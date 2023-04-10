@@ -1,0 +1,1135 @@
+//------------------------------------------------------------
+//  Project: Open Tools for Xbase++                          -
+//  Repository : http://www.xbwin.com                        -
+//  Author: Pablo Botella Navarro ( http://www.xbwin.com )   -
+//------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// ot4xb.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB )
+_XPP_REG_FUN_( APPINSTANCE  )
+_XPP_REG_FUN_( GETCURRENTPROCESSHANDLE ) 
+_XPP_REG_FUN_( GETHKERNEL32 )
+_XPP_REG_FUN_( GETHUSER32   )
+_XPP_REG_FUN_( GETHSHELL32  )
+_XPP_REG_FUN_( GETHOT4XB    )
+_XPP_REG_FUN_( OT4XB_CREATEGENERICWINDOW )        
+_XPP_REG_FUN_( OT4XB_SUBCLASSWINDOW      )        
+_XPP_REG_FUN_( DELEGATED_XBASE_CALL ) 
+_XPP_REG_FUN_( DELEGATED_FPQCALL ) 
+_XPP_REG_FUN_( DELEGATED_EVAL ) 
+_XPP_REG_FUN_( OT4XB_REGISTER_DELEGATE_HWND ) 
+_XPP_REG_FUN_( OT4XB_SINGLE_INSTANCE ) 
+_XPP_REG_FUN_( OT4XB_HOOKTHREAD ) 
+_XPP_REG_FUN_( OT4XB_UNHOOKTHREAD ) 
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _OT4XB_TASK_INTERNAL_PROC_ )  // ot4xb internal function
+_XPP_REG_FUN_( OT4XB_TASK_ID )        
+_XPP_REG_FUN_( OT4XB_TASK_RUN )        
+_XPP_REG_FUN_( OT4XB_TASK_WAIT ) 
+_XPP_REG_FUN_( OT4XB_TASK_POP  ) 
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_UNMANGLE_CPP_NAME ) 
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_APC_SEND_CB ) 
+_XPP_REG_FUN_( OT4XB_APC_POST_CB ) 
+_XPP_REG_FUN_( OT4XB_APC_POST_CB_H ) 
+_XPP_REG_FUN_( OT4XB_PUSH_EXIT_CB )  
+_XPP_REG_FUN_( OT4XB_AUTOMATIC_SCROLL_FOCUS ) 
+_XPP_REG_FUN_( OT4XB_PAINTTHEMSGBAR ) 
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// TCriticalSection.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( TCRITICALSECTION ) 
+
+// ---------------------------------------------------------------------------
+// ot4xb_odbd.cpp
+// ---------------------------------------------------------------------------
+
+
+
+
+
+// ---------------------------------------------------------------------------
+// TLdList.cpp
+// ---------------------------------------------------------------------------
+
+_XPP_REG_FUN_( TLDLIST ) 
+
+// ---------------------------------------------------------------------------
+// OSVer.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( LISWIN9X ) // Doc. // ng
+_XPP_REG_FUN_( LISXP    ) // Doc. // ng
+_XPP_REG_FUN_( LISVISTA ) // ссс  // ng
+
+
+// ---------------------------------------------------------------------------
+// NumAndBytes.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( DWFIX     )
+_XPP_REG_FUN_( DWMINUS   )
+_XPP_REG_FUN_( EXTENDSIGN8 )
+_XPP_REG_FUN_( EXTENDSIGN16 )
+_XPP_REG_FUN_( UNSIGNED8 )
+_XPP_REG_FUN_( UNSIGNED16 )
+_XPP_REG_FUN_( UNSIGNED32 )
+_XPP_REG_FUN_( LONG2DOUBLE )
+_XPP_REG_FUN_( DOUBLE2LONG )
+_XPP_REG_WMAC( LOWORD )
+_XPP_REG_WMAC( HIWORD )
+_XPP_REG_WMAC( LOBYTE )
+_XPP_REG_WMAC( HIBYTE )
+_XPP_REG_WMAC( LONIBBLE )            
+_XPP_REG_WMAC( HINIBBLE )            
+_XPP_REG_WMAC( MAKEBYTE )            
+_XPP_REG_WMAC( MAKEWORD )
+_XPP_REG_WMAC( MAKELONG)
+_XPP_REG_WMAC( MAKELANGID)           
+_XPP_REG_WMAC( MAKELPARAM)
+_XPP_REG_WMAC( MAKELRESULT )
+_XPP_REG_WMAC( GET_X_LPARAM)
+_XPP_REG_WMAC( GET_Y_LPARAM)
+_XPP_REG_FUN_( DWBYTEREV)
+_XPP_REG_FUN_( WHLBYTEREV)
+_XPP_REG_FUN_( PACKFLOAT32)
+_XPP_REG_FUN_( UNPACKFLOAT32)
+_XPP_REG_FUN_( OT4XB_PARSE_NUMBER)   
+_XPP_REG_FUN_( OT4XB_PARSE_INT   )   
+
+// ---------------------------------------------------------------------------
+// DrTool.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( GETPROCCESSARGV )             
+_XPP_REG_FUN_( GETCOMMANDLINE )              
+_XPP_REG_FUN_( CAPPPATH )                    
+_XPP_REG_FUN_( CAPPDIR  )                    
+_XPP_REG_FUN_( LMAKEPATH  )                  
+_XPP_REG_FUN_( LCOPYFILE )                    
+_XPP_REG_FUN_( LDISKREADY)                    
+_XPP_REG_FUN_( CCREATETMPFILE )              
+_XPP_REG_FUN_( CGETTMPPATH )                 
+_XPP_REG_FUN_( NGETDRIVETYPE )               
+_XPP_REG_FUN_( LCHDIR )                      
+_XPP_REG_FUN_( CDRIVES )                     
+_XPP_REG_FUN_( ADRIVES )                     
+_XPP_REG_FUN_( _TDRIVEINFO_ )                
+_XPP_REG_FUN_( GETDRIVEINFO )                
+_XPP_REG_FUN_( CGETSHORTFILENAME )           
+_XPP_REG_FUN_( LISDIR )                      
+_XPP_REG_FUN_( LISFILE )                     
+_XPP_REG_FUN_( GETWINDIR )                   
+_XPP_REG_FUN_( GETSYSDIR )                   
+_XPP_REG_FUN_( CPATHCOMBINE )                
+_XPP_REG_FUN_( CURLCOMBINE )                 
+_XPP_REG_FUN_( CPATHDEFEXT )                 
+_XPP_REG_FUN_( CPATHBUILDROOT )              
+_XPP_REG_FUN_( ASPLITPATH )                  
+_XPP_REG_FUN_( CPATHCANONICALIZE )           
+_XPP_REG_FUN_( CPATHGETEXT )                 
+_XPP_REG_FUN_( CPATHREMOVEEXT )              
+_XPP_REG_FUN_( CPATHCHANGEEXT )              
+_XPP_REG_FUN_( CPATHGETFILENAME )            
+_XPP_REG_FUN_( CPATHREMOVEBACKSLASH )        
+_XPP_REG_FUN_( CPATHADDBACKSLASH )           
+_XPP_REG_FUN_( CPATHGETPATH)                 
+_XPP_REG_FUN_( CPATHGETROOT )                
+_XPP_REG_FUN_( CPATHREMOVEROOT )             
+_XPP_REG_FUN_( LPATHISRELATIVE )             
+_XPP_REG_WST_( WIN32_FIND_DATA )             
+_XPP_REG_FUN_( CCPUSERIAL      )             
+_XPP_REG_FUN_( OT4XB_PUSHDIR   )               
+_XPP_REG_FUN_( OT4XB_POPDIR )                  
+_XPP_REG_FUN_( OT4XB_CURDIR )                  
+
+// ---------------------------------------------------------------------------
+// Bitwise.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( NOR       ) // Doc
+_XPP_REG_FUN_( NXOR      ) // Doc
+_XPP_REG_FUN_( NAND      ) // Doc
+_XPP_REG_FUN_( NANDNOT   )
+_XPP_REG_FUN_( NNOT      ) // Doc
+_XPP_REG_FUN_( LAND      ) // Doc
+_XPP_REG_FUN_( NLSHIFT   ) // Doc
+_XPP_REG_FUN_( NRSHIFT   ) // Doc
+_XPP_REG_FUN_( NLROT     ) // Doc
+_XPP_REG_FUN_( NRROT     ) // Doc
+_XPP_REG_FUN_( NLROTBYTE ) // Doc
+_XPP_REG_FUN_( NRROTBYTE ) // Doc
+_XPP_REG_FUN_( NLROTWORD ) // Doc
+_XPP_REG_FUN_( NRROTWORD ) // Doc
+_XPP_REG_FUN_( LDWBITONOFF ) // Doc
+
+// ---------------------------------------------------------------------------
+// String.cpp
+// ---------------------------------------------------------------------------
+
+_XPP_REG_FUN_( ASPLITTXTLINES     ) 
+_XPP_REG_FUN_( TOKENIZE           )
+_XPP_REG_FUN_( TOKENIZEEX         ) 
+_XPP_REG_FUN_( NOCOMMENT          )
+_XPP_REG_FUN_( NCRC32             )
+_XPP_REG_FUN_( NCRC8              )
+_XPP_REG_FUN_( CHRR               )
+_XPP_REG_FUN_( MKSCSTR            ) 
+_XPP_REG_FUN_( LSTRBITSET         )
+_XPP_REG_FUN_( LPSTRBITSET        )
+_XPP_REG_FUN_( CSTRBITNOT         )
+_XPP_REG_FUN_( PSTRBITNOT         )
+_XPP_REG_FUN_( CSTRBITOR          )
+_XPP_REG_FUN_( CSTRBITXOR         )
+_XPP_REG_FUN_( CSTRBITAND         )
+_XPP_REG_FUN_( PSTRBITOR          )
+_XPP_REG_FUN_( PSTRBITXOR         )
+_XPP_REG_FUN_( PSTRBITAND         )
+_XPP_REG_FUN_( ASTRBITS           )
+_XPP_REG_FUN_( NSTRBITCOUNT       )
+_XPP_REG_FUN_( TRIMQUOTES         )
+_XPP_REG_FUN_( TRIMZ              )
+_XPP_REG_FUN_( C5LTRIM            ) 
+_XPP_REG_FUN_( C5RTRIM            ) 
+_XPP_REG_FUN_( C5ALLTRIM          ) 
+_XPP_REG_FUN_( STRTRIMEX          ) 
+_XPP_REG_FUN_( LSTRWILDCMPEX      ) 
+_XPP_REG_FUN_( LSTRWILDCMP        ) 
+_XPP_REG_FUN_( CDW2BITS           ) 
+_XPP_REG_FUN_( NBITS2DW           ) 
+_XPP_REG_FUN_( CGENRNDSTR         ) 
+_XPP_REG_FUN_( OT4XB_NRAND) 
+_XPP_REG_FUN_( SPLIT_DATA_URI )
+
+
+
+// -------- // hex functions
+
+_XPP_REG_FUN_( CHEX2BIN           ) 
+_XPP_REG_FUN_( CBIN2HEX           )
+_XPP_REG_FUN_( CDW2HEX            )
+_XPP_REG_FUN_( NHEX2DW            )
+_XPP_REG_FUN_( CW2HEX             )
+_XPP_REG_FUN_( NHEX2W             )
+_XPP_REG_FUN_( CBYTE2HEX          )
+_XPP_REG_FUN_( NHEX2BYTE          )
+
+_XPP_REG_FUN_( CQW2HEX            ) 
+_XPP_REG_FUN_( NHEX2QW            ) 
+_XPP_REG_FUN_( NHEX2DOUBLE        ) 
+_XPP_REG_FUN_( CDOUBLE2HEX         ) 
+
+// ------------- encode/decode 
+_XPP_REG_FUN_( __B64ENC ) 
+_XPP_REG_FUN_( __B64DEC ) 
+
+
+// ---------------------------------------------------------------------------
+// Unicode.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( CSZANSI2WIDE  )
+_XPP_REG_FUN_( CSZWIDE2ANSI  )
+_XPP_REG_FUN_( UNICODEDYNSTR )
+_XPP_REG_FUN_( CUTF8TOANSI   ) 
+_XPP_REG_FUN_( CANSITOUTF8   ) 
+_XPP_REG_FUN_( CUTF8TOOEM   ) 
+_XPP_REG_FUN_( COEMTOUTF8   ) 
+_XPP_REG_FUN_( PEEKWSTR     ) 
+_XPP_REG_FUN_( CUTF8TOWIDE  ) 
+_XPP_REG_FUN_( _MB2W ) 
+_XPP_REG_FUN_( _W2MB ) 
+_XPP_REG_FUN_( _MB2MB) 
+
+
+// ---------------------------------------------------------------------------
+// Container.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( TYPE2EMPTYVALUE)  
+_XPP_REG_FUN_( PPMARSHALL2ARRAY )
+_XPP_REG_FUN_( ARRAY2PPMARSHALL )
+_XPP_REG_FUN_( PSZZ2ARRAY    )
+_XPP_REG_FUN_( ARRAY2PSZZ    )
+_XPP_REG_FUN_( LCALLFUNCPA   )
+_XPP_REG_FUN_( LCALLMETHODPA )
+_XPP_REG_FUN_( CALLFUNCTION  )
+_XPP_REG_FUN_( LOBJGETMEMBER )
+_XPP_REG_FUN_( LOBJSETMEMBER )
+_XPP_REG_FUN_( _VAR2CON    )
+_XPP_REG_FUN_( _CON2VAR    )
+_XPP_REG_FUN_( _CONRELEASE )
+_XPP_REG_FUN_( OT4XB_MEMVAR_SETGET ) 
+_XPP_REG_FUN_(_CONGENERICBREAKCB ) 
+_XPP_REG_FUN_(__VDEF) 
+_XPP_REG_FUN_(__VBLOCK) 
+_XPP_REG_FUN_(__VNUM) 
+_XPP_REG_FUN_(__VLOWER) 
+_XPP_REG_FUN_(__VUPPER) 
+_XPP_REG_FUN_(__VSTR) 
+_XPP_REG_FUN_(__ANEW) 
+_XPP_REG_FUN_( __VCLSPTR ) 
+_XPP_REG_FUN_( __VMASK ) 
+_XPP_REG_FUN_(__XB_TYPE ) 
+_XPP_REG_FUN_(__APEEK) 
+_XPP_REG_FUN_(__VPEEK) 
+_XPP_REG_FUN_(__ANEXT ) 
+_XPP_REG_FUN_(__XML_FV ) 
+_XPP_REG_FUN_(__XML_FV_GET_VALUE)
+_XPP_REG_FUN_( __V2FV )
+_XPP_REG_FUN_( __V2_CSV_CELL )
+_XPP_REG_FUN_(OT4XB_QLOOP) 
+
+// ---------------------------------------------------------------------------
+// ot4xb_vtran.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_(__VTRAN) 
+// ---------------------------------------------------------------------------
+// Memory.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _XGRAB_COUNT_        ) 
+_XPP_REG_FUN_( _XGRAB        ) // Doc
+_XPP_REG_FUN_( _XFREE        ) // Doc
+_XPP_REG_FUN_( _VGRAB        ) // Doc
+_XPP_REG_FUN_( _VFREE        ) // Doc
+_XPP_REG_FUN_( _PGRAB        ) // Doc
+_XPP_REG_FUN_( _PFREE        ) // Doc
+_XPP_REG_FUN_( _BSET         ) // Doc
+_XPP_REG_FUN_( _BMOVE        ) // Doc
+_XPP_REG_FUN_( _BDUP         ) // Doc
+_XPP_REG_FUN_( _BCOPYWITHTABLE ) // Doc
+_XPP_REG_FUN_( _BCOPY        ) // Doc
+_XPP_REG_FUN_( _BCOPYF       ) // Doc
+_XPP_REG_FUN_( _BCMP         ) // Doc
+_XPP_REG_FUN_( _BSCAN        ) // Doc
+_XPP_REG_FUN_( _XSTRCPY      ) // Doc
+_XPP_REG_FUN_( _XXSTRCPY     ) // Doc
+_XPP_REG_FUN_( _XSTCCPY     ) // Doc
+_XPP_REG_FUN_( _XSTRNCPY    ) // Doc
+_XPP_REG_FUN_( _XSTRCAT     ) // Doc
+_XPP_REG_FUN_( _XSTPCHR     ) // Doc
+_XPP_REG_FUN_( _XSTPBLK     ) // Doc
+_XPP_REG_FUN_( _XSTRLEN     ) // Doc
+_XPP_REG_FUN_( _XSTRDUP     ) // Doc
+_XPP_REG_FUN_( _XSTRAT      ) // Doc
+_XPP_REG_FUN_( _SHIFT_PTR_  ) 
+
+
+
+// ---------------------------------------------------------------------------
+// PeekPoke.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( PEEKSTR       ) // Doc
+_XPP_REG_FUN_( POKESTR       ) // Doc
+_XPP_REG_FUN_( PEEKBYTE      ) // Doc
+_XPP_REG_FUN_( POKEBYTE      ) // Doc
+_XPP_REG_FUN_( PEEKWORD      ) // Doc
+_XPP_REG_FUN_( PEEKSHORT     ) 
+_XPP_REG_FUN_( POKEWORD      ) // Doc
+_XPP_REG_FUN_( PEEKDWORD     ) // Doc
+_XPP_REG_FUN_( POKEDWORD     ) // Doc
+_XPP_REG_FUN_( PEEKDOUBLE    ) // Doc
+_XPP_REG_FUN_( POKEDOUBLE    ) // Doc
+_XPP_REG_FUN_( PEEKFLOAT        ) 
+_XPP_REG_FUN_( POKEFLOAT        ) 
+_XPP_REG_FUN_( PEEKWORDNET      ) 
+_XPP_REG_FUN_( PEEKDWORDNET     ) 
+_XPP_REG_FUN_( POKEWORDNET      ) 
+_XPP_REG_FUN_( POKEDWORDNET     ) 
+_XPP_REG_FUN_( __I8             ) 
+_XPP_REG_FUN_( __I16            ) 
+_XPP_REG_FUN_( __I32            ) 
+_XPP_REG_FUN_( __F32            ) 
+_XPP_REG_FUN_( __F64            ) 
+_XPP_REG_FUN_( PPVTBL2A         ) 
+_XPP_REG_FUN_( PPVTBL2N         ) 
+
+// ---------------------------------------------------------------------------
+// TGXbStack.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( TGXBSTACK      )
+
+// ---------------------------------------------------------------------------
+// TLXbStack.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( TLSSTACKTOP     )
+_XPP_REG_FUN_( TLSSTACKPUSH    )
+_XPP_REG_FUN_( TLSSTACKPOP     )
+_XPP_REG_FUN_( TLSSTACKCOUNT   )
+_XPP_REG_FUN_( TLS    )  
+_XPP_REG_FUN_( WITHOBJECTSTACKTOP   ) 
+_XPP_REG_FUN_( WITHOBJECTSTACKPUSH  ) 
+_XPP_REG_FUN_( WITHOBJECTSTACKPOP   ) 
+_XPP_REG_FUN_( WITHOBJECTSTACKCOUNT ) 
+_XPP_REG_FUN_( WITHOBJECTSTACKRECOVER ) 
+
+_XPP_REG_FUN_( XBTLSALLOC      )
+_XPP_REG_FUN_( XBTLSFREE       )
+_XPP_REG_FUN_( XBTLSSETVALUE   )
+_XPP_REG_FUN_( XBTLSGETVALUE   )
+
+_XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR )  
+_XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR_STEP ) 
+_XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR_INDEX ) 
+
+// ---------------------------------------------------------------------------
+// gwst.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( GWST                       ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_BOOL_          ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_BYTEBOOL_      ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_BYTE_          ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_SINT8_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_WORD_          ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_SINT16_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_DWORD_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_UINT32_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_DWORD64_       ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_NINT64_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_PCLIPVAR_      ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_XPPGUIWND_     ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_FLOAT_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_DOUBLE_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_LPSTR_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_BINSTR_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_SZSTR_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_SZWSTR_        ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_DYNSZ_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_WORDNET_       ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_DWORDNET_      ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_XDATE_         ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_POINTER32_     ) 
+_XPP_REG_FUN_(  _GWST_XBSETGET_HANDLE_        ) 
+// ---------------------------------------------------------------------------
+// XbClass
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _XBMTPF1_                  ) 
+_XPP_REG_FUN_( TXBCLASS   ) 
+
+// ---------------------------------------------------------------------------
+// Num64.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( LONGLONG2DOUBLE            )
+_XPP_REG_FUN_( DOUBLE2LONGLONG            )
+_XPP_REG_FUN_( ULONGLONG2DOUBLE           )
+_XPP_REG_FUN_( DOUBLE2ULONGLONG           )
+_XPP_REG_FUN_( GETNUMFORMAT               )
+_XPP_REG_FUN_( LISNUMF64                  ) 
+_XPP_REG_FUN_( SETNUMFORMAT               )
+_XPP_REG_FUN_( _LARGE_INTEGER_            ) 
+_XPP_REG_WST_( LARGE_INTEGER              ) 
+_XPP_REG_WST_( ULARGE_INTEGER             ) 
+_XPP_REG_FUN_( MAKE_QWORD                 ) 
+_XPP_REG_FUN_( MAKE_INT64                 ) 
+_XPP_REG_FUN_( LO_DWORD                   ) 
+_XPP_REG_FUN_( HI_DWORD                   ) 
+_XPP_REG_FUN_( I64CMP                     ) 
+_XPP_REG_FUN_(I64SUM)	
+_XPP_REG_FUN_(I64REST)	
+_XPP_REG_FUN_(I64MULT)	
+_XPP_REG_FUN_(I64DIV)	
+_XPP_REG_FUN_(I64MOD)	
+
+
+
+// ---------------------------------------------------------------------------
+// uuid.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _UUIDCREATE )   
+_XPP_REG_FUN_( UUIDCREATESTR)
+_XPP_REG_FUN_( CUUIDCREATENAME)  
+_XPP_REG_FUN_( CUUIDCREATENAMEEX)  
+_XPP_REG_FUN_( UUIDFROMSTRING)
+_XPP_REG_FUN_( UUIDTOSTRING)
+
+
+// ---------------------------------------------------------------------------
+// fpCall.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( SET_FPCALL_FLAGS )         
+_XPP_REG_FUN_( _DUMMYSTDCBK  )         
+_XPP_REG_FUN_( NLOADLIBRARY  )         
+_XPP_REG_FUN_( LFREELIBRARY  )         
+_XPP_REG_FUN_( _FPCALL_PUSHFLAGS_ )  
+_XPP_REG_FUN_( NFPCALL  )
+_XPP_REG_FUN_( NFPGET   )         
+_XPP_REG_FUN_( F2T )           
+_XPP_REG_FUN_( XBFPCALL )         
+_XPP_REG_FUN_( NDFPCALL )
+_XPP_REG_FUN_( QWFPCALL )
+_XPP_REG_FUN_( NFPGETLASTERROR )
+_XPP_REG_FUN_( QFPGETLASTPOINTER )  
+_XPP_REG_FUN_( QFPSETLASTPOINTER )  
+_XPP_REG_FUN_( NGETPROCADDRESS )
+_XPP_REG_FUN_( FPQCALL )          
+_XPP_REG_FUN_( IFPQCALL )          
+_XPP_REG_FUN_( FPLQCALL2 )         
+_XPP_REG_FUN_( FPLQCALL )          
+_XPP_REG_FUN_( OT4XB_GENERIC_POINTER ) 
+_XPP_REG_FUN_( PT2GP )                 
+_XPP_REG_FUN_( CPRINTF )
+_XPP_REG_FUN_( __PRINTF )
+_XPP_REG_FUN_( LWRITELOGLINE )  
+_XPP_REG_FUN_( LSENDLOGSTRFL )  
+_XPP_REG_FUN_( LSENDLOGSTR )  
+_XPP_REG_FUN_( REGISTER_USER_LOG_UUID ) 
+_XPP_REG_FUN_( OT4XB_LSENDLOGSTRFL )  
+_XPP_REG_FUN_( OT4XB_LSENDLOGSTR )  
+_XPP_REG_FUN_( CFMTRESMSG )  
+_XPP_REG_FUN_( CFMTSTRMSG )  
+_XPP_REG_FUN_( CFMTSYSMSG )  
+
+
+
+
+// ---------------------------------------------------------------------------
+// TBinFile.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( LMEMOWRITE   )    
+_XPP_REG_FUN_( CMEMOREADEX  )       
+_XPP_REG_FUN_( TBINFILE     )       
+_XPP_REG_FUN_( TFILEWRITER  )       
+
+_XPP_REG_FUN_( LMEMOSTGWRITE )  
+_XPP_REG_FUN_( CMEMOSTGREAD )   
+_XPP_REG_FUN_( LMEMOSTGEXPORT ) 
+_XPP_REG_FUN_( LMEMOSTGIMPORT ) 
+_XPP_REG_FUN_( CMEMOSTGLIST   ) 
+
+// ---------------------------------------------------------------------------
+// FileTime.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_WST_( FILETIME64 ) 
+_XPP_REG_FUN_( FT64_SETTS ) 
+_XPP_REG_FUN_( FT64_GETTS ) 
+_XPP_REG_FUN_( FT64_TOHTTP) 
+_XPP_REG_FUN_( FT64_SETDATETIME ) 
+_XPP_REG_FUN_( FT64_GETDATETIME ) 
+_XPP_REG_FUN_( FT64_GETDATETIMESEC ) 
+_XPP_REG_FUN_( FT64_NOW ) 
+_XPP_REG_FUN_( FT64_ELAPMILLISECONDS ) 
+_XPP_REG_FUN_( FT64_ELAPSECONDS ) 
+_XPP_REG_FUN_( FT64_COMPARE ) 
+_XPP_REG_FUN_( FT64_ADD) 
+_XPP_REG_FUN_( FT64_ADD_Y) 
+_XPP_REG_FUN_( FT64_ADD_M) 
+_XPP_REG_FUN_( FT64_TO_DOSDATETIME) 
+_XPP_REG_FUN_( FT64_FROM_DOSDATETIME) 
+_XPP_REG_FUN_( FT64_TO_UNIXTIME) 
+_XPP_REG_FUN_( FT64_FROM_UNIXTIME) 
+_XPP_REG_FUN_( FT64_TO_EXCELTIME) 
+_XPP_REG_FUN_( FT64_FROM_EXCELTIME) 
+_XPP_REG_FUN_( DT2ISO8601 ) 
+_XPP_REG_FUN_( FT64_SETRFC822DATE) 
+_XPP_REG_FUN_( FT64_TOLOCALTIME) 
+_XPP_REG_FUN_( FT64_STRF ) 
+
+
+
+// ---------------------------------------------------------------------------
+// THashTable.cpp
+// ---------------------------------------------------------------------------
+
+_XPP_REG_FUN_( _HDICT_NEW               ) 
+_XPP_REG_FUN_( _HDICT_KEY_COMPARE       ) 
+_XPP_REG_FUN_( _HDICT_DESTROY           ) 
+_XPP_REG_FUN_( _HDICT_SETPROP           ) 
+_XPP_REG_FUN_( _HDICT_GETPROP           ) 
+_XPP_REG_FUN_( _HDICT_ISPROP            ) 
+_XPP_REG_FUN_( _HDICT_GETPROP_RAW_      ) 
+
+_XPP_REG_FUN_( _HDICT_REMOVEPROP        ) 
+_XPP_REG_FUN_( _HDICT_REMOVEALL         ) 
+_XPP_REG_FUN_( _HDICT_COUNT             ) 
+_XPP_REG_FUN_( _HDICT_ITERATE_STEP      ) 
+_XPP_REG_FUN_( _HDICT_ITERATE_CB        ) 
+_XPP_REG_FUN_( _HDICT_ADDPROPFROMARRAY  ) 
+_XPP_REG_FUN_( _HDICT_ADDPROPFROMINISTRING ) 
+_XPP_REG_FUN_( _HDICT_ADD_ENV_STRINGS  ) 
+_XPP_REG_FUN_( _HDICT_ADD_HTTP_HEADERS ) 
+_XPP_REG_FUN_( _HDICT_FROM_ZKDW )        
+// -------------
+_XPP_REG_FUN_( THDICTEX)
+_XPP_REG_FUN_( _OT4XB_EXPANDO_)
+// -------------
+_XPP_REG_FUN_( OT4XB_HASH )
+_XPP_REG_FUN_( OT4XB_CNG  )
+
+// ------------- case sensitive hash table
+_XPP_REG_FUN_( _HDICTCS_COUNT         ) 
+_XPP_REG_FUN_( _HDICTCS_DESTROY       ) 
+_XPP_REG_FUN_( _HDICTCS_GETPROP       ) 
+_XPP_REG_FUN_( _HDICTCS_ISPROP        ) 
+_XPP_REG_FUN_( _HDICTCS_KEY_COMPARE   ) 
+_XPP_REG_FUN_( _HDICTCS_NEW           ) 
+_XPP_REG_FUN_( _HDICTCS_REMOVEALL     ) 
+_XPP_REG_FUN_( _HDICTCS_REMOVEPROP    ) 
+_XPP_REG_FUN_( _HDICTCS_SETPROP       ) 
+
+
+// ---------------------------------------------------------------------------
+// MD5.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( STR2MD5HEX     ) 
+_XPP_REG_FUN_( STR2MD5BIN     ) 
+_XPP_REG_FUN_( HFILE2MD5HEX   ) 
+_XPP_REG_FUN_( HFILE2MD5BIN   ) 
+_XPP_REG_FUN_( FILE2MD5HEX    ) 
+_XPP_REG_FUN_( FILE2MD5BIN    ) 
+_XPP_REG_FUN_( _MD5_NEW       ) 
+_XPP_REG_FUN_( _MD5_STR       ) 
+_XPP_REG_FUN_( _MD5_HFILE     ) 
+_XPP_REG_FUN_( _MD5_FINALIZE  ) 
+_XPP_REG_FUN_( _MD5_GETHEX    ) 
+_XPP_REG_FUN_( _MD5_GETBIN    ) 
+_XPP_REG_FUN_( _MD5_DESTROY   ) 
+
+// ---------------------------------------------------------------------------
+// gdipus_helper.cpp
+// ---------------------------------------------------------------------------
+
+_XPP_REG_FUN_( GDIPLUS_HELPER ) 
+
+// ---------------------------------------------------------------------------
+// array2dbf.cpp
+// ---------------------------------------------------------------------------
+
+_XPP_REG_FUN_( _A2DBF_ ) 
+
+// ---------------------------------------------------------------------------
+// ot4xb_IUnknow.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_IUNKNOW ) 
+_XPP_REG_FUN_( OT4XB_IDISPATCH ) 
+_XPP_REG_FUN_( OT4XB_ISEQUENTIALSTREAM ) 
+_XPP_REG_FUN_( OT4XB_ISTREAM   ) 
+
+
+// ---------------------------------------------------------------------------
+// ot4xb_ndtg.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( NDTG_CREATE_TYPEDEF_TABLE ) 
+_XPP_REG_FUN_( NDTG_DESTROY_TYPEDEF_TABLE ) 
+_XPP_REG_FUN_( NDTG_ADD_TYPE ) 
+_XPP_REG_FUN_( NDTG_SET_ATTRIB_CB) 
+_XPP_REG_FUN_( NDTG_GET_TYPE ) 
+_XPP_REG_FUN_( NDTG_ADD_PROP) 
+_XPP_REG_FUN_( NDTG_STACK_BEGIN    ) 
+_XPP_REG_FUN_( NDTG_STACK_STEP     ) 
+_XPP_REG_FUN_( NDTG_STACK_SEAL     ) 
+_XPP_REG_FUN_( NDTG_STACK_UNSEALED ) 
+_XPP_REG_FUN_( NDTG_STACK_PUTVAL   ) 
+_XPP_REG_FUN_( NDTG_STACK_ATTRIB   ) 
+_XPP_REG_FUN_( NDTG_STACK_ATTRIB_SEAL ) 
+_XPP_REG_FUN_( NDTG_STACK_END      ) 
+
+
+// ---------------------------------------------------------------------------
+// ot4xb_iocp.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_IOCP ) 
+
+
+// ---------------------------------------------------------------------------
+// ot4xb_dirty_dlgedit.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_DIRTY_DLGEDIT ) 
+
+
+// ---------------------------------------------------------------------------
+// ot4xb_disphelper.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _DH_CREATEOBJECT       )  
+_XPP_REG_FUN_( _DH_GETOBJECT          )  
+_XPP_REG_FUN_( _DH_CREATEOBJECTEX     )  
+_XPP_REG_FUN_( _DH_GETOBJECTEX        )  
+_XPP_REG_FUN_( _DH_CALLMETHOD         )  
+_XPP_REG_FUN_( _DH_PUTVALUE           )  
+_XPP_REG_FUN_( _DH_PUTREF             )  
+_XPP_REG_FUN_( _DH_GETVALUE           )  
+_XPP_REG_FUN_( _DH_INVOKE             )  
+_XPP_REG_FUN_( _DH_INVOKEARRAY        )  
+_XPP_REG_FUN_( _DH_CALLMETHODV        )  
+_XPP_REG_FUN_( _DH_PUTVALUEV          )  
+_XPP_REG_FUN_( _DH_PUTREFV            )  
+_XPP_REG_FUN_( _DH_GETVALUEV          )  
+_XPP_REG_FUN_( _DH_INVOKEV            )  
+_XPP_REG_FUN_( _DH_ENUMBEGIN          )  
+_XPP_REG_FUN_( _DH_ENUMBEGINV         )  
+_XPP_REG_FUN_( _DH_ENUMNEXTOBJECT     )  
+_XPP_REG_FUN_( _DH_ENUMNEXTVARIANT    )  
+_XPP_REG_FUN_( _DH_TOGGLEEXCEPTIONS   )  
+
+
+// ---------------------------------------------------------------------------
+// ot4xb_regexp.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( _RGX )               
+_XPP_REG_FUN_( _RGX_NEW )           
+_XPP_REG_FUN_( _RGX_SET_PATTERN )   
+_XPP_REG_FUN_( _RGX_SET_FLAGS )     
+_XPP_REG_FUN_( _RGX_DESTROY )       
+_XPP_REG_FUN_( _RGX_EXEC )          
+_XPP_REG_FUN_( _RGX_TEST )          
+_XPP_REG_FUN_( _RGX_REPLACE )       
+
+// _XPP_REG_FUN_( _STRING_MAP_TABLE         )  
+// _XPP_REG_FUN_( _STRING_MAP_TABLE_NEW     )  
+// _XPP_REG_FUN_( _STRING_MAP_TABLE_DESTROY )  
+// _XPP_REG_FUN_( _STRING_MAP_TABLE_EXEC    )  
+
+// ---------------------------------------------------------------------------
+// ot4xb_sqlstr.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_(__SQLSTR_MONEY)// __sqlstr_money(v, nPad, lAbs)
+_XPP_REG_FUN_(__SQLSTR_MONEY_SUM) // __sqlstr_money_sum(...)
+_XPP_REG_FUN_(__SQLSTR_MONEY_SUBSTRACT) // __sqlstr_money_substract(...)
+
+
+// ---------------------------------------------------------------------------
+// TPeFile.cpp
+// ---------------------------------------------------------------------------
+// ---------- _XPP_REG_FUN_( TPEFILE ) 
+
+// ---------------------------------------------------------------------------
+// common windows structures
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( WAPIST__PRINTER_NOTIFY_INFO_DATA___DATA )
+_XPP_REG_FUN_( WAPIST__PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA )
+_XPP_REG_FUN_( WAPIST_ABC )
+_XPP_REG_FUN_( WAPIST_ABCFLOAT )
+_XPP_REG_FUN_( WAPIST_ACCEL )
+_XPP_REG_FUN_( WAPIST_ADDJOB_INFO_1 )
+_XPP_REG_FUN_( WAPIST_ALTTABINFO )
+_XPP_REG_FUN_( WAPIST_BIDIOPTIONS )
+_XPP_REG_FUN_( WAPIST_BITMAP )
+_XPP_REG_FUN_( WAPIST_BITMAPINFO )
+_XPP_REG_FUN_( WAPIST_BITMAPINFOHEADER )
+_XPP_REG_FUN_( WAPIST_BLENDFUNCTION )
+_XPP_REG_FUN_( WAPIST_CHARFORMAT )
+_XPP_REG_FUN_( WAPIST_CHARFORMAT2 )
+_XPP_REG_FUN_( WAPIST_CHARRANGE )
+_XPP_REG_FUN_( WAPIST_CLSID )
+_XPP_REG_FUN_( WAPIST_COMPCOLOR )
+_XPP_REG_FUN_( WAPIST_CURSORINFO )
+_XPP_REG_FUN_( WAPIST_DATATYPES_INFO_1 )
+_XPP_REG_FUN_( WAPIST_DEVMODE )
+_XPP_REG_FUN_( WAPIST_DIBSECTION )
+_XPP_REG_FUN_( WAPIST_DLGITEMTEMPLATE )
+_XPP_REG_FUN_( WAPIST_DLGTEMPLATE )
+_XPP_REG_FUN_( WAPIST_DOC_INFO_1 )
+_XPP_REG_FUN_( WAPIST_DOC_INFO_2 )
+_XPP_REG_FUN_( WAPIST_DOC_INFO_3 )
+_XPP_REG_FUN_( WAPIST_DOCINFO )
+_XPP_REG_FUN_( WAPIST_DRAWPATRECT )
+_XPP_REG_FUN_( WAPIST_DRAWTEXTPARAMS )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_1 )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_2 )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_3 )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_4 )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_5 )
+_XPP_REG_FUN_( WAPIST_DRIVER_INFO_6 )
+_XPP_REG_FUN_( WAPIST_EDITSTREAM )
+_XPP_REG_FUN_( WAPIST_ENCORRECTTEXT )
+_XPP_REG_FUN_( WAPIST_ENDROPFILES )
+_XPP_REG_FUN_( WAPIST_ENLINK )
+_XPP_REG_FUN_( WAPIST_ENLOWFIRTF )
+_XPP_REG_FUN_( WAPIST_ENOLEOPFAILED )
+_XPP_REG_FUN_( WAPIST_ENPROTECTED )
+_XPP_REG_FUN_( WAPIST_ENSAVECLIPBOARD )
+_XPP_REG_FUN_( WAPIST_ENUMLOGFONT )
+_XPP_REG_FUN_( WAPIST_ENUMLOGFONTEX )
+_XPP_REG_FUN_( WAPIST_EXTLOGFONT )
+_XPP_REG_FUN_( WAPIST_EXTLOGPEN )
+_XPP_REG_FUN_( WAPIST_FINDTEXT )
+_XPP_REG_FUN_( WAPIST_FINDTEXTEX )
+_XPP_REG_FUN_( WAPIST_FIXED )
+_XPP_REG_FUN_( WAPIST_FLASHWINFO )
+_XPP_REG_FUN_( WAPIST_FONTSIGNATURE )
+_XPP_REG_FUN_( WAPIST_FORM_INFO_1 )
+_XPP_REG_FUN_( WAPIST_FORMATRANGE )
+_XPP_REG_FUN_( WAPIST_GCP_RESULTS )
+_XPP_REG_FUN_( WAPIST_GETTEXTEX )
+_XPP_REG_FUN_( WAPIST_GETTEXTLENGTHEX )
+_XPP_REG_FUN_( WAPIST_GLYPHMETRICS )
+_XPP_REG_FUN_( WAPIST_GLYPHSET )
+_XPP_REG_FUN_( WAPIST_GUID )
+_XPP_REG_FUN_( WAPIST_GUITHREADINFO )
+_XPP_REG_FUN_( WAPIST_HARDWAREINPUT )
+_XPP_REG_FUN_( WAPIST_HYPHENATEINFO )
+_XPP_REG_FUN_( WAPIST_HYPHRESULT )
+_XPP_REG_FUN_( WAPIST_ICONINFO )
+_XPP_REG_FUN_( WAPIST_ICONMETRICS )
+_XPP_REG_FUN_( WAPIST_IMAGEINFO )
+_XPP_REG_FUN_( WAPIST_IMAGELISTDRAWPARAMS )
+_XPP_REG_FUN_( WAPIST_IMECOMPTEXT )
+_XPP_REG_FUN_( WAPIST_INPUT )
+_XPP_REG_FUN_( WAPIST_JOB_INFO_1 )
+_XPP_REG_FUN_( WAPIST_JOB_INFO_2 )
+_XPP_REG_FUN_( WAPIST_JOB_INFO_3 )
+_XPP_REG_FUN_( WAPIST_KERNINGPAIR )
+_XPP_REG_FUN_( WAPIST_KEYBDINPUT )
+_XPP_REG_FUN_( WAPIST_LASTINPUTINFO )
+_XPP_REG_FUN_( WAPIST_LOGBRUSH )
+_XPP_REG_FUN_( WAPIST_LOGBRUSH32 )
+_XPP_REG_FUN_( WAPIST_LOGFONT )
+_XPP_REG_FUN_( WAPIST_LOGPALETTE )
+_XPP_REG_FUN_( WAPIST_LOGPEN )
+_XPP_REG_FUN_( WAPIST_MAT2 )
+_XPP_REG_FUN_( WAPIST_MDICREATESTRUCT )
+_XPP_REG_FUN_( WAPIST_MDINEXTMENU )
+_XPP_REG_FUN_( WAPIST_MENUBARINFO )
+_XPP_REG_FUN_( WAPIST_MENUEX_TEMPLATE_HEADER )
+_XPP_REG_FUN_( WAPIST_MENUEX_TEMPLATE_ITEM )
+_XPP_REG_FUN_( WAPIST_MENUGETOBJECTINFO )
+_XPP_REG_FUN_( WAPIST_MENUINFO )
+_XPP_REG_FUN_( WAPIST_MENUITEMINFO )
+_XPP_REG_FUN_( WAPIST_MENUITEMTEMPLATE )
+_XPP_REG_FUN_( WAPIST_MENUITEMTEMPLATEHEADER )
+_XPP_REG_FUN_( WAPIST_METAFILEPICT )
+_XPP_REG_FUN_( WAPIST_MINMAXINFO )
+_XPP_REG_FUN_( WAPIST_MONITOR_INFO_1 )
+_XPP_REG_FUN_( WAPIST_MONITOR_INFO_2 )
+_XPP_REG_FUN_( WAPIST_MONITORINFO )
+_XPP_REG_FUN_( WAPIST_MONITORINFOEX )
+_XPP_REG_FUN_( WAPIST_MOUSEINPUT )
+_XPP_REG_FUN_( WAPIST_MSG )
+_XPP_REG_FUN_( WAPIST_MSGBOXPARAMS )
+_XPP_REG_FUN_( WAPIST_MSGFILTER )
+_XPP_REG_FUN_( WAPIST_NEWTEXTMETRIC )
+_XPP_REG_FUN_( WAPIST_NEWTEXTMETRICEX )
+_XPP_REG_FUN_( WAPIST_NMHDR )
+_XPP_REG_FUN_( WAPIST_NMRBAUTOSIZE )
+_XPP_REG_FUN_( WAPIST_NMREBAR )
+_XPP_REG_FUN_( WAPIST_NMREBARAUTOBREAK )
+_XPP_REG_FUN_( WAPIST_NMREBARCHEVRON )
+_XPP_REG_FUN_( WAPIST_NMREBARCHILDSIZE )
+_XPP_REG_FUN_( WAPIST_OBJECTPOSITIONS )
+_XPP_REG_FUN_( WAPIST_OUTLINETEXTMETRIC )
+_XPP_REG_FUN_( WAPIST_PAINTSTRUCT )
+_XPP_REG_FUN_( WAPIST_PALETTEENTRY )
+_XPP_REG_FUN_( WAPIST_PANOSE )
+_XPP_REG_FUN_( WAPIST_PARAFORMAT )
+_XPP_REG_FUN_( WAPIST_PARAFORMAT2 )
+_XPP_REG_FUN_( WAPIST_POINT )
+_XPP_REG_FUN_( WAPIST_POINTFX )
+_XPP_REG_FUN_( WAPIST_POINTL )
+_XPP_REG_FUN_( WAPIST_POINTS )
+_XPP_REG_FUN_( WAPIST_POLYTEXT )
+_XPP_REG_FUN_( WAPIST_PORT_INFO_1 )
+_XPP_REG_FUN_( WAPIST_PORT_INFO_2 )
+_XPP_REG_FUN_( WAPIST_PORT_INFO_3 )
+_XPP_REG_FUN_( WAPIST_PRINTER_DEFAULTS )
+_XPP_REG_FUN_( WAPIST_PRINTER_ENUM_VALUES )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_1 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_2 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_3 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_4 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_5 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_6 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_7 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_8 )
+_XPP_REG_FUN_( WAPIST_PRINTER_INFO_9 )
+_XPP_REG_FUN_( WAPIST_PRINTER_NOTIFY_INFO )
+_XPP_REG_FUN_( WAPIST_PRINTER_NOTIFY_INFO_DATA )
+_XPP_REG_FUN_( WAPIST_PRINTER_NOTIFY_OPTIONS )
+_XPP_REG_FUN_( WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE )
+_XPP_REG_FUN_( WAPIST_PRINTPROCESSOR_CAPS_1 )
+_XPP_REG_FUN_( WAPIST_PRINTPROCESSOR_INFO_1 )
+_XPP_REG_FUN_( WAPIST_PROVIDOR_INFO_1 )
+_XPP_REG_FUN_( WAPIST_PROVIDOR_INFO_2 )
+_XPP_REG_FUN_( WAPIST_PSFEATURE_CUSTPAPER )
+_XPP_REG_FUN_( WAPIST_PSFEATURE_OUTPUT )
+_XPP_REG_FUN_( WAPIST_PSINJECTDATA )
+_XPP_REG_FUN_( WAPIST_PUNCTUATION )
+_XPP_REG_FUN_( WAPIST_RASTERIZER_STATUS )
+_XPP_REG_FUN_( WAPIST_RBHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_REBARBANDINFO )
+_XPP_REG_FUN_( WAPIST_REBARINFO )
+_XPP_REG_FUN_( WAPIST_RECT )
+_XPP_REG_FUN_( WAPIST_RECTL )
+_XPP_REG_FUN_( WAPIST_REOBJECT )
+_XPP_REG_FUN_( WAPIST_REPASTESPECIAL )
+_XPP_REG_FUN_( WAPIST_REQRESIZE )
+_XPP_REG_FUN_( WAPIST_RGBQUAD )
+_XPP_REG_FUN_( WAPIST_RGNDATA )
+_XPP_REG_FUN_( WAPIST_RGNDATAHEADER )
+_XPP_REG_FUN_( WAPIST_SELCHANGE )
+_XPP_REG_FUN_( WAPIST_SETTEXTEX )
+_XPP_REG_FUN_( WAPIST_SIZE )
+_XPP_REG_FUN_( WAPIST_SIZEL )
+_XPP_REG_FUN_( WAPIST_SYSTEMTIME )
+_XPP_REG_FUN_( WAPIST_TBBUTTON )
+_XPP_REG_FUN_( WAPIST_TEXTMETRIC )
+_XPP_REG_FUN_( WAPIST_TEXTRANGE )
+_XPP_REG_FUN_( WAPIST_TITLEBARINFO )
+_XPP_REG_FUN_( WAPIST_TPMPARAMS )
+_XPP_REG_FUN_( WAPIST_TRIVERTEX )
+_XPP_REG_FUN_( WAPIST_TTPOLYCURVE )
+_XPP_REG_FUN_( WAPIST_TTPOLYGONHEADER )
+_XPP_REG_FUN_( WAPIST_WCRANGE )
+_XPP_REG_FUN_( WAPIST_WINDOWINFO )
+_XPP_REG_FUN_( WAPIST_WINDOWPLACEMENT )
+_XPP_REG_FUN_( WAPIST_WNDCLASS )
+_XPP_REG_FUN_( WAPIST_WNDCLASSEX )
+_XPP_REG_FUN_( WAPIST_XFORM )
+// ---
+_XPP_REG_FUN_( WAPIST_IN_ADDR )
+_XPP_REG_FUN_( WAPIST_SOCKADDR )
+_XPP_REG_FUN_( WAPIST_SOCKET_ADDRESS )
+_XPP_REG_FUN_( WAPIST_SOCKET_ADDRESS_LIST)
+_XPP_REG_FUN_( WAPIST_CSADDR_INFO )
+_XPP_REG_FUN_( WAPIST_SOCKADDR_STORAGE )
+_XPP_REG_FUN_( WAPIST_SCOPE_ID )
+_XPP_REG_FUN_( WAPIST_SOCKADDR_IN )
+_XPP_REG_FUN_( WAPIST_WSABUF )
+_XPP_REG_FUN_( WAPIST_WSAMSG )
+_XPP_REG_FUN_( WAPIST_WSACMSGHDR )
+_XPP_REG_FUN_( WAPIST_FD_SET )
+_XPP_REG_FUN_( WAPIST_TIMEVAL )
+_XPP_REG_FUN_( WAPIST_HOSTENT )
+_XPP_REG_FUN_( WAPIST_NETENT )
+_XPP_REG_FUN_( WAPIST_SERVENT )
+_XPP_REG_FUN_( WAPIST_PROTOENT )
+_XPP_REG_FUN_( WAPIST_WSADATA  )
+_XPP_REG_FUN_( WAPIST_SOCKPROTO )
+_XPP_REG_FUN_( WAPIST_LINGER    )
+_XPP_REG_FUN_( WAPIST_FLOWSPEC )
+_XPP_REG_FUN_( WAPIST_QOS_OBJECT_HDR )
+_XPP_REG_FUN_( WAPIST_QOS_SD_MODE )
+_XPP_REG_FUN_( WAPIST_QOS_SHAPING_RATE                     )
+_XPP_REG_FUN_( WAPIST_QOS                                  )
+_XPP_REG_FUN_( WAPIST_WSANETWORKEVENTS                     )
+_XPP_REG_FUN_( WAPIST_WSAPROTOCOLCHAIN                     )
+_XPP_REG_FUN_( WAPIST_WSAPROTOCOL_INFO                     )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION_NS_WINDOWMESSAGE       )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION_NS_EVENT               )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION_NS_APC                 )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION_NS_PORT                )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION_NS_PARAMETERS          )
+_XPP_REG_FUN_( WAPIST_WSACOMPLETION                        )
+_XPP_REG_FUN_( WAPIST_BLOB                                 )
+_XPP_REG_FUN_( WAPIST_AFPROTOCOLS                          )
+_XPP_REG_FUN_( WAPIST_WSAVERSION                           )
+_XPP_REG_FUN_( WAPIST_WSAQUERYSET                          )
+_XPP_REG_FUN_( WAPIST_WSAQUERYSET2                         )
+_XPP_REG_FUN_( WAPIST_WSANSCLASSINFO                       )
+_XPP_REG_FUN_( WAPIST_WSASERVICECLASSINFO                  )
+_XPP_REG_FUN_( WAPIST_WSANAMESPACE_INFO                    )
+_XPP_REG_FUN_( WAPIST_WSANAMESPACE_INFOEX                  )
+_XPP_REG_FUN_( WAPIST_WSAPOLLFD                            )
+_XPP_REG_FUN_( WAPIST_ADDRINFO                             )
+
+_XPP_REG_FUN_( WAPIST_OPENFILENAME )
+// --------------------------------------
+_XPP_REG_FUN_( WAPIST_RAWHID )
+_XPP_REG_FUN_( WAPIST_RAWINPUT_DATA_UNION )
+_XPP_REG_FUN_( WAPIST_RAWINPUT )
+_XPP_REG_FUN_( WAPIST_RAWINPUTDEVICE)
+_XPP_REG_FUN_( WAPIST_RAWINPUTDEVICELIST )
+_XPP_REG_FUN_( WAPIST_RAWINPUTHEADER )
+_XPP_REG_FUN_( WAPIST_RAWKEYBOARD )
+_XPP_REG_FUN_( WAPIST_RAWMOUSE )
+_XPP_REG_FUN_( WAPIST_RID_DEVICE_INFO )
+_XPP_REG_FUN_( WAPIST_RID_DEVICE_INFO_HID )
+_XPP_REG_FUN_( WAPIST_RID_DEVICE_INFO_KEYBOARD )
+_XPP_REG_FUN_( WAPIST_RID_DEVICE_INFO_MOUSE )
+// --------------------------------------
+
+
+_XPP_REG_FUN_( WAPIST_IP_ADDR_STRING )
+_XPP_REG_FUN_( WAPIST_IP_ADAPTER_INFO )
+_XPP_REG_FUN_( WAPIST_IP_PER_ADAPTER_INFO )
+
+// --------------------------------------
+_XPP_REG_FUN_( WAPIST_OVERLAPPED )
+_XPP_REG_FUN_( WAPIST_SYSTEM_INFO )
+// --------------------------------------
+_XPP_REG_FUN_( WAPIST_OSVERSIONINFOEX )
+// --------------------------------------
+
+
+
+// --------------------------------------
+// TOOLHELP STRUCTURES
+// --------------------------------------
+_XPP_REG_FUN_( WAPIST_MODULEENTRY32 )
+_XPP_REG_FUN_( WAPIST_PROCESSENTRY32 )
+_XPP_REG_FUN_( WAPIST_THREADENTRY32 )
+_XPP_REG_FUN_( WAPIST_HEAPENTRY32 )
+_XPP_REG_FUN_( WAPIST_HEAPLIST32 )
+
+// ----------------------------------------
+// common controls - listview support
+// ----------------------------------------
+_XPP_REG_FUN_( WAPIST_LVBKIMAGE )
+_XPP_REG_FUN_( WAPIST_LVCOLUMN )
+_XPP_REG_FUN_( WAPIST_LVFINDINFO )
+_XPP_REG_FUN_( WAPIST_LVFOOTERINFO )
+_XPP_REG_FUN_( WAPIST_LVFOOTERITEM )
+_XPP_REG_FUN_( WAPIST_LVGROUP )
+_XPP_REG_FUN_( WAPIST_LVGROUPMETRICS )
+_XPP_REG_FUN_( WAPIST_LVHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_LVINSERTGROUPSORTED )
+_XPP_REG_FUN_( WAPIST_LVINSERTMARK )
+_XPP_REG_FUN_( WAPIST_LVITEM )
+_XPP_REG_FUN_( WAPIST_LVITEMINDEX )
+_XPP_REG_FUN_( WAPIST_LVSETINFOTIP )
+_XPP_REG_FUN_( WAPIST_LVTILEINFO )
+_XPP_REG_FUN_( WAPIST_LVTILEVIEWINFO )
+_XPP_REG_FUN_( WAPIST_NMITEMACTIVATE )
+_XPP_REG_FUN_( WAPIST_NMLISTVIEW )
+_XPP_REG_FUN_( WAPIST_NMLVCACHEHINT )
+_XPP_REG_FUN_( WAPIST_NMLVCUSTOMDRAW )
+_XPP_REG_FUN_( WAPIST_NMLVDISPINFO )
+_XPP_REG_FUN_( WAPIST_NMLVEMPTYMARKUP )
+_XPP_REG_FUN_( WAPIST_NMLVFINDITEM )
+_XPP_REG_FUN_( WAPIST_NMLVGETINFOTIP )
+_XPP_REG_FUN_( WAPIST_NMLVKEYDOWN )
+_XPP_REG_FUN_( WAPIST_NMLVLINK )
+_XPP_REG_FUN_( WAPIST_NMLVODSTATECHANGE )
+_XPP_REG_FUN_( WAPIST_NMLVSCROLL )
+_XPP_REG_FUN_( WAPIST_LITEM )
+_XPP_REG_FUN_( WAPIST_NMCUSTOMDRAW )
+// ----------------------------------------
+
+_XPP_REG_FUN_( WAPIST_WINDOWPOS )
+_XPP_REG_FUN_( WAPIST_COLORSCHEME )
+_XPP_REG_FUN_( WAPIST_DPASTREAMINFO )
+_XPP_REG_FUN_( WAPIST_NMCHAR )
+_XPP_REG_FUN_( WAPIST_NMCUSTOMSPLITRECTINFO )
+_XPP_REG_FUN_( WAPIST_NMCUSTOMTEXT )
+_XPP_REG_FUN_( WAPIST_NMKEY )
+_XPP_REG_FUN_( WAPIST_NMMOUSE )
+_XPP_REG_FUN_( WAPIST_NMOBJECTNOTIFY )
+_XPP_REG_FUN_( WAPIST_NMTOOLTIPSCREATED )
+_XPP_REG_FUN_( WAPIST_READERMODEINFO )
+_XPP_REG_FUN_( WAPIST_BUTTON_IMAGELIST )
+_XPP_REG_FUN_( WAPIST_BUTTON_SPLITINFO )
+_XPP_REG_FUN_( WAPIST_NMBCDROPDOWN )
+_XPP_REG_FUN_( WAPIST_NMBCHOTITEM )
+_XPP_REG_FUN_( WAPIST_COMBOBOXINFO )
+_XPP_REG_FUN_( WAPIST_COMPAREITEMSTRUCT )
+_XPP_REG_FUN_( WAPIST_DRAWITEMSTRUCT )
+_XPP_REG_FUN_( WAPIST_MEASUREITEMSTRUCT )
+_XPP_REG_FUN_( WAPIST_COMBOBOXEXITEM )
+_XPP_REG_FUN_( WAPIST_NMCBEDRAGBEGIN )
+_XPP_REG_FUN_( WAPIST_NMCBEENDEDIT )
+_XPP_REG_FUN_( WAPIST_NMCOMBOBOXEX )
+_XPP_REG_FUN_( WAPIST_DATETIMEPICKERINFO )
+_XPP_REG_FUN_( WAPIST_NMDATETIMECHANGE )
+_XPP_REG_FUN_( WAPIST_NMDATETIMEFORMAT )
+_XPP_REG_FUN_( WAPIST_NMDATETIMEFORMATQUERY )
+_XPP_REG_FUN_( WAPIST_NMDATETIMESTRING )
+_XPP_REG_FUN_( WAPIST_NMDATETIMEWMKEYDOWN )
+_XPP_REG_FUN_( WAPIST_DRAGLISTINFO )
+_XPP_REG_FUN_( WAPIST_EDITBALLOONTIP )
+_XPP_REG_FUN_( WAPIST_HDHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_HDITEM )
+_XPP_REG_FUN_( WAPIST_HDLAYOUT )
+_XPP_REG_FUN_( WAPIST_HDTEXTFILTER )
+_XPP_REG_FUN_( WAPIST_NMHDDISPINFO )
+_XPP_REG_FUN_( WAPIST_NMHDFILTERBTNCLICK )
+_XPP_REG_FUN_( WAPIST_NMHEADER )
+
+
+_XPP_REG_FUN_( WAPIST_NMIPADDRESS )
+_XPP_REG_FUN_( WAPIST_DELETEITEMSTRUCT )
+_XPP_REG_FUN_( WAPIST_MCGRIDINFO )
+_XPP_REG_FUN_( WAPIST_MCHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_NMDAYSTATE )
+_XPP_REG_FUN_( WAPIST_NMSELCHANGE )
+_XPP_REG_FUN_( WAPIST_NMVIEWCHANGE )
+_XPP_REG_FUN_( WAPIST_NMPGCALCSIZE )
+_XPP_REG_FUN_( WAPIST_NMPGHOTITEM )
+_XPP_REG_FUN_( WAPIST_NMPGSCROLL )
+_XPP_REG_FUN_( WAPIST_PBRANGE )
+
+
+
+_XPP_REG_FUN_( WAPIST_NMREBARSPLITTER )
+
+
+
+_XPP_REG_FUN_( WAPIST_SCROLLBARINFO )
+_XPP_REG_FUN_( WAPIST_SCROLLINFO )
+_XPP_REG_FUN_( WAPIST_LHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_NMLINK )
+_XPP_REG_FUN_( WAPIST_NMTCKEYDOWN )
+_XPP_REG_FUN_( WAPIST_TCHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_TCITEM )
+_XPP_REG_FUN_( WAPIST_TCITEMHEADER )
+_XPP_REG_FUN_( WAPIST_COLORMAP )
+_XPP_REG_FUN_( WAPIST_NMTBCUSTOMDRAW )
+_XPP_REG_FUN_( WAPIST_NMTBDISPINFO )
+_XPP_REG_FUN_( WAPIST_NMTBGETINFOTIP )
+_XPP_REG_FUN_( WAPIST_NMTBHOTITEM )
+_XPP_REG_FUN_( WAPIST_NMTBRESTORE )
+_XPP_REG_FUN_( WAPIST_NMTBSAVE )
+_XPP_REG_FUN_( WAPIST_NMTOOLBAR )
+_XPP_REG_FUN_( WAPIST_TBADDBITMAP )
+
+_XPP_REG_FUN_( WAPIST_TBBUTTONINFOA )
+_XPP_REG_FUN_( WAPIST_TBINSERTMARK )
+_XPP_REG_FUN_( WAPIST_TBMETRICS )
+_XPP_REG_FUN_( WAPIST_TBREPLACEBITMAP )
+_XPP_REG_FUN_( WAPIST_TBSAVEPARAMS )
+_XPP_REG_FUN_( WAPIST_NMTTCUSTOMDRAW )
+_XPP_REG_FUN_( WAPIST_NMTTDISPINFO )
+_XPP_REG_FUN_( WAPIST_TOOLINFO )
+_XPP_REG_FUN_( WAPIST_TTGETTITLE )
+_XPP_REG_FUN_( WAPIST_TTHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_NMTREEVIEW )
+_XPP_REG_FUN_( WAPIST_NMTVASYNCDRAW )
+_XPP_REG_FUN_( WAPIST_NMTVCUSTOMDRAW )
+_XPP_REG_FUN_( WAPIST_NMTVDISPINFO )
+_XPP_REG_FUN_( WAPIST_NMTVDISPINFOEX )
+_XPP_REG_FUN_( WAPIST_NMTVGETINFOTIP )
+_XPP_REG_FUN_( WAPIST_NMTVITEMCHANGE )
+_XPP_REG_FUN_( WAPIST_NMTVKEYDOWN )
+_XPP_REG_FUN_( WAPIST_NMTVSTATEIMAGECHANGING )
+_XPP_REG_FUN_( WAPIST_TVGETITEMPARTRECTINFO )
+_XPP_REG_FUN_( WAPIST_TVHITTESTINFO )
+_XPP_REG_FUN_( WAPIST_TVINSERTSTRUCT )
+_XPP_REG_FUN_( WAPIST_TVITEM )
+_XPP_REG_FUN_( WAPIST_TVITEMEX )
+_XPP_REG_FUN_( WAPIST_TVSORTCB )
+_XPP_REG_FUN_( WAPIST_NMUPDOWN )
+_XPP_REG_FUN_( WAPIST_UDACCEL )
+_XPP_REG_FUN_( WAPIST_URL_COMPONENTS )
+_XPP_REG_FUN_( WAPIST_INTERNET_ASYNC_RESULT )
+_XPP_REG_FUN_( WAPIST_INTERNET_DIAGNOSTIC_SOCKET_INFO)
+_XPP_REG_FUN_( WAPIST_INTERNET_PROXY_INFO            )
+_XPP_REG_FUN_( WAPIST_INTERNET_PER_CONN_OPTION       )
+_XPP_REG_FUN_( WAPIST_INTERNET_PER_CONN_OPTION_LIST  )
+_XPP_REG_FUN_( WAPIST_INTERNET_VERSION_INFO          )
+_XPP_REG_FUN_( WAPIST_HTTP_VERSION_INFO              )
+_XPP_REG_FUN_( WAPIST_INTERNET_CONNECTED_INFO        )
+_XPP_REG_FUN_( WAPIST_INTERNET_CERTIFICATE_INFO      )
+_XPP_REG_FUN_( WAPIST_INTERNET_BUFFERS               )
+_XPP_REG_FUN_( WAPIST_INCOMINGCOOKIESTATE            )
+_XPP_REG_FUN_( WAPIST_OUTGOINGCOOKIESTATE            )
+_XPP_REG_FUN_( WAPIST_INTERNETCOOKIEHISTORY          )
+_XPP_REG_FUN_( WAPIST_COOKIEDECISION                 )
+_XPP_REG_FUN_( WAPIST_INTERNET_AUTH_NOTIFY_DATA      )
+_XPP_REG_FUN_( WAPIST_INTERNET_CACHE_ENTRY_INFO      )
+_XPP_REG_FUN_( WAPIST_INTERNET_CACHE_TIMESTAMPS      )
+_XPP_REG_FUN_( WAPIST_INTERNET_CACHE_GROUP_INFO      )
+_XPP_REG_FUN_( WAPIST_AUTO_PROXY_SCRIPT_BUFFER       )
+_XPP_REG_FUN_( WAPIST_INTERNET_PER_CONN_OPTION___VALUE)
+
+_XPP_REG_FUN_( WAPIST_TRACKMOUSEEVENT )
+_XPP_REG_FUN_( WAPIST_MOUSEMOVEPOINT  )
+_XPP_REG_FUN_( WAPIST_PREVENT_MEDIA_REMOVAL)
+_XPP_REG_FUN_( WAPIST_SHFILEINFO)
+_XPP_REG_FUN_( WAPIST_NMSELCHANGE)
+_XPP_REG_FUN_( WAPIST_SHELLEXECUTEINFO)
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+// -------------------------  C EXPORTED FUNCTIONS
+_CDECL_EXPORT_( _conGetFloat  )
+_CDECL_EXPORT_( _conPutFloat  )
+_CDECL_EXPORT_( _conGetQWord  )
+_CDECL_EXPORT_( _conPutQWord  )

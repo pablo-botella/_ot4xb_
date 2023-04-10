@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="def">
+      <UniqueIdentifier>{4da3a9c4-d5b3-468d-aeba-7ab8007c3da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ch">
+      <UniqueIdentifier>{be0b1f77-c4af-4015-bae8-3ceda9a4669f}</UniqueIdentifier>
+      <Extensions>*.ch</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="bat">
+      <UniqueIdentifier>{837b4d90-94c9-48bf-93ca-76aace22ac2d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="array2dbf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitwise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClrTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conCallEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conEvalEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conMCallEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="disphelper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fpCall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gdiplus_helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gwst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gwst_xb_setget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Num64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumAndBytes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OSVer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_acp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_cng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_cryptography.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_dirty_dlgedit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_disphelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_iocp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_IUnknow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_md5_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_ndtg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_ndtg_xstack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_ndtk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_regexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_variant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_vtran.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_xstream_t.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PeekPoke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointerEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointerEx_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resource_tool_base_t.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TBinFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TBinFile_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TCriticalSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TFileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TGStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="THashTable_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="THDict.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="THDict_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="THpStrList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="THtcs_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TldList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TldList_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TLXbStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TokenizeEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbClass_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbClsParams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbCPItem_internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbFpParam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbFpQParam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbFpQParam_init.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXbGenError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TXppParamList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TZString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Unicode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UUID.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vhti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="winapi_CommonStructures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WndTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XbSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_sqlstr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_statistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_expando.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_pcl_tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CRC32.HPP">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="disphelper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gdiplus_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ndtg_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_c_exported.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_cpp_exported.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_dirty_dlgedit_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_md5_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_resource_tool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TBinFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TGStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_THashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_Thtcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TldList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TLists.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TokenizeEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TPeFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TXppParamList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_TZString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_XbClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_XbSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerEx_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="THDict_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tls_Internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TXbClass_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TXbFpParam_internal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vhti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xbrt1request.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="atomic_resource_lock_t.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ot4xb.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ot4xbCpp.def">
+      <Filter>def</Filter>
+    </None>
+    <None Include="ot4xb.VersionInfo" />
+    <None Include="ot4xb.xbmac" />
+    <None Include="ch\apiset_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\apisetconv_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\CommCtrl_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\commdlg_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\GdiPlus_Constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\GdiPlus_Prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\mciapi_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\mmsyscom_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\mmsystem_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ot4xb.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ot4xb_app.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ot4xb_except.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ot4xb_mini_rt_asm.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ot4xb_wapist_map.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\RestartManager_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\RestartManager_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\Richedit_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\ShellApi_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\toolhelp32_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\toolhelp32_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\Vfw_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\Vfw_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\winapifamily_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinBase_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinDDE_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinError_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinGdi_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\wininet_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\wininet_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinReg_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\Winsock2_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\Winsock2_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinSpool_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\winspool_prototypes.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\winsvc_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinUser_constants.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="ch\WinNetWk.ch">
+      <Filter>ch</Filter>
+    </None>
+    <None Include="postbuild_debug.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="postbuild_release.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="prebuild_debug.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="prebuild_release.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="cpp.hint" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="disphelper_readme.txt" />
+  </ItemGroup>
+</Project>

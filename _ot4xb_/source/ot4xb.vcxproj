@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2E3706D7-10A0-4FE6-8FF3-E544843EA8A1}</ProjectGuid>
+    <RootNamespace>ot4xb</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <XPDeprecationWarning>false</XPDeprecationWarning>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <CodeAnalysisRuleSet>ruleset\ot4xb.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>call prebuild_debug.bat $(IntDir)ot4xb.obj</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)xpp;c:\pli\atl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_OT4XB_API_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/Zc:strictStrings- %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <Version>1.6</Version>
+      <AdditionalLibraryDirectories>$(SolutionDir)xpp;c:\pli\atl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>ot4xbCpp.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <SupportUnloadOfDelayLoadedDLL>false</SupportUnloadOfDelayLoadedDLL>
+      <ImportLibrary>$(TargetDir)$(TargetName)_cpp.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Xdcmake>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PostBuildEvent>
+      <Command>call postbuild_debug.bat   $(ProjectDir)   $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>call prebuild_release.bat $(IntDir)ot4xb.obj
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)xpp;c:\pli\atl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_OT4XB_API_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnablePREfast>false</EnablePREfast>
+      <MinimalRebuild />
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/Zc:strictStrings- %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <Version>1.6</Version>
+      <AdditionalLibraryDirectories>$(SolutionDir)xpp;c:\pli\atl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>ot4xbCpp.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(TargetDir)$(TargetName)_cpp.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Xdcmake>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PostBuildEvent>
+      <Command>echo on
+call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="array2dbf.cpp" />
+    <ClCompile Include="Bitwise.cpp" />
+    <ClCompile Include="ClrTool.cpp" />
+    <ClCompile Include="conCallEx.cpp" />
+    <ClCompile Include="conEvalEx.cpp" />
+    <ClCompile Include="conMCallEx.cpp" />
+    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="disphelper.c">
+      <GenerateXMLDocumentationFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="DrTool.cpp" />
+    <ClCompile Include="FileTime.cpp" />
+    <ClCompile Include="fpCall.cpp" />
+    <ClCompile Include="gdiplus_helper.cpp" />
+    <ClCompile Include="gwst.cpp" />
+    <ClCompile Include="gwst_xb_setget.cpp" />
+    <ClCompile Include="LogTool.cpp" />
+    <ClCompile Include="memory.cpp" />
+    <ClCompile Include="Num64.cpp" />
+    <ClCompile Include="NumAndBytes.cpp" />
+    <ClCompile Include="OSVer.cpp" />
+    <ClCompile Include="ot4xb.cpp" />
+    <ClCompile Include="ot4xb_acp.cpp" />
+    <ClCompile Include="ot4xb_cng.cpp" />
+    <ClCompile Include="ot4xb_cryptography.cpp" />
+    <ClCompile Include="ot4xb_dirty_dlgedit.cpp" />
+    <ClCompile Include="ot4xb_disphelper.cpp" />
+    <ClCompile Include="ot4xb_expando.cpp" />
+    <ClCompile Include="ot4xb_iocp.cpp" />
+    <ClCompile Include="ot4xb_IUnknow.cpp" />
+    <ClCompile Include="ot4xb_md5.cpp" />
+    <ClCompile Include="ot4xb_md5_internal.cpp" />
+    <ClCompile Include="ot4xb_ndtg.cpp" />
+    <ClCompile Include="ot4xb_ndtg_xstack.cpp" />
+    <ClCompile Include="ot4xb_ndtk.cpp" />
+    <ClCompile Include="ot4xb_pcl_tool.cpp" />
+    <ClCompile Include="ot4xb_regexp.cpp" />
+    <ClCompile Include="ot4xb_socket.cpp" />
+    <ClCompile Include="ot4xb_sqlstr.cpp" />
+    <ClCompile Include="ot4xb_statistics.cpp" />
+    <ClCompile Include="ot4xb_variant.cpp" />
+    <ClCompile Include="ot4xb_vtran.cpp" />
+    <ClCompile Include="ot4xb_xstream_t.cpp" />
+    <ClCompile Include="PeekPoke.cpp" />
+    <ClCompile Include="PointerEx.cpp" />
+    <ClCompile Include="PointerEx_internal.cpp" />
+    <ClCompile Include="resource_tool_base_t.cpp" />
+    <ClCompile Include="string.cpp" />
+    <ClCompile Include="TBinFile.cpp" />
+    <ClCompile Include="TBinFile_internal.cpp" />
+    <ClCompile Include="TCriticalSection.cpp" />
+    <ClCompile Include="TFileWriter.cpp" />
+    <ClCompile Include="TGStack.cpp" />
+    <ClCompile Include="THashTable_internal.cpp" />
+    <ClCompile Include="THDict.cpp" />
+    <ClCompile Include="THDict_internal.cpp" />
+    <ClCompile Include="THpStrList.cpp" />
+    <ClCompile Include="THtcs_internal.cpp" />
+    <ClCompile Include="TldList.cpp" />
+    <ClCompile Include="TldList_internal.cpp" />
+    <ClCompile Include="TList.cpp" />
+    <ClCompile Include="Tls.cpp" />
+    <ClCompile Include="TLXbStack.cpp" />
+    <ClCompile Include="TokenizeEx.cpp" />
+    <ClCompile Include="TXbClass.cpp" />
+    <ClCompile Include="TXbClass_internal.cpp" />
+    <ClCompile Include="TXbClsParams.cpp" />
+    <ClCompile Include="TXbCPItem_internal.cpp" />
+    <ClCompile Include="TXbFpParam.cpp" />
+    <ClCompile Include="TXbFpQParam.cpp" />
+    <ClCompile Include="TXbFpQParam_init.cpp" />
+    <ClCompile Include="TXbGenError.cpp" />
+    <ClCompile Include="TXppParamList.cpp" />
+    <ClCompile Include="TZString.cpp" />
+    <ClCompile Include="Unicode.cpp" />
+    <ClCompile Include="UUID.CPP" />
+    <ClCompile Include="vhti.cpp" />
+    <ClCompile Include="winapi_CommonStructures.cpp" />
+    <ClCompile Include="WndTool.cpp" />
+    <ClCompile Include="XbSet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CRC32.HPP" />
+    <ClInclude Include="disphelper.hpp" />
+    <ClInclude Include="gdiplus_helper.h" />
+    <ClInclude Include="atomic_resource_lock_t.h" />
+    <ClInclude Include="ndtg_internal.hpp" />
+    <ClInclude Include="ot4xb_api.h" />
+    <ClInclude Include="ot4xb_classes.h" />
+    <ClInclude Include="ot4xb_constants.h" />
+    <ClInclude Include="ot4xb_cpp_exported.h" />
+    <ClInclude Include="ot4xb_c_exported.h" />
+    <ClInclude Include="ot4xb_dirty_dlgedit_internal.hpp" />
+    <ClInclude Include="ot4xb_internal.hpp" />
+    <ClInclude Include="ot4xb_md5_internal.hpp" />
+    <ClInclude Include="ot4xb_resource_tool.h" />
+    <ClInclude Include="ot4xb_statistics.h" />
+    <ClInclude Include="ot4xb_TBinFile.h" />
+    <ClInclude Include="ot4xb_TGStack.h" />
+    <ClInclude Include="ot4xb_THashTable.h" />
+    <ClInclude Include="ot4xb_Thtcs.h" />
+    <ClInclude Include="ot4xb_TldList.h" />
+    <ClInclude Include="ot4xb_TLists.h" />
+    <ClInclude Include="ot4xb_TokenizeEx.h" />
+    <ClInclude Include="ot4xb_TPeFile.h" />
+    <ClInclude Include="ot4xb_TXppParamList.h" />
+    <ClInclude Include="ot4xb_types.h" />
+    <ClInclude Include="ot4xb_TZString.h" />
+    <ClInclude Include="ot4xb_version.h" />
+    <ClInclude Include="ot4xb_XbClass.h" />
+    <ClInclude Include="ot4xb_XbSet.h" />
+    <ClInclude Include="PointerEx_internal.hpp" />
+    <ClInclude Include="THDict_internal.hpp" />
+    <ClInclude Include="Tls_Internal.hpp" />
+    <ClInclude Include="TXbClass_internal.hpp" />
+    <ClInclude Include="TXbFpParam_internal.hpp" />
+    <ClInclude Include="vhti.h" />
+    <ClInclude Include="xbrt1request.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ot4xb.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ch\apisetconv_constants.ch" />
+    <None Include="ch\apiset_constants.ch" />
+    <None Include="ch\CommCtrl_constants.ch" />
+    <None Include="ch\commdlg_constants.ch" />
+    <None Include="ch\GdiPlus_Constants.ch" />
+    <None Include="ch\GdiPlus_Prototypes.ch" />
+    <None Include="ch\mciapi_constants.ch" />
+    <None Include="ch\mmsyscom_constants.ch" />
+    <None Include="ch\mmsystem_constants.ch" />
+    <None Include="ch\ot4xb.ch" />
+    <None Include="ch\ot4xb_app.ch" />
+    <None Include="ch\ot4xb_except.ch" />
+    <None Include="ch\ot4xb_mini_rt_asm.ch" />
+    <None Include="ch\ot4xb_wapist_map.ch" />
+    <None Include="ch\RestartManager_constants.ch" />
+    <None Include="ch\RestartManager_prototypes.ch" />
+    <None Include="ch\Richedit_constants.ch" />
+    <None Include="ch\ShellApi_constants.ch" />
+    <None Include="ch\toolhelp32_constants.ch" />
+    <None Include="ch\toolhelp32_prototypes.ch" />
+    <None Include="ch\Vfw_constants.ch" />
+    <None Include="ch\Vfw_prototypes.ch" />
+    <None Include="ch\winapifamily_constants.ch" />
+    <None Include="ch\WinBase_constants.ch" />
+    <None Include="ch\WinDDE_constants.ch" />
+    <None Include="ch\WinError_constants.ch" />
+    <None Include="ch\WinGdi_constants.ch" />
+    <None Include="ch\wininet_constants.ch" />
+    <None Include="ch\wininet_prototypes.ch" />
+    <None Include="ch\WinNetWk.ch" />
+    <None Include="ch\WinReg_constants.ch" />
+    <None Include="ch\Winsock2_constants.ch" />
+    <None Include="ch\Winsock2_prototypes.ch" />
+    <None Include="ch\WinSpool_constants.ch" />
+    <None Include="ch\winspool_prototypes.ch" />
+    <None Include="ch\winsvc_constants.ch" />
+    <None Include="ch\WinUser_constants.ch" />
+    <None Include="cpp.hint" />
+    <None Include="ot4xb.VersionInfo" />
+    <None Include="ot4xb.xbmac" />
+    <None Include="ot4xbCpp.def" />
+    <None Include="packages.config" />
+    <None Include="postbuild_debug.bat" />
+    <None Include="postbuild_release.bat" />
+    <None Include="prebuild_debug.bat" />
+    <None Include="prebuild_release.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="disphelper_readme.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+</Project>

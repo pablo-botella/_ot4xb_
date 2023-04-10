@@ -1,0 +1,30 @@
+#include <windows.h>
+
+1 VERSIONINFO
+FILEVERSION 1,7,0,5
+PRODUCTVERSION 1,7,0,5
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_DLL
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Pablo Botella\r\nwww.xbwin.com\r\n\0"
+   VALUE "FileDescription", "Open Tools for Xbase++ \000"
+   VALUE "FileVersion", "1.7.0.5\000\000"
+   VALUE "InternalName", "ot4xb\000"
+   VALUE "LegalCopyright", "Pablo Botella Navarro.\000\000"
+   VALUE "OriginalFilename", "ot4xb.dll\000"
+  }
+
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x409, 1252
+ }
+}
+
+
+                                     
