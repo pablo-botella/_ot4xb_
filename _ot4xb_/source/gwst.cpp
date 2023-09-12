@@ -616,7 +616,7 @@ static void gwst_xb_nExtraSize_( TXbClsParams * px ) // 1 // ::_nExtraSize_ | ::
                _xfree( pBuffer );
             }
          }
-         px->PutExtraLong( 1 , nNewSize );
+         px->PutExtraLong(3 , nNewSize );
       }
    }
    else px->PutReturnLong( px->GetExtraLong(3) - px->GetExtraLong(4) );

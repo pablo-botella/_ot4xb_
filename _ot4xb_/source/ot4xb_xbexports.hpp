@@ -288,6 +288,10 @@ XPPRET XPPENTRY OT4XB_QLOOP(XppParamList );
 // ot4xb_vtran.cpp
 // ---------------------------------------------------------------------------
 XPPRET XPPENTRY __VTRAN(XppParamList );
+XPPRET XPPENTRY OT4XB_COPY_WA_RECORD_WITH_TABLE(XppParamList );
+XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST(XppParamList );
+XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST(XppParamList );
+
 // ---------------------------------------------------------------------------
 // Memory.cpp
 // ---------------------------------------------------------------------------
@@ -554,7 +558,7 @@ XPPRET XPPENTRY _HDICT_ADD_HTTP_HEADERS(XppParamList );
 XPPRET XPPENTRY _HDICT_FROM_ZKDW(XppParamList );
 // -------------
 XPPRET XPPENTRY THDICTEX(XppParamList );
-XPPRET XPPENTRY _OT4XB_EXPANDO_(XppParamList );
+
 // -------------
 XPPRET XPPENTRY OT4XB_HASH(XppParamList );
 XPPRET XPPENTRY OT4XB_CNG(XppParamList );
@@ -570,6 +574,11 @@ XPPRET XPPENTRY _HDICTCS_REMOVEALL(XppParamList );
 XPPRET XPPENTRY _HDICTCS_REMOVEPROP(XppParamList );
 XPPRET XPPENTRY _HDICTCS_SETPROP(XppParamList );
 
+// ---------------------------------------------------------------------------
+// OT4XB_EXPANDO.CPP
+// ---------------------------------------------------------------------------
+XPPRET XPPENTRY OT4XB_ITERATE_ARRAY_CB(XppParamList );
+XPPRET XPPENTRY _OT4XB_EXPANDO_(XppParamList );
 
 // ---------------------------------------------------------------------------
 // MD5.cpp
@@ -1133,12 +1142,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1131>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1140>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1133>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1134>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1135>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1136>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1142>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1143>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1144>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1145>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

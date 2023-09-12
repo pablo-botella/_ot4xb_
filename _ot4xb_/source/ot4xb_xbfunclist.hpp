@@ -283,6 +283,10 @@
 // ot4xb_vtran.cpp
 // ---------------------------------------------------------------------------
    ,    {"__VTRAN",__VTRAN}
+   ,    {"OT4XB_COPY_WA_RECORD_WITH_TABLE",OT4XB_COPY_WA_RECORD_WITH_TABLE}
+   ,    {"OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST",OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST}
+   ,    {"OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST",OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST}
+
 // ---------------------------------------------------------------------------
 // Memory.cpp
 // ---------------------------------------------------------------------------
@@ -549,7 +553,7 @@
    ,    {"_HDICT_FROM_ZKDW",_HDICT_FROM_ZKDW}
 // -------------
    ,    {"THDICTEX",THDICTEX}
-   ,    {"_OT4XB_EXPANDO_",_OT4XB_EXPANDO_}
+
 // -------------
    ,    {"OT4XB_HASH",OT4XB_HASH}
    ,    {"OT4XB_CNG",OT4XB_CNG}
@@ -565,6 +569,11 @@
    ,    {"_HDICTCS_REMOVEPROP",_HDICTCS_REMOVEPROP}
    ,    {"_HDICTCS_SETPROP",_HDICTCS_SETPROP}
 
+// ---------------------------------------------------------------------------
+// OT4XB_EXPANDO.CPP
+// ---------------------------------------------------------------------------
+   ,    {"OT4XB_ITERATE_ARRAY_CB",OT4XB_ITERATE_ARRAY_CB}
+   ,    {"_OT4XB_EXPANDO_",_OT4XB_EXPANDO_}
 
 // ---------------------------------------------------------------------------
 // MD5.cpp
@@ -1128,9 +1137,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1131>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1140>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1133>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1134>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1135>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1136>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1142>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1143>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1144>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1145>>>_CDECL_EXPORT_( _conPutQWord  )<<<
