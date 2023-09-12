@@ -341,7 +341,6 @@ static void method_add_from_array(XppParamList pl)
          else
          {
             ContainerHandle pcon[] = { self_ref,k,vv };
-            _conCallMethodPa(con_tmp, "set_prop_add", 3, pcon);
 
             if (flags & 1)
             {
