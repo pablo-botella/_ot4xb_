@@ -7,6 +7,8 @@ echo ---------------------------------------------------************************
 echo copy %1ot4xb.def  %2ot4xb.def
 copy %1ot4xb.def  %2ot4xb.def
 copy %1__mklib.bat  %2__mklib.bat
+
+
 rem del %2ot4xb.lib
 
 %~d2

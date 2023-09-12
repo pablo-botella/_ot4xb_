@@ -26,13 +26,22 @@ SOFTWARE.
 C:\xpp19355\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib > ot4xb-lib.log
 type ot4xb-lib.log
 
+{$<File:>$[ot4xb_extract_all.bat]$}
+rd ot4xb_bin
+md ot4xb_bin
+rd ot4xb_source
+md ot4xb_source
+7z x _ot4xb_{$<FILEVERSION(_._._._)>$}.zip  -o.\ot4xb_bin
+7z x _ot4xb_{$<FILEVERSION(_._._._)>$}_source.zip  -o.\ot4xb_source
+if exists ot4xb_autodeploy.bat call ot4xb_autodeploy.bat
 
 
 {$<File:>$[__mk_package.bat]$}
 
+echo ---------    %0
 echo %1
 echo %2
-echo ----------------------
+echo ----------------------  
 set "path=c:\util;%path%"
 md %2builds
 md %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}
@@ -48,7 +57,14 @@ copy %2ot4xb.lib  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSI
 copy %2ot4xb_cpp.lib  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}
 copy %1*.txt %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}
 copy %1ch\*.ch  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}\include
-7za.exe a -y  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}.zip  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}\*
+
+copy %1ot4xb_extract_all.bat  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\ot4xb_extract_all.bat
+
+%~d2
+cd %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}
+7za.exe a -y  ..\_ot4xb_{$<FILEVERSION(_._._._)>$}.zip  *
+%~d1
+cd %~dp1
 
 copy %1..\ot4xb.sln %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source
 copy %1ch\*.ch  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source\ch
@@ -64,9 +80,12 @@ copy %1*.versioninfo %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVE
 copy %1*.bat %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source
 del %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source\BAT??????????????.bat
 copy %1ot4xb.vcproj %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source
-7za.exe a -y  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source.zip  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\*
+%~d2
+cd %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source
+7za.exe a -y  ..\_ot4xb_{$<FILEVERSION(_._._._)>$}_source.zip   *
 
-
+%~d1
+cd %~dp1
 
 
 if exist %2builds\SKIP_REMOVE_FILES.TXT goto SKIP_REMOVE_FILES
