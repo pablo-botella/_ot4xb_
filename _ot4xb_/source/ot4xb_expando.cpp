@@ -14,6 +14,7 @@ CreateXmlReader_ft  s_fp_CreateXmlReader = 0;
 BEGIN_NAMESPACE(ot4xb_expando)
 // ---------------------------------------------------------------------------------
 static void method_add_from_array(XppParamList pl);
+static void method_iterate_cb(XppParamList pl);
 // ---------------------------------------------------------------------------------
 static void get_prop(TXppParamList& xpp);
 static void set_prop(TXppParamList& xpp);
@@ -171,70 +172,193 @@ static void add_ini_string(TXppParamList& xpp)
    xpp[2]->Put(cona); _conRelease(cona); cona = 0;
 }
 // ---------------------------------------------------------------------------------
-static void add_from_array(TXppParamList& xpp)
+// ot4xb_iterate_array_cb(1 array , 2 cb , 3 cargo ,4 flags)
+// {|element,pos , cargo |    ..... }  -> result ignore unless 0x1000
+// flags   0x0001  skip NIL
+//         0x1000  replace value with codeblock result
+// 
+
+_XPP_REG_FUN_(OT4XB_ITERATE_ARRAY_CB)
 {
-   LONG ht = _conCallLong("_HDICT_NEW");
-   _conCallVoid("_HDICT_ADDPROPFROMARRAY", ht, xpp[2]->con());
-   _conCallVoid("_HDICT_ADDPROPFROMARRAY", ht, xpp[4]->con());
-   ContainerHandle contmp = _conPutNL(NULLCONTAINER, 3);
-   ContainerHandle cona = _conCallCon("_HDICT_ITERATE_CB", ht, contmp, xpp[3]->con());
-   _conRelease(contmp); contmp = 0;
-   _conCallVoid("_HDICT_DESTROY", ht); ht = 0;
-   xpp[2]->Put(cona); _conRelease(cona); cona = 0;
+   TXppParamList xpp(pl, 4);
+   ContainerHandle cona = xpp[1]->CheckType(XPP_ARRAY) ? xpp[1]->con() : NULLCONTAINER;
+   DWORD item_count = cona ? xpp[1]->con_size() : 0;
+   ContainerHandle codeblock = xpp[2]->CheckType(XPP_BLOCK) ? xpp[2]->con() : NULLCONTAINER;
+   ContainerHandle cargo = xpp[3]->con();
+   DWORD flags = (DWORD)xpp[4]->GetDWord();
+   if (codeblock && item_count)
+   {
+      DWORD item_pos;
+      for (item_pos = 1; item_pos <= item_count; item_pos++)
+      {
+         ContainerHandle item = _conArrayGet(cona, NULLCONTAINER, item_pos, 0);
+         if (item)
+         {
+            ContainerHandle con_item_pos = _conPutNL(NULLCONTAINER, item_pos);
+            if (!((flags & 1) && _conCheckType(item, XPP_UNDEF)))
+            {
+               ContainerHandle tmp = _conNew(NULLCONTAINER);
+               if (!_conEvalB(tmp, codeblock, 3, item, con_item_pos, cargo))
+               {
+                  if (flags && 0x1000) // store result
+                  {
+                     _conArrayPut(cona, tmp, item_pos, 0);
+                  }
+               }
+               _conRelease(tmp); tmp = NULLCONTAINER;
+            }
+            _conRelease(item); item = NULLCONTAINER;
+         }
+      }
+   }
+}
+
+// ---------------------------------------------------------------------------------
+// method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags)
+// {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
+// flags   0x0001  skip NIL
+//         0x1000  replace value with codeblock result
+// 
+static void method_iterate_cb(XppParamList pl)
+{
+   TXppParamList xpp(pl, 5);
+   ContainerHandle self = xpp[1]->con();
+   ContainerHandle cona = xpp[2]->CheckType(XPP_ARRAY) ? xpp[2]->con() : NULLCONTAINER;
+   DWORD item_count = cona ? xpp[2]->con_size() : 0;
+   ContainerHandle codeblock = xpp[3]->CheckType(XPP_BLOCK) ? xpp[3]->con() : NULLCONTAINER;
+   ContainerHandle cargo = xpp[4]->con();
+   DWORD flags = (DWORD)xpp[5]->GetDWord();
+   if (codeblock && item_count)
+   {
+      DWORD item_pos;
+      for (item_pos = 1; item_pos <= item_count; item_pos++)
+      {
+         ContainerHandle k = _conArrayGet(cona, NULLCONTAINER, item_pos, 1, 0);
+         if (_conCheckType(k, XPP_CHARACTER))
+         {
+            ContainerHandle vv = _conArrayGet(cona, NULLCONTAINER, item_pos, 2, 0);
+            if ((flags & 1) && _conCheckType(vv, XPP_UNDEF))
+            {
+               _conRelease(vv);
+               vv = NULLCONTAINER;
+            }
+            if (vv)
+            {
+               ContainerHandle tmp = _conNew(NULLCONTAINER);
+               if (!_conEvalB(tmp, codeblock, 4, k, vv, self, cargo))
+               {
+                  if (flags && 0x1000) // store result
+                  {
+                     _conArrayPut(cona, tmp, item_pos, 2, 0);
+                  }
+               }
+               _conRelease(vv);
+               vv = NULLCONTAINER;
+            }
+         }
+         if (k)
+         {
+            _conRelease(k);
+            k = NULLCONTAINER;
+         }
+      }
+   }
 }
 // ---------------------------------------------------------------------------------
-// method_add_from_array( 1 Self , 2 src_array , 3 flags )
-// flags:  0 normal set_prop_add
-// 
-//         8 each item contain an array with one or more items  // like html3:GetAllvars()
+ // method_add_from_array( 1 Self , 2 src_array , 3 flags , 4 get_key_cb  , 5 cargo)
+ // flags:  0 normal set_prop_add
+ //         1 replace set_prop
+ //    0x0008 each item contain an array with one or more items  // like html3:GetAllvars()
+ //    0x0100 use get_key_cb //  k := eval(get_key_cb , element ) // v := element
 static void method_add_from_array(XppParamList pl)
 {
-   TXppParamList xpp(pl, 3);
+   TXppParamList xpp(pl, 5);
    DWORD flags = (DWORD)xpp[3]->GetDWord();
    DWORD item_count = ((xpp[1]->CheckType(XPP_OBJECT) && xpp[2]->CheckType(XPP_ARRAY)) ? xpp[2]->con_size() : 0);
    DWORD item_pos;
    ContainerHandle cona_ref = xpp[2]->con();
    ContainerHandle self_ref = xpp[1]->con();
    ContainerHandle con_tmp = _conNew(NULLCONTAINER);
+   ContainerHandle con_key_ref = flags & 0x100 ? (xpp[4]->CheckType(XPP_BLOCK) ? xpp[4]->con() : NULLCONTAINER) : NULLCONTAINER;
+   ContainerHandle con_cargo_ref = flags & 0x100 ? xpp[5]->con() : NULLCONTAINER;
 
    for (item_pos = 1; item_pos <= item_count; item_pos++)
    {
-
-      ContainerHandle  k = _conArrayGet(cona_ref, NULLCONTAINER, item_pos, 1, 0);
-      if (k)
+      ContainerHandle k = NULLCONTAINER;
+      ContainerHandle vv = NULLCONTAINER;
+      if (flags & 0x100)
       {
-         ContainerHandle vv = _conArrayGet(cona_ref, NULLCONTAINER, item_pos, 2, 0);
-         if (vv)
+         if (con_key_ref)
          {
-
-            ULONG t = 0;
-            _conType(vv, &t);
-            if ((t & XPP_ARRAY) && (flags & 8))
+            vv = _conArrayGet(cona_ref, NULLCONTAINER, item_pos, 0);
+            if (vv)
             {
-               DWORD cnt = 0;
-               DWORD pos;
-               _conSizeA(vv, &cnt, 0);
-               for (pos = 1; pos <= cnt; pos++)
+               k = _conNew(k);
+               if (_conEvalB(k, con_key_ref, 4, vv, item_pos, self_ref, con_cargo_ref))
                {
-                  ContainerHandle v = _conArrayGet(vv, NULLCONTAINER, pos, 0);
-                  if (v)
-                  {
-                     ContainerHandle pcon[] = { self_ref,k,v };
-                     _conCallMethodPa(con_tmp, "set_prop_add", 3, pcon);
-                     _conRelease(v); v = 0;
-                  }
-
+                  _conRelease(k);
+                  k = NULLCONTAINER;
                }
+            }
+         }
+      }
+      else
+      {
+         k = _conArrayGet(cona_ref, NULLCONTAINER, item_pos, 1, 0);
+         if (k)
+         {
+            vv = _conArrayGet(cona_ref, NULLCONTAINER, item_pos, 2, 0);
+         }
+      }
+      if (k && vv)
+      {
+         ULONG t = 0;
+         _conType(vv, &t);
+         if ((t & XPP_ARRAY) && (flags & 8))
+         {
+            DWORD cnt = 0;
+            DWORD pos;
+            _conSizeA(vv, &cnt, 0);
+            for (pos = 1; pos <= cnt; pos++)
+            {
+               ContainerHandle v = _conArrayGet(vv, NULLCONTAINER, pos, 0);
+               if (v)
+               {
+                  ContainerHandle pcon[] = { self_ref,k,v };
+                  if (flags & 1)
+                  {
+                     _conCallMethodPa(con_tmp, "set_prop", 3, pcon);
+                  }
+                  else
+                  {
+                     _conCallMethodPa(con_tmp, "set_prop_add", 3, pcon);
+                  }
+                  _conRelease(v); v = 0;
+               }
+
+            }
+         }
+         else
+         {
+            ContainerHandle pcon[] = { self_ref,k,vv };
+            _conCallMethodPa(con_tmp, "set_prop_add", 3, pcon);
+
+            if (flags & 1)
+            {
+               _conCallMethodPa(con_tmp, "set_prop", 3, pcon);
             }
             else
             {
-               ContainerHandle pcon[] = { self_ref,k,vv };
                _conCallMethodPa(con_tmp, "set_prop_add", 3, pcon);
             }
-            _conRelease(vv); vv = 0;
+
          }
-         _conRelease(k);
+
+
+
       }
+      if (k) { _conRelease(k);  k = NULLCONTAINER; }
+      if (vv) { _conRelease(vv); vv = NULLCONTAINER; }
    }
    _conRelease(con_tmp); con_tmp = 0;
 }
@@ -254,147 +378,147 @@ static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD p
 
    switch (ulType & 0xFF)
    {
-   case  XPP_CHARACTER:
-   {
-      if (nMoreFlags & 1) { z += "[\"C\","; }
-      z += "\"";
-      DWORD cb = 0;
-      LPSTR p = 0;
-      if (_conRLockC(con_value, &p, &cb) == 0)
+      case  XPP_CHARACTER:
       {
-         z.Add_to_json(p, (int)cb);
-         _conUnlockC(con_value);
+         if (nMoreFlags & 1) { z += "[\"C\","; }
+         z += "\"";
+         DWORD cb = 0;
+         LPSTR p = 0;
+         if (_conRLockC(con_value, &p, &cb) == 0)
+         {
+            z.Add_to_json(p, (int)cb);
+            _conUnlockC(con_value);
+         }
+         p = 0; cb = 0;
+         z += "\"";
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
       }
-      p = 0; cb = 0;
-      z += "\"";
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   case  XPP_DATE:
-   {
-      if (nMoreFlags & 1) { z += "[\"D\","; }
-      char sz[9]; ZeroMemory(sz, sizeof(sz));
-      _conGetDS(con_value, sz);
-      z += "\"";
-      z += sz;
-      z += "\"";
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   case  XPP_NUMERIC:
-   {
-      if (nMoreFlags & 1) { z += "[\"N\","; }
-      if (ulType & _xpp_DOUBLE)
+      case  XPP_DATE:
       {
-         double nd = 0.00;
-         char format[64];
-         _conGetND(con_value, &nd);
-         _snprintf_c(format, sizeof(format), "%%f");
+         if (nMoreFlags & 1) { z += "[\"D\","; }
+         char sz[9]; ZeroMemory(sz, sizeof(sz));
+         _conGetDS(con_value, sz);
+         z += "\"";
+         z += sz;
+         z += "\"";
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
+      }
+      case  XPP_NUMERIC:
+      {
+         if (nMoreFlags & 1) { z += "[\"N\","; }
+         if (ulType & _xpp_DOUBLE)
+         {
+            double nd = 0.00;
+            char format[64];
+            _conGetND(con_value, &nd);
+            _snprintf_c(format, sizeof(format), "%%f");
 
-         DWORD ndf = ((nMoreFlags >> 20) & 0x0F);
-         DWORD precission = (nMoreFlags >> 16) & 0x0F;
-         if (precission && !(ndf & 3))
-         {
-            ndf = 1;
+            DWORD ndf = ((nMoreFlags >> 20) & 0x0F);
+            DWORD precission = (nMoreFlags >> 16) & 0x0F;
+            if (precission && !(ndf & 3))
+            {
+               ndf = 1;
+            }
+            if ((ndf & 3) && !precission)
+            {
+               precission = 15;
+            }
+            switch (ndf)
+            {
+               case 1:
+               {
+                  _snprintf_c(format, sizeof(format), "%%.%if", precission);
+                  break;
+               }
+               case 2:
+               {
+                  _snprintf_c(format, sizeof(format), "%%.%ig", precission);
+                  break;
+               }
+            }
+            z.printf(format, nd);
          }
-         if ((ndf & 3) && !precission)
+         else
          {
-            precission = 15;
+            LONG nl = 0;
+            _conGetNL(con_value, &nl);
+            z.printf("%i", nl);
          }
-         switch (ndf)
-         {
-         case 1:
-         {
-            _snprintf_c(format, sizeof(format), "%%.%if", precission);
-            break;
-         }
-         case 2:
-         {
-            _snprintf_c(format, sizeof(format), "%%.%ig", precission);
-            break;
-         }
-         }
-         z.printf(format, nd);
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
       }
-      else
+      case  XPP_LOGICAL:
       {
-         LONG nl = 0;
-         _conGetNL(con_value, &nl);
-         z.printf("%i", nl);
-      }
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   case  XPP_LOGICAL:
-   {
 
-      BOOL b = 0;
-      if (nMoreFlags & 1) { z += "[\"L\","; }
-      _conGetL(con_value, &b);
-      z += (b ? "true" : "false");
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   case  XPP_OBJECT:
-   {
-      LPSTR p = 0;
-      if (nMoreFlags & 1)
+         BOOL b = 0;
+         if (nMoreFlags & 1) { z += "[\"L\","; }
+         _conGetL(con_value, &b);
+         z += (b ? "true" : "false");
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
+      }
+      case  XPP_OBJECT:
       {
-         z += "[\"O";
-         p = _pszGetClassName(con_value);
+         LPSTR p = 0;
+         if (nMoreFlags & 1)
+         {
+            z += "[\"O";
+            p = _pszGetClassName(con_value);
+            if (p)
+            {
+               z += " (  ";
+               z += p;
+               _xfree(p);
+               p = 0;
+               z += " )";
+            }
+            z += "\",";
+         }
+         p = _conMCallLpstr(con_value, "json_escape_self", (LONG)nMoreFlags, (LONG)nDepth, (LONG)pStack);
          if (p)
          {
-            z += " (  ";
             z += p;
             _xfree(p);
-            p = 0;
-            z += " )";
          }
-         z += "\",";
+         else
+         {
+            z += "null";
+         }
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
       }
-      p = _conMCallLpstr(con_value, "json_escape_self", (LONG)nMoreFlags, (LONG)nDepth, (LONG)pStack);
-      if (p)
+      case XPP_ARRAY:
       {
-         z += p;
-         _xfree(p);
+         DWORD nCount = _conGetArrayLen(con_value);
+         DWORD n;
+         if (nMoreFlags & 1) { z.printf("[\"A (%i) \",", nCount); }
+         if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
+         z += "[";
+         nDepth++;
+         for (n = 1; n <= nCount; n++)
+         {
+            ContainerHandle con = _conNew(NULLCONTAINER);
+            _conArrayGet(con_value, con, n, 0);
+            if (n > 1) { z.AddChar(','); }
+            json_serialize_value(z, con, pStack, nMoreFlags, nDepth);
+            _conReleaseM(con, 0);
+         }
+         nDepth--;
+         if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
+         z += "]";
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
       }
-      else
+      default:
       {
-         z += "null";
-      }
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   case XPP_ARRAY:
-   {
-      DWORD nCount = _conGetArrayLen(con_value);
-      DWORD n;
-      if (nMoreFlags & 1) { z.printf("[\"A (%i) \",", nCount); }
-      if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
-      z += "[";
-      nDepth++;
-      for (n = 1; n <= nCount; n++)
-      {
-         ContainerHandle con = _conNew(NULLCONTAINER);
-         _conArrayGet(con_value, con, n, 0);
-         if (n > 1) { z.AddChar(','); }
-         json_serialize_value(z, con, pStack, nMoreFlags, nDepth);
-         _conReleaseM(con, 0);
-      }
-      nDepth--;
-      if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
-      z += "]";
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
-   default:
-   {
 
-      if (nMoreFlags & 1) { z += "[\"U\","; }
-      z += "null";
-      if (nMoreFlags & 1) { z += "]"; }
-      return;
-   }
+         if (nMoreFlags & 1) { z += "[\"U\","; }
+         z += "null";
+         if (nMoreFlags & 1) { z += "]"; }
+         return;
+      }
    }
 }
 // ---------------------------------------------------------------------------------
@@ -500,7 +624,7 @@ static void json_escape_self(TXppParamList& xpp)
       pStack = 0;
    }
 
-   after_dump_properties:;
+after_dump_properties:;
    nDepth--;
    if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
    z += "}";
@@ -580,7 +704,10 @@ static void mc_from_xml(TXppParamList& xpp) //  _OT4XB_EXPANDO_( 0x07350001 , uX
    if (!s_hdll_xmllite)
    {
       s_hdll_xmllite = LoadLibrary("xmllite.dll");
-      s_fp_CreateXmlReader = (CreateXmlReader_ft)GetProcAddress(s_hdll_xmllite, "CreateXmlReader");
+      if (s_hdll_xmllite)
+      {
+         s_fp_CreateXmlReader = (CreateXmlReader_ft)GetProcAddress(s_hdll_xmllite, "CreateXmlReader");
+      }
    }
    if (s_fp_CreateXmlReader && xpp[2]->CheckType(XPP_CHARACTER) && (dwFlags & 0x100))
    {
@@ -592,7 +719,7 @@ static void mc_from_xml(TXppParamList& xpp) //  _OT4XB_EXPANDO_( 0x07350001 , uX
 // ---------------------------------------------------------------------------------
 class xml_node_100_t : public T_ot4xb_base
 {
-public:
+   public:
    xml_node_100_t* m_prev;
    xml_node_100_t* m_next;
    char             m_name[260];
@@ -654,8 +781,11 @@ public:
          _conRelease(_conMCallConNR("set_prop_add", m_con, 2, _conPutC(0, pName), *pcon));
          *pcon = 0;
       }
-      _conReleaseM(*pcon, 0);
-      *pcon = 0;
+      if (pcon)
+      {
+         _conReleaseM(*pcon, 0);
+         *pcon = 0;
+      }
    };
    // -----------------------------------------------
    xml_node_100_t* pop(void)
@@ -778,8 +908,7 @@ static void from_xml_worker_100(ContainerHandle conr, LPSTR pXmlSrc, DWORD cbXml
             }
          }
       }
-   }
-   __finally
+   } __finally
    {
       if (pXmlReader)
       {
@@ -805,82 +934,125 @@ static void from_xml_xml_loop_100(ContainerHandle conr, IXmlReader* xml, DWORD d
    {
       switch (nt)
       {
-      case XmlNodeType_Element:
-      {
-         LPWSTR pw = 0;
-         if (FAILED(xml->GetLocalName((LPCWSTR*)&pw, 0)))
+         case XmlNodeType_Element:
          {
-            goto label_cleanup;
-         }
-         if (tos)
-         {
-            tos = tos->push(pw, dwFlags);
-         }
-         else
-         {
-            if (root)
+            LPWSTR pw = 0;
+            if (FAILED(xml->GetLocalName((LPCWSTR*)&pw, 0)))
             {
                goto label_cleanup;
             }
-            root = new xml_node_100_t(pw);
-            tos = root;
-            tos->m_flags = dwFlags;
-         }
-         if (dwFlags & 0x1000)
-         {
-            TList ls;
-            if (xml->MoveToFirstAttribute() == S_OK)
+            if (tos)
             {
-               do
+               tos = tos->push(pw, dwFlags);
+            }
+            else
+            {
+               if (root)
                {
-                  UINT    cbw = 0;
-                  LPWSTR  pwstr = 0;
-                  if ((xml->GetLocalName((LPCWSTR*)&pwstr, &cbw) == S_OK) && cbw)
-                  {
-                     void** item = (void**)_xgrab(16);
-                     item[0] = (void*)w2ansi(pwstr, (int)cbw, _mk_ptr_(LPINT, item, 4));
-                     cbw = 0; pwstr = 0;
-                     if ((xml->GetValue((LPCWSTR*)&pwstr, &cbw) == S_OK) && cbw)
-                     {
-                        item[2] = (void*)w2ansi(pwstr, (int)cbw, _mk_ptr_(LPINT, item, 12));
-                     }
-                     ls.Add((void*)item);
-                  }
-               } while (xml->MoveToNextAttribute() == S_OK);
-
-               DWORD dwCount = ls.Count();
-               DWORD dw;
-               tos->m_attributes = _conNewArray(2, dwCount, 2, 0);
-               for (dw = 0; dw < dwCount; dw++)
+                  goto label_cleanup;
+               }
+               root = new xml_node_100_t(pw);
+               tos = root;
+               tos->m_flags = dwFlags;
+            }
+            if (dwFlags & 0x1000)
+            {
+               TList ls;
+               if (xml->MoveToFirstAttribute() == S_OK)
                {
-                  void** item = (void**)ls.Replace(dw, 0);
-                  if (item)
+                  do
                   {
-                     ContainerHandle conKey = _conPutC(0, "");
-                     ContainerHandle conValue = _conPutC(0, "");
+                     UINT    cbw = 0;
+                     LPWSTR  pwstr = 0;
+                     if ((xml->GetLocalName((LPCWSTR*)&pwstr, &cbw) == S_OK) && cbw)
+                     {
+                        void** item = (void**)_xgrab(16);
+                        item[0] = (void*)w2ansi(pwstr, (int)cbw, _mk_ptr_(LPINT, item, 4));
+                        cbw = 0; pwstr = 0;
+                        if ((xml->GetValue((LPCWSTR*)&pwstr, &cbw) == S_OK) && cbw)
+                        {
+                           item[2] = (void*)w2ansi(pwstr, (int)cbw, _mk_ptr_(LPINT, item, 12));
+                        }
+                        ls.Add((void*)item);
+                     }
+                  } while (xml->MoveToNextAttribute() == S_OK);
 
-                     if (item[0])
+                  DWORD dwCount = ls.Count();
+                  DWORD dw;
+                  tos->m_attributes = _conNewArray(2, dwCount, 2, 0);
+                  for (dw = 0; dw < dwCount; dw++)
+                  {
+                     void** item = (void**)ls.Replace(dw, 0);
+                     if (item)
                      {
-                        conKey = _conPutCL(conKey, (LPSTR)item[0], (ULONG)item[1]);
-                        _xfree(item[0]);
-                        item[0] = 0;
+                        ContainerHandle conKey = _conPutC(0, "");
+                        ContainerHandle conValue = _conPutC(0, "");
+
+                        if (item[0])
+                        {
+                           conKey = _conPutCL(conKey, (LPSTR)item[0], (ULONG)item[1]);
+                           _xfree(item[0]);
+                           item[0] = 0;
+                        }
+                        if (item[2])
+                        {
+                           conValue = _conPutCL(conValue, (LPSTR)item[2], (ULONG)item[3]);
+                           _xfree(item[2]);
+                           item[2] = 0;
+                        }
+                        _xfree((void*)item); item = 0;
+                        _conArrayPut(tos->m_attributes, conKey, dw + 1, 1, 0);
+                        _conArrayPut(tos->m_attributes, conValue, dw + 1, 2, 0);
+                        _conReleaseM(conKey, conValue, 0);
                      }
-                     if (item[2])
-                     {
-                        conValue = _conPutCL(conValue, (LPSTR)item[2], (ULONG)item[3]);
-                        _xfree(item[2]);
-                        item[2] = 0;
-                     }
-                     _xfree((void*)item); item = 0;
-                     _conArrayPut(tos->m_attributes, conKey, dw + 1, 1, 0);
-                     _conArrayPut(tos->m_attributes, conValue, dw + 1, 2, 0);
-                     _conReleaseM(conKey, conValue, 0);
                   }
                }
+               xml->MoveToElement();
             }
-            xml->MoveToElement();
+            if (xml->IsEmptyElement())
+            {
+               if (tos)
+               {
+                  tos = tos->pop();
+               }
+               else
+               {
+                  goto label_cleanup;
+               }
+               break;
+            }
+            if (!tos)
+            {
+               goto label_cleanup;
+            }
+            break;
          }
-         if (xml->IsEmptyElement())
+         case XmlNodeType_CDATA:
+         {
+            if (!(dwFlags & 2))
+            {
+               break;
+            }
+         }
+         case XmlNodeType_Text:
+         {
+            if (!tos)
+            {
+               goto label_cleanup;
+            }
+            UINT cc = 0;
+            LPWSTR pw = 0;
+            if (FAILED(xml->GetValue((LPCWSTR*)&pw, &cc)))
+            {
+               goto label_cleanup;
+            }
+            if (pw)
+            {
+               tos->add_text(pw, cc);
+            }
+            break;
+         }
+         case XmlNodeType_EndElement:
          {
             if (tos)
             {
@@ -892,52 +1064,9 @@ static void from_xml_xml_loop_100(ContainerHandle conr, IXmlReader* xml, DWORD d
             }
             break;
          }
-         if (!tos)
-         {
-            goto label_cleanup;
-         }
-         break;
-      }
-      case XmlNodeType_CDATA:
-      {
-         if (!(dwFlags & 2))
-         {
-            break;
-         }
-      }
-      case XmlNodeType_Text:
-      {
-         if (!tos)
-         {
-            goto label_cleanup;
-         }
-         UINT cc = 0;
-         LPWSTR pw = 0;
-         if (FAILED(xml->GetValue((LPCWSTR*)&pw, &cc)))
-         {
-            goto label_cleanup;
-         }
-         if (pw)
-         {
-            tos->add_text(pw, cc);
-         }
-         break;
-      }
-      case XmlNodeType_EndElement:
-      {
-         if (tos)
-         {
-            tos = tos->pop();
-         }
-         else
-         {
-            goto label_cleanup;
-         }
-         break;
-      }
       }
    }
-   label_cleanup:;
+label_cleanup:;
    while (tos) // must not happen but we will be sure not abandoned items
    {
       if (tos == root)
@@ -975,17 +1104,16 @@ static void set_get(XppParamList pl)
    {
       switch ((xpp[1]->GetLong() & 0x0F))
       {
-      case 0x01: { get_prop(xpp); break; }
-      case 0x02: { set_prop(xpp); break; }
-      case 0x03: { is_prop(xpp); break; }
-      case 0x04: { remove_prop(xpp); break; }
-      case 0x05: { set_prop_add(xpp); break; }
-      case 0x06: { add_env_strings(xpp); break; }
-      case 0x07: { add_ini_string(xpp); break; }
-      case 0x08: { add_from_array(xpp); break; }
-      case 0x09: { json_escape_self(xpp); break; }
-      case 0x0A: { get_prop_index(xpp); break; }
-      case 0x0B: { m_json_on_unserialize_pop(xpp); break; }
+         case 0x01: { get_prop(xpp); break; }
+         case 0x02: { set_prop(xpp); break; }
+         case 0x03: { is_prop(xpp); break; }
+         case 0x04: { remove_prop(xpp); break; }
+         case 0x05: { set_prop_add(xpp); break; }
+         case 0x06: { add_env_strings(xpp); break; }
+         case 0x07: { add_ini_string(xpp); break; }
+         case 0x09: { json_escape_self(xpp); break; }
+         case 0x0A: { get_prop_index(xpp); break; }
+         case 0x0B: { m_json_on_unserialize_pop(xpp); break; }
 
       }
    }
@@ -1022,10 +1150,9 @@ static void create_class(XppParamList pl)
       pc->MethodCB("set_prop_add", "{|s,k,v|    _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811405 )   ,@s:__m__props__,@s:__m__hash__,k,v)  }");
       pc->MethodCB("add_env_strings", "{|s,p|      _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811406 )   ,@s:__m__props__,@s:__m__hash__,p)    , s}");
       pc->MethodCB("add_ini_string", "{|s,p,dw|   _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811407 )   ,@s:__m__props__,@s:__m__hash__,p,dw) , s}");
-      pc->ClassMethod_cbbs("add_from_array", "{|s,aa,flags|  XbFpCall(%i,s,aa,flags) , s }", method_add_from_array);
-
-
-
+      pc->Method_cbbs("add_from_array", "{|s,aa,flags,get_key_cb,cargo|  XbFpCall(%i,s,aa,flags,get_key_cb,cargo) , s }", method_add_from_array);
+      pc->Method_cbbs("iterate_cb", "{|s,cb,cargo,flags|  XbFpCall(%i,s,s:__m__props__,cb,cargo,flags) , s }", method_iterate_cb); // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags) 
+                                                                                                                                        // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
 
       pc->MethodCB("json_escape_self", "{|s,mf,depth,pStack| _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811409 )   ,s:__m__props__,s:__m__serial__,pStack,s,mf,depth)   }");
       // -----
@@ -1074,8 +1201,7 @@ _XPP_REG_FUN_(_OT4XB_EXPANDO_)
             EnterCriticalSection(pcs);
          }
          ot4xb_expando::set_get(pl);
-      }
-      __finally
+      } __finally
       {
          if (bSync)
          {
@@ -1086,16 +1212,16 @@ _XPP_REG_FUN_(_OT4XB_EXPANDO_)
    }
    switch (dw)
    {
-   case 0x07350001:
-   {
-      ot4xb_expando::mc_envelope_from_xml(pl);
-      return;
-   }
-   default:
-   {
-      ot4xb_expando::create_class(pl);
-      return;
-   }
+      case 0x07350001:
+      {
+         ot4xb_expando::mc_envelope_from_xml(pl);
+         return;
+      }
+      default:
+      {
+         ot4xb_expando::create_class(pl);
+         return;
+      }
    }
 }
 // -----------------------------------------------------------------------------------------------------------------

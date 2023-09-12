@@ -283,6 +283,10 @@ _XPP_REG_FUN_(OT4XB_QLOOP)
 // ot4xb_vtran.cpp
 // ---------------------------------------------------------------------------
 _XPP_REG_FUN_(__VTRAN) 
+_XPP_REG_FUN_(OT4XB_COPY_WA_RECORD_WITH_TABLE) 
+_XPP_REG_FUN_(OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST) 
+_XPP_REG_FUN_(OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST) 
+
 // ---------------------------------------------------------------------------
 // Memory.cpp
 // ---------------------------------------------------------------------------
@@ -549,7 +553,7 @@ _XPP_REG_FUN_( _HDICT_ADD_HTTP_HEADERS )
 _XPP_REG_FUN_( _HDICT_FROM_ZKDW )        
 // -------------
 _XPP_REG_FUN_( THDICTEX)
-_XPP_REG_FUN_( _OT4XB_EXPANDO_)
+
 // -------------
 _XPP_REG_FUN_( OT4XB_HASH )
 _XPP_REG_FUN_( OT4XB_CNG  )
@@ -565,6 +569,11 @@ _XPP_REG_FUN_( _HDICTCS_REMOVEALL     )
 _XPP_REG_FUN_( _HDICTCS_REMOVEPROP    ) 
 _XPP_REG_FUN_( _HDICTCS_SETPROP       ) 
 
+// ---------------------------------------------------------------------------
+// OT4XB_EXPANDO.CPP
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_(OT4XB_ITERATE_ARRAY_CB) 
+_XPP_REG_FUN_( _OT4XB_EXPANDO_)
 
 // ---------------------------------------------------------------------------
 // MD5.cpp

@@ -2106,7 +2106,10 @@ OT4XB_API XPPAPIRET _conGetDateAsFileTime( ContainerHandle con, FILETIME * pft )
       st.wDay = (WORD) ( sz[7] + ( sz[6] * 10 ) );
       st.wMonth = (WORD) ( sz[5] + ( sz[4] * 10 ) );
       st.wYear = (WORD) ( ( (WORD) sz[3] ) + ( (WORD) sz[2] * 10 ) + ( (WORD) sz[1] * 100 ) + ( (WORD) sz[0] * 1000 ) );
-      SystemTimeToFileTime( &st, pft );
+      if (pft)
+      {
+         SystemTimeToFileTime(&st, pft);
+      }
    }
    return 0;
 }

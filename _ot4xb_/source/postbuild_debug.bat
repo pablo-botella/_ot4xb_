@@ -18,9 +18,9 @@ echo ---------------------------------------------------************************
 CD %~dp2         
 echo %~d2
 echo %~dp2
-C:\xpp19355\XPPW32\bin\aimplib.exe
-C:\xpp19355\XPPW32\bin\aimplib.exe
-C:\xpp19355\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib 
+C:\Alaska\XPPW32\bin\aimplib.exe
+C:\Alaska\XPPW32\bin\aimplib.exe
+C:\Alaska\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib 
 
 %~d1
 CD %~dp1
@@ -44,7 +44,7 @@ IF EXIST C:\pli\ot4xb  copy %1ch\*.ch          C:\pli\ot4xb\
 
 @echo ----------------------------------------
 
-IF EXIST \util\ot4xb-deploy-debug.bat call \util\ot4xb-deploy-debug.bat   %1  %2
+IF EXIST c:\util\ot4xb-deploy-debug.bat call c:\util\ot4xb-deploy-debug.bat   %1  %2
 
 @echo ----------------------------------------
 
