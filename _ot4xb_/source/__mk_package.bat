@@ -19,7 +19,7 @@ copy %2ot4xb_cpp.lib  %2builds\_ot4xb_001_007_000_007\_ot4xb_001_007_000_007
 copy %1*.txt %2builds\_ot4xb_001_007_000_007\_ot4xb_001_007_000_007
 copy %1ch\*.ch  %2builds\_ot4xb_001_007_000_007\_ot4xb_001_007_000_007\include
 
-copy %1ot4xb_extract_all.bat  %2builds\_ot4xb_001_007_000_007\ot4xb_extract_all.bat
+copy %1ot4xb_extract_all.bat  %2builds\_ot4xb_001_007_000_007\_ot4xb_001_007_000_007_deploy.bat
 
 %~d2
 cd %2builds\_ot4xb_001_007_000_007\_ot4xb_001_007_000_007

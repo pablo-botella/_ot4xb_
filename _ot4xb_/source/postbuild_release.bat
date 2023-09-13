@@ -11,12 +11,10 @@ copy %1__mklib.bat  %2__mklib.bat
 
 rem del %2ot4xb.lib
 
+
 %~d2
 CD %~dp2         
-echo %~d2
-echo %~dp2
-C:\Alaska\XPPW32\bin\aimplib.exe
-C:\Alaska\XPPW32\bin\aimplib.exe
+echo C:\Alaska\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib
 C:\Alaska\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib
            
 

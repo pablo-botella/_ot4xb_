@@ -23,17 +23,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 {$<File:>$[__mklib.bat]$}
-C:\xpp19355\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib > ot4xb-lib.log
+C:\Alaska\XPPW32\bin\aimplib.exe  ot4xb.def   /oot4xb.lib > ot4xb-lib.log
 type ot4xb-lib.log
 
 {$<File:>$[ot4xb_extract_all.bat]$}
-rd ot4xb_bin
+rd ot4xb_bin /s /q
 md ot4xb_bin
-rd ot4xb_source
+rd ot4xb_source  /s /q
 md ot4xb_source
+
 7z x _ot4xb_{$<FILEVERSION(_._._._)>$}.zip  -o.\ot4xb_bin
 7z x _ot4xb_{$<FILEVERSION(_._._._)>$}_source.zip  -o.\ot4xb_source
-if exists ot4xb_autodeploy.bat call ot4xb_autodeploy.bat
+
+if exist "c:\util\ot4xb_autodeploy.bat" ( 
+call "c:\util\ot4xb_autodeploy.bat"  %~dp0ot4xb_bin\  
+) else (
+cls                        
+@echo '
+@echo '
+@echo '
+@echo '
+@echo '  - --------------------------------------------------------------------
+@echo '  -   CREATE THE BATCH FILE "c:\util\ot4xb_autodeploy.bat"             -
+@echo '  -   THAT WILL BE CALLED WITH THE FULL PATH OF OT4XB_BIN AS PARAMETER -
+@echo '  -   SO YOU CAN CUSTOMIZE THE DEPLOYMENT ACORDING YOUR ENVIRONMENT    -
+@echo '  - --------------------------------------------------------------------
+@echo '
+@echo '
+@echo '
+pause
+)    
+
 
 
 {$<File:>$[__mk_package.bat]$}
@@ -58,7 +78,7 @@ copy %2ot4xb_cpp.lib  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEV
 copy %1*.txt %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}
 copy %1ch\*.ch  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}\include
 
-copy %1ot4xb_extract_all.bat  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\ot4xb_extract_all.bat
+copy %1ot4xb_extract_all.bat  %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_deploy.bat
 
 %~d2
 cd %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}
