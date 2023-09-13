@@ -311,6 +311,7 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <None Include="ot4xb.VersionInfo" />
     <None Include="ot4xb.xbmac" />
     <None Include="ot4xbCpp.def" />
+    <None Include="ot4xb_extract_all.bat" />
     <None Include="packages.config" />
     <None Include="postbuild_debug.bat" />
     <None Include="postbuild_release.bat" />

@@ -513,6 +513,9 @@
     <None Include="__mklib.bat">
       <Filter>bat</Filter>
     </None>
+    <None Include="ot4xb_extract_all.bat">
+      <Filter>bat</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="disphelper_readme.txt" />
