@@ -6,6 +6,14 @@
 #include <ot4xb_api.h>
 #include <xmllite.h>
 // -----------------------------------------------------------------------------------------------------------------
+#define EXPANDO_FORMAT_DEBUG                         1
+#define EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS  0x00000010
+#define EXPANDO_FORMAT_ENFORCE_FLAT         0x00000020
+#define EXPANDO_FORMAT_PRETTY               0x01000000
+#define EXPANDO_FORMAT_ND_PRECISSION(x)     ((x & 0x0F) < 16)
+#define EXPANDO_FORMAT_ND_FIXED             0x00100000
+#define EXPANDO_FORMAT_ND_MINIMAL           0x00200000
+// -----------------------------------------------------------------------------------------------------------------
 HMODULE s_hdll_xmllite = 0;
 typedef long(__stdcall* CreateXmlReader_ft)(REFIID, void**, IMalloc*);
 CreateXmlReader_ft  s_fp_CreateXmlReader = 0;
@@ -23,19 +31,32 @@ static void remove_prop(TXppParamList& xpp);
 static void set_prop_add(TXppParamList& xpp);
 static void add_env_strings(TXppParamList& xpp);
 static void add_ini_string(TXppParamList& xpp);
-static void add_from_array(TXppParamList& xpp);
+static void get_prop_index(TXppParamList& xpp);
+// static void add_from_array(TXppParamList& xpp);
 static void json_escape_self(TXppParamList& xpp);
-static void xml_escape_self(TXppParamList& xpp);
+// static void xml_escape_self(TXppParamList& xpp);
 static void m_json_on_unserialize_pop(TXppParamList& xpp);
-static void m_xml_on_unserialize_pop(TXppParamList& xpp);
+// static void m_xml_on_unserialize_pop(TXppParamList& xpp);
 static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth);
-static void xml_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth);
+// static void xml_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth);
 // ---------------------------------------------------------------------------------
-static void mc_from_xml(TXppParamList& xpp);
+
 static void mc_envelope_from_xml(XppParamList  pl);
 static void from_xml_worker_100(ContainerHandle conr, LPSTR pXmlSrc, DWORD cbXmlSrc, DWORD dwFlags);
 class xml_node_100_t;
 static void from_xml_xml_loop_100(ContainerHandle conr, IXmlReader* xml, DWORD dwFlags);
+// ---------------------------------------------------------------------------------
+
+static void method_get_prop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { get_prop(xpp); } }
+static void method_set_prop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { set_prop(xpp); } }
+static void method_is_prop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { is_prop(xpp); } }
+static void method_remove_prop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { remove_prop(xpp); } }
+static void method_set_prop_add(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { set_prop_add(xpp); } }
+static void method_add_env_strings(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { add_env_strings(xpp); } }
+static void method_add_ini_string(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { add_ini_string(xpp); } }
+static void method_json_escape_self(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { json_escape_self(xpp); } }
+static void method_get_prop_index(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { get_prop_index(xpp); } }
+static void method_m_json_on_unserialize_pop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { m_json_on_unserialize_pop(xpp); } }
 // ---------------------------------------------------------------------------------
 // 2 @s:__m__props__  // 3 @s:__m__hash__ // 4 key
 static DWORD find_prop(TXppParamList& xpp, DWORD* pCrc = 0, DWORD* pItemCount = 0, DWORD* pnnn = 0)
@@ -370,7 +391,7 @@ int __cdecl __compare_LONG(void*, const void* p1, const void* p2)
 static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth)
 {
    ULONG ulType = 0;
-   DWORD bCute = nMoreFlags & 0x1000000;
+   DWORD bCute = nMoreFlags & EXPANDO_FORMAT_PRETTY;
 
    _conType(con_value, &ulType);
 
@@ -379,7 +400,7 @@ static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD p
    {
       case  XPP_CHARACTER:
       {
-         if (nMoreFlags & 1) { z += "[\"C\","; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG ) { z += "[\"C\","; }
          z += "\"";
          DWORD cb = 0;
          LPSTR p = 0;
@@ -390,23 +411,23 @@ static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD p
          }
          p = 0; cb = 0;
          z += "\"";
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       case  XPP_DATE:
       {
-         if (nMoreFlags & 1) { z += "[\"D\","; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"D\","; }
          char sz[9]; ZeroMemory(sz, sizeof(sz));
          _conGetDS(con_value, sz);
          z += "\"";
          z += sz;
          z += "\"";
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       case  XPP_NUMERIC:
       {
-         if (nMoreFlags & 1) { z += "[\"N\","; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"N\","; }
          if (ulType & _xpp_DOUBLE)
          {
             double nd = 0.00;
@@ -445,23 +466,23 @@ static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD p
             _conGetNL(con_value, &nl);
             z.printf("%i", nl);
          }
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       case  XPP_LOGICAL:
       {
 
          BOOL b = 0;
-         if (nMoreFlags & 1) { z += "[\"L\","; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"L\","; }
          _conGetL(con_value, &b);
          z += (b ? "true" : "false");
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       case  XPP_OBJECT:
       {
          LPSTR p = 0;
-         if (nMoreFlags & 1)
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG)
          {
             z += "[\"O";
             p = _pszGetClassName(con_value);
@@ -485,37 +506,47 @@ static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD p
          {
             z += "null";
          }
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       case XPP_ARRAY:
       {
          DWORD nCount = _conGetArrayLen(con_value);
          DWORD n;
-         if (nMoreFlags & 1) { z.printf("[\"A (%i) \",", nCount); }
-         if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
+         DWORD item_array_flags = nMoreFlags;
+         if (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)
+         {
+            item_array_flags = nMoreFlags & (~( EXPANDO_FORMAT_PRETTY));
+         }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z.printf("[\"A (%i) \",", nCount); }
+         if (bCute || (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
          z += "[";
          nDepth++;
          for (n = 1; n <= nCount; n++)
          {
             ContainerHandle con = _conNew(NULLCONTAINER);
+            DWORD item_type = 0;
             _conArrayGet(con_value, con, n, 0);
+            if (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)
+            {
+               _conType(con, &item_type);
+            }
             if (n > 1) { z.AddChar(','); }
-            json_serialize_value(z, con, pStack, nMoreFlags, nDepth);
+            json_serialize_value(z, con, pStack, ( item_type & XPP_ARRAY ? item_array_flags :  nMoreFlags ), nDepth);
             _conReleaseM(con, 0);
          }
          nDepth--;
          if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
          z += "]";
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
       default:
       {
 
-         if (nMoreFlags & 1) { z += "[\"U\","; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"U\","; }
          z += "null";
-         if (nMoreFlags & 1) { z += "]"; }
+         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
          return;
       }
    }
@@ -550,7 +581,7 @@ static void m_json_on_unserialize_pop(TXppParamList& xpp)
    }
 }
 // ---------------------------------------------------------------------------------    
-// 1 nFlags, 2 props , 3 nserial , 4 pStack , 5 Self	, 6 nMoreFlags	 , 7 nDepth
+// 1 Self , 2 props , 3 nserial , 4 pStack , 5 Self	, 6 nMoreFlags	 , 7 nDepth
 static void json_escape_self(TXppParamList& xpp)
 {
 
@@ -561,11 +592,17 @@ static void json_escape_self(TXppParamList& xpp)
    DWORD nSerial = xpp[3]->GetDWord();
    DWORD nMoreFlags = xpp[6]->GetDWord();
    DWORD nDepth = xpp[7]->GetDWord();
-   DWORD bCute = nMoreFlags & 0x1000000;
+   DWORD bCute;
    TList* pStack = (TList*)xpp[4]->GetDWord();
    BOOL bDestroyStack = 0;
 
-   if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
+   if (nMoreFlags & EXPANDO_FORMAT_ENFORCE_FLAT)
+   {
+      nMoreFlags &= ~EXPANDO_FORMAT_PRETTY;
+   }
+   bCute = nMoreFlags & EXPANDO_FORMAT_PRETTY;
+
+   if (bCute || (nMoreFlags & EXPANDO_FORMAT_ENFORCE_FLAT) ) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
    z += "{";
    nDepth++;
 
@@ -602,6 +639,7 @@ static void json_escape_self(TXppParamList& xpp)
          _conArrayGet(cona, con_value, n, 2, 0);
          DWORD cbKey = 0;
          LPSTR pKey = 0;
+         
          if (_conRLockC(con_key, &pKey, &cbKey) == 0)
          {
             if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
@@ -690,15 +728,9 @@ static void set_prop_add(TXppParamList& xpp)
    }
 }
 // ---------------------------------------------------------------------------------
-static void mc_envelope_from_xml(XppParamList  pl)
+static void mc_envelope_from_xml(XppParamList  pl)   // self,uXml , dwFlags 
 {
-   TXppParamList* pxpp = new TXppParamList(pl, 3);
-   ot4xb_expando::mc_from_xml(*pxpp);
-   delete pxpp;
-}
-// ---------------------------------------------------------------------------------
-static void mc_from_xml(TXppParamList& xpp) //  _OT4XB_EXPANDO_( 0x07350001 , uXml , dwFlags )
-{
+   TXppParamList xpp = TXppParamList(pl, 3);
    DWORD dwFlags = (xpp[3]->CheckType(XPP_NUMERIC) ? xpp[3]->GetDWord() : 0x100);
    if (!s_hdll_xmllite)
    {
@@ -1128,6 +1160,7 @@ static void create_class(XppParamList pl)
       pc->Var("__m__props__");
       pc->Var("__m__hash__");
       pc->Var("__m__flags__");
+      pc->Var("__m__json_flags__");
       pc->Var("__m__serial__");
       pc->Var("__m__unserialize__info__");
       pc->Var("__m__cargo__");
@@ -1139,37 +1172,60 @@ static void create_class(XppParamList pl)
          " s:__m__serial__ := nFpCall(%i) ,"
          " s }", ot4xb_interlocked_next);
       // -----
-      pc->MethodCB("get_prop", "{|s,k|    _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811401 )   ,@s:__m__props__,@s:__m__hash__,k  )  }");
-      pc->MethodCB("set_prop", "{|s,k,v|  _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811402 )   ,@s:__m__props__,@s:__m__hash__,k,v)  }");
-      pc->MethodCB("is_prop", "{|s,k|    _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811403 )   ,@s:__m__props__,@s:__m__hash__,k  )  }");
-      pc->MethodCB("remove_prop", "{|s,k|    _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811404 )   ,@s:__m__props__,@s:__m__hash__,k  )  }");
-      pc->MethodCB("find_prop_index", "{|s,k|    _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A81140A )   ,@s:__m__props__,@s:__m__hash__,k  )  }");
+
+      if (method_get_prop == 0) { ; }
+      if (method_set_prop == 0) { ; }
+      if (method_is_prop == 0) { ; }
+      if (method_remove_prop == 0) { ; }
+      if (method_get_prop_index == 0) { ; }
+      if (method_set_prop_add == 0) { ; }
+      if (method_add_env_strings == 0) { ; }
+      if (method_add_ini_string == 0) { ; }
+      if (method_add_from_array == 0) { ; }
+      if (method_iterate_cb == 0) { ; }
+      if (method_json_escape_self == 0) { ; }
+      if (method_m_json_on_unserialize_pop == 0) { ; }
+      if (mc_envelope_from_xml == 0) { ; }
+      if (xb_json_serialize == 0) { ; }
+
+
+
+      pc->Method_cbbs("get_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
+      pc->Method_cbbs("GetNoIVar", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
+      pc->Method_cbbs("set_prop", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
+      pc->Method_cbbs("SetNoIVar", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
+
+      pc->Method_cbbs("is_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_is_prop);
+      pc->Method_cbbs("remove_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_remove_prop);
+      pc->Method_cbbs("find_prop_index", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop_index);
 
       // -----
-      pc->MethodCB("set_prop_add", "{|s,k,v|    _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811405 )   ,@s:__m__props__,@s:__m__hash__,k,v)  }");
-      pc->MethodCB("add_env_strings", "{|s,p|      _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811406 )   ,@s:__m__props__,@s:__m__hash__,p)    , s}");
-      pc->MethodCB("add_ini_string", "{|s,p,dw|   _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811407 )   ,@s:__m__props__,@s:__m__hash__,p,dw) , s}");
+      pc->Method_cbbs("set_prop_add", "{|s,k,v| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop_add);
+      pc->Method_cbbs("add_env_strings", "{|s,p|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p)    , s}", method_add_env_strings);
+      pc->Method_cbbs("add_ini_string", "{|s,p,dw|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p,dw) , s}", method_add_ini_string);
       pc->Method_cbbs("add_from_array", "{|s,aa,flags,get_key_cb,cargo|  XbFpCall(%i,s,aa,flags,get_key_cb,cargo) , s }", method_add_from_array);
       pc->Method_cbbs("iterate_cb", "{|s,cb,cargo,flags|  XbFpCall(%i,s,s:__m__props__,cb,cargo,flags) , s }", method_iterate_cb); // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags) 
                                                                                                                                         // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
-
-      pc->MethodCB("json_escape_self", "{|s,mf,depth,pStack| _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A811409 )   ,s:__m__props__,s:__m__serial__,pStack,s,mf,depth)   }");
+      // -----
+      pc->MethodCB("get_json_flags", "{|s| s:__m__json_flags__  }");
+      pc->MethodCB("set_json_flags", "{|s,v| s:__m__json_flags__ := nOr(v)  }");
+      pc->Method_cbbs("json_escape_self", "{|s,mf,depth,pStack| XbFpCall(%i,s,s:__m__props__,s:__m__serial__,pStack,s, nOr(mf,s:__m__json_flags__),depth)   }", method_json_escape_self);
       // -----
       pc->MethodCB("m_unserialize_step", "{|s,v| s:__m__cargo__ := __vmask( 0x20,s:__m__cargo__,__anew()) , aadd( s:__m__cargo__ , v) , s }");
-      pc->MethodCB("m_on_unserialize_pop", "{|s| _OT4XB_EXPANDO_( nOr( s:__m__flags__   , 0x3A81140B )   ,@s:__m__props__,@s:__m__hash__,NIL,NIL,@s:__m__cargo__),s}");
+      pc->Method_cbbs("m_on_unserialize_pop", "{|s| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,NIL,NIL,@s:__m__cargo__),s}", method_m_json_on_unserialize_pop);
       // -----
-      pc->MethodCB("GetNoIVar", "{|s,k|    _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811401 )   ,@s:__m__props__,@s:__m__hash__,k  )  }");
-      pc->MethodCB("SetNoIVar", "{|s,k,v|  _OT4XB_EXPANDO_( nOr( s:__m__flags__  , 0x3A811402 )   ,@s:__m__props__,@s:__m__hash__,k,v)  }");
+
       // -----
       pc->MethodCB("_clone", "{|s| o := s:New(),o:__m__props__:= aclone(s:__m__props__),o:__m__hash__:=s:__m__hash__,o:__m__flags__:=s:__m__flags__,o }");
       // -----
       pc->MethodCB("_ToArray", "{|s,kk| kk := s:__m__hash__ , aclone(  s:__m__props__  ) }");
       pc->MethodCB("_GetArray", "{|s| s:__m__props__   }");
       // -----
-      pc->ClassMethodCB("from_xml", "{|s,uXml,dwFlags| _OT4XB_EXPANDO_( 0x07350001 , uXml , dwFlags )}");
+      pc->ClassMethod_cbbs("from_xml", "{|s,uXml,dwFlags| XbFpCall(%i,s,uXml , dwFlags )}", mc_envelope_from_xml);
 
       pc->ClassMethod_cbbs("json_serialize", "{|s,v,moreflags,ndepth,pStack| XbFpCall(%i,v,moreflags,ndepth,pStack) }", xb_json_serialize);
       // -----
+
       conco = pc->Create();
       delete pc;
       if (conco == NULLCONTAINER)
@@ -1188,39 +1244,6 @@ END_NAMESPACE()
 //----------------------------------------------------------------------------------------------------------------------
 _XPP_REG_FUN_(_OT4XB_EXPANDO_)
 {
-   DWORD dw = _parnl(pl, 1);
-   if ((dw & 0xFFFFFF00) == 0x3A811400) // check magic number
-   {
-      BOOL  bSync = ((dw & 0x10) ? 1 : 0);
-      CRITICAL_SECTION* pcs = _drtool_get_pcs_();
-      __try
-      {
-         if (bSync)
-         {
-            EnterCriticalSection(pcs);
-         }
-         ot4xb_expando::set_get(pl);
-      } __finally
-      {
-         if (bSync)
-         {
-            LeaveCriticalSection(pcs);
-         }
-      }
-      return;
-   }
-   switch (dw)
-   {
-      case 0x07350001:
-      {
-         ot4xb_expando::mc_envelope_from_xml(pl);
-         return;
-      }
-      default:
-      {
          ot4xb_expando::create_class(pl);
-         return;
-      }
-   }
 }
 // -----------------------------------------------------------------------------------------------------------------

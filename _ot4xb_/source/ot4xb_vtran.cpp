@@ -2500,3 +2500,40 @@ _XPP_REG_FUN_(OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST)
    _conReturn(pl, conco);
    _conRelease(conco);
 }
+// ------------------------------------------------------------------------------------------------------------------------------
+// flags 1 =quote ; 2 bin
+
+_XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)     //  ot4xb_sql_escape_string_ansi( cStr , flags ) -> Escaped Str 
+{
+   TXppParamList xpp(pl, 2);
+   DWORD flags = xpp[2]->GetDWord();
+   DWORD cb = 0;
+   LPBYTE p = (LPBYTE) xpp[1]->LockStr(&cb,FALSE);
+   DWORD buffer_cb = escape_to_sql_required_size((LPBYTE)p, cb ) + 4;
+   LPSTR buffer = (LPSTR)_xgrab(buffer_cb);
+   DWORD cbo = 0;
+   LPSTR po = buffer;
+   if (flags & 1) // quotes '
+   {
+      *po = '\''; po++;  cbo++; buffer_cb -= 2;
+   }
+   cbo += escape_to_sql_buffer((LPBYTE) p,cb, (LPBYTE) po, buffer_cb, flags & 2 ? 0 : 1 );
+   if (flags & 1) // quotes '
+   {
+      buffer[cbo] = '\''; cbo++; 
+   }
+   xpp[0]->PutStrLen(buffer, cbo);
+   _xfree((void*)buffer);
+   buffer = 0;
+}
+// ------------------------------------------------------------------------------------------------------------------------------
+/*_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value , sql_type , len )
+{
+   pl;
+}
+// ------------------------------------------------------------------------------------------------------------------------------
+_XPP_REG_FUN_(OT4XB_SQL_DUMP_ROW_ANSI)
+{
+   pl;
+} */
+// ------------------------------------------------------------------------------------------------------------------------------

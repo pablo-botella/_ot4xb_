@@ -2325,56 +2325,18 @@ void TZString::Add_cp1252_to_html( LPSTR pStr, DWORD dwFlags )
 void TZString::Add_to_sql( LPSTR pStr )
 {
    if( !pStr ) return;
-   for( ; *pStr; pStr++ )
-   {
-      switch( (BYTE) *pStr )
-      {
-         case 0x00:
-         {
-            Add( "\\0" ); break;
-         }
-         case 0x08:
-         {
-            Add( "\\b" ); break;
-         }
-         case 0x09:
-         {
-            Add( "\\t" ); break;
-         }
-         case 0x1A:
-         {
-            Add( "\\z" ); break;
-         }
-         case 0x0A:
-         {
-            Add( "\\n" ); break;
-         }
-         case 0x0D:
-         {
-            Add( "\\r" ); break;
-         }
-         case 0x22:
-         {
-            Add( "\\\"" ); break;
-         }
-         case 0x27:
-         {
-            Add( "\\'" ); break;
-         }
-         case 0x5C:
-         {
-            Add( "\\\\" ); break;
-         }
-         case 0x25:
-         {
-            Add( "\\%" ); break;
-         }
-         default:
-         {
-            AddChar( *pStr ); break;
-         }
-      }
-   }
+   DWORD cb = escape_to_sql_required_size((LPBYTE) pStr , (DWORD)-1) + 1;
+   LPBYTE buffer = (LPBYTE) _pt_next_(cb);
+   m_nLen +=  escape_to_sql_buffer((LPBYTE)pStr, (DWORD)-1, (LPBYTE) buffer, cb, TRUE);
+}
+// -----------------------------------------------------------------------------------------------------------------
+void TZString::Add_to_sql_bin(LPBYTE p, DWORD cb)
+{
+   if (!p) return;
+   DWORD cbo = escape_to_sql_required_size(p,cb) + 1;
+   LPBYTE buffer = (LPBYTE)_pt_next_(cb);
+   m_nLen += escape_to_sql_buffer(p,cb,buffer, cbo, FALSE);
+
 }
 // -----------------------------------------------------------------------------------------------------------------
 void TZString::Add_to_xml( LPSTR pStr )

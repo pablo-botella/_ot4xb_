@@ -2291,13 +2291,164 @@ OT4XB_API LPSTR escape_to_xml( LPSTR pIn, UINT * pcbOut )
 	return pOut;
 }
 // -----------------------------------------------------------------------------------------------------------------
+DWORD escape_to_sql_required_size(LPBYTE p, DWORD cb)
+{
+	DWORD cbo = 0;
+	if (p && cb)
+	{
+		if (((LONG)cb) < 0)
+		{
+			for (; *p; p++)
+			{
+				switch (*p)
+				{
+					case 8: case '\t': case 26: case '\n': case '\r': case '\"': case '\'': case '\\': case '%':
+					{
+						cbo += 2;
+						break;
+					}
+					default:
+					{
+						cbo++;
+					}
+				}
+			}
+		}
+		else
+		{
+			DWORD n;
+			for (n = 0; n < cb; n++)
+			{
+				switch (p[n])
+				{
+					case 0: case 8: case '\t': case 26: case '\n': case '\r': case '\"': case '\'': case '\\': case '%':
+					{
+						cbo += 2;
+						break;
+					}
+					default:
+					{
+						cbo++;
+					}
+				}
+			}
+			return cbo;
+
+
+		}
+	}
+	return cbo; // not including terminator \0 in cb == -1
+}
+// -------------------------------------------------------------------------------------------------
+DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo , BOOL zero_string )
+{
+	DWORD dw = 0;
+	if (((LONG)cb) < 0)
+	{
+		zero_string = 1;
+	}
+
+
+	if (p && cb && po && cbo)
+	{
+		DWORD n;
+		if (zero_string)
+		{
+			cbo--;
+			po[cbo] = 0;
+		}
+		for (n = 0; (n < cb) && (dw < cbo); n++)
+		{
+			BYTE  b0 = 0;
+			BYTE  b1 = 0;
+			switch (p[n])
+			{
+				case 0x00:
+				{
+					if (zero_string)
+					{
+						po[dw] = 0; 
+						return dw;
+					}
+					else
+					{
+						b0 = '\\'; b1 = '0';
+					}
+					break;
+				}
+				case '\b':
+				{
+					b0 = '\\'; b1 = 'b'; break;
+				}
+				case '\t':
+				{
+					b0 = '\\'; b1 = 't'; break; 
+				}
+				case 26:
+				{
+					b0 = '\\'; b1 = 'Z'; break; 
+				}
+				case '\n':
+				{
+					b0 = '\\'; b1 = 'n'; break; 
+				}
+				case '\r':
+				{
+					b0 = '\\'; b1 = 'r'; break; 
+				}
+				case '\"':
+				{
+					b0 = '\\'; b1 = '\"'; break; 
+				}
+				case '\'':
+				{
+					b0 = '\\'; b1 = '\''; break; 
+				}
+				case '\\':
+				{
+					b0 = '\\'; b1 = '\\'; break;
+				}
+				case '%':
+				{
+					b0 = '\\'; b1 = '%'; break;
+				}
+				case '_':
+				{
+					b0 = '\\'; b1 = '_'; break;
+				}
+				default:
+				{
+					b0 = p[0]; b1 = 0; break;
+				}
+			}
+			po[dw] = b0; dw++;
+			if(b1)
+			{
+				if (dw < cbo)
+				{
+					po[dw] = b1; dw++;
+				}
+				else
+				{
+					dw--; 
+					po[dw] = 0;
+					return dw;
+				}
+			}
+		}
+	}
+	return dw;
+}
+// -------------------------------------------------------------------------------------------------------------------
 OT4XB_API LPSTR escape_to_sql( LPSTR pIn, UINT * pcbOut )
 {
-	TZString zs;
-	LPSTR pOut = 0;
-	zs.Add_to_sql( pIn );
-	pOut = zs.Detach( pcbOut, 0 );
-	return pOut;
+	DWORD cb = escape_to_sql_required_size((LPBYTE)pIn ,(DWORD) -1 ) + 1;
+	LPSTR buffer = ( LPSTR ) _xgrab(cb) ;
+	cb = escape_to_sql_buffer((LPBYTE)pIn, (DWORD)  -1, (LPBYTE)buffer, cb, TRUE);
+	if (pcbOut) {
+		pcbOut[0] = cb;
+	}
+	return buffer;
 }
 // -----------------------------------------------------------------------------------------------------------------
 OT4XB_API LPSTR escape_to_json( LPSTR pIn, int cb, UINT * pcbOut )

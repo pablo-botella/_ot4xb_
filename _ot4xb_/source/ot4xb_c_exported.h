@@ -352,6 +352,8 @@ OT4XB_API LPSTR bin2ot4xbenc_ta(LPSTR pIn, UINT cb, UINT* pcbOut, UINT * lt, UIN
 OT4XB_API LPSTR bin2ot4xbenc(LPSTR pIn , UINT cb, UINT* pcbOut);
 OT4XB_API LPSTR ot4xbenc2bin(LPSTR pIn , UINT cb, UINT* pcbOut);
 OT4XB_API LPSTR escape_to_xml(LPSTR pIn , UINT* pcbOut);
+DWORD escape_to_sql_required_size(LPBYTE p, DWORD cb);
+DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, BOOL zero_string);
 OT4XB_API LPSTR escape_to_sql(LPSTR pIn, UINT* pcbOut);
 OT4XB_API LPSTR escape_to_json(LPSTR pIn , int cb , UINT* pcbOut);
 OT4XB_API LPSTR unescape_from_json(LPSTR pIn , UINT* pcbOut);
