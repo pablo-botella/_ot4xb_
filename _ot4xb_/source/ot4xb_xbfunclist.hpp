@@ -286,6 +286,9 @@
    ,    {"OT4XB_COPY_WA_RECORD_WITH_TABLE",OT4XB_COPY_WA_RECORD_WITH_TABLE}
    ,    {"OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST",OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST}
    ,    {"OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST",OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST}
+   ,    {"OT4XB_SQL_ESCAPE_STRING_ANSI",OT4XB_SQL_ESCAPE_STRING_ANSI}
+// _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)
+// _XPP_REG_FUN_(OT4XB_SQL_DUMP_ROW_ANSI)
 
 // ---------------------------------------------------------------------------
 // Memory.cpp
@@ -1137,9 +1140,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1140>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1143>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1142>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1143>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1144>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1145>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1145>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1146>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1147>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1148>>>_CDECL_EXPORT_( _conPutQWord  )<<<

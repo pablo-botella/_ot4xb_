@@ -1240,6 +1240,14 @@ WithObjectStackPush( ErrorBlock({|__e__| Break(__e__)}) ) ;
 #define OT4XB_FPFLAGS_JSON_MINIMAL_ENCODING     0x08000000
 #define OT4XB_FPFLAGS_JSON_CODEPAGE_OEM         0x01000000
 #define OT4XB_FPFLAGS_JSON_CODEPAGE_UTF8        0x04000000
+// ----------------------------------------------------------------------------------------------------------------
+#define EXPANDO_FORMAT_DEBUG                 1
+#define EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS    0x00000010
+#define EXPANDO_FORMAT_ENFORCE_FLAT           0x00000020
+#define EXPANDO_FORMAT_PRETTY                 0x01000000
+#xtranslate EXPANDO_FORMAT_ND_PRECISSION( <x> )   => nLShift( nAnd( <x> , 0x0F ) , 16 )
+#define EXPANDO_FORMAT_ND_FIXED               0x00100000
+#define EXPANDO_FORMAT_ND_MINIMAL             0x00200000
 // -----------------------------------------------------------------------------------------------------------------
 #ifdef _OT4XB_MAP_WAPIST_FUNC_
 #include "ot4xb_wapist_map.ch"
