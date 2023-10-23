@@ -38,6 +38,7 @@ class OT4XB_API TXbCPItem : public T_ot4xb_base
        DWORD           m_nCntType;            //  DWORD           nCntType; // 0 int/byte , 1 FLOAT
        TList *         m_pComplex;            //  TList *         pComplex;
        BOOL            m_bStrLockEx;          // } CON_PLKSTREX;
+       char            m_date_buffer[16];
 
        // ---------------------------------------------------------------------------------
        TXbCPItem( void );
@@ -62,8 +63,8 @@ class OT4XB_API TXbCPItem : public T_ot4xb_base
        WORD            GetWord(void);
        double          GetDouble(void);
        FLOAT           GetFloat(void);
-	   LONGLONG        GetSqlStrMoney(void);
-	   void            PutSqlStrMoney(LONGLONG qn, DWORD flags, DWORD pad);
+	   LONGLONG         GetSqlStrMoney(void);
+	   void             PutSqlStrMoney(LONGLONG qn, DWORD flags, DWORD pad);
        void            PutBool(BOOL value );
        void            PutLong(LONG value );
        void            PutQWord(LONGLONG value );
@@ -75,7 +76,7 @@ class OT4XB_API TXbCPItem : public T_ot4xb_base
        void            PutDateString( LPSTR ds );       
 		 void            PutJulianDate( DWORD dw );
 		 DWORD           GetJulianDate( void);
-       LPSTR           GetDateString(void); 
+       LPCSTR          GetDateString(void); 
        void            GetDateString(LPSTR ds);
        LPSTR           StrDupA(ULONG * pnLen = 0);
        LPWSTR          StrDupW(ULONG * pnBytes = 0);

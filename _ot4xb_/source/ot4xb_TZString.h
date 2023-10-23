@@ -28,8 +28,10 @@ class OT4XB_API TZString : public T_ot4xb_base
        void Add_cp437_to_html( LPSTR pStr , DWORD dwFlags = 0); // 1 CRLF2BR | 2 sp+sp = sp+&nbsp;
        void Add_cp1252_to_html( LPSTR pStr , DWORD dwFlags = 0); // 1 CRLF2BR | 2 sp+sp = sp+&nbsp;
        void Add_to_xml( LPSTR pStr );
-	   void Add_to_sql(LPSTR pStr);
-      void Add_to_sql_bin(LPBYTE p , DWORD cb );
+	    void Add_to_sql(LPSTR pStr);
+       void Add_to_sql_bin(LPBYTE p , DWORD cb );
+       void Add_to_sql_q(LPSTR pStr);
+       void Add_to_sql_bin_q(LPBYTE p, DWORD cb);
        void Add_to_json( LPSTR pStr , int cb = -1);
        void Add( LPSTR pStr );
        DWORD AddStrCb( LPSTR pStr ,  DWORD cb  , DWORD offset , DWORD  bytes_to_write , DWORD flags );

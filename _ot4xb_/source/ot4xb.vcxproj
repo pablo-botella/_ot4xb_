@@ -246,6 +246,7 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClInclude Include="ot4xb_internal.hpp" />
     <ClInclude Include="ot4xb_md5_internal.hpp" />
     <ClInclude Include="ot4xb_resource_tool.h" />
+    <ClInclude Include="ot4xb_sqlstr.h" />
     <ClInclude Include="ot4xb_statistics.h" />
     <ClInclude Include="ot4xb_TBinFile.h" />
     <ClInclude Include="ot4xb_TGStack.h" />

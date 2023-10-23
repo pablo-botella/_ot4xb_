@@ -370,6 +370,9 @@
     <ClInclude Include="atomic_resource_lock_t.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ot4xb_sqlstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ot4xb.rc">

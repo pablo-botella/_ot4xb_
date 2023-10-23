@@ -442,10 +442,11 @@ void TXbCPItem::GetDateString(LPSTR ds)
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
-LPSTR TXbCPItem::GetDateString(void)
+LPCSTR TXbCPItem::GetDateString(void)
 {
-   LPSTR ds = (LPSTR)_xgrab(9);
-   GetDateString(ds);
+   LPCSTR ds = m_date_buffer;
+   ZeroMemory(m_date_buffer, sizeof(m_date_buffer));
+   GetDateString((LPSTR) ds);
    return ds;
 }
 //----------------------------------------------------------------------------------------------------------------------

@@ -291,9 +291,7 @@ XPPRET XPPENTRY __VTRAN(XppParamList );
 XPPRET XPPENTRY OT4XB_COPY_WA_RECORD_WITH_TABLE(XppParamList );
 XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST(XppParamList );
 XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST(XppParamList );
-XPPRET XPPENTRY OT4XB_SQL_ESCAPE_STRING_ANSI(XppParamList );
-// _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)
-// _XPP_REG_FUN_(OT4XB_SQL_DUMP_ROW_ANSI)
+
 
 // ---------------------------------------------------------------------------
 // Memory.cpp
@@ -700,6 +698,15 @@ XPPRET XPPENTRY _RGX_REPLACE(XppParamList );
 XPPRET XPPENTRY __SQLSTR_MONEY(XppParamList );
 XPPRET XPPENTRY __SQLSTR_MONEY_SUM(XppParamList );
 XPPRET XPPENTRY __SQLSTR_MONEY_SUBSTRACT(XppParamList );
+// ------
+XPPRET XPPENTRY OT4XB_SQL_ESCAPE_STRING_ANSI(XppParamList );
+XPPRET XPPENTRY OT4XB_SQL_DUMP_VALUE_ANSI(XppParamList );
+XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_FLAG_ENUM(XppParamList );
+XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_ENUM(XppParamList );
+XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_LEN(XppParamList );
+XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_DEC(XppParamList );
+
+
 
 
 // ---------------------------------------------------------------------------
@@ -1145,12 +1152,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1143>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1150>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1145>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1146>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1147>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1148>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1152>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1153>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1154>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1155>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

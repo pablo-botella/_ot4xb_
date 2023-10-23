@@ -2327,7 +2327,7 @@ void TZString::Add_to_sql( LPSTR pStr )
    if( !pStr ) return;
    DWORD cb = escape_to_sql_required_size((LPBYTE) pStr , (DWORD)-1) + 1;
    LPBYTE buffer = (LPBYTE) _pt_next_(cb);
-   m_nLen +=  escape_to_sql_buffer((LPBYTE)pStr, (DWORD)-1, (LPBYTE) buffer, cb, TRUE);
+   m_nLen +=  escape_to_sql_buffer((LPBYTE)pStr, (DWORD)-1, (LPBYTE) buffer, cb, (DWORD)escape_to_sql_buffer_flags::zero_terminated_string );
 }
 // -----------------------------------------------------------------------------------------------------------------
 void TZString::Add_to_sql_bin(LPBYTE p, DWORD cb)
@@ -2335,8 +2335,24 @@ void TZString::Add_to_sql_bin(LPBYTE p, DWORD cb)
    if (!p) return;
    DWORD cbo = escape_to_sql_required_size(p,cb) + 1;
    LPBYTE buffer = (LPBYTE)_pt_next_(cb);
-   m_nLen += escape_to_sql_buffer(p,cb,buffer, cbo, FALSE);
+   m_nLen += escape_to_sql_buffer(p,cb,buffer, cbo, (DWORD) escape_to_sql_buffer_flags::binary_string);
 
+}
+void TZString::Add_to_sql_q(LPSTR pStr)
+{
+   if (!pStr) return;
+   DWORD cb = escape_to_sql_required_size((LPBYTE)pStr, (DWORD)-1) + 1;
+   LPBYTE buffer = (LPBYTE)_pt_next_(cb);
+   m_nLen += escape_to_sql_buffer((LPBYTE)pStr, (DWORD)-1, (LPBYTE)buffer, cb,
+             (DWORD)escape_to_sql_buffer_flags::zero_terminated_string || (DWORD)escape_to_sql_buffer_flags::add_quotes);
+}
+void TZString::Add_to_sql_bin_q(LPBYTE p, DWORD cb)
+{
+   if (!p) return;
+   DWORD cbo = escape_to_sql_required_size(p, cb) + 1;
+   LPBYTE buffer = (LPBYTE)_pt_next_(cb);
+   m_nLen += escape_to_sql_buffer(p, cb, buffer, cbo, 
+      (DWORD)escape_to_sql_buffer_flags::binary_string || (DWORD)escape_to_sql_buffer_flags::add_quotes);
 }
 // -----------------------------------------------------------------------------------------------------------------
 void TZString::Add_to_xml( LPSTR pStr )

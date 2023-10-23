@@ -286,9 +286,7 @@ _XPP_REG_FUN_(__VTRAN)
 _XPP_REG_FUN_(OT4XB_COPY_WA_RECORD_WITH_TABLE) 
 _XPP_REG_FUN_(OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST) 
 _XPP_REG_FUN_(OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST) 
-_XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI) 
-// _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI) 
-// _XPP_REG_FUN_(OT4XB_SQL_DUMP_ROW_ANSI) 
+
 
 // ---------------------------------------------------------------------------
 // Memory.cpp
@@ -695,6 +693,15 @@ _XPP_REG_FUN_( _RGX_REPLACE )
 _XPP_REG_FUN_(__SQLSTR_MONEY)// __sqlstr_money(v, nPad, lAbs)
 _XPP_REG_FUN_(__SQLSTR_MONEY_SUM) // __sqlstr_money_sum(...)
 _XPP_REG_FUN_(__SQLSTR_MONEY_SUBSTRACT) // __sqlstr_money_substract(...)
+// ------
+_XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI) 
+_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI) 
+_XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_FLAG_ENUM)
+_XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_ENUM)
+_XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_LEN )
+_XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_DEC)
+
+
 
 
 // ---------------------------------------------------------------------------

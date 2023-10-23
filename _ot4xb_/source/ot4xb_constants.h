@@ -97,4 +97,36 @@
 #define _XPP_NOT_NIL_   0xFE      
 //----------------------------------------------------------------------------------------------------------------------
 
+enum class ot4xb_sql_type : LONG
+{
+   Invalid,
+   TinyInt,
+   SmallInt,
+   MediumInt,
+   Int,
+   BigInt,
+   Decimal,
+   Float,
+   Double,
+   Bit,
+   Date,
+   Time,
+   DateTime,
+   TimeStamp,
+   Year,
+   Char,
+   VarChar,
+   Binary,
+   VarBinary,
+   TinyBlob,
+   Blob,
+   MediumBlob,
+   LongBlob,
+   TinyText,
+   Text,
+   MediumText,
+   LongText,
+   Enum,
+   Set
+};
 
