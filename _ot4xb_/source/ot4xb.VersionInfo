@@ -1,4 +1,4 @@
-[ot4xb.dll]  Version:{1,7,0,9}
+[ot4xb.dll]  Version:{1,7,0,10}
 
 {$<File:>$[LICENSE.TXT]$}
 
@@ -100,6 +100,7 @@ copy %1*.versioninfo %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVE
 copy %1*.bat %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source
 del %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source\BAT??????????????.bat
 copy %1ot4xb.vcproj %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source
+copy %1ot4xb.vcxproj %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source\source
 %~d2
 cd %2builds\_ot4xb_{$<FILEVERSION(_._._._)>$}\_ot4xb_{$<FILEVERSION(_._._._)>$}_source
 7za.exe a -y  ..\_ot4xb_{$<FILEVERSION(_._._._)>$}_source.zip   *
