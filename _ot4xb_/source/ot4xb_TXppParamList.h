@@ -68,6 +68,7 @@ class OT4XB_API TXbCPItem : public T_ot4xb_base
        void            PutBool(BOOL value );
        void            PutLong(LONG value );
        void            PutQWord(LONGLONG value );
+       void            PutQWordAsNumeric(LONGLONG value);
        void            PutDWord(DWORD value );
        void            PutWord(WORD value );
        void            PutDouble(double value );

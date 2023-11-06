@@ -32,7 +32,7 @@ IF EXIST C:\pli\ot4xb  copy %2ot4xb.dll        C:\pli\ot4xb\
 IF EXIST C:\pli\ot4xb  copy %2ot4xbcpp.lib     C:\pli\ot4xb\   
 IF EXIST C:\pli\ot4xb  copy %2ot4xb.lib        C:\pli\ot4xb\   
 IF EXIST C:\pli\ot4xb  copy %1ch\*.ch          C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4x\source  copy %1*.h        C:\pli\ot4xb\source\   
+IF EXIST C:\pli\ot4x\source  copy %1*.h        C:\pli\ot4xb\cppinc\   
 
 
 
