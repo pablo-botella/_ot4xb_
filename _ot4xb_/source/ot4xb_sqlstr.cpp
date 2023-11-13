@@ -279,7 +279,7 @@ DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, DWORD flags
                {
                   b0 = '%';
                }
-               
+
                break;
             }
             case '_':
@@ -319,11 +319,11 @@ DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, DWORD flags
 }
 // -------------------------------------------------------------------------------------------------------------------
 // escape_to_sql_buffer_flags
-OT4XB_API LPSTR escape_to_sql(LPSTR pIn, UINT* pcbOut , DWORD flags )
+OT4XB_API LPSTR escape_to_sql(LPSTR pIn, UINT* pcbOut, DWORD flags)
 {
    DWORD cb = escape_to_sql_required_size((LPBYTE)pIn, (DWORD)-1) + 4;
    LPSTR buffer = (LPSTR)_xgrab(cb);
-   cb = escape_to_sql_buffer((LPBYTE)pIn, (DWORD)-1, (LPBYTE)buffer, cb, flags );
+   cb = escape_to_sql_buffer((LPBYTE)pIn, (DWORD)-1, (LPBYTE)buffer, cb, flags);
    if (pcbOut) {
       pcbOut[0] = cb;
    }
@@ -526,16 +526,16 @@ _XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)     //  ot4xb_sql_escape_string_ansi
    else
    {
       flags &= ~(DWORD)escape_to_sql_buffer_flags::binary_string;
-      flags |=  (DWORD)escape_to_sql_buffer_flags::zero_terminated_string;   // default here
+      flags |= (DWORD)escape_to_sql_buffer_flags::zero_terminated_string;   // default here
    }
 
 
-   if (flags & (DWORD) escape_to_sql_buffer_flags::add_quotes ) // quotes '
+   if (flags & (DWORD)escape_to_sql_buffer_flags::add_quotes) // quotes '
    {
       *po = '\''; po++;  cbo++; buffer_cb -= 2;
    }
-   cbo += escape_to_sql_buffer((LPBYTE)p, cb, (LPBYTE)po, buffer_cb, flags );
-   if (flags & (DWORD)escape_to_sql_buffer_flags::add_quotes ) // quotes '
+   cbo += escape_to_sql_buffer((LPBYTE)p, cb, (LPBYTE)po, buffer_cb, flags);
+   if (flags & (DWORD)escape_to_sql_buffer_flags::add_quotes) // quotes '
    {
       buffer[cbo] = '\''; cbo++;
    }
@@ -1009,7 +1009,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
          cb--;
       }
    }
-   DWORD pd_size = escape_to_sql_required_size((LPBYTE)ps, cb) + ( max - cb )+ 16;
+   DWORD pd_size = escape_to_sql_required_size((LPBYTE)ps, cb) + (max - cb) + 16;
    LPSTR pd = (LPSTR)_xgrab(pd_size);
    DWORD dwo = 0;
    DWORD pad = 0;
@@ -1030,7 +1030,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
          *p = ' '; p++; pad++; dwo++;
       }
    }
-   dwo += escape_to_sql_buffer((LPBYTE)ps, cb, (LPBYTE)p, pd_size - dwo, (DWORD)  escape_to_sql_buffer_flags::binary_string);
+   dwo += escape_to_sql_buffer((LPBYTE)ps, cb, (LPBYTE)p, pd_size - dwo, (DWORD)escape_to_sql_buffer_flags::binary_string);
    p = _mk_ptr_(LPSTR, pd, dwo);
    if (flags & (DWORD)ot4xb_sql_type_flag::LeftAlign)
    {
@@ -1190,14 +1190,16 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_ENUM)
    xpp[0]->PutLong((LONG)q);
 }
 // ------------------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value , 2sql_type , 3len , 4dec, 5 flags)
+
+
+_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value , 2sql_type , 3len , 4dec, 5 flags )
 {
    TXppParamList xpp(pl, 5);
    ot4xb_sql_type q = (xpp[2]->CheckType(XPP_CHARACTER) ? ot4xb_str_to_sql_type_enum(xpp[2]->LockStr()) : (ot4xb_sql_type)xpp[2]->GetLong());
-   int len = xpp[3]->GetLong();
-   int dec = xpp[4]->GetLong();
    DWORD  flags = (DWORD)(xpp[5]->CheckType(XPP_CHARACTER) ? (DWORD)ot4xb_str_to_sql_type_flag(xpp[5]->LockStr()) : xpp[5]->GetDWord());
 
+   int len = xpp[3]->GetLong();
+   int dec = xpp[4]->GetLong();
    switch (q)
    {
 
@@ -1258,7 +1260,7 @@ _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value 
       case ot4xb_sql_type::Blob:
       {
          flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0xFFFF , flags);
+         sql_dump_value::to_char_value(xpp, 0xFFFF, flags);
          break;
       }
       case ot4xb_sql_type::MediumBlob:
@@ -1270,7 +1272,7 @@ _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value 
       case ot4xb_sql_type::LongBlob:
       {
          flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0 , flags);
+         sql_dump_value::to_char_value(xpp, 0, flags);
          break;
       }
       case ot4xb_sql_type::TinyText:

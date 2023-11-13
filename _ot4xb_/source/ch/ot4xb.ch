@@ -1249,6 +1249,53 @@ WithObjectStackPush( ErrorBlock({|__e__| Break(__e__)}) ) ;
 #define EXPANDO_FORMAT_ND_FIXED               0x00100000
 #define EXPANDO_FORMAT_ND_MINIMAL             0x00200000
 // -----------------------------------------------------------------------------------------------------------------
+#xtranslate ot4xb_sql_type_flag.none                 =>    ( 0         ) 
+#xtranslate ot4xb_sql_type_flag.LTrim                =>    ( 0x000001  ) 
+#xtranslate ot4xb_sql_type_flag.RTrim                =>    ( 0x000002  ) 
+#xtranslate ot4xb_sql_type_flag.AllTrim              =>    ( 0x000003  ) 
+#xtranslate ot4xb_sql_type_flag.wildcard_escape      =>    ( 0x000008  ) 
+#xtranslate ot4xb_sql_type_flag.LeftAlign            =>    ( 0x000010  ) 
+#xtranslate ot4xb_sql_type_flag.RightAlign           =>    ( 0x000020  ) 
+#xtranslate ot4xb_sql_type_flag.Truncate             =>    ( 0x000100  ) 
+#xtranslate ot4xb_sql_type_flag.ToUtf8               =>    ( 0x001000  ) 
+#xtranslate ot4xb_sql_type_flag.NotNull              =>    ( 0x010000  ) 
+#xtranslate ot4xb_sql_type_flag.OvNull               =>    ( 0x100000  ) 
+#xtranslate ot4xb_sql_type_flag.OvMin                =>    ( 0x200000  ) 
+#xtranslate ot4xb_sql_type_flag.OvMax                =>    ( 0x400000  ) 
+#xtranslate ot4xb_sql_type_flag.OvZero               =>    ( 0x800000  ) 
+
+
+#xtranslate ot4xb_sql_type.Invalid      =>  (  0  )
+#xtranslate ot4xb_sql_type.TinyInt      =>  (  1  )
+#xtranslate ot4xb_sql_type.SmallInt     =>  (  2  )
+#xtranslate ot4xb_sql_type.MediumInt    =>  (  3  )
+#xtranslate ot4xb_sql_type.Int          =>  (  4  )
+#xtranslate ot4xb_sql_type.BigInt       =>  (  5  )
+#xtranslate ot4xb_sql_type.Decimal      =>  (  6  )
+#xtranslate ot4xb_sql_type.Float        =>  (  7  )
+#xtranslate ot4xb_sql_type.Double       =>  (  8  )
+#xtranslate ot4xb_sql_type.Bit          =>  (  9  )
+#xtranslate ot4xb_sql_type.Date         =>  ( 10  )
+#xtranslate ot4xb_sql_type.Time         =>  ( 11  )
+#xtranslate ot4xb_sql_type.DateTime     =>  ( 12  )
+#xtranslate ot4xb_sql_type.TimeStamp    =>  ( 13  )
+#xtranslate ot4xb_sql_type.Year         =>  ( 14  )
+#xtranslate ot4xb_sql_type.Char         =>  ( 15  )
+#xtranslate ot4xb_sql_type.VarChar      =>  ( 16  )
+#xtranslate ot4xb_sql_type.Binary       =>  ( 17  )
+#xtranslate ot4xb_sql_type.VarBinary    =>  ( 18  )
+#xtranslate ot4xb_sql_type.TinyBlob     =>  ( 19  )
+#xtranslate ot4xb_sql_type.Blob         =>  ( 20  )
+#xtranslate ot4xb_sql_type.MediumBlob   =>  ( 21  )
+#xtranslate ot4xb_sql_type.LongBlob     =>  ( 22  )
+#xtranslate ot4xb_sql_type.TinyText     =>  ( 23  )
+#xtranslate ot4xb_sql_type.Text         =>  ( 24  )
+#xtranslate ot4xb_sql_type.MediumText   =>  ( 25  )
+#xtranslate ot4xb_sql_type.LongText     =>  ( 26  )
+#xtranslate ot4xb_sql_type.Enum         =>  ( 27  )
+#xtranslate ot4xb_sql_type.Set          =>  ( 28  )
+
+// -----------------------------------------------------------------------------------------------------------------
 #ifdef _OT4XB_MAP_WAPIST_FUNC_
 #include "ot4xb_wapist_map.ch"
 #endif
