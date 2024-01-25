@@ -2360,7 +2360,7 @@ void TZString::Add_to_sql_bin(LPBYTE p, DWORD cb)
 {
    if (!p) return;
    DWORD cbo = escape_to_sql_required_size(p, cb) + 1;
-   LPBYTE buffer = (LPBYTE)_pt_next_(cb);
+   LPBYTE buffer = (LPBYTE)_pt_next_(cbo);
    m_nLen += escape_to_sql_buffer(p, cb, buffer, cbo, (DWORD)escape_to_sql_buffer_flags::binary_string);
 
 }
@@ -2376,7 +2376,7 @@ void TZString::Add_to_sql_bin_q(LPBYTE p, DWORD cb)
 {
    if (!p) return;
    DWORD cbo = escape_to_sql_required_size(p, cb) + 1;
-   LPBYTE buffer = (LPBYTE)_pt_next_(cb);
+   LPBYTE buffer = (LPBYTE)_pt_next_(cbo);
    m_nLen += escape_to_sql_buffer(p, cb, buffer, cbo,
       (DWORD)escape_to_sql_buffer_flags::binary_string || (DWORD)escape_to_sql_buffer_flags::add_quotes);
 }

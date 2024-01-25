@@ -5,6 +5,7 @@
 //------------------------------------------------------------
 #pragma optimize( "t", on )
 #include <ot4xb_api.h>
+#include  <math.h>
 //----------------------------------------------------------------------------------------------------------------------
 _XPP_REG_FUN_(__SQLSTR_MONEY) // __sqlstr_money(v, {flags,pad})
 {
@@ -49,44 +50,44 @@ OT4XB_API BOOL __sqlstr_str2money(LPSTR buffer, DWORD buffer_cb, LONGLONG& qn)
       char ch = buffer[dw_bp];
       switch (ch)
       {
-         case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+      case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+      {
+         qn = qn * 10LL;
+         qn += (LONGLONG)(ch - '0');
+         if (dc_sep)
          {
-            qn = qn * 10LL;
-            qn += (LONGLONG)(ch - '0');
-            if (dc_sep)
-            {
-               decimal_places++;
-               if (decimal_places > 2) { th_sep = dc_sep; dc_sep = 0; decimal_places = 0; }
-            }
-            break;
+            decimal_places++;
+            if (decimal_places > 2) { th_sep = dc_sep; dc_sep = 0; decimal_places = 0; }
          }
-         case '.': case ',':
-         {
-            if (dc_sep) { th_sep = dc_sep; dc_sep = 0; decimal_places = 0; break; }
-            if (th_sep == ch) { break; }
-            dc_sep = ch;
-            break;
-         }
-         case ' ': case '\t':
-         {
-            break;
-         }
-         case '-':
-         {
-            qn = qn * -1LL;
-            break;
-         }
-         case 'c': case 'C':
-         {
-            qn = qn * -1LL;
-            dw_bp = buffer_cb + 1;
-            break;
-         }
-         default:
-         {
-            dw_bp = buffer_cb + 1;
-            break;
-         }
+         break;
+      }
+      case '.': case ',':
+      {
+         if (dc_sep) { th_sep = dc_sep; dc_sep = 0; decimal_places = 0; break; }
+         if (th_sep == ch) { break; }
+         dc_sep = ch;
+         break;
+      }
+      case ' ': case '\t':
+      {
+         break;
+      }
+      case '-':
+      {
+         qn = qn * -1LL;
+         break;
+      }
+      case 'c': case 'C':
+      {
+         qn = qn * -1LL;
+         dw_bp = buffer_cb + 1;
+         break;
+      }
+      default:
+      {
+         dw_bp = buffer_cb + 1;
+         break;
+      }
       }
 
    }
@@ -158,44 +159,27 @@ DWORD escape_to_sql_required_size(LPBYTE p, DWORD cb)
    {
       if (((LONG)cb) < 0)
       {
-         for (; *p; p++)
-         {
-            switch (*p)
-            {
-               case 8: case '\t': case 26: case '\n': case '\r': case '\"': case '\'': case '\\': case '%': case '_':
-               {
-                  cbo += 2;
-                  break;
-               }
-               default:
-               {
-                  cbo++;
-               }
-            }
-         }
+         cb = _xstrlen((LPSTR)p);
+         cbo++;
       }
-      else
+
+      DWORD n;
+      for (n = 0; n < cb; n++)
       {
-         DWORD n;
-         for (n = 0; n < cb; n++)
+         switch (p[n])
          {
-            switch (p[n])
-            {
-               case 0: case 8: case '\t': case 26: case '\n': case '\r': case '\"': case '\'': case '\\': case '%': case '_':
-               {
-                  cbo += 2;
-                  break;
-               }
-               default:
-               {
-                  cbo++;
-               }
-            }
+         case 0: case 8: case '\t': case 26: case '\n': case '\r': case '\"': case '\'': case '\\': case '%': case '_':
+         {
+            cbo += 2;
+            break;
          }
-         return cbo;
-
-
+         default:
+         {
+            cbo++;
+         }
+         }
       }
+      return cbo;
    }
    return cbo; // not including terminator \0 in cb == -1
 }
@@ -224,80 +208,80 @@ DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, DWORD flags
          BYTE  b1 = 0;
          switch (p[n])
          {
-            case 0x00:
+         case 0x00:
+         {
+            if (flags & (DWORD)escape_to_sql_buffer_flags::zero_terminated_string)
             {
-               if (flags & (DWORD)escape_to_sql_buffer_flags::zero_terminated_string)
-               {
-                  po[dw] = 0;
-                  return dw;
-               }
-               else
-               {
-                  b0 = '\\'; b1 = '0';
-               }
-               break;
+               po[dw] = 0;
+               return dw;
             }
-            case '\b':
+            else
             {
-               b0 = '\\'; b1 = 'b'; break;
+               b0 = '\\'; b1 = '0';
             }
-            case '\t':
+            break;
+         }
+         case '\b':
+         {
+            b0 = '\\'; b1 = 'b'; break;
+         }
+         case '\t':
+         {
+            b0 = '\\'; b1 = 't'; break;
+         }
+         case 26:
+         {
+            b0 = '\\'; b1 = 'Z'; break;
+         }
+         case '\n':
+         {
+            b0 = '\\'; b1 = 'n'; break;
+         }
+         case '\r':
+         {
+            b0 = '\\'; b1 = 'r'; break;
+         }
+         case '\"':
+         {
+            b0 = '\\'; b1 = '\"'; break;
+         }
+         case '\'':
+         {
+            b0 = '\\'; b1 = '\''; break;
+         }
+         case '\\':
+         {
+            b0 = '\\'; b1 = '\\'; break;
+         }
+         case '%':
+         {
+            if (flags & (DWORD)escape_to_sql_buffer_flags::wildcard_escape)
             {
-               b0 = '\\'; b1 = 't'; break;
+               b0 = '\\'; b1 = '%';
             }
-            case 26:
+            else
             {
-               b0 = '\\'; b1 = 'Z'; break;
+               b0 = '%';
             }
-            case '\n':
-            {
-               b0 = '\\'; b1 = 'n'; break;
-            }
-            case '\r':
-            {
-               b0 = '\\'; b1 = 'r'; break;
-            }
-            case '\"':
-            {
-               b0 = '\\'; b1 = '\"'; break;
-            }
-            case '\'':
-            {
-               b0 = '\\'; b1 = '\''; break;
-            }
-            case '\\':
-            {
-               b0 = '\\'; b1 = '\\'; break;
-            }
-            case '%':
-            {
-               if (flags & (DWORD)escape_to_sql_buffer_flags::wildcard_escape)
-               {
-                  b0 = '\\'; b1 = '%';
-               }
-               else
-               {
-                  b0 = '%';
-               }
 
-               break;
-            }
-            case '_':
+            break;
+         }
+         case '_':
+         {
+            if (flags & (DWORD)escape_to_sql_buffer_flags::wildcard_escape)
             {
-               if (flags & (DWORD)escape_to_sql_buffer_flags::wildcard_escape)
-               {
-                  b0 = '\\'; b1 = '_';
-               }
-               else
-               {
-                  b0 = '_';
-               }
-               break;
+               b0 = '\\'; b1 = '_';
             }
-            default:
+            else
             {
-               b0 = p[n]; b1 = 0; break;
+               b0 = '_';
             }
+            break;
+         }
+         default:
+         {
+            b0 = p[n]; b1 = 0; break;
+         }
          }
          po[dw] = b0; dw++;
          if (b1)
@@ -371,95 +355,95 @@ ot4xb_sql_type_flag ot4xb_str_to_sql_type_flag(LPSTR p)
             go_next = TRUE;
             switch (_lower_ansi_char_table_[(BYTE)*p])
             {
-               case 'w': { flags |= (DWORD)ot4xb_sql_type_flag::wildcard_escape; break; } // "wildcard_escape" for queries
-               case 'a':  // AllTrim
+            case 'w': { flags |= (DWORD)ot4xb_sql_type_flag::wildcard_escape; break; } // "wildcard_escape" for queries
+            case 'a':  // AllTrim
+            {
+               switch (_lower_ansi_char_table_[(BYTE)p[1]])
                {
-                  switch (_lower_ansi_char_table_[(BYTE)p[1]])
-                  {
-                     case 'l': case 't': { flags |= (DWORD)ot4xb_sql_type_flag::AllTrim; break; } // AllTrim | AT
-                     default: { break; }
-                  }
-                  break;
+               case 'l': case 't': { flags |= (DWORD)ot4xb_sql_type_flag::AllTrim; break; } // AllTrim | AT
+               default: { break; }
                }
-               case 'l':  // LTrim , LeftAlign
+               break;
+            }
+            case 'l':  // LTrim , LeftAlign
+            {
+               switch (_lower_ansi_char_table_[(BYTE)p[1]])
                {
-                  switch (_lower_ansi_char_table_[(BYTE)p[1]])
-                  {
-                     case 'e': case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::LeftAlign; break; }   // LeftAlign | LA
-                     case 't': { flags |= (DWORD)ot4xb_sql_type_flag::LTrim; break; }    // LTrim
-                     default: { break; }
-                  }
-                  break;
+               case 'e': case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::LeftAlign; break; }   // LeftAlign | LA
+               case 't': { flags |= (DWORD)ot4xb_sql_type_flag::LTrim; break; }    // LTrim
+               default: { break; }
                }
-               case 'r':  // RTrim , RightAlign
+               break;
+            }
+            case 'r':  // RTrim , RightAlign
+            {
+               switch (_lower_ansi_char_table_[(BYTE)p[1]])
                {
-                  switch (_lower_ansi_char_table_[(BYTE)p[1]])
-                  {
-                     case 'i': case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::RightAlign; break; } // RightAlign | RA 
-                     case 't': { flags |= (DWORD)ot4xb_sql_type_flag::RTrim; break; }    // RTrim
-                     default: { break; }
-                  }
-                  break;
+               case 'i': case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::RightAlign; break; } // RightAlign | RA 
+               case 't': { flags |= (DWORD)ot4xb_sql_type_flag::RTrim; break; }    // RTrim
+               default: { break; }
                }
-               case 't':  // Truncate
+               break;
+            }
+            case 't':  // Truncate
+            {
+               switch (_lower_ansi_char_table_[(BYTE)p[1]])
                {
-                  switch (_lower_ansi_char_table_[(BYTE)p[1]])
+               case 'r': { flags |= (DWORD)ot4xb_sql_type_flag::Truncate; break; } // Truncate
+               case 'u': { flags |= (DWORD)ot4xb_sql_type_flag::ToUtf8; break; } // TU -> ToUtf8
+               case 'o':
+               {
+                  if (_lower_ansi_char_table_[(BYTE)p[2]] == 'u')
                   {
-                     case 'r': { flags |= (DWORD)ot4xb_sql_type_flag::Truncate; break; } // Truncate
-                     case 'u': { flags |= (DWORD)ot4xb_sql_type_flag::ToUtf8; break; } // TU -> ToUtf8
-                     case 'o':
-                     {
-                        if (_lower_ansi_char_table_[(BYTE)p[2]] == 'u')
-                        {
-                           flags |= (DWORD)ot4xb_sql_type_flag::ToUtf8;// ToUtf8
+                     flags |= (DWORD)ot4xb_sql_type_flag::ToUtf8;// ToUtf8
 
-                        }
-                        break;
+                  }
+                  break;
+               }
+               default: { break; }
+               }
+               break;
+            }
+            case 'n': // NotNull = 0x010000
+            {
+               if (_lower_ansi_char_table_[(BYTE)p[1]] == 'o')
+               {
+                  if (_lower_ansi_char_table_[(BYTE)p[2]] == 't')
+                  {
+                     if (_lower_ansi_char_table_[(BYTE)p[3]] == 'n')
+                     {
+                        flags |= (DWORD)ot4xb_sql_type_flag::NotNull;
                      }
+                  }
+               }
+            }
+            case 'o': // Ov????
+            {
+               if (_lower_ansi_char_table_[(BYTE)p[1]] == 'v')
+               {
+                  switch (_lower_ansi_char_table_[(BYTE)p[2]])
+                  {
+                  case 'n': { flags |= (DWORD)ot4xb_sql_type_flag::OvNull; break; } // OvNull
+                  case 'm':
+                  {
+                     switch (_lower_ansi_char_table_[(BYTE)p[3]])
+                     {
+                     case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::OvMax; break; } // OvMax
+                     case 'i': { flags |= (DWORD)ot4xb_sql_type_flag::OvMin; break; } // OvMin
                      default: { break; }
-                  }
-                  break;
-               }
-               case 'n': // NotNull = 0x010000
-               {
-                  if (_lower_ansi_char_table_[(BYTE)p[1]] == 'o')
-                  {
-                     if (_lower_ansi_char_table_[(BYTE)p[2]] == 't')
-                     {
-                        if (_lower_ansi_char_table_[(BYTE)p[3]] == 'n')
-                        {
-                           flags |= (DWORD)ot4xb_sql_type_flag::NotNull;
-                        }
                      }
+                     break;
+                  }
+                  case 'z': { flags |= (DWORD)ot4xb_sql_type_flag::OvZero; break; } // OvZero
+                  default: { break; }
                   }
                }
-               case 'o': // Ov????
-               {
-                  if (_lower_ansi_char_table_[(BYTE)p[1]] == 'v')
-                  {
-                     switch (_lower_ansi_char_table_[(BYTE)p[2]])
-                     {
-                        case 'n': { flags |= (DWORD)ot4xb_sql_type_flag::OvNull; break; } // OvNull
-                        case 'm':
-                        {
-                           switch (_lower_ansi_char_table_[(BYTE)p[3]])
-                           {
-                              case 'a': { flags |= (DWORD)ot4xb_sql_type_flag::OvMax; break; } // OvMax
-                              case 'i': { flags |= (DWORD)ot4xb_sql_type_flag::OvMin; break; } // OvMin
-                              default: { break; }
-                           }
-                           break;
-                        }
-                        case 'z': { flags |= (DWORD)ot4xb_sql_type_flag::OvZero; break; } // OvZero
-                        default: { break; }
-                     }
-                  }
-                  break;
-               }
-               default:
-               {
-                  break;
-               }
+               break;
+            }
+            default:
+            {
+               break;
+            }
             }
          }
       }
@@ -552,41 +536,41 @@ static void sql_dump_value::to_integer_value(TXppParamList& xpp, LONGLONG min, L
 
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
+   case XPP_CHARACTER:
+   {
+      value = atoll(xpp[1]->LockStr());
+      init = TRUE;
+      break;
+   }
+   case XPP_NUMERIC:
+   {
+      if (t & _xpp_DOUBLE)
       {
-         value = atoll(xpp[1]->LockStr());
-         init = TRUE;
-         break;
+         value = (LONGLONG)xpp[1]->GetDouble();
       }
-      case XPP_NUMERIC:
+      else
       {
-         if (t & _xpp_DOUBLE)
-         {
-            value = (LONGLONG)xpp[1]->GetDouble();
-         }
-         else
-         {
-            value = (LONGLONG)(xpp[1]->GetLong() & 0xFFFFFFFFll);
-         }
-         init = TRUE;
-         break;
+         value = (LONGLONG)(xpp[1]->GetLong() & 0xFFFFFFFFll);
       }
-      case XPP_DATE:
-      {
-         value = (LONGLONG)xpp[1]->GetJulianDate();
-         init = TRUE;
-         break;
-      }
-      case XPP_LOGICAL:
-      {
-         value = xpp[1]->GetBool() ? 0ll : 1ll;
-         init = TRUE;
-         break;
-      }
-      default:
-      {
-         break;
-      }
+      init = TRUE;
+      break;
+   }
+   case XPP_DATE:
+   {
+      value = (LONGLONG)xpp[1]->GetJulianDate();
+      init = TRUE;
+      break;
+   }
+   case XPP_LOGICAL:
+   {
+      value = xpp[1]->GetBool() ? 1ll : 0ll;
+      init = TRUE;
+      break;
+   }
+   default:
+   {
+      break;
+   }
    }
    if (!init)
    {
@@ -658,108 +642,57 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
 
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
+   case XPP_CHARACTER:
+   {
+      LPSTR p = xpp[1]->LockStr();
+      if (p)
       {
-         LPSTR p = xpp[1]->LockStr();
-         if (p)
+         char sz_int[72] = { 0 };
+         DWORD int_count = 0;
+         char sz_dec[72] = { 0 };
+         DWORD dec_count = 0;
+         LPSTR dst = sz_int;
+         BOOL  decimal_reached = FALSE;
+         BOOL  negative = FALSE;
+         DWORD cb = 0;
+         for (; *p && cb < 67; p++)
          {
-            char sz_int[72] = { 0 };
-            DWORD int_count = 0;
-            char sz_dec[72] = { 0 };
-            DWORD dec_count = 0;
-            LPSTR dst = sz_int;
-            BOOL  decimal_reached = FALSE;
-            BOOL  negative = FALSE;
-            DWORD cb = 0;
-            for (; *p && cb < 67; p++)
+            switch (*p)
             {
-               switch (*p)
-               {
-                  case 7: case 32:
-                  {
-                     if (int_count || dec_count || decimal_reached) { cb = 0xFF; }
-                     break;
-                  }
-                  case '-':
-                  {
-                     if (cb) { cb = 0xFF; }
-                     else { negative = TRUE; }
-                     break;
-                  }
-                  case '.':
-                  {
-                     if (decimal_reached) { cb = 0xFF; }
-                     else { decimal_reached = TRUE; dst = sz_dec; }
-                     break;
-                  }
-                  default:
-                  {
-                     if (*p >= '0' && *p <= '9')
-                     {
-                        *dst = *p; cb++;
-                        if (decimal_reached) { dec_count++; }
-                        else { int_count++; }
-                     }
-                     else { cb = 0xFF; }
-                     break;
-                  }
-               }
-            }
-
-            if (int_count > (DWORD)(len - dec))
+            case 7: case 32:
             {
-
-               if (flags & (DWORD)ot4xb_sql_type_flag::OvNull)
-               {
-                  xpp[0]->PutStr("null");
-                  return;
-               }
-               if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
-               {
-                  xpp[0]->PutStr("0");
-                  return;
-               }
-               if (flags & (DWORD)ot4xb_sql_type_flag::OvMax)
-               {
-                  sql_dump_value::put_decimal_max_value(xpp, len, dec, negative);
-                  return;
-               }
+               if (int_count || dec_count || decimal_reached) { cb = 0xFF; }
+               break;
             }
-            if (!int_count)
+            case '-':
             {
-               *sz_int = '0';
-               int_count = 1;
+               if (cb) { cb = 0xFF; }
+               else { negative = TRUE; }
+               break;
             }
-            if (dec_count > (DWORD)dec)
+            case '.':
             {
-               dec_count = (DWORD)dec;
-               sz_dec[(DWORD)dec] = '\0';
+               if (decimal_reached) { cb = 0xFF; }
+               else { decimal_reached = TRUE; dst = sz_dec; }
+               break;
             }
-
-            sprintf_s(buffer, sizeof(buffer), "%s%s%s%s", (negative ? "-" : ""), sz_int, (dec_count ? "." : ""), sz_dec);
-            xpp[0]->PutStr(buffer);
-            return;
+            default:
+            {
+               if (*p >= '0' && *p <= '9')
+               {
+                  *dst = *p; cb++;
+                  if (decimal_reached) { dec_count++; }
+                  else { int_count++; }
+               }
+               else { cb = 0xFF; }
+               break;
+            }
+            }
          }
-         break;
-      }
-      case XPP_NUMERIC:
-      {
-         int cb = 0;
-         BOOL negative = FALSE;
-         if (t & _xpp_DOUBLE)
+
+         if (int_count > (DWORD)(len - dec))
          {
-            double nd = xpp[1]->GetDouble();
-            negative = !(nd == abs(nd));
-            cb = sprintf_s(buffer, sizeof(buffer), "%.*f", dec, nd);
-         }
-         else
-         {
-            long nl = xpp[1]->GetLong();
-            negative = nl < 0;
-            cb = sprintf_s(buffer, sizeof(buffer), "%i", nl);
-         }
-         if (cb > (len - dec))
-         {
+
             if (flags & (DWORD)ot4xb_sql_type_flag::OvNull)
             {
                xpp[0]->PutStr("null");
@@ -776,44 +709,96 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
                return;
             }
          }
-         xpp[0]->PutStr(buffer);
-         return;
-      }
-      case XPP_DATE:
-      {
-         int cb = 0;
-         long nl = xpp[1]->GetJulianDate();
-         cb = sprintf_s(buffer, sizeof(buffer), "%i", nl);
-         if (cb > (len - dec))
+         if (!int_count)
          {
-            if (flags & (DWORD)ot4xb_sql_type_flag::OvNull)
-            {
-               xpp[0]->PutStr("null");
-               return;
-            }
-            if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
-            {
-               xpp[0]->PutStr("0");
-               return;
-            }
-            if (flags & (DWORD)ot4xb_sql_type_flag::OvMax)
-            {
-               sql_dump_value::put_decimal_max_value(xpp, len, dec, 0);
-               return;
-            }
+            *sz_int = '0';
+            int_count = 1;
          }
+         if (dec_count > (DWORD)dec)
+         {
+            dec_count = (DWORD)dec;
+            sz_dec[(DWORD)dec] = '\0';
+         }
+
+         sprintf_s(buffer, sizeof(buffer), "%s%s%s%s", (negative ? "-" : ""), sz_int, (dec_count ? "." : ""), sz_dec);
          xpp[0]->PutStr(buffer);
          return;
       }
-      case XPP_LOGICAL:
+      break;
+   }
+   case XPP_NUMERIC:
+   {
+      int cb = 0;
+      BOOL negative = FALSE;
+      if (t & _xpp_DOUBLE)
       {
-         xpp[0]->PutStr(xpp[1]->GetBool() ? "1" : "0");
-         return;
+         double nd = xpp[1]->GetDouble();
+         negative = !(nd >= fabs(nd));   // nd < 0.0
+
+         cb = sprintf_s(buffer, sizeof(buffer), "%.*f", dec, nd);
       }
-      default:
+      else
       {
-         break;
+         long nl = xpp[1]->GetLong();
+         negative = nl < 0;
+         cb = sprintf_s(buffer, sizeof(buffer), "%i", nl);
       }
+      if (cb > (len - dec))
+      {
+         if (flags & (DWORD)ot4xb_sql_type_flag::OvNull)
+         {
+            xpp[0]->PutStr("null");
+            return;
+         }
+         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
+         {
+            xpp[0]->PutStr("0");
+            return;
+         }
+         if (flags & (DWORD)ot4xb_sql_type_flag::OvMax)
+         {
+            sql_dump_value::put_decimal_max_value(xpp, len, dec, negative);
+            return;
+         }
+      }
+      xpp[0]->PutStr(buffer);
+      return;
+   }
+   case XPP_DATE:
+   {
+      int cb = 0;
+      long nl = xpp[1]->GetJulianDate();
+      cb = sprintf_s(buffer, sizeof(buffer), "%i", nl);
+      if (cb > (len - dec))
+      {
+         if (flags & (DWORD)ot4xb_sql_type_flag::OvNull)
+         {
+            xpp[0]->PutStr("null");
+            return;
+         }
+         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
+         {
+            xpp[0]->PutStr("0");
+            return;
+         }
+         if (flags & (DWORD)ot4xb_sql_type_flag::OvMax)
+         {
+            sql_dump_value::put_decimal_max_value(xpp, len, dec, 0);
+            return;
+         }
+      }
+      xpp[0]->PutStr(buffer);
+      return;
+   }
+   case XPP_LOGICAL:
+   {
+      xpp[0]->PutStr(xpp[1]->GetBool() ? "1" : "0");
+      return;
+   }
+   default:
+   {
+      break;
+   }
    }
    xpp[0]->PutStr((flags & (DWORD)ot4xb_sql_type_flag::OvNull) ? "null" : "0");
 }
@@ -827,34 +812,34 @@ void sql_dump_value::to_double_value(TXppParamList& xpp)
 
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
+   case XPP_CHARACTER:
+   {
+      LPSTR p = xpp[1]->LockStr();
+      if (p)
       {
-         LPSTR p = xpp[1]->LockStr();
-         if (p)
-         {
-            nd = atof(p);
-         }
-         break;
+         nd = atof(p);
       }
-      case XPP_NUMERIC:
-      {
-         nd = xpp[1]->GetDouble();
-         break;
-      }
-      case XPP_DATE:
-      {
-         nd = (double)xpp[1]->GetJulianDate();
-         break;
-      }
-      case XPP_LOGICAL:
-      {
-         nd = xpp[1]->GetBool() ? 1.00 : 0.00;
-         break;
-      }
-      default:
-      {
-         break;
-      }
+      break;
+   }
+   case XPP_NUMERIC:
+   {
+      nd = xpp[1]->GetDouble();
+      break;
+   }
+   case XPP_DATE:
+   {
+      nd = (double)xpp[1]->GetJulianDate();
+      break;
+   }
+   case XPP_LOGICAL:
+   {
+      nd = xpp[1]->GetBool() ? 1.00 : 0.00;
+      break;
+   }
+   default:
+   {
+      break;
+   }
    }
    sprintf_s(buffer, sizeof(buffer), "%.f", nd);
    xpp[0]->PutStr(buffer);
@@ -868,33 +853,33 @@ void sql_dump_value::to_bit_value(TXppParamList& xpp, int len)
 
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
+   case XPP_CHARACTER:
+   {
+      LPSTR ps = xpp[1]->LockStr();
+      if (ps)
       {
-         LPSTR ps = xpp[1]->LockStr();
-         if (ps)
+         LPSTR pd = buffer;
+         *pd = 'b'; pd++; *pd = '\''; pd++;
+         for (; *ps && len > 0; ps++)
          {
-            LPSTR pd = buffer;
-            *pd = 'b'; pd++; *pd = '\''; pd++;
-            for (; *ps && len > 0; ps++)
-            {
-               if (*ps == '0' || *ps == '1') { *pd = *ps; pd++; len--; }
-            }
-            *pd = '\''; pd++;
-            xpp[0]->PutStr(buffer);
-            return;
+            if (*ps == '0' || *ps == '1') { *pd = *ps; pd++; len--; }
          }
-         break;
-      }
-      case XPP_NUMERIC:
-      {
-         sprintf_s(buffer, sizeof(buffer), "%i", xpp[1]->GetLong());
+         *pd = '\''; pd++;
          xpp[0]->PutStr(buffer);
          return;
       }
-      default:
-      {
-         break;
-      }
+      break;
+   }
+   case XPP_NUMERIC:
+   {
+      sprintf_s(buffer, sizeof(buffer), "%i", xpp[1]->GetLong());
+      xpp[0]->PutStr(buffer);
+      return;
+   }
+   default:
+   {
+      break;
+   }
    }
    xpp[0]->PutStr("b''");
 }
@@ -905,42 +890,20 @@ void sql_dump_value::to_date_value(TXppParamList& xpp, DWORD flags)
    char buffer[16] = { 0 };
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
+   case XPP_CHARACTER:
+   {
+      LPSTR ps = xpp[1]->LockStr();
+      if (ps)
       {
-         LPSTR ps = xpp[1]->LockStr();
-         if (ps)
+         LPSTR pd = buffer;
+         DWORD cb = 0;
+         *pd = '\''; pd++;
+         for (; *ps && cb < 8; ps++)
          {
-            LPSTR pd = buffer;
-            DWORD cb = 0;
-            *pd = '\''; pd++;
-            for (; *ps && cb < 8; ps++)
-            {
-               if (*ps >= '0' && *ps <= '9') { *pd = *ps; pd++; cb++; }
-            }
-            *pd = '\''; pd++;
-            if (buffer[1] < '0' || buffer[1] < '9')
-            {
-               if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
-               {
-                  xpp[0]->PutStr("'0000-00-00'");
-               }
-               else
-               {
-                  xpp[0]->PutStr("null");
-               }
-               return;
-            }
-            xpp[0]->PutStr(buffer);
-            return;
+            if (*ps >= '0' && *ps <= '9') { *pd = *ps; pd++; cb++; }
          }
-         break;
-
-      }
-      case XPP_DATE:
-      {
-
-         LPSTR ps = (LPSTR)xpp[1]->GetDateString();
-         if (ps[0] < '0' || ps[0] > '9')
+         *pd = '\''; pd++;
+         if (buffer[1] < '0' || buffer[1] < '9')
          {
             if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
             {
@@ -952,14 +915,36 @@ void sql_dump_value::to_date_value(TXppParamList& xpp, DWORD flags)
             }
             return;
          }
-         sprintf_s(buffer, sizeof(buffer), "'%s'", ps);
          xpp[0]->PutStr(buffer);
          return;
       }
-      default:
+      break;
+
+   }
+   case XPP_DATE:
+   {
+
+      LPSTR ps = (LPSTR)xpp[1]->GetDateString();
+      if (ps[0] < '0' || ps[0] > '9')
       {
-         break;
+         if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
+         {
+            xpp[0]->PutStr("'0000-00-00'");
+         }
+         else
+         {
+            xpp[0]->PutStr("null");
+         }
+         return;
       }
+      sprintf_s(buffer, sizeof(buffer), "'%s'", ps);
+      xpp[0]->PutStr(buffer);
+      return;
+   }
+   default:
+   {
+      break;
+   }
    }
    if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
    {
@@ -976,7 +961,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
    char buffer[256] = { 0 };
    DWORD cb = 0;
    LPSTR ps = sql_dump_value::grip_string(xpp, buffer, &cb);
-   int max = (len < 1 ? (int)cb : len);
+   DWORD max_cb = (len < 1 ? cb : (DWORD)len);
    if (!ps)
    {
       if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
@@ -1009,7 +994,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
          cb--;
       }
    }
-   DWORD pd_size = escape_to_sql_required_size((LPBYTE)ps, cb) + (max - cb) + 16;
+   DWORD pd_size = escape_to_sql_required_size((LPBYTE)ps, ((flags & (DWORD)ot4xb_sql_type_flag::RightAlign) ? max(max_cb, cb) : cb)) + 16;
    LPSTR pd = (LPSTR)_xgrab(pd_size);
    DWORD dwo = 0;
    DWORD pad = 0;
@@ -1018,14 +1003,14 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
    *p = '\''; p++; dwo++;
    if (flags & (DWORD)ot4xb_sql_type_flag::Truncate)
    {
-      if (cb > (DWORD)max)
+      if (cb > (DWORD)max_cb)
       {
-         cb = (DWORD)max;
+         cb = (DWORD)max_cb;
       }
    }
    if (flags & (DWORD)ot4xb_sql_type_flag::RightAlign)
    {
-      while ((pad + cb) < (DWORD)max)
+      while ((pad + cb) < (DWORD)max_cb)
       {
          *p = ' '; p++; pad++; dwo++;
       }
@@ -1034,7 +1019,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
    p = _mk_ptr_(LPSTR, pd, dwo);
    if (flags & (DWORD)ot4xb_sql_type_flag::LeftAlign)
    {
-      while ((pad + cb) < (DWORD)max)
+      while ((pad + cb) < (DWORD)max_cb)
       {
          *p = ' '; p++; pad++; dwo++;
       }
@@ -1059,44 +1044,46 @@ LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, char alt_buffer[256], DWO
    DWORD t = xpp[1]->GetType();
    switch (t & 0xFF)
    {
-      case XPP_CHARACTER:
-      {
-         LPSTR p = xpp[1]->LockStr(pcb);
-         return p;
-      }
+   case XPP_CHARACTER:
+   {
+      LPSTR p = xpp[1]->LockStr(pcb);
+      return p;
+   }
 
-      case XPP_NUMERIC:
+   case XPP_NUMERIC:
+   {
+      LPSTR p = (LPSTR)alt_buffer;
+
+      if (t & _xpp_DOUBLE)
       {
-         LPSTR p = (LPSTR)alt_buffer;
-         if (t & _xpp_DOUBLE)
-         {
-            double nd = xpp[1]->GetDouble();
-            *pcb = sprintf_s(p, sizeof(alt_buffer), "%.f", nd);
-         }
-         else
-         {
-            long nl = xpp[1]->GetLong();
-            *pcb = sprintf_s(p, sizeof(alt_buffer), "%i", nl);
-         }
-         return p;
+         double nd = xpp[1]->GetDouble();
+         *pcb = sprintf_s(p, sizeof(alt_buffer), "%.f", nd);
       }
-      case XPP_DATE:
+      else
       {
-         LPSTR p = (LPSTR)xpp[1]->GetDateString();
-         *pcb = 8;
-         return p;
+         long nl = xpp[1]->GetLong();
+         *pcb = sprintf_s(p, sizeof(alt_buffer), "%i", nl);
       }
-      case XPP_LOGICAL:
-      {
-         LPSTR p = (LPSTR)alt_buffer;
-         *pcb = 1;
-         *p = xpp[1]->GetBool() ? '1' : '0';
-         return p;
-      }
-      default:
-      {
-         break;
-      }
+      return p;
+   }
+   case XPP_DATE:
+   {
+      LPSTR p = (LPSTR)xpp[1]->GetDateString();
+      *pcb = 8;
+      return p;
+   }
+   case XPP_LOGICAL:
+   {
+      LPSTR p = (LPSTR) alt_buffer;
+      *pcb = 1;
+      *p = xpp[1]->GetBool() ? '1' : '0';
+      p[1] = 0;
+      return p;
+   }
+   default:
+   {
+      break;
+   }
    }
    *pcb = 0;
    return 0;
@@ -1203,141 +1190,141 @@ _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value 
    switch (q)
    {
 
-      case ot4xb_sql_type::TinyInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFFFF80ll, 0x000000000000007Fll, flags); break; }
-      case ot4xb_sql_type::SmallInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFF8000ll, 0x0000000000007FFFll, flags); break; }
-      case ot4xb_sql_type::MediumInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFF800000ll, 0x00000000007FFFFFll, flags); break; }
-      case ot4xb_sql_type::Int: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFF80000000ll, 0x000000007FFFFFFFll, flags); break; }
-      case ot4xb_sql_type::BigInt: { sql_dump_value::to_integer_value(xpp, 0x8000000000000000ll, 0x7FFFFFFFFFFFFFFFll, flags); break; }
-      case ot4xb_sql_type::Decimal: { sql_dump_value::to_decimal_value(xpp, len, dec, flags); break; }
-      case ot4xb_sql_type::Float: case ot4xb_sql_type::Double: { sql_dump_value::to_double_value(xpp); break; }
-      case ot4xb_sql_type::Bit: { sql_dump_value::to_bit_value(xpp, len); break; }
-      case ot4xb_sql_type::Date: { sql_dump_value::to_date_value(xpp, flags); break; }
-                               // case ot4xb_sql_type::Time: {; break; } // to-do
-                               // case ot4xb_sql_type::DateTime: {; break; }
-                               // case ot4xb_sql_type::TimeStamp: {; break; }
-                               // case ot4xb_sql_type::Year: {; break; }
-      case ot4xb_sql_type::Char: { sql_dump_value::to_char_value(xpp, len, flags); break; }
-      case ot4xb_sql_type::VarChar:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
-            (DWORD)ot4xb_sql_type_flag::RTrim |
-            (DWORD)ot4xb_sql_type_flag::Truncate |
-            (DWORD)ot4xb_sql_type_flag::ToUtf8 |
-            (DWORD)ot4xb_sql_type_flag::NotNull);
-         flags = flags | (DWORD)ot4xb_sql_type_flag::RTrim;
-         sql_dump_value::to_char_value(xpp, len, flags);
-         break;
-      }
-      case ot4xb_sql_type::Binary:
-      {
+   case ot4xb_sql_type::TinyInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFFFF80ll, 0x000000000000007Fll, flags); break; }
+   case ot4xb_sql_type::SmallInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFF8000ll, 0x0000000000007FFFll, flags); break; }
+   case ot4xb_sql_type::MediumInt: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFF800000ll, 0x00000000007FFFFFll, flags); break; }
+   case ot4xb_sql_type::Int: { sql_dump_value::to_integer_value(xpp, 0xFFFFFFFF80000000ll, 0x000000007FFFFFFFll, flags); break; }
+   case ot4xb_sql_type::BigInt: { sql_dump_value::to_integer_value(xpp, 0x8000000000000000ll, 0x7FFFFFFFFFFFFFFFll, flags); break; }
+   case ot4xb_sql_type::Decimal: { sql_dump_value::to_decimal_value(xpp, len, dec, flags); break; }
+   case ot4xb_sql_type::Float: case ot4xb_sql_type::Double: { sql_dump_value::to_double_value(xpp); break; }
+   case ot4xb_sql_type::Bit: { sql_dump_value::to_bit_value(xpp, len); break; }
+   case ot4xb_sql_type::Date: { sql_dump_value::to_date_value(xpp, flags); break; }
+                            // case ot4xb_sql_type::Time: {; break; } // to-do
+                            // case ot4xb_sql_type::DateTime: {; break; }
+                            // case ot4xb_sql_type::TimeStamp: {; break; }
+                            // case ot4xb_sql_type::Year: {; break; }
+   case ot4xb_sql_type::Char: { sql_dump_value::to_char_value(xpp, len, flags); break; }
+   case ot4xb_sql_type::VarChar:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
+         (DWORD)ot4xb_sql_type_flag::RTrim |
+         (DWORD)ot4xb_sql_type_flag::Truncate |
+         (DWORD)ot4xb_sql_type_flag::ToUtf8 |
+         (DWORD)ot4xb_sql_type_flag::NotNull);
+      flags = flags | (DWORD)ot4xb_sql_type_flag::RTrim;
+      sql_dump_value::to_char_value(xpp, len, flags);
+      break;
+   }
+   case ot4xb_sql_type::Binary:
+   {
 
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
-            (DWORD)ot4xb_sql_type_flag::RTrim |
-            (DWORD)ot4xb_sql_type_flag::AllTrim |
-            (DWORD)ot4xb_sql_type_flag::LeftAlign |
-            (DWORD)ot4xb_sql_type_flag::RightAlign |
-            (DWORD)ot4xb_sql_type_flag::Truncate |
-            (DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, len, flags);
-         break;
-      }
-      case ot4xb_sql_type::VarBinary:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
-            (DWORD)ot4xb_sql_type_flag::RTrim |
-            (DWORD)ot4xb_sql_type_flag::Truncate |
-            (DWORD)ot4xb_sql_type_flag::NotNull);
-         flags = flags | (DWORD)ot4xb_sql_type_flag::RTrim;
-         sql_dump_value::to_char_value(xpp, len, flags);
-         break;
-      }
-      case ot4xb_sql_type::TinyBlob:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0xFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::Blob:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0xFFFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::MediumBlob:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0xFFFFFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::LongBlob:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
-         sql_dump_value::to_char_value(xpp, 0, flags);
-         break;
-      }
-      case ot4xb_sql_type::TinyText:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
-         sql_dump_value::to_char_value(xpp, 0xFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::Text:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
-         sql_dump_value::to_char_value(xpp, 0xFFFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::MediumText:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
-         sql_dump_value::to_char_value(xpp, 0xFFFFFF, flags);
-         break;
-      }
-      case ot4xb_sql_type::LongText:
-      {
-         flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
-         sql_dump_value::to_char_value(xpp, 0, flags);
-         break;
-      }
-      // case ot4xb_sql_type::Enum: {; break; }
-      // case ot4xb_sql_type::Set: {; break; }
-      default:
-      {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
+         (DWORD)ot4xb_sql_type_flag::RTrim |
+         (DWORD)ot4xb_sql_type_flag::AllTrim |
+         (DWORD)ot4xb_sql_type_flag::LeftAlign |
+         (DWORD)ot4xb_sql_type_flag::RightAlign |
+         (DWORD)ot4xb_sql_type_flag::Truncate |
+         (DWORD)ot4xb_sql_type_flag::NotNull);
+      sql_dump_value::to_char_value(xpp, len, flags);
+      break;
+   }
+   case ot4xb_sql_type::VarBinary:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::LTrim |
+         (DWORD)ot4xb_sql_type_flag::RTrim |
+         (DWORD)ot4xb_sql_type_flag::Truncate |
+         (DWORD)ot4xb_sql_type_flag::NotNull);
+      flags = flags | (DWORD)ot4xb_sql_type_flag::RTrim;
+      sql_dump_value::to_char_value(xpp, len, flags);
+      break;
+   }
+   case ot4xb_sql_type::TinyBlob:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
+      sql_dump_value::to_char_value(xpp, 0xFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::Blob:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
+      sql_dump_value::to_char_value(xpp, 0xFFFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::MediumBlob:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
+      sql_dump_value::to_char_value(xpp, 0xFFFFFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::LongBlob:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull);
+      sql_dump_value::to_char_value(xpp, 0, flags);
+      break;
+   }
+   case ot4xb_sql_type::TinyText:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
+      sql_dump_value::to_char_value(xpp, 0xFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::Text:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
+      sql_dump_value::to_char_value(xpp, 0xFFFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::MediumText:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
+      sql_dump_value::to_char_value(xpp, 0xFFFFFF, flags);
+      break;
+   }
+   case ot4xb_sql_type::LongText:
+   {
+      flags = flags & ((DWORD)ot4xb_sql_type_flag::NotNull | (DWORD)ot4xb_sql_type_flag::ToUtf8);
+      sql_dump_value::to_char_value(xpp, 0, flags);
+      break;
+   }
+   // case ot4xb_sql_type::Enum: {; break; }
+   // case ot4xb_sql_type::Set: {; break; }
+   default:
+   {
 
-         DWORD t = xpp[1]->GetType();
-         switch (t)
+      DWORD t = xpp[1]->GetType();
+      switch (t)
+      {
+      case XPP_LOGICAL:
+      {
+         sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFFFF80ll, 0x000000000000007Fll, flags);
+         break;
+      }
+
+      case XPP_NUMERIC:
+      {
+         if (t & _xpp_DOUBLE)
          {
-            case XPP_LOGICAL:
-            {
-               sql_dump_value::to_integer_value(xpp, 0xFFFFFFFFFFFFFF80ll, 0x000000000000007Fll, flags);
-               break;
-            }
+            sql_dump_value::to_double_value(xpp);
+         }
+         else
+         {
 
-            case XPP_NUMERIC:
-            {
-               if (t & _xpp_DOUBLE)
-               {
-                  sql_dump_value::to_double_value(xpp);
-               }
-               else
-               {
-
-                  sql_dump_value::to_integer_value(xpp, 0x8000000000000000ll, 0x7FFFFFFFFFFFFFFFll, flags);
-               }
-               break;
-            }
-            case XPP_DATE:
-            {
-               sql_dump_value::to_date_value(xpp, flags);
-               break;
-            }
-            default: // XPP_CHARACTER:
-            {
-               sql_dump_value::to_char_value(xpp, len, flags);
-               break;
-            }
+            sql_dump_value::to_integer_value(xpp, 0x8000000000000000ll, 0x7FFFFFFFFFFFFFFFll, flags);
          }
          break;
       }
+      case XPP_DATE:
+      {
+         sql_dump_value::to_date_value(xpp, flags);
+         break;
+      }
+      default: // XPP_CHARACTER:
+      {
+         sql_dump_value::to_char_value(xpp, len, flags);
+         break;
+      }
+      }
+      break;
+   }
    }
 }
