@@ -841,7 +841,7 @@ void sql_dump_value::to_double_value(TXppParamList& xpp)
       break;
    }
    }
-   sprintf_s(buffer, sizeof(buffer), "%.f", nd);
+   sprintf_s(buffer, sizeof(buffer), "%.15g", nd);
    xpp[0]->PutStr(buffer);
 }
 // ------------------------------------------------------------------------------------------------------------------------------
@@ -1057,7 +1057,7 @@ LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, char alt_buffer[256], DWO
       if (t & _xpp_DOUBLE)
       {
          double nd = xpp[1]->GetDouble();
-         *pcb = sprintf_s(p, sizeof(alt_buffer), "%.f", nd);
+         *pcb = sprintf_s(p, sizeof(alt_buffer), "%.15g", nd);
       }
       else
       {
