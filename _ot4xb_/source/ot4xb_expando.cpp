@@ -1125,31 +1125,6 @@ label_cleanup:;
    }
 }
 // ---------------------------------------------------------------------------------
-// 1// 981537828  // magic number // 2 @s:__m__props__  // 3 @s:__m__hash__ // 4 k // 5 v	// 6 moreflags	// 7 nDepth
-static void set_get(XppParamList pl)
-{
-   TXppParamList xpp(pl);
-   if ((xpp.PCount() > 3) &&
-      xpp[2]->CheckType(XPP_ARRAY) &&
-      xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC))
-   {
-      switch ((xpp[1]->GetLong() & 0x0F))
-      {
-         case 0x01: { get_prop(xpp); break; }
-         case 0x02: { set_prop(xpp); break; }
-         case 0x03: { is_prop(xpp); break; }
-         case 0x04: { remove_prop(xpp); break; }
-         case 0x05: { set_prop_add(xpp); break; }
-         case 0x06: { add_env_strings(xpp); break; }
-         case 0x07: { add_ini_string(xpp); break; }
-         case 0x09: { json_escape_self(xpp); break; }
-         case 0x0A: { get_prop_index(xpp); break; }
-         case 0x0B: { m_json_on_unserialize_pop(xpp); break; }
-
-      }
-   }
-}
-// ---------------------------------------------------------------------------------
 static void create_class(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("_OT4XB_EXPANDO_");

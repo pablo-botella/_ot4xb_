@@ -503,7 +503,7 @@ _XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)     //  ot4xb_sql_escape_string_ansi
    DWORD cbo = 0;
    LPSTR po = buffer;
 
-   if ((DWORD)escape_to_sql_buffer_flags::binary_string)
+   if (flags & (DWORD)escape_to_sql_buffer_flags::binary_string)
    {
       flags &= ~(DWORD)escape_to_sql_buffer_flags::zero_terminated_string;
    }

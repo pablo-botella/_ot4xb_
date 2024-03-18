@@ -23,6 +23,12 @@
 #endif
 // -----------------------------------------------------------------------------------------------------------------
 //#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+#pragma warning( disable:  5045 4711 4514 5267 )
+#pragma warning( push)
+#pragma warning( disable:  4265 4365 4668 4820 5039 4191 5204  )
+
+
+
 #include <windows.h>
 #ifdef _OT4XB_API_
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
@@ -32,10 +38,12 @@
 // -----------------------------------------------------------------------------------------------------------------
 #include <uxtheme.h>
 #ifdef _OT4XB_API_
-#pragma warning( push , 3 )
 #include <gdiplus.h>
-#pragma warning( pop)
 #endif
+
+#pragma warning( pop)
+
+
 #include <xpppar.h>
 #include <xppcon.h>
 #define _mk_ptr_( cast, ptr, addValue ) ((cast)((void*)( (DWORD)(ptr)+(DWORD)(addValue))))
