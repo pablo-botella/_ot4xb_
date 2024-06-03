@@ -201,6 +201,8 @@
    ,    {"CGENRNDSTR",CGENRNDSTR}
    ,    {"OT4XB_NRAND",OT4XB_NRAND}
    ,    {"SPLIT_DATA_URI",SPLIT_DATA_URI}
+   ,    {"OT4XB_REGEX_MATCH",OT4XB_REGEX_MATCH}
+   ,    {"OT4XB_REGEX_REPLACE",OT4XB_REGEX_REPLACE}
 
 
 
@@ -1147,9 +1149,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1150>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1152>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1152>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1153>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1154>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1155>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1154>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1155>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1156>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1157>>>_CDECL_EXPORT_( _conPutQWord  )<<<

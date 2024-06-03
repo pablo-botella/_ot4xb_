@@ -504,6 +504,7 @@ LPSTR OT4XB_API __cdecl ft64_strf_l( FILETIME* pft, LPSTR pFormat , LPSTR locale
 BOOL  OT4XB_API __cdecl ft64_now( FILETIME* pft );
 // -----------------------------------------------------------------------------------------------------------------
 BOOL  OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, int flags = 0, int match_flags = 0);
+LPSTR OT4XB_API __cdecl ot4xb_regex_replace(LPSTR pattern, LPSTR input_string, LPSTR replacement, DWORD* pcb_out, int flags, int match_flags);
 
 
 // -----------------------------------------------------------------------------------------------------------------

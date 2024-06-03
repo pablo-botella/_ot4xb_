@@ -3,8 +3,8 @@ md ot4xb_bin
 rd ot4xb_source  /s /q
 md ot4xb_source
 
-7z x _ot4xb_001_007_000_020.zip  -o.\ot4xb_bin
-7z x _ot4xb_001_007_000_020_source.zip  -o.\ot4xb_source
+7z x _ot4xb_001_007_001_000.zip  -o.\ot4xb_bin
+7z x _ot4xb_001_007_001_000_source.zip  -o.\ot4xb_source
 
 if exist "c:\util\ot4xb_autodeploy.bat" ( 
 call "c:\util\ot4xb_autodeploy.bat"  %~dp0ot4xb_bin\  
