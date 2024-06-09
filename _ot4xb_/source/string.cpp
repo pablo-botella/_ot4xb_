@@ -1662,7 +1662,7 @@ OT4XB_API TList* TxtSplitLinesToTListEx(LPSTR pStr, DWORD dwFlags, DWORD* pdwSki
 // -----------------------------------------------------------------------------------------------------------------
 // 
 // dwFlags: 0x10 remove empty ( cb=0) lines| 0x20 remove lines starting with ; | 0x40 remove lines starting with [ | 1 LTrim |2 RTrim
-// 0x200 for ini files
+// 0x200 for ini files  // 0x1200 like 0x200 but all elements using {k,v} pairs ; and [ going as k with empty string v
 // 0x100 email header lines
 // aSplitTxtLines( cText , nFlags , @nShift) -> aLines
 XPPRET XPPENTRY ASPLITTXTLINES(XppParamList pl)
@@ -1733,7 +1733,15 @@ XPPRET XPPENTRY ASPLITTXTLINES(XppParamList pl)
                      {
                         if (!(dwFlags & 0x40))
                         {
-                           _conArrayPutC(conr, p, (n + 1), 0);
+                           if (dwFlags & 0x1000)
+                           {
+                              _conArrayPutC(conr, p , (n + 1), 1, 0);
+                              _conArrayPutC(conr, "", (n + 1), 2, 0);
+                           }
+                           else
+                           {
+                              _conArrayPutC(conr, p, (n + 1), 0);
+                           }
                         }
                         break;
                      }
@@ -1741,7 +1749,15 @@ XPPRET XPPENTRY ASPLITTXTLINES(XppParamList pl)
                      {
                         if (!(dwFlags & 0x20))
                         {
-                           _conArrayPutC(conr, p, (n + 1), 0);
+                           if (dwFlags & 0x1000)
+                           {
+                              _conArrayPutC(conr, p, (n + 1), 1, 0);
+                              _conArrayPutC(conr, "", (n + 1), 2, 0);
+                           }
+                           else
+                           {
+                              _conArrayPutC(conr, p, (n + 1), 0);
+                           }
                         }
                         break;
                      }
@@ -1749,7 +1765,15 @@ XPPRET XPPENTRY ASPLITTXTLINES(XppParamList pl)
                      {
                         if (!(dwFlags & 0x10))
                         {
-                           _conArrayPutC(conr, "", (n + 1), 0);
+                           if (dwFlags & 0x1000)
+                           {
+                              _conArrayPutC(conr, p, (n + 1), 1, 0);
+                              _conArrayPutC(conr, "", (n + 1), 2, 0);
+                           }
+                           else
+                           {
+                              _conArrayPutC(conr, "", (n + 1), 0);
+                           }
                         }
                         break;
                      }
