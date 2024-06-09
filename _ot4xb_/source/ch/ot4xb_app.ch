@@ -95,7 +95,7 @@ function __app()                                                                
 ;       end                                                                                        ;
 ;       return Self                                                                                ;
 ;INLINE CLASS METHOD load_ini_file(cIniFile)                                                       ;
-;          ::ini:add_ini_string( cMemoReadEx(cIniFile,2))                                          ;
+;          ::ini:add_ini_string( cMemoReadEx(cIniFile),2 )                                          ;
 ;       return Self                                                                                ;
 ;INLINE CLASS METHOD argv(n)                                                                       ;
 ;       return __apeek( GetProccessArgv() , n + iif( IsDebug(),1,0) )                              ;
