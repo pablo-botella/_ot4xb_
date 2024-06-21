@@ -1265,17 +1265,21 @@ XPPRET XPPENTRY NHEX2BYTE(XppParamList  pl)
 
 // -----------------------------------------------------------------------------------------------------------------
 // flags :
-// 0x0001 = case insensitive
-// 0x0002 = return found index ( first or last if flags & 4 ) 
-// 0x0004 = stop at last ocurrence
-// 0x0008 = implicit extra begin and end asterisks in mask
-// 0x0010 = ltrim
-// 0x0020 = rtrim
-// 0x0040 = allow ^ at the begining as negation
-// 0x0100 = use template characters
-// 0x0200 = ot4xb_regex_match
-// 0x8000 = ( without regexp) if ` ( character 96) at the begining the expression must exist
-// 0x8000 = ( without regexp) if ~ ( character 126) at the begining the expression must not exist
+
+//0x010000 = { {k,v},...,{kN,vN}} pair array 
+//0x020000 = extract first value  ( or last if flag 4 ) from { {k,v},...,{kN,vN}} pair array 
+//0x040000 = extract first pair   ( or last if flag 4 ) from { {k,v},...,{kN,vN}} pair array 
+//0x000001 = case insensitive
+//0x000002 = return found index ( first or last if flags & 4 ) 
+//0x000004 = stop at last ocurrence
+//0x000008 = implicit extra begin and end asterisks in mask
+//0x000010 = ltrim
+//0x000020 = rtrim
+//0x000040 = allow ^ at the begining as negation
+//0x000100 = use template characters
+//0x000200 = ot4xb_regex_match
+//0x008000 = ( without regexp) if ` ( character 96) at the begining the expression must exist
+//0x008000 = ( without regexp) if ~ ( character 126) at the begining the expression must not exist
 // -----------------------------------------------------------------------------------------------------------------
 XPPRET XPPENTRY LSTRWILDCMP(XppParamList  pl) // lStrWildCmp( pWild , pStr , nFlags  ) -> lMatch
 {
@@ -1315,7 +1319,14 @@ XPPRET XPPENTRY LSTRWILDCMPEX(XppParamList  pl) // lStrWildCmpEx( pWild , pStr ,
          for (dw = 1; dw <= count; dw++)
          {
             ContainerHandle con = _conNew(0);
-            _conArrayGet(xpp[1]->con(), con, dw, 0);
+            if (flags & 0x070000)  // { {k,v},... } 
+            {
+               _conArrayGet(xpp[1]->con(), con, dw,1,0);
+            }
+            else
+            {
+               _conArrayGet(xpp[1]->con(), con, dw, 0);
+            }
             LPSTR pWild = 0;
             ULONG cbWild = 0;
             if (!ot4xb_conRLockC(con, &pWild, &cbWild))
@@ -1362,8 +1373,27 @@ XPPRET XPPENTRY LSTRWILDCMPEX(XppParamList  pl) // lStrWildCmpEx( pWild , pStr ,
                   }
                }
                ot4xb_conUnlockC(con);
+
+               if (b && (flags & 0x060000))  // { {k,v},... } 
+               {
+                  _conPut(con, NULLCONTAINER);
+
+                  if((flags & 0x060000) == 0x020000)   // extract value{ {k,v},... } 
+                  {
+                     _conArrayGet(xpp[1]->con(), xpp[0]->con(), dw, 2, 0);
+                  }
+                  if ((flags & 0x060000) == 0x040000)   // extract pair { {k,v},... } 
+                  {
+                     _conArrayGet(xpp[1]->con(), xpp[0]->con(), dw, 0);
+                  }
+                  
+
+               }
+
+
             }
             _conRelease(con); con = 0;
+
          }
       }
       else
@@ -1394,13 +1424,16 @@ XPPRET XPPENTRY LSTRWILDCMPEX(XppParamList  pl) // lStrWildCmpEx( pWild , pStr ,
       }
    }
    xpp[2]->UnlockStr();
-   if (flags & 2)
+   if (!(flags & 0x060000))
    {
-      xpp[0]->PutDWord(found);
-   }
-   else
-   {
-      xpp[0]->PutBool(found);
+      if (flags & 2)
+      {
+         xpp[0]->PutDWord(found);
+      }
+      else
+      {
+         xpp[0]->PutBool(found);
+      }
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
