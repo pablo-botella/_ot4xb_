@@ -70,7 +70,13 @@ class OT4XB_API x_www_form_cp1252_Header_t : public T_ot4xb_base
 };   
 // -----------------------------------------------------------------------------------------------------------------
 
-
+namespace json_ns
+{
+   OT4XB_API ContainerHandle parse_string_utf8( LPSTR source_string,ContainerHandle expando_class_object, char* add_property_method_name );
+   OT4XB_API ContainerHandle parse_string_ansi( LPSTR source_string,ContainerHandle expando_class_object, char* add_property_method_name );
+   OT4XB_API void __cdecl serialize( XppParamList pl );
+   OT4XB_API void __cdecl serialize_value( TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth );
+}
    
    
 
@@ -354,6 +360,9 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , LPSTR pStr , LONG val);
 // DrTool
 // ---------------------------------------------------------------------------
 OT4XB_API TList * Path2TList( LPSTR pPath );
+
+
+
 
 
 // ---------------------------------------------------------------------------

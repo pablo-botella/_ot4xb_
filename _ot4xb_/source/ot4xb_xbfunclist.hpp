@@ -203,6 +203,8 @@
    ,    {"SPLIT_DATA_URI",SPLIT_DATA_URI}
    ,    {"OT4XB_REGEX_MATCH",OT4XB_REGEX_MATCH}
    ,    {"OT4XB_REGEX_REPLACE",OT4XB_REGEX_REPLACE}
+   ,    {"OT4XB_REGEX_SEARCH",OT4XB_REGEX_SEARCH}
+// _XPP_REG_FUN_(OT4XB_REGEX_EXEC )
 
 
 
@@ -226,6 +228,10 @@
    ,    {"__B64ENC",__B64ENC}
    ,    {"__B64DEC",__B64DEC}
 
+// ---------------------------------------------------------------------------
+// ot4xb_json.cpp
+// ---------------------------------------------------------------------------
+   ,    {"OT4XB_JSON_PARSE",OT4XB_JSON_PARSE}
 
 // ---------------------------------------------------------------------------
 // Unicode.cpp
@@ -1149,9 +1155,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1152>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1158>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1154>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1155>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1156>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1157>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1160>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1161>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1162>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1163>>>_CDECL_EXPORT_( _conPutQWord  )<<<

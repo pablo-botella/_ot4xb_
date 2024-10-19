@@ -37,7 +37,6 @@ static void json_escape_self(TXppParamList& xpp);
 // static void xml_escape_self(TXppParamList& xpp);
 static void m_json_on_unserialize_pop(TXppParamList& xpp);
 // static void m_xml_on_unserialize_pop(TXppParamList& xpp);
-static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth);
 // static void xml_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth);
 // ---------------------------------------------------------------------------------
 
@@ -388,180 +387,7 @@ int __cdecl __compare_LONG(void*, const void* p1, const void* p2)
    return _mk_ptr_(LPLONG, p1, 0)[0] - _mk_ptr_(LPLONG, p2, 0)[0];
 }
 // ---------------------------------------------------------------------------------      
-static void json_serialize_value(TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth)
-{
-   ULONG ulType = 0;
-   DWORD bCute = nMoreFlags & EXPANDO_FORMAT_PRETTY;
 
-   _conType(con_value, &ulType);
-
-
-   switch (ulType & 0xFF)
-   {
-      case  XPP_CHARACTER:
-      {
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG ) { z += "[\"C\","; }
-         z += "\"";
-         DWORD cb = 0;
-         LPSTR p = 0;
-         if (_conRLockC(con_value, &p, &cb) == 0)
-         {
-            z.Add_to_json(p, (int)cb);
-            _conUnlockC(con_value);
-         }
-         p = 0; cb = 0;
-         z += "\"";
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      case  XPP_DATE:
-      {
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"D\","; }
-         char sz[9]; ZeroMemory(sz, sizeof(sz));
-         _conGetDS(con_value, sz);
-         z += "\"";
-         z += sz;
-         z += "\"";
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      case  XPP_NUMERIC:
-      {
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"N\","; }
-         if (ulType & _xpp_DOUBLE)
-         {
-            double nd = 0.00;
-            char format[64];
-            _conGetND(con_value, &nd);
-            _snprintf_c(format, sizeof(format), "%%f");
-
-            DWORD ndf = ((nMoreFlags >> 20) & 0x0F);
-            DWORD precission = (nMoreFlags >> 16) & 0x0F;
-            if (precission && !(ndf & 3))
-            {
-               ndf = 1;
-            }
-            if ((ndf & 3) && !precission)
-            {
-               precission = 15;
-            }
-            switch (ndf)
-            {
-               case 1:
-               {
-                  _snprintf_c(format, sizeof(format), "%%.%if", precission);
-                  break;
-               }
-               case 2:
-               {
-                  _snprintf_c(format, sizeof(format), "%%.%ig", precission);
-                  break;
-               }
-            }
-            z.printf(format, nd);
-         }
-         else
-         {
-            LONG nl = 0;
-            _conGetNL(con_value, &nl);
-            z.printf("%i", nl);
-         }
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      case  XPP_LOGICAL:
-      {
-
-         BOOL b = 0;
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"L\","; }
-         _conGetL(con_value, &b);
-         z += (b ? "true" : "false");
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      case  XPP_OBJECT:
-      {
-         LPSTR p = 0;
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG)
-         {
-            z += "[\"O";
-            p = _pszGetClassName(con_value);
-            if (p)
-            {
-               z += " (  ";
-               z += p;
-               _xfree(p);
-               p = 0;
-               z += " )";
-            }
-            z += "\",";
-         }
-         p = _conMCallLpstr(con_value, "json_escape_self", (LONG)nMoreFlags, (LONG)nDepth, (LONG)pStack);
-         if (p)
-         {
-            z += p;
-            _xfree(p);
-         }
-         else
-         {
-            z += "null";
-         }
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      case XPP_ARRAY:
-      {
-         DWORD nCount = _conGetArrayLen(con_value);
-         DWORD n;
-         DWORD item_array_flags = nMoreFlags;
-         if (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)
-         {
-            item_array_flags = nMoreFlags & (~( EXPANDO_FORMAT_PRETTY));
-         }
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z.printf("[\"A (%i) \",", nCount); }
-         if (bCute || (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
-         z += "[";
-         nDepth++;
-         for (n = 1; n <= nCount; n++)
-         {
-            ContainerHandle con = _conNew(NULLCONTAINER);
-            DWORD item_type = 0;
-            _conArrayGet(con_value, con, n, 0);
-            if (nMoreFlags & EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS)
-            {
-               _conType(con, &item_type);
-            }
-            if (n > 1) { z.AddChar(','); }
-            json_serialize_value(z, con, pStack, ( item_type & XPP_ARRAY ? item_array_flags :  nMoreFlags ), nDepth);
-            _conReleaseM(con, 0);
-         }
-         nDepth--;
-         if (bCute) { DWORD ddd;  z += "\r\n"; for (ddd = 0;  ddd < nDepth; ddd++) { z += "   "; } }
-         z += "]";
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-      default:
-      {
-
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "[\"U\","; }
-         z += "null";
-         if (nMoreFlags & EXPANDO_FORMAT_DEBUG) { z += "]"; }
-         return;
-      }
-   }
-}
-// ---------------------------------------------------------------------------------
-static void __cdecl xb_json_serialize(XppParamList pl)
-{
-   TXppParamList xpp(pl, 4);
-   TList* pStack = (TList*)xpp[4]->GetDWord();
-   TZString z(4096);
-   json_serialize_value(z, xpp[1]->con(), (DWORD)pStack, xpp[2]->GetDWord(), xpp[3]->GetDWord());
-   // delete pStack;
-   // pStack = 0;
-   xpp[0]->PutStrLen(z._pt_(), z.len());
-}
 // ---------------------------------------------------------------------------------    
 // 1 nFlags, 2 props , 3 hash , 4 k=NIL , 5 value=NIL , 6 @cargo
 static void m_json_on_unserialize_pop(TXppParamList& xpp)
@@ -646,7 +472,7 @@ static void json_escape_self(TXppParamList& xpp)
             if (nn) { z.AddChar(','); }
             nn++;
             z.printf("\"%s\" : ", pKey);
-            json_serialize_value(z, con_value, (DWORD)pStack, nMoreFlags, nDepth);
+            json_ns::serialize_value(z, con_value, (DWORD)pStack, nMoreFlags, nDepth);
             _conUnlockC(con_key);
             pKey = 0;
          }
@@ -1161,8 +987,6 @@ static void create_class(XppParamList pl)
       if (method_json_escape_self == 0) { ; }
       if (method_m_json_on_unserialize_pop == 0) { ; }
       if (mc_envelope_from_xml == 0) { ; }
-      if (xb_json_serialize == 0) { ; }
-
 
 
       pc->Method_cbbs("get_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
@@ -1198,7 +1022,7 @@ static void create_class(XppParamList pl)
       // -----
       pc->ClassMethod_cbbs("from_xml", "{|s,uXml,dwFlags| XbFpCall(%i,s,uXml , dwFlags )}", mc_envelope_from_xml);
 
-      pc->ClassMethod_cbbs("json_serialize", "{|s,v,moreflags,ndepth,pStack| XbFpCall(%i,v,moreflags,ndepth,pStack) }", xb_json_serialize);
+      pc->ClassMethod_cbbs("json_serialize", "{|s,v,moreflags,ndepth,pStack| XbFpCall(%i,v,moreflags,ndepth,pStack) }", json_ns::serialize);
       // -----
 
       conco = pc->Create();

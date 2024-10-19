@@ -203,6 +203,8 @@ _XPP_REG_FUN_( OT4XB_NRAND)
 _XPP_REG_FUN_( SPLIT_DATA_URI )
 _XPP_REG_FUN_(OT4XB_REGEX_MATCH)
 _XPP_REG_FUN_(OT4XB_REGEX_REPLACE)
+_XPP_REG_FUN_(OT4XB_REGEX_SEARCH)
+// _XPP_REG_FUN_(OT4XB_REGEX_EXEC )
 
 
 
@@ -226,6 +228,10 @@ _XPP_REG_FUN_( CDOUBLE2HEX         )
 _XPP_REG_FUN_( __B64ENC ) 
 _XPP_REG_FUN_( __B64DEC ) 
 
+// ---------------------------------------------------------------------------
+// ot4xb_json.cpp
+// ---------------------------------------------------------------------------
+_XPP_REG_FUN_( OT4XB_JSON_PARSE
 
 // ---------------------------------------------------------------------------
 // Unicode.cpp

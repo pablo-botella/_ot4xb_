@@ -5,7 +5,6 @@
 //------------------------------------------------------------
 #pragma optimize( "t", on )
 #include <ot4xb_api.h>
-#include <regex>
 #include <string>
 #include <atlenc.h>
 //----------------------------------------------------------------------------------------------------------------------
@@ -4393,72 +4392,3 @@ _XPP_REG_FUN_(__B64DEC)
    }
 }
 // -------------------------------------------------------------------------------------------------------------------------------------
-
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BOOL  OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, int flags, int match_flags)
-{
-
-   BOOL result;
-   std::regex rgx(pattern, (std::regex::flag_type)flags);
-   result = std::regex_match(string_to_test, rgx, (std::regex_constants::match_flag_type)match_flags);
-   return result;
-}
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-LPSTR OT4XB_API __cdecl ot4xb_regex_replace(LPSTR pattern, LPSTR input_string, LPSTR replacement, DWORD* pcb_out, int flags, int match_flags)
-{
-   LPSTR p = 0;
-   size_t cb = 0;
-   std::string text(input_string);
-   std::regex rgx(pattern, (std::regex::flag_type)flags);
-   std::string output_str = std::regex_replace(text, rgx, replacement, (std::regex_constants::match_flag_type)match_flags);
-
-   cb = output_str.length();
-   if (cb > 0)
-   {
-      p = (LPSTR)_xgrab(cb + 1);
-      _bcopy((LPBYTE)p, (LPBYTE)output_str.c_str(), cb);
-   }
-   if (pcb_out)
-   {
-      *pcb_out = cb;
-   }
-   return p;
-
-}
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ot4xb_regex_match(1 pattern, 2 string_to_test, 3 flags, 4 match_flags) -> lMatch
-_XPP_REG_FUN_(OT4XB_REGEX_MATCH)
-{
-   BOOL result = FALSE;
-   TXppParamList xpp(pl, 4);
-   LPSTR pattern = xpp[1]->LockStr();
-   LPSTR string_to_test = xpp[2]->LockStr();
-   std::regex::flag_type flags = (std::regex::flag_type)xpp[3]->GetLong();
-   std::regex_constants::match_flag_type match_flags = (std::regex_constants::match_flag_type)xpp[4]->GetLong();
-   if (pattern && string_to_test)
-   {
-      std::regex rgx(pattern, flags);
-      result = std::regex_match(string_to_test, rgx, match_flags);
-   }
-   xpp[0]->PutBool(result);
-}
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ot4xb_regex_replace(1 pattern, 2 input_string, 3 replacement, 4flags, 5 match_flags)
-_XPP_REG_FUN_(OT4XB_REGEX_REPLACE)
-{
-   TXppParamList xpp(pl, 5);
-   LPSTR pattern = xpp[1]->LockStr();
-   LPSTR input_string = xpp[2]->LockStr();
-   LPSTR replacement = xpp[3]->LockStr();
-   std::regex::flag_type flags = (std::regex::flag_type)xpp[4]->GetLong();
-   std::regex_constants::match_flag_type match_flags = (std::regex_constants::match_flag_type)xpp[5]->GetLong();
-
-   std::string text(input_string);
-   std::regex rgx(pattern, flags);
-   std::string output_str = std::regex_replace(text, rgx, replacement, match_flags);
-
-   xpp[0]->PutStrLen((LPSTR)output_str.c_str(), output_str.length());
-
-}
-

@@ -1294,7 +1294,37 @@ WithObjectStackPush( ErrorBlock({|__e__| Break(__e__)}) ) ;
 #xtranslate ot4xb_sql_type.LongText     =>  ( 26  )
 #xtranslate ot4xb_sql_type.Enum         =>  ( 27  )
 #xtranslate ot4xb_sql_type.Set          =>  ( 28  )
+#xtranslate ot4xb_sql_type.Json         =>  ( 29  )
 
+// -----------------------------------------------------------------------------------------------------------------
+#xtranslate ot4xb_regex_option.ECMAScript => (0x01)
+#xtranslate ot4xb_regex_option.basic      => (0x02)
+#xtranslate ot4xb_regex_option.extended   => (0x04)
+#xtranslate ot4xb_regex_option.awk        => (0x08)
+#xtranslate ot4xb_regex_option.grep       => (0x10)
+#xtranslate ot4xb_regex_option.egrep      => (0x20)
+#xtranslate ot4xb_regex_option.Gmask      => (0x3F)
+#xtranslate ot4xb_regex_option.icase      => (0x0100)
+#xtranslate ot4xb_regex_option.nosubs     => (0x0200)
+#xtranslate ot4xb_regex_option.optimize   => (0x0400)
+#xtranslate ot4xb_regex_option.collate    => (0x0800)
+//----------------------------------------------------------------------------------------------------------------------
+
+#xtranslate ot4xb_regex_option.match_default      => 0x0000
+#xtranslate ot4xb_regex_option.match_not_bol      => 0x0001
+#xtranslate ot4xb_regex_option.match_not_eol      => 0x0002
+#xtranslate ot4xb_regex_option.match_not_bow      => 0x0004
+#xtranslate ot4xb_regex_option.match_not_eow      => 0x0008
+#xtranslate ot4xb_regex_option.match_any          => 0x0010
+#xtranslate ot4xb_regex_option.match_not_null     => 0x0020
+#xtranslate ot4xb_regex_option.match_continuous   => 0x0040
+#xtranslate ot4xb_regex_option.match_prev_avail   => 0x0100
+#xtranslate ot4xb_regex_option.format_default     => 0x0000
+#xtranslate ot4xb_regex_option.format_sed         => 0x0400
+#xtranslate ot4xb_regex_option.format_no_copy     => 0x0800
+#xtranslate ot4xb_regex_option.format_first_only  => 0x1000
+#xtranslate ot4xb_regex_option.Match_not_null     => 0x2000
+#xtranslate ot4xb_regex_option.Skip_zero_length   => 0x4000
 // -----------------------------------------------------------------------------------------------------------------
 #ifdef _OT4XB_MAP_WAPIST_FUNC_
 #include "ot4xb_wapist_map.ch"

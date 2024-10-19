@@ -27,12 +27,13 @@ echo ---------------------------------------------------************************
 @echo ---------------------------------------- 4
 
 @echo ---------------------------------------- 5
-IF EXIST C:\pli\ot4xb  copy %2ot4xb.dll        C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4xb  copy %2ot4xb.dll        C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4xb  copy %2ot4xbcpp.lib     C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4xb  copy %2ot4xb.lib        C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4xb  copy %1ch\*.ch          C:\pli\ot4xb\   
-IF EXIST C:\pli\ot4x\source  copy %1*.h        C:\pli\ot4xb\cppinc\   
+IF EXIST C:\pli\ot4xb  copy /y %2ot4xb.dll        C:\pli\ot4xb\   
+IF EXIST C:\pli\ot4xb  copy /y %2ot4xb.dll        C:\pli\ot4xb\   
+IF EXIST C:\pli\ot4xb  copy /y %2ot4xb_cpp.lib     C:\pli\ot4xb\   
+IF EXIST C:\pli\ot4xb  copy /y %2ot4xb.lib        C:\pli\ot4xb\   
+IF EXIST C:\pli\ot4xb  copy /y %1ch\*.ch          C:\pli\ot4xb\   
+IF EXIST C:\pli\ot4xb\cppinc  copy /y %1*.h        C:\pli\ot4xb\cppinc\   
+IF EXIST C:\pli\ot4xb\cppinc  copy /y %1*.hpp        C:\pli\ot4xb\cppinc\   
 
 
 

@@ -485,6 +485,7 @@ ot4xb_sql_type ot4xb_str_to_sql_type_enum(LPSTR p)
       if (!_xstrcmpi(p, "LongText")) { return ot4xb_sql_type::LongText; }
       if (!_xstrcmpi(p, "Enum")) { return ot4xb_sql_type::Enum; }
       if (!_xstrcmpi(p, "Set")) { return ot4xb_sql_type::Set; }
+      if( !_xstrcmpi( p, "Json" ) ) { return ot4xb_sql_type::Json; }
    }
    return ot4xb_sql_type::Invalid;
 }
@@ -698,7 +699,7 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
                xpp[0]->PutStr("null");
                return;
             }
-            if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
+            if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero | (DWORD)ot4xb_sql_type_flag::OvMin))
             {
                xpp[0]->PutStr("0");
                return;
@@ -750,7 +751,7 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
             xpp[0]->PutStr("null");
             return;
          }
-         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
+         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero | (DWORD)ot4xb_sql_type_flag::OvMin))
          {
             xpp[0]->PutStr("0");
             return;
@@ -776,7 +777,7 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
             xpp[0]->PutStr("null");
             return;
          }
-         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero || (DWORD)ot4xb_sql_type_flag::OvMin))
+         if (flags & ((DWORD)ot4xb_sql_type_flag::OvZero | (DWORD)ot4xb_sql_type_flag::OvMin))
          {
             xpp[0]->PutStr("0");
             return;
@@ -1286,8 +1287,23 @@ _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value 
       sql_dump_value::to_char_value(xpp, 0, flags);
       break;
    }
+   case ot4xb_sql_type::Json:
+   {
+      if( xpp[ 1 ]->CheckType( XPP_OBJECT | XPP_ARRAY ) )
+      {
+         TZString z( 4096 );
+         json_ns::serialize_value( z, xpp[ 1 ]->con(), 0,0x00200000, 0 );
+         xpp[ 1 ]->PutStrLen( z._pt_(), z.len() );
+      }
+      flags = flags & ( (DWORD) ot4xb_sql_type_flag::NotNull | (DWORD) ot4xb_sql_type_flag::ToUtf8 );
+      sql_dump_value::to_char_value( xpp, 0xFFFF, flags );
+      
+      break;
+  
+   }
    // case ot4xb_sql_type::Enum: {; break; }
    // case ot4xb_sql_type::Set: {; break; }
+   
    default:
    {
 

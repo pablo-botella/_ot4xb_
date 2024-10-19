@@ -127,6 +127,7 @@ enum class ot4xb_sql_type : LONG
    MediumText,
    LongText,
    Enum,
-   Set
+   Set,
+   Json
 };
 

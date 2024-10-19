@@ -179,12 +179,14 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClCompile Include="ot4xb_expando.cpp" />
     <ClCompile Include="ot4xb_iocp.cpp" />
     <ClCompile Include="ot4xb_IUnknow.cpp" />
+    <ClCompile Include="ot4xb_json.cpp" />
     <ClCompile Include="ot4xb_md5.cpp" />
     <ClCompile Include="ot4xb_md5_internal.cpp" />
     <ClCompile Include="ot4xb_ndtg.cpp" />
     <ClCompile Include="ot4xb_ndtg_xstack.cpp" />
     <ClCompile Include="ot4xb_ndtk.cpp" />
     <ClCompile Include="ot4xb_pcl_tool.cpp" />
+    <ClCompile Include="ot4xb_regex.cpp" />
     <ClCompile Include="ot4xb_regexp.cpp" />
     <ClCompile Include="ot4xb_socket.cpp" />
     <ClCompile Include="ot4xb_sqlstr.cpp" />

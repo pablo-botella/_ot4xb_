@@ -393,11 +393,14 @@ void TXbCPItem::PutSqlStrMoney(LONGLONG qn, DWORD flags, DWORD pad)
    {
       if (flags & 4)
       {
-         buffer[buffer_cb] = ' '; buffer_cb++; buffer[buffer_cb] = 0;
-         buffer[buffer_cb] = 'D'; buffer_cb++; buffer[buffer_cb] = 0;
-         if (flags & 0x20)
+         if( buffer_cb < ( sizeof( buffer ) - 2 ) )  // for intelisense to stop fucking arround
          {
-            buffer[buffer_cb] = 'b';  buffer_cb++; buffer[buffer_cb] = 0;
+            buffer[ buffer_cb ] = ' '; buffer_cb++; buffer[ buffer_cb ] = 0;
+            buffer[ buffer_cb ] = 'D'; buffer_cb++; buffer[ buffer_cb ] = 0;
+            if( flags & 0x20 )
+            {
+               buffer[ buffer_cb ] = 'b';  buffer_cb++; buffer[ buffer_cb ] = 0;
+            }
          }
       }
    }
