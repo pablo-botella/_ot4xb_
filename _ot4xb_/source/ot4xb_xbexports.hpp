@@ -169,6 +169,13 @@ XPPRET XPPENTRY NLROTWORD(XppParamList );
 XPPRET XPPENTRY NRROTWORD(XppParamList );
 XPPRET XPPENTRY LDWBITONOFF(XppParamList );
 
+
+// --------------------------------------------------------------------------
+// ot4xb_register.cpp
+// ---------------------------------------------------------------------------
+XPPRET XPPENTRY OT4XB_SET_REGISTRY_VALUE_AS_STRING(XppParamList );
+XPPRET XPPENTRY OT4XB_GET_REGISTRY_VALUE_AS_STRING(XppParamList );
+
 // ---------------------------------------------------------------------------
 // String.cpp
 // ---------------------------------------------------------------------------
@@ -1160,12 +1167,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1158>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1160>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1161>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1162>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1163>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }
