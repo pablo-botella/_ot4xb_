@@ -5,3 +5,4 @@
 #define OT4XB_API __declspec(dllexport)
 #define OT4XB_API __declspec(dllimport)
 #define wsprintf
+#define _XPP_REG_FUN_(fn) extern "C" XPPRET XPPENTRY fn( XppParamList pl )

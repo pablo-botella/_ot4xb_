@@ -188,6 +188,7 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClCompile Include="ot4xb_pcl_tool.cpp" />
     <ClCompile Include="ot4xb_regex.cpp" />
     <ClCompile Include="ot4xb_regexp.cpp" />
+    <ClCompile Include="ot4xb_register.cpp" />
     <ClCompile Include="ot4xb_socket.cpp" />
     <ClCompile Include="ot4xb_sqlstr.cpp" />
     <ClCompile Include="ot4xb_statistics.cpp" />

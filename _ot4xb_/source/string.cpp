@@ -549,6 +549,18 @@ XPPRET XPPENTRY PSTRBITXOR(XppParamList pl) //PStrBitXOR(1p1,2nl1, 3 p2 , 4 nl2 
    else for (n = 0; n < n1; n++) p1[n] ^= p2[n];
    _retnl(pl, (LONG)p1);
 }
+// ---------------------------------------------------------------------------------------------------------------------
+OT4XB_API void _xstr_bit_xor( LPBYTE p1, ULONG cb1, LPBYTE p2, ULONG cb2, BOOL bRotate )
+{
+   ULONG n, nn;
+   if( p1 == 0 ) return;
+   if( ( cb1 == 0 ) || ( cb2 == 0 ) || ( p2 == 0 ) ) return;
+   if( bRotate ) for( n = nn = 0; n < cb1; n++ ) {
+      p1[ n ] ^= p2[ nn ]; nn++; if( nn >= cb2 ) nn = 0;
+   }
+   else if( cb1 > cb2 ) for( n = 0; n < cb2; n++ ) p1[ n ] ^= p2[ n ];
+   else for( n = 0; n < cb1; n++ ) p1[ n ] ^= p2[ n ];
+}
 //----------------------------------------------------------------------------------------------------------------------
 XPPRET XPPENTRY PSTRBITAND(XppParamList pl) //PStrBitAND(1p1,2nl1, 3 p2 , 4 nl2 , 5 bRotate )
 {

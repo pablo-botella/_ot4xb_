@@ -266,6 +266,9 @@
     <ClCompile Include="ot4xb_json.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ot4xb_register.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CRC32.HPP">

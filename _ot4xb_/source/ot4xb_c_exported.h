@@ -308,6 +308,12 @@ OT4XB_API LPSTR _conArray2Pszz(ContainerHandle cona , DWORD* pcb = 0);
 OT4XB_API ContainerHandle _conPszz2Array( LPSTR p );
 
 // ---------------------------------------------------------------------------
+// ot4xb_register.cpp
+// ---------------------------------------------------------------------------
+OT4XB_API BOOL ot4xb_set_registry_value_as_string( LPSTR key, LPSTR valueName, LPSTR value, size_t value_cb, LPSTR encoding, LPSTR key_type );
+OT4XB_API LPSTR ot4xb_get_registry_value_as_string( LPSTR key, LPSTR valueName, DWORD & value_cb, LPSTR encoding );
+
+// ---------------------------------------------------------------------------
 // string
 // ---------------------------------------------------------------------------
 OT4XB_API DWORD __cdecl dwCrc32(DWORD dwCRC,LPBYTE pStr,ULONG nLen);
@@ -334,6 +340,7 @@ OT4XB_API LONGLONG pHex2i64(LPBYTE ph, DWORD cb = 0xFFFFFFFF);
 OT4XB_API DWORD pHex2i32(LPBYTE ph, DWORD cb = 0xFFFFFFFF);
 OT4XB_API TList* TxtSplitLinesToTList( LPSTR pStr , DWORD dwFlags = 0 );
 OT4XB_API TList* TxtSplitLinesToTListEx( LPSTR pStr , DWORD dwFlags = 0 , DWORD* pdwSkip = 0);
+OT4XB_API void _xstr_bit_xor( LPBYTE p1, ULONG cb1, LPBYTE p2, ULONG cb2, BOOL bRotate );
 // ----- 
 OT4XB_API void  ByteMapTable_Add(LPBYTE pTable , LPBYTE pPos , LPBYTE pMap ,DWORD cb);
 OT4XB_API BOOL  ByteMapTable_IsSafeStr(LPBYTE pTable , LPBYTE p , int cb);

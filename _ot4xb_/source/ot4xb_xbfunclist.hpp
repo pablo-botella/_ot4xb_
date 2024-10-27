@@ -164,6 +164,13 @@
    ,    {"NRROTWORD",NRROTWORD}
    ,    {"LDWBITONOFF",LDWBITONOFF}
 
+
+// --------------------------------------------------------------------------
+// ot4xb_register.cpp
+// ---------------------------------------------------------------------------
+   ,    {"OT4XB_SET_REGISTRY_VALUE_AS_STRING",OT4XB_SET_REGISTRY_VALUE_AS_STRING}
+   ,    {"OT4XB_GET_REGISTRY_VALUE_AS_STRING",OT4XB_GET_REGISTRY_VALUE_AS_STRING}
+
 // ---------------------------------------------------------------------------
 // String.cpp
 // ---------------------------------------------------------------------------
@@ -1155,9 +1162,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1158>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1160>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1161>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1162>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1163>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
