@@ -533,6 +533,47 @@ XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList pl) // (1@v,2np,3@pt,4ns)
    }
    _gwst_sg_exit_(&sg);
 }
+// ----------------------------------------------------------------------------------------------------------------------
+XPPRET XPPENTRY _GWST_XBSETGET_DYNWSZ_( XppParamList pl ) // (1@v,2np,3@pt,4ns) 
+{
+   GWSTSG sg;
+   if( _gwst_sg_init_( &sg, pl ) )
+   {
+      if( sg.bWrite && sg.pt )
+      {
+         if( reinterpret_cast<LPWSTR*>( sg.pt )[ 0 ] )
+         {
+            _xfree( reinterpret_cast<void**>( sg.pt )[ 0 ] );
+            reinterpret_cast<void**>( sg.pt )[ 0 ] = 0;
+         }
+         if( sg.dwType & XPP_CHARACTER )
+         {             
+
+            ULONG buffer_cb = 0;
+            LPSTR buffer = 0;
+            if( _conRLockC( sg.conVal, &buffer, &buffer_cb ) == 0 )
+            {
+               int pcc = 0;
+               reinterpret_cast<LPWSTR*>( sg.pt )[ 0 ] = mb2w( buffer, buffer_cb, &pcc, CP_ACP, 0 );
+               _conUnlockC( sg.conVal );
+            }
+         }
+      }
+      else if( sg.pt )
+      {
+         if( reinterpret_cast<LPWSTR*>( sg.pt )[ 0 ] )
+         {
+
+            int cb = 0;
+            LPSTR pAnsi = w2mb( reinterpret_cast<LPWSTR*>( sg.pt )[ 0 ], -1,&cb, CP_ACP, 0 );
+            _conPutC( sg.conVal, pAnsi);
+            _xfree( pAnsi );
+         }
+      }
+   }
+   _gwst_sg_exit_( &sg );
+}
+
 //-----------------------------------------------------------------------------------------------------------------------
 XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
 {

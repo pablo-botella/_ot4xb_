@@ -32,8 +32,9 @@
 #define __GWST_MEMBER_XDATE__       22
 #define __GWST_MEMBER_POINTER32__   23
 #define __GWST_MEMBER_HANDLE__      24
+#define __GWST_MEMBER_DYNWSZ__      25
 
-#define __GWST_MEMBER_MAX_DEF__     24
+#define __GWST_MEMBER_MAX_DEF__     25
 // ---------------------------------------------------------------------------
 #define xppCLASS_HIDDEN         0x0001
 #define xppCLASS_PROTECTED      0x0002

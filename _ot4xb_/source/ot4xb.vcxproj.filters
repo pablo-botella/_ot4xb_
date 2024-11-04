@@ -269,6 +269,9 @@
     <ClCompile Include="ot4xb_register.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ot4xb_proc_tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CRC32.HPP">

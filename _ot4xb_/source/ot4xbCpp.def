@@ -416,6 +416,7 @@ EXPORTS
      _GWST_XBSETGET_SZSTR_  PRIVATE
      _GWST_XBSETGET_SZWSTR_  PRIVATE
      _GWST_XBSETGET_DYNSZ_  PRIVATE
+     _GWST_XBSETGET_DYNWSZ_  PRIVATE
      _GWST_XBSETGET_WORDNET_  PRIVATE
      _GWST_XBSETGET_DWORDNET_  PRIVATE
      _GWST_XBSETGET_XDATE_  PRIVATE
@@ -1159,14 +1160,16 @@ EXPORTS
      WAPIST_SHFILEINFO  PRIVATE
      WAPIST_NMSELCHANGE  PRIVATE
      WAPIST_SHELLEXECUTEINFO  PRIVATE
+     WAPIST_STARTUPINFOEX  PRIVATE
+     WAPIST_STARTUPINFOEXW  PRIVATE
 
 
 
 
 ;;-----------------------------------------------------------------------------
-;;;;;;;;;;  UNKNOW LINE #1165>>>-----------------------------------------<<<
+;;;;;;;;;;  UNKNOW LINE #1168>>>-----------------------------------------<<<
 ;; -------------------------  C EXPORTED FUNCTIONS
-;;;;;;;;;;  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-;;;;;;;;;;  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-;;;;;;;;;;  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-;;;;;;;;;;  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+;;;;;;;;;;  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+;;;;;;;;;;  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+;;;;;;;;;;  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+;;;;;;;;;;  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conPutQWord  )<<<

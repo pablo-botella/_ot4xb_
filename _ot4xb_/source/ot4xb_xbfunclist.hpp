@@ -414,6 +414,7 @@
    ,    {"_GWST_XBSETGET_SZSTR_",_GWST_XBSETGET_SZSTR_}
    ,    {"_GWST_XBSETGET_SZWSTR_",_GWST_XBSETGET_SZWSTR_}
    ,    {"_GWST_XBSETGET_DYNSZ_",_GWST_XBSETGET_DYNSZ_}
+   ,    {"_GWST_XBSETGET_DYNWSZ_",_GWST_XBSETGET_DYNWSZ_}
    ,    {"_GWST_XBSETGET_WORDNET_",_GWST_XBSETGET_WORDNET_}
    ,    {"_GWST_XBSETGET_DWORDNET_",_GWST_XBSETGET_DWORDNET_}
    ,    {"_GWST_XBSETGET_XDATE_",_GWST_XBSETGET_XDATE_}
@@ -1157,14 +1158,16 @@
    ,    {"WAPIST_SHFILEINFO",WAPIST_SHFILEINFO}
    ,    {"WAPIST_NMSELCHANGE",WAPIST_NMSELCHANGE}
    ,    {"WAPIST_SHELLEXECUTEINFO",WAPIST_SHELLEXECUTEINFO}
+   ,    {"WAPIST_STARTUPINFOEX",WAPIST_STARTUPINFOEX}
+   ,    {"WAPIST_STARTUPINFOEXW",WAPIST_STARTUPINFOEXW}
 
 
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1168>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conPutQWord  )<<<

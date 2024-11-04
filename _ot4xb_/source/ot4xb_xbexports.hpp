@@ -419,6 +419,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList );
+XPPRET XPPENTRY _GWST_XBSETGET_DYNWSZ_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList );
 XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList );
@@ -1162,17 +1163,19 @@ XPPRET XPPENTRY WAPIST_PREVENT_MEDIA_REMOVAL(XppParamList );
 XPPRET XPPENTRY WAPIST_SHFILEINFO(XppParamList );
 XPPRET XPPENTRY WAPIST_NMSELCHANGE(XppParamList );
 XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
+XPPRET XPPENTRY WAPIST_STARTUPINFOEX(XppParamList );
+XPPRET XPPENTRY WAPIST_STARTUPINFOEXW(XppParamList );
 
 
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1168>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

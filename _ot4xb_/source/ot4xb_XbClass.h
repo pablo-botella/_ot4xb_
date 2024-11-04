@@ -166,6 +166,7 @@ class OT4XB_API TXbClass
        void Member_szStr(LPSTR pName , UINT nSize);
        void Member_szWStr(LPSTR pName , UINT nSize);
        void Member_DynSz(LPSTR pName );
+       void Member_DynSzW( LPSTR pName );
        void Member_WordNet(LPSTR pName );
        void Member_DWordNet(LPSTR pName );
        void Member_XppGuiWnd(LPSTR pName );

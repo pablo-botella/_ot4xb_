@@ -933,6 +933,11 @@ void TXbClass::Member( LPSTR pName , ULONG nMType, UINT nSize)
          wsprintf(sz,sztps,"_GWST_XBSETGET_DYNSZ_",pItem->m_dwShift,pItem->m_dwSize);
          break;
       }
+      case __GWST_MEMBER_DYNWSZ__:
+      {
+         wsprintf( sz, sztps, "_GWST_XBSETGET_DYNWSZ_", pItem->m_dwShift, pItem->m_dwSize );
+         break;
+      }
       case __GWST_MEMBER_WORDNET__ :
       {
          wsprintf(sz,sztpn,"_GWST_XBSETGET_WORDNET_",pItem->m_dwShift);
@@ -1117,7 +1122,9 @@ void TXbClass::Member_BinStr(LPSTR pName , UINT nSize){Member(pName, __GWST_MEMB
 void TXbClass::Member_szStr(LPSTR pName , UINT nSize){Member(pName, __GWST_MEMBER_SZSTR__ ,nSize);}
 void TXbClass::Member_szWStr(LPSTR pName , UINT nSize){Member(pName, __GWST_MEMBER_SZWSTR__ ,(nSize*2));}
 //----------------------------------------------------------------------------------------------------------------------
-void TXbClass::Member_DynSz(LPSTR pName){Member(pName, __GWST_MEMBER_DYNSZ__ ,4);}
+void TXbClass::Member_DynSz( LPSTR pName ) { Member( pName, __GWST_MEMBER_DYNSZ__, 4 ); }
+void TXbClass::Member_DynSzW( LPSTR pName ) { Member( pName, __GWST_MEMBER_DYNWSZ__, 4 ); }
+
 //-----------------------------------------------------------------------------------------------------------------------
 void TXbClass::Member_XppGuiWnd(LPSTR pName){Member(pName, __GWST_MEMBER_XPPGUIWND__ ,4);}
 //----------------------------------------------------------------------------------------------------------------------
