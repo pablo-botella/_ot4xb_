@@ -183,6 +183,7 @@ XPPRET XPPENTRY OT4XB_GET_REGISTRY_VALUE_AS_STRING(XppParamList );
 XPPRET XPPENTRY ASPLITTXTLINES(XppParamList );
 XPPRET XPPENTRY TOKENIZE(XppParamList );
 XPPRET XPPENTRY TOKENIZEEX(XppParamList );
+XPPRET XPPENTRY __AJOIN(XppParamList );
 XPPRET XPPENTRY NOCOMMENT(XppParamList );
 XPPRET XPPENTRY NCRC32(XppParamList );
 XPPRET XPPENTRY NCRC8(XppParamList );
@@ -1167,12 +1168,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1166>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

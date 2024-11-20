@@ -178,6 +178,7 @@
    ,    {"ASPLITTXTLINES",ASPLITTXTLINES}
    ,    {"TOKENIZE",TOKENIZE}
    ,    {"TOKENIZEEX",TOKENIZEEX}
+   ,    {"__AJOIN",__AJOIN}
    ,    {"NOCOMMENT",NOCOMMENT}
    ,    {"NCRC32",NCRC32}
    ,    {"NCRC8",NCRC8}
@@ -1162,9 +1163,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1165>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1166>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1167>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutQWord  )<<<
