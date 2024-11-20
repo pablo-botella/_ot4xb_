@@ -231,9 +231,11 @@ void TokenizeEx_t::run_xbase( XppParamList pl )
    _conRelease(cona);
 }
 // --------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter )
+// flags: 1 include empty strings
+_XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
 {
-   TXppParamList xpp( pl, 2 );
+   TXppParamList xpp( pl, 3 );
+   DWORD flags = xpp[ 3 ]->GetDWord();
    TZString s( 1024 );
 
    if( xpp[ 1 ]->CheckType( XPP_ARRAY ) )
@@ -253,14 +255,17 @@ _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter )
                LPSTR p = 0;
                if( !_conRLockC( con, &p, &cb ) )
                {
-                  if(dw)
+                  if( cb || flags & 1 )
                   {
-                     s += delimiter;
+                     if( dw )
+                     {
+                        s += delimiter;
+                     }
+                     s += p;
+                     dw++;
                   }
-                  s += p;
                   _conUnlockC( con );
                   p = 0;
-                  dw++;
                }
             }
          }
