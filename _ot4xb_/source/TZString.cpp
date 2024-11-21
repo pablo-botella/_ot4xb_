@@ -121,6 +121,25 @@ DWORD TZString::AddStrCb(LPSTR pStr, DWORD cb, DWORD offset, DWORD  bytes_to_wri
    }
    return offset;
 }
+void TZString::Add_With_Safe_Map( BYTE map[ 256 ], LPSTR pStr )
+{
+   UINT n;
+   if( pStr )
+   {
+      for( n = 0; pStr[ n ]; n++ );
+      _grow_cb_( n + m_nLen + 1 );
+      for( n = 0; pStr[ n ]; n++ )
+      {
+         if( map[ (BYTE) pStr[ n ] ] & 0xFF )
+         {
+            m_pBuffer[ m_nLen ] = pStr[ n ];
+            m_nLen++;
+         }
+      }
+    
+      m_pBuffer[ m_nLen ] = 0;
+   }
+}
 // -----------------------------------------------------------------------------------------------------------------
 void TZString::Add_RTrim(LPSTR pStr)
 {

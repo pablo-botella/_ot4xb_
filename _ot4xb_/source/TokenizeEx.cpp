@@ -231,50 +231,5 @@ void TokenizeEx_t::run_xbase( XppParamList pl )
    _conRelease(cona);
 }
 // --------------------------------------------------------------------------------------------------------------------
-// flags: 1 include empty strings
-_XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
-{
-   TXppParamList xpp( pl, 3 );
-   DWORD flags = xpp[ 3 ]->GetDWord();
-   TZString s( 1024 );
-
-   if( xpp[ 1 ]->CheckType( XPP_ARRAY ) )
-   {
-      ULONG item_count = xpp[ 1 ]->con_size();
-      if( item_count )
-      {
-         char default_delimiter[ ] = ",";
-         LPSTR delimiter = ( xpp[ 2 ]->CheckType( XPP_CHARACTER ) ? xpp[ 2 ]->LockStr() : default_delimiter );
-         ContainerHandle con = _conNew( NULLCONTAINER );
-         DWORD dw = 0;
-         for( ULONG item_pos = 1; item_pos <= item_count; item_pos++ )
-         {
-            if( _conArrayGet( xpp[ 1 ]->con(), con, item_pos, 0 ) )
-            {
-               DWORD cb = 0;
-               LPSTR p = 0;
-               if( !_conRLockC( con, &p, &cb ) )
-               {
-                  if( cb || flags & 1 )
-                  {
-                     if( dw )
-                     {
-                        s += delimiter;
-                     }
-                     s += p;
-                     dw++;
-                  }
-                  _conUnlockC( con );
-                  p = 0;
-               }
-            }
-         }
-         _conRelease( con );
-         con = NULLCONTAINER;
-      }
-   }
-   xpp[ 0 ]->PutStr( s.GetBuffer() );
-
-}
 
 

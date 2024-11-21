@@ -344,6 +344,7 @@ OT4XB_API void _xstr_bit_xor( LPBYTE p1, ULONG cb1, LPBYTE p2, ULONG cb2, BOOL b
 // ----- 
 OT4XB_API void  ByteMapTable_Add(LPBYTE pTable , LPBYTE pPos , LPBYTE pMap ,DWORD cb);
 OT4XB_API BOOL  ByteMapTable_IsSafeStr(LPBYTE pTable , LPBYTE p , int cb);
+OT4XB_API DWORD ByteMapTable_safe_strlen( BYTE map[256], LPSTR p );
 OT4XB_API void  ByteMapTable_FillSeq(LPBYTE pTable , LPWORD pSeq , DWORD sc);
 OT4XB_API DWORD ByteMapTable_StrFindFlag(LPBYTE pSrc , int cb, int nStart , LPBYTE pTable , DWORD dwFlags);
 OT4XB_API DWORD ByteMapTable_LTrimEx(LPBYTE pTable , LPBYTE pIn , DWORD cbIn = (DWORD) -1 );

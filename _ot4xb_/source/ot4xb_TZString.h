@@ -35,6 +35,7 @@ class OT4XB_API TZString : public T_ot4xb_base
        void Add_to_json( LPSTR pStr , int cb = -1);
        void Add( LPSTR pStr );
        DWORD AddStrCb( LPSTR pStr ,  DWORD cb  , DWORD offset , DWORD  bytes_to_write , DWORD flags );
+       void Add_With_Safe_Map( BYTE map[256], LPSTR pStr );
        void Add_RTrim( LPSTR pStr );
        void Add_LTrim( LPSTR pStr );
        void Add_AllTrim( LPSTR pStr );
