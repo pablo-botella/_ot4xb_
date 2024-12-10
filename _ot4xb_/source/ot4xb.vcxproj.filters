@@ -24,6 +24,9 @@
     <Filter Include="bat">
       <UniqueIdentifier>{837b4d90-94c9-48bf-93ca-76aace22ac2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="argon2">
+      <UniqueIdentifier>{64851e0b-3b4a-452f-92ec-5fe4cacee1a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array2dbf.cpp">
@@ -269,6 +272,24 @@
     <ClCompile Include="ot4xb_register.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="argon2\argon2.c">
+      <Filter>argon2</Filter>
+    </ClCompile>
+    <ClCompile Include="argon2\core.c">
+      <Filter>argon2</Filter>
+    </ClCompile>
+    <ClCompile Include="argon2\blake2\blake2b.c">
+      <Filter>argon2</Filter>
+    </ClCompile>
+    <ClCompile Include="argon2\encoding.c">
+      <Filter>argon2</Filter>
+    </ClCompile>
+    <ClCompile Include="argon2\opt.c">
+      <Filter>argon2</Filter>
+    </ClCompile>
+    <ClCompile Include="ot4xb_argon2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CRC32.HPP">
@@ -381,6 +402,9 @@
     </ClInclude>
     <ClInclude Include="ot4xb_sqlstr.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="argon2\argon2.h">
+      <Filter>argon2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -580,6 +580,9 @@ XPPRET XPPENTRY THDICTEX(XppParamList );
 XPPRET XPPENTRY OT4XB_HASH(XppParamList );
 XPPRET XPPENTRY OT4XB_CNG(XppParamList );
 
+XPPRET XPPENTRY ARGON2_HASH(XppParamList );
+XPPRET XPPENTRY ARGON2_VERIFY(XppParamList );
+
 // ------------- case sensitive hash table
 XPPRET XPPENTRY _HDICTCS_COUNT(XppParamList );
 XPPRET XPPENTRY _HDICTCS_DESTROY(XppParamList );
@@ -1168,12 +1171,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1166>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1169>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

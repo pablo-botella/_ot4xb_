@@ -575,6 +575,9 @@ _XPP_REG_FUN_( THDICTEX)
 _XPP_REG_FUN_( OT4XB_HASH )
 _XPP_REG_FUN_( OT4XB_CNG  )
 
+_XPP_REG_FUN_( ARGON2_HASH )
+_XPP_REG_FUN_( ARGON2_VERIFY )
+
 // ------------- case sensitive hash table
 _XPP_REG_FUN_( _HDICTCS_COUNT         ) 
 _XPP_REG_FUN_( _HDICTCS_DESTROY       ) 

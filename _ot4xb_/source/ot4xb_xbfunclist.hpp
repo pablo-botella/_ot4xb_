@@ -575,6 +575,9 @@
    ,    {"OT4XB_HASH",OT4XB_HASH}
    ,    {"OT4XB_CNG",OT4XB_CNG}
 
+   ,    {"ARGON2_HASH",ARGON2_HASH}
+   ,    {"ARGON2_VERIFY",ARGON2_VERIFY}
+
 // ------------- case sensitive hash table
    ,    {"_HDICTCS_COUNT",_HDICTCS_COUNT}
    ,    {"_HDICTCS_DESTROY",_HDICTCS_DESTROY}
@@ -1163,9 +1166,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1166>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1169>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1168>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1169>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1170>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutQWord  )<<<
