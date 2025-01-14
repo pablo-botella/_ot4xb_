@@ -290,6 +290,9 @@
     <ClCompile Include="ot4xb_argon2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ot4xb_base32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CRC32.HPP">
@@ -405,6 +408,9 @@
     </ClInclude>
     <ClInclude Include="argon2\argon2.h">
       <Filter>argon2</Filter>
+    </ClInclude>
+    <ClInclude Include="ot4xb_base32.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

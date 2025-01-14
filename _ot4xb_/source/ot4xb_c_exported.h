@@ -380,6 +380,8 @@ OT4XB_API int ot4xb_uu_decode_required_length( int nSrcLen);
 OT4XB_API BOOL ot4xb_uu_decode(BYTE* pbSrcData,int nSrcLen,BYTE* pbDest,int* pnDestLen);
 OT4XB_API int ot4xb_base32_encode_required_length(int nSrcLen);
 OT4XB_API BOOL ot4xb_base32_encode_with_table(LPSTR pTable , LPBYTE pSrc, int nSrcLen, LPSTR szDest, int* pnDestLen, DWORD dwFlags = 0);
+OT4XB_API int ot4xb_base32_decode_required_length( int nEncodedLen );
+OT4XB_API BOOL ot4xb_base32_decode_with_table( LPSTR pTable, LPCSTR szEncoded, int nEncodedLen, LPBYTE pDest, int* pnDestLen, DWORD flags = 0 );
 // ---------------------------------------------------------------------------
 // DrTool.cpp
 // ---------------------------------------------------------------------------
@@ -510,6 +512,8 @@ void OT4XB_API __cdecl ft64_ToLocalTime( FILETIME* pft);
 LPSTR OT4XB_API __cdecl ft64_strf( FILETIME* pft, LPSTR pFormat );
 LPSTR OT4XB_API __cdecl ft64_strf_l( FILETIME* pft, LPSTR pFormat , LPSTR locale_string , int locale_category );
 BOOL  OT4XB_API __cdecl ft64_now( FILETIME* pft );
+BOOL OT4XB_API __cdecl ft64_set_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] );
+BOOL OT4XB_API __cdecl ft64_get_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] );
 // -----------------------------------------------------------------------------------------------------------------
 BOOL  OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, int flags = 0, int match_flags = 0);
 LPSTR OT4XB_API __cdecl ot4xb_regex_replace(LPSTR pattern, LPSTR input_string, LPSTR replacement, DWORD* pcb_out, int flags, int match_flags);

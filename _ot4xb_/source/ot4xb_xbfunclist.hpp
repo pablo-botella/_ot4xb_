@@ -543,6 +543,8 @@
    ,    {"FT64_SETRFC822DATE",FT64_SETRFC822DATE}
    ,    {"FT64_TOLOCALTIME",FT64_TOLOCALTIME}
    ,    {"FT64_STRF",FT64_STRF}
+   ,    {"FT64_GET_CKF32TS",FT64_GET_CKF32TS}
+   ,    {"FT64_SET_CKF32TS",FT64_SET_CKF32TS}
 
 
 
@@ -1166,9 +1168,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1169>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1171>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1175>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1176>>>_CDECL_EXPORT_( _conPutQWord  )<<<

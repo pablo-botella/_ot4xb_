@@ -383,6 +383,7 @@ _XPP_REG_FUN_( FT64_SETDATETIME ) // ft64_SETDATETIME(pft,d,t)
             break;
          }
          case XPP_DATE:
+         case XPP_CHARACTER:
          {
             ULONG nt3 = _partype(pl,3);
             BOOL bDateByRef = FALSE;
@@ -1079,6 +1080,8 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl ) // <doc!xb!!|CLASS{FileTime
       // ---------------------------      
       pc->MethodCB("ToLocalTime","{|s| FT64_TOLOCALTIME(s)}");      
       // ---------------------------
+      pc->MethodCB( "SetCkf32Ts", "{|s,v| Ft64_Set_Ckf32Ts(s,v),s}" );
+      pc->MethodCB( "GetCkf32Ts", "{|s| Ft64_Get_Ckf32Ts(s)}" );
       conco = pc->Create();
       delete pc;
       if( conco == NULLCONTAINER ){_ret(pl); return;}
@@ -1406,4 +1409,81 @@ _XPP_REG_FUN_( FT64_STRF ) // FT64_STRF( @ft , cFmt , locale , locale_category)
    }
 
 }
+
+// -------------------------------------------------------------------------------------------------------------------
+
+BOOL OT4XB_API __cdecl ft64_set_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[8] )
+{
+
+   if( pft && ckf32ts  )
+   {
+      int year;
+      int month;
+      int day;
+      int day_milliseconds; 
+      base32_ns::DecodeCkf32Ts( (BYTE*) ckf32ts, year, month, day, day_milliseconds);
+      SYSTEMTIME st; ZeroMemory( &st, sizeof( st ) );
+      st.wYear    = (WORD) year;
+      st.wMonth   = (WORD) month;
+      st.wDay = (WORD) day;
+      st.wHour = (WORD) ( day_milliseconds / ( 60 * 60 * 1000 ) );
+      day_milliseconds %= ( 60 * 60 * 1000 );
+      st.wMinute = (WORD) ( day_milliseconds / ( 60 * 1000 ) );
+      day_milliseconds %= ( 60 * 1000 );
+      st.wSecond = (WORD) ( day_milliseconds / 1000 );
+      st.wMilliseconds = (WORD) ( day_milliseconds % 1000 );
+      return SystemTimeToFileTime( &st, pft );
+   }
+   return FALSE;
+}
+BOOL OT4XB_API __cdecl ft64_get_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] )
+{
+   if( pft && ckf32ts)
+   {
+      SYSTEMTIME st;
+      if( !FileTimeToSystemTime( pft, &st ) )
+      {
+         return FALSE;
+      }
+
+      int year = st.wYear;
+      int month = st.wMonth;
+      int day = st.wDay;
+      int day_milliseconds = ( st.wHour * 60 * 60 * 1000 ) + ( st.wMinute * 60 * 1000 ) + ( st.wSecond * 1000 ) + st.wMilliseconds;
+      base32_ns::EncodeCkf32Ts( year, month, day, day_milliseconds, ckf32ts );
+      return TRUE;
+   }
+   return FALSE;
+}
 // -----------------------------------------------------------------------------------------------------------------
+_XPP_REG_FUN_( FT64_SET_CKF32TS ) // FT64_SET_CKF32TS( @ft , ckf32ts )
+{
+   BOOL result = FALSE;
+   TXppParamList xpp( pl, 2 );
+   FILETIME* pft = (FILETIME*) xpp[ 1 ]->LockStrEx( TRUE );
+   if( pft )
+   {
+      BYTE* ckf32ts = (BYTE*) xpp[ 2 ]->LockStrEx();
+      if( ckf32ts )
+      {
+         if( xpp[ 2 ]->ExLen() > 7 )
+         {
+            result = ft64_set_Ckf32TsStr( pft, ckf32ts );
+         }
+         xpp[ 2 ]->UnLockStrEx();
+      }
+      xpp[ 1 ]->UnLockStrEx();
+   }
+   xpp[ 0 ]->PutBool( result );
+}
+_XPP_REG_FUN_( FT64_GET_CKF32TS ) // FT64_GET_CKF32TS( @ft ) -> CKF32TS
+{
+   char ckf32ts[ 16 ] = { 0 };
+   TXppParamList xpp( pl);
+   FILETIME* pft = (FILETIME*) xpp[ 1 ]->LockStrEx();
+   if( pft )
+   {
+      ft64_get_Ckf32TsStr( pft, (BYTE*) ckf32ts );
+   }
+   xpp[ 0 ]->PutStr( ckf32ts );
+}

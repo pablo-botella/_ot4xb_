@@ -175,6 +175,7 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
     </ClCompile>
     <ClCompile Include="array2dbf.cpp" />
+    <ClCompile Include="ot4xb_base32.cpp" />
     <ClCompile Include="Bitwise.cpp" />
     <ClCompile Include="ClrTool.cpp" />
     <ClCompile Include="conCallEx.cpp" />
@@ -270,6 +271,7 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClInclude Include="atomic_resource_lock_t.h" />
     <ClInclude Include="ndtg_internal.hpp" />
     <ClInclude Include="ot4xb_api.h" />
+    <ClInclude Include="ot4xb_base32.h" />
     <ClInclude Include="ot4xb_classes.h" />
     <ClInclude Include="ot4xb_constants.h" />
     <ClInclude Include="ot4xb_cpp_exported.h" />

@@ -168,6 +168,7 @@ extern OSVERSIONINFOEX ot4xb_global_osvi ;
 #include <ot4xb_resource_tool.h>
 #include <ot4xb_statistics.h>
 #include <ot4xb_sqlstr.h>
+#include <ot4xb_base32.h>
 //-----------------------------------------------------------------------------------------------------------------------
 #define _TSTDCTXCBK_PROXI_WNDPROC_( function , cls , method )                         \
 LRESULT __stdcall function( DWORD* ctx, HWND hWnd ,UINT nMsg,WPARAM wp , LPARAM lp )  \

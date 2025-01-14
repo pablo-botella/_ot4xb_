@@ -2116,23 +2116,54 @@ OT4XB_API XPPAPIRET _conGetDateAsFileTime( ContainerHandle con, FILETIME * pft )
 //----------------------------------------------------------------------------------------------------------------------
 OT4XB_API XPPAPIRET _conGetDateAsSystemTime( ContainerHandle con, SYSTEMTIME * pst )
 {
-   char sz[8];
+   char sz[ 16 ] = { 0 };
    LONG n;
 
-   _bset( (LPBYTE) sz, 32, 8 );
-   if( con && pst ) _conGetDS( con, sz );
+   if( con && pst )
+   {
+      ULONG ul = 0;
+      _conType( con, &ul );
+      if( (ul & 0xFF) == XPP_CHARACTER )
+      {
+         char buffer[ 256 ] = { 0 };
+         ULONG cb = 0;
+         ULONG pos = 0;
+         _conGetCL( con, &cb, buffer, sizeof( buffer ) - 1 );
+         for( ULONG i = 0; i < cb && pos <  8 ; i++ )
+         {
+            if( isdigit( buffer[ i ] ) )
+            {
+               sz[pos] = buffer[ i ]; pos++;
+            }
+         }
+         if( pos < 8 )
+         {
+            ZeroMemory( sz, sizeof( sz ) );
+         }
+      }
+      else
+      {
+         _conGetDS( con, sz );
+      }
+   }
    if( sz[0] >= '0' )
    {
       for( n = 0; n < 8; n++ ) sz[n] -= 48;
-      pst->wDay = (WORD) ( sz[7] + ( sz[6] * 10 ) );
-      pst->wMonth = (WORD) ( sz[5] + ( sz[4] * 10 ) );
-      pst->wYear = (WORD) ( ( (WORD) sz[3] ) + ( (WORD) sz[2] * 10 ) + ( (WORD) sz[1] * 100 ) + ( (WORD) sz[0] * 1000 ) );
+      if( pst )
+      {
+         pst->wDay = (WORD) ( sz[ 7 ] + ( sz[ 6 ] * 10 ) );
+         pst->wMonth = (WORD) ( sz[ 5 ] + ( sz[ 4 ] * 10 ) );
+         pst->wYear = (WORD) ( ( (WORD) sz[ 3 ] ) + ( (WORD) sz[ 2 ] * 10 ) + ( (WORD) sz[ 1 ] * 100 ) + ( (WORD) sz[ 0 ] * 1000 ) );
+      }
    }
    else
    {
-      pst->wDay = 0;
-      pst->wMonth = 0;
-      pst->wYear = 0;
+      if( pst )
+      {
+         pst->wDay = 0;
+         pst->wMonth = 0;
+         pst->wYear = 0;
+      }
    }
    return 0;
 }

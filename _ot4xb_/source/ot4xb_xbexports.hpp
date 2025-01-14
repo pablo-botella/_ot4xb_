@@ -548,6 +548,8 @@ XPPRET XPPENTRY DT2ISO8601(XppParamList );
 XPPRET XPPENTRY FT64_SETRFC822DATE(XppParamList );
 XPPRET XPPENTRY FT64_TOLOCALTIME(XppParamList );
 XPPRET XPPENTRY FT64_STRF(XppParamList );
+XPPRET XPPENTRY FT64_GET_CKF32TS(XppParamList );
+XPPRET XPPENTRY FT64_SET_CKF32TS(XppParamList );
 
 
 
@@ -1171,12 +1173,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1169>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1171>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1171>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1172>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1175>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1176>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }
