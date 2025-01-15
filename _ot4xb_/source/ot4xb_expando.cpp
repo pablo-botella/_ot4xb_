@@ -56,7 +56,73 @@ static void method_add_ini_string(XppParamList pl) { TXppParamList xpp(pl); if (
 static void method_json_escape_self(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { json_escape_self(xpp); } }
 static void method_get_prop_index(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { get_prop_index(xpp); } }
 static void method_m_json_on_unserialize_pop(XppParamList pl) { TXppParamList xpp(pl); if ((xpp.PCount() > 3) && xpp[2]->CheckType(XPP_ARRAY) && xpp[3]->CheckType(XPP_CHARACTER | XPP_NUMERIC)) { m_json_on_unserialize_pop(xpp); } }
+static void method_add_from_server_cookie( XppParamList pl );
 // ---------------------------------------------------------------------------------
+// method_add_from_server_cookie( 1 Self , 2 cookie )
+static void method_add_from_server_cookie( XppParamList pl )
+{
+   TXppParamList xpp( pl, 2 );
+   ContainerHandle Self = xpp[ 1 ]->con();
+   LPSTR server_cookie_string = xpp[ 2 ]->LockStrEx();
+
+   if( server_cookie_string )
+   {
+      const char* cookie_start = (const char*) server_cookie_string;
+      const char* cookie_end;
+
+      auto add_cookie = [Self] ( const char* name, size_t name_len, const char* value, size_t value_len ) {
+         // Realizar LTrim y RTrim para name
+         while( name_len > 0 && *name == ' ' ) { name++; name_len--; }
+         while( name_len > 0 && *( name + name_len - 1 ) == ' ' ) { name_len--; }
+         while( value_len > 0 && *value == ' ' ) { value++; value_len--; }
+         while( value_len > 0 && *( value + value_len - 1 ) == ' ' ) { value_len--; }
+
+         // Crear los containers para key y value
+         ContainerHandle k = _conPutCL( NULLCONTAINER, (LPSTR) name, name_len );
+         ContainerHandle v = _conPutCL( NULLCONTAINER, (LPSTR) value, value_len );
+         ContainerHandle r = _conNew( NULLCONTAINER );
+
+         // Llamar al método "set_prop" en el contenedor
+         ContainerHandle pcon[ ] = { Self, k, v };
+         _conCallMethodPa( r, "set_prop", 3, pcon );
+
+         // Liberar los contenedores
+         _conRelease( k );
+         _conRelease( v );
+         _conRelease( r );
+      };
+
+      // Procesar las cookies
+      while( ( cookie_end = strchr( cookie_start, ';' ) ) != NULL )
+      {
+         const char* equal_sign = strchr( cookie_start, '=' );
+         if( equal_sign && equal_sign < cookie_end )
+         {
+            size_t name_len = equal_sign - cookie_start;  // Longitud del nombre (antes del '=')
+            size_t value_len = cookie_end - ( equal_sign + 1 );  // Longitud del valor (después del '=' y antes del ';')
+            add_cookie( cookie_start, name_len, equal_sign + 1, value_len );  // Llamada a add_cookie con la cookie actual
+         }
+         cookie_start = cookie_end + 1;  // Avanzamos al siguiente cookie
+      }
+
+      // Procesar la última cookie (si no termina con ';')
+      if( *cookie_start != '\0' )
+      {
+         const char* equal_sign = strchr( cookie_start, '=' );
+         if( equal_sign )
+         {
+            size_t name_len = equal_sign - cookie_start;
+            size_t value_len = strlen( cookie_start ) - ( equal_sign - cookie_start ) - 1;
+            add_cookie( cookie_start, name_len, equal_sign + 1, value_len );  // Llamada para la última cookie
+         }
+      }
+   }
+}
+
+
+
+
+// ------------------------------------------------------------------------------------------------
 // 2 @s:__m__props__  // 3 @s:__m__hash__ // 4 key
 static DWORD find_prop(TXppParamList& xpp, DWORD* pCrc = 0, DWORD* pItemCount = 0, DWORD* pnnn = 0)
 {
@@ -1003,6 +1069,10 @@ static void create_class(XppParamList pl)
       pc->Method_cbbs("add_env_strings", "{|s,p|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p)    , s}", method_add_env_strings);
       pc->Method_cbbs("add_ini_string", "{|s,p,dw|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p,dw) , s}", method_add_ini_string);
       pc->Method_cbbs("add_from_array", "{|s,aa,flags,get_key_cb,cargo|  XbFpCall(%i,s,aa,flags,get_key_cb,cargo) , s }", method_add_from_array);
+      pc->Method_cbbs( "add_from_server_cookie", "{|s,str|  XbFpCall(%i,s,str) , s }", method_add_from_server_cookie );
+
+
+
       pc->Method_cbbs("iterate_cb", "{|s,cb,cargo,flags|  XbFpCall(%i,s,s:__m__props__,cb,cargo,flags) , s }", method_iterate_cb); // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags) 
                                                                                                                                         // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
       // -----
@@ -1038,6 +1108,8 @@ static void create_class(XppParamList pl)
    _conRelease(conco);
 }
 // ---------------------------------------------------------------------------------
+
+
 END_NAMESPACE()
 
 //----------------------------------------------------------------------------------------------------------------------
