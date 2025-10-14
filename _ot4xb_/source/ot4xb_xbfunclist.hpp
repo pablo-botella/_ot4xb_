@@ -40,6 +40,11 @@
    ,    {"OT4XB_PAINTTHEMSGBAR",OT4XB_PAINTTHEMSGBAR}
 // ---------------------------------------------------------------------------
 
+
+
+
+
+
 // ---------------------------------------------------------------------------
 // TCriticalSection.cpp
 // ---------------------------------------------------------------------------
@@ -295,13 +300,13 @@
    ,    {"__V2_CSV_CELL",__V2_CSV_CELL}
    ,    {"OT4XB_QLOOP",OT4XB_QLOOP}
 
+   ,    {"__VCMP",__VCMP}
+
 // ---------------------------------------------------------------------------
 // ot4xb_vtran.cpp
 // ---------------------------------------------------------------------------
    ,    {"__VTRAN",__VTRAN}
-   ,    {"OT4XB_COPY_WA_RECORD_WITH_TABLE",OT4XB_COPY_WA_RECORD_WITH_TABLE}
-   ,    {"OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST",OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST}
-   ,    {"OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST",OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST}
+
 
 
 // ---------------------------------------------------------------------------
@@ -1168,9 +1173,9 @@
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1171>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1176>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1175>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1176>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1178>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1179>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1180>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1181>>>_CDECL_EXPORT_( _conPutQWord  )<<<

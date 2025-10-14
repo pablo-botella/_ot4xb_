@@ -45,6 +45,11 @@ XPPRET XPPENTRY OT4XB_AUTOMATIC_SCROLL_FOCUS(XppParamList );
 XPPRET XPPENTRY OT4XB_PAINTTHEMSGBAR(XppParamList );
 // ---------------------------------------------------------------------------
 
+
+
+
+
+
 // ---------------------------------------------------------------------------
 // TCriticalSection.cpp
 // ---------------------------------------------------------------------------
@@ -300,13 +305,13 @@ XPPRET XPPENTRY __V2FV(XppParamList );
 XPPRET XPPENTRY __V2_CSV_CELL(XppParamList );
 XPPRET XPPENTRY OT4XB_QLOOP(XppParamList );
 
+XPPRET XPPENTRY __VCMP(XppParamList );
+
 // ---------------------------------------------------------------------------
 // ot4xb_vtran.cpp
 // ---------------------------------------------------------------------------
 XPPRET XPPENTRY __VTRAN(XppParamList );
-XPPRET XPPENTRY OT4XB_COPY_WA_RECORD_WITH_TABLE(XppParamList );
-XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_ENTRY_ST(XppParamList );
-XPPRET XPPENTRY OT4XB_COPY_WA_FIELD_TABLE_HEADER_ST(XppParamList );
+
 
 
 // ---------------------------------------------------------------------------
@@ -1173,12 +1178,12 @@ XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
 
 //-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1171>>>-----------------------------------------<<<
+//////////  UNKNOW LINE #1176>>>-----------------------------------------<<<
 // -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1173>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1174>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1175>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1176>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+//////////  UNKNOW LINE #1178>>>_CDECL_EXPORT_( _conGetFloat  )<<<
+//////////  UNKNOW LINE #1179>>>_CDECL_EXPORT_( _conPutFloat  )<<<
+//////////  UNKNOW LINE #1180>>>_CDECL_EXPORT_( _conGetQWord  )<<<
+//////////  UNKNOW LINE #1181>>>_CDECL_EXPORT_( _conPutQWord  )<<<
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

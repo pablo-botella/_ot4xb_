@@ -575,13 +575,18 @@ XPPRET XPPENTRY _XSTRNCPY( XppParamList pl )
 // stopping at nMax bytes if NULL not found before.
 // If bytes copied are less than nMax fill the rest of pDest with NULLs up to nMax bytes.
 
-OT4XB_API LPSTR _xstrncpy(LPSTR pDest, LPSTR pSrc, UINT nMax)
+OT4XB_API LPSTR _xstrncpy( LPSTR pDest, LPCSTR pSrc, UINT destination_cb )
 {
-   UINT  n = 0;
-   if( nMax )
+   UINT i = 0;
+   if( destination_cb )
    {
-      do{ pDest[n] = *pSrc;n++;} while(*pSrc++ && (n < nMax) );
-      for( ; n < nMax; n++) pDest[n] = 0;
+      destination_cb--;
+      pDest[ destination_cb ] = 0;
+      for( ; i < destination_cb && pSrc[ i ]; i++ )
+         pDest[ i ] = pSrc[ i ];
+
+      for( ; i < destination_cb; i++ )
+         pDest[ i ] = 0;
    }
    return pDest;
 }
