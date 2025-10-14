@@ -4425,7 +4425,7 @@ _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
          ContainerHandle con = _conNew( NULLCONTAINER );
          DWORD dw = 0;
          DWORD tmp_cb = 1024;
-         void* tmp_buffer = _xgrab( tmp_cb);
+         void* tmp_buffer = _xgrab( tmp_cb +1);
          if( tmp_buffer )
          {
             for( ULONG item_pos = 1; item_pos <= item_count; item_pos++ )
@@ -4457,7 +4457,7 @@ _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
                            if( item_cb >= tmp_cb )
                            {
                               _xfree( tmp_buffer );
-                              tmp_cb = ( cb | 0x1FF ) + 1;
+                              tmp_cb = ( item_cb | 0x1FF ) + 1;
                               tmp_buffer = _xgrab( tmp_cb );
                               if( tmp_buffer == nullptr )
                               {
@@ -4508,8 +4508,6 @@ _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
                         if( flags & 4 ) { s += "\""; }
                         dw++;
                      }
-                     _xfree( (void*) p );
-                     p = 0;
                   }
                }
             }
