@@ -1531,54 +1531,111 @@ XPPRET XPPENTRY NBITS2DW( XppParamList  pl ) // nBits2Dw( cBitStr ) -> nInt32
    }
    _retnl( pl, (LONG) dw );
 }
+// ---------------------------------------------------------------------------------------------------------------------
+
+typedef BOOLEAN( WINAPI* SystemFunction036_t )( PVOID, ULONG );
+BOOL __gen_rnd_str_buffer( LPBYTE buffer, ULONG cb , DWORD flags )
+{
+   HMODULE hAdvapi = GetModuleHandleA( "advapi32.dll" );
+   if( !hAdvapi )
+   {
+      hAdvapi = LoadLibraryA( "advapi32.dll" );
+      if( !hAdvapi )
+      {
+         return FALSE;
+      }
+   }
+   SystemFunction036_t pRtlGenRandom = (SystemFunction036_t) GetProcAddress( hAdvapi, "SystemFunction036" );
+   if( !pRtlGenRandom )
+   {
+      return FALSE;
+   }
+   if( !pRtlGenRandom( buffer, cb ) )
+   {
+      return FALSE;
+   }
+   switch( flags )
+   {
+      case 1: // safe chars
+      {
+         static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+         for( ULONG n = 0; n < cb; n++ )
+         {
+            buffer[ n ] = (BYTE) szsc[ ( (UINT) ( buffer[ n ] % ( sizeof( szsc ) - 1 ) ) ) ];
+         }
+         break;
+      }
+      case 2: // safe and upper only
+      {
+         static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+         for( ULONG n = 0; n < cb; n++ )
+         {
+            buffer[ n ] = (BYTE) szsc[ ( (UINT) ( buffer[ n ] % ( sizeof( szsc ) - 1 ) ) ) ];
+         }
+         break;
+      }
+      case 3: // A-Z only
+      {
+         static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+         for( ULONG n = 0; n < cb; n++ )
+         {
+            buffer[ n ] = (BYTE) szsc[ ( (UINT) ( buffer[ n ] % ( sizeof( szsc ) - 1 ) ) ) ];
+         }
+         break;
+      }
+      default:
+         break;
+   }
+   return TRUE;
+
+}
+
+
+
 //----------------------------------------------------------------------------------------------------------------------
 XPPRET XPPENTRY CGENRNDSTR( XppParamList  pl ) // cGenRndStr( nLen , lSafeChars = .F. | 1 lsafe chars , 2 lsafeandupperonly , 3 A-Z only )
 {
-   if( GetTlsHeapManager()->m_rnd_seed == 1 )
-   {
-      GetTlsHeapManager()->m_rnd_seed = GetTickCount();
-      srand( GetTlsHeapManager()->m_rnd_seed );
-   }
-   ULONG nSize = (ULONG) ( _parnl( pl, 1 ) & 0x007FFFFF ); // 8MB max
+   TXppParamList xpp( pl, 2 );
+
+   DWORD flags = xpp[ 2 ]->CheckType( XPP_LOGICAL ) ? ( xpp[ 2 ]->GetBool() ? 1 : 0 ) : xpp[ 2 ]->GetDWord();
+   ULONG nSize = (ULONG) ( xpp[ 1 ]->GetDWord() & 0x007FFFFF ); // 8MB max
    LPSTR p = (LPSTR) _xgrab( nSize + 1 );
-   ULONG n;
-   if( _parnl( pl, 2 ) == 2 )
+   if( p )
    {
-      static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      for( n = 0; n < nSize; n++ ) p[ n ] = szsc[ ( (UINT) ( rand() % ( sizeof( szsc ) - 1 ) ) ) ];
+      if( __gen_rnd_str_buffer( (LPBYTE) p, nSize, flags ) )
+      {
+         xpp[ 0 ]->PutStrLen( p, nSize );
+      }
+      _xfree( (void*) p );
    }
-   else if( _parnl( pl, 2 ) == 3 )
+}
+// -----------------------------------------------------------------------------------------------------------------
+XPPRET XPPENTRY OT4XB_NRAND( XppParamList pl ) // ot4xb_nRand(nMax)
+{
+   TXppParamList xpp( pl, 1 );
+   DWORD m = xpp[ 1 ]->GetDWord() & 0x7FFFFFFF;
+   if( !m )
+      m = 0x7FFFFFFF;
+
+   DWORD r = 0;
+   if( __gen_rnd_str_buffer( (LPBYTE) &r, sizeof( DWORD ), 0 ) )
    {
-      static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for( n = 0; n < nSize; n++ ) p[ n ] = szsc[ ( (UINT) ( rand() % ( sizeof( szsc ) - 1 ) ) ) ];
-   }
-   else if( _parl( pl, 2 ) || ( _parnl( pl, 2 ) == 1 ) )
-   {
-      static const char szsc[ ] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for( n = 0; n < nSize; n++ ) p[ n ] = szsc[ ( (UINT) ( rand() % ( sizeof( szsc ) - 1 ) ) ) ];
+      DWORD limit = ( 0xFFFFFFFFu / m ) * m;
+      int tries = 0;
+
+      while( r >= limit && tries++ < 16 )
+      {
+         if( !__gen_rnd_str_buffer( (LPBYTE) &r, sizeof( DWORD ), 0 ) )
+            break;
+      }
+
+      r %= m;
+      xpp[ 0 ]->PutDWord( r );
    }
    else
    {
-      for( n = 0; n < nSize; n++ ) p[ n ] = (char) ( rand() % 256 );
+      xpp[ 0 ]->PutDWord( 0 );
    }
-   _retclen( pl, p, nSize );
-   _xfree( (void*) p );
-}
-// -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY OT4XB_NRAND( XppParamList  pl ) // ot4xb_nRand( nMax )
-{
-   if( GetTlsHeapManager()->m_rnd_seed == 1 )
-   {
-      GetTlsHeapManager()->m_rnd_seed = GetTickCount();
-      srand( GetTlsHeapManager()->m_rnd_seed );
-   }
-
-   LONG n = _parnl( pl, 1 );
-   if( n < 1 )
-   {
-      n = 1;
-   }
-   _retnl( pl, (LONG) ( ( (double) rand() / (double) ( RAND_MAX + 1 ) ) * ( (double) n ) ) );
 }
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -3315,7 +3372,7 @@ OT4XB_API int ansi_byte_to_utf8_urlenc( BYTE ch, LPBYTE buffer, int nLevel ) // 
       }
    }
 
-   BYTE wsz[ 2 ]; ZeroMemory( wsz, sizeof( wsz ) );
+   BYTE wsz[ 8 ]; ZeroMemory( wsz, sizeof( wsz ) );
    int  wcb = MultiByteToWideChar( 1252, 0, (LPSTR) &ch, 1, (LPWSTR) wsz, 2 );
    BYTE usz[ 16 ]; ZeroMemory( usz, sizeof( usz ) );
    int  ucb = WideCharToMultiByte( CP_UTF8, 0, (LPWSTR) wsz, wcb, (LPSTR) usz, 16, 0, 0 );
