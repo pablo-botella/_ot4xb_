@@ -2164,6 +2164,49 @@ OT4XB_API DWORD pHex2i32( LPBYTE ph, DWORD cb )
    return dw;
 }
 // -----------------------------------------------------------------------------------------------------------------
+OT4XB_API BOOL  ByteMapTable_RO_LtrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn, LPBYTE& pOut, DWORD& cbOut )
+{
+
+   if( pTable == 0 )
+   {
+      pTable = __DEFAULT_WHITE_SPACE_TABLE__;
+   }
+   if( !pIn || (int) cbIn  < 0 )
+   {
+      return FALSE;
+   }
+   pOut = pIn;
+   cbOut = cbIn;
+
+   while( cbOut && pTable[ (BYTE) *pOut ] )
+   {
+      pOut++; cbOut--;
+   }
+   return TRUE;
+}
+OT4XB_API BOOL  ByteMapTable_RO_RtrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn, LPBYTE& pOut, DWORD& cbOut )
+{
+
+   if( pTable == 0 )
+   {
+      pTable = __DEFAULT_WHITE_SPACE_TABLE__;
+   }
+   if( !pIn || (int) cbIn < 0 )
+   {
+      return FALSE;
+   }
+   pOut = pIn;
+   cbOut = cbIn;
+
+   while( cbOut && pTable[ (BYTE) pOut[ cbOut -1 ]] )
+   {
+      cbOut--;
+   }
+   return TRUE;
+}
+
+
+
 OT4XB_API DWORD ByteMapTable_RTrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn )
 {
 
@@ -4294,6 +4337,7 @@ _XPP_REG_FUN_( __B64DEC )
 //        0x00000004 add double quote delimiters
 //        0x00000010 = ltrim
 //        0x00000020 = rtrim
+//        0x00000400 = int to str 
 //        0x01000000 trim unsafe with map
 //        0x00100000 safe 0 to 9 
 // -------------------------------------------------------------------------------------------------------------------------------------
@@ -4323,57 +4367,106 @@ _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
          LPSTR delimiter = ( xpp[ 2 ]->CheckType( XPP_CHARACTER ) ? xpp[ 2 ]->LockStr() : default_delimiter );
          ContainerHandle con = _conNew( NULLCONTAINER );
          DWORD dw = 0;
-         for( ULONG item_pos = 1; item_pos <= item_count; item_pos++ )
+         DWORD tmp_cb = 1024;
+         void* tmp_buffer = _xgrab( tmp_cb);
+         if( tmp_buffer )
          {
-            if( _conArrayGet( xpp[ 1 ]->con(), con, item_pos, 0 ) )
+            for( ULONG item_pos = 1; item_pos <= item_count; item_pos++ )
             {
-               DWORD cb = 0;
-               LPSTR p = _conXStrDup( con, &cb );
-               if( p) 
+               if( _conArrayGet( xpp[ 1 ]->con(), con, item_pos, 0 ) )
                {
-                  if( flags & 0x01000000 )
+                  DWORD t = 0;
+                  LPSTR p = 0;
+                  DWORD cb = 0;
+                  _conType( con, &t );
+                  switch( t & 0xFF )
                   {
-                     cb = (DWORD) ByteMapTable_RemoveUnsafe( map, (LPBYTE) p, (int) cb );
-                  }
-                  if( flags & 0x10 )
-                  {
-                     cb = ByteMapTable_LTrimEx( 0, (LPBYTE) p, cb );
-                  }
-                  if( flags & 0x20 )
-                  {
-                     cb = ByteMapTable_RTrimEx( 0, (LPBYTE) p, cb );
-                  }
-
-                  BOOL validate = cb || flags & 1;
-                  if( validate )
-                  {
-                     if( dw )
+                     case XPP_NUMERIC:
                      {
-                        s += delimiter;
+                        if( flags & 0x400 )
+                        {
+                           LONG n; _conGetNL( con, &n );
+                           p = (LPSTR) tmp_buffer;
+                           cb = wsprintf( p, "%i", n );
+                        }
+                        break;
                      }
-                     if( flags & 4 ) { s += "\""; }
-                     if( flags & 2 ){s += "'";}
+                     case XPP_CHARACTER:
+                     {
+                        LPSTR item_p = 0;
+                        DWORD item_cb = 0;
+                        if( _conRLockC( con, &item_p, &item_cb ) == 0 )
+                        {
+                           if( item_cb >= tmp_cb )
+                           {
+                              _xfree( tmp_buffer );
+                              tmp_cb = ( cb | 0x1FF ) + 1;
+                              tmp_buffer = _xgrab( tmp_cb );
+                              if( tmp_buffer == nullptr )
+                              {
+                                 tmp_cb = 0;
+                              }
+                           }
+                           if( tmp_buffer )
+                           {
+                              _bcopy( (LPBYTE) tmp_buffer, (LPBYTE) item_p, item_cb );
+                              p = (LPSTR) tmp_buffer;
+                              cb = item_cb;
+                              p[ cb ] = 0;
+                           }
 
-                     s.AddStrCb( p, cb,0,cb,0);
-
-                     if( flags & 2 ) { s += "'"; }
-                     if( flags & 4 ) { s += "\""; }
-
-
-
-                     dw++;
+                           _conUnlockC( con );
+                        }
+                        break;
+                     }
                   }
-                  _xfree( (void*) p );
-                  p = 0;
+                  if( p )
+                  {
+                     if( flags & 0x01000000 )
+                     {
+                        cb = (DWORD) ByteMapTable_RemoveUnsafe( map, (LPBYTE) p, (int) cb );
+                     }
+                     if( flags & 0x10 )
+                     {
+                        cb = ByteMapTable_LTrimEx( 0, (LPBYTE) p, cb );
+                     }
+                     if( flags & 0x20 )
+                     {
+                        cb = ByteMapTable_RTrimEx( 0, (LPBYTE) p, cb );
+                     }
+
+                     BOOL validate = cb || flags & 1;
+                     if( validate )
+                     {
+                        if( dw )
+                        {
+                           s += delimiter;
+                        }
+                        if( flags & 4 ) { s += "\""; }
+                        if( flags & 2 ) { s += "'"; }
+
+                        s.AddStrCb( p, cb, 0, cb, 0 );
+
+                        if( flags & 2 ) { s += "'"; }
+                        if( flags & 4 ) { s += "\""; }
+                        dw++;
+                     }
+                     _xfree( (void*) p );
+                     p = 0;
+                  }
                }
             }
          }
          _conRelease( con );
          con = NULLCONTAINER;
+         if( tmp_buffer )
+         {
+            _xfree( tmp_buffer );
+            tmp_buffer = 0;
+         }
       }
    }
    xpp[ 0 ]->PutStr( s.GetBuffer() );
-
 }
 
 
