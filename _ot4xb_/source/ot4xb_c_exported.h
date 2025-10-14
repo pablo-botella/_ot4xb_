@@ -130,7 +130,7 @@ OT4XB_API UINT   __cdecl _bscan(LPBYTE pStr, UINT nBytes , BYTE ch);
 OT4XB_API LPSTR  __cdecl _xstrcpy(LPSTR pDest, LPSTR pSrc);
 OT4XB_API LPSTR  __cdecl _xxstrcpy(LPSTR pDest, LPSTR pSrc);
 OT4XB_API UINT   __cdecl _xstccpy(LPSTR pDest, LPSTR pSrc, UINT nMax);
-OT4XB_API LPSTR  __cdecl _xstrncpy(LPSTR pDest, LPSTR pSrc, UINT destination_cb );
+OT4XB_API LPSTR  __cdecl _xstrncpy(LPSTR pDest, LPCSTR pSrc, UINT destination_cb );
 OT4XB_API LPSTR  __cdecl _xstrcat ( LPSTR pDst, LPSTR pSrc);
 OT4XB_API LPSTR  __cdecl _xstpchr( LPSTR pStr , CHAR ch );
 OT4XB_API LPSTR  __cdecl _xstpblk(LPSTR pStr);

@@ -20,7 +20,7 @@ extern BYTE _lower_ansi_char_table_[ 256 ];
 #define VCMP_MISSING_RIGHT              0x00000080 // internal ignored if user provide it
 
 
-#define VCMP_COMPARE_MAP                0x00000100   // when object is expando  or array is k->v pair list
+#define VCMP_COMPARE_MAP                0x00000100   // when object is expando  or array is k->v pair list  // NOT IMPLEMENTED YET !!!!!!!!
 #define VCMP_STRINGIFY_CHANGES          0x00000200  
 #define VCMP_JUST_DUMP_VALUES           0x00000400   // internal ignored if user provide it
 
@@ -54,11 +54,14 @@ namespace vcmp_ns
 {
    DWORD __vtran_parse_flags( LPCSTR szFlags );
    DWORD __type_coercion( DWORD * pt1, DWORD * pt2 , DWORD & flags );
-   BOOL compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& changes );
-   BOOL compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHandle v2, DWORD t2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 );
+   BOOL compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flags );
+   BOOL compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHandle v2, DWORD t2, DWORD flags);
 
-   BOOL compare_character_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 );
-   BOOL compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 );
+   BOOL compare_character_values( ContainerHandle v1, ContainerHandle v2, DWORD flags);
+   BOOL compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DWORD flags );
+   BOOL compare_logical_values( ContainerHandle v1, ContainerHandle v2);
+   BOOL compare_date_values( ContainerHandle v1, ContainerHandle v2 );
+   BOOL compare_generic_values( ContainerHandle v1, ContainerHandle v2 );
 
    void* to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] );
    void* to_date_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] );
@@ -239,7 +242,7 @@ void* vcmp_ns::to_date_string( ContainerHandle con, DWORD, LPSTR& str, DWORD& le
 
 // --------------------------------------------------------------------------------------------------------------------
 // -> lMatch
-BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 )
+BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, DWORD flags)
 {
    LPSTR s1, s2;
    DWORD cb1, cb2;
@@ -274,19 +277,6 @@ BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, 
 
       }
    }
-   if( !match )
-   {
-      if( flags & VCMP_STRINGIFY_CHANGES )
-      {
-         ch1 = ( s1 && cb1 ? _conPutCL( NULLCONTAINER, s1, cb1 ) : _conPutC( NULLCONTAINER, "" ) );
-         ch2 = ( s2 && cb2 ? _conPutCL( NULLCONTAINER, s2, cb2 ) : _conPutC( NULLCONTAINER, "" ) );
-      }
-      else
-      {
-         ch1 = _conPut( ch1, v1 );
-         ch2 = _conPut( ch2, v2 );
-      }
-   }
    if( buffer_1 )
    {
       _xfree( buffer_1 );
@@ -300,12 +290,12 @@ BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, 
    return  match;
 }
 // --------------------------------------------------------------------------------------------------------------------
-BOOL vcmp_ns::compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 )
+BOOL vcmp_ns::compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DWORD flags)
 {
    DWORD t1, t2;
    BOOL match = FALSE;
    double epsilon = get_precission_epsilon( flags );
-   LPCSTR tpl = get_precission_template( flags );
+   // LPCSTR tpl = get_precission_template( flags );
 
    _conType( v1, &t1 );
    _conType( v2, &t2 );
@@ -313,50 +303,10 @@ BOOL vcmp_ns::compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DW
    {
       double nd1, nd2;
 
-      char precission_template[ 8 ] = "";
+      // char precission_template[ 8 ] = "";
+      _conGetND( v1, &nd1 );
       _conGetND( v2, &nd2 );
       match = fabs( nd1 - nd2 ) < epsilon;
-      if( !match )
-      {
-         ContainerHandle ch = _conNewArray( 1, 2 );
-         if( flags & VCMP_STRINGIFY_CHANGES )
-         {
-            char b1[ 64 ];
-            char b2[ 64 ];
-
-            if( flags & VCMP_DOUBLE_PRECISSION_4 )
-            {
-               sprintf_s( b1, sizeof( b1 ), "%.4f", nd1 );
-               sprintf_s( b2, sizeof( b2 ), "%.4f", nd2 );
-            }
-            else
-            {
-               if( flags & VCMP_DOUBLE_PRECISSION_15 )
-               {
-                  sprintf_s( b1, sizeof( b1 ), "%.15f", nd1 );
-                  sprintf_s( b2, sizeof( b2 ), "%.15f", nd2 );
-               }
-               else
-               {
-                  sprintf_s( b1, sizeof( b1 ), "%.15g", nd1 );
-                  sprintf_s( b2, sizeof( b2 ), "%.15g", nd2 );
-               }
-            }
-            ContainerHandle ch1 = _conPutC( NULLCONTAINER, b1 );
-            ContainerHandle ch2 = _conPutC( NULLCONTAINER, b2 );
-            _conArrayPut( ch, ch1, 1, 0 );
-            _conArrayPut( ch, ch2, 2, 0 );
-            _conRelease( ch1 );
-            _conRelease( ch2 );
-         }
-         else
-         {
-            _conArrayPut( ch, v1, 1, 0 );
-            _conArrayPut( ch, v2, 2, 0 );
-         }
-         _conaadd( changes, ch );
-         _conRelease( ch );
-      }
       return match;
    }
 
@@ -367,37 +317,13 @@ BOOL vcmp_ns::compare_numeric_values( ContainerHandle v1, ContainerHandle v2, DW
       _conGetLongOrBool( v1, &n1 );
       _conGetLongOrBool( v2, &n2 );
       match = ( n1 == n2 );
-      if( !match )
-      {
-         ContainerHandle ch = _conNewArray( 1, 2 );
-         if( flags & VCMP_STRINGIFY_CHANGES )
-         {
-            char b1[ 64 ];
-            char b2[ 64 ];
-            sprintf_s( b1, sizeof( b1 ), "%i", n1 );
-            sprintf_s( b2, sizeof( b2 ), "%i", n2 );
-            ContainerHandle ch1 = _conPutC( NULLCONTAINER, b1 );
-            ContainerHandle ch2 = _conPutC( NULLCONTAINER, b2 );
-            _conArrayPut( ch, ch1, 1, 0 );
-            _conArrayPut( ch, ch2, 2, 0 );
-            _conRelease( ch1 );
-            _conRelease( ch2 );
-         }
-         else
-         {
-            _conArrayPut( ch, v1, 1, 0 );
-            _conArrayPut( ch, v2, 2, 0 );
-         }
-         _conaadd( changes, ch );
-         _conRelease( ch );
-      }
       return match;
    }
-   return compare_character_values( v1, v2, flags, changes );
+   return match;
 }
 // --------------------------------------------------------------------------------------------------------------------
 
-BOOL vcmp_ns::compare_logical_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle changes )
+BOOL vcmp_ns::compare_logical_values( ContainerHandle v1, ContainerHandle v2)
 {
    DWORD t1, t2;
    BOOL match = FALSE;
@@ -410,47 +336,39 @@ BOOL vcmp_ns::compare_logical_values( ContainerHandle v1, ContainerHandle v2, DW
       _conGetLongOrBool( v1, &n1 );
       _conGetLongOrBool( v2, &n2 );
       match = ( n1 == n2 );
-      if( !match )
-      {
-         ContainerHandle ch = _conNewArray( 1, 2 );
-         if( flags & VCMP_STRINGIFY_CHANGES )
-         {
-            char b1[ 64 ];
-            char b2[ 64 ];
-            sprintf_s( b1, sizeof( b1 ), "%s", n1 ? ".T." : ".F." );
-            sprintf_s( b1, sizeof( b2 ), "%s", n2 ? ".T." : ".F." );
-            ContainerHandle ch1 = _conPutC( NULLCONTAINER, b1 );
-            ContainerHandle ch2 = _conPutC( NULLCONTAINER, b2 );
-            _conArrayPut( ch, ch1, 1, 0 );
-            _conArrayPut( ch, ch2, 2, 0 );
-            _conRelease( ch1 );
-            _conRelease( ch2 );
-         }
-         else
-         {
-            _conArrayPut( ch, v1, 1, 0 );
-            _conArrayPut( ch, v2, 2, 0 );
-         }
-         _conaadd( changes, ch );
-         _conRelease( ch );
-      }
       return match;
    }
-   return compare_character_values( v1, v2, flags, changes );
+   return match;
 }
-BOOL vcmp_ns::compare_date_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle changes )
+BOOL vcmp_ns::compare_date_values( ContainerHandle v1, ContainerHandle v2)
 {
-   return FALSE;
+   char s1[16]; ZeroMemory( s1,sizeof(s1));
+   char s2[16]; ZeroMemory( s2,sizeof(s2));
+   _conGetDS( v1, s1 );
+   _conGetDS( v2, s2 );
+   for( DWORD i = 0; i < 8; i++ )
+   {
+      if( s1[ i ] != s2[ i ] )
+      {
+         return FALSE;
+      }
+   }
+   return TRUE;
 }
-BOOL vcmp_ns::compare_generic_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle changes )
+BOOL vcmp_ns::compare_generic_values( ContainerHandle v1, ContainerHandle v2)
 {
+   LONG n = 0;
+   if( !_conCompare( &n, v1, v2 ) )
+   {
+      return ( n == 0 );
+   }
    return FALSE;
 }
 
 
 
 // --------------------------------------------------------------------------------------------------------------------
-BOOL vcmp_ns::compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHandle v2, DWORD t2, DWORD flags, ContainerHandle& ch1, ContainerHandle& ch2 )
+BOOL vcmp_ns::compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHandle v2, DWORD t2, DWORD flags)
 {
 
 
@@ -552,99 +470,59 @@ BOOL vcmp_ns::compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHand
 
    if( ( t1 & 0xFF ) != ( t2 & 0xFF ) )
    { // diferent types and no possible casting
-      if( flags & VCMP_STRINGIFY_CHANGES )
-      {
-         compare_character_values( v1, v2, flags | VCMP_JUST_DUMP_VALUES, ch1, ch2 );
          return FALSE;
-      }
-      else
-      {
-         ch1 = _conPut( ch1, v1 );
-         ch2 = _conPut( ch2, v2 );
-         return FALSE;
-      }
    }
 
    switch( t1 & 0xFF )
    {
       case XPP_CHARACTER:
       {
-         return compare_character_values( v1, v2, flags, ch1, ch2 );
+         return compare_character_values( v1, v2, flags);
       }
       case XPP_NUMERIC:
       {
-         return compare_numeric_values( v1, v2, flags, ch1, ch2 );
+         return compare_numeric_values( v1, v2, flags);
       }
       case XPP_LOGICAL:
       {
-         return compare_logical_values( v1, v2, flags, ch1, ch2 );
+         return compare_logical_values( v1, v2);
       }
       case XPP_DATE:
       {
-         return compare_date_values( v1, v2, flags, ch1, ch2 );
+         return compare_date_values( v1, v2);
       }
       default:
       {
-         return compare_generic_values( v1, v2, flags, ch1, ch2 );
+         return compare_generic_values( v1, v2 );
       }
    }
 }
 
 // --------------------------------------------------------------------------------------------------------------------
-BOOL vcmp_ns::compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flags, ContainerHandle& changes )   // -> lMatch
+BOOL vcmp_ns::compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flags)   // -> lMatch
 {
    BOOL match = FALSE;
    DWORD t1, t2;
 
    flags &= ~( VCMP_MISSING_LEFT | VCMP_MISSING_RIGHT | VCMP_JUST_DUMP_VALUES );  // internal use so clear if provided directly 
 
-
-   if( changes != NULLCONTAINER )
-   {
-      _conRelease( changes );
-      changes = NULLCONTAINER;
-   }
-
-
    _conType( v1, &t1 );
    _conType( v2, &t2 );
 
    if( ( flags & VCMP_COMPARE_MAP ) && ( ( t1 | t2 ) & ( XPP_ARRAY | XPP_OBJECT ) ) )
    {
-      return compare_map( v1, v2, flags, changes );
+      return FALSE;
+      // TO-DO: traverse internal elements 
+
    }
    flags &= ~VCMP_COMPARE_MAP;
 
-   ContainerHandle change_1 = NULLCONTAINER;
-   ContainerHandle change_2 = NULLCONTAINER;
-   match = compare_simple_values( v1, t1, v2, t2, flags, change_1, change_2 );
-   if( !match )
-   {
-      changes = _conNewArray( 1, 2 );
-      if( change_1 != NULLCONTAINER )
-      {
-         _conArrayPut( changes, change_1, 1, 0 );
-      }
-      if( change_2 != NULLCONTAINER )
-      {
-         _conArrayPut( changes, change_2, 2, 0 );
-      }
-   }
-   if( change_1 != NULLCONTAINER )
-   {
-      _conRelease( change_1 );
-      change_1 = NULL;
-   }
-   if( change_2 != NULLCONTAINER )
-   {
-      _conRelease( change_2 );
-      change_2 = NULL;
-   }
+   match = compare_simple_values( v1, t1, v2, t2, flags );
 
    return match;
 }
 // --------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags , 4 @changes ) ->  lMatch
+_XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags  ) ->  lMatch
 {
    TXppParamList xpp( pl, 4 );
    ContainerHandle v1 = xpp[ 1 ]->con();
@@ -663,21 +541,14 @@ _XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags , 4 @changes ) ->  lMa
          flags = xpp[ 3 ]->GetDWord();
       }
    }
-
-   ContainerHandle changes = NULLCONTAINER;
-   BOOL result = vcmp_ns::compare_values( v1, v2, flags, changes );
-   if( changes != NULLCONTAINER )
-   {
-      xpp[ 4 ]->Put( changes );
-      _conRelease( changes );
-   }
+   BOOL result = vcmp_ns::compare_values( v1, v2, flags);
    xpp[ 0 ]->PutBool( result );
 }
 
 
 
 // -----------------------------------------------------------------------------------------------------------------
-// __vtran( v , flags , len , precission )
+// __vtran( v , flags )
 _XPP_REG_FUN_( __VTRAN )
 {
    TXppParamList xpp( pl, 4 );
@@ -695,6 +566,24 @@ _XPP_REG_FUN_( __VTRAN )
          flags = xpp[ 2 ]->GetDWord();
       }
    }
+   LPSTR p = 0;
+   DWORD cb = 0;
+   BYTE small_buffer[ 256 ];
+   void* buffer = vcmp_ns::to_string( v1, flags, p, cb, small_buffer );
+   if( p && cb )
+   {
+      xpp[ 0 ]->PutStrLen( p, cb );
+   }
+   else 
+   {
+      xpp[ 0 ]->PutStr("");
+   }
+   if( buffer )
+   {
+      _xfree( buffer );
+   }
+
+
 }
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -1095,7 +984,7 @@ DWORD vcmp_ns::__vtran_parse_flags( LPCSTR p )
    return flags;
 }
 // ---------------------------------------------------------------------------------------------------------------------------------
-DWORD vcmp_ns::__type_coercion( DWORD *pt1, DWORD *pt2 , DWORD & flags )
+DWORD vcmp_ns::__type_coercion(DWORD* pt1, DWORD* pt2, DWORD& flags)
 {
    DWORD t1, t2;
    if( pt1 ) 
