@@ -146,6 +146,71 @@ void TLXbStack::PopAndDestroy( void ){ _conReleaseM(Pop(),0);}
       // ---------------------------------------------------------------------------------
 DWORD TLXbStack::Count( void ){ return m_element_capacity; }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>TlsStackTop</name>
+      <category>runtime/thread</category>
+      <description>
+         Returns an item from the current thread's OT4XB ThreadLocalStorage Stack without removing it.
+      </description>
+      <syntax>TlsStackTop( [nSkip] [, @pCtx] ) -> xValue</syntax>
+      <parameters>
+         <parameter>
+            <name>nSkip</name>
+            <type>Numeric</type>
+            <description>Zero-based distance from the top of the stack. The default value is 0.</description>
+         </parameter>
+         <parameter>
+            <name>@pCtx</name>
+            <type>Numeric by reference</type>
+            <description>Optional pointer to the internal context DWORD associated with the stack item.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any | NIL</type>
+         <description>Stored value, or NIL when no item exists at the requested position.</description>
+      </return>
+      <remarks>
+         Each thread has its own independent ThreadLocalStorage Stack for application use.
+      </remarks>
+   </function>
+   <function>
+      <name>TlsStackPush</name>
+      <category>runtime/thread</category>
+      <description>Pushes a value on the current thread's OT4XB ThreadLocalStorage Stack.</description>
+      <syntax>TlsStackPush( xValue ) -> NIL</syntax>
+      <parameters>
+         <parameter><name>xValue</name><type>Any</type><description>Value to store on the thread-local stack.</description></parameter>
+      </parameters>
+      <return> NIL </return>
+   </function>
+   <function>
+      <name>TlsStackPop</name>
+      <category>runtime/thread</category>
+      <description>Pops the top value from the current thread's OT4XB ThreadLocalStorage Stack.</description>
+      <syntax>TlsStackPop( [@pCtx] ) -> xValue</syntax>
+      <parameters>
+         <parameter>
+            <name>@pCtx</name>
+            <type>Numeric by reference</type>
+            <description>Optional context DWORD value stored with the popped item.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any | NIL</type>
+         <description>Popped value, or NIL when the stack is empty.</description>
+      </return>
+   </function>
+   <function>
+      <name>TlsStackCount</name>
+      <category>runtime/thread</category>
+      <description>Returns the number of items in the current thread's OT4XB ThreadLocalStorage Stack.</description>
+      <syntax>TlsStackCount() -> nCount</syntax>
+      <return><type>Numeric</type><description>Current thread's ThreadLocalStorage Stack item count.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY TLSSTACKTOP( XppParamList pl)
 {
    TTlsHeapManager * pHMan = GetTlsHeapManager();
@@ -183,6 +248,47 @@ XPPRET XPPENTRY TLSSTACKCOUNT( XppParamList pl)
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>Xbase++ TLS slot wrappers</name>
+      <source>TLXbStack.cpp</source>
+      <category>runtime/thread</category>
+      <description>
+         Thin wrappers over the Win32 TLS slot API that store Xbase++ container handles in a slot.
+      </description>
+      <functions>
+         <function>
+            <name>XbTlsAlloc</name>
+            <syntax>XbTlsAlloc() -> nTlsIndex | NIL</syntax>
+            <description>Allocates a Win32 TLS slot for the process.</description>
+         </function>
+         <function>
+            <name>XbTlsFree</name>
+            <syntax>XbTlsFree( nTlsIndex ) -> lOk</syntax>
+            <description>Frees a Win32 TLS slot.</description>
+         </function>
+         <function>
+            <name>XbTlsSetValue</name>
+            <syntax>XbTlsSetValue( nTlsIndex [, xValue] ) -> lOk</syntax>
+            <description>
+               Replaces the current thread's value for the TLS slot. The previous stored container is released;
+               when xValue is omitted the slot is set to NULL.
+            </description>
+         </function>
+         <function>
+            <name>XbTlsGetValue</name>
+            <syntax>XbTlsGetValue( nTlsIndex ) -> xValue | NIL</syntax>
+            <description>Returns the current thread's value stored in the TLS slot.</description>
+         </function>
+      </functions>
+      <remarks>
+         These are low-level wrappers. Clear stored values before freeing a TLS index when application code owns
+         the lifetime of values stored in that slot.
+      </remarks>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY XBTLSALLOC( XppParamList pl)
 {                 
    DWORD dwTls = TlsAlloc();
@@ -215,6 +321,49 @@ OT4XB_API ContainerHandle _WithObject_StackTop_( UINT n )
    return GetTlsHeapManager()->m_pWithObject->GetTos(n);
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>WithObjectStack helpers</name>
+      <source>TLXbStack.cpp</source>
+      <category>runtime/thread</category>
+      <description>
+         Thread-local stack used by OT4XB header commands such as WITH OBJECT, END WITH, WITH FRAME, END FRAME
+         and the .: shorthand translators.
+      </description>
+      <functions>
+         <function>
+            <name>WithObjectStackTop</name>
+            <syntax>WithObjectStackTop( [nSkip] ) -> xValue | NIL</syntax>
+            <description>Returns an item from the current thread's with-object stack without removing it.</description>
+         </function>
+         <function>
+            <name>WithObjectStackPush</name>
+            <syntax>WithObjectStackPush( xValue ) -> NIL</syntax>
+            <description>Pushes xValue on the current thread's with-object stack.</description>
+         </function>
+         <function>
+            <name>WithObjectStackPop</name>
+            <syntax>WithObjectStackPop() -> xValue | NIL</syntax>
+            <description>Pops and returns the current top value.</description>
+         </function>
+         <function>
+            <name>WithObjectStackCount</name>
+            <syntax>WithObjectStackCount() -> nCount</syntax>
+            <description>Returns the current thread's with-object stack depth.</description>
+         </function>
+         <function>
+            <name>WithObjectStackRecover</name>
+            <syntax>WithObjectStackRecover( nCount ) -> NIL</syntax>
+            <description>Pops items until the stack contains at most nCount items.</description>
+         </function>
+      </functions>
+      <remarks>
+         Application code normally uses the ot4xb.ch commands instead of calling these functions directly.
+      </remarks>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY WITHOBJECTSTACKTOP( XppParamList pl)
 {
    TTlsHeapManager * pHMan = GetTlsHeapManager();
@@ -255,6 +404,44 @@ XPPRET XPPENTRY WITHOBJECTSTACKRECOVER( XppParamList pl)
   while( pHMan->m_pWithObject->Count() > ((DWORD) i) ){ _conReleaseM(pHMan->m_pWithObject->Pop() , 0);  }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>OT4XB array iterator helpers</name>
+      <source>TLXbStack.cpp</source>
+      <category>array/iteration</category>
+      <description>
+         Runtime support for the ITERATE ARRAY / END ITERATE commands declared in ot4xb.ch. The iterator stores
+         its state in the current thread's with-object stack, so with.item and with.index can be used inside the loop.
+      </description>
+      <functions>
+         <function>
+            <name>ot4xb_array_iterator</name>
+            <syntax>ot4xb_array_iterator( aArray ) -> NIL</syntax>
+            <description>Starts an iterator over aArray.</description>
+         </function>
+         <function>
+            <name>ot4xb_array_iterator_step</name>
+            <syntax>ot4xb_array_iterator_step( [nTypeMask] ) -> lContinue</syntax>
+            <description>
+               Advances to the next item. When nTypeMask is supplied, items whose Xbase++ type does not match
+               the mask are skipped.
+            </description>
+         </function>
+         <function>
+            <name>ot4xb_array_iterator_index</name>
+            <syntax>ot4xb_array_iterator_index() -> nIndex</syntax>
+            <description>Returns the current 1-based array index while inside an active iterator.</description>
+         </function>
+      </functions>
+      <example><![CDATA[
+ITERATE ARRAY aItems VALID TYPES XPP_CHARACTER
+   ? with.index, with.item
+END ITERATE
+      ]]></example>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR )
 {
    TXppParamList xpp(pl,1);
@@ -316,6 +503,33 @@ _XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR_INDEX )
    _retnl(pl,(LONG) GetTlsHeapManager()->m_pWithObject->GetTosCtx(0));
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>TLS</name>
+      <category>runtime/thread</category>
+      <description>
+         Returns the current thread's TLS expando object.
+      </description>
+      <syntax>TLS() -> oTls</syntax>
+      <return>
+         <type>Object</type>
+         <description>Thread-local expando object backed by an internal OT4XB hash table.</description>
+      </return>
+      <remarks>
+         Each thread has its own TLS object for application data. It behaves like _ot4xb_expando_(), but the backing
+         hash table is local to the current thread. Properties can be read and written using normal expando syntax,
+         for example:
+      </remarks>
+      <example><![CDATA[
+TLS():clave := valor
+? TLS():clave
+
+TLS():clave := NIL   // removes the property
+      ]]></example>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( TLS )
 {
    if( _cono_tls_static_ == NULLCONTAINER )

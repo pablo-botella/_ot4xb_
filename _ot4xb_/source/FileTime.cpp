@@ -150,12 +150,48 @@ void OT4XB_API __cdecl ft64_SetTs( FILETIME* pft, LPSTR ps , LONG* pnShift )
 // ft64_SetTs( @ft , cStr , @nShift  )
 // ft64_SetTs( pft , cStr , @nShift , nExtendedFlags )
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_SetTs</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores a timestamp string into a FILETIME64 value.
+      </description>
+      <syntax>ft64_SetTs( pft, cTimeStamp, @nShift [, nFlags] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>cTimeStamp</name>
+            <type>Character | FILETIME64 object | NIL</type>
+            <description>
+               Timestamp string to parse. With flag 0x01 it may also be a FILETIME64-compatible object to copy from.
+               With flag 0x10, NIL stores the current time.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nShift</name>
+            <type>Numeric by reference</type>
+            <description>Receives the timezone shift in minutes when the string contains a timezone component.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>0x01 allows object copy; 0x10 allows NIL as now UTC; 0x30 allows NIL as now local.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>
+         The pft parameter uses OT4XB extended pointer handling. It can be a FILETIME64 object, an
+         8-byte character buffer passed by reference when it must be modified, a numeric memory pointer,
+         or an array holding the low and high DWORD values.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_SETTS ) 
 {
@@ -216,12 +252,50 @@ LPSTR OT4XB_API __cdecl ft64_GetTs( FILETIME* pft, LPSTR pFmt)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_GetTs</name>
+      <category>date-time/filetime</category>
+      <description>
+         Formats a FILETIME64 value as a timestamp string.
+      </description>
+      <syntax>ft64_GetTs( pft [, cFormat [, nFlags]] ) -> cTimeStamp | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>cFormat</name>
+            <type>Character</type>
+            <description>
+               Optional printf-style format. Arguments supplied internally are year, month, day, hour,
+               minute, second and millisecond.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Low nibble 1 uses current local time when pft is NIL; low nibble 2 uses current UTC time.
+               Format flags 0x0C00, 0x0E00, 0x0F00 and 0x1700 select built-in timestamp formats when
+               cFormat is omitted.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>Formatted timestamp, or NIL when no FILETIME source can be resolved.</description>
+      </return>
+      <remarks>
+         Default format is YYYY-MM-DD hh:mm:ss. Built-in format 0x0C00 returns YYYYMMDDhhmm,
+         0x0E00 returns YYYYMMDDhhmmss, 0x0F00 selects the current 15-character compact
+         format, and 0x1700 returns YYYY-MM-DDThh:mm:ss.mmm.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_GETTS ) // ft64_GetTs( @ft , cFmt , flags) // flags 1 default to localtime 2 default to system time
 {
@@ -308,12 +382,33 @@ LPSTR OT4XB_API __cdecl ft64_ToHttp( FILETIME* pft)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_ToHttp</name>
+      <category>date-time/filetime</category>
+      <description>
+         Formats a FILETIME64 value as an HTTP date string.
+      </description>
+      <syntax>ft64_ToHttp( pft [, nFlags] ) -> cHttpDate | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>Low nibble 1 uses current local time when pft is NIL; low nibble 2 uses current UTC time.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>HTTP-style timestamp, or NIL when no FILETIME source can be resolved.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_TOHTTP) // ft64_ToHttp( ft , flags )
 {
@@ -351,15 +446,43 @@ _XPP_REG_FUN_( FT64_TOHTTP) // ft64_ToHttp( ft , flags )
    else { _ret(pl); };
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ft64_SetDateTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores an Xbase++ date/time pair into a FILETIME64 value.
+      </description>
+      <syntax>ft64_SetDateTime( pft, dDate, uTime ) -> NIL</syntax>
+      <syntax>ft64_SetDateTime( pft, oFileTime ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>dDate</name>
+            <type>Date | Character | FILETIME64 object</type>
+            <description>
+               Date value to store, or another FILETIME64-compatible value to copy from.
+            </description>
+         </parameter>
+         <parameter>
+            <name>uTime</name>
+            <type>Character | Numeric</type>
+            <description>
+               Time as HH:MM:SS.mmm or as seconds after midnight.
+            </description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_SETDATETIME ) // ft64_SETDATETIME(pft,d,t)
 {
    CON_PLKSTREX plk;
@@ -426,12 +549,35 @@ _XPP_REG_FUN_( FT64_SETDATETIME ) // ft64_SETDATETIME(pft,d,t)
 //----------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_GetDateTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Extracts the date and a time string from a FILETIME64 value.
+      </description>
+      <syntax>ft64_GetDateTime( pft, @dDate, @cTime ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>dDate</name>
+            <type>Date by reference</type>
+            <description>Receives the Xbase++ date.</description>
+         </parameter>
+         <parameter>
+            <name>cTime</name>
+            <type>Character by reference</type>
+            <description>Receives HH:MM:SS.mmm.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_GETDATETIME ) // ft64_GETDATETIME(pft,@d,@t)
 {
@@ -454,12 +600,35 @@ _XPP_REG_FUN_( FT64_GETDATETIME ) // ft64_GETDATETIME(pft,@d,@t)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_GetDateTimeSec</name>
+      <category>date-time/filetime</category>
+      <description>
+         Extracts the date and the time as seconds after midnight from a FILETIME64 value.
+      </description>
+      <syntax>ft64_GetDateTimeSec( pft, @dDate, @nSeconds ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>dDate</name>
+            <type>Date by reference</type>
+            <description>Receives the Xbase++ date.</description>
+         </parameter>
+         <parameter>
+            <name>nSeconds</name>
+            <type>Numeric by reference</type>
+            <description>Receives seconds after midnight, including milliseconds as decimals.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_GETDATETIMESEC ) // ft64_GETDATETIMESEC(pft,@d,@t)
 {
@@ -489,15 +658,33 @@ _XPP_REG_FUN_( FT64_GETDATETIMESEC ) // ft64_GETDATETIMESEC(pft,@d,@t)
    _ret(pl);
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ft64_Now</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores the current time into a FILETIME64 value.
+      </description>
+      <syntax>ft64_Now( pft [, lLocal] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>lLocal</name>
+            <type>Logical</type>
+            <description>When .T., stores local time. Otherwise stores UTC system time.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_NOW ) // ft64_NOW(pft,lLocal)
 {
    CON_PLKSTREX plk;
@@ -575,12 +762,46 @@ static void elaptime_to_str( TZString & z, LONGLONG t1, LONGLONG t2 )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_ElapMilliSeconds</name>
+      <category>date-time/filetime</category>
+      <description>
+         Returns elapsed milliseconds between two FILETIME64 values.
+      </description>
+      <syntax>ft64_ElapMilliSeconds( pft [, pft2 [, lLocal [, @cElapsed]]]) -> nMilliseconds | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Start FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>pft2</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>End FILETIME storage. When omitted, current UTC or local time is used.</description>
+         </parameter>
+         <parameter>
+            <name>lLocal</name>
+            <type>Logical</type>
+            <description>When pft2 is omitted, .T. compares against current local time; otherwise UTC is used.</description>
+         </parameter>
+         <parameter>
+            <name>cElapsed</name>
+            <type>Character by reference</type>
+            <description>
+               Optional elapsed text. When this fourth parameter is supplied, the function stores the text and
+               does not return the numeric value.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Elapsed milliseconds, unless cElapsed is supplied.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_ELAPMILLISECONDS) // ft64_ElapMilliSeconds(pft,pft2,lLocal[,yyyy days hh:mm:ss.mss)
 {
@@ -622,12 +843,46 @@ _XPP_REG_FUN_( FT64_ELAPMILLISECONDS) // ft64_ElapMilliSeconds(pft,pft2,lLocal[,
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_ElapSeconds</name>
+      <category>date-time/filetime</category>
+      <description>
+         Returns elapsed seconds between two FILETIME64 values.
+      </description>
+      <syntax>ft64_ElapSeconds( pft [, pft2 [, lLocal [, @cElapsed]]]) -> nSeconds | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Start FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>pft2</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>End FILETIME storage. When omitted, current UTC or local time is used.</description>
+         </parameter>
+         <parameter>
+            <name>lLocal</name>
+            <type>Logical</type>
+            <description>When pft2 is omitted, .T. compares against current local time; otherwise UTC is used.</description>
+         </parameter>
+         <parameter>
+            <name>cElapsed</name>
+            <type>Character by reference</type>
+            <description>
+               Optional elapsed text. When this fourth parameter is supplied, the function stores the text and
+               does not return the numeric value.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Elapsed seconds, unless cElapsed is supplied.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_ELAPSECONDS) // ft64_ElapSeconds(pft,pft2,lLocal)
 {
@@ -672,12 +927,44 @@ _XPP_REG_FUN_( FT64_ELAPSECONDS) // ft64_ElapSeconds(pft,pft2,lLocal)
 // 1 - and pft2 == NIL -> .T. if pft is before now
 // 2 - and pft2 == NIL -> like 1 but using local time
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_Compare</name>
+      <category>date-time/filetime</category>
+      <description>
+         Compares two FILETIME64 values.
+      </description>
+      <syntax>ft64_Compare( pft, pft2 [, nFlags] ) -> nCompare | lBeforeNow | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>First FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>pft2</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Second FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               With pft2 omitted, 1 compares pft with current UTC time and 2 compares with current local time,
+               returning a logical value.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | Logical | NIL</type>
+         <description>
+            With two FILETIME values, returns 0 when equal, 1 when pft is earlier than pft2, and -1 when pft
+            is later than pft2. With flags 1 or 2 and no pft2, returns whether pft is before or equal to now.
+         </description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_COMPARE) // ft64_Compare(pft,pft2[,nFlags])
 {
@@ -720,12 +1007,39 @@ _XPP_REG_FUN_( FT64_COMPARE) // ft64_Compare(pft,pft2[,nFlags])
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_Add</name>
+      <category>date-time/filetime</category>
+      <description>
+         Adds a millisecond-based offset to a FILETIME64 value.
+      </description>
+      <syntax>ft64_Add( pft, nMilliseconds [, nMultiplier] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>FILETIME storage to modify.</description>
+         </parameter>
+         <parameter>
+            <name>nMilliseconds</name>
+            <type>Numeric</type>
+            <description>Base offset in milliseconds.</description>
+         </parameter>
+         <parameter>
+            <name>nMultiplier</name>
+            <type>Numeric</type>
+            <description>Optional multiplier. Default is 1.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>
+         FILETIME stores 100-nanosecond ticks. This function converts nMilliseconds to FILETIME ticks
+         and then applies the optional multiplier.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_ADD ) // Ft64_Add(pft,n,m)
 {
@@ -798,12 +1112,31 @@ void OT4XB_API __cdecl ft64_AddMonths( FILETIME* pft, LONG m )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_Add_Y</name>
+      <category>date-time/filetime</category>
+      <description>
+         Adds years to a FILETIME64 value.
+      </description>
+      <syntax>ft64_Add_Y( pft, nYears ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>FILETIME storage to modify.</description>
+         </parameter>
+         <parameter>
+            <name>nYears</name>
+            <type>Numeric</type>
+            <description>Number of years to add. Negative values move backwards.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>February 29 is adjusted to February 28 when the target year is not leap.</remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_ADD_Y ) // Ft64_Add_Y(pft,n)
 {
@@ -818,12 +1151,31 @@ _XPP_REG_FUN_( FT64_ADD_Y ) // Ft64_Add_Y(pft,n)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_Add_M</name>
+      <category>date-time/filetime</category>
+      <description>
+         Adds months to a FILETIME64 value.
+      </description>
+      <syntax>ft64_Add_M( pft, nMonths ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>FILETIME storage to modify.</description>
+         </parameter>
+         <parameter>
+            <name>nMonths</name>
+            <type>Numeric</type>
+            <description>Number of months to add. Negative values move backwards.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>End-of-month dates are adjusted when the target month has fewer days.</remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_ADD_M ) // Ft64_Add_M(pft,n)
 {
@@ -838,12 +1190,28 @@ _XPP_REG_FUN_( FT64_ADD_M ) // Ft64_Add_M(pft,n)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_To_DosDateTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Converts a FILETIME64 value to a DOS FAT date/time DWORD.
+      </description>
+      <syntax>ft64_To_DosDateTime( pft ) -> nDosDateTime | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>DOS date/time value, or NIL if conversion fails.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_TO_DOSDATETIME) // Ft64_To_DosDateTime(pft) -> nDosDateTime
 {
@@ -862,12 +1230,33 @@ _XPP_REG_FUN_( FT64_TO_DOSDATETIME) // Ft64_To_DosDateTime(pft) -> nDosDateTime
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_From_DosDateTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores a DOS FAT date/time DWORD into a FILETIME64 value.
+      </description>
+      <syntax>ft64_From_DosDateTime( pft, nDosDateTime ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>nDosDateTime</name>
+            <type>Numeric</type>
+            <description>DOS FAT date/time value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. when the value was converted; otherwise .F.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_FROM_DOSDATETIME) // Ft64_From_DosDateTime(pft,ddt) -> lOk
 {
@@ -895,12 +1284,31 @@ DWORD OT4XB_API __cdecl ft64_GetUnixTime( FILETIME* pft)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_To_UnixTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Converts a FILETIME64 value to a 32-bit Unix timestamp.
+      </description>
+      <syntax>ft64_To_UnixTime( pft ) -> nUnixTime | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>
+            Unix time in seconds. Values are returned using the 32-bit numeric representation available
+            to Xbase++.
+         </description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_TO_UNIXTIME) // Ft64_To_UnixTime(pft) -> nUnixTime
 {
@@ -917,12 +1325,30 @@ _XPP_REG_FUN_( FT64_TO_UNIXTIME) // Ft64_To_UnixTime(pft) -> nUnixTime
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_From_UnixTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores a 32-bit Unix timestamp into a FILETIME64 value.
+      </description>
+      <syntax>ft64_From_UnixTime( pft, nUnixTime ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>nUnixTime</name>
+            <type>Numeric</type>
+            <description>Unix time in seconds.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_FROM_UNIXTIME) // Ft64_From_UnixTime(pft,ut) -> NIL
 {
@@ -948,12 +1374,28 @@ LONGLONG OT4XB_API __cdecl ft64_GetUnixTime64( FILETIME* pft)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_To_ExcelTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Converts a FILETIME64 value to an Excel serial date/time number.
+      </description>
+      <syntax>ft64_To_ExcelTime( pft ) -> nExcelTime | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Excel serial date/time value.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_TO_EXCELTIME) // Ft64_To_EXCELTime(pft) -> nUnixTime
 {
@@ -972,12 +1414,30 @@ _XPP_REG_FUN_( FT64_TO_EXCELTIME) // Ft64_To_EXCELTime(pft) -> nUnixTime
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_From_ExcelTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores an Excel serial date/time number into a FILETIME64 value.
+      </description>
+      <syntax>ft64_From_ExcelTime( pft, nExcelTime ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>nExcelTime</name>
+            <type>Numeric</type>
+            <description>Excel serial date/time value.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_FROM_EXCELTIME) // Ft64_From_EXCELTime(pft,ut) -> NIL
 {
@@ -993,12 +1453,86 @@ _XPP_REG_FUN_( FT64_FROM_EXCELTIME) // Ft64_From_EXCELTime(pft,ut) -> NIL
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/classes/xb_class_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <class>
+      <name>FILETIME64</name>
+      <parent>GWST</parent>
+      <source>FileTime.cpp:wapist_FILETIME64</source>
+      <category>date-time/filetime</category>
+      <description>
+         GWST wrapper over the WinAPI FILETIME structure, with helper properties and methods for
+         timestamp parsing, formatting, arithmetic and common time representations.
+      </description>
+      <members>
+         <member type="DWORD" name="dwLowDateTime" offset="0" size="4" />
+         <member type="DWORD" name="dwHighDateTime" offset="4" size="4" />
+         <member type="DWORD64" name="qft" offset="0" size="8">
+            Alternate 64-bit view over the same FILETIME storage.
+         </member>
+      </members>
+      <properties>
+         <property name="cTimeStamp" type="Character">Default timestamp view, YYYY-MM-DD hh:mm:ss.</property>
+         <property name="dDate" type="Date">Date component as an Xbase++ date.</property>
+         <property name="cTime" type="Character">Time component as HH:MM:SS.mmm.</property>
+         <property name="nTime" type="Numeric">Time component as seconds after midnight.</property>
+         <property name="cHexTs" type="Character">64-bit FILETIME value as a hexadecimal string.</property>
+         <property name="nDosDateTime" type="Numeric">DOS FAT date/time DWORD.</property>
+         <property name="nUnixTime" type="Numeric">Unix timestamp in seconds.</property>
+         <property name="nExcelTime" type="Numeric">Excel serial date/time value.</property>
+      </properties>
+      <methods>
+         <method name="SetTimeStamp" returns="Self">Stores a timestamp string, another FILETIME64 object, or now depending on flags.</method>
+         <method name="_GetTimeStamp_" returns="Character">Formats the value with a supplied printf-style format.</method>
+         <method name="GetTimeStamp" returns="Character">Returns YYYY-MM-DD hh:mm:ss.</method>
+         <method name="GetTimeStamp19" returns="Character">Returns YYYY-MM-DD hh:mm:ss.</method>
+         <method name="GetTimeStamp14" returns="Character">Returns YYYYMMDDhhmmss.</method>
+         <method name="GetIso8601" returns="Character">Returns YYYY-MM-DDThh:mm:ss.</method>
+         <method name="json_escape_self" returns="Character">Returns a JSON escaped ISO-like timestamp using tls():json_timezone when present.</method>
+         <method name="strf" returns="Character">Formats the value with FT64_STRF().</method>
+         <method name="SetDateTime" returns="Self">Stores an Xbase++ date and time.</method>
+         <method name="GetDateTime" returns="Self">Stores date and HH:MM:SS.mmm into by-reference parameters.</method>
+         <method name="GetDateTimeSec" returns="Self">Stores date and seconds after midnight into by-reference parameters.</method>
+         <method name="Now" returns="Self">Stores current UTC time, or local time when lLocal is .T.</method>
+         <method name="NowL" returns="Self">Stores current local time.</method>
+         <method name="ElapMilliSeconds" returns="Numeric">Returns elapsed milliseconds.</method>
+         <method name="ElapMilliSecondsL" returns="Numeric">Returns elapsed milliseconds against local time when no end value is supplied.</method>
+         <method name="ElapTimeStr" returns="Character">Returns elapsed time as text.</method>
+         <method name="ElapSeconds" returns="Numeric">Returns elapsed seconds.</method>
+         <method name="ElapSecondsL" returns="Numeric">Returns elapsed seconds against local time when no end value is supplied.</method>
+         <method name="Compare" returns="Numeric">Compares with another FILETIME64 value.</method>
+         <method name="SETRFC822" returns="Self">Stores an RFC822 timestamp string.</method>
+         <method name="Day" returns="Numeric">Returns day of month.</method>
+         <method name="Month" returns="Numeric">Returns month number.</method>
+         <method name="Year" returns="Numeric">Returns year number.</method>
+         <method name="AddMilliSeconds" returns="Self">Adds milliseconds.</method>
+         <method name="AddSeconds" returns="Self">Adds seconds.</method>
+         <method name="AddMinutes" returns="Self">Adds minutes.</method>
+         <method name="AddHours" returns="Self">Adds hours.</method>
+         <method name="AddDays" returns="Self">Adds days.</method>
+         <method name="AddMonths" returns="Self">Adds months.</method>
+         <method name="AddYears" returns="Self">Adds years.</method>
+         <method name="SetHexTs" returns="NIL">Stores a hexadecimal 64-bit FILETIME value.</method>
+         <method name="GetHexTs" returns="Character">Returns the hexadecimal 64-bit FILETIME value.</method>
+         <method name="SetDosDateTime" returns="Self">Stores a DOS FAT date/time DWORD.</method>
+         <method name="GetDosDateTime" returns="Numeric">Returns a DOS FAT date/time DWORD.</method>
+         <method name="SetUnixTime" returns="Self">Stores a Unix timestamp.</method>
+         <method name="GetUnixTime" returns="Numeric">Returns a Unix timestamp.</method>
+         <method name="SetExcelTime" returns="Self">Stores an Excel serial date/time number.</method>
+         <method name="GetExcelTime" returns="Numeric">Returns an Excel serial date/time number.</method>
+         <method name="ToHttp" returns="Character">Returns an HTTP date string.</method>
+         <method name="ToLocalTime" returns="Self">Converts the stored UTC FILETIME to local time.</method>
+         <method name="SetCkf32Ts" returns="Self">Stores a CKF32 timestamp string.</method>
+         <method name="GetCkf32Ts" returns="Character">Returns a CKF32 timestamp string.</method>
+      </methods>
+      <remarks>
+         FILETIME64 uses the normal GWST storage model. Mutating helper methods generally return Self
+         so calls can be chained; methods that only read the value return the requested value.
+
+         The class is named FILETIME64 instead of FileTime to avoid a name conflict with the
+         FileTime function/class name used by Alaska XbTools.
+      </remarks>
+   </class>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl ) // <doc!xb!!|CLASS{FileTime}from{gwst}| />
 {
@@ -1091,12 +1625,32 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl ) // <doc!xb!!|CLASS{FileTime
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>dt2iso8601</name>
+      <category>date-time/filetime</category>
+      <description>
+         Formats an Xbase++ date/time pair as an ISO 8601 timestamp.
+      </description>
+      <syntax>dt2iso8601( dDate, uTime ) -> cIso8601</syntax>
+      <parameters>
+         <parameter>
+            <name>dDate</name>
+            <type>Date</type>
+            <description>Xbase++ date value.</description>
+         </parameter>
+         <parameter>
+            <name>uTime</name>
+            <type>Character | Numeric</type>
+            <description>Time value accepted by OT4XB date/time conversion helpers.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Timestamp in YYYY-MM-DDThh:mm:ss format, or an empty string when the date is invalid.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( DT2ISO8601 ) // DT2ISO8601(d,t) -> cIso8601
 {
@@ -1270,12 +1824,39 @@ void OT4XB_API __cdecl ft64_SetRfc822Date( FILETIME* pft, LPSTR ps , LONG* pnShi
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_SetRfc822Date</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores an RFC822 timestamp string into a FILETIME64 value.
+      </description>
+      <syntax>ft64_SetRfc822Date( pft, cRfc822, @nShift ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>cRfc822</name>
+            <type>Character</type>
+            <description>RFC822-style timestamp string.</description>
+         </parameter>
+         <parameter>
+            <name>nShift</name>
+            <type>Numeric by reference</type>
+            <description>Receives the timezone shift in minutes when a timezone component is present.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>
+         Numeric zones such as -0500 are supported. Named US zones EST/EDT, CST/CDT, MST/MDT and PST/PDT
+         are also recognized.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_SETRFC822DATE) // ft64_SetRfc822Date(pft,cStr,@nShiftInMinutes) -> NIL
 {
@@ -1313,12 +1894,29 @@ void OT4XB_API __cdecl ft64_ToLocalTime( FILETIME* pft)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_ToLocalTime</name>
+      <category>date-time/filetime</category>
+      <description>
+         Converts the stored UTC FILETIME64 value to local time.
+      </description>
+      <syntax>ft64_ToLocalTime( pft ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>FILETIME storage to modify.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>
+         The conversion uses the current local/system offset. The source contains a TODO to review daylight
+         saving behavior for the date being converted.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_TOLOCALTIME) // FT64_TOLOCALTIME(pft) -> NIL
 {
@@ -1360,12 +1958,46 @@ LPSTR OT4XB_API __cdecl ft64_strf_l( FILETIME* pft, LPSTR pFormat , LPSTR locale
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ft64_strf</name>
+      <category>date-time/filetime</category>
+      <description>
+         Formats a FILETIME64 value with the C runtime strftime() formatter.
+      </description>
+      <syntax>ft64_strf( pft, cFormat [, cLocale [, nLocaleCategory]] ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>cFormat</name>
+            <type>Character</type>
+            <description>strftime() format string.</description>
+         </parameter>
+         <parameter>
+            <name>cLocale</name>
+            <type>Character</type>
+            <description>Optional C locale name used with _strftime_l().</description>
+         </parameter>
+         <parameter>
+            <name>nLocaleCategory</name>
+            <type>Numeric</type>
+            <description>Optional locale category. Default is LC_TIME.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Formatted text, or an empty string when the value cannot be formatted.</description>
+      </return>
+      <remarks>
+         The non-standard sequence %S.msc is replaced with seconds plus milliseconds.
+      </remarks>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_STRF ) // FT64_STRF( @ft , cFmt , locale , locale_category)
 {
@@ -1456,6 +2088,35 @@ BOOL OT4XB_API __cdecl ft64_get_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] )
    return FALSE;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ft64_Set_Ckf32Ts</name>
+      <category>date-time/filetime</category>
+      <description>
+         Stores a CKF32 timestamp string into a FILETIME64 value.
+      </description>
+      <syntax>ft64_Set_Ckf32Ts( pft, cCkf32Ts ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Destination FILETIME storage.</description>
+         </parameter>
+         <parameter>
+            <name>cCkf32Ts</name>
+            <type>Character</type>
+            <description>CKF32 timestamp string. The function reads the first 8 bytes.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. when the timestamp was decoded and stored; otherwise .F.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_SET_CKF32TS ) // FT64_SET_CKF32TS( @ft , ckf32ts )
 {
    BOOL result = FALSE;
@@ -1476,6 +2137,30 @@ _XPP_REG_FUN_( FT64_SET_CKF32TS ) // FT64_SET_CKF32TS( @ft , ckf32ts )
    }
    xpp[ 0 ]->PutBool( result );
 }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ft64_Get_Ckf32Ts</name>
+      <category>date-time/filetime</category>
+      <description>
+         Encodes a FILETIME64 value as a CKF32 timestamp string.
+      </description>
+      <syntax>ft64_Get_Ckf32Ts( pft ) -> cCkf32Ts</syntax>
+      <parameters>
+         <parameter>
+            <name>pft</name>
+            <type>FILETIME64 extended pointer</type>
+            <description>Source FILETIME storage.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>CKF32 timestamp string, or an empty string when the source cannot be read.</description>
+      </return>
+      <see-also>FILETIME64</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( FT64_GET_CKF32TS ) // FT64_GET_CKF32TS( @ft ) -> CKF32TS
 {
    char ckf32ts[ 16 ] = { 0 };

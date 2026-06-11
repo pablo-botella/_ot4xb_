@@ -5,6 +5,31 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 //----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xbmtpf1_</name>
+      <category>structures/internal</category>
+      <description>
+         Internal GWST dispatcher used by generated method wrappers to invoke a C method pointer through
+         TXbClsParams. It is exported for the generated Xbase++ code emitted by OT4XB, not as a general application
+         API, and is not intended to be called directly from application code.
+      </description>
+      <status>Internal GWST support API; not intended for direct application calls.</status>
+      <syntax>_xbmtpf1_( @Self, nPtrLo, nPtrHi, @rt, @e, nPCount, nParams, ... ) -> lOk</syntax>
+      <remarks>
+         Application code should not call this function directly. It is documented only so the exported symbol is
+         accounted for and can be classified as internal GWST machinery.
+      </remarks>
+      <return>
+         <type>logical</type>
+         <description>.T. when the dispatched method reports a successful result.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
+
 static LPSTR _GenCbParamBlock_( ULONG nParams );
 static LPSTR _GenCbParamBlockRef_( ULONG nParams );
 static DWORD _x_name2crc( LPSTR pName);

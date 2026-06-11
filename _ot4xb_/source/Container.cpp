@@ -8,6 +8,36 @@
 // -----------------------------------------------------------------------------------------------------------------
 static DWORD _fp_parclen_jmp_ = (DWORD) GetProcAddress( GetModuleHandle( "xpprt1.dll" ), "__parclen" );
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetLen</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Gets the length of an array element at the specified indices.
+         Wrapper for _conSizeA with variable arguments.
+      </description>
+      <syntax>DWORD _conArrayGetLen( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Container handle of the array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>DWORD</type>
+         <description>Length of the array element, or 0 if invalid.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API DWORD _conArrayGetLen( ContainerHandle cona, ... )
 {
    DWORD ul = 0;
@@ -50,6 +80,36 @@ OT4XB_API DWORD _conArrayGetLen( ContainerHandle cona, ... )
    return ul;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetType</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Gets the type of an array element at the specified indices.
+         Wrapper for _conTypeA with variable arguments.
+      </description>
+      <syntax>DWORD _conArrayGetType( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Container handle of the array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>DWORD</type>
+         <description>XPP type flags of the element, or 0 if invalid.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API DWORD _conArrayGetType( ContainerHandle cona, ... )
 {
    DWORD ul = 0;
@@ -92,6 +152,40 @@ OT4XB_API DWORD _conArrayGetType( ContainerHandle cona, ... )
    return ul;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayCheckType</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Checks if an array element at the specified indices matches the given type flags.
+      </description>
+      <syntax>BOOL _conArrayCheckType( ContainerHandle cona, ULONG nType, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Container handle of the array.</description>
+         </parameter>
+         <parameter>
+            <name>nType</name>
+            <type>ULONG</type>
+            <description>XPP type flags to check against.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>BOOL</type>
+         <description>TRUE if the element matches the type flags, FALSE otherwise.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API BOOL _conArrayCheckType( ContainerHandle cona, ULONG nType, ... )
 {
    DWORD ul = 0;
@@ -134,6 +228,35 @@ OT4XB_API BOOL _conArrayCheckType( ContainerHandle cona, ULONG nType, ... )
    return (BOOL) ( ul & nType );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conCheckType</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Checks if a container matches the given type flags.
+      </description>
+      <syntax>BOOL _conCheckType( ContainerHandle con, ULONG nType )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Container to check.</description>
+         </parameter>
+         <parameter>
+            <name>nType</name>
+            <type>ULONG</type>
+            <description>XPP type flags to check against.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>BOOL</type>
+         <description>TRUE if the container matches the type flags, FALSE otherwise.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API BOOL _conCheckType( ContainerHandle con, ULONG nType )
 {
    ULONG ul = 0;
@@ -142,6 +265,30 @@ OT4XB_API BOOL _conCheckType( ContainerHandle con, ULONG nType )
    return (BOOL) ( ul & nType );
 }
 //-----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetArrayLen</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the number of elements in the first dimension of an array container.
+      </description>
+      <syntax>ULONG _conGetArrayLen( ContainerHandle cona )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Container handle of the array.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ULONG</type>
+         <description>Number of elements, or 0 if invalid.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ULONG _conGetArrayLen( ContainerHandle cona )
 {
    ULONG ul = 0;
@@ -149,9 +296,39 @@ OT4XB_API ULONG _conGetArrayLen( ContainerHandle cona )
    return ul;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Description: Get a LONG value from a container
-// Remarks: Retrieving LONG values with _conGetNL() can result in data lost if the container have stored a double
-// value _conGetLong() detect the internal numeric type and convert it to LONG properly.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetLong</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a numeric container.
+      </description>
+      <notes>
+         Retrieving LONG values with _conGetNL() can result in data lost if the container have stored a double
+         value. _conGetLong() detect the internal numeric type and convert it to LONG properly.
+      </notes>
+      <syntax>XPPAPIRET _conGetLong( ContainerHandle con, LONG * pnVal )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Container to extract the value from.</description>
+         </parameter>
+         <parameter>
+            <name>pnVal</name>
+            <type>LONG*</type>
+            <description>Pointer to receive the LONG value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conGetLong( ContainerHandle con, LONG * pnVal )
 {
    ULONG ulType = 0;
@@ -177,9 +354,40 @@ OT4XB_API XPPAPIRET _conGetLong( ContainerHandle con, LONG * pnVal )
    return nResult;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Description: Get a LONG value from a container
-// Remarks: Retrieving LONG values with _conGetNL() can result in data lost if the container have stored a double
-// value _conGetLong() detect the internal numeric type and convert it to LONG properly.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetLongOrBool</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a numeric or logical container.
+         Logical containers are converted to 1 (.T.) or 0 (.F.).
+      </description>
+      <notes>
+         Retrieving LONG values with _conGetNL() can result in data lost if the container have stored a double
+         value. _conGetLongOrBool() detect the internal numeric type and convert it to LONG properly.
+      </notes>
+      <syntax>XPPAPIRET _conGetLongOrBool( ContainerHandle con, LONG * pnVal )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Container to extract the value from. Must be numeric or logical.</description>
+         </parameter>
+         <parameter>
+            <name>pnVal</name>
+            <type>LONG*</type>
+            <description>Pointer to receive the LONG value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conGetLongOrBool( ContainerHandle con, LONG * pnVal )
 {
    ULONG ulType = 0;
@@ -211,6 +419,37 @@ OT4XB_API XPPAPIRET _conGetLongOrBool( ContainerHandle con, LONG * pnVal )
    return nResult;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetLong64</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONGLONG (64-bit integer) value from a numeric container.
+         Detects the internal numeric type to avoid data loss.
+      </description>
+      <syntax>XPPAPIRET _conGetLong64( ContainerHandle con, LONGLONG * pnVal )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Numeric container to extract the value from.</description>
+         </parameter>
+         <parameter>
+            <name>pnVal</name>
+            <type>LONGLONG*</type>
+            <description>Pointer to receive the 64-bit value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+      <see-also>_conGetLongEx</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conGetLong64( ContainerHandle con, LONGLONG * pnVal )
 {
    ULONG ulType = 0;
@@ -239,6 +478,40 @@ OT4XB_API XPPAPIRET _conGetLong64( ContainerHandle con, LONGLONG * pnVal )
    return nResult;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetLongEx</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a container of any supported type:
+         - Numeric: detects internal type (double or integer) and converts properly.
+         - Logical: returns 1 for .T., 0 for .F.
+         - Character: treats the string buffer as containing the raw 4 bytes of a LONG.
+         - Object: assumes the object implements the :_lock_() and :_unlock_() methods (ot4xb structure convention),
+           calls :_lock_() to obtain a pointer and reads the first LONG from it.
+      </description>
+      <syntax>XPPAPIRET _conGetLongEx( ContainerHandle con, LONG * pnVal )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Container to extract the value from.</description>
+         </parameter>
+         <parameter>
+            <name>pnVal</name>
+            <type>LONG*</type>
+            <description>Pointer to receive the LONG value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conGetLongEx( ContainerHandle con, LONG * pnVal )
 {
    ULONG ul = 0;
@@ -286,16 +559,46 @@ OT4XB_API XPPAPIRET _conGetLongEx( ContainerHandle con, LONG * pnVal )
    return nResult;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Description: Get a LONG value from a Xbase++ parameter
-// Params:
-// <pl> Pointer to the Xbase++ parameter list
-// <nIndex> Position of the parameter which contains the numeric value (first parameter is 1).
-// <... > The remaining arguments must be of ULONG type and are only considered
-// when the parameter <ulIndex> is an array. In this case, an index is specified for each array
-// dimension to select the element which has the numeric value. Warning: The end of the
-// list of array indexes must be indicated with a NULL index.
-// Remarks: Retrieving LONG values with _parnl() can result in data lost if the Xbase++ param contains a double
-// value _parLong() detect the internal numeric type and convert it to LONG properly.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_parLong</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a numeric parameter in an XppParamList.
+         If the parameter is an array, accepts indices to select the element.
+      </description>
+      <notes>
+         Retrieving LONG values with _parnl() can result in data lost if the Xbase++ param contains a double
+         value. _parLong() detect the internal numeric type and convert it to LONG properly.
+      </notes>
+      <syntax>LONG _parLong( XppParamList pl, ULONG nIndex, ... )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>ULONG</type>
+            <description>Optional array indices if the parameter is an array. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Extracted value, or 0 if not numeric.</description>
+      </return>
+      <see-also>_parLongOrBool, _parLongEx</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _parLong( XppParamList pl, ULONG nIndex, ... )
 {
    ULONG ulType = _partype( pl, nIndex );
@@ -335,6 +638,43 @@ OT4XB_API LONG _parLong( XppParamList pl, ULONG nIndex, ... )
    return nResult;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_parLongOrBool</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a numeric or logical parameter in an XppParamList.
+         Logical parameters are converted to 1 (.T.) or 0 (.F.).
+         If the parameter is an array, accepts indices to select the element.
+      </description>
+      <syntax>LONG _parLongOrBool( XppParamList pl, ULONG nIndex, ... )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>ULONG</type>
+            <description>Optional array indices if the parameter is an array. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Extracted value, or 0 if not numeric or logical.</description>
+      </return>
+      <see-also>_parLong, _parLongEx</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _parLongOrBool( XppParamList pl, ULONG nIndex, ... )
 {
    ULONG ulType = _partype( pl, nIndex );
@@ -380,6 +720,47 @@ OT4XB_API LONG _parLongOrBool( XppParamList pl, ULONG nIndex, ... )
    return nResult;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_parLongEx</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONG value from a parameter of any supported type in an XppParamList:
+         - Numeric: detects internal type (double or integer) and converts properly.
+         - Logical: returns 1 for .T., 0 for .F.
+         - Character: treats the string buffer as containing the raw 4 bytes of a LONG.
+         - Object: assumes the object implements the :_lock_() and :_unlock_() methods (ot4xb structure convention),
+           calls :_lock_() to obtain a pointer and reads the first LONG from it.
+         If the parameter is an array, accepts indices to select the element.
+      </description>
+      <syntax>LONG _parLongEx( XppParamList pl, ULONG nIndex, ... )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>ULONG</type>
+            <description>Optional array indices if the parameter is an array. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Extracted value, or 0 if type not supported.</description>
+      </return>
+      <see-also>_parLong, _parLongOrBool, _conGetLongEx</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _parLongEx( XppParamList pl, ULONG nIndex, ... )
 {
    ULONG ulType = _partype( pl, nIndex );
@@ -440,6 +821,43 @@ OT4XB_API LONG _parLongEx( XppParamList pl, ULONG nIndex, ... )
    return nResult;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_parLong64</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Extracts a LONGLONG (64-bit integer) value from a numeric parameter in an XppParamList.
+         Detects the internal numeric type to avoid data loss.
+         If the parameter is an array, accepts indices to select the element.
+      </description>
+      <syntax>LONGLONG _parLong64( XppParamList pl, ULONG nIndex, ... )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>ULONG</type>
+            <description>Optional array indices if the parameter is an array. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONGLONG</type>
+         <description>Extracted 64-bit value, or 0 if not numeric.</description>
+      </return>
+      <see-also>_parLong, _conGetLong64</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONGLONG _parLong64( XppParamList pl, ULONG nIndex, ... )
 {
    ULONG ulType = _partype( pl, nIndex );
@@ -483,6 +901,40 @@ OT4XB_API LONGLONG _parLong64( XppParamList pl, ULONG nIndex, ... )
    return q;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PSzz2Array</name>
+      <category>container</category>
+      <description>
+         Converts a pszz buffer to a Xbase++ array.
+         A pszz buffer is a sequence of substrings each terminated by Chr(0),
+         where a double Chr(0)+Chr(0) marks the end of the list.
+         Each substring becomes one element of the returned array.
+      </description>
+      <syntax>PSzz2Array( pStr ) -> aStr</syntax>
+      <parameters>
+         <parameter>
+            <name>pStr</name>
+            <type>Character | Numeric pointer | Object</type>
+            <description>
+               pszz buffer resolved through OT4XB extended pointer handling. The buffer contains substrings
+               each ending in Chr(0), terminated by Chr(0)+Chr(0).
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Array</type>
+         <description>Array of strings, one element per substring.</description>
+      </return>
+      <remarks>
+         This is the reverse operation for Array2pszz(). The current parser preserves empty elements
+         found in the buffer, including a final empty item when the supplied buffer represents one.
+      </remarks>
+      <see-also>Array2pszz</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PSZZ2ARRAY( XppParamList pl ) // PSzz2Array(pStr) -> aStr
 {
    CON_PLKSTREX plk;
@@ -513,8 +965,38 @@ XPPRET XPPENTRY PSZZ2ARRAY( XppParamList pl ) // PSzz2Array(pStr) -> aStr
    _conRelease( cona );
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Retrieve a zero terminated string copy from a CHARACTER Xbase++ container
-// The string must be released with _xfree() when no longer needed.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conXStrDup</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Retrieves a zero-terminated string copy from a CHARACTER Xbase++ container.
+      </description>
+      <notes>
+         The returned string must be released with _xfree() when no longer needed.
+      </notes>
+      <syntax>LPSTR _conXStrDup( ContainerHandle con, ULONG * pnLen )</syntax>
+      <parameters>
+         <parameter>
+            <name>con</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to a CHARACTER Xbase++ value.</description>
+         </parameter>
+         <parameter>
+            <name>pnLen</name>
+            <type>ULONG*</type>
+            <description>Optional pointer to receive the string length. May be NULL.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string, or NULL if the container is not a string.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _conXStrDup( ContainerHandle con, ULONG * pnLen )
 {
    ULONG nLen = 0;
@@ -529,9 +1011,34 @@ OT4XB_API LPSTR _conXStrDup( ContainerHandle con, ULONG * pnLen )
    return (LPSTR) pRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Return a string containinig the class name of the provided Xbase++ container
-// if this contains a object
-// The string must be released with _xfree() when no longer needed.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszGetClassName</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the class name of a Xbase++ object container.
+         Calls the object's className() method internally.
+      </description>
+      <notes>
+         The returned string must be released with _xfree() when no longer needed.
+      </notes>
+      <syntax>LPSTR _pszGetClassName( ContainerHandle conClassObject )</syntax>
+      <parameters>
+         <parameter>
+            <name>conClassObject</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to a Xbase++ object.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string with the class name, or NULL if not an object.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _pszGetClassName( ContainerHandle conClassObject )
 {
    ContainerHandle con = _conNew( NULLCONTAINER );
@@ -551,9 +1058,33 @@ OT4XB_API LPSTR _pszGetClassName( ContainerHandle conClassObject )
    return p;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Return a string containing the parent class name of the provided Xbase++ container
-// if this contains a object
-// The string must be released with _xfree() when no longer needed.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetSuperClass</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a container holding the parent class name of a Xbase++ object container.
+      </description>
+      <notes>
+         The returned ContainerHandle must be released with _conRelease() when no longer needed.
+      </notes>
+      <syntax>ContainerHandle _conGetSuperClass( ContainerHandle conClassObject )</syntax>
+      <parameters>
+         <parameter>
+            <name>conClassObject</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to a Xbase++ object.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to a Xbase++ value containing the parent class name, or NULLCONTAINER if not an object.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conGetSuperClass( ContainerHandle conClassObject )
 {
 
@@ -595,9 +1126,39 @@ OT4XB_API ContainerHandle _conGetSuperClass( ContainerHandle conClassObject )
    return conRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// ..XB( { n,n,n,..} | n) -> n | n| ...
-// return a numeric Xbase++ param as DWORD or combine with the OR bitwise operator the elements if the param is
-// an Array of numeric values
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_dwANFlagsParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a Xbase++ parameter as DWORD flags.
+         If the parameter is a single numeric value, returns it as DWORD.
+         If the parameter is an array of numeric values, combines all elements
+         with bitwise OR and returns the result.
+         Useful for accepting flags either as a single value or as an array.
+      </description>
+      <syntax>DWORD _dwANFlagsParam( XppParamList pl, ULONG nParam )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>DWORD</type>
+         <description>Combined flags value, or 0 if not numeric.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API DWORD _dwANFlagsParam( XppParamList pl, ULONG nParam )
 {
    ULONG ulType = _partype( pl, nParam );
@@ -616,10 +1177,41 @@ OT4XB_API DWORD _dwANFlagsParam( XppParamList pl, ULONG nParam )
    return (DWORD) 0;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// ..XB( { "blablabla","blablabla",..} | "blablabla") -> LPSTR blablabla\0blablabla\0blablabla\0\0
-// Return a double zero terminated string from a character Xbase++ param
-// or concatenate the items using Chr(0) as a separator if the param is an Xbase++ array
-// The string must be released with _xfree() when no longer needed.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszzACParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a pszz buffer from a Xbase++ character parameter.
+         If the parameter is a single string, returns it as a pszz buffer (string + Chr(0)+Chr(0)).
+         If the parameter is an array of strings, concatenates all elements
+         separated by Chr(0), ending with Chr(0)+Chr(0).
+      </description>
+      <notes>
+         The returned string must be released with _xfree() when no longer needed.
+      </notes>
+      <syntax>LPSTR _pszzACParam( XppParamList pl, ULONG nParam )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Newly allocated pszz buffer. Must be released with _xfree().</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _pszzACParam( XppParamList pl, ULONG nParam )
 {
    ULONG ulType = _partype( pl, nParam );
@@ -652,13 +1244,79 @@ OT4XB_API LPSTR _pszzACParam( XppParamList pl, ULONG nParam )
    return (LPSTR) _xgrab( 2 );
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Return a zero terminated string copy from a Xbase++ character param
-// The string must be released with _xfree() when no longer needed.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a copy of a Xbase++ character parameter as a zero-terminated string,
+         allocated with _xgrab(). Must be released with _xfree() when no longer needed.
+      </description>
+      <syntax>LPSTR _pszParam( XppParamList pl, ULONG n )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string copy, or NULL if not a string.</description>
+      </return>
+      <see-also>_pszParam_cb</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _pszParam( XppParamList pl, ULONG n )
 {
    return _pszParam_cb( pl, n, 0 );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszParam_cb</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a copy of a Xbase++ character parameter as a zero-terminated string,
+         allocated with _xgrab(). Must be released with _xfree() when no longer needed.
+         Also returns the length of the string (not including the terminating zero) via pcb.
+      </description>
+      <syntax>LPSTR _pszParam_cb( XppParamList pl, ULONG n, DWORD * pcb )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>pcb</name>
+            <type>DWORD*</type>
+            <description>Pointer to receive the string length, not including the terminating zero. May be NULL.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string copy, or NULL if not a string.</description>
+      </return>
+      <see-also>_pszParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _pszParam_cb( XppParamList pl, ULONG n, DWORD * pcb )
 {
    LPSTR p = 0;
@@ -678,7 +1336,35 @@ OT4XB_API LPSTR _pszParam_cb( XppParamList pl, ULONG n, DWORD * pcb )
    return p;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Return the value of a Xbase++ member as LONG
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetNLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the value of a Xbase++ object member as LONG.
+      </description>
+      <syntax>LONG _conGetNLMember( ContainerHandle conObj, LPSTR pMName )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Member value as LONG, or 0 if not found.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _conGetNLMember( ContainerHandle conObj, LPSTR pMName )
 {
    LONG n = 0;
@@ -689,7 +1375,40 @@ OT4XB_API LONG _conGetNLMember( ContainerHandle conObj, LPSTR pMName )
    return n;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Store a LONG value into a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conSetNLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Sets the value of a Xbase++ object member from a LONG.
+      </description>
+      <syntax>void _conSetNLMember( ContainerHandle conObj, LPSTR pMName, LONG n )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>LONG</type>
+            <description>Value to store in the member.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conSetNLMember( ContainerHandle conObj, LPSTR pMName, LONG n )
 {
    ContainerHandle con = _conPutNL( NULLCONTAINER, n );
@@ -697,7 +1416,35 @@ OT4XB_API void _conSetNLMember( ContainerHandle conObj, LPSTR pMName, LONG n )
    _conRelease( con );
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Return the value of a Xbase++ member as BOOL
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the value of a Xbase++ object member as BOOL.
+      </description>
+      <syntax>BOOL _conGetLMember( ContainerHandle conObj, LPSTR pMName )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>BOOL</type>
+         <description>Member value as BOOL, or FALSE if not found.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API BOOL _conGetLMember( ContainerHandle conObj, LPSTR pMName )
 {
    BOOL n = FALSE;
@@ -708,7 +1455,40 @@ OT4XB_API BOOL _conGetLMember( ContainerHandle conObj, LPSTR pMName )
    return n;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Store a BOOL value into a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conSetLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Sets the value of a Xbase++ object member from a BOOL.
+      </description>
+      <syntax>void _conSetLMember( ContainerHandle conObj, LPSTR pMName, BOOL n )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>BOOL</type>
+            <description>Value to store in the member.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conSetLMember( ContainerHandle conObj, LPSTR pMName, BOOL n )
 {
    ContainerHandle con = _conPutL( NULLCONTAINER, n );
@@ -722,6 +1502,42 @@ OT4XB_API void _conSetLMember( ContainerHandle conObj, LPSTR pMName, BOOL n )
 // the length of the string ( not counting the terminating zero) is stored inside pnLen if is provided
 // The string must be released with _xfree() when no longer needed.
 
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a copy of a Xbase++ object string member as a zero-terminated string,
+         allocated with _xgrab(). Must be released with _xfree() when no longer needed.
+         Also returns the string length (not including the terminating zero) via pnLen.
+      </description>
+      <syntax>LPSTR _pszMember( ContainerHandle cono, LPSTR pMName, PULONG pnLen )</syntax>
+      <parameters>
+         <parameter>
+            <name>cono</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>pnLen</name>
+            <type>PULONG</type>
+            <description>Pointer to receive the string length, not including the terminating zero. May be NULL.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string copy, or NULL if not a string.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _pszMember( ContainerHandle cono, LPSTR pMName, PULONG pnLen )
 {
    LPSTR pRet = (LPSTR) 0;
@@ -739,6 +1555,43 @@ OT4XB_API LPSTR _pszMember( ContainerHandle cono, LPSTR pMName, PULONG pnLen )
    return pRet;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_pszMember2W</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a copy of a Xbase++ object string member converted to Unicode (UCS2),
+         allocated with _xgrab(). Must be released with _xfree() when no longer needed.
+         Also returns the number of Unicode characters (not bytes) via pcc.
+      </description>
+      <syntax>LPWSTR _pszMember2W( ContainerHandle cono, LPSTR pMName, PULONG pcc )</syntax>
+      <parameters>
+         <parameter>
+            <name>cono</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>pcc</name>
+            <type>PULONG</type>
+            <description>Pointer to receive the number of Unicode characters, not bytes. May be NULL.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPWSTR</type>
+         <description>Pointer to a newly allocated Unicode string copy, or NULL if not a string.</description>
+      </return>
+      <see-also>_pszMember</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPWSTR _pszMember2W( ContainerHandle cono, LPSTR pMName, PULONG pcc )
 {
    ULONG  cb = 0;
@@ -754,7 +1607,46 @@ OT4XB_API LPWSTR _pszMember2W( ContainerHandle cono, LPSTR pMName, PULONG pcc )
    return pw;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Store a sized string into a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conSetCLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Sets a Xbase++ object member from a sized string (length specified explicitly).
+      </description>
+      <syntax>void _conSetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pValue, ULONG nLen )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>pValue</name>
+            <type>LPSTR</type>
+            <description>String value to store.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>ULONG</type>
+            <description>Length of the string in bytes.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+      <see-also>_conSetCMember</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conSetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pValue, ULONG nLen )
 {
    ContainerHandle con = _conPutCL( NULLCONTAINER, pValue, nLen );
@@ -762,7 +1654,41 @@ OT4XB_API void _conSetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pVal
    _conRelease( con );
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Store a Zero terminated string into a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conSetCMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Sets a Xbase++ object member from a zero-terminated string.
+      </description>
+      <syntax>void _conSetCMember( ContainerHandle conObj, LPSTR pMName, LPSTR pValue )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>pValue</name>
+            <type>LPSTR</type>
+            <description>Zero-terminated string value to store.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+      <see-also>_conSetCLMember</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void  _conSetCMember( ContainerHandle conObj, LPSTR pMName, LPSTR pValue )
 {
    ContainerHandle con = _conPutC( NULLCONTAINER, pValue );
@@ -771,6 +1697,46 @@ OT4XB_API void  _conSetCMember( ContainerHandle conObj, LPSTR pMName, LPSTR pVal
 }
 //----------------------------------------------------------------------------------------------------------------------
 // Fill a character buffer with the content of a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conGetCLMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Copies the value of a Xbase++ object string member into a caller-provided buffer.
+      </description>
+      <syntax>void _conGetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pBuffer, ULONG nBuffSize )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>pBuffer</name>
+            <type>LPSTR</type>
+            <description>Caller-provided buffer to receive the string.</description>
+         </parameter>
+         <parameter>
+            <name>nBuffSize</name>
+            <type>ULONG</type>
+            <description>Size of the buffer in bytes.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+      <see-also>_conSetCLMember, _pszMember</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conGetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pBuffer, ULONG nBuffSize )
 {
    ContainerHandle con = _conNew( NULLCONTAINER );
@@ -783,6 +1749,35 @@ OT4XB_API void _conGetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pBuf
 }
 //----------------------------------------------------------------------------------------------------------------------
 // Put a NIL value into a Xbase++ object member
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conSetNILMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Sets a Xbase++ object member to NIL.
+      </description>
+      <syntax>void _conSetNILMember( ContainerHandle conObj, LPSTR pMName )</syntax>
+      <parameters>
+         <parameter>
+            <name>conObj</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pMName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conSetNILMember( ContainerHandle conObj, LPSTR pMName )
 {
    ContainerHandle con = _conNew( NULLCONTAINER );
@@ -792,6 +1787,49 @@ OT4XB_API void _conSetNILMember( ContainerHandle conObj, LPSTR pMName )
 //----------------------------------------------------------------------------------------------------------------------
 // retrieve a ContainerHandle from the Xbase++ paramlist if the param type match <nType>
 // values in <nType> can be combined with the bitwise OR operator.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conTParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter if its type
+         is one of the types specified in the nType mask.
+         If not, releases the container (only if not passed by reference) and returns NULLCONTAINER.
+         Also informs whether the parameter was passed by reference via pbByRef.
+      </description>
+      <syntax>ContainerHandle _conTParam( XppParamList pl, ULONG n, BOOL * pbByRef, ULONG nType )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>pbByRef</name>
+            <type>BOOL*</type>
+            <description>Pointer to receive whether the parameter was passed by reference. May be NULL.</description>
+         </parameter>
+         <parameter>
+            <name>nType</name>
+            <type>ULONG</type>
+            <description>XPP type mask of accepted types (e.g. XPP_CHARACTER | XPP_ARRAY).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the parameter value, or NULLCONTAINER if type does not match.</description>
+      </return>
+      <see-also>_conTpParam, _conCopyParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conTParam( XppParamList pl, ULONG n, BOOL * pbByRef, ULONG nType )
 {
    ContainerHandle con = _conParam( pl, n, pbByRef );
@@ -805,6 +1843,38 @@ OT4XB_API ContainerHandle _conTParam( XppParamList pl, ULONG n, BOOL * pbByRef, 
    return NULLCONTAINER;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conCopyParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns an independent copy of a Xbase++ parameter as a new ContainerHandle,
+         regardless of whether it was passed by reference or by value.
+         The caller must release the returned handle with _conRelease().
+      </description>
+      <syntax>ContainerHandle _conCopyParam( XppParamList pl, ULONG n )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to a new independent copy of the parameter value.</description>
+      </return>
+      <see-also>_conTParam, _conTpParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conCopyParam( XppParamList pl, ULONG n )
 {
    BOOL bByRef = FALSE;
@@ -814,7 +1884,50 @@ OT4XB_API ContainerHandle _conCopyParam( XppParamList pl, ULONG n )
    return conr;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// retrieve a ContainerHandle from the Xbase++ paramlist and it's type
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conTpParam</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter if its type
+         is one of the types specified in the pType mask.
+         If not, releases the container (only if not passed by reference) and returns NULLCONTAINER.
+         Also returns the actual type of the parameter via pType.
+         If pType[0] is 0 on entry, accepts any type.
+      </description>
+      <syntax>ContainerHandle _conTpParam( XppParamList pl, ULONG n, BOOL * pbByRef, ULONG * pType )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>n</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>pbByRef</name>
+            <type>BOOL*</type>
+            <description>Pointer to receive whether the parameter was passed by reference. May be NULL.</description>
+         </parameter>
+         <parameter>
+            <name>pType</name>
+            <type>ULONG*</type>
+            <description>On entry: XPP type mask of accepted types, or 0 to accept any type. On exit: actual type of the parameter.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the parameter value, or NULLCONTAINER if type does not match.</description>
+      </return>
+      <see-also>_conTParam, _conCopyParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conTpParam( XppParamList pl, ULONG n, BOOL * pbByRef, ULONG * pType )
 {
    ContainerHandle con;
@@ -840,6 +1953,43 @@ OT4XB_API ContainerHandle _conTpParam( XppParamList pl, ULONG n, BOOL * pbByRef,
 }
 //----------------------------------------------------------------------------------------------------------------------
 // retrieve a container from a Xbase++ object member if match <nType>
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conTMember</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ object member if its type
+         is one of the types specified in the nType mask.
+         If not, releases the container and returns NULLCONTAINER.
+      </description>
+      <syntax>ContainerHandle _conTMember( ContainerHandle Self, LPSTR pszMemberName, ULONG nType )</syntax>
+      <parameters>
+         <parameter>
+            <name>Self</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ object.</description>
+         </parameter>
+         <parameter>
+            <name>pszMemberName</name>
+            <type>LPSTR</type>
+            <description>Member name (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>nType</name>
+            <type>ULONG</type>
+            <description>XPP type mask of accepted types (e.g. XPP_CHARACTER | XPP_ARRAY).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the member value, or NULLCONTAINER if type does not match.</description>
+      </return>
+      <see-also>_conTParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conTMember( ContainerHandle Self, LPSTR pszMemberName, ULONG nType )
 {
    ContainerHandle con = _conNew( NULLCONTAINER );
@@ -862,6 +2012,44 @@ OT4XB_API ContainerHandle _conTMember( ContainerHandle Self, LPSTR pszMemberName
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lCallFuncPA</name>
+      <category>container</category>
+      <description>
+         Calls a Xbase++ function by name passing the elements of an array as individual parameters.
+         Returns .F. without raising an error if the function does not exist.
+      </description>
+      <syntax>lCallFuncPA( cFuncName, aParams, @uResult ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>cFuncName</name>
+            <type>String</type>
+            <description>Name of the function to call.</description>
+         </parameter>
+         <parameter>
+            <name>aParams</name>
+            <type>Array</type>
+            <description>Array of values to pass individually to the function.</description>
+         </parameter>
+         <parameter>
+            <name>@uResult</name>
+            <type>AnyType</type>
+            <description>Param passed by reference to receive the return value of the called function.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. if the call succeeded, .F. if the function does not exist.</description>
+      </return>
+      <remarks>
+         If aParams is passed by reference, the parameter array is written back after the call so
+         by-reference changes made by the called function are preserved.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LCALLFUNCPA( XppParamList pl ) //lCallFuncPA(1func,2params,3@uResult)
 {
    BOOL pbRef[3];
@@ -899,6 +2087,50 @@ XPPRET XPPENTRY LCALLFUNCPA( XppParamList pl ) //lCallFuncPA(1func,2params,3@uRe
    _retl( pl, bRet );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lCallMethodPA</name>
+      <category>container</category>
+      <description>
+         Calls a method of a Xbase++ object passing the elements of an array as individual parameters.
+         Returns .F. without raising an error if the object is not valid or the method does not exist.
+      </description>
+      <syntax>lCallMethodPA( oSelf, cMethod, aParams, @uResult ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>oSelf</name>
+            <type>Object</type>
+            <description>Object on which to call the method.</description>
+         </parameter>
+         <parameter>
+            <name>cMethod</name>
+            <type>String</type>
+            <description>Name of the method to call.</description>
+         </parameter>
+         <parameter>
+            <name>aParams</name>
+            <type>Array</type>
+            <description>Array of values to pass individually to the method.</description>
+         </parameter>
+         <parameter>
+            <name>@uResult</name>
+            <type>AnyType</type>
+            <description>Param passed by reference to receive the return value of the called method.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. if the call succeeded, .F. if the object is not valid or the method does not exist.</description>
+      </return>
+      <remarks>
+         If aParams is passed by reference, the parameter array is written back after the call so
+         by-reference changes made by the called method are preserved.
+      </remarks>
+      <see-also>lCallFuncPA</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LCALLMETHODPA( XppParamList pl ) //lCallMethodPA(1Self,2method,3params,4@uResult)
 {
    BOOL pbRef[4];
@@ -941,6 +2173,37 @@ XPPRET XPPENTRY LCALLMETHODPA( XppParamList pl ) //lCallMethodPA(1Self,2method,3
    _retl( pl, bRet );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>CallFunction</name>
+      <category>container</category>
+      <description>
+         Calls a Xbase++ function by name. The function name is the first parameter,
+         followed by any number of parameters to pass to the function.
+         Returns NIL if the function cannot be called.
+      </description>
+      <syntax>CallFunction( cFuncName, params... ) -> uResult</syntax>
+      <parameters>
+         <parameter>
+            <name>cFuncName</name>
+            <type>String</type>
+            <description>Name of the function to call.</description>
+         </parameter>
+         <parameter>
+            <name>params...</name>
+            <type>AnyType</type>
+            <description>Any number of values to pass to the function.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>AnyType</type>
+         <description>Return value of the called function, or NIL if the function cannot be called.</description>
+      </return>
+      <see-also>lCallFuncPA</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CALLFUNCTION( XppParamList pl ) // CallFunction(cFuncName,params..... )
 {
    BOOL * _ref;
@@ -967,6 +2230,40 @@ XPPRET XPPENTRY CALLFUNCTION( XppParamList pl ) // CallFunction(cFuncName,params
    _conRelease( _eval );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lObjGetMember</name>
+      <category>container</category>
+      <description>
+         Gets the value of a member of a Xbase++ object.
+      </description>
+      <syntax>lObjGetMember( oSelf, cMemberName, @uVal ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>oSelf</name>
+            <type>Object</type>
+            <description>Object from which to get the member value.</description>
+         </parameter>
+         <parameter>
+            <name>cMemberName</name>
+            <type>String</type>
+            <description>Name of the member (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>@uVal</name>
+            <type>AnyType</type>
+            <description>Param passed by reference to receive the member value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. if the member was retrieved successfully, .F. otherwise.</description>
+      </return>
+      <see-also>lObjSetMember</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LOBJGETMEMBER( XppParamList pl ) //lObjGetMember(1Self,2name,3@val) -> lOk
 {
 
@@ -999,6 +2296,40 @@ XPPRET XPPENTRY LOBJGETMEMBER( XppParamList pl ) //lObjGetMember(1Self,2name,3@v
    _retl( pl, bRet );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lObjSetMember</name>
+      <category>container</category>
+      <description>
+         Sets the value of a member of a Xbase++ object.
+      </description>
+      <syntax>lObjSetMember( oSelf, cMemberName, uVal ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>oSelf</name>
+            <type>Object</type>
+            <description>Object on which to set the member value.</description>
+         </parameter>
+         <parameter>
+            <name>cMemberName</name>
+            <type>String</type>
+            <description>Name of the member (case insensitive).</description>
+         </parameter>
+         <parameter>
+            <name>uVal</name>
+            <type>AnyType</type>
+            <description>Value to assign to the member.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. if the member was set successfully, .F. otherwise.</description>
+      </return>
+      <see-also>lObjGetMember</see-also>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LOBJSETMEMBER( XppParamList pl ) //lObjSetMember(1Self,2name,3val) -> lOk
 {
 
@@ -1030,12 +2361,73 @@ XPPRET XPPENTRY LOBJSETMEMBER( XppParamList pl ) //lObjSetMember(1Self,2name,3va
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
 // retrieve a container from the param list if was passed by reference and the type is object
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conParamSelfByRef</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter if it is an object
+         and was passed by reference. Returns NULLCONTAINER otherwise.
+      </description>
+      <syntax>ContainerHandle _conParamSelfByRef( XppParamList pl, ULONG nParam )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the object, or NULLCONTAINER if not an object or not passed by reference.</description>
+      </return>
+      <see-also>_conParamByRef, _conTParamByRef</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conParamSelfByRef( XppParamList pl, ULONG nParam )
 {
    return _conTParamByRef( pl, nParam, XPP_OBJECT );
 }
 //----------------------------------------------------------------------------------------------------------------------
-// retrieve a container from the param list if was passed by reference
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conParamByRef</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference.
+         Returns NULLCONTAINER if the parameter was not passed by reference.
+      </description>
+      <syntax>ContainerHandle _conParamByRef( XppParamList pl, ULONG nParam )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the parameter, or NULLCONTAINER if not passed by reference.</description>
+      </return>
+      <see-also>_conTParamByRef, _conParamSelfByRef</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conParamByRef( XppParamList pl, ULONG nParam )
 {
    BOOL bByRef = FALSE;
@@ -1047,7 +2439,43 @@ OT4XB_API ContainerHandle _conParamByRef( XppParamList pl, ULONG nParam )
    return con;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// retrieve a container from the param list if was passed by reference and match <ulType>
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conTParamByRef</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference
+         and its type is one of the types specified in the ulType mask.
+         Returns NULLCONTAINER otherwise.
+      </description>
+      <syntax>ContainerHandle _conTParamByRef( XppParamList pl, ULONG nParam, ULONG ulType )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>ulType</name>
+            <type>ULONG</type>
+            <description>XPP type mask of accepted types.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the parameter, or NULLCONTAINER if not passed by reference or type does not match.</description>
+      </return>
+      <see-also>_conParamByRef, _conTParam</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conTParamByRef( XppParamList pl, ULONG nParam, ULONG ulType )
 {
    ContainerHandle con = _conParamByRef( pl, nParam );
@@ -1058,6 +2486,45 @@ OT4XB_API ContainerHandle _conTParamByRef( XppParamList pl, ULONG nParam, ULONG 
    return NULLCONTAINER;
 }
 //-----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conTpParamByRef</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference
+         and its type is one of the types specified in the pType mask.
+         Also returns the actual type of the parameter via pType.
+         If pType[0] is 0 on entry, accepts any type.
+         Returns NULLCONTAINER if not passed by reference or type does not match.
+      </description>
+      <syntax>ContainerHandle _conTpParamByRef( XppParamList pl, ULONG nParam, ULONG * pType )</syntax>
+      <parameters>
+         <parameter>
+            <name>pl</name>
+            <type>XppParamList</type>
+            <description>Opaque handle to the Xbase++ parameter list.</description>
+         </parameter>
+         <parameter>
+            <name>nParam</name>
+            <type>ULONG</type>
+            <description>Position of the parameter (1-based).</description>
+         </parameter>
+         <parameter>
+            <name>pType</name>
+            <type>ULONG*</type>
+            <description>On entry: XPP type mask of accepted types, or 0 to accept any type. On exit: actual type of the parameter.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>ContainerHandle</type>
+         <description>Opaque handle to the parameter, or NULLCONTAINER if not passed by reference or type does not match.</description>
+      </return>
+      <see-also>_conTpParam, _conTParamByRef</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API ContainerHandle _conTpParamByRef( XppParamList pl, ULONG nParam, ULONG * pType )
 {
    BOOL            bByRef = FALSE;
@@ -1069,7 +2536,31 @@ OT4XB_API ContainerHandle _conTpParamByRef( XppParamList pl, ULONG nParam, ULONG
    return con;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Release multiple ContainerHandle params. The last param must be NULLCONTAINER
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conReleaseM</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Releases multiple ContainerHandles in a single call.
+         The argument list must end with NULLCONTAINER.
+      </description>
+      <syntax>void _conReleaseM( ContainerHandle con, ..., NULLCONTAINER )</syntax>
+      <parameters>
+         <parameter>
+            <name>con, ...</name>
+            <type>ContainerHandle</type>
+            <description>One or more ContainerHandles to release. MUST end with NULLCONTAINER.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conReleaseM( ContainerHandle con, ... )
 {
    va_list pMarker;
@@ -1084,6 +2575,36 @@ OT4XB_API void _conReleaseM( ContainerHandle con, ... )
    va_end( pMarker );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conReleasePa</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Releases an array of ContainerHandles.
+      </description>
+      <syntax>void _conReleasePa( ContainerHandle * pcon, ULONG np )</syntax>
+      <parameters>
+         <parameter>
+            <name>pcon</name>
+            <type>ContainerHandle*</type>
+            <description>Pointer to an array of ContainerHandles to release.</description>
+         </parameter>
+         <parameter>
+            <name>np</name>
+            <type>ULONG</type>
+            <description>Number of ContainerHandles in the array.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+      <see-also>_conReleaseM</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conReleasePa( ContainerHandle * pcon, ULONG np )
 {
    if( pcon )
@@ -1100,6 +2621,30 @@ OT4XB_API void _conReleasePa( ContainerHandle * pcon, ULONG np )
 }
 //----------------------------------------------------------------------------------------------------------------------
 // if pcon point to a NIL Xbase++ container, release the container and store a NULLCONTAINER at the provided pointer
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conNil2NullContainer</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Releases a ContainerHandle if it contains NIL and sets the pointer to NULLCONTAINER.
+      </description>
+      <syntax>void _conNil2NullContainer( ContainerHandle * pcon )</syntax>
+      <parameters>
+         <parameter>
+            <name>pcon</name>
+            <type>ContainerHandle*</type>
+            <description>Pointer to a ContainerHandle. Set to NULLCONTAINER if the container holds NIL.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>void</type>
+         <description></description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API void _conNil2NullContainer( ContainerHandle * pcon )
 {
    if( pcon )
@@ -1112,15 +2657,35 @@ OT4XB_API void _conNil2NullContainer( ContainerHandle * pcon )
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
-// return the length of a string stored inside a Xbase++ array element
-// Syntax:
-// _conArrayGetSizeC(ContainerHandle cona , n , ... )
-// Params:
-// <cona> Xbase++ Array container
-// <n> Array index
-// <... > an index must be specified for each array
-// dimension to select the element which has the numeric value. Warning: The end of the
-// list of array indexes must be indicated with a NULL index.
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetSizeC</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns the length of a string stored inside a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>LONG _conArrayGetSizeC( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Length of the string, or 0 if the element is not a string.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _conArrayGetSizeC( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1145,16 +2710,36 @@ OT4XB_API LONG _conArrayGetSizeC( ContainerHandle cona, ... )
    return nRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// return a copy a string stored inside a Xbase++ array element
-// Syntax:
-// _conArrayGetXStrDup(ContainerHandle cona , n , ... )
-// Params:
-// <cona> Xbase++ Array container
-// <n> Array index
-// <... > an index must be specified for each array
-// dimension to select the element which has the numeric value. Warning: The end of the
-// list of array indexes must be indicated with a NULL index.
-// Remarks: The string must be released with _xfree()
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetXStrDup</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a copy of a string stored inside a Xbase++ array element at the specified indices,
+         allocated with _xgrab(). Must be released with _xfree() when no longer needed.
+      </description>
+      <syntax>LPSTR _conArrayGetXStrDup( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LPSTR</type>
+         <description>Pointer to a newly allocated zero-terminated string copy, or NULL if the element is not a string.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LPSTR _conArrayGetXStrDup( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1185,16 +2770,46 @@ OT4XB_API LPSTR _conArrayGetXStrDup( ContainerHandle cona, ... )
    return (LPSTR) pRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Fill a string buffer with the content of a string stored inside a Xbase++ array element
-// Syntax:
-// _conArrayGetXStrDup(ContainerHandle cona , n , ... )
-// Params:
-// <cona> Xbase++ Array container
-// <n> Array index
-// <... > an index must be specified for each array
-// dimension to select the element which has the numeric value. Warning: The end of the
-// list of array indexes must be indicated with a NULL index.
-// Return the number of characters writted
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetCL</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Fills a caller-provided buffer with the content of a string stored inside a Xbase++ array element
+         at the specified indices.
+      </description>
+      <syntax>LONG _conArrayGetCL( ContainerHandle cona, LPSTR pStr, ULONG nLen, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>pStr</name>
+            <type>LPSTR</type>
+            <description>Caller-provided buffer to receive the string.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>ULONG</type>
+            <description>Size of the buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Number of characters written to the buffer.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _conArrayGetCL( ContainerHandle cona, LPSTR pStr, ULONG nLen, ... )
 {
    int * pi;
@@ -1219,7 +2834,35 @@ OT4XB_API LONG _conArrayGetCL( ContainerHandle cona, LPSTR pStr, ULONG nLen, ...
    return nWritten;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// returns a long value stored into an Xbase++ array element
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetNL</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a LONG value stored inside a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>LONG _conArrayGetNL( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Numeric value of the element, or 0 if not numeric.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _conArrayGetNL( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1244,7 +2887,35 @@ OT4XB_API LONG _conArrayGetNL( ContainerHandle cona, ... )
    return nRet;
 }
 // -----------------------------------------------------------------------------------------------------------------
-// returns a BOOL value stored into an Xbase++ array element
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetL</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a BOOL value stored inside a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>BOOL _conArrayGetL( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>BOOL</type>
+         <description>Logical value of the element, or FALSE if not logical.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API BOOL _conArrayGetL( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1269,7 +2940,42 @@ OT4XB_API BOOL _conArrayGetL( ContainerHandle cona, ... )
    return nRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// returns a long value stored into an Xbase++ array element
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetNLEx</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a LONG value from a Xbase++ array element at the specified indices,
+         supporting any type accepted by _conGetLongEx:
+         - Numeric: detects internal type (double or integer) and converts properly.
+         - Logical: returns 1 for .T., 0 for .F.
+         - Character: treats the string buffer as containing the raw 4 bytes of a LONG.
+         - Object: assumes the object implements the :_lock_() and :_unlock_() methods (ot4xb structure convention),
+           calls :_lock_() to obtain a pointer and reads the first LONG from it.
+      </description>
+      <syntax>LONG _conArrayGetNLEx( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>LONG</type>
+         <description>Value of the element as LONG, or 0 if type not supported.</description>
+      </return>
+      <see-also>_conGetLongEx, _conArrayGetNL</see-also>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API LONG _conArrayGetNLEx( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1295,7 +3001,35 @@ OT4XB_API LONG _conArrayGetNLEx( ContainerHandle cona, ... )
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// returns a double value stored into an Xbase++ array element
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayGetND</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Returns a double value stored inside a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>double _conArrayGetND( ContainerHandle cona, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>double</type>
+         <description>Numeric value of the element, or 0.0 if not numeric.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API double _conArrayGetND( ContainerHandle cona, ... )
 {
    int * pi;
@@ -1320,9 +3054,43 @@ OT4XB_API double _conArrayGetND( ContainerHandle cona, ... )
    return nRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Compile a string to generate a codeblock and store it into a Xbase++ array element
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayPutC_MacroStr</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Compiles a string as a codeblock and stores it into a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>XPPAPIRET _conArrayPutC_MacroStr( ContainerHandle cona, LPSTR pStr, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>pStr</name>
+            <type>LPSTR</type>
+            <description>String to compile as a codeblock.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conArrayPutC_MacroStr( ContainerHandle cona, LPSTR pStr, ... )
 {
+
    int * pi;
    int   i;
    va_list pMarker;
@@ -1338,6 +3106,8 @@ OT4XB_API XPPAPIRET _conArrayPutC_MacroStr( ContainerHandle cona, LPSTR pStr, ..
    for( i = 0; ( ( pi[i] = va_arg( pMarker, ULONG ) ) != 0 ); i++ );
    va_end( pMarker );
 
+   // TODO: si no tiene  la forma de un codeblock {|.... |    .... } hay que ponerlo dentro de un codeblock
+   // porque no queremos evaluar el codigo sino crear un codeblock
    _conEvalMacroStr( con, pStr );
 
    nRet = _conArrayPutA( cona, con, pi );
@@ -1346,7 +3116,50 @@ OT4XB_API XPPAPIRET _conArrayPutC_MacroStr( ContainerHandle cona, LPSTR pStr, ..
    return nRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Init a Xbase++ array element with the emty value corresponding with the provided type
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayPutEmptyData</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Initializes a Xbase++ array element with the empty value corresponding to the specified type.
+      </description>
+      <syntax>XPPAPIRET _conArrayPutEmptyData( ContainerHandle cona, ULONG nType, LONG nLength, LONG nDecs, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>nType</name>
+            <type>ULONG</type>
+            <description>XPP type of the element to initialize.</description>
+         </parameter>
+         <parameter>
+            <name>nLength</name>
+            <type>LONG</type>
+            <description>Length of the value (used for strings).</description>
+         </parameter>
+         <parameter>
+            <name>nDecs</name>
+            <type>LONG</type>
+            <description>Number of decimals (used for numeric values).</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conArrayPutEmptyData( ContainerHandle cona, ULONG nType, LONG nLength, LONG nDecs, ... )
 {
    int * pi;
@@ -1371,7 +3184,40 @@ OT4XB_API XPPAPIRET _conArrayPutEmptyData( ContainerHandle cona, ULONG nType, LO
    return nRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// store a LONG value into a Xbase++ array item
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayPutNL</name>
+      <category>container</category>
+      <header>ot4xb_cpp_exported.h</header>
+      <description>
+         Stores a LONG value into a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>XPPAPIRET _conArrayPutNL( ContainerHandle cona, LONG nVal, ULONG n1, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>nVal</name>
+            <type>LONG</type>
+            <description>Value to store.</description>
+         </parameter>
+         <parameter>
+            <name>n1...nN, 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conArrayPutNL( ContainerHandle cona, LONG nVal, ... )
 {
    int * pi;
@@ -1395,8 +3241,50 @@ OT4XB_API XPPAPIRET _conArrayPutNL( ContainerHandle cona, LONG nVal, ... )
    _conRelease( con );
    return nRet;
 }
-//----------------------------------------------------------------------------------------------------------------------
-// store a double value specifing its format into a Xbase++ array item
+/*******************************************************************************************************************
+<ot4xb-api>
+   <function>
+      <name>_conArrayPutNDF</name>
+      <category>container</category>
+      <header>ot4xb_c_exported.h</header>
+      <description>
+         Stores a double value with explicit digit and decimal format into a Xbase++ array element at the specified indices.
+      </description>
+      <syntax>XPPAPIRET _conArrayPutNDF( ContainerHandle cona, double nd, LONG nDigits, LONG nDec, ULONG nn, ..., 0 )</syntax>
+      <parameters>
+         <parameter>
+            <name>cona</name>
+            <type>ContainerHandle</type>
+            <description>Opaque handle to the Xbase++ array.</description>
+         </parameter>
+         <parameter>
+            <name>nd</name>
+            <type>double</type>
+            <description>Double value to store.</description>
+         </parameter>
+         <parameter>
+            <name>nDigits</name>
+            <type>LONG</type>
+            <description>Total number of digits.</description>
+         </parameter>
+         <parameter>
+            <name>nDec</name>
+            <type>LONG</type>
+            <description>Number of decimal places.</description>
+         </parameter>
+         <parameter>
+            <name>nn, ..., 0</name>
+            <type>ULONG</type>
+            <description>Indices (1-based) for each dimension. MUST end with 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>XPPAPIRET</type>
+         <description>Non 0 if error.</description>
+      </return>
+   </function>
+</ot4xb-api>
+*******************************************************************************************************************/
 OT4XB_API XPPAPIRET _conArrayPutNDF( ContainerHandle cona, double nd, LONG nDigits, LONG nDec, ULONG nn, ... )
 {
    int * pi;
@@ -1745,6 +3633,28 @@ OT4XB_API ContainerHandle _conNewObjR( LPSTR pClassName, ContainerHandle p1, ...
    return NULLCONTAINER;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <c-api>
+      <name>Container numeric helpers</name>
+      <category>c-api/container</category>
+      <description>
+         C API helpers for moving 32-bit float and 64-bit integer values between OT4XB C code and Xbase++ containers.
+      </description>
+      <functions>
+         <function name="_conGetFloat" syntax="_conGetFloat( con, pFloat ) -> nResult">Reads a Xbase++ numeric container and stores it as a C FLOAT.</function>
+         <function name="_conPutFloat" syntax="_conPutFloat( con, nFloat ) -> con">Stores a C FLOAT in a Xbase++ numeric container.</function>
+         <function name="_conGetQWord" syntax="_conGetQWord( con, pQWord ) -> nResult">Reads eight binary bytes from a character container into a ULONGLONG.</function>
+         <function name="_conPutQWord" syntax="_conPutQWord( con, qWord ) -> con">Stores a ULONGLONG as an eight-byte Xbase++ character value.</function>
+      </functions>
+      <remarks>
+         These are exported C helpers, not Xbase++ callable functions.
+      </remarks>
+   </c-api>
+</xbdoc>
+*******************************************************************************************************************/
+
+//----------------------------------------------------------------------------------------------------------------------
 // retrieve a 32 bit float value from a Xbase++ numeric container
 OT4XB_API DWORD _conGetFloat( ContainerHandle con, FLOAT * pnf )
 {
@@ -1776,12 +3686,33 @@ OT4XB_API ContainerHandle _conPutQWord( ContainerHandle con, ULONGLONG qw )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>_var2con</name>
+      <category>container/low-level</category>
+      <description>
+         Creates a new Xbase++ container handle containing a copy of a value.
+      </description>
+      <syntax>_var2con( xValue ) -> hContainer</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Value to copy into a new container handle.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric pointer</type>
+         <description>ContainerHandle value represented as a numeric pointer.</description>
+      </return>
+      <remarks>
+         This is a low-level container helper. The returned handle must be released with _conrelease()
+         when it is no longer needed.
+      </remarks>
+      <see-also>_con2var</see-also>
+      <see-also>_conrelease</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY _VAR2CON( XppParamList pl )
 {
@@ -1793,12 +3724,32 @@ XPPRET XPPENTRY _VAR2CON( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>_con2var</name>
+      <category>container/low-level</category>
+      <description>
+         Returns the Xbase++ value stored in a container handle without releasing the handle.
+      </description>
+      <syntax>_con2var( hContainer ) -> xValue</syntax>
+      <parameters>
+         <parameter>
+            <name>hContainer</name>
+            <type>Numeric pointer</type>
+            <description>ContainerHandle value previously obtained from low-level container code.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any</type>
+         <description>Value stored in the container, or NIL when hContainer is 0.</description>
+      </return>
+      <remarks>
+         The handle remains owned by the caller. Use _conrelease() when the handle must be released.
+      </remarks>
+      <see-also>_var2con</see-also>
+      <see-also>_conrelease</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY _CON2VAR( XppParamList pl )
 {
@@ -1808,12 +3759,32 @@ XPPRET XPPENTRY _CON2VAR( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>_conrelease</name>
+      <category>container/low-level</category>
+      <description>
+         Returns the Xbase++ value stored in a container handle and releases that handle.
+      </description>
+      <syntax>_conrelease( hContainer ) -> xValue</syntax>
+      <parameters>
+         <parameter>
+            <name>hContainer</name>
+            <type>Numeric pointer</type>
+            <description>ContainerHandle value to return and release.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any</type>
+         <description>Value stored in the container, or NIL when hContainer is 0.</description>
+      </return>
+      <remarks>
+         This helper is intended for handles produced by low-level OT4XB container routines such as _var2con().
+      </remarks>
+      <see-also>_var2con</see-also>
+      <see-also>_con2var</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY _CONRELEASE( XppParamList pl )
 {
@@ -1825,12 +3796,42 @@ XPPRET XPPENTRY _CONRELEASE( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>Array2pszz</name>
+      <category>container/marshalling</category>
+      <description>
+         Allocates a double-zero-terminated string list buffer from a string or array of strings.
+      </description>
+      <syntax>Array2pszz( aStrings | cText, @nBuffSize ) -> pStr</syntax>
+      <parameters>
+         <parameter>
+            <name>aStrings</name>
+            <type>Array</type>
+            <description>Array of strings to write as item1 + Chr(0) + ... + itemN + Chr(0) + Chr(0).</description>
+         </parameter>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>String to copy into a newly allocated buffer with two trailing zero bytes.</description>
+         </parameter>
+         <parameter>
+            <name>nBuffSize</name>
+            <type>Numeric by reference</type>
+            <description>Receives the allocated buffer size in bytes.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric pointer</type>
+         <description>Pointer to the allocated pszz buffer, or 0 when the first parameter is not supported.</description>
+      </return>
+      <remarks>
+         The returned memory is allocated with _xgrab(). The application owns that buffer and must release it
+         with _xfree() when it is no longer required.
+      </remarks>
+      <see-also>PSzz2Array</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY ARRAY2PSZZ( XppParamList pl ) // Array2pszz(aStr|cStr,@nBuffSize) -> pStr
 {
@@ -1914,12 +3915,39 @@ OT4XB_API ContainerHandle _conPszz2Array( LPSTR p )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ppMarshall2Array</name>
+      <category>container/marshalling</category>
+      <description>
+         Builds an Xbase++ array from a NULL-terminated C array of LPSTR pointers.
+      </description>
+      <syntax>ppMarshall2Array( pArrayOfStringPointers ) -> aStrings | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pArrayOfStringPointers</name>
+            <type>Numeric pointer</type>
+            <description>
+               Pointer to a C array of LPSTR values terminated with a NULL pointer.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Array | NIL</type>
+         <description>
+            An array with one Xbase++ character value for each C string, or NIL when no pointer is supplied.
+         </description>
+      </return>
+      <remarks>
+         The function copies the pointed strings into Xbase++ containers. It does not release
+         pArrayOfStringPointers and it does not release any string referenced by that array.
+
+         The pointed C string array does not need to have been created by Array2ppMarshall().
+         The only required layout is a sequence of LPSTR pointers ending with a NULL pointer.
+      </remarks>
+      <see-also>Array2ppMarshall</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY PPMARSHALL2ARRAY( XppParamList pl )
 {
@@ -1940,12 +3968,64 @@ XPPRET XPPENTRY PPMARSHALL2ARRAY( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>Array2ppMarshall</name>
+      <category>container/marshalling</category>
+      <description>
+         Allocates a buffer containing a NULL-terminated C array of LPSTR pointers and the string data
+         referenced by those pointers.
+      </description>
+      <syntax>Array2ppMarshall( aStrings [, @aSizes] ) -> pMem</syntax>
+      <parameters>
+         <parameter>
+            <name>aStrings</name>
+            <type>Array</type>
+            <description>Array with the character strings to marshal.</description>
+         </parameter>
+         <parameter>
+            <name>aSizes</name>
+            <type>Array by reference</type>
+            <description>
+               Optional output array receiving the byte length of each source string, not including
+               the trailing zero terminator.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric pointer</type>
+         <description>
+            Pointer to the allocated marshalled buffer, or 0 when aStrings is not a non-empty array.
+         </description>
+      </return>
+      <remarks>
+         The returned memory is allocated with _xgrab(). The application owns that buffer and must
+         release it with _xfree() when it is no longer required.
+
+         The buffer layout is:
+
+         LPSTR pStr1
+         ...
+         LPSTR pStrN
+         DWORD 0
+         String1 + Chr(0)
+         ...
+         StringN + Chr(0)
+
+         This layout is suitable for C APIs that expect a char** or LPSTR* list terminated with a
+         NULL pointer.
+      </remarks>
+      <example><![CDATA[
+BEGIN STRUCTURE pqPrintOpt
+   MEMBER POINTER32 fieldName
+   DYNAMIC METHOD SetFieldNames BLOCK {|s,a| _xfree(s:fieldName), ;
+      s:fieldName := iif(a == NIL,0,Array2ppMarshall(a)) }
+   DYNAMIC METHOD GetFieldNames BLOCK {|s| ppMarshall2Array(s:fieldName) }
+END STRUCTURE
+      ]]></example>
+      <see-also>ppMarshall2Array</see-also>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY ARRAY2PPMARSHALL( XppParamList pl )
 {
@@ -2004,6 +4084,54 @@ OT4XB_API ContainerHandle _conPutZeroString( ContainerHandle con, ULONG nLen )
    return con;
 }
 //-----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>Type2EmptyValue</name>
+      <category>container/value</category>
+      <description>
+         Creates an empty Xbase++ value for the requested type.
+      </description>
+      <syntax>Type2EmptyValue( cType [, nLen [, nDec]] ) -> xValue</syntax>
+      <syntax>Type2EmptyValue( nXppType [, nLen [, nDec]] ) -> xValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cType</name>
+            <type>Character</type>
+            <description>
+               One-letter type selector. Supported values are "C" character, "M" memo,
+               "N" numeric, "L" logical and "D" date.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nXppType</name>
+            <type>Numeric</type>
+            <description>Xbase++ internal type mask such as XPP_CHARACTER, XPP_NUMERIC or XPP_DATE.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>Optional length passed to the Xbase++ empty-data constructor.</description>
+         </parameter>
+         <parameter>
+            <name>nDec</name>
+            <type>Numeric</type>
+            <description>Optional decimal count passed to the Xbase++ empty-data constructor.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any</type>
+         <description>
+            Empty value for the requested type. Unknown or zero type values return NIL.
+         </description>
+      </return>
+      <remarks>
+         This is a small wrapper around the Xbase++ empty-data constructor used internally by OT4XB.
+         It is useful when code has a field or XPP type descriptor and needs the corresponding empty value.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY TYPE2EMPTYVALUE( XppParamList pl )
 {
    ULONG ulType = 0;
@@ -2371,12 +4499,35 @@ OT4XB_API HWND _conGetHWND( ContainerHandle con )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ot4xb_memvar_setget</name>
+      <category>container/memvar</category>
+      <description>
+         Gets or sets an Xbase++ memvar by name.
+      </description>
+      <syntax>ot4xb_memvar_setget( cName ) -> xValue</syntax>
+      <syntax>ot4xb_memvar_setget( cName, xValue ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cName</name>
+            <type>Character</type>
+            <description>Name of the memvar.</description>
+         </parameter>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Optional value to assign to the memvar.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any</type>
+         <description>
+            With one parameter, returns the memvar value. With two parameters, sets the memvar and returns NIL.
+         </description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_MEMVAR_SETGET( XppParamList pl ) //ot4xb_memvar_setget(var,val)
 {
@@ -2506,12 +4657,23 @@ OT4XB_API ContainerHandle _conGenericBreakCB( BOOL bCopy )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>_congenericbreakcb</name>
+      <category>container/low-level</category>
+      <description>
+         Returns the generic OT4XB break codeblock.
+      </description>
+      <syntax>_congenericbreakcb() -> bBreak</syntax>
+      <return>
+         <type>Codeblock</type>
+         <description>Codeblock equivalent to {|e| Break(e) }.</description>
+      </return>
+      <remarks>
+         This is a shared internal helper used when OT4XB needs a simple ErrorBlock-compatible break callback.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( _CONGENERICBREAKCB )
 {
@@ -2519,12 +4681,26 @@ _XPP_REG_FUN_( _CONGENERICBREAKCB )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vdef</name>
+      <category>value</category>
+      <description>
+         Returns the first parameter that has a real Xbase++ value.
+      </description>
+      <syntax>__vdef( xValue1 [, xValueN] ) -> xValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>First non-NIL value found, or NIL if all parameters are NIL or omitted.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VDEF )
 {
@@ -2544,12 +4720,27 @@ _XPP_REG_FUN_( __VDEF )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vblock</name>
+      <category>value</category>
+      <description>
+         Returns the first codeblock found in a variable argument list.
+      </description>
+      <syntax>__vblock( xValue1 [, xValueN] ) -> bBlock | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Codeblock | NIL</type>
+         <description>First codeblock parameter, or NIL if none is found.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VBLOCK )
 {
@@ -2569,12 +4760,27 @@ _XPP_REG_FUN_( __VBLOCK )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vnum</name>
+      <category>value</category>
+      <description>
+         Returns the first numeric value found in a variable argument list.
+      </description>
+      <syntax>__vnum( xValue1 [, xValueN] ) -> nValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>First numeric parameter, or NIL if none is found.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VNUM )
 {
@@ -2594,12 +4800,27 @@ _XPP_REG_FUN_( __VNUM )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vlower</name>
+      <category>value/string</category>
+      <description>
+         Returns the first character value found in a variable argument list, converted to lowercase.
+      </description>
+      <syntax>__vlower( xValue1 [, xValueN] ) -> cLower | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>Lowercase copy of the first character parameter, or NIL if none is found.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VLOWER )
 {
@@ -2623,6 +4844,29 @@ _XPP_REG_FUN_( __VLOWER )
    _ret( pl);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__vupper</name>
+      <category>value/string</category>
+      <description>
+         Returns the first character value found in a variable argument list, converted to uppercase.
+      </description>
+      <syntax>__vupper( xValue1 [, xValueN] ) -> cUpper | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>Uppercase copy of the first character parameter, or NIL if none is found.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __VUPPER )
 {
    ULONG np = _partype( pl, 0 );
@@ -2646,12 +4890,27 @@ _XPP_REG_FUN_( __VUPPER )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vstr</name>
+      <category>value/string</category>
+      <description>
+         Returns the first character value found in a variable argument list.
+      </description>
+      <syntax>__vstr( xValue1 [, xValueN] ) -> cValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>First character parameter, unchanged, or NIL if none is found.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VSTR )
 {
@@ -2670,7 +4929,50 @@ _XPP_REG_FUN_( __VSTR )
    _ret( pl );
 }
 // -----------------------------------------------------------------------------------------------------------------
-
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__v2fv</name>
+      <category>value</category>
+      <description>
+         Converts a value to a field value, adjusted to the requested field type, length, and decimals.
+      </description>
+      <syntax>__v2fv( xValue, cFieldType, nLength, nDecimals ) -> xFieldValue</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Value to convert.</description>
+         </parameter>
+         <parameter>
+            <name>cFieldType</name>
+            <type>Character</type>
+            <description>Field type. Supported values are C, M, L, D, and N.</description>
+         </parameter>
+         <parameter>
+            <name>nLength</name>
+            <type>Numeric</type>
+            <description>Field length. Character results are truncated when needed.</description>
+         </parameter>
+         <parameter>
+            <name>nDecimals</name>
+            <type>Numeric</type>
+            <description>Decimal count used for numeric field conversion.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Value converted to fit the requested field definition. Unsupported or incompatible values are converted to
+            the corresponding empty field value where possible.
+         </description>
+      </return>
+      <remarks>
+         The function is meant for record/field work: it takes a general Xbase++ value and adapts it so it can be
+         stored using the same type and size rules as a field value.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __V2FV )	 // __v2fv( 1 value , 2 type , 3 length , 4 dec ) -> value adjusted to field type and size
 {
    TXppParamList xpp( pl, 4 );
@@ -2892,6 +5194,41 @@ _XPP_REG_FUN_( __V2FV )	 // __v2fv( 1 value , 2 type , 3 length , 4 dec ) -> val
 }
 
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__vmask</name>
+      <category>value</category>
+      <description>
+         Returns the first parameter whose Xbase++ type matches a type mask.
+      </description>
+      <syntax>__vmask( nTypeMask, xValue1 [, xValueN] ) -> xValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>nTypeMask</name>
+            <type>Numeric</type>
+            <description>
+               Xbase++ type mask, using the type constants from types.ch. Combine several type flags with bitwise OR,
+               for example with nOr( XPP_CHARACTER, XPP_NUMERIC ). Add 0x10000000 to require the selected value to be
+               non-empty.
+            </description>
+         </parameter>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right after nTypeMask.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>First matching value, or NIL if no value matches the mask.</description>
+      </return>
+      <remarks>
+         If the non-empty flag 0x10000000 is used with no explicit type bits, all ordinary Xbase++ value types are
+         accepted, but empty values are skipped.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __VMASK )
 {
    ULONG np = _partype( pl, 0 );
@@ -2935,12 +5272,42 @@ _XPP_REG_FUN_( __VMASK )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__xb_type</name>
+      <category>container/type</category>
+      <description>
+         Returns the Xbase++ internal type of a value, or checks that type against a mask.
+      </description>
+      <syntax>__xb_type( xValue ) -> nType</syntax>
+      <syntax>__xb_type( xValue, nMask ) -> lMatch</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Value whose internal Xbase++ type is inspected.</description>
+         </parameter>
+         <parameter>
+            <name>nMask</name>
+            <type>Numeric</type>
+            <description>
+               Type mask built from the Xbase++ type constants in types.ch.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | Logical</type>
+         <description>
+            With one parameter, returns the numeric internal type of xValue. With two parameters,
+            returns .T. when the type of xValue has any bit in common with nMask; otherwise .F.
+         </description>
+      </return>
+      <remarks>
+         The two-parameter form performs a bitwise AND check: __xb_type( xValue, nMask )
+         is true when nAnd( __xb_type( xValue ), nMask ) is not zero.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __XB_TYPE )
 {
@@ -2963,12 +5330,48 @@ _XPP_REG_FUN_( __XB_TYPE )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vclsptr</name>
+      <category>value</category>
+      <description>
+         Returns the first value that can be used as a pointer argument, optionally filtering object values by class
+         name.
+      </description>
+      <syntax>__vclsptr( cClassName, xValue1 [, xValueN] ) -> xValue | 0</syntax>
+      <syntax>__vclsptr( xValue1 [, xValueN] ) -> xValue | 0</syntax>
+      <parameters>
+         <parameter>
+            <name>cClassName</name>
+            <type>Character</type>
+            <description>
+               Optional class-name mask. When the first parameter is a character string, object values are accepted
+               only when ::ClassName() matches this mask. Matching uses case-insensitive WildCmp semantics, so '*'
+               and '?' can be used as wildcards in the class name.
+            </description>
+         </parameter>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Variable argument list scanned from left to right.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            First numeric pointer value, first object matching the optional class mask, or 0 if no suitable value is
+            found.
+         </description>
+      </return>
+      <remarks>
+         Numeric values are assumed to already be pointers and are returned directly. Object values are accepted so
+         OT4XB can use its normal pointer-object mechanism: the object is expected to provide _lock_/_unlock_ behavior
+         so the pointer can be obtained for the duration of the call and released afterwards. The optional class-name
+         parameter is only a filter to make sure the selected object is of the expected class; without it, the first
+         object or numeric value is considered valid. If a numeric value is passed, __vclsptr() does not validate that
+         it is a real pointer; passing an invalid pointer value will fail later when that pointer is used.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VCLSPTR )
 {
@@ -3017,12 +5420,37 @@ _XPP_REG_FUN_( __VCLSPTR )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__anew</name>
+      <category>container/array</category>
+      <description>
+         Creates a new array initialized with the values passed as parameters.
+      </description>
+      <syntax>__anew( xValue1 [, xValueN] ) -> aValues</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1...xValueN</name>
+            <type>Any</type>
+            <description>Values copied into the returned array, in parameter order.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Array</type>
+         <description>A newly created array containing the supplied values.</description>
+      </return>
+      <remarks>
+         __anew( 1, 2, 3 ) is equivalent in intent to { 1, 2, 3 }. The Xbase++ array literal
+         should also create a new array every time it is evaluated.
+
+         This helper was useful with old Xbase++ versions where array literals such as
+         local aa := {1,2,3,4} could, in rare situations, unexpectedly share an array instance.
+         The exact trigger was hard to reproduce. Newer Xbase++ versions are not expected to show
+         that behavior, but __anew() is still harmless and is often used out of habit or as a
+         defensive way to force a fresh array allocation on every call.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __ANEW ) // __ANew( e1 , ... , eN ) -> { e1 , ... , eN }
 {
@@ -3040,12 +5468,43 @@ _XPP_REG_FUN_( __ANEW ) // __ANew( e1 , ... , eN ) -> { e1 , ... , eN }
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__apeek</name>
+      <category>container/array</category>
+      <description>
+         Tries to read a value from an array using one or more indexes.
+      </description>
+      <syntax>__apeek( aArray, nIndex1 [, nIndexN] ) -> xValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>aArray</name>
+            <type>Array</type>
+            <description>Array to inspect.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex1...nIndexN</name>
+            <type>Numeric</type>
+            <description>
+               One or more 1-based indexes. Multiple indexes are used to navigate nested or multidimensional arrays.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any | NIL</type>
+         <description>
+            The value found at the requested path, or NIL if the supplied value is not an array, an intermediate
+            value is not an array, or any requested index is outside the available dimensions.
+         </description>
+      </return>
+      <remarks>
+         __apeek() is intended for defensive inspection of arrays whose shape may vary, such as parsed data
+         or optional nested structures. It returns NIL instead of failing when the requested path does not exist.
+
+         It is similar in purpose to __vpeek(), but is limited to arrays and numeric indexes.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __APEEK ) // __APeek( array , nIndex, ... , nSubIndex ) -> value | NIL
 {
@@ -3166,12 +5625,47 @@ static BOOL __vpeek_from_object( ContainerHandle con, DWORD & cb, LPSTR & p )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__vpeek</name>
+      <category>value</category>
+      <description>
+         Safely peeks/extracts a nested value from an array, object, or a combination of both.
+      </description>
+      <syntax>__vpeek( xValue, cExpression [, xDefault] ) -> xResult</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Root value to inspect, usually an array, object, or value parsed from structured data.</description>
+         </parameter>
+         <parameter>
+            <name>cExpression</name>
+            <type>Character</type>
+            <description>
+               Access expression. Use [n] to select an array element and :name to read an object member. Steps can be
+               chained, for example "[1]:customer:name".
+            </description>
+         </parameter>
+         <parameter>
+            <name>xDefault</name>
+            <type>Any</type>
+            <description>Optional value returned when any step cannot be resolved.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Extracted value, xDefault when supplied and extraction fails, or NIL when extraction fails without a default.</description>
+      </return>
+      <remarks>
+         This is useful when inspecting complex values whose shape is not guaranteed, such as parsed JSON. It allows
+         probing deep values without first checking every intermediate array element or object member.
+      </remarks>
+      <example><![CDATA[
+// Get a nested value from a parsed JSON-like structure.
+cName := __vpeek( xJson, ":data[1]:customer:name", "" )
+]]></example>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __VPEEK ) // __vpeek( vv , exp , def) -> value | def
 {
@@ -3242,12 +5736,47 @@ _XPP_REG_FUN_( __VPEEK ) // __vpeek( vv , exp , def) -> value | def
 // -----------------------------------------------------------------------------------------------------------------
 // flags: 1 loop
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>__anext</name>
+      <category>value/array</category>
+      <description>
+         Returns the next element of an array and advances an index passed by reference.
+      </description>
+      <syntax>__anext( aArray, @nIndex [, nFlags] ) -> xValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>aArray</name>
+            <type>Array</type>
+            <description>Array to iterate.</description>
+         </parameter>
+         <parameter>
+            <name>nIndex</name>
+            <type>Numeric by reference</type>
+            <description>
+               Current position. Values lower than 1 are treated as 0 before advancing. The parameter is updated with
+               the position that was attempted or returned.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0001 - loop back to the first element after the end of the array.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Next array element, or NIL when there is no next element or the first parameter is not an array.</description>
+      </return>
+      <remarks>
+         Without 0x0001, the array is traversed once and the function returns NIL after the last element.
+         This is useful for round-robin iteration over a fixed array of resources, such as a list of mailboxes to check:
+         each call returns the next item, and with 0x0001 the sequence starts again from the first item after the last.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( __ANEXT ) // __ANext( array , @nIndex , flags) -> value | NIL
 {
@@ -3352,6 +5881,36 @@ static LPSTR __xml_fv__get_value( ContainerHandle  con_value )
 }
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__xml_fv_get_value</name>
+      <category>value/xml</category>
+      <description>
+         Formats a Xbase++ value as the text representation used by __xml_fv().
+      </description>
+      <syntax>__xml_fv_get_value( xValue ) -> cValue</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Character | Date | Numeric | Logical</type>
+            <description>Value to format for XML value output.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>
+            Character values are returned as-is, dates are formatted as yyyy-mm-dd, numeric values are formatted as
+            text, and logical values are returned as true or false. Unsupported values return an empty string.
+         </description>
+      </return>
+      <remarks>
+         This function only formats the value text. It does not XML-escape the result and does not add XML element tags
+         or attributes.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __XML_FV_GET_VALUE )
 {
    TXppParamList xpp( pl, 1 );
@@ -3416,6 +5975,59 @@ static void __xml_fv__add_atributes( TZString & z, TXbCPItem & x )
 
 // -----------------------------------------------------------------------------------------------------------------
 // flags = // 0x100 no scientific, 1 LTrim , 2 Rtrim , 0x200 do not convert 1252-to-utf8 
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__v2_csv_cell</name>
+      <category>value/csv</category>
+      <description>
+         Converts a Xbase++ value to one CSV cell.
+      </description>
+      <syntax>__v2_csv_cell( xValue [, nFlags] [, nDecimals] ) -> cCell</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Character | Date | Numeric | Logical</type>
+            <description>Value to format as a CSV cell.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0001 - left-trim spaces while building the cell.
+               0x0002 - right-trim spaces after building the cell.
+               0x0008 - prefix numeric-looking cells with an apostrophe.
+               0x0100 - quote numeric-looking cells to avoid scientific-notation interpretation by CSV consumers.
+               0x0200 - do not convert CP1252 characters to UTF-8.
+               0x0400 - convert CR, LF, and TAB to spaces.
+               0x0800 - convert double quotes to single quotes.
+               0x4000 - limit input length to 400 characters.
+               0x8000 - limit input length to 800 characters.
+               0xC000 - limit input length to 1200 characters.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nDecimals</name>
+            <type>Numeric</type>
+            <description>
+               Optional decimal count for numeric values. When omitted, doubles use a compact representation and
+               integer values are formatted without decimals.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>CSV cell text, quoted and escaped when needed.</description>
+      </return>
+      <remarks>
+         Character and date values are passed through the CSV-cell formatter. Dates are written as yyyy-mm-dd, or ten
+         spaces for an empty date. Logical values are written as 1 or 0. Embedded double quotes are escaped by doubling
+         them unless the quote-to-single-quote flag is used.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __V2_CSV_CELL )  // 1 value , 2 flags , 3 decimal
 {
    TXppParamList xpp( pl, 3 );
@@ -3454,7 +6066,7 @@ _XPP_REG_FUN_( __V2_CSV_CELL )  // 1 value , 2 flags , 3 decimal
       }
       case XPP_NUMERIC:
       {
-         char s[128]; ZeroMemory( s, sizeof( s ) );
+         char s[256]; ZeroMemory( s, sizeof( s ) );
          DWORD dec = ( xpp[3]->CheckType( XPP_NUMERIC ) ? xpp[3]->GetDWord() & 0x0F : 0xFF );
          DWORD pos = 0;
          if( dec == 0 )
@@ -3479,10 +6091,10 @@ _XPP_REG_FUN_( __V2_CSV_CELL )  // 1 value , 2 flags , 3 decimal
             else
             {
                pos = (DWORD) _snprintf_c( s, sizeof( s ), "%u", xpp[1]->GetDWord() );
-               if( dec > 0 && dec <= 0x0F )
+               if( dec > 0 && dec <= 0x0F && pos < ( sizeof( s ) - 16 ) )
                {
                   s[pos++] = '.';
-                  for( ; dec; dec-- )
+                  for( ; dec && pos < (sizeof(s)-2) ; dec-- )
                   {
                      s[pos++] = '0';
                   }
@@ -3506,6 +6118,71 @@ _XPP_REG_FUN_( __V2_CSV_CELL )  // 1 value , 2 flags , 3 decimal
 // flags:
 // 2 - RTRIM
 // 0x10000 -  naked value
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__xml_fv</name>
+      <category>value/xml</category>
+      <description>
+         Formats a Xbase++ value as an XML value fragment, using an element name and optional attributes.
+      </description>
+      <syntax>__xml_fv( cName, xValue [, xAttributes] [, nCodePageTo] [, nCodePageFrom] [, nFlags] ) -> cXml</syntax>
+      <parameters>
+         <parameter>
+            <name>cName</name>
+            <type>Character</type>
+            <description>XML element name.</description>
+         </parameter>
+         <parameter>
+            <name>xValue</name>
+            <type>Character | Date | Numeric | Logical</type>
+            <description>
+               Value to serialize. Characters are used as text, dates are formatted as yyyy-mm-dd, numerics are
+               formatted as text, and logical values are written as true or false.
+            </description>
+         </parameter>
+         <parameter>
+            <name>xAttributes</name>
+            <type>Character | Array</type>
+            <description>
+               Optional attributes. Normally an array of { cName, xValue } pairs; each value is XML-escaped. A
+               character value is also accepted and is inserted as raw attribute text.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nCodePageTo</name>
+            <type>Numeric</type>
+            <description>Destination Windows code page. Defaults to CP_UTF8.</description>
+         </parameter>
+         <parameter>
+            <name>nCodePageFrom</name>
+            <type>Numeric</type>
+            <description>Source Windows code page used for the generated text before conversion. Defaults to CP_ACP.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0002 - right-trim the escaped value text.
+               0x10000 - naked value: return only the XML-escaped value text, without opening or closing element tags.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>
+            XML fragment. Unsupported values generate a self-closing element unless the naked-value flag is used.
+         </description>
+      </return>
+      <remarks>
+         Attribute names are not escaped. When xAttributes is a raw character string it is inserted as supplied, so the
+         caller is responsible for making it valid XML attribute text. The self-closing form is not controlled by a
+         flag; it is used automatically when xValue cannot be converted to XML text.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __XML_FV ) // __xml_fv(1 name , 2 value , 3 attributes , 4 cp_To = utf8 , 5 cp_from = default ansi , 6 flags )
 {
    TXppParamList xpp( pl, 6 );
@@ -3646,12 +6323,63 @@ OT4XB_API ULONG ot4xb_conUnlockC( ContainerHandle con )
 #define OT4XB_QLOOP_COMPILE_BLOCKS  0x01000000
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ot4xb_qloop</name>
+      <category>value/control</category>
+      <description>
+         Executes a small loop from Xbase++, evaluating a body codeblock while an optional condition codeblock is true.
+      </description>
+      <syntax>ot4xb_qloop( nFlags, @uCargo, bEval [, bCondition] [, bInit] ) -> nErrorCode</syntax>
+      <parameters>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x01000000 - compile block parameters supplied as character macro strings before executing the loop.
+            </description>
+         </parameter>
+         <parameter>
+            <name>uCargo</name>
+            <type>Any by reference</type>
+            <description>Value passed as the only argument to bInit, bCondition, and bEval.</description>
+         </parameter>
+         <parameter>
+            <name>bEval</name>
+            <type>Codeblock</type>
+            <description>Loop body. It is evaluated as Eval( bEval, uCargo ).</description>
+         </parameter>
+         <parameter>
+            <name>bCondition</name>
+            <type>Codeblock</type>
+            <description>
+               Optional condition block. While Eval( bCondition, uCargo ) is .T., the body is evaluated. When omitted,
+               the body is evaluated once.
+            </description>
+         </parameter>
+         <parameter>
+            <name>bInit</name>
+            <type>Codeblock</type>
+            <description>Optional initialization block evaluated once before the loop body or condition.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>
+            Non-negative values are the number of body evaluations. Negative values are error codes; currently -1 means
+            bEval was not a codeblock after optional macro compilation.
+         </description>
+      </return>
+      <remarks>
+         This function is meant for running a small loop inside a codeblock without having to declare a separate
+         function for the loop body.
+         The compile-blocks flag allows the block parameters to be supplied as macro strings and compiled before the
+         loop runs. The loop count is incremented before each body evaluation. When bCondition is omitted, the count is
+         1 after a successful single body evaluation.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_QLOOP ) // ot4xb_qloop( 1nFlags , 2@uCargo , [3bEval] , [4bCondition] , [5 bInit] ) -> nErrorCode ( >= 0 nLoops , < 0 Error Code )
 {

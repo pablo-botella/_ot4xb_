@@ -11,6 +11,70 @@
                               px->SetErrorDescription( d ); \
                               px->SetErrorGenCode(0x00102000 + n);
 //----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>TXbClass</name>
+      <category>runtime/classes</category>
+      <description>
+         Low-level runtime class builder used internally by OT4XB to create exported Xbase++ classes and GWST
+         structure classes. It is the object-level API behind many OT4XB dynamic class and structure helpers.
+      </description>
+      <syntax>TXbClass():new( cClassName ) -> oBuilder</syntax>
+      <remarks>
+         Most application code should use the higher-level OT4XB class and structure commands. TXbClass is documented
+         because it is exported and because many generated classes in OT4XB are built with it. Builder methods return
+         Self unless otherwise noted, so calls can be chained while declaring a class.
+      </remarks>
+      <class-methods>
+         <method name="AddHook" syntax="TXbClass():AddHook( cClassName, oHook | bHook ) -> nHookId">
+            Registers a hook evaluated when a matching class is created. Object hooks receive ::OnClassCreate(oTXbClass);
+            codeblock hooks are evaluated with the TXbClass builder object.
+         </method>
+      </class-methods>
+      <methods>
+         <method name="DisableHooks" syntax="::DisableHooks() -> NIL">Disables class creation hooks for this builder.</method>
+         <method name="Destroy" syntax="::Destroy() -> Self">Destroys the underlying builder object.</method>
+         <method name="Create" syntax="::Create() -> oClass">Creates and returns the Xbase++ class object.</method>
+         <method name="_Parent" syntax="::_Parent( cParentClass | oParentClass ) -> Self">Adds a parent class.</method>
+         <method name="_GwstParent" syntax="::_GwstParent( [cParentClass | oParentClass] ) -> Self">Marks the class as a GWST-derived structure class.</method>
+         <method name="_Exported" syntax="::_Exported() -> Self">Sets following declarations to exported scope.</method>
+         <method name="_Hidden" syntax="::_Hidden() -> Self">Sets following declarations to hidden scope.</method>
+         <method name="_Protected" syntax="::_Protected() -> Self">Sets following declarations to protected scope.</method>
+         <method name="_Var" syntax="::_Var( cName, [nExtraFlags] ) -> Self">Adds an instance variable.</method>
+         <method name="_ClassVar" syntax="::_ClassVar( cName, [nExtraFlags] ) -> Self">Adds a class variable.</method>
+         <method name="_SharedClassVar" syntax="::_SharedClassVar( cName, [nExtraFlags] ) -> Self">Adds a shared class variable.</method>
+         <method name="_Method" syntax="::_Method( cName, cCodeBlock | bCodeBlock ) -> Self">Adds an instance method.</method>
+         <method name="_ClassMethod" syntax="::_ClassMethod( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a class method.</method>
+         <method name="_Property" syntax="::_Property( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a read/write property.</method>
+         <method name="_ClassProperty" syntax="::_ClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a class read/write property.</method>
+         <method name="_ROProperty" syntax="::_ROProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a readonly property.</method>
+         <method name="_ROClassProperty" syntax="::_ROClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a readonly class property.</method>
+         <method name="_WOProperty" syntax="::_WOProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a write-only property.</method>
+         <method name="_WOClassProperty" syntax="::_WOClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a write-only class property.</method>
+         <method name="_AddGwstStyleMembers" syntax="::_AddGwstStyleMembers() -> Self">Adds GWST-style pointer support members.</method>
+         <method name="_GwstReadOnly" syntax="::_GwstReadOnly() -> Self">Declares generated GWST members as readonly.</method>
+         <method name="_GwstReadWrite" syntax="::_GwstReadWrite() -> Self">Declares generated GWST members as read/write.</method>
+         <method name="_GwstBeginUnion" syntax="::_GwstBeginUnion() -> Self">Starts a GWST union layout block.</method>
+         <method name="_GwstEndUnion" syntax="::_GwstEndUnion() -> Self">Ends the current GWST union layout block.</method>
+         <method name="_GwstSkipBytes" syntax="::_GwstSkipBytes( nBytes ) -> Self">Advances the current GWST offset by nBytes.</method>
+         <method name="_GwstAdjustSize" syntax="::_GwstAdjustSize( nSize ) -> Self">Ensures the GWST class size is at least nSize bytes.</method>
+         <method name="_GwstAlignNextMember" syntax="::_GwstAlignNextMember( nPack ) -> Self">Aligns the next GWST member offset.</method>
+         <method name="_GwstGetOffset" syntax="::_GwstGetOffset() -> nOffset">Returns the next GWST member offset.</method>
+         <method name="_GwstSetOffset" syntax="::_GwstSetOffset( nOffset ) -> Self">Sets the next GWST member offset.</method>
+         <method name="_GwstBack" syntax="::_GwstBack() -> Self">Moves the GWST offset back to the previous member start.</method>
+         <method name="_Child" syntax="::_Child( cName, cClass | oClass ) -> Self">Adds an embedded child GWST structure.</method>
+         <method name="_Member" syntax="::_Member( cName, nMemberType, nSize ) -> Self">Adds a raw GWST member declaration.</method>
+         <method name="_Member_*" syntax="::_Member_DWord( cName ), ::_Member_szStr( cName, nSize ), ... -> Self">
+            Adds a typed GWST member. The exported helpers cover integer, pointer, handle, string, date, floating
+            point, bit-field and network-byte-order member variants.
+         </method>
+      </methods>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 static void TXbClass_cm_AddClassHook(TXbClsParams * px);
 //----------------------------------------------------------------------------------------------------------------------
 static void TXbClass_DisableHooks(TXbClsParams * px);

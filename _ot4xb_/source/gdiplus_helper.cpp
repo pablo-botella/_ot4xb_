@@ -12,6 +12,32 @@ static GdipGetImageEncodersSize_ft* fpGetImageEncodersSize = (GdipGetImageEncode
 static GdipGetImageEncoders_ft* fpGetImageEncoders = (GdipGetImageEncoders_ft*)0;
 static HMODULE hGdiplusDll = (HMODULE)0;
 //----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>GDIPLUS_HELPER</name>
+      <category>gdiplus</category>
+      <description>
+         Small GDI+ helper class. It loads gdiplus.dll on demand and exposes helpers used by OT4XB image code.
+      </description>
+      <syntax>GDIPLUS_HELPER() -> oClass</syntax>
+      <class-methods>
+         <method name="font_spec_t" syntax="GDIPLUS_HELPER():font_spec_t( cFontName, nSize, [nStyle := 0] ) -> cFontSpec">
+            Builds the binary font_spec_t buffer used by OT4XB GDI+ helpers.
+         </method>
+         <method name="get_encoder_clsid" syntax="GDIPLUS_HELPER():get_encoder_clsid( cMimeType ) -> cClsid16 | NIL">
+            Returns the 16-byte CLSID of the image encoder that matches cMimeType, for example "image/png".
+         </method>
+      </class-methods>
+      <remarks>
+         The helper keeps the GDI+ entry points resolved after the first successful load. cClsid16 is the raw CLSID
+         bytes, not a formatted GUID string.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 BEGIN_NAMESPACE(gdiplus_helper_ns)
 
 BOOL  load_gdiplus_table()
@@ -104,14 +130,6 @@ void AddXbMethods(TXbClass* pc)
 // -----------------------------------------------------------------------------------------------------------------
 END_NAMESPACE()
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 BEGIN_XBASE_CLASS(GDIPLUS_HELPER)
 {
    gdiplus_helper_ns::AddXbMethods(pc);

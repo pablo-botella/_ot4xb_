@@ -1,3 +1,8 @@
+// -----------------------------------------------------------------------------------------------------------------
+// Maps WinAPI structure names to their WAPIST_* OT4XB structure class factories.
+// This file is included from ot4xb.ch when _OT4XB_MAP_WAPIST_FUNC_ is defined by the caller.
+// Example: POINT():new() is translated to WAPIST_POINT():new().
+// -----------------------------------------------------------------------------------------------------------------
 #pragma Map( _PRINTER_NOTIFY_INFO_DATA___DATA   ,  "WAPIST__PRINTER_NOTIFY_INFO_DATA___DATA" )
 #pragma Map( _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA  ,  "WAPIST__PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA" )
 #pragma Map( ABC  ,  "WAPIST_ABC" )

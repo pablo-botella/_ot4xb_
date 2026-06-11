@@ -46,6 +46,188 @@ static  void unlock_hdict( void* cs )
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>THDict low-level functions</name>
+      <source>THDict.cpp</source>
+      <category>container/dictionary</category>
+      <description>
+         Low-level hash dictionary functions used internally by OT4XB and exposed for advanced code. A dictionary
+         is addressed by a numeric handle returned by _hdict_new() or _hdictcs_new().
+      </description>
+      <status>Legacy API; to be deprecated.</status>
+      <remarks>
+         _HDICT_* uses THashTable and compares character keys case-insensitively using the OT4XB ANSI lower-case
+         table. _HDICTCS_* uses THtcsTable and compares keys case-sensitively. These functions own the stored
+         values; _hdict_destroy() or _hdictcs_destroy() must be called for handles created by the caller.
+
+         THDict is not the backing store for _ot4xb_expando_. A few legacy/helper paths still use it as an
+         implementation shortcut, but new code should prefer the newer containers where possible.
+
+         Character keys preserve their byte length. Numeric and date keys are converted to internal string keys.
+         Values are stored as typed THDictItem entries and converted back to Xbase++ values when read.
+      </remarks>
+      <functions>
+         <function>
+            <name>_hdict_new</name>
+            <syntax>_hdict_new( @pOld [, nBuckets] [, nMaxPopulation] [, lSync] ) -> pHt</syntax>
+            <description>Destroys pOld when supplied and returns a new case-insensitive dictionary handle.</description>
+         </function>
+         <function>
+            <name>_hdictcs_new</name>
+            <syntax>_hdictcs_new( @pOld [, nBuckets] [, nMaxPopulation] [, lSync] ) -> pHt</syntax>
+            <description>Destroys pOld when supplied and returns a new case-sensitive dictionary handle.</description>
+         </function>
+         <function>
+            <name>_hdict_destroy</name>
+            <syntax>_hdict_destroy( @pHt ) -> 0</syntax>
+            <description>Destroys a case-insensitive dictionary and stores 0 in @pHt.</description>
+         </function>
+         <function>
+            <name>_hdictcs_destroy</name>
+            <syntax>_hdictcs_destroy( @pHt ) -> 0</syntax>
+            <description>Destroys a case-sensitive dictionary and stores 0 in @pHt.</description>
+         </function>
+         <function>
+            <name>_hdict_key_compare</name>
+            <syntax>_hdict_key_compare( xKey1, xKey2 ) -> lEqual</syntax>
+            <description>Compares two keys using the case-insensitive THashTable comparison rules.</description>
+         </function>
+         <function>
+            <name>_hdictcs_key_compare</name>
+            <syntax>_hdictcs_key_compare( xKey1, xKey2 ) -> lEqual</syntax>
+            <description>Compares two keys using the case-sensitive THtcsTable comparison rules.</description>
+         </function>
+         <function>
+            <name>_hdict_setprop</name>
+            <syntax>_hdict_setprop( pHt, xKey, xValue ) -> NIL</syntax>
+            <description>Stores or replaces a value in a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_setprop</name>
+            <syntax>_hdictcs_setprop( pHt, xKey, xValue ) -> NIL</syntax>
+            <description>Stores or replaces a value in a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_getprop</name>
+            <syntax>_hdict_getprop( pHt, xKey ) -> xValue | NIL</syntax>
+            <description>Returns a value from a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_getprop</name>
+            <syntax>_hdictcs_getprop( pHt, xKey ) -> xValue | NIL</syntax>
+            <description>Returns a value from a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_isprop</name>
+            <syntax>_hdict_isprop( pHt, xKey ) -> lExists</syntax>
+            <description>Returns .T. when the key exists in a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_isprop</name>
+            <syntax>_hdictcs_isprop( pHt, xKey ) -> lExists</syntax>
+            <description>Returns .T. when the key exists in a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_getprop_raw_</name>
+            <syntax>_hdict_getprop_raw_( pHt, xKey ) -> pItem</syntax>
+            <description>Returns the internal THDictItem pointer for xKey, or 0. This is an internal/diagnostic entry point.</description>
+         </function>
+         <function>
+            <name>_hdict_removeprop</name>
+            <syntax>_hdict_removeprop( pHt, xKey ) -> lRemoved</syntax>
+            <description>Removes a key from a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_removeprop</name>
+            <syntax>_hdictcs_removeprop( pHt, xKey ) -> lRemoved</syntax>
+            <description>Removes a key from a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_removeall</name>
+            <syntax>_hdict_removeall( pHt ) -> NIL</syntax>
+            <description>Removes all entries from a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_removeall</name>
+            <syntax>_hdictcs_removeall( pHt ) -> NIL</syntax>
+            <description>Removes all entries from a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_count</name>
+            <syntax>_hdict_count( pHt ) -> nCount | NIL</syntax>
+            <description>Returns the number of entries in a case-insensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdictcs_count</name>
+            <syntax>_hdictcs_count( pHt ) -> nCount | NIL</syntax>
+            <description>Returns the number of entries in a case-sensitive dictionary.</description>
+         </function>
+         <function>
+            <name>_hdict_iterate_step</name>
+            <syntax>_hdict_iterate_step( pHt, @pIterator, @xValue, @cKey [, pFilter] ) -> lContinue</syntax>
+            <description>
+               Step iterator over a case-insensitive dictionary. On each .T. result, @xValue and @cKey contain
+               the current item. The function is not supported for synchronized hash tables.
+            </description>
+         </function>
+         <function>
+            <name>_hdict_iterate_cb</name>
+            <syntax>_hdict_iterate_cb( pHt, bEval, @xCargo ) -> nCount</syntax>
+            <description>Evaluates Eval( bEval, nPos, cKey, xValue, xCargo ) for each entry until the block returns .F.</description>
+         </function>
+         <function>
+            <name>_hdict_iterate_cb</name>
+            <syntax>_hdict_iterate_cb( pHt, nOp [, @xExtra] ) -> xResult</syntax>
+            <description>Runs one of the numeric iteration/export operations listed below.</description>
+         </function>
+         <function>
+            <name>_hdict_addpropfromarray</name>
+            <syntax>_hdict_addpropfromarray( pHt, aPairs ) -> NIL</syntax>
+            <description>Adds entries from an array whose items are { xKey, xValue } arrays.</description>
+         </function>
+         <function>
+            <name>_hdict_addpropfroministring</name>
+            <syntax>_hdict_addpropfroministring( pHt, cIniText, nFlags ) -> aSections | NIL</syntax>
+            <description>Adds entries parsed from INI-style text.</description>
+         </function>
+         <function>
+            <name>_hdict_add_env_strings</name>
+            <syntax>_hdict_add_env_strings( pHt [, pEnvironment] ) -> NIL</syntax>
+            <description>
+               Adds environment variables from a Windows environment block. When pEnvironment is omitted or 0,
+               GetEnvironmentStrings() is used and the block is released internally.
+            </description>
+         </function>
+         <function>
+            <name>_hdict_add_http_headers</name>
+            <syntax>_hdict_add_http_headers( pHt, cHeaders ) -> NIL</syntax>
+            <description>Adds HTTP-style header lines formatted as "Name: value". Surrounding spaces are trimmed.</description>
+         </function>
+         <function>
+            <name>_hdict_from_zkdw</name>
+            <syntax>_hdict_from_zkdw( pHt, cZkdw ) -> nItems</syntax>
+            <description>Imports a ZKDW buffer: DWORD value, DWORD key length, followed by key bytes.</description>
+         </function>
+      </functions>
+      <flags name="_hdict_iterate_cb numeric operation">
+         <flag value="1">Return an array with keys.</flag>
+         <flag value="2">Return an array with values.</flag>
+         <flag value="3">Return an array of { key, value } pairs. If @xExtra is supplied, it receives the CRC DWORD buffer.</flag>
+         <flag value="4">Return a pointer to a generated environment block and store its byte length in @xExtra. Caller frees the pointer with _xfree().</flag>
+         <flag value="5">Return a ZKDW string. Optional xExtra numeric value is used as default for non-integer entries.</flag>
+         <flag value="6">Reset entries to integer values, using optional xExtra numeric default.</flag>
+      </flags>
+      <flags name="_hdict_addpropfroministring">
+         <flag value="0x0000">Ignore section lines.</flag>
+         <flag value="0x0001">Prefix entries with the current section name using section\entry.</flag>
+         <flag value="0x0002">LTrim/RTrim values.</flag>
+         <flag value="0x0004">With 0x0001, return an array of section names.</flag>
+      </flags>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _HDICT_NEW( XppParamList pl )// (pOld,nBuckets,nMaxPopulation,lSync) -> pTHashTable
 {
    THashTable * pHt  = reinterpret_cast<THashTable *>(_parLong(pl,1));
@@ -1030,6 +1212,55 @@ _XPP_REG_FUN_( _HDICT_ADDPROPFROMINISTRING ) // _hdict_AddPropFromIniString( ht,
 
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>THDictEx</name>
+      <source>THDict.cpp:THDICTEX</source>
+      <category>container/dictionary</category>
+      <description>
+         Xbase++ wrapper around a case-insensitive THDict handle. It exposes explicit dictionary methods and
+         virtual instance variables backed by the dictionary.
+      </description>
+      <status>Legacy API; to be deprecated.</status>
+      <syntax>THDictEx():new( [lSync] ) -> oDict</syntax>
+      <remarks>
+         This class wraps the low-level _HDICT_* functions. Call ::destroy() when the dictionary is no longer
+         needed if the object lifetime is not otherwise controlled by the application.
+      </remarks>
+      <methods>
+         <method name="::h" syntax="o:h() -> pHt">Returns the raw dictionary handle.</method>
+         <method name="::handle" syntax="o:handle() -> pHt">Returns the raw dictionary handle.</method>
+         <method name="::destroy" syntax="o:destroy() -> NIL">Destroys the wrapped dictionary handle.</method>
+         <method name="::SetProp" syntax="o:SetProp( xKey, xValue ) -> NIL">Stores a value.</method>
+         <method name="::GetProp" syntax="o:GetProp( xKey ) -> xValue | NIL">Returns a value.</method>
+         <method name="::SetNoIVar" syntax="o:SetNoIVar( cKey, xValue ) -> NIL">Virtual instance-variable setter.</method>
+         <method name="::GetNoIVar" syntax="o:GetNoIVar( cKey ) -> xValue | NIL">Virtual instance-variable getter.</method>
+         <method name="::IsProp" syntax="o:IsProp( xKey ) -> lExists">Checks whether a key exists.</method>
+         <method name="::RemoveProp" syntax="o:RemoveProp( xKey ) -> lRemoved">Removes one key.</method>
+         <method name="::RemoveAll" syntax="o:RemoveAll() -> NIL">Removes all keys.</method>
+         <method name="::Count" syntax="o:Count() -> nCount">Returns the number of entries.</method>
+         <method name="::AddFromArray" syntax="o:AddFromArray( aPairs ) -> NIL">Adds entries from { key, value } pairs.</method>
+         <method name="::AddFromIniString" syntax="o:AddFromIniString( cIniText, nFlags ) -> aSections | NIL">Adds entries from INI-style text.</method>
+         <method name="::AddEnvStrings" syntax="o:AddEnvStrings( [pEnvironment] ) -> NIL">Adds environment variables.</method>
+         <method name="::AddHttpHeaders" syntax="o:AddHttpHeaders( cHeaders ) -> NIL">Adds HTTP-style headers.</method>
+         <method name="::ToArray" syntax="o:ToArray() -> aPairs">Returns { key, value } pairs.</method>
+         <method name="::FromZkdw" syntax="o:FromZkdw( cZkdw ) -> nItems">Imports ZKDW entries.</method>
+         <method name="::ToZkdw" syntax="o:ToZkdw( [nDefault] ) -> cZkdw">Exports entries to ZKDW format.</method>
+         <method name="::ResetZkdw" syntax="o:ResetZkdw( [nDefault] ) -> NIL">Resets entries to integer values.</method>
+      </methods>
+      <example><![CDATA[
+local o := THDictEx():new()
+
+o:SetProp( "Name", "OT4XB" )
+? o:GetProp( "name" )   // case-insensitive
+? o:Name                // virtual member access
+
+o:destroy()
+      ]]></example>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
 BEGIN_XBASE_CLASS( THDICTEX )
 {
    pc->EXPORTED();

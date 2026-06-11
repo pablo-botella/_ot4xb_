@@ -5,6 +5,61 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 //-----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>GWST member accessors</name>
+      <source>gwst_xb_setget.cpp</source>
+      <category>structures/internal</category>
+      <description>
+         Internal read/write helpers used by OT4XB GWST structure classes to expose binary structure members as
+         Xbase++ properties. They are exported implementation details and are not intended to be called directly
+         from application code.
+      </description>
+      <status>Internal GWST support API; not intended for direct application calls.</status>
+      <remarks>
+         These functions are generated into GWST member accessors by the structure/class machinery. Application
+         code normally uses the structure member directly, for example oRect:left or oFindData:cFileName, and
+         does not call _gwst_xbsetget_*() functions by hand.
+
+         The common calling shape is _gwst_xbsetget_type_( @xValue, nPCount, @pStorage, nShift, nOffset,
+         nStorageSize, pGhost, nMemberSize ). When nPCount is greater than 1 the helper writes xValue into the
+         structure storage. Otherwise it reads the member and returns the converted Xbase++ value.
+
+         Storage can be the default Xbase++ character buffer used by GWST, a linked/allocated memory pointer, or
+         a direct ghost pointer supplied by the structure runtime. Character-buffer storage is locked while the
+         member is read or written and unlocked before returning.
+      </remarks>
+      <functions>
+         <function name="_gwst_xbsetget_bool_"        c-type="BOOL"       xbase-type="logical" description="Reads or writes a Win32 BOOL value." />
+         <function name="_gwst_xbsetget_bytebool_"    c-type="BYTE"       xbase-type="logical" description="Reads or writes a byte-sized boolean value." />
+         <function name="_gwst_xbsetget_byte_"        c-type="BYTE"       xbase-type="numeric" description="Reads or writes an unsigned 8-bit value." />
+         <function name="_gwst_xbsetget_sint8_"       c-type="INT8"       xbase-type="numeric" description="Reads or writes a signed 8-bit value with sign extension on read." />
+         <function name="_gwst_xbsetget_word_"        c-type="WORD"       xbase-type="numeric" description="Reads or writes an unsigned 16-bit value." />
+         <function name="_gwst_xbsetget_sint16_"      c-type="INT16"      xbase-type="numeric" description="Reads or writes a signed 16-bit value with sign extension on read." />
+         <function name="_gwst_xbsetget_dword_"       c-type="DWORD"      xbase-type="numeric" description="Reads or writes a 32-bit value using Xbase++ LONG representation." />
+         <function name="_gwst_xbsetget_uint32_"      c-type="UINT32"     xbase-type="numeric" description="Reads an unsigned 32-bit value as LONG or double when the high bit is set." />
+         <function name="_gwst_xbsetget_dword64_"     c-type="QWORD"      xbase-type="character" description="Reads or writes an unsigned 64-bit value as an 8-byte string." />
+         <function name="_gwst_xbsetget_nint64_"      c-type="INT64"      xbase-type="character" description="Reads or writes a signed 64-bit value as an 8-byte string." />
+         <function name="_gwst_xbsetget_pclipvar_"    c-type="PXBASEVAR"  xbase-type="any" description="Stores a retained Xbase++ container handle in the structure member." />
+         <function name="_gwst_xbsetget_xppguiwnd_"   c-type="pointer"    xbase-type="numeric" description="Stores a GUI window C++ pointer, resolving Xbase++ objects through ::GetTwWinBaseCppPointer()." />
+         <function name="_gwst_xbsetget_float_"       c-type="FLOAT"      xbase-type="numeric" description="Reads or writes a 32-bit floating point value." />
+         <function name="_gwst_xbsetget_double_"      c-type="DOUBLE"     xbase-type="numeric" description="Reads or writes a 64-bit floating point value." />
+         <function name="_gwst_xbsetget_lpstr_"       c-type="LPSTR"      xbase-type="numeric" description="Alias of the DWORD accessor for pointer-sized string pointers in 32-bit builds." />
+         <function name="_gwst_xbsetget_binstr_"      c-type="BYTE[]"     xbase-type="character" description="Reads or writes a fixed-size binary buffer." />
+         <function name="_gwst_xbsetget_szstr_"       c-type="SZSTR"      xbase-type="character" description="Reads or writes a fixed-size zero-terminated ANSI character buffer." />
+         <function name="_gwst_xbsetget_szwstr_"      c-type="SZWSTR"     xbase-type="character" description="Reads or writes a fixed-size Unicode buffer, converting to or from ANSI at the Xbase++ boundary." />
+         <function name="_gwst_xbsetget_dynsz_"       c-type="DYNSZ"      xbase-type="character" description="Reads or writes an owned dynamic ANSI string pointer allocated with _xgrab() and released with _xfree()." />
+         <function name="_gwst_xbsetget_wordnet_"     c-type="WORD"       xbase-type="numeric" description="Reads or writes a network-byte-order 16-bit value." />
+         <function name="_gwst_xbsetget_dwordnet_"    c-type="DWORD"      xbase-type="numeric" description="Reads or writes a network-byte-order 32-bit value." />
+         <function name="_gwst_xbsetget_xdate_"       c-type="CHAR[8]"    xbase-type="date" description="Reads or writes an 8-byte Xbase++ date representation." />
+         <function name="_gwst_xbsetget_pointer32_"   c-type="POINTER32"  xbase-type="numeric" description="Alias of the DWORD accessor for 32-bit pointers." />
+         <function name="_gwst_xbsetget_handle_"      c-type="HANDLE"     xbase-type="numeric" description="Alias of the DWORD accessor for Win32 handles." />
+      </functions>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
+//-----------------------------------------------------------------------------------------------------------------------
 typedef struct GWSTSG_strcut
 {                  
    XppParamList     pl;

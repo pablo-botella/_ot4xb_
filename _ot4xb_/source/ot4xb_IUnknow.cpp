@@ -9,6 +9,73 @@
 #include <shlwapi.h>
 #include <comutil.h>
 // -----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class-group>
+      <name>OT4XB COM interface wrappers</name>
+      <category>com/interfaces</category>
+      <description>
+         Low-level GWST-based wrappers over COM interface pointers. Instances are linked to existing COM interface
+         pointers and dispatch methods through the interface vtable with IFpQCall().
+      </description>
+      <remarks>
+         OT4XB_IUNKNOW keeps the historical exported spelling. It wraps IUnknown. These classes do not create COM
+         objects by themselves; callers must link or provide a valid interface pointer and manage COM lifetime rules.
+      </remarks>
+      <class>
+         <name>OT4XB_IUNKNOW</name>
+         <parent>GWST</parent>
+         <description>Wrapper over IUnknown.</description>
+         <members>
+            <member type="POINTER32" name="_m__vtbl_">Interface vtable pointer.</member>
+         </members>
+         <methods>
+            <method name="QueryInterface" syntax="::QueryInterface( cIid, @pInterface ) -> nHRESULT" />
+            <method name="AddRef" syntax="::AddRef() -> nRefCount" />
+            <method name="Release" syntax="::Release() -> nRefCount" />
+         </methods>
+      </class>
+      <class>
+         <name>OT4XB_IDISPATCH</name>
+         <parent>OT4XB_IUNKNOW</parent>
+         <description>Wrapper over IDispatch.</description>
+         <methods>
+            <method name="GetTypeInfoCount" syntax="::GetTypeInfoCount( @nCount ) -> nHRESULT" />
+            <method name="GetTypeInfo" syntax="::GetTypeInfo( nIndex, nLocale, @pTypeInfo ) -> nHRESULT" />
+            <method name="GetIDsOfNames" syntax="::GetIDsOfNames( pRiid, pNames, nCount, nLocale, @pDispIds ) -> nHRESULT" />
+            <method name="Invoke" syntax="::Invoke( nDispId, pRiid, nLocale, nFlags, @pDispParams, @pVarResult, @pExcepInfo, @nArgErr ) -> nHRESULT" />
+         </methods>
+      </class>
+      <class>
+         <name>OT4XB_ISEQUENTIALSTREAM</name>
+         <parent>OT4XB_IUNKNOW</parent>
+         <description>Wrapper over ISequentialStream.</description>
+         <methods>
+            <method name="Read" syntax="::Read( pBuffer, nBytes, @nRead ) -> nHRESULT" />
+            <method name="Write" syntax="::Write( pBuffer, nBytes, @nWritten ) -> nHRESULT" />
+         </methods>
+      </class>
+      <class>
+         <name>OT4XB_ISTREAM</name>
+         <parent>OT4XB_ISEQUENTIALSTREAM</parent>
+         <description>Wrapper over IStream.</description>
+         <methods>
+            <method name="Seek" syntax="::Seek( nMove64, nOrigin, @nNewPos64 ) -> nHRESULT" />
+            <method name="SetSize" syntax="::SetSize( nSize64 ) -> nHRESULT" />
+            <method name="CopyTo" syntax="::CopyTo( pStream, nBytes64, @nRead64, @nWritten64 ) -> nHRESULT" />
+            <method name="Commit" syntax="::Commit( nFlags ) -> nHRESULT" />
+            <method name="Revert" syntax="::Revert() -> nHRESULT" />
+            <method name="LockRegion" syntax="::LockRegion( nOffset64, nBytes64, nLockType ) -> nHRESULT" />
+            <method name="UnlockRegion" syntax="::UnlockRegion( nOffset64, nBytes64, nLockType ) -> nHRESULT" />
+            <method name="Stat" syntax="::Stat( @pStatStg, nFlags ) -> nHRESULT" />
+            <method name="Clone" syntax="::Clone( @pStream ) -> nHRESULT" />
+         </methods>
+      </class>
+   </class-group>
+</xbdoc>
+*******************************************************************************************************************/
+
 BEGIN_XBASE_CLASS( OT4XB_IUNKNOW )
 {
    pc->GwstParent();

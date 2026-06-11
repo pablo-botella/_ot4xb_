@@ -21,6 +21,180 @@ static void ULARGE_INTEGER_Mult(   TXbClsParams * px );
 static void ULARGE_INTEGER_Div(    TXbClsParams * px );
 static void ULARGE_INTEGER_Mod(  TXbClsParams * px );
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>64-bit numeric helpers</name>
+      <source>Num64.cpp</source>
+      <category>numeric/64-bit</category>
+      <description>
+         Helpers for working with signed and unsigned 64-bit values from Xbase++. OT4XB commonly represents a
+         64-bit integer as an 8-byte binary string in little-endian order, or as a GWST LARGE_INTEGER /
+         ULARGE_INTEGER structure.
+      </description>
+      <remarks>
+         Xbase++ numeric values can be LONG or double. A double can represent large integer ranges but cannot
+         represent every 64-bit integer exactly; conversion functions expose @lDataLost when precision is lost.
+      </remarks>
+      <functions>
+         <function>
+            <name>LongLong2Double</name>
+            <syntax>LongLong2Double( cLongLong [, @lDataLost] ) -> nDouble | NIL</syntax>
+            <description>Converts an 8-byte signed integer string to double.</description>
+         </function>
+         <function>
+            <name>Double2LongLong</name>
+            <syntax>Double2LongLong( nDouble ) -> cLongLong</syntax>
+            <description>Converts a double to an 8-byte signed integer string.</description>
+         </function>
+         <function>
+            <name>ULongLong2Double</name>
+            <syntax>ULongLong2Double( cULongLong [, @lDataLost] ) -> nDouble | NIL</syntax>
+            <description>Converts an 8-byte unsigned integer string to double.</description>
+         </function>
+         <function>
+            <name>Double2ULongLong</name>
+            <syntax>Double2ULongLong( nDouble ) -> cULongLong</syntax>
+            <description>Converts a double to an 8-byte unsigned integer string.</description>
+         </function>
+         <function>
+            <name>GetNumFormat</name>
+            <syntax>GetNumFormat( @nNum, @nInt, @nDec ) -> nNum | NIL</syntax>
+            <description>Returns nNum and stores the internal numeric width and decimal metadata in @nInt and @nDec.</description>
+         </function>
+         <function>
+            <name>lIsNumF64</name>
+            <syntax>lIsNumF64( nValue ) -> lDouble</syntax>
+            <description>Returns .T. when the value is an Xbase++ numeric stored as double.</description>
+         </function>
+         <function>
+            <name>SetNumFormat</name>
+            <syntax>SetNumFormat( @nNum, nInt, nDec ) -> nNum | NIL</syntax>
+            <description>Updates the internal numeric width and decimal metadata for nNum.</description>
+         </function>
+         <function>
+            <name>Make_QWord</name>
+            <syntax>Make_QWord( nLo32, nHi32 [, @nDouble] [, @lDataLost] ) -> cQWord</syntax>
+            <description>Builds an unsigned 64-bit 8-byte string from low and high DWORD parts.</description>
+         </function>
+         <function>
+            <name>Make_Int64</name>
+            <syntax>Make_Int64( nLo32, nHi32 [, @nDouble] [, @lDataLost] ) -> cInt64</syntax>
+            <description>Builds a signed 64-bit 8-byte string from low and high DWORD parts.</description>
+         </function>
+         <function>
+            <name>Lo_DWord</name>
+            <syntax>Lo_DWord( xInt64 ) -> nLo32</syntax>
+            <description>Returns the low DWORD from an 8-byte integer string or numeric value.</description>
+         </function>
+         <function>
+            <name>Hi_DWord</name>
+            <syntax>Hi_DWord( xInt64 ) -> nHi32</syntax>
+            <description>Returns the high DWORD from an 8-byte integer string or numeric value.</description>
+         </function>
+         <function>
+            <name>i64cmp</name>
+            <syntax>i64cmp( xLeft, xRight ) -> nResult</syntax>
+            <description>Compares two OT4XB QWord-convertible values and returns -1, 0 or 1.</description>
+         </function>
+         <function>
+            <name>i64sum</name>
+            <syntax>i64sum( xLeft, xRight ) -> cInt64</syntax>
+            <description>Adds two OT4XB QWord-convertible values.</description>
+         </function>
+         <function>
+            <name>i64rest</name>
+            <syntax>i64rest( xLeft, xRight ) -> cInt64</syntax>
+            <description>Subtracts xRight from xLeft.</description>
+         </function>
+         <function>
+            <name>i64mult</name>
+            <syntax>i64mult( xLeft, xRight ) -> cInt64</syntax>
+            <description>Multiplies two OT4XB QWord-convertible values.</description>
+         </function>
+         <function>
+            <name>i64div</name>
+            <syntax>i64div( xLeft, xRight ) -> cInt64</syntax>
+            <description>Integer division of xLeft by xRight.</description>
+         </function>
+         <function>
+            <name>i64mod</name>
+            <syntax>i64mod( xLeft, xRight ) -> cInt64</syntax>
+            <description>Integer remainder of xLeft divided by xRight.</description>
+         </function>
+      </functions>
+   </function-family>
+   <class>
+      <name>_LARGE_INTEGER_</name>
+      <parent>GWST</parent>
+      <source>Num64.cpp:_LARGE_INTEGER_</source>
+      <category>numeric/64-bit</category>
+      <description>
+         Internal GWST union-like structure exposing the same 8 bytes as LowPart/HighPart, l/h, QuadPart and q.
+      </description>
+      <members>
+         <member type="DWORD" name="LowPart" offset="0" />
+         <member type="DWORD" name="HighPart" offset="4" />
+         <member type="DWORD" name="l" offset="0" />
+         <member type="DWORD" name="h" offset="4" />
+         <member type="DWORD64" name="QuadPart" offset="0" />
+         <member type="DWORD64" name="q" offset="0" />
+      </members>
+   </class>
+   <class>
+      <name>LARGE_INTEGER</name>
+      <parent>_LARGE_INTEGER_</parent>
+      <source>Num64.cpp:wapist_LARGE_INTEGER</source>
+      <category>winapi/structures</category>
+      <description>Wrapper over the WinApi signed LARGE_INTEGER structure.</description>
+      <members>
+         <member type="DWORD" name="LowPart" offset="0" />
+         <member type="LONG" name="HighPart" offset="4" />
+         <member type="_LARGE_INTEGER_" name="u" offset="0" child="true" />
+      </members>
+      <properties>
+         <property name="double">Converts q to/from double and updates ::lPLost when the read loses precision.</property>
+      </properties>
+      <methods>
+         <method name="::Plus" syntax="o:Plus( xValue [, lStore] ) -> cInt64" />
+         <method name="::Minus" syntax="o:Minus( xValue [, lStore] ) -> cInt64" />
+         <method name="::Mul" syntax="o:Mul( xValue [, lStore] ) -> cInt64" />
+         <method name="::Div" syntax="o:Div( xDivisor [, lStore] [, @cMod] ) -> cInt64" />
+         <method name="::Mod" syntax="o:Mod( xDivisor [, lStore] [, @cDivResult] ) -> cInt64" />
+         <method name="::Str" syntax="o:Str() -> cDecimalText" />
+      </methods>
+      <class-methods>
+         <method name="::New64" syntax="LARGE_INTEGER():New64( cInt64 ) -> oLargeInteger" />
+      </class-methods>
+   </class>
+   <class>
+      <name>ULARGE_INTEGER</name>
+      <parent>_LARGE_INTEGER_</parent>
+      <source>Num64.cpp:wapist_ULARGE_INTEGER</source>
+      <category>winapi/structures</category>
+      <description>Wrapper over the WinApi unsigned ULARGE_INTEGER structure.</description>
+      <members>
+         <member type="DWORD" name="LowPart" offset="0" />
+         <member type="DWORD" name="HighPart" offset="4" />
+         <member type="_LARGE_INTEGER_" name="u" offset="0" child="true" />
+      </members>
+      <properties>
+         <property name="double">Converts q to/from double and updates ::lPLost when the read loses precision.</property>
+      </properties>
+      <methods>
+         <method name="::Plus" syntax="o:Plus( xValue [, lStore] ) -> cUInt64" />
+         <method name="::Minus" syntax="o:Minus( xValue [, lStore] ) -> cUInt64" />
+         <method name="::Mul" syntax="o:Mul( xValue [, lStore] ) -> cUInt64" />
+         <method name="::Div" syntax="o:Div( xDivisor [, lStore] [, @cMod] ) -> cUInt64" />
+         <method name="::Mod" syntax="o:Mod( xDivisor [, lStore] [, @cDivResult] ) -> cUInt64" />
+         <method name="::Str" syntax="o:Str() -> cDecimalText" />
+      </methods>
+      <class-methods>
+         <method name="::New64" syntax="ULARGE_INTEGER():New64( cUInt64 ) -> oULargeInteger" />
+      </class-methods>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LONGLONG2DOUBLE( XppParamList pl) // LongLong2Double( cLongLong [, @lDataLost ] ) nDouble
 {
    union{ char sz[9]; LONGLONG ll; } uu;
@@ -108,7 +282,7 @@ XPPRET XPPENTRY SETNUMFORMAT( XppParamList pl) // SetNumFormat( @nNum ,  nInt , 
    {
       ULONG nParams = _partype(pl,0);
       _conGetNDF( con,&nd,&ii,&dd );
-      if( nParams > 1 ) dd = _parLong(pl,2);
+      if( nParams > 1 ) ii = _parLong(pl,2);
       if( nParams > 2 ) dd = _parLong(pl,3);
       _conPutNDF( con,nd,ii,dd );
       _conReturn( pl,con);

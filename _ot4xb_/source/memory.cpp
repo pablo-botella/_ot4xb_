@@ -279,17 +279,276 @@ OT4XB_API UINT _mmsize(void* p){ return _msize(p);}
 OT4XB_API void * _mgrow(void* pp  , UINT n){ return realloc(pp,n);}
 OT4XB_API void * _mcgrab(UINT nItems , UINT nItemSize ){ return calloc(nItems , nItemSize );}
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xgrab_count_</name>
+      <category>memory</category>
+      <description>
+         Deprecated diagnostic counter for selected _xgrab() allocations that have not been released.
+      </description>
+      <syntax>_xgrab_count_() -> nCount</syntax>
+      <return>
+         <type>Numeric</type>
+         <description>Current value of the internal diagnostic counter.</description>
+      </return>
+      <remarks>
+         Deprecated. This counter is incomplete: it only tracks some allocation paths and excludes many cases, so it
+         must not be used as a general memory-leak detector. It may still be useful occasionally while debugging a
+         narrow _xgrab() path, but it can be removed in the future.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XGRAB_COUNT_(XppParamList pl){ _retnl(pl,_xgrab_count_);}
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xgrab</name>
+      <category>memory</category>
+      <description>
+         Allocates a memory block using the current malloc/free based OT4XB allocator and initializes it with zeroes.
+      </description>
+      <syntax>_xgrab( nBytes ) -> pMem</syntax>
+      <syntax>_xgrab( cValue, @nBytes [, lUseMinSize] ) -> pMem</syntax>
+      <parameters>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to allocate. If zero, NIL is returned.</description>
+         </parameter>
+         <parameter>
+            <name>cValue</name>
+            <type>Character</type>
+            <description>Optional source buffer copied into the newly allocated block.</description>
+         </parameter>
+         <parameter>
+            <name>@nBytes</name>
+            <type>Numeric by reference</type>
+            <description>
+               Receives the allocated size when cValue is used. The size includes room for a terminating zero byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lUseMinSize</name>
+            <type>Logical</type>
+            <description>
+               When .T., the supplied @nBytes value is used as a minimum allocation size.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Pointer to the allocated memory block, or NIL when no block is allocated.</description>
+      </return>
+      <remarks>
+         The current implementation uses malloc() and then clears the allocated bytes with ZeroMemory(). Memory
+         returned by _xgrab() must be released with _xfree(). This is the usual allocation pair for OT4XB code.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XGRAB(XppParamList pl){  __xb__grab(pl, _xgrab ); }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xfree</name>
+      <category>memory</category>
+      <description>
+         Releases a memory block allocated with _xgrab().
+      </description>
+      <syntax>_xfree( pMem [, @cValue [, nBytes]] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pMem</name>
+            <type>Numeric</type>
+            <description>Pointer returned by _xgrab().</description>
+         </parameter>
+         <parameter>
+            <name>@cValue</name>
+            <type>Character by reference</type>
+            <description>Optional variable that receives bytes copied from pMem before the block is released.</description>
+         </parameter>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to copy into @cValue before releasing pMem.</description>
+         </parameter>
+      </parameters>
+      <return> NIL </return>
+      <remarks>
+         The current implementation releases the block with free(). The optional @cValue copy is a convenience for
+         returning data from a pointer buffer before the memory is released.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XFREE(XppParamList pl){  __xb__free(pl, _xfree ); }
 // ---------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_pgrab</name>
+      <category>memory</category>
+      <description>
+         Allocates a memory block from the process heap.
+      </description>
+      <syntax>_pgrab( nBytes ) -> pMem</syntax>
+      <syntax>_pgrab( cValue, @nBytes [, lUseMinSize] ) -> pMem</syntax>
+      <parameters>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to allocate. If zero, NIL is returned.</description>
+         </parameter>
+         <parameter>
+            <name>cValue</name>
+            <type>Character</type>
+            <description>Optional source buffer copied into the newly allocated block.</description>
+         </parameter>
+         <parameter>
+            <name>@nBytes</name>
+            <type>Numeric by reference</type>
+            <description>
+               Receives the allocated size when cValue is used. The size includes room for a terminating zero byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lUseMinSize</name>
+            <type>Logical</type>
+            <description>When .T., the supplied @nBytes value is used as a minimum allocation size.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Pointer to the allocated memory block, or NIL when no block is allocated.</description>
+      </return>
+      <remarks>
+         _pgrab() uses the process heap through HeapAlloc(). Memory returned by _pgrab() must be released with
+         _pfree(). Normal OT4XB code usually uses _xgrab() and _xfree() instead.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _PGRAB(XppParamList pl){  __xb__grab(pl, _pgrab ); }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_pfree</name>
+      <category>memory</category>
+      <description>
+         Releases a memory block allocated with _pgrab().
+      </description>
+      <syntax>_pfree( pMem [, @cValue [, nBytes]] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pMem</name>
+            <type>Numeric</type>
+            <description>Pointer returned by _pgrab().</description>
+         </parameter>
+         <parameter>
+            <name>@cValue</name>
+            <type>Character by reference</type>
+            <description>Optional variable that receives bytes copied from pMem before the block is released.</description>
+         </parameter>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to copy into @cValue before releasing pMem.</description>
+         </parameter>
+      </parameters>
+      <return> NIL </return>
+      <remarks>
+         _pfree() releases process-heap memory through HeapFree(). Use it only with blocks allocated by _pgrab().
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _PFREE(XppParamList pl){  __xb__free(pl, _pfree ); }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_vgrab</name>
+      <category>memory</category>
+      <description>
+         Allocates a memory block directly from virtual memory.
+      </description>
+      <syntax>_vgrab( nBytes ) -> pMem</syntax>
+      <syntax>_vgrab( cValue, @nBytes [, lUseMinSize] ) -> pMem</syntax>
+      <parameters>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to allocate. If zero, NIL is returned.</description>
+         </parameter>
+         <parameter>
+            <name>cValue</name>
+            <type>Character</type>
+            <description>Optional source buffer copied into the newly allocated block.</description>
+         </parameter>
+         <parameter>
+            <name>@nBytes</name>
+            <type>Numeric by reference</type>
+            <description>
+               Receives the allocated size when cValue is used. The size includes room for a terminating zero byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lUseMinSize</name>
+            <type>Logical</type>
+            <description>When .T., the supplied @nBytes value is used as a minimum allocation size.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric | NIL</type>
+         <description>Pointer to the allocated memory block, or NIL when no block is allocated.</description>
+      </return>
+      <remarks>
+         _vgrab() uses VirtualAlloc() directly and keeps an internal size header before the returned pointer. Memory
+         returned by _vgrab() must be released with _vfree(). Normal OT4XB code usually uses _xgrab() and _xfree()
+         instead.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _VGRAB(XppParamList pl){  __xb__grab(pl, _vgrab ); }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_vfree</name>
+      <category>memory</category>
+      <description>
+         Releases a memory block allocated with _vgrab().
+      </description>
+      <syntax>_vfree( pMem [, @cValue [, nBytes]] ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pMem</name>
+            <type>Numeric</type>
+            <description>Pointer returned by _vgrab().</description>
+         </parameter>
+         <parameter>
+            <name>@cValue</name>
+            <type>Character by reference</type>
+            <description>Optional variable that receives bytes copied from pMem before the block is released.</description>
+         </parameter>
+         <parameter>
+            <name>nBytes</name>
+            <type>Numeric</type>
+            <description>Number of bytes to copy into @cValue before releasing pMem.</description>
+         </parameter>
+      </parameters>
+      <return> NIL </return>
+      <remarks>
+         _vfree() releases virtual memory allocated by _vgrab(). Use it only with blocks allocated by _vgrab().
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _VFREE(XppParamList pl){  __xb__free(pl, _vfree ); }
 //----------------------------------------------------------------------------------------------------------------------
 // _xGrab(n) || _xGrab(1[@]cVar,2[@nGetSize],3[lTakeP2AsSize)
@@ -357,6 +616,22 @@ OT4XB_API LPSTR _conXGrabSz(ContainerHandle con,ULONG * puSize)
    return pRet;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bset</name>
+      <category>memory</category>
+      <description>Fills a memory buffer with a byte value.</description>
+      <syntax>_bset( pMem, xByte, nBytes ) -> pMem</syntax>
+      <parameters>
+         <parameter><name>pMem</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>xByte</name><type>Numeric | Character</type><description>Byte value to write.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to fill.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BSET( XppParamList pl )
 {
    LPBYTE  pStr    = (LPBYTE) _parLong(pl,1);
@@ -375,6 +650,22 @@ OT4XB_API LPBYTE _bset(LPBYTE pStr, BYTE ch , UINT nBytes)
    return pStr;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bmove</name>
+      <category>memory</category>
+      <description>Copies bytes between memory buffers, allowing overlapping source and destination ranges.</description>
+      <syntax>_bmove( pDest, pSrc, nBytes ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to copy.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BMOVE( XppParamList pl )
 {
    _retnl(pl,(LONG) _bmove( (LPBYTE) _parLong(pl,1),(LPBYTE) _parLong(pl,2),(UINT) _parLong( pl,3,0)));
@@ -395,6 +686,22 @@ OT4XB_API LPBYTE _bmove(LPBYTE pDest, LPBYTE pSrc , UINT nBytes)
    return pDest;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bdup</name>
+      <category>memory</category>
+      <description>Duplicates a memory buffer into a new _xgrab() block.</description>
+      <syntax>_bdup( pSrc, nBytes ) -> pNew</syntax>
+      <parameters>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to duplicate.</description></parameter>
+      </parameters>
+      <return><type>Numeric | NIL</type><description>Pointer to the new block, or 0 when nBytes is zero.</description></return>
+      <remarks>The returned block is allocated with _xgrab() and must be released with _xfree().</remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BDUP( XppParamList pl )
 {
    _retnl(pl,(LONG) _bdup( (LPBYTE) _parLong(pl,1),(UINT) _parLong( pl,2,0)));
@@ -413,6 +720,23 @@ OT4XB_API LPBYTE _bdup(LPBYTE pSrc , UINT nBytes)
    return 0;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bcopywithtable</name>
+      <category>memory</category>
+      <description>Copies bytes from one buffer to another, translating each byte through a 256-byte table.</description>
+      <syntax>_bcopywithtable( pDest, pSrc, nBytes, pTable ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to copy.</description></parameter>
+         <parameter><name>pTable</name><type>Numeric</type><description>Pointer to a 256-byte translation table.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BCOPYWITHTABLE( XppParamList pl )
 {
    _retnl(pl, (LONG) _bcopywithtable((LPBYTE) _parLong(pl,1),(LPBYTE) _parLong(pl,2),
@@ -432,6 +756,23 @@ OT4XB_API LPBYTE _bcopywithtable(LPBYTE pDest, LPBYTE pSrc , UINT nBytes, LPBYTE
    return pDest;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bcopy</name>
+      <category>memory</category>
+      <description>Copies bytes from one memory buffer to another.</description>
+      <syntax>_bcopy( pDest, pSrc, nBytes ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to copy.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+      <remarks>For overlapping ranges use _bmove().</remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BCOPY( XppParamList pl )
 {
    _retnl(pl,(LONG) _bcopy( (LPBYTE) _parLong(pl,1),(LPBYTE) _parLong(pl,2),(UINT) _parLong( pl,3,0)));
@@ -477,6 +818,24 @@ OT4XB_API LPBYTE __cdecl _bcopyex(LPBYTE pDest, DWORD dshift , LPBYTE pSrc , DWO
    return pDest;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bcopyf</name>
+      <category>memory</category>
+      <description>Copies bytes from a source buffer into a fixed-size destination buffer.</description>
+      <syntax>_bcopyf( pDest, pSrc, nDestBytes, nSrcBytes ) -> NIL</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source pointer.</description></parameter>
+         <parameter><name>nDestBytes</name><type>Numeric</type><description>Destination buffer size in bytes.</description></parameter>
+         <parameter><name>nSrcBytes</name><type>Numeric</type><description>Source buffer size in bytes.</description></parameter>
+      </parameters>
+      <return> NIL </return>
+      <remarks>Copies the smaller of nDestBytes and nSrcBytes bytes.</remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BCOPYF( XppParamList pl )
 {
    _bcopyf( (LPBYTE) _parLong(pl,1),
@@ -495,6 +854,25 @@ OT4XB_API void _bcopyf(LPBYTE pDest, LPBYTE pSrc , UINT nDstSize, UINT nSrcSize)
    if(nSrcSize > nBytes) for( n = nBytes; n < nDstSize ; n++) pDest[n] = 0x20;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bscan</name>
+      <category>memory</category>
+      <description>Searches a byte value inside a memory buffer.</description>
+      <syntax>_bscan( pMem, nBytes, xByte ) -> nPos</syntax>
+      <parameters>
+         <parameter><name>pMem</name><type>Numeric</type><description>Buffer pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to scan.</description></parameter>
+         <parameter><name>xByte</name><type>Numeric | Character</type><description>Byte value to find.</description></parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>Zero-based byte position, or nBytes when the byte is not found.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BSCAN( XppParamList pl )
 {
    LPBYTE  pStr    = (LPBYTE) _parLong(pl,1);
@@ -517,6 +895,21 @@ OT4XB_API UINT  _bscan(LPBYTE pStr, UINT nBytes , BYTE ch)
    return nBytes;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrcpy</name>
+      <category>memory/string</category>
+      <description>Copies a zero-terminated string to a destination buffer.</description>
+      <syntax>_xstrcpy( pDest, pSrc ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source zero-terminated string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRCPY( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrcpy( (LPSTR) _parLong(pl,1),(LPSTR) _parLong(pl,2)));
@@ -538,6 +931,21 @@ OT4XB_API LPWSTR _xstrcpyW(LPWSTR pDest, LPWSTR pSrc)
    return( pDest );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xxstrcpy</name>
+      <category>memory/string</category>
+      <description>Copies a zero-terminated string and returns the destination pointer positioned at the final zero.</description>
+      <syntax>_xxstrcpy( pDest, pSrc ) -> pEnd</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source zero-terminated string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Pointer to the terminating zero written in the destination buffer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XXSTRCPY( XppParamList pl )
 {
    _retnl(pl,(LONG) _xxstrcpy( (LPSTR) _parLong(pl,1),(LPSTR) _parLong(pl,2)));
@@ -552,6 +960,22 @@ OT4XB_API LPSTR _xxstrcpy(LPSTR pDest, LPSTR pSrc)
    return( pDest );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstccpy</name>
+      <category>memory/string</category>
+      <description>Copies a zero-terminated string up to a maximum number of bytes.</description>
+      <syntax>_xstccpy( pDest, pSrc, nMax ) -> nCopied</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source zero-terminated string pointer.</description></parameter>
+         <parameter><name>nMax</name><type>Numeric</type><description>Maximum number of bytes to copy.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Number of bytes copied.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTCCPY( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstccpy( (LPSTR) _parLong(pl,1),(LPSTR) _parLong(pl,2),(UINT) _parLong(pl,3,0)));
@@ -566,6 +990,23 @@ OT4XB_API UINT _xstccpy(LPSTR pDest, LPSTR pSrc, UINT nMax)
    return( n );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrncpy</name>
+      <category>memory/string</category>
+      <description>Copies a zero-terminated string into a fixed-size destination buffer.</description>
+      <syntax>_xstrncpy( pDest, pSrc, nDestBytes ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source zero-terminated string pointer.</description></parameter>
+         <parameter><name>nDestBytes</name><type>Numeric</type><description>Destination buffer size in bytes.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+      <remarks>The destination buffer is always zero-terminated when nDestBytes is greater than zero.</remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRNCPY( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrncpy( (LPSTR) _parLong(pl,1),(LPSTR) _parLong(pl,2),(UINT) _parLong(pl,3,0)));
@@ -591,6 +1032,21 @@ OT4XB_API LPSTR _xstrncpy( LPSTR pDest, LPCSTR pSrc, UINT destination_cb )
    return pDest;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrcat</name>
+      <category>memory/string</category>
+      <description>Appends a zero-terminated source string to a zero-terminated destination string.</description>
+      <syntax>_xstrcat( pDest, pSrc ) -> pDest</syntax>
+      <parameters>
+         <parameter><name>pDest</name><type>Numeric</type><description>Destination string pointer.</description></parameter>
+         <parameter><name>pSrc</name><type>Numeric</type><description>Source string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>The destination pointer.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRCAT( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrcat( (LPSTR) _parLong(pl,1),(LPSTR) _parLong(pl,2)));
@@ -605,6 +1061,21 @@ OT4XB_API LPSTR _xstrcat( LPSTR pDest, LPSTR pSrc )
    return( pDest );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstpchr</name>
+      <category>memory/string</category>
+      <description>Finds a character inside a zero-terminated string.</description>
+      <syntax>_xstpchr( pStr, xChar ) -> pFound</syntax>
+      <parameters>
+         <parameter><name>pStr</name><type>Numeric</type><description>Zero-terminated string pointer.</description></parameter>
+         <parameter><name>xChar</name><type>Numeric | Character</type><description>Character to find.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Pointer to the character, or 0 when it is not found before the final zero.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTPCHR( XppParamList pl )
 {
    CHAR    sz[2];
@@ -622,6 +1093,20 @@ OT4XB_API LPSTR _xstpchr( LPSTR pStr , CHAR ch )
    return 0;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstpblk</name>
+      <category>memory/string</category>
+      <description>Skips TAB, space, CR, and LF characters at the start of a zero-terminated string.</description>
+      <syntax>_xstpblk( pStr ) -> pFirst</syntax>
+      <parameters>
+         <parameter><name>pStr</name><type>Numeric</type><description>Zero-terminated string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Pointer to the first non-blank character, or to the final zero.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTPBLK( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstpblk( (LPSTR) _parLong(pl,1)));
@@ -643,6 +1128,20 @@ OT4XB_API LPSTR _xstpblk(LPSTR pStr)
   return pStr;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrlen</name>
+      <category>memory/string</category>
+      <description>Returns the length of a zero-terminated string.</description>
+      <syntax>_xstrlen( pStr ) -> nLen</syntax>
+      <parameters>
+         <parameter><name>pStr</name><type>Numeric</type><description>Zero-terminated string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Number of bytes before the first zero byte.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRLEN( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrlen( (LPSTR) _parLong(pl,1)));
@@ -663,6 +1162,21 @@ OT4XB_API UINT _xstrlenW(LPWSTR pStr)
   return n;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrdup</name>
+      <category>memory/string</category>
+      <description>Duplicates a zero-terminated string into a new _xgrab() block.</description>
+      <syntax>_xstrdup( pStr ) -> pNew</syntax>
+      <parameters>
+         <parameter><name>pStr</name><type>Numeric</type><description>Source zero-terminated string pointer.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Pointer to the duplicated string, or 0 when pStr is 0.</description></return>
+      <remarks>The returned pointer must be released with _xfree().</remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRDUP( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrdup( (LPSTR) _parLong(pl,1)));
@@ -752,6 +1266,23 @@ OT4XB_API LPWSTR _xstrdupW(LPWSTR pStr )
    return 0;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_xstrat</name>
+      <category>memory/string</category>
+      <description>Searches a byte sequence inside another byte sequence.</description>
+      <syntax>_xstrat( pSep, nSepBytes, pStr, nStrBytes ) -> nPos</syntax>
+      <parameters>
+         <parameter><name>pSep</name><type>Numeric</type><description>Pointer to the byte sequence to find.</description></parameter>
+         <parameter><name>nSepBytes</name><type>Numeric</type><description>Length of the sequence to find.</description></parameter>
+         <parameter><name>pStr</name><type>Numeric</type><description>Pointer to the buffer to search.</description></parameter>
+         <parameter><name>nStrBytes</name><type>Numeric</type><description>Length of the buffer to search.</description></parameter>
+      </parameters>
+      <return><type>Numeric</type><description>Zero-based position of pSep inside pStr, or -1 when not found.</description></return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _XSTRAT( XppParamList pl )
 {
    _retnl(pl,(LONG) _xstrat( (LPSTR) _parLong(pl,1), (int) _parLong(pl,2), (LPSTR) _parLong(pl,3),(int) _parLong(pl,4)));
@@ -895,6 +1426,25 @@ OT4XB_API int    _xsstrcmpi( LPSTR p1 , ULONG cb1 , LPSTR p2 , ULONG cb2)
    return _xsstrcmpwithtable(p1,cb1,p2,cb2,_lower_ansi_char_table_ );
 }
 //-----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_bcmp</name>
+      <category>memory</category>
+      <description>Compares two memory buffers byte by byte.</description>
+      <syntax>_bcmp( p1, p2, nBytes ) -> nCmp</syntax>
+      <parameters>
+         <parameter><name>p1</name><type>Numeric</type><description>First buffer pointer.</description></parameter>
+         <parameter><name>p2</name><type>Numeric</type><description>Second buffer pointer.</description></parameter>
+         <parameter><name>nBytes</name><type>Numeric</type><description>Number of bytes to compare.</description></parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>-1 when p1 is lower, 0 when both buffers match, and 1 when p1 is greater.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _BCMP( XppParamList pl )
 {
    _retnl(pl, _bcmp( (LPBYTE) _parLong(pl,1),(LPBYTE) _parLong(pl,2),(UINT) _parLong( pl,3,0)));
@@ -993,6 +1543,28 @@ extern "C" OT4XB_API BOOL  __cdecl _hdict_filter_wildcmpi(LPSTR key, DWORD cb_ke
    return (BOOL) bStrWildCmpI(pat,key);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_shift_ptr_</name>
+      <category>memory</category>
+      <description>Shifts a pointer, and optionally reduces an associated byte count.</description>
+      <syntax>_shift_ptr_( @pMem, @nBytes, nSkip ) -> lMore</syntax>
+      <syntax>_shift_ptr_( pMem, NIL, nSkip ) -> pShifted</syntax>
+      <parameters>
+         <parameter><name>@pMem</name><type>Numeric by reference</type><description>Pointer to shift by nSkip bytes.</description></parameter>
+         <parameter><name>@nBytes</name><type>Numeric by reference</type><description>Optional remaining byte count reduced by nSkip.</description></parameter>
+         <parameter><name>nSkip</name><type>Numeric</type><description>Number of bytes to add to the pointer.</description></parameter>
+      </parameters>
+      <return>
+         <type>Logical | Numeric</type>
+         <description>
+            When nBytes is supplied, returns .T. while bytes remain. Otherwise returns the shifted pointer.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( _SHIFT_PTR_  ) // _shift_ptr_( @p,@cb, nSkip ) -> cb > 0
 {
    TXppParamList xpp(pl,3);

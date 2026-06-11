@@ -6,6 +6,46 @@
 #include <ot4xb_api.h>
 #include <bcrypt.h>
 // -----------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>OT4XB_CNG</name>
+      <category>crypto/cng</category>
+      <description>
+         Windows CNG helper class for symmetric encryption helpers. The current exported Xbase++ surface exposes AES
+         encrypt/decrypt and RC4 encrypt/decrypt class methods.
+      </description>
+      <syntax>OT4XB_CNG():aes_encrypt( cPlain, oFlags ) -> cEncrypted</syntax>
+      <class-methods>
+         <method name="aes_encrypt" syntax="OT4XB_CNG():aes_encrypt( cPlain, oFlags ) -> cEncrypted">Encrypts cPlain using AES.</method>
+         <method name="aes_decrypt" syntax="OT4XB_CNG():aes_decrypt( cEncrypted, oFlags ) -> cPlain">Decrypts AES data.</method>
+         <method name="rc4_encrypt" syntax="OT4XB_CNG():rc4_encrypt( cPlain, oFlags ) -> cEncrypted">Applies RC4 to the input.</method>
+         <method name="rc4_decrypt" syntax="OT4XB_CNG():rc4_decrypt( cEncrypted, oFlags ) -> cPlain">Applies RC4 to the input; RC4 uses the same operation for encryption and decryption.</method>
+      </class-methods>
+      <parameters>
+         <parameter name="oFlags" type="object">
+            Object that responds to ::get_prop(cName). The implementation reads keys such as key, iv, mode,
+            encode_input, encode_output, encode_key, encode_iv and aes_block_padding.
+         </parameter>
+      </parameters>
+      <flags>
+         <flag name="encode_input">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
+         <flag name="encode_output">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
+         <flag name="encode_key">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
+         <flag name="encode_iv">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
+         <flag name="mode">AES mode. "cbc" selects CBC. The legacy spelling "ebc" selects ECB.</flag>
+         <flag name="aes_block_padding">Logical property enabling BCRYPT_BLOCK_PADDING for AES.</flag>
+      </flags>
+      <remarks>
+         AES keys must decode to 16, 24 or 32 bytes. When AES mode is not supplied, CBC is selected if an IV is
+         supplied; otherwise ECB is used. RC4 reads key and encode_key from the same flags object. All byte encodings
+         are applied before or after the CNG call according to the encode_* properties.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 BEGIN_NAMESPACE( ot4xb_cng_ns )
 //----------------------------------------------------------------------------------------------------------------------
 typedef NTSTATUS( __stdcall * ft_BCryptOpenAlgorithmProvider       )(BCRYPT_ALG_HANDLE*,LPCWSTR,LPCWSTR,ULONG);

@@ -9,1181 +9,5488 @@ extern "C" {
 //  Author: Pablo Botella Navarro ( http://www.xbwin.com )   -
 //------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// ot4xb.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: ot4xb.cpp:OT4XB
+// DOC: REV 2026.06.09 PBN
+// NAME: ot4xb
 XPPRET XPPENTRY OT4XB(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:APPINSTANCE
+// DOC: REV 2026.06.09 PBN
+// NAME: AppInstance
 XPPRET XPPENTRY APPINSTANCE(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:GETCURRENTPROCESSHANDLE
+// DOC: REV 2026.06.09 PBN
+// NAME: GetCurrentProcessHandle
 XPPRET XPPENTRY GETCURRENTPROCESSHANDLE(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:GETHKERNEL32
+// DOC: REV 2026.06.09 PBN
+// NAME: GetHKernel32
 XPPRET XPPENTRY GETHKERNEL32(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:GETHUSER32
+// DOC: REV 2026.06.09 PBN
+// NAME: GetHUser32
 XPPRET XPPENTRY GETHUSER32(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:GETHSHELL32
+// DOC: REV 2026.06.09 PBN
+// NAME: GetHShell32
 XPPRET XPPENTRY GETHSHELL32(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:GETHOT4XB
+// DOC: REV 2026.06.09 PBN
+// NAME: GetHOt4xb
 XPPRET XPPENTRY GETHOT4XB(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_CREATEGENERICWINDOW
+// DOC:
 XPPRET XPPENTRY OT4XB_CREATEGENERICWINDOW(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_SUBCLASSWINDOW
+// DOC:
 XPPRET XPPENTRY OT4XB_SUBCLASSWINDOW(XppParamList );
+
+
+
+// SRC: WndTool.cpp:DELEGATED_XBASE_CALL
+// DOC:
 XPPRET XPPENTRY DELEGATED_XBASE_CALL(XppParamList );
+
+
+
+// SRC: WndTool.cpp:DELEGATED_FPQCALL
+// DOC:
 XPPRET XPPENTRY DELEGATED_FPQCALL(XppParamList );
+
+
+
+// SRC: WndTool.cpp:DELEGATED_EVAL
+// DOC:
 XPPRET XPPENTRY DELEGATED_EVAL(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_REGISTER_DELEGATE_HWND
+// DOC:
 XPPRET XPPENTRY OT4XB_REGISTER_DELEGATE_HWND(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_SINGLE_INSTANCE
+// DOC:
 XPPRET XPPENTRY OT4XB_SINGLE_INSTANCE(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_HOOKTHREAD
+// DOC:
 XPPRET XPPENTRY OT4XB_HOOKTHREAD(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_UNHOOKTHREAD
+// DOC:
 XPPRET XPPENTRY OT4XB_UNHOOKTHREAD(XppParamList );
-// ---------------------------------------------------------------------------
+
+
+
+// SRC: ot4xb_acp.cpp:_OT4XB_TASK_INTERNAL_PROC_
+// DOC:
 XPPRET XPPENTRY _OT4XB_TASK_INTERNAL_PROC_(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_TASK_ID
+// DOC:
 XPPRET XPPENTRY OT4XB_TASK_ID(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_TASK_RUN
+// DOC:
 XPPRET XPPENTRY OT4XB_TASK_RUN(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_TASK_WAIT
+// DOC:
 XPPRET XPPENTRY OT4XB_TASK_WAIT(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_TASK_POP
+// DOC:
 XPPRET XPPENTRY OT4XB_TASK_POP(XppParamList );
-// ---------------------------------------------------------------------------
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_UNMANGLE_CPP_NAME
+// DOC:
 XPPRET XPPENTRY OT4XB_UNMANGLE_CPP_NAME(XppParamList );
-// ---------------------------------------------------------------------------
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_APC_SEND_CB
+// DOC:
 XPPRET XPPENTRY OT4XB_APC_SEND_CB(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_APC_POST_CB
+// DOC:
 XPPRET XPPENTRY OT4XB_APC_POST_CB(XppParamList );
+
+
+
+// SRC: ot4xb_acp.cpp:OT4XB_APC_POST_CB_H
+// DOC:
 XPPRET XPPENTRY OT4XB_APC_POST_CB_H(XppParamList );
+
+
+
+// SRC: ot4xb.cpp:OT4XB_PUSH_EXIT_CB
+// DOC:
 XPPRET XPPENTRY OT4XB_PUSH_EXIT_CB(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_AUTOMATIC_SCROLL_FOCUS
+// DOC:
 XPPRET XPPENTRY OT4XB_AUTOMATIC_SCROLL_FOCUS(XppParamList );
+
+
+
+// SRC: WndTool.cpp:OT4XB_PAINTTHEMSGBAR
+// DOC:
 XPPRET XPPENTRY OT4XB_PAINTTHEMSGBAR(XppParamList );
-// ---------------------------------------------------------------------------
 
 
 
-
-
-
-// ---------------------------------------------------------------------------
-// TCriticalSection.cpp
-// ---------------------------------------------------------------------------
+// SRC: TCriticalSection.cpp:TCRITICALSECTION
+// DOC:
 XPPRET XPPENTRY TCRITICALSECTION(XppParamList );
 
-// ---------------------------------------------------------------------------
-// ot4xb_odbd.cpp
-// ---------------------------------------------------------------------------
 
 
-
-
-
-// ---------------------------------------------------------------------------
-// TLdList.cpp
-// ---------------------------------------------------------------------------
-
+// SRC: TldList.cpp:TLDLIST
+// DOC:
 XPPRET XPPENTRY TLDLIST(XppParamList );
 
-// ---------------------------------------------------------------------------
-// OSVer.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: OSVer.cpp:LISWIN9X
+// DOC:
 XPPRET XPPENTRY LISWIN9X(XppParamList );
+
+
+
+// SRC: OSVer.cpp:LISXP
+// DOC:
 XPPRET XPPENTRY LISXP(XppParamList );
+
+
+
+// SRC: OSVer.cpp:LISVISTA
+// DOC:
 XPPRET XPPENTRY LISVISTA(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// NumAndBytes.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: NumAndBytes.cpp:DWFIX
+// DOC:
 XPPRET XPPENTRY DWFIX(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:DWMINUS
+// DOC:
 XPPRET XPPENTRY DWMINUS(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:EXTENDSIGN8
+// DOC:
 XPPRET XPPENTRY EXTENDSIGN8(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:EXTENDSIGN16
+// DOC:
 XPPRET XPPENTRY EXTENDSIGN16(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:UNSIGNED8
+// DOC:
 XPPRET XPPENTRY UNSIGNED8(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:UNSIGNED16
+// DOC:
 XPPRET XPPENTRY UNSIGNED16(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:UNSIGNED32
+// DOC:
 XPPRET XPPENTRY UNSIGNED32(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:LONG2DOUBLE
+// DOC:
 XPPRET XPPENTRY LONG2DOUBLE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:DOUBLE2LONG
+// DOC:
 XPPRET XPPENTRY DOUBLE2LONG(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_LOWORD
+// DOC:
 XPPRET XPPENTRY wapimc_LOWORD(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_HIWORD
+// DOC:
 XPPRET XPPENTRY wapimc_HIWORD(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_LOBYTE
+// DOC:
 XPPRET XPPENTRY wapimc_LOBYTE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_HIBYTE
+// DOC:
 XPPRET XPPENTRY wapimc_HIBYTE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_LONIBBLE
+// DOC:
 XPPRET XPPENTRY wapimc_LONIBBLE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_HINIBBLE
+// DOC:
 XPPRET XPPENTRY wapimc_HINIBBLE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKEBYTE
+// DOC:
 XPPRET XPPENTRY wapimc_MAKEBYTE(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKEWORD
+// DOC:
 XPPRET XPPENTRY wapimc_MAKEWORD(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKELONG
+// DOC:
 XPPRET XPPENTRY wapimc_MAKELONG(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKELANGID
+// DOC:
 XPPRET XPPENTRY wapimc_MAKELANGID(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKELPARAM
+// DOC:
 XPPRET XPPENTRY wapimc_MAKELPARAM(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_MAKELRESULT
+// DOC:
 XPPRET XPPENTRY wapimc_MAKELRESULT(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_GET_X_LPARAM
+// DOC:
 XPPRET XPPENTRY wapimc_GET_X_LPARAM(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:wapimc_GET_Y_LPARAM
+// DOC:
 XPPRET XPPENTRY wapimc_GET_Y_LPARAM(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:DWBYTEREV
+// DOC:
 XPPRET XPPENTRY DWBYTEREV(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:WHLBYTEREV
+// DOC:
 XPPRET XPPENTRY WHLBYTEREV(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:PACKFLOAT32
+// DOC:
 XPPRET XPPENTRY PACKFLOAT32(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:UNPACKFLOAT32
+// DOC:
 XPPRET XPPENTRY UNPACKFLOAT32(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:OT4XB_PARSE_NUMBER
+// DOC:
 XPPRET XPPENTRY OT4XB_PARSE_NUMBER(XppParamList );
+
+
+
+// SRC: NumAndBytes.cpp:OT4XB_PARSE_INT
+// DOC:
 XPPRET XPPENTRY OT4XB_PARSE_INT(XppParamList );
 
-// ---------------------------------------------------------------------------
-// DrTool.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: DrTool.cpp:GETPROCCESSARGV
+// DOC:
 XPPRET XPPENTRY GETPROCCESSARGV(XppParamList );
+
+
+
+// SRC: DrTool.cpp:GETCOMMANDLINE
+// DOC:
 XPPRET XPPENTRY GETCOMMANDLINE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CAPPPATH
+// DOC:
 XPPRET XPPENTRY CAPPPATH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CAPPDIR
+// DOC:
 XPPRET XPPENTRY CAPPDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LMAKEPATH
+// DOC:
 XPPRET XPPENTRY LMAKEPATH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LCOPYFILE
+// DOC:
 XPPRET XPPENTRY LCOPYFILE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LDISKREADY
+// DOC:
 XPPRET XPPENTRY LDISKREADY(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CCREATETMPFILE
+// DOC:
 XPPRET XPPENTRY CCREATETMPFILE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CGETTMPPATH
+// DOC:
 XPPRET XPPENTRY CGETTMPPATH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:NGETDRIVETYPE
+// DOC:
 XPPRET XPPENTRY NGETDRIVETYPE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LCHDIR
+// DOC:
 XPPRET XPPENTRY LCHDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CDRIVES
+// DOC:
 XPPRET XPPENTRY CDRIVES(XppParamList );
+
+
+
+// SRC: DrTool.cpp:ADRIVES
+// DOC:
 XPPRET XPPENTRY ADRIVES(XppParamList );
+
+
+
+// SRC: DrTool.cpp:_TDRIVEINFO_
+// DOC:
 XPPRET XPPENTRY _TDRIVEINFO_(XppParamList );
+
+
+
+// SRC: DrTool.cpp:GETDRIVEINFO
+// DOC:
 XPPRET XPPENTRY GETDRIVEINFO(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CGETSHORTFILENAME
+// DOC:
 XPPRET XPPENTRY CGETSHORTFILENAME(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LISDIR
+// DOC:
 XPPRET XPPENTRY LISDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LISFILE
+// DOC:
 XPPRET XPPENTRY LISFILE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:GETWINDIR
+// DOC:
 XPPRET XPPENTRY GETWINDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:GETSYSDIR
+// DOC:
 XPPRET XPPENTRY GETSYSDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHCOMBINE
+// DOC:
 XPPRET XPPENTRY CPATHCOMBINE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CURLCOMBINE
+// DOC:
 XPPRET XPPENTRY CURLCOMBINE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHDEFEXT
+// DOC:
 XPPRET XPPENTRY CPATHDEFEXT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHBUILDROOT
+// DOC:
 XPPRET XPPENTRY CPATHBUILDROOT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:ASPLITPATH
+// DOC:
 XPPRET XPPENTRY ASPLITPATH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHCANONICALIZE
+// DOC:
 XPPRET XPPENTRY CPATHCANONICALIZE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHGETEXT
+// DOC:
 XPPRET XPPENTRY CPATHGETEXT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHREMOVEEXT
+// DOC:
 XPPRET XPPENTRY CPATHREMOVEEXT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHCHANGEEXT
+// DOC:
 XPPRET XPPENTRY CPATHCHANGEEXT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHGETFILENAME
+// DOC:
 XPPRET XPPENTRY CPATHGETFILENAME(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHREMOVEBACKSLASH
+// DOC:
 XPPRET XPPENTRY CPATHREMOVEBACKSLASH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHADDBACKSLASH
+// DOC:
 XPPRET XPPENTRY CPATHADDBACKSLASH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHGETPATH
+// DOC:
 XPPRET XPPENTRY CPATHGETPATH(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHGETROOT
+// DOC:
 XPPRET XPPENTRY CPATHGETROOT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CPATHREMOVEROOT
+// DOC:
 XPPRET XPPENTRY CPATHREMOVEROOT(XppParamList );
+
+
+
+// SRC: DrTool.cpp:LPATHISRELATIVE
+// DOC:
 XPPRET XPPENTRY LPATHISRELATIVE(XppParamList );
+
+
+
+// SRC: DrTool.cpp:wapist_WIN32_FIND_DATA
+// DOC:
 XPPRET XPPENTRY wapist_WIN32_FIND_DATA(XppParamList );
+
+
+
+// SRC: DrTool.cpp:CCPUSERIAL
+// DOC:
 XPPRET XPPENTRY CCPUSERIAL(XppParamList );
+
+
+
+// SRC: DrTool.cpp:OT4XB_PUSHDIR
+// DOC:
 XPPRET XPPENTRY OT4XB_PUSHDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:OT4XB_POPDIR
+// DOC:
 XPPRET XPPENTRY OT4XB_POPDIR(XppParamList );
+
+
+
+// SRC: DrTool.cpp:OT4XB_CURDIR
+// DOC:
 XPPRET XPPENTRY OT4XB_CURDIR(XppParamList );
 
-// ---------------------------------------------------------------------------
-// Bitwise.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: Bitwise.cpp:NOR
+// DOC:
 XPPRET XPPENTRY NOR(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NXOR
+// DOC:
 XPPRET XPPENTRY NXOR(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NAND
+// DOC:
 XPPRET XPPENTRY NAND(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NANDNOT
+// DOC:
 XPPRET XPPENTRY NANDNOT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NNOT
+// DOC:
 XPPRET XPPENTRY NNOT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:LAND
+// DOC:
 XPPRET XPPENTRY LAND(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NLSHIFT
+// DOC:
 XPPRET XPPENTRY NLSHIFT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NRSHIFT
+// DOC:
 XPPRET XPPENTRY NRSHIFT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NLROT
+// DOC:
 XPPRET XPPENTRY NLROT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NRROT
+// DOC:
 XPPRET XPPENTRY NRROT(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NLROTBYTE
+// DOC:
 XPPRET XPPENTRY NLROTBYTE(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NRROTBYTE
+// DOC:
 XPPRET XPPENTRY NRROTBYTE(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NLROTWORD
+// DOC:
 XPPRET XPPENTRY NLROTWORD(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:NRROTWORD
+// DOC:
 XPPRET XPPENTRY NRROTWORD(XppParamList );
+
+
+
+// SRC: Bitwise.cpp:LDWBITONOFF
+// DOC:
 XPPRET XPPENTRY LDWBITONOFF(XppParamList );
 
 
-// --------------------------------------------------------------------------
-// ot4xb_register.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_c_exported.h:ot4xb_set_registry_value_as_string
+// DOC:
 XPPRET XPPENTRY OT4XB_SET_REGISTRY_VALUE_AS_STRING(XppParamList );
+
+
+
+// SRC: ot4xb_c_exported.h:ot4xb_get_registry_value_as_string
+// DOC:
 XPPRET XPPENTRY OT4XB_GET_REGISTRY_VALUE_AS_STRING(XppParamList );
 
-// ---------------------------------------------------------------------------
-// String.cpp
-// ---------------------------------------------------------------------------
 
+
+// SRC: string.cpp:ASPLITTXTLINES
+// DOC:
 XPPRET XPPENTRY ASPLITTXTLINES(XppParamList );
+
+
+
+// SRC: string.cpp:TOKENIZE
+// DOC:
 XPPRET XPPENTRY TOKENIZE(XppParamList );
+
+
+
+// SRC: TokenizeEx.cpp:TOKENIZEEX
+// DOC:
 XPPRET XPPENTRY TOKENIZEEX(XppParamList );
+
+
+
+// SRC: string.cpp:__AJOIN
+// DOC:
 XPPRET XPPENTRY __AJOIN(XppParamList );
+
+
+
+// SRC: string.cpp:NOCOMMENT
+// DOC:
 XPPRET XPPENTRY NOCOMMENT(XppParamList );
+
+
+
+// SRC: string.cpp:NCRC32
+// DOC:
 XPPRET XPPENTRY NCRC32(XppParamList );
+
+
+
+// SRC: string.cpp:NCRC8
+// DOC:
 XPPRET XPPENTRY NCRC8(XppParamList );
+
+
+
+// SRC: string.cpp:CHRR
+// DOC:
 XPPRET XPPENTRY CHRR(XppParamList );
+
+
+
+// SRC: string.cpp:MKSCSTR
+// DOC:
 XPPRET XPPENTRY MKSCSTR(XppParamList );
+
+
+
+// SRC: string.cpp:LSTRBITSET
+// DOC:
 XPPRET XPPENTRY LSTRBITSET(XppParamList );
+
+
+
+// SRC: string.cpp:LPSTRBITSET
+// DOC:
 XPPRET XPPENTRY LPSTRBITSET(XppParamList );
+
+
+
+// SRC: string.cpp:CSTRBITNOT
+// DOC:
 XPPRET XPPENTRY CSTRBITNOT(XppParamList );
+
+
+
+// SRC: string.cpp:PSTRBITNOT
+// DOC:
 XPPRET XPPENTRY PSTRBITNOT(XppParamList );
+
+
+
+// SRC: string.cpp:CSTRBITOR
+// DOC:
 XPPRET XPPENTRY CSTRBITOR(XppParamList );
+
+
+
+// SRC: string.cpp:CSTRBITXOR
+// DOC:
 XPPRET XPPENTRY CSTRBITXOR(XppParamList );
+
+
+
+// SRC: string.cpp:CSTRBITAND
+// DOC:
 XPPRET XPPENTRY CSTRBITAND(XppParamList );
+
+
+
+// SRC: string.cpp:PSTRBITOR
+// DOC:
 XPPRET XPPENTRY PSTRBITOR(XppParamList );
+
+
+
+// SRC: string.cpp:PSTRBITXOR
+// DOC:
 XPPRET XPPENTRY PSTRBITXOR(XppParamList );
+
+
+
+// SRC: string.cpp:PSTRBITAND
+// DOC:
 XPPRET XPPENTRY PSTRBITAND(XppParamList );
+
+
+
+// SRC: string.cpp:ASTRBITS
+// DOC:
 XPPRET XPPENTRY ASTRBITS(XppParamList );
+
+
+
+// SRC: string.cpp:NSTRBITCOUNT
+// DOC:
 XPPRET XPPENTRY NSTRBITCOUNT(XppParamList );
+
+
+
+// SRC: string.cpp:TRIMQUOTES
+// DOC:
 XPPRET XPPENTRY TRIMQUOTES(XppParamList );
+
+
+
+// SRC: string.cpp:TRIMZ
+// DOC:
 XPPRET XPPENTRY TRIMZ(XppParamList );
+
+
+
+// SRC: string.cpp:C5LTRIM
+// DOC:
 XPPRET XPPENTRY C5LTRIM(XppParamList );
+
+
+
+// SRC: string.cpp:C5RTRIM
+// DOC:
 XPPRET XPPENTRY C5RTRIM(XppParamList );
+
+
+
+// SRC: string.cpp:C5ALLTRIM
+// DOC:
 XPPRET XPPENTRY C5ALLTRIM(XppParamList );
+
+
+
+// SRC: string.cpp:STRTRIMEX
+// DOC:
 XPPRET XPPENTRY STRTRIMEX(XppParamList );
+
+
+
+// SRC: string.cpp:LSTRWILDCMPEX
+// DOC:
 XPPRET XPPENTRY LSTRWILDCMPEX(XppParamList );
+
+
+
+// SRC: string.cpp:LSTRWILDCMP
+// DOC:
 XPPRET XPPENTRY LSTRWILDCMP(XppParamList );
+
+
+
+// SRC: string.cpp:CDW2BITS
+// DOC:
 XPPRET XPPENTRY CDW2BITS(XppParamList );
+
+
+
+// SRC: string.cpp:NBITS2DW
+// DOC:
 XPPRET XPPENTRY NBITS2DW(XppParamList );
+
+
+
+// SRC: string.cpp:CGENRNDSTR
+// DOC:
 XPPRET XPPENTRY CGENRNDSTR(XppParamList );
+
+
+
+// SRC: string.cpp:OT4XB_NRAND
+// DOC:
 XPPRET XPPENTRY OT4XB_NRAND(XppParamList );
+
+
+
+// SRC: string.cpp:SPLIT_DATA_URI
+// DOC:
 XPPRET XPPENTRY SPLIT_DATA_URI(XppParamList );
+
+
+
+// SRC: ot4xb_c_exported.h:ot4xb_regex_match
+// DOC:
 XPPRET XPPENTRY OT4XB_REGEX_MATCH(XppParamList );
+
+
+
+// SRC: ot4xb_c_exported.h:ot4xb_regex_replace
+// DOC:
 XPPRET XPPENTRY OT4XB_REGEX_REPLACE(XppParamList );
+
+
+
+// SRC: ot4xb_regex.cpp:OT4XB_REGEX_SEARCH
+// DOC:
 XPPRET XPPENTRY OT4XB_REGEX_SEARCH(XppParamList );
-// _XPP_REG_FUN_(OT4XB_REGEX_EXEC )
 
 
 
-// -------- // hex functions
-
+// SRC: string.cpp:CHEX2BIN
+// DOC:
 XPPRET XPPENTRY CHEX2BIN(XppParamList );
+
+
+
+// SRC: string.cpp:CBIN2HEX
+// DOC:
 XPPRET XPPENTRY CBIN2HEX(XppParamList );
+
+
+
+// SRC: string.cpp:CDW2HEX
+// DOC:
 XPPRET XPPENTRY CDW2HEX(XppParamList );
+
+
+
+// SRC: string.cpp:NHEX2DW
+// DOC:
 XPPRET XPPENTRY NHEX2DW(XppParamList );
+
+
+
+// SRC: string.cpp:CW2HEX
+// DOC:
 XPPRET XPPENTRY CW2HEX(XppParamList );
+
+
+
+// SRC: string.cpp:NHEX2W
+// DOC:
 XPPRET XPPENTRY NHEX2W(XppParamList );
+
+
+
+// SRC: string.cpp:CBYTE2HEX
+// DOC:
 XPPRET XPPENTRY CBYTE2HEX(XppParamList );
+
+
+
+// SRC: string.cpp:NHEX2BYTE
+// DOC:
 XPPRET XPPENTRY NHEX2BYTE(XppParamList );
 
+
+
+// SRC: string.cpp:CQW2HEX
+// DOC:
 XPPRET XPPENTRY CQW2HEX(XppParamList );
+
+
+
+// SRC: string.cpp:NHEX2QW
+// DOC:
 XPPRET XPPENTRY NHEX2QW(XppParamList );
+
+
+
+// SRC: string.cpp:NHEX2DOUBLE
+// DOC:
 XPPRET XPPENTRY NHEX2DOUBLE(XppParamList );
+
+
+
+// SRC: string.cpp:CDOUBLE2HEX
+// DOC:
 XPPRET XPPENTRY CDOUBLE2HEX(XppParamList );
 
-// ------------- encode/decode
+
+
+// SRC: string.cpp:__B64ENC
+// DOC:
 XPPRET XPPENTRY __B64ENC(XppParamList );
+
+
+
+// SRC: string.cpp:__B64DEC
+// DOC:
 XPPRET XPPENTRY __B64DEC(XppParamList );
 
-// ---------------------------------------------------------------------------
-// ot4xb_json.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: ot4xb_json.cpp:OT4XB_JSON_PARSE
+// DOC:
 XPPRET XPPENTRY OT4XB_JSON_PARSE(XppParamList );
 
-// ---------------------------------------------------------------------------
-// Unicode.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: Unicode.cpp:CSZANSI2WIDE
+// DOC:
 XPPRET XPPENTRY CSZANSI2WIDE(XppParamList );
+
+
+
+// SRC: Unicode.cpp:CSZWIDE2ANSI
+// DOC:
 XPPRET XPPENTRY CSZWIDE2ANSI(XppParamList );
+
+
+
+// SRC: Unicode.cpp:UNICODEDYNSTR
+// DOC:
 XPPRET XPPENTRY UNICODEDYNSTR(XppParamList );
+
+
+
+// SRC: Unicode.cpp:CUTF8TOANSI
+// DOC:
 XPPRET XPPENTRY CUTF8TOANSI(XppParamList );
+
+
+
+// SRC: Unicode.cpp:CANSITOUTF8
+// DOC:
 XPPRET XPPENTRY CANSITOUTF8(XppParamList );
+
+
+
+// SRC: Unicode.cpp:CUTF8TOOEM
+// DOC:
 XPPRET XPPENTRY CUTF8TOOEM(XppParamList );
+
+
+
+// SRC: Unicode.cpp:COEMTOUTF8
+// DOC:
 XPPRET XPPENTRY COEMTOUTF8(XppParamList );
+
+
+
+// SRC: Unicode.cpp:PEEKWSTR
+// DOC:
 XPPRET XPPENTRY PEEKWSTR(XppParamList );
+
+
+
+// SRC: Unicode.cpp:CUTF8TOWIDE
+// DOC:
 XPPRET XPPENTRY CUTF8TOWIDE(XppParamList );
+
+
+
+// SRC: Unicode.cpp:_MB2W
+// DOC:
 XPPRET XPPENTRY _MB2W(XppParamList );
+
+
+
+// SRC: Unicode.cpp:_W2MB
+// DOC:
 XPPRET XPPENTRY _W2MB(XppParamList );
+
+
+
+// SRC: Unicode.cpp:_MB2MB
+// DOC:
 XPPRET XPPENTRY _MB2MB(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// Container.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: Container.cpp:TYPE2EMPTYVALUE
+// DOC:
 XPPRET XPPENTRY TYPE2EMPTYVALUE(XppParamList );
+
+
+
+// SRC: Container.cpp:PPMARSHALL2ARRAY
+// DOC:
 XPPRET XPPENTRY PPMARSHALL2ARRAY(XppParamList );
+
+
+
+// SRC: Container.cpp:ARRAY2PPMARSHALL
+// DOC:
 XPPRET XPPENTRY ARRAY2PPMARSHALL(XppParamList );
+
+
+
+// SRC: Container.cpp:PSZZ2ARRAY
+// DOC:
 XPPRET XPPENTRY PSZZ2ARRAY(XppParamList );
+
+
+
+// SRC: Container.cpp:ARRAY2PSZZ
+// DOC:
 XPPRET XPPENTRY ARRAY2PSZZ(XppParamList );
+
+
+
+// SRC: Container.cpp:LCALLFUNCPA
+// DOC:
 XPPRET XPPENTRY LCALLFUNCPA(XppParamList );
+
+
+
+// SRC: Container.cpp:LCALLMETHODPA
+// DOC:
 XPPRET XPPENTRY LCALLMETHODPA(XppParamList );
+
+
+
+// SRC: Container.cpp:CALLFUNCTION
+// DOC:
 XPPRET XPPENTRY CALLFUNCTION(XppParamList );
+
+
+
+// SRC: Container.cpp:LOBJGETMEMBER
+// DOC:
 XPPRET XPPENTRY LOBJGETMEMBER(XppParamList );
+
+
+
+// SRC: Container.cpp:LOBJSETMEMBER
+// DOC:
 XPPRET XPPENTRY LOBJSETMEMBER(XppParamList );
+
+
+
+// SRC: Container.cpp:_VAR2CON
+// DOC:
 XPPRET XPPENTRY _VAR2CON(XppParamList );
+
+
+
+// SRC: Container.cpp:_CON2VAR
+// DOC:
 XPPRET XPPENTRY _CON2VAR(XppParamList );
+
+
+
+// SRC: Container.cpp:_CONRELEASE
+// DOC:
 XPPRET XPPENTRY _CONRELEASE(XppParamList );
+
+
+
+// SRC: Container.cpp:OT4XB_MEMVAR_SETGET
+// DOC:
 XPPRET XPPENTRY OT4XB_MEMVAR_SETGET(XppParamList );
+
+
+
+// SRC: Container.cpp:_CONGENERICBREAKCB
+// DOC:
 XPPRET XPPENTRY _CONGENERICBREAKCB(XppParamList );
+
+
+
+// SRC: Container.cpp:__VDEF
+// DOC:
 XPPRET XPPENTRY __VDEF(XppParamList );
+
+
+
+// SRC: Container.cpp:__VBLOCK
+// DOC:
 XPPRET XPPENTRY __VBLOCK(XppParamList );
+
+
+
+// SRC: Container.cpp:__VNUM
+// DOC:
 XPPRET XPPENTRY __VNUM(XppParamList );
+
+
+
+// SRC: Container.cpp:__VLOWER
+// DOC:
 XPPRET XPPENTRY __VLOWER(XppParamList );
+
+
+
+// SRC: Container.cpp:__VUPPER
+// DOC:
 XPPRET XPPENTRY __VUPPER(XppParamList );
+
+
+
+// SRC: Container.cpp:__VSTR
+// DOC:
 XPPRET XPPENTRY __VSTR(XppParamList );
+
+
+
+// SRC: Container.cpp:__ANEW
+// DOC:
 XPPRET XPPENTRY __ANEW(XppParamList );
+
+
+
+// SRC: Container.cpp:__VCLSPTR
+// DOC:
 XPPRET XPPENTRY __VCLSPTR(XppParamList );
+
+
+
+// SRC: Container.cpp:__VMASK
+// DOC:
 XPPRET XPPENTRY __VMASK(XppParamList );
+
+
+
+// SRC: Container.cpp:__XB_TYPE
+// DOC:
 XPPRET XPPENTRY __XB_TYPE(XppParamList );
+
+
+
+// SRC: Container.cpp:__APEEK
+// DOC:
 XPPRET XPPENTRY __APEEK(XppParamList );
+
+
+
+// SRC: Container.cpp:__VPEEK
+// DOC:
 XPPRET XPPENTRY __VPEEK(XppParamList );
+
+
+
+// SRC: Container.cpp:__ANEXT
+// DOC:
 XPPRET XPPENTRY __ANEXT(XppParamList );
+
+
+
+// SRC: Container.cpp:__XML_FV
+// DOC:
 XPPRET XPPENTRY __XML_FV(XppParamList );
+
+
+
+// SRC: Container.cpp:__XML_FV_GET_VALUE
+// DOC:
 XPPRET XPPENTRY __XML_FV_GET_VALUE(XppParamList );
+
+
+
+// SRC: Container.cpp:__V2FV
+// DOC:
 XPPRET XPPENTRY __V2FV(XppParamList );
+
+
+
+// SRC: Container.cpp:__V2_CSV_CELL
+// DOC:
 XPPRET XPPENTRY __V2_CSV_CELL(XppParamList );
+
+
+
+// SRC: Container.cpp:OT4XB_QLOOP
+// DOC:
 XPPRET XPPENTRY OT4XB_QLOOP(XppParamList );
 
+
+
+// SRC: ot4xb_vtran.cpp:__VCMP
+// DOC:
 XPPRET XPPENTRY __VCMP(XppParamList );
 
-// ---------------------------------------------------------------------------
-// ot4xb_vtran.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: ot4xb_vtran.cpp:__VTRAN
+// DOC:
 XPPRET XPPENTRY __VTRAN(XppParamList );
 
 
 
-// ---------------------------------------------------------------------------
-// Memory.cpp
-// ---------------------------------------------------------------------------
+// SRC: memory.cpp:_XGRAB_COUNT_
+// DOC:
 XPPRET XPPENTRY _XGRAB_COUNT_(XppParamList );
+
+
+
+// SRC: memory.cpp:_XGRAB
+// DOC:
 XPPRET XPPENTRY _XGRAB(XppParamList );
+
+
+
+// SRC: memory.cpp:_XFREE
+// DOC:
 XPPRET XPPENTRY _XFREE(XppParamList );
+
+
+
+// SRC: memory.cpp:_VGRAB
+// DOC:
 XPPRET XPPENTRY _VGRAB(XppParamList );
+
+
+
+// SRC: memory.cpp:_VFREE
+// DOC:
 XPPRET XPPENTRY _VFREE(XppParamList );
+
+
+
+// SRC: memory.cpp:_PGRAB
+// DOC:
 XPPRET XPPENTRY _PGRAB(XppParamList );
+
+
+
+// SRC: memory.cpp:_PFREE
+// DOC:
 XPPRET XPPENTRY _PFREE(XppParamList );
+
+
+
+// SRC: memory.cpp:_BSET
+// DOC:
 XPPRET XPPENTRY _BSET(XppParamList );
+
+
+
+// SRC: memory.cpp:_BMOVE
+// DOC:
 XPPRET XPPENTRY _BMOVE(XppParamList );
+
+
+
+// SRC: memory.cpp:_BDUP
+// DOC:
 XPPRET XPPENTRY _BDUP(XppParamList );
+
+
+
+// SRC: memory.cpp:_BCOPYWITHTABLE
+// DOC:
 XPPRET XPPENTRY _BCOPYWITHTABLE(XppParamList );
+
+
+
+// SRC: memory.cpp:_BCOPY
+// DOC:
 XPPRET XPPENTRY _BCOPY(XppParamList );
+
+
+
+// SRC: memory.cpp:_BCOPYF
+// DOC:
 XPPRET XPPENTRY _BCOPYF(XppParamList );
+
+
+
+// SRC: memory.cpp:_BCMP
+// DOC:
 XPPRET XPPENTRY _BCMP(XppParamList );
+
+
+
+// SRC: memory.cpp:_BSCAN
+// DOC:
 XPPRET XPPENTRY _BSCAN(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRCPY
+// DOC:
 XPPRET XPPENTRY _XSTRCPY(XppParamList );
+
+
+
+// SRC: memory.cpp:_XXSTRCPY
+// DOC:
 XPPRET XPPENTRY _XXSTRCPY(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTCCPY
+// DOC:
 XPPRET XPPENTRY _XSTCCPY(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRNCPY
+// DOC:
 XPPRET XPPENTRY _XSTRNCPY(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRCAT
+// DOC:
 XPPRET XPPENTRY _XSTRCAT(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTPCHR
+// DOC:
 XPPRET XPPENTRY _XSTPCHR(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTPBLK
+// DOC:
 XPPRET XPPENTRY _XSTPBLK(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRLEN
+// DOC:
 XPPRET XPPENTRY _XSTRLEN(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRDUP
+// DOC:
 XPPRET XPPENTRY _XSTRDUP(XppParamList );
+
+
+
+// SRC: memory.cpp:_XSTRAT
+// DOC:
 XPPRET XPPENTRY _XSTRAT(XppParamList );
+
+
+
+// SRC: memory.cpp:_SHIFT_PTR_
+// DOC:
 XPPRET XPPENTRY _SHIFT_PTR_(XppParamList );
 
 
 
-// ---------------------------------------------------------------------------
-// PeekPoke.cpp
-// ---------------------------------------------------------------------------
+// SRC: PeekPoke.cpp:PEEKSTR
+// DOC:
 XPPRET XPPENTRY PEEKSTR(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKESTR
+// DOC:
 XPPRET XPPENTRY POKESTR(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKBYTE
+// DOC:
 XPPRET XPPENTRY PEEKBYTE(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEBYTE
+// DOC:
 XPPRET XPPENTRY POKEBYTE(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKWORD
+// DOC:
 XPPRET XPPENTRY PEEKWORD(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKSHORT
+// DOC:
 XPPRET XPPENTRY PEEKSHORT(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEWORD
+// DOC:
 XPPRET XPPENTRY POKEWORD(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKDWORD
+// DOC:
 XPPRET XPPENTRY PEEKDWORD(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEDWORD
+// DOC:
 XPPRET XPPENTRY POKEDWORD(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKDOUBLE
+// DOC:
 XPPRET XPPENTRY PEEKDOUBLE(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEDOUBLE
+// DOC:
 XPPRET XPPENTRY POKEDOUBLE(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKFLOAT
+// DOC:
 XPPRET XPPENTRY PEEKFLOAT(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEFLOAT
+// DOC:
 XPPRET XPPENTRY POKEFLOAT(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKWORDNET
+// DOC:
 XPPRET XPPENTRY PEEKWORDNET(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PEEKDWORDNET
+// DOC:
 XPPRET XPPENTRY PEEKDWORDNET(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEWORDNET
+// DOC:
 XPPRET XPPENTRY POKEWORDNET(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:POKEDWORDNET
+// DOC:
 XPPRET XPPENTRY POKEDWORDNET(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:__I8
+// DOC:
 XPPRET XPPENTRY __I8(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:__I16
+// DOC:
 XPPRET XPPENTRY __I16(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:__I32
+// DOC:
 XPPRET XPPENTRY __I32(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:__F32
+// DOC:
 XPPRET XPPENTRY __F32(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:__F64
+// DOC:
 XPPRET XPPENTRY __F64(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PPVTBL2A
+// DOC:
 XPPRET XPPENTRY PPVTBL2A(XppParamList );
+
+
+
+// SRC: PeekPoke.cpp:PPVTBL2N
+// DOC:
 XPPRET XPPENTRY PPVTBL2N(XppParamList );
 
-// ---------------------------------------------------------------------------
-// TGXbStack.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: TGStack.cpp:TGXBSTACK
+// DOC:
 XPPRET XPPENTRY TGXBSTACK(XppParamList );
 
-// ---------------------------------------------------------------------------
-// TLXbStack.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: TLXbStack.cpp:TLSSTACKTOP
+// DOC:
 XPPRET XPPENTRY TLSSTACKTOP(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:TLSSTACKPUSH
+// DOC:
 XPPRET XPPENTRY TLSSTACKPUSH(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:TLSSTACKPOP
+// DOC:
 XPPRET XPPENTRY TLSSTACKPOP(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:TLSSTACKCOUNT
+// DOC:
 XPPRET XPPENTRY TLSSTACKCOUNT(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:TLS
+// DOC:
 XPPRET XPPENTRY TLS(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:WITHOBJECTSTACKTOP
+// DOC:
 XPPRET XPPENTRY WITHOBJECTSTACKTOP(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:WITHOBJECTSTACKPUSH
+// DOC:
 XPPRET XPPENTRY WITHOBJECTSTACKPUSH(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:WITHOBJECTSTACKPOP
+// DOC:
 XPPRET XPPENTRY WITHOBJECTSTACKPOP(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:WITHOBJECTSTACKCOUNT
+// DOC:
 XPPRET XPPENTRY WITHOBJECTSTACKCOUNT(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:WITHOBJECTSTACKRECOVER
+// DOC:
 XPPRET XPPENTRY WITHOBJECTSTACKRECOVER(XppParamList );
 
+
+
+// SRC: TLXbStack.cpp:XBTLSALLOC
+// DOC:
 XPPRET XPPENTRY XBTLSALLOC(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:XBTLSFREE
+// DOC:
 XPPRET XPPENTRY XBTLSFREE(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:XBTLSSETVALUE
+// DOC:
 XPPRET XPPENTRY XBTLSSETVALUE(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:XBTLSGETVALUE
+// DOC:
 XPPRET XPPENTRY XBTLSGETVALUE(XppParamList );
 
+
+
+// SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR
+// DOC:
 XPPRET XPPENTRY OT4XB_ARRAY_ITERATOR(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR_STEP
+// DOC:
 XPPRET XPPENTRY OT4XB_ARRAY_ITERATOR_STEP(XppParamList );
+
+
+
+// SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR_INDEX
+// DOC:
 XPPRET XPPENTRY OT4XB_ARRAY_ITERATOR_INDEX(XppParamList );
 
-// ---------------------------------------------------------------------------
-// gwst.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: gwst.cpp:GWST
+// DOC:
 XPPRET XPPENTRY GWST(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BOOL_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_BOOL_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BYTEBOOL_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_BYTEBOOL_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BYTE_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_BYTE_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SINT8_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_SINT8_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_WORD_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_WORD_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SINT16_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_SINT16_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORD_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_DWORD_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_UINT32_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_UINT32_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORD64_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_DWORD64_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_NINT64_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_NINT64_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_PCLIPVAR_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_PCLIPVAR_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_XPPGUIWND_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_XPPGUIWND_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_FLOAT_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_FLOAT_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DOUBLE_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_DOUBLE_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_LPSTR_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_LPSTR_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BINSTR_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SZSTR_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SZWSTR_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DYNSZ_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_WORDNET_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORDNET_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_XDATE_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_POINTER32_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_POINTER32_(XppParamList );
+
+
+
+// SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_HANDLE_
+// DOC:
 XPPRET XPPENTRY _GWST_XBSETGET_HANDLE_(XppParamList );
-// ---------------------------------------------------------------------------
-// XbClass
-// ---------------------------------------------------------------------------
+
+
+
+// SRC: TXbClass_internal.cpp:_XBMTPF1_
+// DOC:
 XPPRET XPPENTRY _XBMTPF1_(XppParamList );
+
+
+
+// SRC: TXbClass.cpp:TXBCLASS
+// DOC:
 XPPRET XPPENTRY TXBCLASS(XppParamList );
 
-// ---------------------------------------------------------------------------
-// Num64.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: Num64.cpp:LONGLONG2DOUBLE
+// DOC:
 XPPRET XPPENTRY LONGLONG2DOUBLE(XppParamList );
+
+
+
+// SRC: Num64.cpp:DOUBLE2LONGLONG
+// DOC:
 XPPRET XPPENTRY DOUBLE2LONGLONG(XppParamList );
+
+
+
+// SRC: Num64.cpp:ULONGLONG2DOUBLE
+// DOC:
 XPPRET XPPENTRY ULONGLONG2DOUBLE(XppParamList );
+
+
+
+// SRC: Num64.cpp:DOUBLE2ULONGLONG
+// DOC:
 XPPRET XPPENTRY DOUBLE2ULONGLONG(XppParamList );
+
+
+
+// SRC: Num64.cpp:GETNUMFORMAT
+// DOC:
 XPPRET XPPENTRY GETNUMFORMAT(XppParamList );
+
+
+
+// SRC: Num64.cpp:LISNUMF64
+// DOC:
 XPPRET XPPENTRY LISNUMF64(XppParamList );
+
+
+
+// SRC: Num64.cpp:SETNUMFORMAT
+// DOC:
 XPPRET XPPENTRY SETNUMFORMAT(XppParamList );
+
+
+
+// SRC: Num64.cpp:_LARGE_INTEGER_
+// DOC:
 XPPRET XPPENTRY _LARGE_INTEGER_(XppParamList );
+
+
+
+// SRC: Num64.cpp:wapist_LARGE_INTEGER
+// DOC:
 XPPRET XPPENTRY wapist_LARGE_INTEGER(XppParamList );
+
+
+
+// SRC: Num64.cpp:wapist_ULARGE_INTEGER
+// DOC:
 XPPRET XPPENTRY wapist_ULARGE_INTEGER(XppParamList );
+
+
+
+// SRC: Num64.cpp:MAKE_QWORD
+// DOC:
 XPPRET XPPENTRY MAKE_QWORD(XppParamList );
+
+
+
+// SRC: Num64.cpp:MAKE_INT64
+// DOC:
 XPPRET XPPENTRY MAKE_INT64(XppParamList );
+
+
+
+// SRC: Num64.cpp:LO_DWORD
+// DOC:
 XPPRET XPPENTRY LO_DWORD(XppParamList );
+
+
+
+// SRC: Num64.cpp:HI_DWORD
+// DOC:
 XPPRET XPPENTRY HI_DWORD(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64CMP
+// DOC:
 XPPRET XPPENTRY I64CMP(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64SUM
+// DOC:
 XPPRET XPPENTRY I64SUM(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64REST
+// DOC:
 XPPRET XPPENTRY I64REST(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64MULT
+// DOC:
 XPPRET XPPENTRY I64MULT(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64DIV
+// DOC:
 XPPRET XPPENTRY I64DIV(XppParamList );
+
+
+
+// SRC: Num64.cpp:I64MOD
+// DOC:
 XPPRET XPPENTRY I64MOD(XppParamList );
 
 
 
-// ---------------------------------------------------------------------------
-// uuid.cpp
-// ---------------------------------------------------------------------------
+// SRC: UUID.CPP:_UUIDCREATE
+// DOC:
 XPPRET XPPENTRY _UUIDCREATE(XppParamList );
+
+
+
+// SRC: UUID.CPP:UUIDCREATESTR
+// DOC:
 XPPRET XPPENTRY UUIDCREATESTR(XppParamList );
+
+
+
+// SRC: UUID.CPP:CUUIDCREATENAME
+// DOC:
 XPPRET XPPENTRY CUUIDCREATENAME(XppParamList );
+
+
+
+// SRC: UUID.CPP:CUUIDCREATENAMEEX
+// DOC:
 XPPRET XPPENTRY CUUIDCREATENAMEEX(XppParamList );
+
+
+
+// SRC: UUID.CPP:UUIDFROMSTRING
+// DOC:
 XPPRET XPPENTRY UUIDFROMSTRING(XppParamList );
+
+
+
+// SRC: UUID.CPP:UUIDTOSTRING
+// DOC:
 XPPRET XPPENTRY UUIDTOSTRING(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// fpCall.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: fpCall.cpp:SET_FPCALL_FLAGS
+// DOC:
 XPPRET XPPENTRY SET_FPCALL_FLAGS(XppParamList );
+
+
+
+// SRC: fpCall.cpp:_DUMMYSTDCBK
+// DOC:
 XPPRET XPPENTRY _DUMMYSTDCBK(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NLOADLIBRARY
+// DOC:
 XPPRET XPPENTRY NLOADLIBRARY(XppParamList );
+
+
+
+// SRC: fpCall.cpp:LFREELIBRARY
+// DOC:
 XPPRET XPPENTRY LFREELIBRARY(XppParamList );
+
+
+
+// SRC: fpCall.cpp:_FPCALL_PUSHFLAGS_
+// DOC:
 XPPRET XPPENTRY _FPCALL_PUSHFLAGS_(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NFPCALL
+// DOC:
 XPPRET XPPENTRY NFPCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NFPGET
+// DOC:
 XPPRET XPPENTRY NFPGET(XppParamList );
+
+
+
+// SRC: fpCall.cpp:F2T
+// DOC:
 XPPRET XPPENTRY F2T(XppParamList );
+
+
+
+// SRC: fpCall.cpp:XBFPCALL
+// DOC:
 XPPRET XPPENTRY XBFPCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NDFPCALL
+// DOC:
 XPPRET XPPENTRY NDFPCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:QWFPCALL
+// DOC:
 XPPRET XPPENTRY QWFPCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NFPGETLASTERROR
+// DOC:
 XPPRET XPPENTRY NFPGETLASTERROR(XppParamList );
+
+
+
+// SRC: fpCall.cpp:QFPGETLASTPOINTER
+// DOC:
 XPPRET XPPENTRY QFPGETLASTPOINTER(XppParamList );
+
+
+
+// SRC: fpCall.cpp:QFPSETLASTPOINTER
+// DOC:
 XPPRET XPPENTRY QFPSETLASTPOINTER(XppParamList );
+
+
+
+// SRC: fpCall.cpp:NGETPROCADDRESS
+// DOC:
 XPPRET XPPENTRY NGETPROCADDRESS(XppParamList );
+
+
+
+// SRC: fpCall.cpp:FPQCALL
+// DOC:
 XPPRET XPPENTRY FPQCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:IFPQCALL
+// DOC:
 XPPRET XPPENTRY IFPQCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:FPLQCALL2
+// DOC:
 XPPRET XPPENTRY FPLQCALL2(XppParamList );
+
+
+
+// SRC: fpCall.cpp:FPLQCALL
+// DOC:
 XPPRET XPPENTRY FPLQCALL(XppParamList );
+
+
+
+// SRC: fpCall.cpp:OT4XB_GENERIC_POINTER
+// DOC:
 XPPRET XPPENTRY OT4XB_GENERIC_POINTER(XppParamList );
+
+
+
+// SRC: fpCall.cpp:PT2GP
+// DOC:
 XPPRET XPPENTRY PT2GP(XppParamList );
+
+
+
+// SRC: fpCall.cpp:CPRINTF
+// DOC:
 XPPRET XPPENTRY CPRINTF(XppParamList );
+
+
+
+// SRC: fpCall.cpp:__PRINTF
+// DOC:
 XPPRET XPPENTRY __PRINTF(XppParamList );
+
+
+
+// SRC: fpCall.cpp:LWRITELOGLINE
+// DOC:
 XPPRET XPPENTRY LWRITELOGLINE(XppParamList );
+
+
+
+// SRC: LogTool.cpp:LSENDLOGSTRFL
+// DOC:
 XPPRET XPPENTRY LSENDLOGSTRFL(XppParamList );
+
+
+
+// SRC: LogTool.cpp:LSENDLOGSTR
+// DOC:
 XPPRET XPPENTRY LSENDLOGSTR(XppParamList );
+
+
+
+// SRC: LogTool.cpp:REGISTER_USER_LOG_UUID
+// DOC:
 XPPRET XPPENTRY REGISTER_USER_LOG_UUID(XppParamList );
+
+
+
+// SRC: LogTool.cpp:OT4XB_LSENDLOGSTRFL
+// DOC:
 XPPRET XPPENTRY OT4XB_LSENDLOGSTRFL(XppParamList );
+
+
+
+// SRC: LogTool.cpp:OT4XB_LSENDLOGSTR
+// DOC:
 XPPRET XPPENTRY OT4XB_LSENDLOGSTR(XppParamList );
+
+
+
+// SRC: fpCall.cpp:CFMTRESMSG
+// DOC:
 XPPRET XPPENTRY CFMTRESMSG(XppParamList );
+
+
+
+// SRC: fpCall.cpp:CFMTSTRMSG
+// DOC:
 XPPRET XPPENTRY CFMTSTRMSG(XppParamList );
+
+
+
+// SRC: fpCall.cpp:CFMTSYSMSG
+// DOC:
 XPPRET XPPENTRY CFMTSYSMSG(XppParamList );
 
 
 
-
-// ---------------------------------------------------------------------------
-// TBinFile.cpp
-// ---------------------------------------------------------------------------
+// SRC: ot4xb_c_exported.h:lMemoWrite
+// DOC:
 XPPRET XPPENTRY LMEMOWRITE(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:CMEMOREADEX
+// DOC:
 XPPRET XPPENTRY CMEMOREADEX(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:TBINFILE
+// DOC:
 XPPRET XPPENTRY TBINFILE(XppParamList );
+
+
+
+// SRC: TFileWriter.cpp:TFILEWRITER
+// DOC:
 XPPRET XPPENTRY TFILEWRITER(XppParamList );
 
+
+
+// SRC: TBinFile.cpp:LMEMOSTGWRITE
+// DOC:
 XPPRET XPPENTRY LMEMOSTGWRITE(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:CMEMOSTGREAD
+// DOC:
 XPPRET XPPENTRY CMEMOSTGREAD(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:LMEMOSTGEXPORT
+// DOC:
 XPPRET XPPENTRY LMEMOSTGEXPORT(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:LMEMOSTGIMPORT
+// DOC:
 XPPRET XPPENTRY LMEMOSTGIMPORT(XppParamList );
+
+
+
+// SRC: TBinFile.cpp:CMEMOSTGLIST
+// DOC:
 XPPRET XPPENTRY CMEMOSTGLIST(XppParamList );
 
-// ---------------------------------------------------------------------------
-// FileTime.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: FileTime.cpp:wapist_FILETIME64
+// DOC:
 XPPRET XPPENTRY wapist_FILETIME64(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_SETTS
+// DOC:
 XPPRET XPPENTRY FT64_SETTS(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_GETTS
+// DOC:
 XPPRET XPPENTRY FT64_GETTS(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_TOHTTP
+// DOC:
 XPPRET XPPENTRY FT64_TOHTTP(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_SETDATETIME
+// DOC:
 XPPRET XPPENTRY FT64_SETDATETIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_GETDATETIME
+// DOC:
 XPPRET XPPENTRY FT64_GETDATETIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_GETDATETIMESEC
+// DOC:
 XPPRET XPPENTRY FT64_GETDATETIMESEC(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_NOW
+// DOC:
 XPPRET XPPENTRY FT64_NOW(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_ELAPMILLISECONDS
+// DOC:
 XPPRET XPPENTRY FT64_ELAPMILLISECONDS(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_ELAPSECONDS
+// DOC:
 XPPRET XPPENTRY FT64_ELAPSECONDS(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_COMPARE
+// DOC:
 XPPRET XPPENTRY FT64_COMPARE(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_ADD
+// DOC:
 XPPRET XPPENTRY FT64_ADD(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_ADD_Y
+// DOC:
 XPPRET XPPENTRY FT64_ADD_Y(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_ADD_M
+// DOC:
 XPPRET XPPENTRY FT64_ADD_M(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_TO_DOSDATETIME
+// DOC:
 XPPRET XPPENTRY FT64_TO_DOSDATETIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_FROM_DOSDATETIME
+// DOC:
 XPPRET XPPENTRY FT64_FROM_DOSDATETIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_TO_UNIXTIME
+// DOC:
 XPPRET XPPENTRY FT64_TO_UNIXTIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_FROM_UNIXTIME
+// DOC:
 XPPRET XPPENTRY FT64_FROM_UNIXTIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_TO_EXCELTIME
+// DOC:
 XPPRET XPPENTRY FT64_TO_EXCELTIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_FROM_EXCELTIME
+// DOC:
 XPPRET XPPENTRY FT64_FROM_EXCELTIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:DT2ISO8601
+// DOC:
 XPPRET XPPENTRY DT2ISO8601(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_SETRFC822DATE
+// DOC:
 XPPRET XPPENTRY FT64_SETRFC822DATE(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_TOLOCALTIME
+// DOC:
 XPPRET XPPENTRY FT64_TOLOCALTIME(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_STRF
+// DOC:
 XPPRET XPPENTRY FT64_STRF(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_GET_CKF32TS
+// DOC:
 XPPRET XPPENTRY FT64_GET_CKF32TS(XppParamList );
+
+
+
+// SRC: FileTime.cpp:FT64_SET_CKF32TS
+// DOC:
 XPPRET XPPENTRY FT64_SET_CKF32TS(XppParamList );
 
 
 
-// ---------------------------------------------------------------------------
-// THashTable.cpp
-// ---------------------------------------------------------------------------
-
+// SRC: THDict.cpp:_HDICT_NEW
+// DOC:
 XPPRET XPPENTRY _HDICT_NEW(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_KEY_COMPARE
+// DOC:
 XPPRET XPPENTRY _HDICT_KEY_COMPARE(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_DESTROY
+// DOC:
 XPPRET XPPENTRY _HDICT_DESTROY(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_SETPROP
+// DOC:
 XPPRET XPPENTRY _HDICT_SETPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_GETPROP
+// DOC:
 XPPRET XPPENTRY _HDICT_GETPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ISPROP
+// DOC:
 XPPRET XPPENTRY _HDICT_ISPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_GETPROP_RAW_
+// DOC:
 XPPRET XPPENTRY _HDICT_GETPROP_RAW_(XppParamList );
 
+
+
+// SRC: THDict.cpp:_HDICT_REMOVEPROP
+// DOC:
 XPPRET XPPENTRY _HDICT_REMOVEPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_REMOVEALL
+// DOC:
 XPPRET XPPENTRY _HDICT_REMOVEALL(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_COUNT
+// DOC:
 XPPRET XPPENTRY _HDICT_COUNT(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ITERATE_STEP
+// DOC:
 XPPRET XPPENTRY _HDICT_ITERATE_STEP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ITERATE_CB
+// DOC:
 XPPRET XPPENTRY _HDICT_ITERATE_CB(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ADDPROPFROMARRAY
+// DOC:
 XPPRET XPPENTRY _HDICT_ADDPROPFROMARRAY(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ADDPROPFROMINISTRING
+// DOC:
 XPPRET XPPENTRY _HDICT_ADDPROPFROMINISTRING(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ADD_ENV_STRINGS
+// DOC:
 XPPRET XPPENTRY _HDICT_ADD_ENV_STRINGS(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_ADD_HTTP_HEADERS
+// DOC:
 XPPRET XPPENTRY _HDICT_ADD_HTTP_HEADERS(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICT_FROM_ZKDW
+// DOC:
 XPPRET XPPENTRY _HDICT_FROM_ZKDW(XppParamList );
-// -------------
+
+
+
+// SRC: UNKNOWN:THDICTEX
+// DOC:
 XPPRET XPPENTRY THDICTEX(XppParamList );
 
-// -------------
+
+
+// SRC: ot4xb_cryptography.cpp:OT4XB_HASH
+// DOC:
 XPPRET XPPENTRY OT4XB_HASH(XppParamList );
+
+
+
+// SRC: ot4xb_cng.cpp:OT4XB_CNG
+// DOC:
 XPPRET XPPENTRY OT4XB_CNG(XppParamList );
 
+
+
+// SRC: ot4xb_argon2.cpp:ARGON2_HASH
+// DOC:
 XPPRET XPPENTRY ARGON2_HASH(XppParamList );
+
+
+
+// SRC: ot4xb_argon2.cpp:ARGON2_VERIFY
+// DOC:
 XPPRET XPPENTRY ARGON2_VERIFY(XppParamList );
 
-// ------------- case sensitive hash table
+
+
+// SRC: THDict.cpp:_HDICTCS_COUNT
+// DOC:
 XPPRET XPPENTRY _HDICTCS_COUNT(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_DESTROY
+// DOC:
 XPPRET XPPENTRY _HDICTCS_DESTROY(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_GETPROP
+// DOC:
 XPPRET XPPENTRY _HDICTCS_GETPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_ISPROP
+// DOC:
 XPPRET XPPENTRY _HDICTCS_ISPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_KEY_COMPARE
+// DOC:
 XPPRET XPPENTRY _HDICTCS_KEY_COMPARE(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_NEW
+// DOC:
 XPPRET XPPENTRY _HDICTCS_NEW(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_REMOVEALL
+// DOC:
 XPPRET XPPENTRY _HDICTCS_REMOVEALL(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_REMOVEPROP
+// DOC:
 XPPRET XPPENTRY _HDICTCS_REMOVEPROP(XppParamList );
+
+
+
+// SRC: THDict.cpp:_HDICTCS_SETPROP
+// DOC:
 XPPRET XPPENTRY _HDICTCS_SETPROP(XppParamList );
 
-// ---------------------------------------------------------------------------
-// OT4XB_EXPANDO.CPP
-// ---------------------------------------------------------------------------
+
+
+// SRC: ot4xb_expando.cpp:OT4XB_ITERATE_ARRAY_CB
+// DOC:
 XPPRET XPPENTRY OT4XB_ITERATE_ARRAY_CB(XppParamList );
+
+
+
+// SRC: ot4xb_expando.cpp:_OT4XB_EXPANDO_
+// DOC:
 XPPRET XPPENTRY _OT4XB_EXPANDO_(XppParamList );
 
-// ---------------------------------------------------------------------------
-// MD5.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: ot4xb_md5.cpp:STR2MD5HEX
+// DOC:
 XPPRET XPPENTRY STR2MD5HEX(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:STR2MD5BIN
+// DOC:
 XPPRET XPPENTRY STR2MD5BIN(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:HFILE2MD5HEX
+// DOC:
 XPPRET XPPENTRY HFILE2MD5HEX(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:HFILE2MD5BIN
+// DOC:
 XPPRET XPPENTRY HFILE2MD5BIN(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:FILE2MD5HEX
+// DOC:
 XPPRET XPPENTRY FILE2MD5HEX(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:FILE2MD5BIN
+// DOC:
 XPPRET XPPENTRY FILE2MD5BIN(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_NEW
+// DOC:
 XPPRET XPPENTRY _MD5_NEW(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_STR
+// DOC:
 XPPRET XPPENTRY _MD5_STR(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_HFILE
+// DOC:
 XPPRET XPPENTRY _MD5_HFILE(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_FINALIZE
+// DOC:
 XPPRET XPPENTRY _MD5_FINALIZE(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_GETHEX
+// DOC:
 XPPRET XPPENTRY _MD5_GETHEX(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_GETBIN
+// DOC:
 XPPRET XPPENTRY _MD5_GETBIN(XppParamList );
+
+
+
+// SRC: ot4xb_md5.cpp:_MD5_DESTROY
+// DOC:
 XPPRET XPPENTRY _MD5_DESTROY(XppParamList );
 
-// ---------------------------------------------------------------------------
-// gdipus_helper.cpp
-// ---------------------------------------------------------------------------
 
+
+// SRC: UNKNOWN:GDIPLUS_HELPER
+// DOC:
 XPPRET XPPENTRY GDIPLUS_HELPER(XppParamList );
 
-// ---------------------------------------------------------------------------
-// array2dbf.cpp
-// ---------------------------------------------------------------------------
 
+
+// SRC: array2dbf.cpp:_A2DBF_
+// DOC:
 XPPRET XPPENTRY _A2DBF_(XppParamList );
 
-// ---------------------------------------------------------------------------
-// ot4xb_IUnknow.cpp
-// ---------------------------------------------------------------------------
+
+
+// SRC: UNKNOWN:OT4XB_IUNKNOW
+// DOC:
 XPPRET XPPENTRY OT4XB_IUNKNOW(XppParamList );
+
+
+
+// SRC: UNKNOWN:OT4XB_IDISPATCH
+// DOC:
 XPPRET XPPENTRY OT4XB_IDISPATCH(XppParamList );
+
+
+
+// SRC: UNKNOWN:OT4XB_ISEQUENTIALSTREAM
+// DOC:
 XPPRET XPPENTRY OT4XB_ISEQUENTIALSTREAM(XppParamList );
+
+
+
+// SRC: UNKNOWN:OT4XB_ISTREAM
+// DOC:
 XPPRET XPPENTRY OT4XB_ISTREAM(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// ot4xb_ndtg.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_ndtg.cpp:NDTG_CREATE_TYPEDEF_TABLE
+// DOC:
 XPPRET XPPENTRY NDTG_CREATE_TYPEDEF_TABLE(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_DESTROY_TYPEDEF_TABLE
+// DOC:
 XPPRET XPPENTRY NDTG_DESTROY_TYPEDEF_TABLE(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_ADD_TYPE
+// DOC:
 XPPRET XPPENTRY NDTG_ADD_TYPE(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_SET_ATTRIB_CB
+// DOC:
 XPPRET XPPENTRY NDTG_SET_ATTRIB_CB(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_GET_TYPE
+// DOC:
 XPPRET XPPENTRY NDTG_GET_TYPE(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_ADD_PROP
+// DOC:
 XPPRET XPPENTRY NDTG_ADD_PROP(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_BEGIN
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_BEGIN(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_STEP
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_STEP(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_SEAL
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_SEAL(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_UNSEALED
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_UNSEALED(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_PUTVAL
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_PUTVAL(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_ATTRIB
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_ATTRIB(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_ATTRIB_SEAL
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_ATTRIB_SEAL(XppParamList );
+
+
+
+// SRC: ot4xb_ndtg.cpp:NDTG_STACK_END
+// DOC:
 XPPRET XPPENTRY NDTG_STACK_END(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// ot4xb_iocp.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_iocp.cpp:OT4XB_IOCP
+// DOC:
 XPPRET XPPENTRY OT4XB_IOCP(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// ot4xb_dirty_dlgedit.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_dirty_dlgedit.cpp:OT4XB_DIRTY_DLGEDIT
+// DOC:
 XPPRET XPPENTRY OT4XB_DIRTY_DLGEDIT(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// ot4xb_disphelper.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_disphelper.cpp:_DH_CREATEOBJECT
+// DOC:
 XPPRET XPPENTRY _DH_CREATEOBJECT(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_GETOBJECT
+// DOC:
 XPPRET XPPENTRY _DH_GETOBJECT(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_CREATEOBJECTEX
+// DOC:
 XPPRET XPPENTRY _DH_CREATEOBJECTEX(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_GETOBJECTEX
+// DOC:
 XPPRET XPPENTRY _DH_GETOBJECTEX(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_CALLMETHOD
+// DOC:
 XPPRET XPPENTRY _DH_CALLMETHOD(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_PUTVALUE
+// DOC:
 XPPRET XPPENTRY _DH_PUTVALUE(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_PUTREF
+// DOC:
 XPPRET XPPENTRY _DH_PUTREF(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_GETVALUE
+// DOC:
 XPPRET XPPENTRY _DH_GETVALUE(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_INVOKE
+// DOC:
 XPPRET XPPENTRY _DH_INVOKE(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_INVOKEARRAY
+// DOC:
 XPPRET XPPENTRY _DH_INVOKEARRAY(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_CALLMETHODV
+// DOC:
 XPPRET XPPENTRY _DH_CALLMETHODV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_PUTVALUEV
+// DOC:
 XPPRET XPPENTRY _DH_PUTVALUEV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_PUTREFV
+// DOC:
 XPPRET XPPENTRY _DH_PUTREFV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_GETVALUEV
+// DOC:
 XPPRET XPPENTRY _DH_GETVALUEV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_INVOKEV
+// DOC:
 XPPRET XPPENTRY _DH_INVOKEV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_ENUMBEGIN
+// DOC:
 XPPRET XPPENTRY _DH_ENUMBEGIN(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_ENUMBEGINV
+// DOC:
 XPPRET XPPENTRY _DH_ENUMBEGINV(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_ENUMNEXTOBJECT
+// DOC:
 XPPRET XPPENTRY _DH_ENUMNEXTOBJECT(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_ENUMNEXTVARIANT
+// DOC:
 XPPRET XPPENTRY _DH_ENUMNEXTVARIANT(XppParamList );
+
+
+
+// SRC: ot4xb_disphelper.cpp:_DH_TOGGLEEXCEPTIONS
+// DOC:
 XPPRET XPPENTRY _DH_TOGGLEEXCEPTIONS(XppParamList );
 
 
-// ---------------------------------------------------------------------------
-// ot4xb_regexp.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_regexp.cpp:_RGX
+// DOC:
 XPPRET XPPENTRY _RGX(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_NEW
+// DOC:
 XPPRET XPPENTRY _RGX_NEW(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_SET_PATTERN
+// DOC:
 XPPRET XPPENTRY _RGX_SET_PATTERN(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_SET_FLAGS
+// DOC:
 XPPRET XPPENTRY _RGX_SET_FLAGS(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_DESTROY
+// DOC:
 XPPRET XPPENTRY _RGX_DESTROY(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_EXEC
+// DOC:
 XPPRET XPPENTRY _RGX_EXEC(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_TEST
+// DOC:
 XPPRET XPPENTRY _RGX_TEST(XppParamList );
+
+
+
+// SRC: ot4xb_regexp.cpp:_RGX_REPLACE
+// DOC:
 XPPRET XPPENTRY _RGX_REPLACE(XppParamList );
 
-// _XPP_REG_FUN_( _STRING_MAP_TABLE         )
-// _XPP_REG_FUN_( _STRING_MAP_TABLE_NEW     )
-// _XPP_REG_FUN_( _STRING_MAP_TABLE_DESTROY )
-// _XPP_REG_FUN_( _STRING_MAP_TABLE_EXEC    )
 
-// ---------------------------------------------------------------------------
-// ot4xb_sqlstr.cpp
-// ---------------------------------------------------------------------------
+
+// SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY
+// DOC:
 XPPRET XPPENTRY __SQLSTR_MONEY(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY_SUM
+// DOC:
 XPPRET XPPENTRY __SQLSTR_MONEY_SUM(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY_SUBSTRACT
+// DOC:
 XPPRET XPPENTRY __SQLSTR_MONEY_SUBSTRACT(XppParamList );
-// ------
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_SQL_ESCAPE_STRING_ANSI
+// DOC:
 XPPRET XPPENTRY OT4XB_SQL_ESCAPE_STRING_ANSI(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_SQL_DUMP_VALUE_ANSI
+// DOC:
 XPPRET XPPENTRY OT4XB_SQL_DUMP_VALUE_ANSI(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_FLAG_ENUM
+// DOC:
 XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_FLAG_ENUM(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_ENUM
+// DOC:
 XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_ENUM(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_LEN
+// DOC:
 XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_LEN(XppParamList );
+
+
+
+// SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_DEC
+// DOC:
 XPPRET XPPENTRY OT4XB_GET_SQL_TYPE_DEC(XppParamList );
 
 
 
-
-// ---------------------------------------------------------------------------
-// TPeFile.cpp
-// ---------------------------------------------------------------------------
-// ---------- _XPP_REG_FUN_( TPEFILE )
-
-// ---------------------------------------------------------------------------
-// common windows structures
-// ---------------------------------------------------------------------------
+// SRC: winapi_CommonStructures.cpp
+// DOC:
 XPPRET XPPENTRY WAPIST__PRINTER_NOTIFY_INFO_DATA___DATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp
+// DOC:
 XPPRET XPPENTRY WAPIST__PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ABC
+// DOC:
 XPPRET XPPENTRY WAPIST_ABC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ABCFLOAT
+// DOC:
 XPPRET XPPENTRY WAPIST_ABCFLOAT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ACCEL
+// DOC:
 XPPRET XPPENTRY WAPIST_ACCEL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ADDJOB_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_ADDJOB_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ALTTABINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_ALTTABINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BIDIOPTIONS
+// DOC:
 XPPRET XPPENTRY WAPIST_BIDIOPTIONS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BITMAP
+// DOC:
 XPPRET XPPENTRY WAPIST_BITMAP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BITMAPINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_BITMAPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BITMAPINFOHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_BITMAPINFOHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BLENDFUNCTION
+// DOC:
 XPPRET XPPENTRY WAPIST_BLENDFUNCTION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CHARFORMAT
+// DOC:
 XPPRET XPPENTRY WAPIST_CHARFORMAT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CHARFORMAT2
+// DOC:
 XPPRET XPPENTRY WAPIST_CHARFORMAT2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CHARRANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_CHARRANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CLSID
+// DOC:
 XPPRET XPPENTRY WAPIST_CLSID(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COMPCOLOR
+// DOC:
 XPPRET XPPENTRY WAPIST_COMPCOLOR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CURSORINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_CURSORINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DATATYPES_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_DATATYPES_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DEVMODE
+// DOC:
 XPPRET XPPENTRY WAPIST_DEVMODE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DIBSECTION
+// DOC:
 XPPRET XPPENTRY WAPIST_DIBSECTION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DLGITEMTEMPLATE
+// DOC:
 XPPRET XPPENTRY WAPIST_DLGITEMTEMPLATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DLGTEMPLATE
+// DOC:
 XPPRET XPPENTRY WAPIST_DLGTEMPLATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_DOC_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_DOC_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_3
+// DOC:
 XPPRET XPPENTRY WAPIST_DOC_INFO_3(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DOCINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_DOCINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRAWPATRECT
+// DOC:
 XPPRET XPPENTRY WAPIST_DRAWPATRECT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRAWTEXTPARAMS
+// DOC:
 XPPRET XPPENTRY WAPIST_DRAWTEXTPARAMS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_3
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_3(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_4
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_4(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_5
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_5(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_6
+// DOC:
 XPPRET XPPENTRY WAPIST_DRIVER_INFO_6(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_EDITSTREAM
+// DOC:
 XPPRET XPPENTRY WAPIST_EDITSTREAM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENCORRECTTEXT
+// DOC:
 XPPRET XPPENTRY WAPIST_ENCORRECTTEXT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENDROPFILES
+// DOC:
 XPPRET XPPENTRY WAPIST_ENDROPFILES(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENLINK
+// DOC:
 XPPRET XPPENTRY WAPIST_ENLINK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENLOWFIRTF
+// DOC:
 XPPRET XPPENTRY WAPIST_ENLOWFIRTF(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENOLEOPFAILED
+// DOC:
 XPPRET XPPENTRY WAPIST_ENOLEOPFAILED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENPROTECTED
+// DOC:
 XPPRET XPPENTRY WAPIST_ENPROTECTED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENSAVECLIPBOARD
+// DOC:
 XPPRET XPPENTRY WAPIST_ENSAVECLIPBOARD(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENUMLOGFONT
+// DOC:
 XPPRET XPPENTRY WAPIST_ENUMLOGFONT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ENUMLOGFONTEX
+// DOC:
 XPPRET XPPENTRY WAPIST_ENUMLOGFONTEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_EXTLOGFONT
+// DOC:
 XPPRET XPPENTRY WAPIST_EXTLOGFONT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_EXTLOGPEN
+// DOC:
 XPPRET XPPENTRY WAPIST_EXTLOGPEN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FINDTEXT
+// DOC:
 XPPRET XPPENTRY WAPIST_FINDTEXT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FINDTEXTEX
+// DOC:
 XPPRET XPPENTRY WAPIST_FINDTEXTEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FIXED
+// DOC:
 XPPRET XPPENTRY WAPIST_FIXED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FLASHWINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_FLASHWINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FONTSIGNATURE
+// DOC:
 XPPRET XPPENTRY WAPIST_FONTSIGNATURE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FORM_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_FORM_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FORMATRANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_FORMATRANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GCP_RESULTS
+// DOC:
 XPPRET XPPENTRY WAPIST_GCP_RESULTS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GETTEXTEX
+// DOC:
 XPPRET XPPENTRY WAPIST_GETTEXTEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GETTEXTLENGTHEX
+// DOC:
 XPPRET XPPENTRY WAPIST_GETTEXTLENGTHEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GLYPHMETRICS
+// DOC:
 XPPRET XPPENTRY WAPIST_GLYPHMETRICS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GLYPHSET
+// DOC:
 XPPRET XPPENTRY WAPIST_GLYPHSET(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GUID
+// DOC:
 XPPRET XPPENTRY WAPIST_GUID(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_GUITHREADINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_GUITHREADINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HARDWAREINPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_HARDWAREINPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HYPHENATEINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_HYPHENATEINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HYPHRESULT
+// DOC:
 XPPRET XPPENTRY WAPIST_HYPHRESULT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ICONINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_ICONINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ICONMETRICS
+// DOC:
 XPPRET XPPENTRY WAPIST_ICONMETRICS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IMAGEINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_IMAGEINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IMAGELISTDRAWPARAMS
+// DOC:
 XPPRET XPPENTRY WAPIST_IMAGELISTDRAWPARAMS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IMECOMPTEXT
+// DOC:
 XPPRET XPPENTRY WAPIST_IMECOMPTEXT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_INPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_JOB_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_JOB_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_3
+// DOC:
 XPPRET XPPENTRY WAPIST_JOB_INFO_3(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_KERNINGPAIR
+// DOC:
 XPPRET XPPENTRY WAPIST_KERNINGPAIR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_KEYBDINPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_KEYBDINPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LASTINPUTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_LASTINPUTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LOGBRUSH
+// DOC:
 XPPRET XPPENTRY WAPIST_LOGBRUSH(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LOGBRUSH32
+// DOC:
 XPPRET XPPENTRY WAPIST_LOGBRUSH32(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LOGFONT
+// DOC:
 XPPRET XPPENTRY WAPIST_LOGFONT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LOGPALETTE
+// DOC:
 XPPRET XPPENTRY WAPIST_LOGPALETTE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LOGPEN
+// DOC:
 XPPRET XPPENTRY WAPIST_LOGPEN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MAT2
+// DOC:
 XPPRET XPPENTRY WAPIST_MAT2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MDICREATESTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_MDICREATESTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MDINEXTMENU
+// DOC:
 XPPRET XPPENTRY WAPIST_MDINEXTMENU(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUBARINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUBARINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUEX_TEMPLATE_HEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUEX_TEMPLATE_HEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUEX_TEMPLATE_ITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUEX_TEMPLATE_ITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUGETOBJECTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUGETOBJECTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUITEMINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMTEMPLATE
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUITEMTEMPLATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMTEMPLATEHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_MENUITEMTEMPLATEHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_METAFILEPICT
+// DOC:
 XPPRET XPPENTRY WAPIST_METAFILEPICT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MINMAXINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MINMAXINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MONITOR_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_MONITOR_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MONITOR_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_MONITOR_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MONITORINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MONITORINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MONITORINFOEX
+// DOC:
 XPPRET XPPENTRY WAPIST_MONITORINFOEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MOUSEINPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_MOUSEINPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MSG
+// DOC:
 XPPRET XPPENTRY WAPIST_MSG(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MSGBOXPARAMS
+// DOC:
 XPPRET XPPENTRY WAPIST_MSGBOXPARAMS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MSGFILTER
+// DOC:
 XPPRET XPPENTRY WAPIST_MSGFILTER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NEWTEXTMETRIC
+// DOC:
 XPPRET XPPENTRY WAPIST_NEWTEXTMETRIC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NEWTEXTMETRICEX
+// DOC:
 XPPRET XPPENTRY WAPIST_NEWTEXTMETRICEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMHDR
+// DOC:
 XPPRET XPPENTRY WAPIST_NMHDR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMRBAUTOSIZE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMRBAUTOSIZE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMREBAR
+// DOC:
 XPPRET XPPENTRY WAPIST_NMREBAR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARAUTOBREAK
+// DOC:
 XPPRET XPPENTRY WAPIST_NMREBARAUTOBREAK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARCHEVRON
+// DOC:
 XPPRET XPPENTRY WAPIST_NMREBARCHEVRON(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARCHILDSIZE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMREBARCHILDSIZE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OBJECTPOSITIONS
+// DOC:
 XPPRET XPPENTRY WAPIST_OBJECTPOSITIONS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OUTLINETEXTMETRIC
+// DOC:
 XPPRET XPPENTRY WAPIST_OUTLINETEXTMETRIC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PAINTSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_PAINTSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PALETTEENTRY
+// DOC:
 XPPRET XPPENTRY WAPIST_PALETTEENTRY(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PANOSE
+// DOC:
 XPPRET XPPENTRY WAPIST_PANOSE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PARAFORMAT
+// DOC:
 XPPRET XPPENTRY WAPIST_PARAFORMAT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PARAFORMAT2
+// DOC:
 XPPRET XPPENTRY WAPIST_PARAFORMAT2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_POINT
+// DOC:
 XPPRET XPPENTRY WAPIST_POINT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_POINTFX
+// DOC:
 XPPRET XPPENTRY WAPIST_POINTFX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_POINTL
+// DOC:
 XPPRET XPPENTRY WAPIST_POINTL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_POINTS
+// DOC:
 XPPRET XPPENTRY WAPIST_POINTS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_POLYTEXT
+// DOC:
 XPPRET XPPENTRY WAPIST_POLYTEXT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_PORT_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_PORT_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_3
+// DOC:
 XPPRET XPPENTRY WAPIST_PORT_INFO_3(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_DEFAULTS
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_DEFAULTS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_ENUM_VALUES
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_ENUM_VALUES(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_3
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_3(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_4
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_4(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_5
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_5(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_6
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_6(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_7
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_7(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_8
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_8(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_9
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_INFO_9(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_NOTIFY_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_INFO_DATA
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_NOTIFY_INFO_DATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_OPTIONS
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_NOTIFY_OPTIONS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTPROCESSOR_CAPS_1
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTPROCESSOR_CAPS_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PRINTPROCESSOR_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_PRINTPROCESSOR_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PROVIDOR_INFO_1
+// DOC:
 XPPRET XPPENTRY WAPIST_PROVIDOR_INFO_1(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PROVIDOR_INFO_2
+// DOC:
 XPPRET XPPENTRY WAPIST_PROVIDOR_INFO_2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PSFEATURE_CUSTPAPER
+// DOC:
 XPPRET XPPENTRY WAPIST_PSFEATURE_CUSTPAPER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PSFEATURE_OUTPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_PSFEATURE_OUTPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PSINJECTDATA
+// DOC:
 XPPRET XPPENTRY WAPIST_PSINJECTDATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PUNCTUATION
+// DOC:
 XPPRET XPPENTRY WAPIST_PUNCTUATION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RASTERIZER_STATUS
+// DOC:
 XPPRET XPPENTRY WAPIST_RASTERIZER_STATUS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RBHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_RBHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_REBARBANDINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_REBARBANDINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_REBARINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_REBARINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RECT
+// DOC:
 XPPRET XPPENTRY WAPIST_RECT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RECTL
+// DOC:
 XPPRET XPPENTRY WAPIST_RECTL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_REOBJECT
+// DOC:
 XPPRET XPPENTRY WAPIST_REOBJECT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_REPASTESPECIAL
+// DOC:
 XPPRET XPPENTRY WAPIST_REPASTESPECIAL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_REQRESIZE
+// DOC:
 XPPRET XPPENTRY WAPIST_REQRESIZE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RGBQUAD
+// DOC:
 XPPRET XPPENTRY WAPIST_RGBQUAD(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RGNDATA
+// DOC:
 XPPRET XPPENTRY WAPIST_RGNDATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RGNDATAHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_RGNDATAHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SELCHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_SELCHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SETTEXTEX
+// DOC:
 XPPRET XPPENTRY WAPIST_SETTEXTEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SIZE
+// DOC:
 XPPRET XPPENTRY WAPIST_SIZE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SIZEL
+// DOC:
 XPPRET XPPENTRY WAPIST_SIZEL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SYSTEMTIME
+// DOC:
 XPPRET XPPENTRY WAPIST_SYSTEMTIME(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBBUTTON
+// DOC:
 XPPRET XPPENTRY WAPIST_TBBUTTON(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TEXTMETRIC
+// DOC:
 XPPRET XPPENTRY WAPIST_TEXTMETRIC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TEXTRANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_TEXTRANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TITLEBARINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TITLEBARINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TPMPARAMS
+// DOC:
 XPPRET XPPENTRY WAPIST_TPMPARAMS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TRIVERTEX
+// DOC:
 XPPRET XPPENTRY WAPIST_TRIVERTEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TTPOLYCURVE
+// DOC:
 XPPRET XPPENTRY WAPIST_TTPOLYCURVE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TTPOLYGONHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_TTPOLYGONHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WCRANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_WCRANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_WINDOWINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWPLACEMENT
+// DOC:
 XPPRET XPPENTRY WAPIST_WINDOWPLACEMENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WNDCLASS
+// DOC:
 XPPRET XPPENTRY WAPIST_WNDCLASS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WNDCLASSEX
+// DOC:
 XPPRET XPPENTRY WAPIST_WNDCLASSEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_XFORM
+// DOC:
 XPPRET XPPENTRY WAPIST_XFORM(XppParamList );
-// ---
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IN_ADDR
+// DOC:
 XPPRET XPPENTRY WAPIST_IN_ADDR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKADDR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKET_ADDRESS
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKET_ADDRESS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKET_ADDRESS_LIST
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKET_ADDRESS_LIST(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_CSADDR_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_CSADDR_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR_STORAGE
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKADDR_STORAGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SCOPE_ID
+// DOC:
 XPPRET XPPENTRY WAPIST_SCOPE_ID(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR_IN
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKADDR_IN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSABUF
+// DOC:
 XPPRET XPPENTRY WAPIST_WSABUF(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAMSG
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAMSG(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACMSGHDR
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACMSGHDR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FD_SET
+// DOC:
 XPPRET XPPENTRY WAPIST_FD_SET(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TIMEVAL
+// DOC:
 XPPRET XPPENTRY WAPIST_TIMEVAL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HOSTENT
+// DOC:
 XPPRET XPPENTRY WAPIST_HOSTENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NETENT
+// DOC:
 XPPRET XPPENTRY WAPIST_NETENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SERVENT
+// DOC:
 XPPRET XPPENTRY WAPIST_SERVENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PROTOENT
+// DOC:
 XPPRET XPPENTRY WAPIST_PROTOENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSADATA
+// DOC:
 XPPRET XPPENTRY WAPIST_WSADATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SOCKPROTO
+// DOC:
 XPPRET XPPENTRY WAPIST_SOCKPROTO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LINGER
+// DOC:
 XPPRET XPPENTRY WAPIST_LINGER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_FLOWSPEC
+// DOC:
 XPPRET XPPENTRY WAPIST_FLOWSPEC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_QOS_OBJECT_HDR
+// DOC:
 XPPRET XPPENTRY WAPIST_QOS_OBJECT_HDR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_QOS_SD_MODE
+// DOC:
 XPPRET XPPENTRY WAPIST_QOS_SD_MODE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_QOS_SHAPING_RATE
+// DOC:
 XPPRET XPPENTRY WAPIST_QOS_SHAPING_RATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_QOS
+// DOC:
 XPPRET XPPENTRY WAPIST_QOS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSANETWORKEVENTS
+// DOC:
 XPPRET XPPENTRY WAPIST_WSANETWORKEVENTS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAPROTOCOLCHAIN
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAPROTOCOLCHAIN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAPROTOCOL_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAPROTOCOL_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION_NS_WINDOWMESSAGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_EVENT
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION_NS_EVENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_APC
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION_NS_APC(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_PORT
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION_NS_PORT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_PARAMETERS
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION_NS_PARAMETERS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION
+// DOC:
 XPPRET XPPENTRY WAPIST_WSACOMPLETION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BLOB
+// DOC:
 XPPRET XPPENTRY WAPIST_BLOB(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_AFPROTOCOLS
+// DOC:
 XPPRET XPPENTRY WAPIST_AFPROTOCOLS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAVERSION
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAVERSION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAQUERYSET
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAQUERYSET(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAQUERYSET2
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAQUERYSET2(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSANSCLASSINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_WSANSCLASSINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSASERVICECLASSINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_WSASERVICECLASSINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSANAMESPACE_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_WSANAMESPACE_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSANAMESPACE_INFOEX
+// DOC:
 XPPRET XPPENTRY WAPIST_WSANAMESPACE_INFOEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WSAPOLLFD
+// DOC:
 XPPRET XPPENTRY WAPIST_WSAPOLLFD(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_ADDRINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_ADDRINFO(XppParamList );
 
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OPENFILENAME
+// DOC:
 XPPRET XPPENTRY WAPIST_OPENFILENAME(XppParamList );
-// --------------------------------------
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWHID
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWHID(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUT_DATA_UNION
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWINPUT_DATA_UNION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUT
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWINPUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTDEVICE
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWINPUTDEVICE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTDEVICELIST
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWINPUTDEVICELIST(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWINPUTHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWKEYBOARD
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWKEYBOARD(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RAWMOUSE
+// DOC:
 XPPRET XPPENTRY WAPIST_RAWMOUSE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_RID_DEVICE_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_HID
+// DOC:
 XPPRET XPPENTRY WAPIST_RID_DEVICE_INFO_HID(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_KEYBOARD
+// DOC:
 XPPRET XPPENTRY WAPIST_RID_DEVICE_INFO_KEYBOARD(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_MOUSE
+// DOC:
 XPPRET XPPENTRY WAPIST_RID_DEVICE_INFO_MOUSE(XppParamList );
-// --------------------------------------
 
 
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IP_ADDR_STRING
+// DOC:
 XPPRET XPPENTRY WAPIST_IP_ADDR_STRING(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IP_ADAPTER_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_IP_ADAPTER_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_IP_PER_ADAPTER_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_IP_PER_ADAPTER_INFO(XppParamList );
 
-// --------------------------------------
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OVERLAPPED
+// DOC:
 XPPRET XPPENTRY WAPIST_OVERLAPPED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SYSTEM_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_SYSTEM_INFO(XppParamList );
-// --------------------------------------
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OSVERSIONINFOEX
+// DOC:
 XPPRET XPPENTRY WAPIST_OSVERSIONINFOEX(XppParamList );
-// --------------------------------------
 
 
 
-// --------------------------------------
-// TOOLHELP STRUCTURES
-// --------------------------------------
+// SRC: winapi_CommonStructures.cpp:WAPIST_MODULEENTRY32
+// DOC:
 XPPRET XPPENTRY WAPIST_MODULEENTRY32(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PROCESSENTRY32
+// DOC:
 XPPRET XPPENTRY WAPIST_PROCESSENTRY32(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_THREADENTRY32
+// DOC:
 XPPRET XPPENTRY WAPIST_THREADENTRY32(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HEAPENTRY32
+// DOC:
 XPPRET XPPENTRY WAPIST_HEAPENTRY32(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HEAPLIST32
+// DOC:
 XPPRET XPPENTRY WAPIST_HEAPLIST32(XppParamList );
 
-// ----------------------------------------
-// common controls - listview support
-// ----------------------------------------
-XPPRET XPPENTRY WAPIST_LVBKIMAGE(XppParamList );
-XPPRET XPPENTRY WAPIST_LVCOLUMN(XppParamList );
-XPPRET XPPENTRY WAPIST_LVFINDINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_LVFOOTERINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_LVFOOTERITEM(XppParamList );
-XPPRET XPPENTRY WAPIST_LVGROUP(XppParamList );
-XPPRET XPPENTRY WAPIST_LVGROUPMETRICS(XppParamList );
-XPPRET XPPENTRY WAPIST_LVHITTESTINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_LVINSERTGROUPSORTED(XppParamList );
-XPPRET XPPENTRY WAPIST_LVINSERTMARK(XppParamList );
-XPPRET XPPENTRY WAPIST_LVITEM(XppParamList );
-XPPRET XPPENTRY WAPIST_LVITEMINDEX(XppParamList );
-XPPRET XPPENTRY WAPIST_LVSETINFOTIP(XppParamList );
-XPPRET XPPENTRY WAPIST_LVTILEINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_LVTILEVIEWINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_NMITEMACTIVATE(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLISTVIEW(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVCACHEHINT(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVCUSTOMDRAW(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVDISPINFO(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVEMPTYMARKUP(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVFINDITEM(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVGETINFOTIP(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVKEYDOWN(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVLINK(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVODSTATECHANGE(XppParamList );
-XPPRET XPPENTRY WAPIST_NMLVSCROLL(XppParamList );
-XPPRET XPPENTRY WAPIST_LITEM(XppParamList );
-XPPRET XPPENTRY WAPIST_NMCUSTOMDRAW(XppParamList );
-// ----------------------------------------
 
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVBKIMAGE
+// DOC:
+XPPRET XPPENTRY WAPIST_LVBKIMAGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVCOLUMN
+// DOC:
+XPPRET XPPENTRY WAPIST_LVCOLUMN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVFINDINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_LVFINDINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVFOOTERINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_LVFOOTERINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVFOOTERITEM
+// DOC:
+XPPRET XPPENTRY WAPIST_LVFOOTERITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVGROUP
+// DOC:
+XPPRET XPPENTRY WAPIST_LVGROUP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVGROUPMETRICS
+// DOC:
+XPPRET XPPENTRY WAPIST_LVGROUPMETRICS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVHITTESTINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_LVHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVINSERTGROUPSORTED
+// DOC:
+XPPRET XPPENTRY WAPIST_LVINSERTGROUPSORTED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVINSERTMARK
+// DOC:
+XPPRET XPPENTRY WAPIST_LVINSERTMARK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVITEM
+// DOC:
+XPPRET XPPENTRY WAPIST_LVITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVITEMINDEX
+// DOC:
+XPPRET XPPENTRY WAPIST_LVITEMINDEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVSETINFOTIP
+// DOC:
+XPPRET XPPENTRY WAPIST_LVSETINFOTIP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVTILEINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_LVTILEINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LVTILEVIEWINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_LVTILEVIEWINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMITEMACTIVATE
+// DOC:
+XPPRET XPPENTRY WAPIST_NMITEMACTIVATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLISTVIEW
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLISTVIEW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVCACHEHINT
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVCACHEHINT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVCUSTOMDRAW
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVCUSTOMDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVDISPINFO
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVDISPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVEMPTYMARKUP
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVEMPTYMARKUP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVFINDITEM
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVFINDITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVGETINFOTIP
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVGETINFOTIP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVKEYDOWN
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVKEYDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVLINK
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVLINK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVODSTATECHANGE
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVODSTATECHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLVSCROLL
+// DOC:
+XPPRET XPPENTRY WAPIST_NMLVSCROLL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LITEM
+// DOC:
+XPPRET XPPENTRY WAPIST_LITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMDRAW
+// DOC:
+XPPRET XPPENTRY WAPIST_NMCUSTOMDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWPOS
+// DOC:
 XPPRET XPPENTRY WAPIST_WINDOWPOS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COLORSCHEME
+// DOC:
 XPPRET XPPENTRY WAPIST_COLORSCHEME(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DPASTREAMINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_DPASTREAMINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCHAR
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCHAR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMSPLITRECTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCUSTOMSPLITRECTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMTEXT
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCUSTOMTEXT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMKEY
+// DOC:
 XPPRET XPPENTRY WAPIST_NMKEY(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMMOUSE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMMOUSE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMOBJECTNOTIFY
+// DOC:
 XPPRET XPPENTRY WAPIST_NMOBJECTNOTIFY(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTOOLTIPSCREATED
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTOOLTIPSCREATED(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_READERMODEINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_READERMODEINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BUTTON_IMAGELIST
+// DOC:
 XPPRET XPPENTRY WAPIST_BUTTON_IMAGELIST(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_BUTTON_SPLITINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_BUTTON_SPLITINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMBCDROPDOWN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMBCDROPDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMBCHOTITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_NMBCHOTITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COMBOBOXINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_COMBOBOXINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COMPAREITEMSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_COMPAREITEMSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRAWITEMSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_DRAWITEMSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MEASUREITEMSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_MEASUREITEMSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COMBOBOXEXITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_COMBOBOXEXITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCBEDRAGBEGIN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCBEDRAGBEGIN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCBEENDEDIT
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCBEENDEDIT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMCOMBOBOXEX
+// DOC:
 XPPRET XPPENTRY WAPIST_NMCOMBOBOXEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DATETIMEPICKERINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_DATETIMEPICKERINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMECHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDATETIMECHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEFORMAT
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDATETIMEFORMAT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEFORMATQUERY
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDATETIMEFORMATQUERY(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMESTRING
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDATETIMESTRING(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEWMKEYDOWN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDATETIMEWMKEYDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DRAGLISTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_DRAGLISTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_EDITBALLOONTIP
+// DOC:
 XPPRET XPPENTRY WAPIST_EDITBALLOONTIP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HDHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_HDHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HDITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_HDITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HDLAYOUT
+// DOC:
 XPPRET XPPENTRY WAPIST_HDLAYOUT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HDTEXTFILTER
+// DOC:
 XPPRET XPPENTRY WAPIST_HDTEXTFILTER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMHDDISPINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_NMHDDISPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMHDFILTERBTNCLICK
+// DOC:
 XPPRET XPPENTRY WAPIST_NMHDFILTERBTNCLICK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_NMHEADER(XppParamList );
 
 
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMIPADDRESS
+// DOC:
 XPPRET XPPENTRY WAPIST_NMIPADDRESS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_DELETEITEMSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_DELETEITEMSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MCGRIDINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MCGRIDINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MCHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_MCHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMDAYSTATE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMDAYSTATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMSELCHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMSELCHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMVIEWCHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMVIEWCHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMPGCALCSIZE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMPGCALCSIZE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMPGHOTITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_NMPGHOTITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMPGSCROLL
+// DOC:
 XPPRET XPPENTRY WAPIST_NMPGSCROLL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PBRANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_PBRANGE(XppParamList );
 
 
 
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARSPLITTER
+// DOC:
 XPPRET XPPENTRY WAPIST_NMREBARSPLITTER(XppParamList );
 
 
 
+// SRC: winapi_CommonStructures.cpp:WAPIST_SCROLLBARINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_SCROLLBARINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SCROLLINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_SCROLLINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_LHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_LHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMLINK
+// DOC:
 XPPRET XPPENTRY WAPIST_NMLINK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTCKEYDOWN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTCKEYDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TCHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TCHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TCITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_TCITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TCITEMHEADER
+// DOC:
 XPPRET XPPENTRY WAPIST_TCITEMHEADER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COLORMAP
+// DOC:
 XPPRET XPPENTRY WAPIST_COLORMAP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBCUSTOMDRAW
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBCUSTOMDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBDISPINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBDISPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBGETINFOTIP
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBGETINFOTIP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBHOTITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBHOTITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBRESTORE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBRESTORE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTBSAVE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTBSAVE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTOOLBAR
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTOOLBAR(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBADDBITMAP
+// DOC:
 XPPRET XPPENTRY WAPIST_TBADDBITMAP(XppParamList );
 
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBBUTTONINFOA
+// DOC:
 XPPRET XPPENTRY WAPIST_TBBUTTONINFOA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBINSERTMARK
+// DOC:
 XPPRET XPPENTRY WAPIST_TBINSERTMARK(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBMETRICS
+// DOC:
 XPPRET XPPENTRY WAPIST_TBMETRICS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBREPLACEBITMAP
+// DOC:
 XPPRET XPPENTRY WAPIST_TBREPLACEBITMAP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TBSAVEPARAMS
+// DOC:
 XPPRET XPPENTRY WAPIST_TBSAVEPARAMS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTTCUSTOMDRAW
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTTCUSTOMDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTTDISPINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTTDISPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TOOLINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TOOLINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TTGETTITLE
+// DOC:
 XPPRET XPPENTRY WAPIST_TTGETTITLE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TTHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TTHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTREEVIEW
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTREEVIEW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVASYNCDRAW
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVASYNCDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVCUSTOMDRAW
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVCUSTOMDRAW(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVDISPINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVDISPINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVDISPINFOEX
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVDISPINFOEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVGETINFOTIP
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVGETINFOTIP(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVITEMCHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVITEMCHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVKEYDOWN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVKEYDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMTVSTATEIMAGECHANGING
+// DOC:
 XPPRET XPPENTRY WAPIST_NMTVSTATEIMAGECHANGING(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVGETITEMPARTRECTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TVGETITEMPARTRECTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVHITTESTINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_TVHITTESTINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVINSERTSTRUCT
+// DOC:
 XPPRET XPPENTRY WAPIST_TVINSERTSTRUCT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVITEM
+// DOC:
 XPPRET XPPENTRY WAPIST_TVITEM(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVITEMEX
+// DOC:
 XPPRET XPPENTRY WAPIST_TVITEMEX(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TVSORTCB
+// DOC:
 XPPRET XPPENTRY WAPIST_TVSORTCB(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMUPDOWN
+// DOC:
 XPPRET XPPENTRY WAPIST_NMUPDOWN(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_UDACCEL
+// DOC:
 XPPRET XPPENTRY WAPIST_UDACCEL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_URL_COMPONENTS
+// DOC:
 XPPRET XPPENTRY WAPIST_URL_COMPONENTS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_ASYNC_RESULT
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_ASYNC_RESULT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_DIAGNOSTIC_SOCKET_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PROXY_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_PROXY_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PER_CONN_OPTION
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_PER_CONN_OPTION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PER_CONN_OPTION_LIST
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_PER_CONN_OPTION_LIST(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_VERSION_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_VERSION_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_HTTP_VERSION_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_HTTP_VERSION_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CONNECTED_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_CONNECTED_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CERTIFICATE_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_CERTIFICATE_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_BUFFERS
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_BUFFERS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INCOMINGCOOKIESTATE
+// DOC:
 XPPRET XPPENTRY WAPIST_INCOMINGCOOKIESTATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_OUTGOINGCOOKIESTATE
+// DOC:
 XPPRET XPPENTRY WAPIST_OUTGOINGCOOKIESTATE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNETCOOKIEHISTORY
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNETCOOKIEHISTORY(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_COOKIEDECISION
+// DOC:
 XPPRET XPPENTRY WAPIST_COOKIEDECISION(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_AUTH_NOTIFY_DATA
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_AUTH_NOTIFY_DATA(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_ENTRY_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_CACHE_ENTRY_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_TIMESTAMPS
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_CACHE_TIMESTAMPS(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_GROUP_INFO
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_CACHE_GROUP_INFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_AUTO_PROXY_SCRIPT_BUFFER
+// DOC:
 XPPRET XPPENTRY WAPIST_AUTO_PROXY_SCRIPT_BUFFER(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp
+// DOC:
 XPPRET XPPENTRY WAPIST_INTERNET_PER_CONN_OPTION___VALUE(XppParamList );
 
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_TRACKMOUSEEVENT
+// DOC:
 XPPRET XPPENTRY WAPIST_TRACKMOUSEEVENT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_MOUSEMOVEPOINT
+// DOC:
 XPPRET XPPENTRY WAPIST_MOUSEMOVEPOINT(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_PREVENT_MEDIA_REMOVAL
+// DOC:
 XPPRET XPPENTRY WAPIST_PREVENT_MEDIA_REMOVAL(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SHFILEINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_SHFILEINFO(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_NMSELCHANGE
+// DOC:
 XPPRET XPPENTRY WAPIST_NMSELCHANGE(XppParamList );
+
+
+
+// SRC: winapi_CommonStructures.cpp:WAPIST_SHELLEXECUTEINFO
+// DOC:
 XPPRET XPPENTRY WAPIST_SHELLEXECUTEINFO(XppParamList );
 
+// CAPI: Container.cpp:_conGetFloat
+// DOC:
+// _CDECL_EXPORT_( _conGetFloat )
 
+// CAPI: Container.cpp:_conPutFloat
+// DOC:
+// _CDECL_EXPORT_( _conPutFloat )
 
+// CAPI: Container.cpp:_conGetQWord
+// DOC:
+// _CDECL_EXPORT_( _conGetQWord )
 
-//-----------------------------------------------------------------------------
-//////////  UNKNOW LINE #1176>>>-----------------------------------------<<<
-// -------------------------  C EXPORTED FUNCTIONS
-//////////  UNKNOW LINE #1178>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-//////////  UNKNOW LINE #1179>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-//////////  UNKNOW LINE #1180>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-//////////  UNKNOW LINE #1181>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+// CAPI: Container.cpp:_conPutQWord
+// DOC:
+// _CDECL_EXPORT_( _conPutQWord )
 // ---------------------------------------------------------------------------
 #ifdef __cplusplus
 }

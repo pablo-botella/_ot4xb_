@@ -9,6 +9,117 @@
 #include <stdlib.h>
 #include <stdio.h>
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>NDTG node trigger stack</name>
+      <source>ot4xb_ndtg.cpp</source>
+      <category>xml/node-trigger</category>
+      <description>
+         Low-level helpers for building Xbase++ values from a stream of nested node events. The API keeps an
+         internal stack, receives node depth/name/value/attributes, and returns the completed Xbase++ value when
+         the stack is ended.
+      </description>
+      <status>Advanced/internal-style API.</status>
+      <remarks>
+         NDTG has two modes. The typed mode starts with a type-definition table created by
+         ndtg_create_typedef_table(), where type and property names describe how node values are converted and
+         where child values are stored. Calling ndtg_stack_begin() without parameters creates the generic xstack
+         mode used for OT4XB serialized Xbase++ values.
+
+         A typical event flow is: create a stack, call ndtg_stack_step() for each node start with its depth and
+         name, call ndtg_stack_attrib() for each attribute, optionally call ndtg_stack_attrib_seal(), call
+         ndtg_stack_putval() with the node text while ndtg_stack_unsealed() is .T., call ndtg_stack_seal() when
+         the current node must ignore later text, and finally call ndtg_stack_end() to obtain the result and
+         destroy the stack handle.
+
+         Handles returned by this family are numeric pointers. A type-definition table created by the caller must
+         be released with ndtg_destroy_typedef_table(). A stack handle is released by ndtg_stack_end().
+      </remarks>
+      <functions>
+         <function>
+            <name>ndtg_create_typedef_table</name>
+            <syntax>ndtg_create_typedef_table( @pTable [, cPropertyPrefix] ) -> pTable</syntax>
+            <description>Creates a type-definition table. cPropertyPrefix is prepended when object members are assigned in typed mode.</description>
+         </function>
+         <function>
+            <name>ndtg_destroy_typedef_table</name>
+            <syntax>ndtg_destroy_typedef_table( @pTable ) -> NIL</syntax>
+            <description>Destroys a type-definition table and stores 0 in @pTable.</description>
+         </function>
+         <function>
+            <name>ndtg_add_type</name>
+            <syntax>ndtg_add_type( pTable, cTypeName, uItem, nAttrib ) -> pType</syntax>
+            <description>Adds or updates a named type. uItem can hold the class object, object factory, codeblock or other cargo used by the type.</description>
+         </function>
+         <function>
+            <name>ndtg_get_type</name>
+            <syntax>ndtg_get_type( pTable, cTypeName ) -> pType</syntax>
+            <description>Returns the type pointer for a name, or 0 when not found.</description>
+         </function>
+         <function>
+            <name>ndtg_add_prop</name>
+            <syntax>ndtg_add_prop( pType, cPropName, cTypeName, uItem, nAttrib ) -> pProp</syntax>
+            <description>Adds or updates a property definition under a type. The property's value is interpreted as cTypeName.</description>
+         </function>
+         <function>
+            <name>ndtg_set_attrib_cb</name>
+            <syntax>ndtg_set_attrib_cb( pType, bAttrib ) -> NIL</syntax>
+            <description>
+               Installs an attribute callback for a type. The codeblock receives
+               Eval( bAttrib, xItem, cKey, cValue, nKeyCrc32 ).
+            </description>
+         </function>
+         <function>
+            <name>ndtg_stack_begin</name>
+            <syntax>ndtg_stack_begin( pTable, cResultType, nResultFlags ) -> pStack</syntax>
+            <description>Creates a typed stack whose final result is described by cResultType.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_begin</name>
+            <syntax>ndtg_stack_begin() -> pStack</syntax>
+            <description>Creates a generic xstack used to rebuild serialized Xbase++ values.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_step</name>
+            <syntax>ndtg_stack_step( pStack, nDepth, cNodeName ) -> NIL</syntax>
+            <description>Starts a new node at nDepth and closes any open stack items at the same or deeper depth.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_attrib</name>
+            <syntax>ndtg_stack_attrib( pStack, cName, cValue ) -> NIL</syntax>
+            <description>Adds an attribute to the current node.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_attrib_seal</name>
+            <syntax>ndtg_stack_attrib_seal( pStack ) -> NIL</syntax>
+            <description>In generic xstack mode, converts the current node from its attributes and seals it.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_unsealed</name>
+            <syntax>ndtg_stack_unsealed( pStack ) -> lCanReceiveValue</syntax>
+            <description>Returns .T. when the current stack item can still receive text with ndtg_stack_putval().</description>
+         </function>
+         <function>
+            <name>ndtg_stack_putval</name>
+            <syntax>ndtg_stack_putval( pStack, cValue ) -> NIL</syntax>
+            <description>Stores the text value for the current node, applying the current type conversion when applicable.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_seal</name>
+            <syntax>ndtg_stack_seal( pStack ) -> NIL</syntax>
+            <description>Seals the current node so later text is ignored.</description>
+         </function>
+         <function>
+            <name>ndtg_stack_end</name>
+            <syntax>ndtg_stack_end( @pStack ) -> xResult</syntax>
+            <description>Closes the remaining stack items, returns the resulting Xbase++ value and stores 0 in @pStack.</description>
+         </function>
+      </functions>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
+// -----------------------------------------------------------------------------------------------------------------
 using namespace ndtg_ns;
 // -----------------------------------------------------------------------------------------------------------------
 attrib_t::attrib_t(LPSTR pKey, LPSTR pVal)

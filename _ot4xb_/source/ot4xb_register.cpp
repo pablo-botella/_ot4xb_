@@ -6,7 +6,7 @@
 #include <ot4xb_api.h>
 // ---------------------------------------------------------------------------------------------------------------------------
 
-// Declaración del puntero a la función SystemFunction036
+// Declaraci?n del puntero a la funci?n SystemFunction036
 typedef BOOL( WINAPI* SystemFunction036_t )( BYTE* data, DWORD dataSize );
 SystemFunction036_t SystemFunction036 = nullptr;
 // ---------------------------------------------------------------------------------------------------------------------------
@@ -123,6 +123,84 @@ static HKEY ot4xb_get_open_hkey_name( LPSTR key_name, BOOL bCreate )
 }
 // ---------------------------------------------------------------------------------------------------------------------------
 // ot4xb_set_registry_value_as_string( LPSTR key, LPSTR valueName, LPSTR value, size_t value_cb, LPSTR encoding, LPSTR key_type )
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_set_registry_value_as_string</name>
+      <category>registry</category>
+      <description>
+         Writes a registry value from a string or binary buffer, optionally applying a
+         conversion encoding before storing it.
+      </description>
+      <syntax>ot4xb_set_registry_value_as_string( cKey, cValueName, cValue [, nValueBytes] [, cEncoding] [, cKeyType] ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>cKey</name>
+            <type>Character</type>
+            <description>
+               Registry key name. It must begin with one of these root prefixes:
+               HKLM\, HKCC\, HKCR\, HKCU\ or HKU\. Missing subkeys are created.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cValueName</name>
+            <type>Character</type>
+            <description>Name of the value to write.</description>
+         </parameter>
+         <parameter>
+            <name>cValue</name>
+            <type>Character</type>
+            <description>Value text or binary buffer, depending on cEncoding and cKeyType.</description>
+         </parameter>
+         <parameter>
+            <name>nValueBytes</name>
+            <type>Numeric</type>
+            <description>
+               Optional byte count used by binary conversions and random modes. When omitted,
+               string length is used where applicable. Random modes default to 16 bytes.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cEncoding</name>
+            <type>Character</type>
+            <description>
+               Optional conversion mode. Supported write modes are NIL/default, "hex2bin",
+               "bin2hex", "b642bin", "bin2b64", "random_binary", "random_base64" and
+               "random_hex".
+            </description>
+         </parameter>
+         <parameter>
+            <name>cKeyType</name>
+            <type>Character</type>
+            <description>
+               Registry value type. Supported names are "SZ", "EXPAND_SZ", "BINARY",
+               "DWORD", "DWORD_LITTLE_ENDIAN", "DWORD_BIG_ENDIAN", "LINK", "MULTI_SZ",
+               "RESOURCE_LIST", "FULL_RESOURCE_DESCRIPTOR", "RESOURCE_REQUIREMENTS_LIST",
+               "QWORD" and "QWORD_LITTLE_ENDIAN".
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. when the registry value is written successfully; otherwise .F.</description>
+      </return>
+      <remarks>
+         NIL/default writes REG_DWORD, REG_DWORD_BIG_ENDIAN and REG_QWORD from the numeric
+         text in cValue using C conversion with base autodetection. Other key types are
+         written from the supplied bytes, including the terminating zero.
+      </remarks>
+      <remarks>
+         "hex2bin" decodes hexadecimal text before writing, "bin2hex" stores hexadecimal
+         text generated from the supplied bytes, "b642bin" decodes base64 text, and
+         "bin2b64" stores base64 text generated from the supplied bytes.
+      </remarks>
+      <remarks>
+         "random_binary" writes random bytes as REG_BINARY. "random_base64" and
+         "random_hex" generate random bytes and store their encoded text as REG_SZ.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_SET_REGISTRY_VALUE_AS_STRING )
 {
    TXppParamList xpp( pl, 6 );
@@ -137,6 +215,61 @@ _XPP_REG_FUN_( OT4XB_SET_REGISTRY_VALUE_AS_STRING )
 }
 // ---------------------------------------------------------------------------------------------------------------------------
 // ot4xb_get_registry_value_as_string( LPSTR key, LPSTR valueName, DWORD* value_cb, LPSTR encoding )
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_get_registry_value_as_string</name>
+      <category>registry</category>
+      <description>
+         Reads a registry value and returns it as a character string, optionally applying
+         a conversion encoding.
+      </description>
+      <syntax>ot4xb_get_registry_value_as_string( cKey, cValueName [, cEncoding] ) -> cValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cKey</name>
+            <type>Character</type>
+            <description>
+               Registry key name. It must begin with one of these root prefixes:
+               HKLM\, HKCC\, HKCR\, HKCU\ or HKU\. The key must already exist; this
+               function does not create missing subkeys.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cValueName</name>
+            <type>Character</type>
+            <description>Name of the value to read.</description>
+         </parameter>
+         <parameter>
+            <name>cEncoding</name>
+            <type>Character</type>
+            <description>
+               Optional conversion mode. Supported read modes are NIL/default, "decimal",
+               "hex", "hex2bin", "bin2hex", "b642bin" and "bin2b64". "random_*"
+               modes are write-only and are not accepted here.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>
+            Returned value after the requested conversion. When the key, value or encoding
+            cannot be resolved, an empty string is returned by the Xbase++ wrapper.
+         </description>
+      </return>
+      <remarks>
+         NIL/default and "decimal" return REG_DWORD and REG_QWORD values formatted as
+         decimal text; other registry types are copied as their stored bytes. "hex"
+         formats REG_DWORD and REG_QWORD values as 0x-prefixed hexadecimal text.
+      </remarks>
+      <remarks>
+         "hex2bin" decodes stored hexadecimal text to binary, "bin2hex" encodes stored
+         bytes as hexadecimal text, "b642bin" decodes stored base64 text to binary, and
+         "bin2b64" encodes stored bytes as base64 text.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_GET_REGISTRY_VALUE_AS_STRING )
 {
    TXppParamList xpp( pl, 3 );

@@ -13,6 +13,37 @@
                               px->SetErrorDescription( d ); \
                               px->SetErrorGenCode(n);
 // -----------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>OT4XB_IOCP</name>
+      <category>winapi/io</category>
+      <description>
+         Experimental legacy wrapper over Windows I/O completion ports. It creates an IOCP handle, associates
+         file/socket handles with completion keys, posts packets and retrieves queued completions.
+      </description>
+      <syntax>OT4XB_IOCP():new( [nThreads := 1] ) -> oIocp</syntax>
+      <properties>
+         <property name="nLastError" type="numeric" access="class read/write">Thread-local LastError captured by the most recent IOCP wrapper call.</property>
+      </properties>
+      <methods>
+         <method name="release" syntax="::release() -> lOk">Closes the IOCP handle.</method>
+         <method name="add_handle" syntax="::add_handle( hFile, nKey ) -> lOk">Associates hFile with the IOCP using nKey as completion key.</method>
+         <method name="post" syntax="::post( nBytes, nKey, pOverlapped ) -> lOk">Posts a completion packet manually.</method>
+         <method name="get" syntax="::get( @nBytes, @nKey, @pOverlapped, [nTimeout := 0] ) -> lOk">Waits for a queued completion and writes the completion data back by reference.</method>
+      </methods>
+      <remarks>
+         Deprecated pending review. This helper was never fully validated in production use, so treat it as
+         experimental and prefer a reviewed IOCP layer for new code.
+         The class is available only when the needed kernel32 IOCP entry points are present. Handles and OVERLAPPED
+         pointers are numeric Win32 values; callers are responsible for the lifetime of associated handles and
+         overlapped structures.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 BEGIN_NAMESPACE( ot4xb_iocp_ns )
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------

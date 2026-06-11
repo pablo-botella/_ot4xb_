@@ -77,6 +77,61 @@ static BYTE __TEMPLATE_09_AZ_NOCASE__[ ] = { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
                                  0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF,
                                  0xE0, 0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB, 0xEC, 0xED, 0xEE, 0xEF, 0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF };
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nCRC32</name>
+      <category>string</category>
+      <description>
+         Calculates a CRC32 value for a character buffer, optionally processing only a byte range.
+      </description>
+      <syntax>nCRC32( nCRC32, cBuffer [, nLen] [, @nStart] ) -> nCRC32 | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>nCRC32</name>
+            <type>Numeric</type>
+            <description>
+               Initial CRC32 value. Use 0 for the first block, or the previous return value when calculating a CRC32
+               in several chunks. The parameter is also updated with the returned CRC32 value when possible.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cBuffer</name>
+            <type>Character</type>
+            <description>Buffer whose bytes are used for the CRC calculation.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>
+               Optional number of bytes to process. If omitted, bytes are processed from nStart to the end of cBuffer.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nStart</name>
+            <type>Numeric by reference</type>
+            <description>
+               Optional zero-based byte offset where processing starts. On success it is updated to the byte offset
+               immediately after the processed block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the CRC32 value. Returns NIL if cBuffer cannot be locked as a character buffer or if nStart/nLen
+            selects a range outside cBuffer.
+         </description>
+      </return>
+      <remarks>
+         nCRC32() always returns the value using the internal 32-bit integer representation. Since Xbase++ does not
+         expose an internal unsigned 32-bit integer format for this value, CRC32 values with the high bit set may be
+         displayed as negative numbers. The bit pattern is preserved. To view the value as a positive number, format
+         it as text with cPrintf-style formatting or pass it through unsigned32(), which returns a double when the
+         unsigned 32-bit value cannot be represented as a signed LONG.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NCRC32( XppParamList pl ) // nCRC32(nCRC32,cBuffer,[nLen],[[@]nStart]) -> nCRC32 | OnError -> NIL
 {
    DWCHARUNION dwu;
@@ -133,6 +188,54 @@ XPPRET XPPENTRY NCRC32( XppParamList pl ) // nCRC32(nCRC32,cBuffer,[nLen],[[@]nS
 }
 //----------------------------------------------------------------------------------------------------------------------
 OT4XB_API DWORD __cdecl dwCrc8( DWORD dwCrc, char* data, int length );
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nCRC8</name>
+      <category>string</category>
+      <description>
+         Calculates a CRC8 value for a character buffer, optionally processing only a byte range.
+      </description>
+      <syntax>nCRC8( nCRC8, cBuffer [, nLen] [, @nStart] ) -> nCRC8 | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>nCRC8</name>
+            <type>Numeric</type>
+            <description>
+               Initial CRC8 value. Use 0 for the first block, or the previous return value when calculating a CRC8 in
+               several chunks. The parameter is also updated with the returned CRC8 value when possible.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cBuffer</name>
+            <type>Character</type>
+            <description>Buffer whose bytes are used for the CRC calculation.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>
+               Optional number of bytes to process. If omitted, bytes are processed from nStart to the end of cBuffer.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nStart</name>
+            <type>Numeric by reference</type>
+            <description>
+               Optional zero-based byte offset where processing starts. On success it is updated to the byte offset
+               immediately after the processed block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the CRC8 value as a positive numeric value in the 0..255 range. Returns NIL if cBuffer cannot be
+            locked as a character buffer or if nStart/nLen selects a range outside cBuffer.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NCRC8( XppParamList pl ) // nCRC8(nCRC8,cBuffer,[nLen],[[@]nStart]) -> nCRC8 | OnError -> NIL
 {
    DWCHARUNION dwu;
@@ -195,6 +298,48 @@ XPPRET XPPENTRY NCRC8( XppParamList pl ) // nCRC8(nCRC8,cBuffer,[nLen],[[@]nStar
 
 
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ChrR</name>
+      <category>string</category>
+      <description>
+         Builds a character string from numeric character codes, optionally repeating the whole sequence.
+      </description>
+      <syntax>ChrR( nChar1 [, ... nCharN, nRepeat] ) -> cString</syntax>
+      <parameters>
+         <parameter>
+            <name>nChar1...nCharN</name>
+            <type>Numeric</type>
+            <description>
+               Character codes to place in the generated string. Each value is converted to one byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nRepeat</name>
+            <type>Numeric</type>
+            <description>
+               Repeat count. When more than one parameter is supplied, the last parameter is interpreted as the repeat
+               count and all previous parameters form the character sequence to repeat.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the generated character string. With one parameter, ChrR(nChar) behaves like Chr(nChar). With no
+            parameters, returns an empty string.
+         </description>
+      </return>
+      <remarks>
+         ChrR( 0, nSize ) is a convenient way to create a zero-filled buffer with nSize bytes.
+      </remarks>
+      <example><![CDATA[
+? ChrR( 13, 10, 2 )   // CRLF + CRLF
+? ChrR( 0, 1024 )     // 1024 zero bytes
+]]></example>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CHRR( XppParamList pl ) // ChrR(ch,...,n) // Ex: ? Chrr(13,10,2) //-> CRLF + CRLF
 {
    ULONG nParams = (ULONG) _partype( pl, 0 );
@@ -224,6 +369,42 @@ XPPRET XPPENTRY CHRR( XppParamList pl ) // ChrR(ch,...,n) // Ex: ? Chrr(13,10,2)
 
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>MkScStr</name>
+      <category>string</category>
+      <description>
+         Makes an old Clipper-style screen string. Console screen captures used one byte for the character code,
+         followed by one byte for the color attribute; this helper repeats one character code with a sequence of color
+         bytes.
+      </description>
+      <syntax>MkScStr( nChar, cColorBytes ) -> cScreenString</syntax>
+      <parameters>
+         <parameter>
+            <name>nChar</name>
+            <type>Numeric</type>
+            <description>Character code placed in the low byte of each generated screen cell.</description>
+         </parameter>
+         <parameter>
+            <name>cColorBytes</name>
+            <type>Character</type>
+            <description>Color attribute bytes placed in the high byte of each generated screen cell.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns a binary string twice as long as cColorBytes. For each color byte, the function appends the
+            character byte first and the color byte after it. Returns an empty string when cColorBytes is empty or not
+            supplied.
+         </description>
+      </return>
+      <remarks>
+         This is a legacy helper for old console/screen-buffer style strings.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 // for the old clipper console color strings 
 XPPRET XPPENTRY MKSCSTR( XppParamList pl ) // MkScStr(nCh,cStr)
 {
@@ -247,6 +428,51 @@ XPPRET XPPENTRY MKSCSTR( XppParamList pl ) // MkScStr(nCh,cStr)
    _conRelease( conr );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lStrBitSet</name>
+      <category>string/bit</category>
+      <description>
+         Tests and optionally changes one bit inside a character string.
+      </description>
+      <syntax>lStrBitSet( @cStr, nBit [, lNewSetting] ) -> lWasSet | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character by reference</type>
+            <description>String whose bytes contain the bit to test or change.</description>
+         </parameter>
+         <parameter>
+            <name>nBit</name>
+            <type>Numeric</type>
+            <description>
+               One-based bit position. Bit 1 is the low bit of the first byte, bit 8 is the high bit of the first byte,
+               and bit 9 is the low bit of the second byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lNewSetting</name>
+            <type>Logical</type>
+            <description>
+               Optional new value for the bit. When omitted, the function only tests the bit. When supplied, the string
+               is write-locked and the bit is set or cleared.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns .T. if the bit was set before any optional change, or .F. if it was clear or the requested bit is
+            outside the string. Returns NIL when nBit is not greater than zero or the string cannot be locked.
+         </description>
+      </return>
+      <remarks>
+         This is useful for using a character string as a compact bitset, packing many boolean flags into a small
+         buffer.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LSTRBITSET( XppParamList pl ) //lStrBitSet(1@cStr,2nBit[,3lNewSetting])
 {
    ULONG nBit = (ULONG) _parLong( pl, 2 );
@@ -302,6 +528,62 @@ XPPRET XPPENTRY LSTRBITSET( XppParamList pl ) //lStrBitSet(1@cStr,2nBit[,3lNewSe
    else _ret( pl );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lPStrBitSet</name>
+      <category>string/bit</category>
+      <description>
+         Tests and optionally changes one bit inside a memory buffer addressed by a pointer.
+      </description>
+      <syntax>lPStrBitSet( pStr, nBit [, lNewSetting] [, nLen] ) -> lWasSet | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>pStr</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the memory buffer whose bytes contain the bit to test or change.</description>
+         </parameter>
+         <parameter>
+            <name>nBit</name>
+            <type>Numeric</type>
+            <description>
+               One-based bit position. Bit 1 is the low bit of the first byte, bit 8 is the high bit of the first byte,
+               and bit 9 is the low bit of the second byte.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lNewSetting</name>
+            <type>Logical</type>
+            <description>
+               Optional new value for the bit. When omitted or not logical, the function only tests the bit. When
+               supplied as logical, the bit is set or cleared in the pointed memory.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>
+               Length of the memory buffer in bytes. It should be supplied when using this function because the first
+               parameter is only a raw pointer. When omitted, the code uses 0xFFFFFFFF as the limit; this does not
+               mean the pointed buffer has that length.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns .T. if the bit was set before any optional change, or .F. if it was clear. Returns NIL when nBit is
+            not greater than zero, pStr is zero, or nBit falls outside nLen.
+         </description>
+      </return>
+      <remarks>
+         This is the pointer-based variant of lStrBitSet(), kept for code that works directly with memory pointers.
+         Since the pointer does not carry the binary buffer length, use nLen to keep the bit access bounded.
+         Omitting nLen is unsafe: if nBit points outside the real memory buffer, the function may read or write out of
+         bounds and crash the process.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LPSTRBITSET( XppParamList pl ) //lPStrBitSet(1LPSTR,2nBit,[3lNewSetting],[4nLen])
 {
    ULONG nBit = (ULONG) _parLong( pl, 2 );
@@ -333,6 +615,31 @@ XPPRET XPPENTRY LPSTRBITSET( XppParamList pl ) //lPStrBitSet(1LPSTR,2nBit,[3lNew
    else _ret( pl );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cStrBitNot</name>
+      <category>string/bit</category>
+      <description>
+         Inverts all bits in a character string.
+      </description>
+      <syntax>cStrBitNot( @cStr ) -> cStr | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character by reference</type>
+            <description>String whose bytes are modified in place.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the modified string. Each byte is XORed with 0xFF, so every bit is flipped. Returns NIL if cStr is
+            not a character value or cannot be write-locked.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSTRBITNOT( XppParamList pl ) //cStrBitNot(1@cStr)
 {
    BOOL bByRef = FALSE;
@@ -365,6 +672,40 @@ XPPRET XPPENTRY CSTRBITNOT( XppParamList pl ) //cStrBitNot(1@cStr)
 
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PStrBitNot</name>
+      <category>string/bit</category>
+      <description>
+         Inverts all bits in a memory buffer addressed by a pointer.
+      </description>
+      <syntax>PStrBitNot( pStr, nLen ) -> pStr</syntax>
+      <parameters>
+         <parameter>
+            <name>pStr</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the memory buffer to modify.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>Number of bytes to modify.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns pStr. When pStr is not zero and nLen is not zero, each byte in the memory range is XORed with
+            0xFF, so every bit is flipped.
+         </description>
+      </return>
+      <remarks>
+         This is the pointer-based variant of cStrBitNot(). The caller must ensure that pStr points to a writable
+         buffer of at least nLen bytes.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PSTRBITNOT( XppParamList pl ) //PStrBitNot(1pStr,2nLen) -> pStr
 {
    LPSTR pStr = (LPSTR) _parLong( pl, 1 );
@@ -378,6 +719,49 @@ XPPRET XPPENTRY PSTRBITNOT( XppParamList pl ) //PStrBitNot(1pStr,2nLen) -> pStr
    _retnl( pl, (LONG) pStr );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cStrBitOR</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise OR between two character strings.
+      </description>
+      <syntax>cStrBitOR( @cStr, cMask [, lRotate] ) -> cStr | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character by reference</type>
+            <description>Target string modified in place.</description>
+         </parameter>
+         <parameter>
+            <name>cMask</name>
+            <type>Character</type>
+            <description>Mask string whose bytes are ORed with cStr.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and cStr is longer than cMask, cMask is reused from the beginning until
+               all bytes in cStr have been processed. If cMask is empty or not shorter than cStr, rotation is ignored.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the modified cStr. Without rotation, only the common byte range of both strings is processed.
+            Returns NIL if either string cannot be obtained or locked.
+         </description>
+      </return>
+      <remarks>
+         This is useful for combining packed bits or binary masks. With lRotate set to .T., a shorter mask is cycled
+         repeatedly over the target string. cStrBitOR() and cStrBitAND() are commonly used in massive filtering
+         functions that combine large packed bit maps.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSTRBITOR( XppParamList pl ) //cStrBitOR(1@cStr,2[@]cStr,3lRotate:=.F.)
 {
    BOOL bOk = FALSE;
@@ -428,6 +812,50 @@ XPPRET XPPENTRY CSTRBITOR( XppParamList pl ) //cStrBitOR(1@cStr,2[@]cStr,3lRotat
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cStrBitXOR</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise XOR between two character strings.
+      </description>
+      <syntax>cStrBitXOR( @cStr, cKey [, lRotate] ) -> cStr | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character by reference</type>
+            <description>Target string modified in place.</description>
+         </parameter>
+         <parameter>
+            <name>cKey</name>
+            <type>Character</type>
+            <description>Key or mask string whose bytes are XORed with cStr.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and cStr is longer than cKey, cKey is reused from the beginning until
+               all bytes in cStr have been processed. If cKey is empty or not shorter than cStr, rotation is ignored.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the modified cStr. Without rotation, only the common byte range of both strings is processed.
+            Returns NIL if either string cannot be obtained or locked.
+         </description>
+      </return>
+      <remarks>
+         XOR is reversible by applying the same key again. With lRotate set to .T., a shorter key can be cycled over
+         the target buffer. This helper is also useful for splitting data into two related buffers, for example a
+         random byte string and the XORed result, so the pieces can be stored separately and recombined later. It is
+         not a complete encryption system by itself.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSTRBITXOR( XppParamList pl ) //cStrBitXOR(1@cStr,2[@]cStr,3lRotate:=.F.)
 {
    BOOL bOk = FALSE;
@@ -478,6 +906,51 @@ XPPRET XPPENTRY CSTRBITXOR( XppParamList pl ) //cStrBitXOR(1@cStr,2[@]cStr,3lRot
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cStrBitAND</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise AND between two character strings.
+      </description>
+      <syntax>cStrBitAND( @cStr, cMask [, lRotate] ) -> cStr | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character by reference</type>
+            <description>Target string modified in place.</description>
+         </parameter>
+         <parameter>
+            <name>cMask</name>
+            <type>Character</type>
+            <description>Mask string whose bytes are ANDed with cStr.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and cStr is longer than cMask, cMask is reused from the beginning until
+               all bytes in cStr have been processed. If cMask is empty or not shorter than cStr, rotation is ignored.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the modified cStr. Without rotation, only the common byte range of both strings is processed.
+            Returns NIL if either string cannot be obtained or locked.
+         </description>
+      </return>
+      <remarks>
+         This is useful for applying large packed bit maps and reducing searches by combining precomputed masks, for
+         example when words or tags are represented by bit positions. With lRotate set to .T., a shorter mask is cycled
+         repeatedly over the target string, although the common use case is to combine buffers with matching layout.
+         cStrBitOR() and cStrBitAND() are commonly used in massive filtering functions that combine large packed bit
+         maps.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSTRBITAND( XppParamList pl ) //cStrBitAND(1@cStr,2[@]cStr,3lRotate:=.F.)
 {
    BOOL bOk = FALSE;
@@ -528,6 +1001,58 @@ XPPRET XPPENTRY CSTRBITAND( XppParamList pl ) //cStrBitAND(1@cStr,2[@]cStr,3lRot
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PStrBitOR</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise OR between two memory buffers addressed by pointers.
+      </description>
+      <syntax>PStrBitOR( pTarget, nTargetLen, pMask, nMaskLen [, lRotate] ) -> pTarget</syntax>
+      <parameters>
+         <parameter>
+            <name>pTarget</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the writable target buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nTargetLen</name>
+            <type>Numeric</type>
+            <description>Length of the target buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>pMask</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the mask buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nMaskLen</name>
+            <type>Numeric</type>
+            <description>Length of the mask buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and the target is longer than the mask, the mask is reused from the
+               beginning until all target bytes have been processed.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns pTarget. If pTarget is zero, returns 0. If either length is zero or pMask is zero, no bytes are
+            modified and pTarget is returned.
+         </description>
+      </return>
+      <remarks>
+         This is the pointer-based variant of cStrBitOR(). The caller must ensure that both pointers address valid
+         buffers of the supplied lengths.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PSTRBITOR( XppParamList pl ) //PStrBitOR(1p1,2nl1, 3 p2 , 4 nl2 , 5 bRotate )
 {
    LPSTR p1 = (LPSTR) _parLong( pl, 1 );
@@ -554,6 +1079,58 @@ XPPRET XPPENTRY PSTRBITOR( XppParamList pl ) //PStrBitOR(1p1,2nl1, 3 p2 , 4 nl2 
    _retnl( pl, (LONG) p1 );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PStrBitXOR</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise XOR between two memory buffers addressed by pointers.
+      </description>
+      <syntax>PStrBitXOR( pTarget, nTargetLen, pKey, nKeyLen [, lRotate] ) -> pTarget</syntax>
+      <parameters>
+         <parameter>
+            <name>pTarget</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the writable target buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nTargetLen</name>
+            <type>Numeric</type>
+            <description>Length of the target buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>pKey</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the key or mask buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nKeyLen</name>
+            <type>Numeric</type>
+            <description>Length of the key or mask buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and the target is longer than the key, the key is reused from the
+               beginning until all target bytes have been processed.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns pTarget. If pTarget is zero, returns 0. If either length is zero or pKey is zero, no bytes are
+            modified and pTarget is returned.
+         </description>
+      </return>
+      <remarks>
+         This is the pointer-based variant of cStrBitXOR(). XOR is reversible by applying the same key again. The
+         caller must ensure that both pointers address valid buffers of the supplied lengths.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PSTRBITXOR( XppParamList pl ) //PStrBitXOR(1p1,2nl1, 3 p2 , 4 nl2 , 5 bRotate )
 {
    LPSTR p1 = (LPSTR) _parLong( pl, 1 );
@@ -593,6 +1170,58 @@ OT4XB_API void _xstr_bit_xor( LPBYTE p1, ULONG cb1, LPBYTE p2, ULONG cb2, BOOL b
    else for( n = 0; n < cb1; n++ ) p1[ n ] ^= p2[ n ];
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PStrBitAND</name>
+      <category>string/bit</category>
+      <description>
+         Applies a byte-by-byte bitwise AND between two memory buffers addressed by pointers.
+      </description>
+      <syntax>PStrBitAND( pTarget, nTargetLen, pMask, nMaskLen [, lRotate] ) -> pTarget</syntax>
+      <parameters>
+         <parameter>
+            <name>pTarget</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the writable target buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nTargetLen</name>
+            <type>Numeric</type>
+            <description>Length of the target buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>pMask</name>
+            <type>Numeric pointer</type>
+            <description>Pointer to the mask buffer.</description>
+         </parameter>
+         <parameter>
+            <name>nMaskLen</name>
+            <type>Numeric</type>
+            <description>Length of the mask buffer in bytes.</description>
+         </parameter>
+         <parameter>
+            <name>lRotate</name>
+            <type>Logical</type>
+            <description>
+               Optional rotation flag. When .T. and the target is longer than the mask, the mask is reused from the
+               beginning until all target bytes have been processed.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns pTarget. If pTarget is zero, returns 0. If either length is zero or pMask is zero, no bytes are
+            modified and pTarget is returned.
+         </description>
+      </return>
+      <remarks>
+         This is the pointer-based variant of cStrBitAND(). The caller must ensure that both pointers address valid
+         buffers of the supplied lengths.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PSTRBITAND( XppParamList pl ) //PStrBitAND(1p1,2nl1, 3 p2 , 4 nl2 , 5 bRotate )
 {
    LPSTR p1 = (LPSTR) _parLong( pl, 1 );
@@ -619,6 +1248,33 @@ XPPRET XPPENTRY PSTRBITAND( XppParamList pl ) //PStrBitAND(1p1,2nl1, 3 p2 , 4 nl
    _retnl( pl, (LONG) p1 );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nStrBitCount</name>
+      <category>string/bit</category>
+      <description>
+         Counts the bits set to 1 in a character string.
+      </description>
+      <syntax>nStrBitCount( cStr ) -> nBits | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character</type>
+            <description>String whose bytes are scanned.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the number of set bits. Returns 0 when cStr is missing. Returns NIL if the string cannot be locked.
+         </description>
+      </return>
+      <remarks>
+         This is useful with strings used as compact bitsets.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NSTRBITCOUNT( XppParamList pl ) //nStrBitCount(1@cStr)
 {
    BOOL bByRef = FALSE;
@@ -650,6 +1306,34 @@ XPPRET XPPENTRY NSTRBITCOUNT( XppParamList pl ) //nStrBitCount(1@cStr)
    _retnl( pl, (LONG) nBits );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>aStrBits</name>
+      <category>string/bit</category>
+      <description>
+         Returns the one-based positions of all bits set to 1 in a character string.
+      </description>
+      <syntax>aStrBits( cStr ) -> aBits | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cStr</name>
+            <type>Character</type>
+            <description>String whose bytes are scanned.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns an array with the one-based bit positions that are set. Bit 1 is the low bit of the first byte.
+            Returns 0 when cStr is missing. Returns NIL if the string cannot be locked.
+         </description>
+      </return>
+      <remarks>
+         This is useful for expanding a compact bitset into a list of enabled flags or item identifiers.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY ASTRBITS( XppParamList pl ) //aStrBits(1@cStr)
 {
    BOOL bByRef = FALSE;
@@ -755,6 +1439,37 @@ OT4XB_API DWORD dwCrc32WithTable( DWORD dwCRC, LPBYTE pStr, ULONG nLen, LPBYTE p
    return( dwCRC ^ 0xFFFFFFFF );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>NoComment</name>
+      <category>string</category>
+      <description>
+         Removes C/C++ style comments from a character string.
+      </description>
+      <syntax>NoComment( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to process.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns cText with // line comments removed up to the next CR or LF, and /* block comments */ removed
+            completely. The line break that terminates a // comment is preserved. Returns an empty string when cText
+            is not supplied as a character value.
+         </description>
+      </return>
+      <remarks>
+         This is a simple lexical remover. Quotes are not interpreted, so comment markers inside quoted text are still
+         treated as comments. This is a legacy helper intended for ordinary cases; nested comments and some chained or
+         ambiguous comment patterns are not parsed as a full language lexer would do.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NOCOMMENT( XppParamList pl ) // NoComment(<cString>) ->cString
 {
    BOOL bByRef = FALSE;
@@ -819,6 +1534,31 @@ OT4XB_API BYTE chHex2Nibble( BYTE chHex )
    return( 0 );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cBin2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts a binary string to an uppercase hexadecimal string.
+      </description>
+      <syntax>cBin2Hex( cBinary ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>cBinary</name>
+            <type>Character</type>
+            <description>Binary string to encode.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns two hexadecimal characters for each byte in cBinary. Returns an empty string when cBinary is not
+            supplied.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CBIN2HEX( XppParamList pl )
 {
    BOOL bByRef = FALSE;
@@ -859,6 +1599,40 @@ OT4XB_API LONG ot4xb_CHEX2BIN_defmode_( LONG n )
 // nExtended == 0 -> !nibbleChar == Chr(0)  && odd nibbles << 4
 // nExtended == 1 -> !nibbleChar skiped
 // nExtended == 2 -> !nibbleChar skiped &&  byte separator
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cHex2Bin</name>
+      <category>string/hex</category>
+      <description>
+         Converts a hexadecimal string to binary bytes.
+      </description>
+      <syntax>cHex2Bin( cHex [, nMode] ) -> cBinary</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text to decode.</description>
+         </parameter>
+         <parameter>
+            <name>nMode</name>
+            <type>Numeric</type>
+            <description>
+               Optional decoding mode.
+               0 - non-hex characters are decoded as zero nibbles; odd nibbles are shifted into the high half-byte.
+               1 - non-hex characters are skipped.
+               2 - non-hex characters are skipped and can act as byte separators.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the decoded binary string. If nMode is omitted, the current default cHex2Bin mode is used.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CHEX2BIN( XppParamList pl )
 {
    ULONG nEx = (ULONG) ( ( _partype( pl, 2 ) & XPP_NUMERIC ) ? _parLong( pl, 2, 0 ) : _cHex2Bin_Ex_Mode_ );
@@ -909,6 +1683,42 @@ XPPRET XPPENTRY CHEX2BIN( XppParamList pl )
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>Tokenize</name>
+      <category>string</category>
+      <description>
+         Splits a character string using a literal separator string.
+      </description>
+      <syntax>Tokenize( cText [, cSeparator] ) -> aTokens</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to split.</description>
+         </parameter>
+         <parameter>
+            <name>cSeparator</name>
+            <type>Character</type>
+            <description>Literal separator to search for. If omitted or empty, ';' is used.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns an array with the tokens found before each separator and the final non-empty token. Empty tokens
+            between consecutive separators are preserved. A final empty token is not returned when cText ends exactly
+            with the separator; append one extra separator if that trailing empty item must be represented.
+         </description>
+      </return>
+      <remarks>
+         The separator is matched as a single literal string, not as a character set. Multi-byte separators are
+         accepted, but only one separator string can be supplied. Quotes are not interpreted; separators inside quoted
+         text are still treated as separators.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 // TODO: add 3rd param with options about what to do when last token is empty and how to interpret quotes
 XPPRET XPPENTRY TOKENIZE( XppParamList pl )
 {
@@ -956,6 +1766,31 @@ XPPRET XPPENTRY TOKENIZE( XppParamList pl )
    _conRelease( conr );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>TrimQuotes</name>
+      <category>string</category>
+      <description>
+         Removes spaces and double quote characters from both ends of a string.
+      </description>
+      <syntax>TrimQuotes( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to trim.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns cText without leading or trailing spaces and double quotes. Returns an empty string when cText is
+            not supplied.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY TRIMQUOTES( XppParamList pl )
 {
    LPSTR pStr = _pszParam( pl, 1 );
@@ -976,6 +1811,31 @@ XPPRET XPPENTRY TRIMQUOTES( XppParamList pl )
    else _retc( pl, "" );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>TrimZ</name>
+      <category>string</category>
+      <description>
+         Returns the zero-terminated portion of a character string.
+      </description>
+      <syntax>TrimZ( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text that may contain a zero byte.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the bytes from the start of cText up to the first zero byte, as a C-style zero-terminated string.
+            Returns an empty string when cText is not supplied.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY TRIMZ( XppParamList pl )
 {
    ContainerHandle conr = _conNew( NULLCONTAINER );
@@ -995,6 +1855,35 @@ XPPRET XPPENTRY TRIMZ( XppParamList pl )
    _conRelease( conr );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>C5AllTrim</name>
+      <category>string</category>
+      <description>
+         Removes leading and trailing zero bytes and spaces from a character string.
+      </description>
+      <syntax>C5AllTrim( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to trim.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns cText with leading and trailing bytes 0x00 and 0x20 removed. Returns an empty string when cText is
+            not supplied or all bytes are trimmed.
+         </description>
+      </return>
+      <remarks>
+         Compatibility helper for Clipper 5 behavior. Clipper 5 trim functions removed both spaces and null
+         characters, while Alaska Xbase++ trim functions remove spaces only.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY C5ALLTRIM( XppParamList pl )
 {
    ContainerHandle conr = _conNew( NULLCONTAINER );
@@ -1017,6 +1906,35 @@ XPPRET XPPENTRY C5ALLTRIM( XppParamList pl )
    _conRelease( conr );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>C5RTrim</name>
+      <category>string</category>
+      <description>
+         Removes trailing zero bytes and spaces from a character string.
+      </description>
+      <syntax>C5RTrim( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to trim.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns cText with trailing bytes 0x00 and 0x20 removed. Returns an empty string when cText is not supplied
+            or all bytes are trimmed.
+         </description>
+      </return>
+      <remarks>
+         Compatibility helper for Clipper 5 behavior. Clipper 5 trim functions removed both spaces and null
+         characters, while Alaska Xbase++ trim functions remove spaces only.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY C5RTRIM( XppParamList pl )
 {
    ContainerHandle conr = _conNew( NULLCONTAINER );
@@ -1038,6 +1956,35 @@ XPPRET XPPENTRY C5RTRIM( XppParamList pl )
    _conRelease( conr );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>C5LTrim</name>
+      <category>string</category>
+      <description>
+         Removes leading zero bytes and spaces from a character string.
+      </description>
+      <syntax>C5LTrim( cText ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to trim.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns cText with leading bytes 0x00 and 0x20 removed. Returns an empty string when cText is not supplied
+            or all bytes are trimmed.
+         </description>
+      </return>
+      <remarks>
+         Compatibility helper for Clipper 5 behavior. Clipper 5 trim functions removed both spaces and null
+         characters, while Alaska Xbase++ trim functions remove spaces only.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY C5LTRIM( XppParamList pl )
 {
    ContainerHandle conr = _conNew( NULLCONTAINER );
@@ -1059,6 +2006,31 @@ XPPRET XPPENTRY C5LTRIM( XppParamList pl )
    _conRelease( conr );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cQW2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 64-bit value to a 16-character uppercase hexadecimal string.
+      </description>
+      <syntax>cQW2Hex( xValue ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Numeric | Array | Character</type>
+            <description>
+               Value to encode. Numeric values are used directly; arrays are interpreted as { nLowDWord, nHighDWord };
+               character values provide the raw 8 bytes.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns a 16-character hexadecimal string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CQW2HEX( XppParamList  pl )
 {
    ULONG ulType = _partype( pl, 1 );
@@ -1102,6 +2074,28 @@ XPPRET XPPENTRY CQW2HEX( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nHex2QW</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 16-character hexadecimal QWORD representation to its raw 8-byte binary form.
+      </description>
+      <syntax>nHex2QW( cHex ) -> cQWordBytes</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text containing up to 16 hex digits.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns an 8-byte binary string containing the decoded QWORD bytes.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NHEX2QW( XppParamList  pl )
 {
    char ss[ 8 ];
@@ -1130,6 +2124,28 @@ XPPRET XPPENTRY NHEX2QW( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cDouble2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts the binary representation of a double to a 16-character uppercase hexadecimal string.
+      </description>
+      <syntax>cDouble2Hex( nValue ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>nValue</name>
+            <type>Numeric</type>
+            <description>Double value to encode.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns the 8 bytes of the double value encoded as 16 hexadecimal characters.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CDOUBLE2HEX( XppParamList  pl )
 {
    double nd = _parnd( pl, 1, 0 );
@@ -1155,6 +2171,28 @@ XPPRET XPPENTRY CDOUBLE2HEX( XppParamList  pl )
    _retc( pl, (LPSTR) ph );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nHex2Double</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 16-character hexadecimal representation of a double back to a numeric double value.
+      </description>
+      <syntax>nHex2Double( cHex ) -> nValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text containing the 8 bytes of a double value.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns the decoded double value.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NHEX2DOUBLE( XppParamList  pl )
 {
    double nd = 0.00F;
@@ -1174,6 +2212,28 @@ XPPRET XPPENTRY NHEX2DOUBLE( XppParamList  pl )
    _retnd( pl, nd );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cDw2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 32-bit value to an 8-character uppercase hexadecimal string.
+      </description>
+      <syntax>cDw2Hex( nValue ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>nValue</name>
+            <type>Numeric</type>
+            <description>32-bit value to encode.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns an 8-character hexadecimal string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CDW2HEX( XppParamList  pl )
 {
    DWCHARUNION dwu;
@@ -1193,6 +2253,28 @@ XPPRET XPPENTRY CDW2HEX( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nHex2Dw</name>
+      <category>string/hex</category>
+      <description>
+         Converts hexadecimal text to a 32-bit numeric value.
+      </description>
+      <syntax>nHex2Dw( cHex ) -> nValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text to decode. Spaces are ignored by the current implementation.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns the decoded 32-bit value.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NHEX2DW( XppParamList  pl ) // new behavior add nibles from the right
 {
    #ifndef _OT4XB_KEEP_OLD_NHEX2DW_BEHAVIOR
@@ -1243,6 +2325,28 @@ XPPRET XPPENTRY NHEX2DW( XppParamList  pl ) // new behavior add nibles from the 
    #endif
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cW2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts the low 16 bits of a numeric value to a 4-character uppercase hexadecimal string.
+      </description>
+      <syntax>cW2Hex( nValue ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>nValue</name>
+            <type>Numeric</type>
+            <description>Value whose low word is encoded.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns a 4-character hexadecimal string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CW2HEX( XppParamList  pl )
 {
    DWCHARUNION dwu;
@@ -1262,6 +2366,28 @@ XPPRET XPPENTRY CW2HEX( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nHex2W</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 4-character hexadecimal word representation to a numeric value.
+      </description>
+      <syntax>nHex2W( cHex ) -> nValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text containing up to 4 hex digits.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns the decoded word value.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NHEX2W( XppParamList  pl )
 {
    DWCHARUNION dwu;
@@ -1279,6 +2405,28 @@ XPPRET XPPENTRY NHEX2W( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cByte2Hex</name>
+      <category>string/hex</category>
+      <description>
+         Converts the low byte of a numeric value to a 2-character uppercase hexadecimal string.
+      </description>
+      <syntax>cByte2Hex( nValue ) -> cHex</syntax>
+      <parameters>
+         <parameter>
+            <name>nValue</name>
+            <type>Numeric</type>
+            <description>Value whose low byte is encoded.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns a 2-character hexadecimal string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CBYTE2HEX( XppParamList  pl )
 {
    DWCHARUNION dwu;
@@ -1298,6 +2446,28 @@ XPPRET XPPENTRY CBYTE2HEX( XppParamList  pl )
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nHex2Byte</name>
+      <category>string/hex</category>
+      <description>
+         Converts a 2-character hexadecimal byte representation to a numeric value.
+      </description>
+      <syntax>nHex2Byte( cHex ) -> nValue</syntax>
+      <parameters>
+         <parameter>
+            <name>cHex</name>
+            <type>Character</type>
+            <description>Hexadecimal text containing up to 2 hex digits.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>Returns the decoded byte value.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NHEX2BYTE( XppParamList  pl )
 {
    DWCHARUNION dwu;
@@ -1332,10 +2502,112 @@ XPPRET XPPENTRY NHEX2BYTE( XppParamList  pl )
 //0x008000 = ( without regexp) if ` ( character 96) at the begining the expression must exist
 //0x008000 = ( without regexp) if ~ ( character 126) at the begining the expression must not exist
 // -----------------------------------------------------------------------------------------------------------------
+// Legacy-compatible entry point. The implementation is shared with lStrWildCmpEx(); see lStrWildCmpEx() documentation.
 XPPRET XPPENTRY LSTRWILDCMP( XppParamList  pl ) // lStrWildCmp( pWild , pStr , nFlags  ) -> lMatch
 {
    return LSTRWILDCMPEX( pl );
 }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lStrWildCmp</name>
+      <name>lStrWildCmpEx</name>
+      <category>string/match</category>
+      <description>
+         Compares a string against one wildcard pattern, an array of wildcard patterns, or a regular expression.
+         lStrWildCmp() is the legacy-compatible name; lStrWildCmpEx() is the extended name. Both use the same
+         implementation.
+      </description>
+      <syntax>lStrWildCmpEx( cWild | aWild, cStr [, nFlags] [, nRegexFlags] [, nRegexMatchFlags] ) -> lMatch | nIndex | xFound</syntax>
+      <syntax>lStrWildCmp( cWild | aWild, cStr [, nFlags] ) -> lMatch | nIndex | xFound</syntax>
+      <parameters>
+         <parameter>
+            <name>cWild | aWild</name>
+            <type>Character | Array</type>
+            <description>
+               Wildcard pattern, regular expression pattern, or array of patterns. Wildcard mode uses '*' and '?' like
+               file masks. With arrays, patterns are tested in array order unless the last-occurrence flag is used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cStr</name>
+            <type>Character</type>
+            <description>String to test.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric | Logical</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0001 - case-insensitive match. For compatibility with the old lStrWildCmp() syntax, nFlags may also
+               be logical; .T. is treated as 0x0001 and .F. as 0.
+               0x0002 - return the found index instead of a logical value.
+               0x0004 - keep scanning and return the last occurrence.
+               0x0008 - add implicit '*' at the beginning and end of the wildcard.
+               0x0010 - compare the left-trimmed string when not using regular expressions.
+               0x0020 - compare the right-trimmed string when not using regular expressions.
+               0x0040 - allow '^' at the beginning of a wildcard as negation.
+               0x0100 - use template characters.
+               0x0200 - use ot4xb_regex_match() instead of wildcard matching.
+               0x8000 - array-only, non-regex mode: a leading '~' means the expression must not exist and a leading
+               '`' means the expression must exist.
+               0x010000 - aWild is an array of { cKey, xValue } pairs and cKey is tested.
+               0x020000 - with a pair array, return the matching value.
+               0x040000 - with a pair array, return the matching pair.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nRegexFlags</name>
+            <type>Numeric</type>
+            <description>
+               Flags used only with 0x0200. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0001 - ECMAScript grammar, default when no grammar flag is supplied.
+               0x0002 - basic grammar.
+               0x0004 - extended grammar.
+               0x0008 - awk grammar.
+               0x0010 - grep grammar.
+               0x0020 - egrep grammar.
+               0x003F - grammar mask.
+               0x0100 - icase.
+               0x0200 - nosubs.
+               0x0400 - optimize.
+               0x0800 - collate.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nRegexMatchFlags</name>
+            <type>Numeric</type>
+            <description>
+               Match flags used only with 0x0200. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0000 - match_default.
+               0x0001 - match_not_bol.
+               0x0002 - match_not_eol.
+               0x0004 - match_not_bow.
+               0x0008 - match_not_eow.
+               0x0010 - match_any.
+               0x0020 - match_not_null.
+               0x0040 - match_continuous.
+               0x0100 - match_prev_avail.
+               0x0400 - format_sed.
+               0x0800 - format_no_copy.
+               0x1000 - format_first_only.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns .T./.F. by default. With 0x0002, returns the found index. With pair-array extraction flags, returns
+            the requested value or pair instead of the logical result.
+         </description>
+      </return>
+      <remarks>
+         lStrWildCmpEx() is useful both for simple wildcard filtering and for regular-expression matching. Use 0x0200
+         when the pattern must be interpreted as a C++ regular expression. Array input is useful for testing many
+         wildcard masks against the same string without writing an explicit loop.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY LSTRWILDCMPEX( XppParamList  pl ) // lStrWildCmpEx( pWild , pStr , nFlags , regex_flags , regex_match_flags  ) -> lMatch
 {
    TXppParamList xpp( pl, 5 );
@@ -1488,6 +2760,34 @@ XPPRET XPPENTRY LSTRWILDCMPEX( XppParamList  pl ) // lStrWildCmpEx( pWild , pStr
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cDw2Bits</name>
+      <category>string/bit</category>
+      <description>
+         Converts a 32-bit numeric value to a character string made of '0' and '1' bytes.
+      </description>
+      <syntax>cDw2Bits( nInt32 [, nLen] ) -> cBits</syntax>
+      <parameters>
+         <parameter>
+            <name>nInt32</name>
+            <type>Numeric</type>
+            <description>Value interpreted as a 32-bit integer.</description>
+         </parameter>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>Optional result width. Values from 1 to 31 return the rightmost nLen bits.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Binary text representation. The default width is 32 characters.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CDW2BITS( XppParamList  pl ) // cDw2Bits( nInt32 [,nLen]) -> cBits / 100111000 ...
 {
    DWORD dw = (DWORD) _parLong( pl, 1 );
@@ -1506,6 +2806,32 @@ XPPRET XPPENTRY CDW2BITS( XppParamList  pl ) // cDw2Bits( nInt32 [,nLen]) -> cBi
    return;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>nBits2Dw</name>
+      <category>string/bit</category>
+      <description>
+         Converts a string of '0' and '1' bytes to a 32-bit numeric value.
+      </description>
+      <syntax>nBits2Dw( cBitStr ) -> nInt32</syntax>
+      <parameters>
+         <parameter>
+            <name>cBitStr</name>
+            <type>Character</type>
+            <description>Bit string. The rightmost character is the least significant bit.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>32-bit integer value represented by the bit string.</description>
+      </return>
+      <remarks>
+         Only characters equal to '1' set bits. Other characters are treated as zero. Bits beyond 32 are ignored.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY NBITS2DW( XppParamList  pl ) // nBits2Dw( cBitStr ) -> nInt32
 {
    BOOL bByRef = FALSE;
@@ -1593,6 +2919,43 @@ BOOL __gen_rnd_str_buffer( LPBYTE buffer, ULONG cb , DWORD flags )
 
 
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cGenRndStr</name>
+      <category>string/random</category>
+      <description>
+         Generates a random binary string or a random string restricted to a safe character set.
+      </description>
+      <syntax>cGenRndStr( nLen [, nMode | lSafeChars] ) -> cRandom</syntax>
+      <parameters>
+         <parameter>
+            <name>nLen</name>
+            <type>Numeric</type>
+            <description>Requested length. The implementation limits the allocation to 8 MB.</description>
+         </parameter>
+         <parameter>
+            <name>nMode | lSafeChars</name>
+            <type>Numeric | Logical</type>
+            <description>
+               Optional mode. .T. is the same as 1.
+               0 - raw random bytes.
+               1 - letters and digits.
+               2 - uppercase letters and digits.
+               3 - uppercase letters only.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Random string, or NIL if the random provider could not be used.</description>
+      </return>
+      <remarks>
+         Random bytes are obtained through SystemFunction036, also known as RtlGenRandom.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CGENRNDSTR( XppParamList  pl ) // cGenRndStr( nLen , lSafeChars = .F. | 1 lsafe chars , 2 lsafeandupperonly , 3 A-Z only )
 {
    TXppParamList xpp( pl, 2 );
@@ -1610,6 +2973,32 @@ XPPRET XPPENTRY CGENRNDSTR( XppParamList  pl ) // cGenRndStr( nLen , lSafeChars 
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_nRand</name>
+      <category>numeric/random</category>
+      <description>
+         Generates a random non-negative integer lower than the requested maximum.
+      </description>
+      <syntax>ot4xb_nRand( [nMax] ) -> nRandom</syntax>
+      <parameters>
+         <parameter>
+            <name>nMax</name>
+            <type>Numeric</type>
+            <description>Exclusive upper bound. If omitted or zero, 0x7FFFFFFF is used.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>Random value in the range 0 to nMax - 1, or 0 if the random provider fails.</description>
+      </return>
+      <remarks>
+         The function uses SystemFunction036/RtlGenRandom and rejection sampling to reduce modulo bias.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_NRAND( XppParamList pl ) // ot4xb_nRand(nMax)
 {
    TXppParamList xpp( pl, 1 );
@@ -1805,11 +3194,61 @@ OT4XB_API TList* TxtSplitLinesToTListEx( LPSTR pStr, DWORD dwFlags, DWORD* pdwSk
 }
 
 // -----------------------------------------------------------------------------------------------------------------
-// 
-// dwFlags: 0x10 remove empty ( cb=0) lines| 0x20 remove lines starting with ; | 0x40 remove lines starting with [ | 1 LTrim |2 RTrim
-// 0x200 for ini files  // 0x1200 like 0x200 but all elements using {k,v} pairs ; and [ going as k with empty string v
-// 0x100 email header lines
-// aSplitTxtLines( cText , nFlags , @nShift) -> aLines
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>aSplitTxtLines</name>
+      <category>string</category>
+      <description>
+         Splits a text buffer into lines and optionally applies simple trimming, filtering, e-mail-header parsing,
+         or INI-style key/value parsing.
+      </description>
+      <syntax>aSplitTxtLines( cText [, nFlags] [, @nShift] ) -> aLines | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text buffer to split. CRLF, CR, and LF line endings are accepted.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask that controls trimming, filtering, and parsing mode.
+               0x0001 trims leading spaces and tabs.
+               0x0002 trims trailing spaces and tabs.
+               0x0010 removes empty lines after trimming.
+               0x0020 removes lines whose first remaining character is ';'.
+               0x0040 removes lines whose first remaining character is '['.
+               0x0100 parses e-mail header lines.
+               0x0200 parses INI-style lines as key/value pairs when possible.
+               0x1200 is 0x0200 | 0x1000: preserved section, comment, and empty entries are
+               also returned as key/value pairs.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nShift</name>
+            <type>Numeric by reference</type>
+            <description>
+               Receives the byte offset where scanning stopped. This is mainly used by e-mail-header mode to locate
+               the text after the header block. In the ordinary line-split modes it is normally 0.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns an array of lines in the ordinary mode. With 0x0100, returns a two-column array where each row is
+            { cHeaderName, cHeaderValue }; continuation lines are folded into the previous header. With 0x0200, normal
+            INI assignment lines are split at the first '=' and returned as { cKey, cValue }. Ordinary non-assignment
+            lines are returned as { cLine, "" }. Empty, comment, and section lines may be removed by the filtering
+            flags; if they are preserved, 0x0200 returns them as plain character entries, while 0x1200 returns them as
+            { cLine, "" } so every preserved INI entry has the same key/value shape. Returns NIL when cText is not
+            supplied.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY ASPLITTXTLINES( XppParamList pl )
 {
    ContainerHandle conr = NULLCONTAINER;
@@ -2337,7 +3776,58 @@ OT4XB_API DWORD ByteMapTable_LTrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn )
 //      0x100 - Condense String
 //      0x200 - Remove unsafe	( list is safe unless 0x1000 )
 //      0x1000 - INVERT TABLE  if 0x200 only then list is unsafe
-
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>StrTrimEx</name>
+      <category>string</category>
+      <description>
+         Trims, condenses, or filters a string using a caller-supplied byte table.
+      </description>
+      <syntax>StrTrimEx( cText, cTableBytes, nFlags [, cCondenseChar] ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to process.</description>
+         </parameter>
+         <parameter>
+            <name>cTableBytes</name>
+            <type>Character</type>
+            <description>Bytes used to build the trim/filter table.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask.
+               0x0001 - trim table bytes from the left side.
+               0x0002 - trim table bytes from the right side.
+               0x0003 - trim table bytes from both sides.
+               0x0100 - condense runs of table bytes.
+               0x0200 - remove unsafe bytes.
+               0x1000 - invert the table; with 0x0200, cTableBytes is treated as the unsafe list.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cCondenseChar</name>
+            <type>Character</type>
+            <description>Optional replacement byte used when condensing. Space is used by default.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the processed string. When 0x0200 is used without 0x1000, cTableBytes is the safe list; with
+            0x1000, cTableBytes is the unsafe list.
+         </description>
+      </return>
+      <example><![CDATA[
+// Keep only digits and ':' from a timestamp-like string.
+cDigitsAndTime := StrTrimEx( cTimestamp, "0123456789:", 0x0200 )
+]]></example>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( STRTRIMEX )
 {
    TXppParamList xpp( pl, 4 );
@@ -4295,6 +5785,45 @@ extern "C" OT4XB_API LPSTR rfc2047decode( LPSTR pIn, UINT* pcbOut, DWORD nOutCod
 // -------------------------------------------------------------------------------------------------------------------------------------
 // flags & 1 = insert CRLF every 76 chars
 // split_data_uri( str , @header , flags ) -> body
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>split_data_uri</name>
+      <category>string/encoding</category>
+      <description>
+         Splits a data URI into its header and payload parts.
+      </description>
+      <syntax>split_data_uri( cDataUri, @cHeader [, nFlags] ) -> cBody</syntax>
+      <parameters>
+         <parameter>
+            <name>cDataUri</name>
+            <type>Character</type>
+            <description>Data URI text. The first comma separates the header from the body.</description>
+         </parameter>
+         <parameter>
+            <name>cHeader</name>
+            <type>Character by reference</type>
+            <description>Receives the text before the first comma, without the comma. Receives an empty string if no comma is found.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask. Combine flags with bitwise OR, for example with nOr( flag1, ..., flagX ).
+               0x0001 - insert CRLF after each 76 body characters.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Body text after the first comma, optionally wrapped at 76 characters.</description>
+      </return>
+      <remarks>
+         This function only splits and optionally wraps the URI body. It does not decode base64 or percent-encoded data.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( SPLIT_DATA_URI )
 {
    TXppParamList xpp( pl, 3 );
@@ -4332,6 +5861,41 @@ _XPP_REG_FUN_( SPLIT_DATA_URI )
 
 // -------------------------------------------------------------------------------------------------------------------------------------
 // __b64enc( cStr, nFlags )
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__b64enc</name>
+      <category>string/encoding</category>
+      <description>
+         Encodes a binary string as Base64 text.
+      </description>
+      <syntax>__b64enc( cData [, nFlags] ) -> cBase64</syntax>
+      <parameters>
+         <parameter>
+            <name>cData</name>
+            <type>Character</type>
+            <description>Binary string to encode.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional flags passed to the underlying ATL Base64Encode() function. Combine flags with bitwise OR, for
+               example with nOr( flag1, ..., flagX ). A commonly used value is 2, which requests output without CRLF
+               line breaks.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Base64 encoded text, or an empty string if the source is empty or encoding fails.</description>
+      </return>
+      <remarks>
+         This is a thin wrapper over the underlying ATL Base64 encoder.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __B64ENC )
 {
    TXppParamList xpp( pl, 2 );
@@ -4360,6 +5924,32 @@ _XPP_REG_FUN_( __B64ENC )
    }
 }
 // -------------------------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__b64dec</name>
+      <category>string/encoding</category>
+      <description>
+         Decodes Base64 text into its binary string representation.
+      </description>
+      <syntax>__b64dec( cBase64 ) -> cData</syntax>
+      <parameters>
+         <parameter>
+            <name>cBase64</name>
+            <type>Character</type>
+            <description>Base64 text to decode.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Decoded binary string, or an empty string if the source is empty or decoding fails.</description>
+      </return>
+      <remarks>
+         This is a thin wrapper over the underlying ATL Base64 decoder.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __B64DEC )
 {
 
@@ -4388,16 +5978,56 @@ _XPP_REG_FUN_( __B64DEC )
    }
 }
 // -------------------------------------------------------------------------------------------------------------------------------------
-// flags: 0x00000001 include empty strings
-//        0x00000000
-//        0x00000002 add single quote delimiters
-//        0x00000004 add double quote delimiters
-//        0x00000010 = ltrim
-//        0x00000020 = rtrim
-//        0x00000400 = int to str 
-//        0x01000000 trim unsafe with map
-//        0x00100000 safe 0 to 9 
-// -------------------------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__aJoin</name>
+      <category>string</category>
+      <description>
+         Joins the character items of an array into one string using a literal delimiter. It is the inverse operation
+         normally paired with Tokenize().
+      </description>
+      <syntax>__aJoin( aItems [, cDelimiter] [, nFlags] ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>aItems</name>
+            <type>Array</type>
+            <description>Array whose character items are joined.</description>
+         </parameter>
+         <parameter>
+            <name>cDelimiter</name>
+            <type>Character</type>
+            <description>Delimiter inserted between joined items. If omitted or not character, ',' is used.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>
+               Optional bit mask.
+               0x00000001 - includes empty strings after processing.
+               0x00000002 - wraps each item in single quotes.
+               0x00000004 - wraps each item in double quotes.
+               0x00000010 - trims leading whitespace.
+               0x00000020 - trims trailing whitespace.
+               0x00000400 - converts numeric items to integer strings.
+               0x01000000 - removes bytes not present in the internal safe map before joining.
+               0x00100000 - initializes that safe map with digits '0' to '9'.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the joined string. Non-character items are ignored unless 0x00000400 is set for numeric items.
+            Empty strings are skipped unless 0x00000001 is set. No delimiter is appended after the last joined item.
+         </description>
+      </return>
+      <remarks>
+         The delimiter is inserted literally. Quotes added by the quote flags are not escaped and item contents are not
+         parsed.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __AJOIN ) // __ajoin( array , delimiter , flags)
 {
    TXppParamList xpp( pl, 3 );

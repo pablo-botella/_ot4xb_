@@ -38,6 +38,106 @@ static void TLdList_pf_OnDestroy( TXbClsParams* px);
 static void TLdList_pf_OnCloneItem( TXbClsParams* px);
 static void TLdList_dwpfCargo( TXbClsParams* px);
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>TldList</name>
+      <export>TLDLIST</export>
+      <source>TldList.cpp:TLDLIST</source>
+      <inheritance>
+         <parent>GWST</parent>
+      </inheritance>
+      <category>container/list</category>
+      <description>
+         TldList is a base ot4xb structure-list class intended to be
+         subclassed. It is a wrapper used to manage data stored with the
+         inherited structure layout over a doubly linked list of memory blocks.
+      </description>
+      <constructor>
+         <syntax>TldList():New() -> Self</syntax>
+         <description>
+            Creates a TldList instance and initializes its structure storage and
+            list controller.
+         </description>
+      </constructor>
+      <remarks>
+         Derived classes define the structure members stored in each memory
+         block. The item size is taken from the GWST structure size of the
+         actual instance, so each list item uses the binary layout defined by
+         the subclass.
+      </remarks>
+      <remarks>
+         A single TldList object manages all nodes in the list. Structure member
+         access is bound to the current node, so moving the list changes which
+         memory block is exposed through the inherited structure members.
+      </remarks>
+      <remarks>
+         Create instances with :New(). Do not call ::init() again on an
+         initialized object; doing so can abandon the internal list state
+         already owned by the instance.
+      </remarks>
+      <example>
+         <code><![CDATA[
+            // Structure declaration at module level, outside any function.
+            BEGIN STRUCTURE TPointList EXTENDING TldList
+               MEMBER LONG x
+               MEMBER LONG y
+            END STRUCTURE
+
+            FUNCTION DemoPointList()
+               LOCAL oPoints := TPointList():New()
+
+               oPoints:Append()
+               oPoints:x := 10
+               oPoints:y := 20
+
+               oPoints:Append()
+               oPoints:x := 30
+               oPoints:y := 40
+
+               oPoints:GoTop()
+               ? oPoints:x, oPoints:y   // 10, 20
+
+               oPoints:Skip()
+               ? oPoints:x, oPoints:y   // 30, 40
+
+               oPoints:Destroy()
+            RETURN NIL
+         ]]></code>
+      </example>
+      <methods>
+         <method-ref>TldList::Destroy</method-ref>
+         <method-ref>TldList::Bof</method-ref>
+         <method-ref>TldList::Eof</method-ref>
+         <method-ref>TldList::RecNo</method-ref>
+         <method-ref>TldList::LastRec</method-ref>
+         <method-ref>TldList::GoTop</method-ref>
+         <method-ref>TldList::GoBottom</method-ref>
+         <method-ref>TldList::GoBof</method-ref>
+         <method-ref>TldList::GoEof</method-ref>
+         <method-ref>TldList::Skip</method-ref>
+         <method-ref>TldList::Skipper</method-ref>
+         <method-ref>TldList::Goto</method-ref>
+         <method-ref>TldList::Insert</method-ref>
+         <method-ref>TldList::Append</method-ref>
+         <method-ref>TldList::Delete</method-ref>
+         <method-ref>TldList::CloneItems</method-ref>
+         <method-ref>TldList::DetachItems</method-ref>
+         <method-ref>TldList::AttachItems</method-ref>
+         <method-ref>TldList::StealItems</method-ref>
+         <method-ref>TldList::MergeClone</method-ref>
+         <method-ref>TldList::EatList</method-ref>
+         <method-ref>TldList::SwapRecords</method-ref>
+      </methods>
+      <properties>
+         <property-ref>TldList::pf_OnDestroyItem</property-ref>
+         <property-ref>TldList::pf_OnCloneItem</property-ref>
+         <property-ref>TldList::pf_OnDestroy</property-ref>
+         <property-ref>TldList::dwpfCargo</property-ref>
+      </properties>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY TLDLIST( XppParamList pl )
 {
    ContainerHandle conco = _conClsObj("TldList");
@@ -45,7 +145,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
    {
       TXbClass * pc = new TXbClass;
       pc->ClassName("TldList");
-      pc->GwstParent();
+      pc->GwstParent(); // inherits from GWST as an ot4xb structure class
       pc->EXPORTED();
       pc->GwstReadWrite();
       // ---------------------------
@@ -54,8 +154,8 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
       // ---------------------------
       pc->Var( "_m__pControlSt_" );
       // ---------------------------
-      pc->MethodCB( "init"      , "{|s| s:_gwst_(),s:_tld_init_(),s}");
-      pc->Method( "_tld_init_"  , TLdList_Init       ,0 ); // -> Self
+      pc->MethodCB( "init"      , "{|s| s:_gwst_(),s:_tld_init_(),s}"); // doc with TldList constructor
+      pc->Method( "_tld_init_"  , TLdList_Init       ,0 ); // internal init used by TldList():New()
       pc->Method( "Destroy"    , TLdList_Destroy     ,0 ); // -> NIL
       pc->Method( "Bof"        , TLdList_Bof         ,0 ); // -> lBof
       pc->Method( "Eof"        , TLdList_Eof         ,0 ); // -> lEof
@@ -86,15 +186,15 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
       pc->Property( "pf_OnDestroy"     , TLdList_pf_OnDestroy, 1 );
       pc->Property( "dwpfCargo"        , TLdList_dwpfCargo, 1 );
       // ---------------------------------------------------------------------------------
-      pc->MethodCB( "_lock_"       , "{|s| s:_m__pt_ := PeekDWord(s:_m__ghpt_) }");
-      pc->MethodCB( "_unlock_"     , "{|s| s:_m__pt_ := 0}");
-      pc->MethodCB( "_alloc_"      , "{|| NIL}");
-      pc->MethodCB( "_free_"       , "{|| NIL}");
-      pc->MethodCB( "_link_"       , "{|| NIL}");
-      pc->MethodCB( "_unlink_"     , "{|| NIL}");
-      pc->MethodCB( "_zeromemory_" , "{|| NIL}");
-      pc->MethodCB( "_read_"       , "{|| NIL}");
-      pc->MethodCB( "_write_"      , "{|| NIL}");
+      pc->MethodCB( "_lock_"       , "{|s| s:_m__pt_ := PeekDWord(s:_m__ghpt_) }"); // current item memory
+      pc->MethodCB( "_unlock_"     , "{|s| s:_m__pt_ := 0}");                       // release current item view
+      pc->MethodCB( "_alloc_"      , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_free_"       , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_link_"       , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_unlink_"     , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_zeromemory_" , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_read_"       , "{|| NIL}"); // disabled; list methods own item memory
+      pc->MethodCB( "_write_"      , "{|| NIL}"); // disabled; list methods own item memory
       // ---------------------------------------------------------------------------------
 
 

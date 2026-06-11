@@ -594,6 +594,62 @@ namespace json_ns
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_json_parse</name>
+      <source>ot4xb_json.cpp:OT4XB_JSON_PARSE</source>
+      <category>json</category>
+      <description>
+         Parses a JSON string using the RapidJSON SAX reader and returns the corresponding Xbase++ value.
+         JSON objects are created as _ot4xb_expando_ instances by default.
+      </description>
+      <syntax>ot4xb_json_parse( cJson [, nSourceCodePage] [, oExpandoClass] [, cAddPropertyMethod] ) -> xValue | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cJson</name>
+            <type>Character</type>
+            <description>JSON text to parse.</description>
+         </parameter>
+         <parameter>
+            <name>nSourceCodePage</name>
+            <type>Numeric</type>
+            <description>
+               Source encoding selector. 65001 treats cJson as UTF-8. Other values use the current ANSI
+               codepage conversion path before parsing.
+            </description>
+         </parameter>
+         <parameter>
+            <name>oExpandoClass</name>
+            <type>Class object</type>
+            <description>
+               Optional class object used to instantiate JSON objects. Defaults to _ot4xb_expando_().
+            </description>
+         </parameter>
+         <parameter>
+            <name>cAddPropertyMethod</name>
+            <type>Character</type>
+            <description>
+               Method used to add object properties. Defaults to "set_prop"; "set_prop_add" can be used when
+               repeated property names must be collected instead of replaced.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Any | NIL</type>
+         <description>
+            Arrays become Xbase++ arrays, objects become expando instances, strings are converted from UTF-8
+            to ANSI strings, booleans become logical values, null becomes NIL, and numbers become Xbase++
+            numeric values. NIL is returned when parsing fails.
+         </description>
+      </return>
+      <remarks>
+         Serialization is provided by _ot4xb_expando_():json_serialize() and by the ::json_escape_self()
+         method implemented by _ot4xb_expando_ and other OT4XB classes.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 // ot4xb_json_parse_string( 1str ,  2 src_cp = 65001 ,  3expando_class_object = _ot4xb_expando_()  , 4 add_property_method_name = "set_prop" ) -> value or NIL
 _XPP_REG_FUN_( OT4XB_JSON_PARSE )
 {

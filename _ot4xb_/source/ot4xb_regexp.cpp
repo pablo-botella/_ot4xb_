@@ -36,6 +36,49 @@ static IRegExp2* _rgx_init_interface(LONG npi)
    return hrgx;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_new</name>
+      <category>string/regex</category>
+      <description>
+         Creates or reuses a regular expression engine based on the system VBScript/IE RegExp ActiveX component.
+      </description>
+      <syntax>_rgx_new( [@hRgx,] [cPattern], [cFlags] ) -> hRgx</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric by reference</type>
+            <description>
+               Optional existing RegExp engine handle. When supplied, the same engine is reused and the
+               parameter is updated with the resulting handle.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cPattern</name>
+            <type>Character</type>
+            <description>Optional regular expression pattern.</description>
+         </parameter>
+         <parameter>
+            <name>cFlags</name>
+            <type>Character</type>
+            <description>
+               Optional flag string. The supported letters are "g" for Global, "i" for IgnoreCase,
+               and "m" for Multiline.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>Handle to the underlying IRegExp2 ActiveX object.</description>
+      </return>
+      <remarks>
+         This is the low-level handle function used by the _RGX class. Call _rgx_destroy() when the handle is
+         no longer needed.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_NEW)// _rgx_new( [@hrgx ,]  cRegExpStr [, cFlags ] ) -> hrgxe
 {
 
@@ -97,6 +140,29 @@ _XPP_REG_FUN_(_RGX_NEW)// _rgx_new( [@hrgx ,]  cRegExpStr [, cFlags ] ) -> hrgxe
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_set_pattern</name>
+      <category>string/regex</category>
+      <description>Sets the pattern on an existing _RGX ActiveX regular expression engine.</description>
+      <syntax>_rgx_set_pattern( hRgx, cPattern ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric</type>
+            <description>RegExp engine handle returned by _rgx_new().</description>
+         </parameter>
+         <parameter>
+            <name>cPattern</name>
+            <type>Character</type>
+            <description>Regular expression pattern.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_SET_PATTERN)// _rgx_set_pattern( hrgx , cRegExpStr ) -> hrgxe
 {
    TXppParamList xpp(pl, 2);
@@ -113,6 +179,32 @@ _XPP_REG_FUN_(_RGX_SET_PATTERN)// _rgx_set_pattern( hrgx , cRegExpStr ) -> hrgxe
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_set_flags</name>
+      <category>string/regex</category>
+      <description>Sets the Global, IgnoreCase and Multiline flags on an existing _RGX engine.</description>
+      <syntax>_rgx_set_flags( hRgx, cFlags ) -> NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric</type>
+            <description>RegExp engine handle returned by _rgx_new().</description>
+         </parameter>
+         <parameter>
+            <name>cFlags</name>
+            <type>Character</type>
+            <description>Flag string. "g" enables Global, "i" enables IgnoreCase, and "m" enables Multiline.</description>
+         </parameter>
+      </parameters>
+      <return>NIL</return>
+      <remarks>
+         Calling this function resets all three flags to false before applying the letters present in cFlags.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_SET_FLAGS)// _rgx_set_flags( hrgx , cFlags ) -> hrgxe
 {
    TXppParamList xpp(pl, 2);
@@ -155,6 +247,27 @@ _XPP_REG_FUN_(_RGX_SET_FLAGS)// _rgx_set_flags( hrgx , cFlags ) -> hrgxe
 }
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_destroy</name>
+      <category>string/regex</category>
+      <description>Releases an _RGX ActiveX regular expression engine handle.</description>
+      <syntax>_rgx_destroy( @hRgx ) -> 0</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric by reference</type>
+            <description>RegExp engine handle to release. The parameter is set to 0.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Numeric</type>
+         <description>Always returns 0.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_DESTROY) // _rgx_destroy(@hrgx) -> 0
 {
    TXppParamList xpp(pl, 1);
@@ -172,6 +285,32 @@ _XPP_REG_FUN_(_RGX_DESTROY) // _rgx_destroy(@hrgx) -> 0
 
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_test</name>
+      <category>string/regex</category>
+      <description>Tests a string with an _RGX ActiveX regular expression engine.</description>
+      <syntax>_rgx_test( hRgx, cString ) -> lMatch | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric</type>
+            <description>RegExp engine handle returned by _rgx_new().</description>
+         </parameter>
+         <parameter>
+            <name>cString</name>
+            <type>Character</type>
+            <description>String to test.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical | NIL</type>
+         <description>.T. when the pattern matches, .F. when it does not match, or NIL on engine errors.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_TEST) //  _rgx_test(hrgx,cStr) -> lMatch
 {
    TXppParamList xpp(pl, 2);
@@ -195,6 +334,37 @@ _XPP_REG_FUN_(_RGX_TEST) //  _rgx_test(hrgx,cStr) -> lMatch
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_replace</name>
+      <category>string/regex</category>
+      <description>Replaces text using an _RGX ActiveX regular expression engine.</description>
+      <syntax>_rgx_replace( hRgx, cString, cReplacement ) -> cResult | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric</type>
+            <description>RegExp engine handle returned by _rgx_new().</description>
+         </parameter>
+         <parameter>
+            <name>cString</name>
+            <type>Character</type>
+            <description>Input string.</description>
+         </parameter>
+         <parameter>
+            <name>cReplacement</name>
+            <type>Character</type>
+            <description>Replacement string understood by the VBScript RegExp engine.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | NIL</type>
+         <description>Resulting string, or NIL if the operation fails.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_REPLACE) // _rgx_replace(hrgx,cStr,cRepStr) -> cNewStr
 {
    TXppParamList xpp(pl, 3);
@@ -224,6 +394,40 @@ _XPP_REG_FUN_(_RGX_REPLACE) // _rgx_replace(hrgx,cStr,cRepStr) -> cNewStr
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx_exec</name>
+      <category>string/regex</category>
+      <description>Executes an _RGX ActiveX regular expression engine and returns match positions.</description>
+      <syntax>_rgx_exec( hRgx, cString, [lSubMatches] ) -> aMatches | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>hRgx</name>
+            <type>Numeric</type>
+            <description>RegExp engine handle returned by _rgx_new().</description>
+         </parameter>
+         <parameter>
+            <name>cString</name>
+            <type>Character</type>
+            <description>Input string.</description>
+         </parameter>
+         <parameter>
+            <name>lSubMatches</name>
+            <type>Logical</type>
+            <description>When .T., each match row includes an array with captured submatches.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Array | NIL</type>
+         <description>
+            Array of rows { nPos, nLen } or { nPos, nLen, aSubMatches }. nPos is the zero-based
+            FirstIndex value returned by the ActiveX engine.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX_EXEC) // _rgx_exec(hrgx,cStr[,lSub]) -> { {pos,cb[,aSub]},...,{pos,cb[,aSub]} }
 {
    TXppParamList xpp(pl, 3);
@@ -280,6 +484,75 @@ _XPP_REG_FUN_(_RGX_EXEC) // _rgx_exec(hrgx,cStr[,lSub]) -> { {pos,cb[,aSub]},...
 
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>_RGX</name>
+      <source>ot4xb_regexp.cpp:_RGX</source>
+      <category>string/regex</category>
+      <description>
+         Xbase++ class wrapper over the system VBScript/IE RegExp ActiveX engine.
+      </description>
+      <syntax>_RGX():New( [cPattern], [cFlags] ) -> oRgx</syntax>
+      <instance-variables>
+         <variable>
+            <name>m_hrgx</name>
+            <description>Internal IRegExp2 engine handle.</description>
+         </variable>
+      </instance-variables>
+      <methods>
+         <method>
+            <name>_RGX::init</name>
+            <syntax>::init( [cPattern], [cFlags] ) -> Self</syntax>
+            <description>Creates or reuses the internal ActiveX RegExp engine.</description>
+         </method>
+         <method>
+            <name>_RGX::SetPattern</name>
+            <syntax>::SetPattern( cPattern ) -> NIL</syntax>
+            <description>Sets the regular expression pattern.</description>
+         </method>
+         <method>
+            <name>_RGX::SetFlags</name>
+            <syntax>::SetFlags( cFlags ) -> NIL</syntax>
+            <description>Sets the "g", "i" and "m" ActiveX RegExp flags.</description>
+         </method>
+         <method>
+            <name>_RGX::Destroy</name>
+            <syntax>::Destroy() -> 0</syntax>
+            <description>Releases the internal ActiveX RegExp engine and clears the handle.</description>
+         </method>
+         <method>
+            <name>_RGX::Test</name>
+            <syntax>::Test( cString ) -> lMatch | NIL</syntax>
+            <description>Tests cString with the current pattern.</description>
+         </method>
+         <method>
+            <name>_RGX::Replace</name>
+            <syntax>::Replace( cString, cReplacement ) -> cResult | NIL</syntax>
+            <description>Replaces text with the current pattern.</description>
+         </method>
+         <method>
+            <name>_RGX::Exec</name>
+            <syntax>::Exec( cString, [lSubMatches] ) -> aMatches | NIL</syntax>
+            <description>Returns match positions and optionally captured submatches.</description>
+         </method>
+      </methods>
+      <remarks>
+         _RGX is the legacy regular expression class. It uses the VBScript RegExp syntax exposed by the
+         ActiveX component installed with Windows/Internet Explorer scripting support.
+      </remarks>
+      <remarks>
+         cFlags is a character string. The supported letters are "g" for Global, "i" for IgnoreCase,
+         and "m" for Multiline.
+      </remarks>
+      <example><![CDATA[
+local rx := _RGX():New( "^[a-z]+$", "i" )
+? rx:Test( "PATATA" )
+rx:Destroy()
+      ]]></example>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
 static void create_class_rgx(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("_RGX");
@@ -418,6 +691,56 @@ cleanup:;
 
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_rgx</name>
+      <category>string/regex</category>
+      <description>
+         Returns the _RGX class object when called without parameters, or executes a one-shot legacy
+         ActiveX regular expression command when called with parameters.
+      </description>
+      <syntax>_rgx() -> oClass</syntax>
+      <syntax>_rgx( cCommand, cString [, cReplacement] ) -> xResult</syntax>
+      <parameters>
+         <parameter>
+            <name>cCommand</name>
+            <type>Character</type>
+            <description>
+               One-shot command in the form "op[.flags]:pattern". op is "t" for test, "r" for replace,
+               or "e" for exec.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cString</name>
+            <type>Character</type>
+            <description>Input string.</description>
+         </parameter>
+         <parameter>
+            <name>cReplacement</name>
+            <type>Character</type>
+            <description>Replacement string, required only for the "r" operation.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Class object | Logical | Character | Array | NIL</type>
+         <description>
+            With no parameters, the _RGX class object. For one-shot commands, the result of Test,
+            Replace or Exec, or NIL if the command cannot be executed.
+         </description>
+      </return>
+      <remarks>
+         One-shot flags after the dot are "g", "i" and "m". For the "e" operation, "s" also requests
+         captured submatches in the returned rows.
+      </remarks>
+      <example><![CDATA[
+? _RGX( "t.i:^[a-z]+$", "PATATA" )
+? _RGX( "r.g:\d+", "a1 b2", "#" )
+? _RGX( "e.gs:(\w+)=(\d+)", "a=1 b=2" )
+      ]]></example>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_(_RGX)
 {
    DWORD np = _partype(pl, 0);

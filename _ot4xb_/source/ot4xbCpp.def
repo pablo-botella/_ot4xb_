@@ -6,1178 +6,5485 @@ EXPORTS
 ;;  Author: Pablo Botella Navarro ( http:;;www.xbwin.com )   -
 ;;------------------------------------------------------------
 
-;; ---------------------------------------------------------------------------
-;; ot4xb.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: ot4xb.cpp:OT4XB
+;; DOC: REV 2026.06.09 PBN
+;; NAME: ot4xb
      OT4XB  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:APPINSTANCE
+;; DOC: REV 2026.06.09 PBN
+;; NAME: AppInstance
      APPINSTANCE  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:GETCURRENTPROCESSHANDLE
+;; DOC: REV 2026.06.09 PBN
+;; NAME: GetCurrentProcessHandle
      GETCURRENTPROCESSHANDLE  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:GETHKERNEL32
+;; DOC: REV 2026.06.09 PBN
+;; NAME: GetHKernel32
      GETHKERNEL32  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:GETHUSER32
+;; DOC: REV 2026.06.09 PBN
+;; NAME: GetHUser32
      GETHUSER32  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:GETHSHELL32
+;; DOC: REV 2026.06.09 PBN
+;; NAME: GetHShell32
      GETHSHELL32  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:GETHOT4XB
+;; DOC: REV 2026.06.09 PBN
+;; NAME: GetHOt4xb
      GETHOT4XB  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_CREATEGENERICWINDOW
+;; DOC:
      OT4XB_CREATEGENERICWINDOW  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_SUBCLASSWINDOW
+;; DOC:
      OT4XB_SUBCLASSWINDOW  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:DELEGATED_XBASE_CALL
+;; DOC:
      DELEGATED_XBASE_CALL  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:DELEGATED_FPQCALL
+;; DOC:
      DELEGATED_FPQCALL  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:DELEGATED_EVAL
+;; DOC:
      DELEGATED_EVAL  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_REGISTER_DELEGATE_HWND
+;; DOC:
      OT4XB_REGISTER_DELEGATE_HWND  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_SINGLE_INSTANCE
+;; DOC:
      OT4XB_SINGLE_INSTANCE  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_HOOKTHREAD
+;; DOC:
      OT4XB_HOOKTHREAD  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_UNHOOKTHREAD
+;; DOC:
      OT4XB_UNHOOKTHREAD  PRIVATE
-;; ---------------------------------------------------------------------------
+
+
+
+;; SRC: ot4xb_acp.cpp:_OT4XB_TASK_INTERNAL_PROC_
+;; DOC:
      _OT4XB_TASK_INTERNAL_PROC_  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_TASK_ID
+;; DOC:
      OT4XB_TASK_ID  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_TASK_RUN
+;; DOC:
      OT4XB_TASK_RUN  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_TASK_WAIT
+;; DOC:
      OT4XB_TASK_WAIT  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_TASK_POP
+;; DOC:
      OT4XB_TASK_POP  PRIVATE
-;; ---------------------------------------------------------------------------
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_UNMANGLE_CPP_NAME
+;; DOC:
      OT4XB_UNMANGLE_CPP_NAME  PRIVATE
-;; ---------------------------------------------------------------------------
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_APC_SEND_CB
+;; DOC:
      OT4XB_APC_SEND_CB  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_APC_POST_CB
+;; DOC:
      OT4XB_APC_POST_CB  PRIVATE
+
+
+
+;; SRC: ot4xb_acp.cpp:OT4XB_APC_POST_CB_H
+;; DOC:
      OT4XB_APC_POST_CB_H  PRIVATE
+
+
+
+;; SRC: ot4xb.cpp:OT4XB_PUSH_EXIT_CB
+;; DOC:
      OT4XB_PUSH_EXIT_CB  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_AUTOMATIC_SCROLL_FOCUS
+;; DOC:
      OT4XB_AUTOMATIC_SCROLL_FOCUS  PRIVATE
+
+
+
+;; SRC: WndTool.cpp:OT4XB_PAINTTHEMSGBAR
+;; DOC:
      OT4XB_PAINTTHEMSGBAR  PRIVATE
-;; ---------------------------------------------------------------------------
 
 
 
-
-
-
-;; ---------------------------------------------------------------------------
-;; TCriticalSection.cpp
-;; ---------------------------------------------------------------------------
+;; SRC: TCriticalSection.cpp:TCRITICALSECTION
+;; DOC:
      TCRITICALSECTION  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_odbd.cpp
-;; ---------------------------------------------------------------------------
 
 
-
-
-
-;; ---------------------------------------------------------------------------
-;; TLdList.cpp
-;; ---------------------------------------------------------------------------
-
+;; SRC: TldList.cpp:TLDLIST
+;; DOC:
      TLDLIST  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; OSVer.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: OSVer.cpp:LISWIN9X
+;; DOC:
      LISWIN9X  PRIVATE
+
+
+
+;; SRC: OSVer.cpp:LISXP
+;; DOC:
      LISXP  PRIVATE
+
+
+
+;; SRC: OSVer.cpp:LISVISTA
+;; DOC:
      LISVISTA  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; NumAndBytes.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: NumAndBytes.cpp:DWFIX
+;; DOC:
      DWFIX  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:DWMINUS
+;; DOC:
      DWMINUS  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:EXTENDSIGN8
+;; DOC:
      EXTENDSIGN8  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:EXTENDSIGN16
+;; DOC:
      EXTENDSIGN16  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:UNSIGNED8
+;; DOC:
      UNSIGNED8  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:UNSIGNED16
+;; DOC:
      UNSIGNED16  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:UNSIGNED32
+;; DOC:
      UNSIGNED32  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:LONG2DOUBLE
+;; DOC:
      LONG2DOUBLE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:DOUBLE2LONG
+;; DOC:
      DOUBLE2LONG  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_LOWORD
+;; DOC:
      LOWORD =  wapimc_LOWORD  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_HIWORD
+;; DOC:
      HIWORD =  wapimc_HIWORD  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_LOBYTE
+;; DOC:
      LOBYTE =  wapimc_LOBYTE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_HIBYTE
+;; DOC:
      HIBYTE =  wapimc_HIBYTE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_LONIBBLE
+;; DOC:
      LONIBBLE =  wapimc_LONIBBLE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_HINIBBLE
+;; DOC:
      HINIBBLE =  wapimc_HINIBBLE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKEBYTE
+;; DOC:
      MAKEBYTE =  wapimc_MAKEBYTE  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKEWORD
+;; DOC:
      MAKEWORD =  wapimc_MAKEWORD  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKELONG
+;; DOC:
      MAKELONG =  wapimc_MAKELONG  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKELANGID
+;; DOC:
      MAKELANGID =  wapimc_MAKELANGID  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKELPARAM
+;; DOC:
      MAKELPARAM =  wapimc_MAKELPARAM  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_MAKELRESULT
+;; DOC:
      MAKELRESULT =  wapimc_MAKELRESULT  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_GET_X_LPARAM
+;; DOC:
      GET_X_LPARAM =  wapimc_GET_X_LPARAM  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:wapimc_GET_Y_LPARAM
+;; DOC:
      GET_Y_LPARAM =  wapimc_GET_Y_LPARAM  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:DWBYTEREV
+;; DOC:
      DWBYTEREV  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:WHLBYTEREV
+;; DOC:
      WHLBYTEREV  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:PACKFLOAT32
+;; DOC:
      PACKFLOAT32  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:UNPACKFLOAT32
+;; DOC:
      UNPACKFLOAT32  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:OT4XB_PARSE_NUMBER
+;; DOC:
      OT4XB_PARSE_NUMBER  PRIVATE
+
+
+
+;; SRC: NumAndBytes.cpp:OT4XB_PARSE_INT
+;; DOC:
      OT4XB_PARSE_INT  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; DrTool.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: DrTool.cpp:GETPROCCESSARGV
+;; DOC:
      GETPROCCESSARGV  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:GETCOMMANDLINE
+;; DOC:
      GETCOMMANDLINE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CAPPPATH
+;; DOC:
      CAPPPATH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CAPPDIR
+;; DOC:
      CAPPDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LMAKEPATH
+;; DOC:
      LMAKEPATH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LCOPYFILE
+;; DOC:
      LCOPYFILE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LDISKREADY
+;; DOC:
      LDISKREADY  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CCREATETMPFILE
+;; DOC:
      CCREATETMPFILE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CGETTMPPATH
+;; DOC:
      CGETTMPPATH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:NGETDRIVETYPE
+;; DOC:
      NGETDRIVETYPE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LCHDIR
+;; DOC:
      LCHDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CDRIVES
+;; DOC:
      CDRIVES  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:ADRIVES
+;; DOC:
      ADRIVES  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:_TDRIVEINFO_
+;; DOC:
      _TDRIVEINFO_  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:GETDRIVEINFO
+;; DOC:
      GETDRIVEINFO  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CGETSHORTFILENAME
+;; DOC:
      CGETSHORTFILENAME  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LISDIR
+;; DOC:
      LISDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LISFILE
+;; DOC:
      LISFILE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:GETWINDIR
+;; DOC:
      GETWINDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:GETSYSDIR
+;; DOC:
      GETSYSDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHCOMBINE
+;; DOC:
      CPATHCOMBINE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CURLCOMBINE
+;; DOC:
      CURLCOMBINE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHDEFEXT
+;; DOC:
      CPATHDEFEXT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHBUILDROOT
+;; DOC:
      CPATHBUILDROOT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:ASPLITPATH
+;; DOC:
      ASPLITPATH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHCANONICALIZE
+;; DOC:
      CPATHCANONICALIZE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHGETEXT
+;; DOC:
      CPATHGETEXT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHREMOVEEXT
+;; DOC:
      CPATHREMOVEEXT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHCHANGEEXT
+;; DOC:
      CPATHCHANGEEXT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHGETFILENAME
+;; DOC:
      CPATHGETFILENAME  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHREMOVEBACKSLASH
+;; DOC:
      CPATHREMOVEBACKSLASH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHADDBACKSLASH
+;; DOC:
      CPATHADDBACKSLASH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHGETPATH
+;; DOC:
      CPATHGETPATH  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHGETROOT
+;; DOC:
      CPATHGETROOT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CPATHREMOVEROOT
+;; DOC:
      CPATHREMOVEROOT  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:LPATHISRELATIVE
+;; DOC:
      LPATHISRELATIVE  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:wapist_WIN32_FIND_DATA
+;; DOC:
      WIN32_FIND_DATA =  wapist_WIN32_FIND_DATA  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:CCPUSERIAL
+;; DOC:
      CCPUSERIAL  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:OT4XB_PUSHDIR
+;; DOC:
      OT4XB_PUSHDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:OT4XB_POPDIR
+;; DOC:
      OT4XB_POPDIR  PRIVATE
+
+
+
+;; SRC: DrTool.cpp:OT4XB_CURDIR
+;; DOC:
      OT4XB_CURDIR  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; Bitwise.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: Bitwise.cpp:NOR
+;; DOC:
      NOR  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NXOR
+;; DOC:
      NXOR  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NAND
+;; DOC:
      NAND  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NANDNOT
+;; DOC:
      NANDNOT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NNOT
+;; DOC:
      NNOT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:LAND
+;; DOC:
      LAND  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NLSHIFT
+;; DOC:
      NLSHIFT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NRSHIFT
+;; DOC:
      NRSHIFT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NLROT
+;; DOC:
      NLROT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NRROT
+;; DOC:
      NRROT  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NLROTBYTE
+;; DOC:
      NLROTBYTE  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NRROTBYTE
+;; DOC:
      NRROTBYTE  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NLROTWORD
+;; DOC:
      NLROTWORD  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:NRROTWORD
+;; DOC:
      NRROTWORD  PRIVATE
+
+
+
+;; SRC: Bitwise.cpp:LDWBITONOFF
+;; DOC:
      LDWBITONOFF  PRIVATE
 
 
-;; --------------------------------------------------------------------------
-;; ot4xb_register.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_c_exported.h:ot4xb_set_registry_value_as_string
+;; DOC:
      OT4XB_SET_REGISTRY_VALUE_AS_STRING  PRIVATE
+
+
+
+;; SRC: ot4xb_c_exported.h:ot4xb_get_registry_value_as_string
+;; DOC:
      OT4XB_GET_REGISTRY_VALUE_AS_STRING  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; String.cpp
-;; ---------------------------------------------------------------------------
 
+
+;; SRC: string.cpp:ASPLITTXTLINES
+;; DOC:
      ASPLITTXTLINES  PRIVATE
+
+
+
+;; SRC: string.cpp:TOKENIZE
+;; DOC:
      TOKENIZE  PRIVATE
+
+
+
+;; SRC: TokenizeEx.cpp:TOKENIZEEX
+;; DOC:
      TOKENIZEEX  PRIVATE
+
+
+
+;; SRC: string.cpp:__AJOIN
+;; DOC:
      __AJOIN  PRIVATE
+
+
+
+;; SRC: string.cpp:NOCOMMENT
+;; DOC:
      NOCOMMENT  PRIVATE
+
+
+
+;; SRC: string.cpp:NCRC32
+;; DOC:
      NCRC32  PRIVATE
+
+
+
+;; SRC: string.cpp:NCRC8
+;; DOC:
      NCRC8  PRIVATE
+
+
+
+;; SRC: string.cpp:CHRR
+;; DOC:
      CHRR  PRIVATE
+
+
+
+;; SRC: string.cpp:MKSCSTR
+;; DOC:
      MKSCSTR  PRIVATE
+
+
+
+;; SRC: string.cpp:LSTRBITSET
+;; DOC:
      LSTRBITSET  PRIVATE
+
+
+
+;; SRC: string.cpp:LPSTRBITSET
+;; DOC:
      LPSTRBITSET  PRIVATE
+
+
+
+;; SRC: string.cpp:CSTRBITNOT
+;; DOC:
      CSTRBITNOT  PRIVATE
+
+
+
+;; SRC: string.cpp:PSTRBITNOT
+;; DOC:
      PSTRBITNOT  PRIVATE
+
+
+
+;; SRC: string.cpp:CSTRBITOR
+;; DOC:
      CSTRBITOR  PRIVATE
+
+
+
+;; SRC: string.cpp:CSTRBITXOR
+;; DOC:
      CSTRBITXOR  PRIVATE
+
+
+
+;; SRC: string.cpp:CSTRBITAND
+;; DOC:
      CSTRBITAND  PRIVATE
+
+
+
+;; SRC: string.cpp:PSTRBITOR
+;; DOC:
      PSTRBITOR  PRIVATE
+
+
+
+;; SRC: string.cpp:PSTRBITXOR
+;; DOC:
      PSTRBITXOR  PRIVATE
+
+
+
+;; SRC: string.cpp:PSTRBITAND
+;; DOC:
      PSTRBITAND  PRIVATE
+
+
+
+;; SRC: string.cpp:ASTRBITS
+;; DOC:
      ASTRBITS  PRIVATE
+
+
+
+;; SRC: string.cpp:NSTRBITCOUNT
+;; DOC:
      NSTRBITCOUNT  PRIVATE
+
+
+
+;; SRC: string.cpp:TRIMQUOTES
+;; DOC:
      TRIMQUOTES  PRIVATE
+
+
+
+;; SRC: string.cpp:TRIMZ
+;; DOC:
      TRIMZ  PRIVATE
+
+
+
+;; SRC: string.cpp:C5LTRIM
+;; DOC:
      C5LTRIM  PRIVATE
+
+
+
+;; SRC: string.cpp:C5RTRIM
+;; DOC:
      C5RTRIM  PRIVATE
+
+
+
+;; SRC: string.cpp:C5ALLTRIM
+;; DOC:
      C5ALLTRIM  PRIVATE
+
+
+
+;; SRC: string.cpp:STRTRIMEX
+;; DOC:
      STRTRIMEX  PRIVATE
+
+
+
+;; SRC: string.cpp:LSTRWILDCMPEX
+;; DOC:
      LSTRWILDCMPEX  PRIVATE
+
+
+
+;; SRC: string.cpp:LSTRWILDCMP
+;; DOC:
      LSTRWILDCMP  PRIVATE
+
+
+
+;; SRC: string.cpp:CDW2BITS
+;; DOC:
      CDW2BITS  PRIVATE
+
+
+
+;; SRC: string.cpp:NBITS2DW
+;; DOC:
      NBITS2DW  PRIVATE
+
+
+
+;; SRC: string.cpp:CGENRNDSTR
+;; DOC:
      CGENRNDSTR  PRIVATE
+
+
+
+;; SRC: string.cpp:OT4XB_NRAND
+;; DOC:
      OT4XB_NRAND  PRIVATE
+
+
+
+;; SRC: string.cpp:SPLIT_DATA_URI
+;; DOC:
      SPLIT_DATA_URI  PRIVATE
+
+
+
+;; SRC: ot4xb_c_exported.h:ot4xb_regex_match
+;; DOC:
      OT4XB_REGEX_MATCH  PRIVATE
+
+
+
+;; SRC: ot4xb_c_exported.h:ot4xb_regex_replace
+;; DOC:
      OT4XB_REGEX_REPLACE  PRIVATE
+
+
+
+;; SRC: ot4xb_regex.cpp:OT4XB_REGEX_SEARCH
+;; DOC:
      OT4XB_REGEX_SEARCH  PRIVATE
-;; _XPP_REG_FUN_(OT4XB_REGEX_EXEC )
 
 
 
-;; -------- ;; hex functions
-
+;; SRC: string.cpp:CHEX2BIN
+;; DOC:
      CHEX2BIN  PRIVATE
+
+
+
+;; SRC: string.cpp:CBIN2HEX
+;; DOC:
      CBIN2HEX  PRIVATE
+
+
+
+;; SRC: string.cpp:CDW2HEX
+;; DOC:
      CDW2HEX  PRIVATE
+
+
+
+;; SRC: string.cpp:NHEX2DW
+;; DOC:
      NHEX2DW  PRIVATE
+
+
+
+;; SRC: string.cpp:CW2HEX
+;; DOC:
      CW2HEX  PRIVATE
+
+
+
+;; SRC: string.cpp:NHEX2W
+;; DOC:
      NHEX2W  PRIVATE
+
+
+
+;; SRC: string.cpp:CBYTE2HEX
+;; DOC:
      CBYTE2HEX  PRIVATE
+
+
+
+;; SRC: string.cpp:NHEX2BYTE
+;; DOC:
      NHEX2BYTE  PRIVATE
 
+
+
+;; SRC: string.cpp:CQW2HEX
+;; DOC:
      CQW2HEX  PRIVATE
+
+
+
+;; SRC: string.cpp:NHEX2QW
+;; DOC:
      NHEX2QW  PRIVATE
+
+
+
+;; SRC: string.cpp:NHEX2DOUBLE
+;; DOC:
      NHEX2DOUBLE  PRIVATE
+
+
+
+;; SRC: string.cpp:CDOUBLE2HEX
+;; DOC:
      CDOUBLE2HEX  PRIVATE
 
-;; ------------- encode/decode
+
+
+;; SRC: string.cpp:__B64ENC
+;; DOC:
      __B64ENC  PRIVATE
+
+
+
+;; SRC: string.cpp:__B64DEC
+;; DOC:
      __B64DEC  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_json.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: ot4xb_json.cpp:OT4XB_JSON_PARSE
+;; DOC:
      OT4XB_JSON_PARSE  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; Unicode.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: Unicode.cpp:CSZANSI2WIDE
+;; DOC:
      CSZANSI2WIDE  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:CSZWIDE2ANSI
+;; DOC:
      CSZWIDE2ANSI  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:UNICODEDYNSTR
+;; DOC:
      UNICODEDYNSTR  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:CUTF8TOANSI
+;; DOC:
      CUTF8TOANSI  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:CANSITOUTF8
+;; DOC:
      CANSITOUTF8  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:CUTF8TOOEM
+;; DOC:
      CUTF8TOOEM  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:COEMTOUTF8
+;; DOC:
      COEMTOUTF8  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:PEEKWSTR
+;; DOC:
      PEEKWSTR  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:CUTF8TOWIDE
+;; DOC:
      CUTF8TOWIDE  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:_MB2W
+;; DOC:
      _MB2W  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:_W2MB
+;; DOC:
      _W2MB  PRIVATE
+
+
+
+;; SRC: Unicode.cpp:_MB2MB
+;; DOC:
      _MB2MB  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; Container.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: Container.cpp:TYPE2EMPTYVALUE
+;; DOC:
      TYPE2EMPTYVALUE  PRIVATE
+
+
+
+;; SRC: Container.cpp:PPMARSHALL2ARRAY
+;; DOC:
      PPMARSHALL2ARRAY  PRIVATE
+
+
+
+;; SRC: Container.cpp:ARRAY2PPMARSHALL
+;; DOC:
      ARRAY2PPMARSHALL  PRIVATE
+
+
+
+;; SRC: Container.cpp:PSZZ2ARRAY
+;; DOC:
      PSZZ2ARRAY  PRIVATE
+
+
+
+;; SRC: Container.cpp:ARRAY2PSZZ
+;; DOC:
      ARRAY2PSZZ  PRIVATE
+
+
+
+;; SRC: Container.cpp:LCALLFUNCPA
+;; DOC:
      LCALLFUNCPA  PRIVATE
+
+
+
+;; SRC: Container.cpp:LCALLMETHODPA
+;; DOC:
      LCALLMETHODPA  PRIVATE
+
+
+
+;; SRC: Container.cpp:CALLFUNCTION
+;; DOC:
      CALLFUNCTION  PRIVATE
+
+
+
+;; SRC: Container.cpp:LOBJGETMEMBER
+;; DOC:
      LOBJGETMEMBER  PRIVATE
+
+
+
+;; SRC: Container.cpp:LOBJSETMEMBER
+;; DOC:
      LOBJSETMEMBER  PRIVATE
+
+
+
+;; SRC: Container.cpp:_VAR2CON
+;; DOC:
      _VAR2CON  PRIVATE
+
+
+
+;; SRC: Container.cpp:_CON2VAR
+;; DOC:
      _CON2VAR  PRIVATE
+
+
+
+;; SRC: Container.cpp:_CONRELEASE
+;; DOC:
      _CONRELEASE  PRIVATE
+
+
+
+;; SRC: Container.cpp:OT4XB_MEMVAR_SETGET
+;; DOC:
      OT4XB_MEMVAR_SETGET  PRIVATE
+
+
+
+;; SRC: Container.cpp:_CONGENERICBREAKCB
+;; DOC:
      _CONGENERICBREAKCB  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VDEF
+;; DOC:
      __VDEF  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VBLOCK
+;; DOC:
      __VBLOCK  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VNUM
+;; DOC:
      __VNUM  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VLOWER
+;; DOC:
      __VLOWER  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VUPPER
+;; DOC:
      __VUPPER  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VSTR
+;; DOC:
      __VSTR  PRIVATE
+
+
+
+;; SRC: Container.cpp:__ANEW
+;; DOC:
      __ANEW  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VCLSPTR
+;; DOC:
      __VCLSPTR  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VMASK
+;; DOC:
      __VMASK  PRIVATE
+
+
+
+;; SRC: Container.cpp:__XB_TYPE
+;; DOC:
      __XB_TYPE  PRIVATE
+
+
+
+;; SRC: Container.cpp:__APEEK
+;; DOC:
      __APEEK  PRIVATE
+
+
+
+;; SRC: Container.cpp:__VPEEK
+;; DOC:
      __VPEEK  PRIVATE
+
+
+
+;; SRC: Container.cpp:__ANEXT
+;; DOC:
      __ANEXT  PRIVATE
+
+
+
+;; SRC: Container.cpp:__XML_FV
+;; DOC:
      __XML_FV  PRIVATE
+
+
+
+;; SRC: Container.cpp:__XML_FV_GET_VALUE
+;; DOC:
      __XML_FV_GET_VALUE  PRIVATE
+
+
+
+;; SRC: Container.cpp:__V2FV
+;; DOC:
      __V2FV  PRIVATE
+
+
+
+;; SRC: Container.cpp:__V2_CSV_CELL
+;; DOC:
      __V2_CSV_CELL  PRIVATE
+
+
+
+;; SRC: Container.cpp:OT4XB_QLOOP
+;; DOC:
      OT4XB_QLOOP  PRIVATE
 
+
+
+;; SRC: ot4xb_vtran.cpp:__VCMP
+;; DOC:
      __VCMP  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_vtran.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: ot4xb_vtran.cpp:__VTRAN
+;; DOC:
      __VTRAN  PRIVATE
 
 
 
-;; ---------------------------------------------------------------------------
-;; Memory.cpp
-;; ---------------------------------------------------------------------------
+;; SRC: memory.cpp:_XGRAB_COUNT_
+;; DOC:
      _XGRAB_COUNT_  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XGRAB
+;; DOC:
      _XGRAB  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XFREE
+;; DOC:
      _XFREE  PRIVATE
+
+
+
+;; SRC: memory.cpp:_VGRAB
+;; DOC:
      _VGRAB  PRIVATE
+
+
+
+;; SRC: memory.cpp:_VFREE
+;; DOC:
      _VFREE  PRIVATE
+
+
+
+;; SRC: memory.cpp:_PGRAB
+;; DOC:
      _PGRAB  PRIVATE
+
+
+
+;; SRC: memory.cpp:_PFREE
+;; DOC:
      _PFREE  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BSET
+;; DOC:
      _BSET  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BMOVE
+;; DOC:
      _BMOVE  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BDUP
+;; DOC:
      _BDUP  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BCOPYWITHTABLE
+;; DOC:
      _BCOPYWITHTABLE  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BCOPY
+;; DOC:
      _BCOPY  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BCOPYF
+;; DOC:
      _BCOPYF  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BCMP
+;; DOC:
      _BCMP  PRIVATE
+
+
+
+;; SRC: memory.cpp:_BSCAN
+;; DOC:
      _BSCAN  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRCPY
+;; DOC:
      _XSTRCPY  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XXSTRCPY
+;; DOC:
      _XXSTRCPY  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTCCPY
+;; DOC:
      _XSTCCPY  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRNCPY
+;; DOC:
      _XSTRNCPY  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRCAT
+;; DOC:
      _XSTRCAT  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTPCHR
+;; DOC:
      _XSTPCHR  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTPBLK
+;; DOC:
      _XSTPBLK  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRLEN
+;; DOC:
      _XSTRLEN  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRDUP
+;; DOC:
      _XSTRDUP  PRIVATE
+
+
+
+;; SRC: memory.cpp:_XSTRAT
+;; DOC:
      _XSTRAT  PRIVATE
+
+
+
+;; SRC: memory.cpp:_SHIFT_PTR_
+;; DOC:
      _SHIFT_PTR_  PRIVATE
 
 
 
-;; ---------------------------------------------------------------------------
-;; PeekPoke.cpp
-;; ---------------------------------------------------------------------------
+;; SRC: PeekPoke.cpp:PEEKSTR
+;; DOC:
      PEEKSTR  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKESTR
+;; DOC:
      POKESTR  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKBYTE
+;; DOC:
      PEEKBYTE  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEBYTE
+;; DOC:
      POKEBYTE  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKWORD
+;; DOC:
      PEEKWORD  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKSHORT
+;; DOC:
      PEEKSHORT  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEWORD
+;; DOC:
      POKEWORD  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKDWORD
+;; DOC:
      PEEKDWORD  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEDWORD
+;; DOC:
      POKEDWORD  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKDOUBLE
+;; DOC:
      PEEKDOUBLE  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEDOUBLE
+;; DOC:
      POKEDOUBLE  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKFLOAT
+;; DOC:
      PEEKFLOAT  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEFLOAT
+;; DOC:
      POKEFLOAT  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKWORDNET
+;; DOC:
      PEEKWORDNET  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PEEKDWORDNET
+;; DOC:
      PEEKDWORDNET  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEWORDNET
+;; DOC:
      POKEWORDNET  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:POKEDWORDNET
+;; DOC:
      POKEDWORDNET  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:__I8
+;; DOC:
      __I8  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:__I16
+;; DOC:
      __I16  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:__I32
+;; DOC:
      __I32  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:__F32
+;; DOC:
      __F32  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:__F64
+;; DOC:
      __F64  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PPVTBL2A
+;; DOC:
      PPVTBL2A  PRIVATE
+
+
+
+;; SRC: PeekPoke.cpp:PPVTBL2N
+;; DOC:
      PPVTBL2N  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; TGXbStack.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: TGStack.cpp:TGXBSTACK
+;; DOC:
      TGXBSTACK  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; TLXbStack.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: TLXbStack.cpp:TLSSTACKTOP
+;; DOC:
      TLSSTACKTOP  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:TLSSTACKPUSH
+;; DOC:
      TLSSTACKPUSH  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:TLSSTACKPOP
+;; DOC:
      TLSSTACKPOP  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:TLSSTACKCOUNT
+;; DOC:
      TLSSTACKCOUNT  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:TLS
+;; DOC:
      TLS  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:WITHOBJECTSTACKTOP
+;; DOC:
      WITHOBJECTSTACKTOP  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:WITHOBJECTSTACKPUSH
+;; DOC:
      WITHOBJECTSTACKPUSH  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:WITHOBJECTSTACKPOP
+;; DOC:
      WITHOBJECTSTACKPOP  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:WITHOBJECTSTACKCOUNT
+;; DOC:
      WITHOBJECTSTACKCOUNT  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:WITHOBJECTSTACKRECOVER
+;; DOC:
      WITHOBJECTSTACKRECOVER  PRIVATE
 
+
+
+;; SRC: TLXbStack.cpp:XBTLSALLOC
+;; DOC:
      XBTLSALLOC  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:XBTLSFREE
+;; DOC:
      XBTLSFREE  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:XBTLSSETVALUE
+;; DOC:
      XBTLSSETVALUE  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:XBTLSGETVALUE
+;; DOC:
      XBTLSGETVALUE  PRIVATE
 
+
+
+;; SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR
+;; DOC:
      OT4XB_ARRAY_ITERATOR  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR_STEP
+;; DOC:
      OT4XB_ARRAY_ITERATOR_STEP  PRIVATE
+
+
+
+;; SRC: TLXbStack.cpp:OT4XB_ARRAY_ITERATOR_INDEX
+;; DOC:
      OT4XB_ARRAY_ITERATOR_INDEX  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; gwst.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: gwst.cpp:GWST
+;; DOC:
      GWST  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BOOL_
+;; DOC:
      _GWST_XBSETGET_BOOL_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BYTEBOOL_
+;; DOC:
      _GWST_XBSETGET_BYTEBOOL_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BYTE_
+;; DOC:
      _GWST_XBSETGET_BYTE_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SINT8_
+;; DOC:
      _GWST_XBSETGET_SINT8_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_WORD_
+;; DOC:
      _GWST_XBSETGET_WORD_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SINT16_
+;; DOC:
      _GWST_XBSETGET_SINT16_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORD_
+;; DOC:
      _GWST_XBSETGET_DWORD_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_UINT32_
+;; DOC:
      _GWST_XBSETGET_UINT32_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORD64_
+;; DOC:
      _GWST_XBSETGET_DWORD64_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_NINT64_
+;; DOC:
      _GWST_XBSETGET_NINT64_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_PCLIPVAR_
+;; DOC:
      _GWST_XBSETGET_PCLIPVAR_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_XPPGUIWND_
+;; DOC:
      _GWST_XBSETGET_XPPGUIWND_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_FLOAT_
+;; DOC:
      _GWST_XBSETGET_FLOAT_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DOUBLE_
+;; DOC:
      _GWST_XBSETGET_DOUBLE_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_LPSTR_
+;; DOC:
      _GWST_XBSETGET_LPSTR_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_BINSTR_
+;; DOC:
      _GWST_XBSETGET_BINSTR_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SZSTR_
+;; DOC:
      _GWST_XBSETGET_SZSTR_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_SZWSTR_
+;; DOC:
      _GWST_XBSETGET_SZWSTR_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DYNSZ_
+;; DOC:
      _GWST_XBSETGET_DYNSZ_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_WORDNET_
+;; DOC:
      _GWST_XBSETGET_WORDNET_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_DWORDNET_
+;; DOC:
      _GWST_XBSETGET_DWORDNET_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_XDATE_
+;; DOC:
      _GWST_XBSETGET_XDATE_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_POINTER32_
+;; DOC:
      _GWST_XBSETGET_POINTER32_  PRIVATE
+
+
+
+;; SRC: gwst_xb_setget.cpp:_GWST_XBSETGET_HANDLE_
+;; DOC:
      _GWST_XBSETGET_HANDLE_  PRIVATE
-;; ---------------------------------------------------------------------------
-;; XbClass
-;; ---------------------------------------------------------------------------
+
+
+
+;; SRC: TXbClass_internal.cpp:_XBMTPF1_
+;; DOC:
      _XBMTPF1_  PRIVATE
+
+
+
+;; SRC: TXbClass.cpp:TXBCLASS
+;; DOC:
      TXBCLASS  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; Num64.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: Num64.cpp:LONGLONG2DOUBLE
+;; DOC:
      LONGLONG2DOUBLE  PRIVATE
+
+
+
+;; SRC: Num64.cpp:DOUBLE2LONGLONG
+;; DOC:
      DOUBLE2LONGLONG  PRIVATE
+
+
+
+;; SRC: Num64.cpp:ULONGLONG2DOUBLE
+;; DOC:
      ULONGLONG2DOUBLE  PRIVATE
+
+
+
+;; SRC: Num64.cpp:DOUBLE2ULONGLONG
+;; DOC:
      DOUBLE2ULONGLONG  PRIVATE
+
+
+
+;; SRC: Num64.cpp:GETNUMFORMAT
+;; DOC:
      GETNUMFORMAT  PRIVATE
+
+
+
+;; SRC: Num64.cpp:LISNUMF64
+;; DOC:
      LISNUMF64  PRIVATE
+
+
+
+;; SRC: Num64.cpp:SETNUMFORMAT
+;; DOC:
      SETNUMFORMAT  PRIVATE
+
+
+
+;; SRC: Num64.cpp:_LARGE_INTEGER_
+;; DOC:
      _LARGE_INTEGER_  PRIVATE
+
+
+
+;; SRC: Num64.cpp:wapist_LARGE_INTEGER
+;; DOC:
      LARGE_INTEGER =  wapist_LARGE_INTEGER  PRIVATE
+
+
+
+;; SRC: Num64.cpp:wapist_ULARGE_INTEGER
+;; DOC:
      ULARGE_INTEGER =  wapist_ULARGE_INTEGER  PRIVATE
+
+
+
+;; SRC: Num64.cpp:MAKE_QWORD
+;; DOC:
      MAKE_QWORD  PRIVATE
+
+
+
+;; SRC: Num64.cpp:MAKE_INT64
+;; DOC:
      MAKE_INT64  PRIVATE
+
+
+
+;; SRC: Num64.cpp:LO_DWORD
+;; DOC:
      LO_DWORD  PRIVATE
+
+
+
+;; SRC: Num64.cpp:HI_DWORD
+;; DOC:
      HI_DWORD  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64CMP
+;; DOC:
      I64CMP  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64SUM
+;; DOC:
      I64SUM  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64REST
+;; DOC:
      I64REST  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64MULT
+;; DOC:
      I64MULT  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64DIV
+;; DOC:
      I64DIV  PRIVATE
+
+
+
+;; SRC: Num64.cpp:I64MOD
+;; DOC:
      I64MOD  PRIVATE
 
 
 
-;; ---------------------------------------------------------------------------
-;; uuid.cpp
-;; ---------------------------------------------------------------------------
+;; SRC: UUID.CPP:_UUIDCREATE
+;; DOC:
      _UUIDCREATE  PRIVATE
+
+
+
+;; SRC: UUID.CPP:UUIDCREATESTR
+;; DOC:
      UUIDCREATESTR  PRIVATE
+
+
+
+;; SRC: UUID.CPP:CUUIDCREATENAME
+;; DOC:
      CUUIDCREATENAME  PRIVATE
+
+
+
+;; SRC: UUID.CPP:CUUIDCREATENAMEEX
+;; DOC:
      CUUIDCREATENAMEEX  PRIVATE
+
+
+
+;; SRC: UUID.CPP:UUIDFROMSTRING
+;; DOC:
      UUIDFROMSTRING  PRIVATE
+
+
+
+;; SRC: UUID.CPP:UUIDTOSTRING
+;; DOC:
      UUIDTOSTRING  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; fpCall.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: fpCall.cpp:SET_FPCALL_FLAGS
+;; DOC:
      SET_FPCALL_FLAGS  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:_DUMMYSTDCBK
+;; DOC:
      _DUMMYSTDCBK  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NLOADLIBRARY
+;; DOC:
      NLOADLIBRARY  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:LFREELIBRARY
+;; DOC:
      LFREELIBRARY  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:_FPCALL_PUSHFLAGS_
+;; DOC:
      _FPCALL_PUSHFLAGS_  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NFPCALL
+;; DOC:
      NFPCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NFPGET
+;; DOC:
      NFPGET  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:F2T
+;; DOC:
      F2T  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:XBFPCALL
+;; DOC:
      XBFPCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NDFPCALL
+;; DOC:
      NDFPCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:QWFPCALL
+;; DOC:
      QWFPCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NFPGETLASTERROR
+;; DOC:
      NFPGETLASTERROR  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:QFPGETLASTPOINTER
+;; DOC:
      QFPGETLASTPOINTER  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:QFPSETLASTPOINTER
+;; DOC:
      QFPSETLASTPOINTER  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:NGETPROCADDRESS
+;; DOC:
      NGETPROCADDRESS  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:FPQCALL
+;; DOC:
      FPQCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:IFPQCALL
+;; DOC:
      IFPQCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:FPLQCALL2
+;; DOC:
      FPLQCALL2  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:FPLQCALL
+;; DOC:
      FPLQCALL  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:OT4XB_GENERIC_POINTER
+;; DOC:
      OT4XB_GENERIC_POINTER  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:PT2GP
+;; DOC:
      PT2GP  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:CPRINTF
+;; DOC:
      CPRINTF  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:__PRINTF
+;; DOC:
      __PRINTF  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:LWRITELOGLINE
+;; DOC:
      LWRITELOGLINE  PRIVATE
+
+
+
+;; SRC: LogTool.cpp:LSENDLOGSTRFL
+;; DOC:
      LSENDLOGSTRFL  PRIVATE
+
+
+
+;; SRC: LogTool.cpp:LSENDLOGSTR
+;; DOC:
      LSENDLOGSTR  PRIVATE
+
+
+
+;; SRC: LogTool.cpp:REGISTER_USER_LOG_UUID
+;; DOC:
      REGISTER_USER_LOG_UUID  PRIVATE
+
+
+
+;; SRC: LogTool.cpp:OT4XB_LSENDLOGSTRFL
+;; DOC:
      OT4XB_LSENDLOGSTRFL  PRIVATE
+
+
+
+;; SRC: LogTool.cpp:OT4XB_LSENDLOGSTR
+;; DOC:
      OT4XB_LSENDLOGSTR  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:CFMTRESMSG
+;; DOC:
      CFMTRESMSG  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:CFMTSTRMSG
+;; DOC:
      CFMTSTRMSG  PRIVATE
+
+
+
+;; SRC: fpCall.cpp:CFMTSYSMSG
+;; DOC:
      CFMTSYSMSG  PRIVATE
 
 
 
-
-;; ---------------------------------------------------------------------------
-;; TBinFile.cpp
-;; ---------------------------------------------------------------------------
+;; SRC: ot4xb_c_exported.h:lMemoWrite
+;; DOC:
      LMEMOWRITE  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:CMEMOREADEX
+;; DOC:
      CMEMOREADEX  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:TBINFILE
+;; DOC:
      TBINFILE  PRIVATE
+
+
+
+;; SRC: TFileWriter.cpp:TFILEWRITER
+;; DOC:
      TFILEWRITER  PRIVATE
 
+
+
+;; SRC: TBinFile.cpp:LMEMOSTGWRITE
+;; DOC:
      LMEMOSTGWRITE  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:CMEMOSTGREAD
+;; DOC:
      CMEMOSTGREAD  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:LMEMOSTGEXPORT
+;; DOC:
      LMEMOSTGEXPORT  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:LMEMOSTGIMPORT
+;; DOC:
      LMEMOSTGIMPORT  PRIVATE
+
+
+
+;; SRC: TBinFile.cpp:CMEMOSTGLIST
+;; DOC:
      CMEMOSTGLIST  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; FileTime.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: FileTime.cpp:wapist_FILETIME64
+;; DOC:
      FILETIME64 =  wapist_FILETIME64  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_SETTS
+;; DOC:
      FT64_SETTS  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_GETTS
+;; DOC:
      FT64_GETTS  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_TOHTTP
+;; DOC:
      FT64_TOHTTP  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_SETDATETIME
+;; DOC:
      FT64_SETDATETIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_GETDATETIME
+;; DOC:
      FT64_GETDATETIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_GETDATETIMESEC
+;; DOC:
      FT64_GETDATETIMESEC  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_NOW
+;; DOC:
      FT64_NOW  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_ELAPMILLISECONDS
+;; DOC:
      FT64_ELAPMILLISECONDS  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_ELAPSECONDS
+;; DOC:
      FT64_ELAPSECONDS  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_COMPARE
+;; DOC:
      FT64_COMPARE  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_ADD
+;; DOC:
      FT64_ADD  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_ADD_Y
+;; DOC:
      FT64_ADD_Y  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_ADD_M
+;; DOC:
      FT64_ADD_M  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_TO_DOSDATETIME
+;; DOC:
      FT64_TO_DOSDATETIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_FROM_DOSDATETIME
+;; DOC:
      FT64_FROM_DOSDATETIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_TO_UNIXTIME
+;; DOC:
      FT64_TO_UNIXTIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_FROM_UNIXTIME
+;; DOC:
      FT64_FROM_UNIXTIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_TO_EXCELTIME
+;; DOC:
      FT64_TO_EXCELTIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_FROM_EXCELTIME
+;; DOC:
      FT64_FROM_EXCELTIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:DT2ISO8601
+;; DOC:
      DT2ISO8601  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_SETRFC822DATE
+;; DOC:
      FT64_SETRFC822DATE  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_TOLOCALTIME
+;; DOC:
      FT64_TOLOCALTIME  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_STRF
+;; DOC:
      FT64_STRF  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_GET_CKF32TS
+;; DOC:
      FT64_GET_CKF32TS  PRIVATE
+
+
+
+;; SRC: FileTime.cpp:FT64_SET_CKF32TS
+;; DOC:
      FT64_SET_CKF32TS  PRIVATE
 
 
 
-;; ---------------------------------------------------------------------------
-;; THashTable.cpp
-;; ---------------------------------------------------------------------------
-
+;; SRC: THDict.cpp:_HDICT_NEW
+;; DOC:
      _HDICT_NEW  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_KEY_COMPARE
+;; DOC:
      _HDICT_KEY_COMPARE  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_DESTROY
+;; DOC:
      _HDICT_DESTROY  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_SETPROP
+;; DOC:
      _HDICT_SETPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_GETPROP
+;; DOC:
      _HDICT_GETPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ISPROP
+;; DOC:
      _HDICT_ISPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_GETPROP_RAW_
+;; DOC:
      _HDICT_GETPROP_RAW_  PRIVATE
 
+
+
+;; SRC: THDict.cpp:_HDICT_REMOVEPROP
+;; DOC:
      _HDICT_REMOVEPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_REMOVEALL
+;; DOC:
      _HDICT_REMOVEALL  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_COUNT
+;; DOC:
      _HDICT_COUNT  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ITERATE_STEP
+;; DOC:
      _HDICT_ITERATE_STEP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ITERATE_CB
+;; DOC:
      _HDICT_ITERATE_CB  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ADDPROPFROMARRAY
+;; DOC:
      _HDICT_ADDPROPFROMARRAY  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ADDPROPFROMINISTRING
+;; DOC:
      _HDICT_ADDPROPFROMINISTRING  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ADD_ENV_STRINGS
+;; DOC:
      _HDICT_ADD_ENV_STRINGS  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_ADD_HTTP_HEADERS
+;; DOC:
      _HDICT_ADD_HTTP_HEADERS  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICT_FROM_ZKDW
+;; DOC:
      _HDICT_FROM_ZKDW  PRIVATE
-;; -------------
+
+
+
+;; SRC: UNKNOWN:THDICTEX
+;; DOC:
      THDICTEX  PRIVATE
 
-;; -------------
+
+
+;; SRC: ot4xb_cryptography.cpp:OT4XB_HASH
+;; DOC:
      OT4XB_HASH  PRIVATE
+
+
+
+;; SRC: ot4xb_cng.cpp:OT4XB_CNG
+;; DOC:
      OT4XB_CNG  PRIVATE
 
+
+
+;; SRC: ot4xb_argon2.cpp:ARGON2_HASH
+;; DOC:
      ARGON2_HASH  PRIVATE
+
+
+
+;; SRC: ot4xb_argon2.cpp:ARGON2_VERIFY
+;; DOC:
      ARGON2_VERIFY  PRIVATE
 
-;; ------------- case sensitive hash table
+
+
+;; SRC: THDict.cpp:_HDICTCS_COUNT
+;; DOC:
      _HDICTCS_COUNT  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_DESTROY
+;; DOC:
      _HDICTCS_DESTROY  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_GETPROP
+;; DOC:
      _HDICTCS_GETPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_ISPROP
+;; DOC:
      _HDICTCS_ISPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_KEY_COMPARE
+;; DOC:
      _HDICTCS_KEY_COMPARE  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_NEW
+;; DOC:
      _HDICTCS_NEW  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_REMOVEALL
+;; DOC:
      _HDICTCS_REMOVEALL  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_REMOVEPROP
+;; DOC:
      _HDICTCS_REMOVEPROP  PRIVATE
+
+
+
+;; SRC: THDict.cpp:_HDICTCS_SETPROP
+;; DOC:
      _HDICTCS_SETPROP  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; OT4XB_EXPANDO.CPP
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: ot4xb_expando.cpp:OT4XB_ITERATE_ARRAY_CB
+;; DOC:
      OT4XB_ITERATE_ARRAY_CB  PRIVATE
+
+
+
+;; SRC: ot4xb_expando.cpp:_OT4XB_EXPANDO_
+;; DOC:
      _OT4XB_EXPANDO_  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; MD5.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: ot4xb_md5.cpp:STR2MD5HEX
+;; DOC:
      STR2MD5HEX  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:STR2MD5BIN
+;; DOC:
      STR2MD5BIN  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:HFILE2MD5HEX
+;; DOC:
      HFILE2MD5HEX  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:HFILE2MD5BIN
+;; DOC:
      HFILE2MD5BIN  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:FILE2MD5HEX
+;; DOC:
      FILE2MD5HEX  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:FILE2MD5BIN
+;; DOC:
      FILE2MD5BIN  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_NEW
+;; DOC:
      _MD5_NEW  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_STR
+;; DOC:
      _MD5_STR  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_HFILE
+;; DOC:
      _MD5_HFILE  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_FINALIZE
+;; DOC:
      _MD5_FINALIZE  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_GETHEX
+;; DOC:
      _MD5_GETHEX  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_GETBIN
+;; DOC:
      _MD5_GETBIN  PRIVATE
+
+
+
+;; SRC: ot4xb_md5.cpp:_MD5_DESTROY
+;; DOC:
      _MD5_DESTROY  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; gdipus_helper.cpp
-;; ---------------------------------------------------------------------------
 
+
+;; SRC: UNKNOWN:GDIPLUS_HELPER
+;; DOC:
      GDIPLUS_HELPER  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; array2dbf.cpp
-;; ---------------------------------------------------------------------------
 
+
+;; SRC: array2dbf.cpp:_A2DBF_
+;; DOC:
      _A2DBF_  PRIVATE
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_IUnknow.cpp
-;; ---------------------------------------------------------------------------
+
+
+;; SRC: UNKNOWN:OT4XB_IUNKNOW
+;; DOC:
      OT4XB_IUNKNOW  PRIVATE
+
+
+
+;; SRC: UNKNOWN:OT4XB_IDISPATCH
+;; DOC:
      OT4XB_IDISPATCH  PRIVATE
+
+
+
+;; SRC: UNKNOWN:OT4XB_ISEQUENTIALSTREAM
+;; DOC:
      OT4XB_ISEQUENTIALSTREAM  PRIVATE
+
+
+
+;; SRC: UNKNOWN:OT4XB_ISTREAM
+;; DOC:
      OT4XB_ISTREAM  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_ndtg.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_CREATE_TYPEDEF_TABLE
+;; DOC:
      NDTG_CREATE_TYPEDEF_TABLE  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_DESTROY_TYPEDEF_TABLE
+;; DOC:
      NDTG_DESTROY_TYPEDEF_TABLE  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_ADD_TYPE
+;; DOC:
      NDTG_ADD_TYPE  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_SET_ATTRIB_CB
+;; DOC:
      NDTG_SET_ATTRIB_CB  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_GET_TYPE
+;; DOC:
      NDTG_GET_TYPE  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_ADD_PROP
+;; DOC:
      NDTG_ADD_PROP  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_BEGIN
+;; DOC:
      NDTG_STACK_BEGIN  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_STEP
+;; DOC:
      NDTG_STACK_STEP  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_SEAL
+;; DOC:
      NDTG_STACK_SEAL  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_UNSEALED
+;; DOC:
      NDTG_STACK_UNSEALED  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_PUTVAL
+;; DOC:
      NDTG_STACK_PUTVAL  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_ATTRIB
+;; DOC:
      NDTG_STACK_ATTRIB  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_ATTRIB_SEAL
+;; DOC:
      NDTG_STACK_ATTRIB_SEAL  PRIVATE
+
+
+
+;; SRC: ot4xb_ndtg.cpp:NDTG_STACK_END
+;; DOC:
      NDTG_STACK_END  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_iocp.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_iocp.cpp:OT4XB_IOCP
+;; DOC:
      OT4XB_IOCP  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_dirty_dlgedit.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_dirty_dlgedit.cpp:OT4XB_DIRTY_DLGEDIT
+;; DOC:
      OT4XB_DIRTY_DLGEDIT  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_disphelper.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_disphelper.cpp:_DH_CREATEOBJECT
+;; DOC:
      _DH_CREATEOBJECT  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_GETOBJECT
+;; DOC:
      _DH_GETOBJECT  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_CREATEOBJECTEX
+;; DOC:
      _DH_CREATEOBJECTEX  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_GETOBJECTEX
+;; DOC:
      _DH_GETOBJECTEX  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_CALLMETHOD
+;; DOC:
      _DH_CALLMETHOD  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_PUTVALUE
+;; DOC:
      _DH_PUTVALUE  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_PUTREF
+;; DOC:
      _DH_PUTREF  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_GETVALUE
+;; DOC:
      _DH_GETVALUE  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_INVOKE
+;; DOC:
      _DH_INVOKE  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_INVOKEARRAY
+;; DOC:
      _DH_INVOKEARRAY  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_CALLMETHODV
+;; DOC:
      _DH_CALLMETHODV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_PUTVALUEV
+;; DOC:
      _DH_PUTVALUEV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_PUTREFV
+;; DOC:
      _DH_PUTREFV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_GETVALUEV
+;; DOC:
      _DH_GETVALUEV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_INVOKEV
+;; DOC:
      _DH_INVOKEV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_ENUMBEGIN
+;; DOC:
      _DH_ENUMBEGIN  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_ENUMBEGINV
+;; DOC:
      _DH_ENUMBEGINV  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_ENUMNEXTOBJECT
+;; DOC:
      _DH_ENUMNEXTOBJECT  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_ENUMNEXTVARIANT
+;; DOC:
      _DH_ENUMNEXTVARIANT  PRIVATE
+
+
+
+;; SRC: ot4xb_disphelper.cpp:_DH_TOGGLEEXCEPTIONS
+;; DOC:
      _DH_TOGGLEEXCEPTIONS  PRIVATE
 
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_regexp.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_regexp.cpp:_RGX
+;; DOC:
      _RGX  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_NEW
+;; DOC:
      _RGX_NEW  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_SET_PATTERN
+;; DOC:
      _RGX_SET_PATTERN  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_SET_FLAGS
+;; DOC:
      _RGX_SET_FLAGS  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_DESTROY
+;; DOC:
      _RGX_DESTROY  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_EXEC
+;; DOC:
      _RGX_EXEC  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_TEST
+;; DOC:
      _RGX_TEST  PRIVATE
+
+
+
+;; SRC: ot4xb_regexp.cpp:_RGX_REPLACE
+;; DOC:
      _RGX_REPLACE  PRIVATE
 
-;; _XPP_REG_FUN_( _STRING_MAP_TABLE         )
-;; _XPP_REG_FUN_( _STRING_MAP_TABLE_NEW     )
-;; _XPP_REG_FUN_( _STRING_MAP_TABLE_DESTROY )
-;; _XPP_REG_FUN_( _STRING_MAP_TABLE_EXEC    )
 
-;; ---------------------------------------------------------------------------
-;; ot4xb_sqlstr.cpp
-;; ---------------------------------------------------------------------------
+
+;; SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY
+;; DOC:
      __SQLSTR_MONEY  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY_SUM
+;; DOC:
      __SQLSTR_MONEY_SUM  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:__SQLSTR_MONEY_SUBSTRACT
+;; DOC:
      __SQLSTR_MONEY_SUBSTRACT  PRIVATE
-;; ------
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_SQL_ESCAPE_STRING_ANSI
+;; DOC:
      OT4XB_SQL_ESCAPE_STRING_ANSI  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_SQL_DUMP_VALUE_ANSI
+;; DOC:
      OT4XB_SQL_DUMP_VALUE_ANSI  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_FLAG_ENUM
+;; DOC:
      OT4XB_GET_SQL_TYPE_FLAG_ENUM  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_ENUM
+;; DOC:
      OT4XB_GET_SQL_TYPE_ENUM  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_LEN
+;; DOC:
      OT4XB_GET_SQL_TYPE_LEN  PRIVATE
+
+
+
+;; SRC: ot4xb_sqlstr.cpp:OT4XB_GET_SQL_TYPE_DEC
+;; DOC:
      OT4XB_GET_SQL_TYPE_DEC  PRIVATE
 
 
 
-
-;; ---------------------------------------------------------------------------
-;; TPeFile.cpp
-;; ---------------------------------------------------------------------------
-;; ---------- _XPP_REG_FUN_( TPEFILE )
-
-;; ---------------------------------------------------------------------------
-;; common windows structures
-;; ---------------------------------------------------------------------------
+;; SRC: winapi_CommonStructures.cpp
+;; DOC:
      WAPIST__PRINTER_NOTIFY_INFO_DATA___DATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp
+;; DOC:
      WAPIST__PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ABC
+;; DOC:
      WAPIST_ABC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ABCFLOAT
+;; DOC:
      WAPIST_ABCFLOAT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ACCEL
+;; DOC:
      WAPIST_ACCEL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ADDJOB_INFO_1
+;; DOC:
      WAPIST_ADDJOB_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ALTTABINFO
+;; DOC:
      WAPIST_ALTTABINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BIDIOPTIONS
+;; DOC:
      WAPIST_BIDIOPTIONS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BITMAP
+;; DOC:
      WAPIST_BITMAP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BITMAPINFO
+;; DOC:
      WAPIST_BITMAPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BITMAPINFOHEADER
+;; DOC:
      WAPIST_BITMAPINFOHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BLENDFUNCTION
+;; DOC:
      WAPIST_BLENDFUNCTION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CHARFORMAT
+;; DOC:
      WAPIST_CHARFORMAT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CHARFORMAT2
+;; DOC:
      WAPIST_CHARFORMAT2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CHARRANGE
+;; DOC:
      WAPIST_CHARRANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CLSID
+;; DOC:
      WAPIST_CLSID  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COMPCOLOR
+;; DOC:
      WAPIST_COMPCOLOR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CURSORINFO
+;; DOC:
      WAPIST_CURSORINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DATATYPES_INFO_1
+;; DOC:
      WAPIST_DATATYPES_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DEVMODE
+;; DOC:
      WAPIST_DEVMODE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DIBSECTION
+;; DOC:
      WAPIST_DIBSECTION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DLGITEMTEMPLATE
+;; DOC:
      WAPIST_DLGITEMTEMPLATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DLGTEMPLATE
+;; DOC:
      WAPIST_DLGTEMPLATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_1
+;; DOC:
      WAPIST_DOC_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_2
+;; DOC:
      WAPIST_DOC_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DOC_INFO_3
+;; DOC:
      WAPIST_DOC_INFO_3  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DOCINFO
+;; DOC:
      WAPIST_DOCINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRAWPATRECT
+;; DOC:
      WAPIST_DRAWPATRECT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRAWTEXTPARAMS
+;; DOC:
      WAPIST_DRAWTEXTPARAMS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_1
+;; DOC:
      WAPIST_DRIVER_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_2
+;; DOC:
      WAPIST_DRIVER_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_3
+;; DOC:
      WAPIST_DRIVER_INFO_3  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_4
+;; DOC:
      WAPIST_DRIVER_INFO_4  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_5
+;; DOC:
      WAPIST_DRIVER_INFO_5  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRIVER_INFO_6
+;; DOC:
      WAPIST_DRIVER_INFO_6  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_EDITSTREAM
+;; DOC:
      WAPIST_EDITSTREAM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENCORRECTTEXT
+;; DOC:
      WAPIST_ENCORRECTTEXT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENDROPFILES
+;; DOC:
      WAPIST_ENDROPFILES  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENLINK
+;; DOC:
      WAPIST_ENLINK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENLOWFIRTF
+;; DOC:
      WAPIST_ENLOWFIRTF  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENOLEOPFAILED
+;; DOC:
      WAPIST_ENOLEOPFAILED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENPROTECTED
+;; DOC:
      WAPIST_ENPROTECTED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENSAVECLIPBOARD
+;; DOC:
      WAPIST_ENSAVECLIPBOARD  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENUMLOGFONT
+;; DOC:
      WAPIST_ENUMLOGFONT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ENUMLOGFONTEX
+;; DOC:
      WAPIST_ENUMLOGFONTEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_EXTLOGFONT
+;; DOC:
      WAPIST_EXTLOGFONT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_EXTLOGPEN
+;; DOC:
      WAPIST_EXTLOGPEN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FINDTEXT
+;; DOC:
      WAPIST_FINDTEXT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FINDTEXTEX
+;; DOC:
      WAPIST_FINDTEXTEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FIXED
+;; DOC:
      WAPIST_FIXED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FLASHWINFO
+;; DOC:
      WAPIST_FLASHWINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FONTSIGNATURE
+;; DOC:
      WAPIST_FONTSIGNATURE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FORM_INFO_1
+;; DOC:
      WAPIST_FORM_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FORMATRANGE
+;; DOC:
      WAPIST_FORMATRANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GCP_RESULTS
+;; DOC:
      WAPIST_GCP_RESULTS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GETTEXTEX
+;; DOC:
      WAPIST_GETTEXTEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GETTEXTLENGTHEX
+;; DOC:
      WAPIST_GETTEXTLENGTHEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GLYPHMETRICS
+;; DOC:
      WAPIST_GLYPHMETRICS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GLYPHSET
+;; DOC:
      WAPIST_GLYPHSET  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GUID
+;; DOC:
      WAPIST_GUID  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_GUITHREADINFO
+;; DOC:
      WAPIST_GUITHREADINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HARDWAREINPUT
+;; DOC:
      WAPIST_HARDWAREINPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HYPHENATEINFO
+;; DOC:
      WAPIST_HYPHENATEINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HYPHRESULT
+;; DOC:
      WAPIST_HYPHRESULT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ICONINFO
+;; DOC:
      WAPIST_ICONINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ICONMETRICS
+;; DOC:
      WAPIST_ICONMETRICS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IMAGEINFO
+;; DOC:
      WAPIST_IMAGEINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IMAGELISTDRAWPARAMS
+;; DOC:
      WAPIST_IMAGELISTDRAWPARAMS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IMECOMPTEXT
+;; DOC:
      WAPIST_IMECOMPTEXT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INPUT
+;; DOC:
      WAPIST_INPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_1
+;; DOC:
      WAPIST_JOB_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_2
+;; DOC:
      WAPIST_JOB_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_JOB_INFO_3
+;; DOC:
      WAPIST_JOB_INFO_3  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_KERNINGPAIR
+;; DOC:
      WAPIST_KERNINGPAIR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_KEYBDINPUT
+;; DOC:
      WAPIST_KEYBDINPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LASTINPUTINFO
+;; DOC:
      WAPIST_LASTINPUTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LOGBRUSH
+;; DOC:
      WAPIST_LOGBRUSH  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LOGBRUSH32
+;; DOC:
      WAPIST_LOGBRUSH32  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LOGFONT
+;; DOC:
      WAPIST_LOGFONT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LOGPALETTE
+;; DOC:
      WAPIST_LOGPALETTE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LOGPEN
+;; DOC:
      WAPIST_LOGPEN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MAT2
+;; DOC:
      WAPIST_MAT2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MDICREATESTRUCT
+;; DOC:
      WAPIST_MDICREATESTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MDINEXTMENU
+;; DOC:
      WAPIST_MDINEXTMENU  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUBARINFO
+;; DOC:
      WAPIST_MENUBARINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUEX_TEMPLATE_HEADER
+;; DOC:
      WAPIST_MENUEX_TEMPLATE_HEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUEX_TEMPLATE_ITEM
+;; DOC:
      WAPIST_MENUEX_TEMPLATE_ITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUGETOBJECTINFO
+;; DOC:
      WAPIST_MENUGETOBJECTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUINFO
+;; DOC:
      WAPIST_MENUINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMINFO
+;; DOC:
      WAPIST_MENUITEMINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMTEMPLATE
+;; DOC:
      WAPIST_MENUITEMTEMPLATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MENUITEMTEMPLATEHEADER
+;; DOC:
      WAPIST_MENUITEMTEMPLATEHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_METAFILEPICT
+;; DOC:
      WAPIST_METAFILEPICT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MINMAXINFO
+;; DOC:
      WAPIST_MINMAXINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MONITOR_INFO_1
+;; DOC:
      WAPIST_MONITOR_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MONITOR_INFO_2
+;; DOC:
      WAPIST_MONITOR_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MONITORINFO
+;; DOC:
      WAPIST_MONITORINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MONITORINFOEX
+;; DOC:
      WAPIST_MONITORINFOEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MOUSEINPUT
+;; DOC:
      WAPIST_MOUSEINPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MSG
+;; DOC:
      WAPIST_MSG  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MSGBOXPARAMS
+;; DOC:
      WAPIST_MSGBOXPARAMS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MSGFILTER
+;; DOC:
      WAPIST_MSGFILTER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NEWTEXTMETRIC
+;; DOC:
      WAPIST_NEWTEXTMETRIC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NEWTEXTMETRICEX
+;; DOC:
      WAPIST_NEWTEXTMETRICEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMHDR
+;; DOC:
      WAPIST_NMHDR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMRBAUTOSIZE
+;; DOC:
      WAPIST_NMRBAUTOSIZE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMREBAR
+;; DOC:
      WAPIST_NMREBAR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARAUTOBREAK
+;; DOC:
      WAPIST_NMREBARAUTOBREAK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARCHEVRON
+;; DOC:
      WAPIST_NMREBARCHEVRON  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARCHILDSIZE
+;; DOC:
      WAPIST_NMREBARCHILDSIZE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OBJECTPOSITIONS
+;; DOC:
      WAPIST_OBJECTPOSITIONS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OUTLINETEXTMETRIC
+;; DOC:
      WAPIST_OUTLINETEXTMETRIC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PAINTSTRUCT
+;; DOC:
      WAPIST_PAINTSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PALETTEENTRY
+;; DOC:
      WAPIST_PALETTEENTRY  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PANOSE
+;; DOC:
      WAPIST_PANOSE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PARAFORMAT
+;; DOC:
      WAPIST_PARAFORMAT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PARAFORMAT2
+;; DOC:
      WAPIST_PARAFORMAT2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_POINT
+;; DOC:
      WAPIST_POINT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_POINTFX
+;; DOC:
      WAPIST_POINTFX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_POINTL
+;; DOC:
      WAPIST_POINTL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_POINTS
+;; DOC:
      WAPIST_POINTS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_POLYTEXT
+;; DOC:
      WAPIST_POLYTEXT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_1
+;; DOC:
      WAPIST_PORT_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_2
+;; DOC:
      WAPIST_PORT_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PORT_INFO_3
+;; DOC:
      WAPIST_PORT_INFO_3  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_DEFAULTS
+;; DOC:
      WAPIST_PRINTER_DEFAULTS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_ENUM_VALUES
+;; DOC:
      WAPIST_PRINTER_ENUM_VALUES  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_1
+;; DOC:
      WAPIST_PRINTER_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_2
+;; DOC:
      WAPIST_PRINTER_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_3
+;; DOC:
      WAPIST_PRINTER_INFO_3  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_4
+;; DOC:
      WAPIST_PRINTER_INFO_4  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_5
+;; DOC:
      WAPIST_PRINTER_INFO_5  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_6
+;; DOC:
      WAPIST_PRINTER_INFO_6  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_7
+;; DOC:
      WAPIST_PRINTER_INFO_7  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_8
+;; DOC:
      WAPIST_PRINTER_INFO_8  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_INFO_9
+;; DOC:
      WAPIST_PRINTER_INFO_9  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_INFO
+;; DOC:
      WAPIST_PRINTER_NOTIFY_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_INFO_DATA
+;; DOC:
      WAPIST_PRINTER_NOTIFY_INFO_DATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_OPTIONS
+;; DOC:
      WAPIST_PRINTER_NOTIFY_OPTIONS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE
+;; DOC:
      WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTPROCESSOR_CAPS_1
+;; DOC:
      WAPIST_PRINTPROCESSOR_CAPS_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PRINTPROCESSOR_INFO_1
+;; DOC:
      WAPIST_PRINTPROCESSOR_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PROVIDOR_INFO_1
+;; DOC:
      WAPIST_PROVIDOR_INFO_1  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PROVIDOR_INFO_2
+;; DOC:
      WAPIST_PROVIDOR_INFO_2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PSFEATURE_CUSTPAPER
+;; DOC:
      WAPIST_PSFEATURE_CUSTPAPER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PSFEATURE_OUTPUT
+;; DOC:
      WAPIST_PSFEATURE_OUTPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PSINJECTDATA
+;; DOC:
      WAPIST_PSINJECTDATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PUNCTUATION
+;; DOC:
      WAPIST_PUNCTUATION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RASTERIZER_STATUS
+;; DOC:
      WAPIST_RASTERIZER_STATUS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RBHITTESTINFO
+;; DOC:
      WAPIST_RBHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_REBARBANDINFO
+;; DOC:
      WAPIST_REBARBANDINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_REBARINFO
+;; DOC:
      WAPIST_REBARINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RECT
+;; DOC:
      WAPIST_RECT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RECTL
+;; DOC:
      WAPIST_RECTL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_REOBJECT
+;; DOC:
      WAPIST_REOBJECT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_REPASTESPECIAL
+;; DOC:
      WAPIST_REPASTESPECIAL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_REQRESIZE
+;; DOC:
      WAPIST_REQRESIZE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RGBQUAD
+;; DOC:
      WAPIST_RGBQUAD  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RGNDATA
+;; DOC:
      WAPIST_RGNDATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RGNDATAHEADER
+;; DOC:
      WAPIST_RGNDATAHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SELCHANGE
+;; DOC:
      WAPIST_SELCHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SETTEXTEX
+;; DOC:
      WAPIST_SETTEXTEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SIZE
+;; DOC:
      WAPIST_SIZE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SIZEL
+;; DOC:
      WAPIST_SIZEL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SYSTEMTIME
+;; DOC:
      WAPIST_SYSTEMTIME  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBBUTTON
+;; DOC:
      WAPIST_TBBUTTON  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TEXTMETRIC
+;; DOC:
      WAPIST_TEXTMETRIC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TEXTRANGE
+;; DOC:
      WAPIST_TEXTRANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TITLEBARINFO
+;; DOC:
      WAPIST_TITLEBARINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TPMPARAMS
+;; DOC:
      WAPIST_TPMPARAMS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TRIVERTEX
+;; DOC:
      WAPIST_TRIVERTEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TTPOLYCURVE
+;; DOC:
      WAPIST_TTPOLYCURVE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TTPOLYGONHEADER
+;; DOC:
      WAPIST_TTPOLYGONHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WCRANGE
+;; DOC:
      WAPIST_WCRANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWINFO
+;; DOC:
      WAPIST_WINDOWINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWPLACEMENT
+;; DOC:
      WAPIST_WINDOWPLACEMENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WNDCLASS
+;; DOC:
      WAPIST_WNDCLASS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WNDCLASSEX
+;; DOC:
      WAPIST_WNDCLASSEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_XFORM
+;; DOC:
      WAPIST_XFORM  PRIVATE
-;; ---
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IN_ADDR
+;; DOC:
      WAPIST_IN_ADDR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR
+;; DOC:
      WAPIST_SOCKADDR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKET_ADDRESS
+;; DOC:
      WAPIST_SOCKET_ADDRESS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKET_ADDRESS_LIST
+;; DOC:
      WAPIST_SOCKET_ADDRESS_LIST  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_CSADDR_INFO
+;; DOC:
      WAPIST_CSADDR_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR_STORAGE
+;; DOC:
      WAPIST_SOCKADDR_STORAGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SCOPE_ID
+;; DOC:
      WAPIST_SCOPE_ID  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKADDR_IN
+;; DOC:
      WAPIST_SOCKADDR_IN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSABUF
+;; DOC:
      WAPIST_WSABUF  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAMSG
+;; DOC:
      WAPIST_WSAMSG  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACMSGHDR
+;; DOC:
      WAPIST_WSACMSGHDR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FD_SET
+;; DOC:
      WAPIST_FD_SET  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TIMEVAL
+;; DOC:
      WAPIST_TIMEVAL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HOSTENT
+;; DOC:
      WAPIST_HOSTENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NETENT
+;; DOC:
      WAPIST_NETENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SERVENT
+;; DOC:
      WAPIST_SERVENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PROTOENT
+;; DOC:
      WAPIST_PROTOENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSADATA
+;; DOC:
      WAPIST_WSADATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SOCKPROTO
+;; DOC:
      WAPIST_SOCKPROTO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LINGER
+;; DOC:
      WAPIST_LINGER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_FLOWSPEC
+;; DOC:
      WAPIST_FLOWSPEC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_QOS_OBJECT_HDR
+;; DOC:
      WAPIST_QOS_OBJECT_HDR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_QOS_SD_MODE
+;; DOC:
      WAPIST_QOS_SD_MODE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_QOS_SHAPING_RATE
+;; DOC:
      WAPIST_QOS_SHAPING_RATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_QOS
+;; DOC:
      WAPIST_QOS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSANETWORKEVENTS
+;; DOC:
      WAPIST_WSANETWORKEVENTS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAPROTOCOLCHAIN
+;; DOC:
      WAPIST_WSAPROTOCOLCHAIN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAPROTOCOL_INFO
+;; DOC:
      WAPIST_WSAPROTOCOL_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp
+;; DOC:
      WAPIST_WSACOMPLETION_NS_WINDOWMESSAGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_EVENT
+;; DOC:
      WAPIST_WSACOMPLETION_NS_EVENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_APC
+;; DOC:
      WAPIST_WSACOMPLETION_NS_APC  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_PORT
+;; DOC:
      WAPIST_WSACOMPLETION_NS_PORT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION_NS_PARAMETERS
+;; DOC:
      WAPIST_WSACOMPLETION_NS_PARAMETERS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSACOMPLETION
+;; DOC:
      WAPIST_WSACOMPLETION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BLOB
+;; DOC:
      WAPIST_BLOB  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_AFPROTOCOLS
+;; DOC:
      WAPIST_AFPROTOCOLS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAVERSION
+;; DOC:
      WAPIST_WSAVERSION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAQUERYSET
+;; DOC:
      WAPIST_WSAQUERYSET  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAQUERYSET2
+;; DOC:
      WAPIST_WSAQUERYSET2  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSANSCLASSINFO
+;; DOC:
      WAPIST_WSANSCLASSINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSASERVICECLASSINFO
+;; DOC:
      WAPIST_WSASERVICECLASSINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSANAMESPACE_INFO
+;; DOC:
      WAPIST_WSANAMESPACE_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSANAMESPACE_INFOEX
+;; DOC:
      WAPIST_WSANAMESPACE_INFOEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WSAPOLLFD
+;; DOC:
      WAPIST_WSAPOLLFD  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_ADDRINFO
+;; DOC:
      WAPIST_ADDRINFO  PRIVATE
 
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OPENFILENAME
+;; DOC:
      WAPIST_OPENFILENAME  PRIVATE
-;; --------------------------------------
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWHID
+;; DOC:
      WAPIST_RAWHID  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUT_DATA_UNION
+;; DOC:
      WAPIST_RAWINPUT_DATA_UNION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUT
+;; DOC:
      WAPIST_RAWINPUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTDEVICE
+;; DOC:
      WAPIST_RAWINPUTDEVICE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTDEVICELIST
+;; DOC:
      WAPIST_RAWINPUTDEVICELIST  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWINPUTHEADER
+;; DOC:
      WAPIST_RAWINPUTHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWKEYBOARD
+;; DOC:
      WAPIST_RAWKEYBOARD  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RAWMOUSE
+;; DOC:
      WAPIST_RAWMOUSE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO
+;; DOC:
      WAPIST_RID_DEVICE_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_HID
+;; DOC:
      WAPIST_RID_DEVICE_INFO_HID  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_KEYBOARD
+;; DOC:
      WAPIST_RID_DEVICE_INFO_KEYBOARD  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_RID_DEVICE_INFO_MOUSE
+;; DOC:
      WAPIST_RID_DEVICE_INFO_MOUSE  PRIVATE
-;; --------------------------------------
 
 
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IP_ADDR_STRING
+;; DOC:
      WAPIST_IP_ADDR_STRING  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IP_ADAPTER_INFO
+;; DOC:
      WAPIST_IP_ADAPTER_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_IP_PER_ADAPTER_INFO
+;; DOC:
      WAPIST_IP_PER_ADAPTER_INFO  PRIVATE
 
-;; --------------------------------------
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OVERLAPPED
+;; DOC:
      WAPIST_OVERLAPPED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SYSTEM_INFO
+;; DOC:
      WAPIST_SYSTEM_INFO  PRIVATE
-;; --------------------------------------
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OSVERSIONINFOEX
+;; DOC:
      WAPIST_OSVERSIONINFOEX  PRIVATE
-;; --------------------------------------
 
 
 
-;; --------------------------------------
-;; TOOLHELP STRUCTURES
-;; --------------------------------------
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MODULEENTRY32
+;; DOC:
      WAPIST_MODULEENTRY32  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PROCESSENTRY32
+;; DOC:
      WAPIST_PROCESSENTRY32  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_THREADENTRY32
+;; DOC:
      WAPIST_THREADENTRY32  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HEAPENTRY32
+;; DOC:
      WAPIST_HEAPENTRY32  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HEAPLIST32
+;; DOC:
      WAPIST_HEAPLIST32  PRIVATE
 
-;; ----------------------------------------
-;; common controls - listview support
-;; ----------------------------------------
-     WAPIST_LVBKIMAGE  PRIVATE
-     WAPIST_LVCOLUMN  PRIVATE
-     WAPIST_LVFINDINFO  PRIVATE
-     WAPIST_LVFOOTERINFO  PRIVATE
-     WAPIST_LVFOOTERITEM  PRIVATE
-     WAPIST_LVGROUP  PRIVATE
-     WAPIST_LVGROUPMETRICS  PRIVATE
-     WAPIST_LVHITTESTINFO  PRIVATE
-     WAPIST_LVINSERTGROUPSORTED  PRIVATE
-     WAPIST_LVINSERTMARK  PRIVATE
-     WAPIST_LVITEM  PRIVATE
-     WAPIST_LVITEMINDEX  PRIVATE
-     WAPIST_LVSETINFOTIP  PRIVATE
-     WAPIST_LVTILEINFO  PRIVATE
-     WAPIST_LVTILEVIEWINFO  PRIVATE
-     WAPIST_NMITEMACTIVATE  PRIVATE
-     WAPIST_NMLISTVIEW  PRIVATE
-     WAPIST_NMLVCACHEHINT  PRIVATE
-     WAPIST_NMLVCUSTOMDRAW  PRIVATE
-     WAPIST_NMLVDISPINFO  PRIVATE
-     WAPIST_NMLVEMPTYMARKUP  PRIVATE
-     WAPIST_NMLVFINDITEM  PRIVATE
-     WAPIST_NMLVGETINFOTIP  PRIVATE
-     WAPIST_NMLVKEYDOWN  PRIVATE
-     WAPIST_NMLVLINK  PRIVATE
-     WAPIST_NMLVODSTATECHANGE  PRIVATE
-     WAPIST_NMLVSCROLL  PRIVATE
-     WAPIST_LITEM  PRIVATE
-     WAPIST_NMCUSTOMDRAW  PRIVATE
-;; ----------------------------------------
 
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVBKIMAGE
+;; DOC:
+     WAPIST_LVBKIMAGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVCOLUMN
+;; DOC:
+     WAPIST_LVCOLUMN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVFINDINFO
+;; DOC:
+     WAPIST_LVFINDINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVFOOTERINFO
+;; DOC:
+     WAPIST_LVFOOTERINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVFOOTERITEM
+;; DOC:
+     WAPIST_LVFOOTERITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVGROUP
+;; DOC:
+     WAPIST_LVGROUP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVGROUPMETRICS
+;; DOC:
+     WAPIST_LVGROUPMETRICS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVHITTESTINFO
+;; DOC:
+     WAPIST_LVHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVINSERTGROUPSORTED
+;; DOC:
+     WAPIST_LVINSERTGROUPSORTED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVINSERTMARK
+;; DOC:
+     WAPIST_LVINSERTMARK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVITEM
+;; DOC:
+     WAPIST_LVITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVITEMINDEX
+;; DOC:
+     WAPIST_LVITEMINDEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVSETINFOTIP
+;; DOC:
+     WAPIST_LVSETINFOTIP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVTILEINFO
+;; DOC:
+     WAPIST_LVTILEINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LVTILEVIEWINFO
+;; DOC:
+     WAPIST_LVTILEVIEWINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMITEMACTIVATE
+;; DOC:
+     WAPIST_NMITEMACTIVATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLISTVIEW
+;; DOC:
+     WAPIST_NMLISTVIEW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVCACHEHINT
+;; DOC:
+     WAPIST_NMLVCACHEHINT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVCUSTOMDRAW
+;; DOC:
+     WAPIST_NMLVCUSTOMDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVDISPINFO
+;; DOC:
+     WAPIST_NMLVDISPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVEMPTYMARKUP
+;; DOC:
+     WAPIST_NMLVEMPTYMARKUP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVFINDITEM
+;; DOC:
+     WAPIST_NMLVFINDITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVGETINFOTIP
+;; DOC:
+     WAPIST_NMLVGETINFOTIP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVKEYDOWN
+;; DOC:
+     WAPIST_NMLVKEYDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVLINK
+;; DOC:
+     WAPIST_NMLVLINK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVODSTATECHANGE
+;; DOC:
+     WAPIST_NMLVODSTATECHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLVSCROLL
+;; DOC:
+     WAPIST_NMLVSCROLL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LITEM
+;; DOC:
+     WAPIST_LITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMDRAW
+;; DOC:
+     WAPIST_NMCUSTOMDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_WINDOWPOS
+;; DOC:
      WAPIST_WINDOWPOS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COLORSCHEME
+;; DOC:
      WAPIST_COLORSCHEME  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DPASTREAMINFO
+;; DOC:
      WAPIST_DPASTREAMINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCHAR
+;; DOC:
      WAPIST_NMCHAR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMSPLITRECTINFO
+;; DOC:
      WAPIST_NMCUSTOMSPLITRECTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCUSTOMTEXT
+;; DOC:
      WAPIST_NMCUSTOMTEXT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMKEY
+;; DOC:
      WAPIST_NMKEY  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMMOUSE
+;; DOC:
      WAPIST_NMMOUSE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMOBJECTNOTIFY
+;; DOC:
      WAPIST_NMOBJECTNOTIFY  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTOOLTIPSCREATED
+;; DOC:
      WAPIST_NMTOOLTIPSCREATED  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_READERMODEINFO
+;; DOC:
      WAPIST_READERMODEINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BUTTON_IMAGELIST
+;; DOC:
      WAPIST_BUTTON_IMAGELIST  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_BUTTON_SPLITINFO
+;; DOC:
      WAPIST_BUTTON_SPLITINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMBCDROPDOWN
+;; DOC:
      WAPIST_NMBCDROPDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMBCHOTITEM
+;; DOC:
      WAPIST_NMBCHOTITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COMBOBOXINFO
+;; DOC:
      WAPIST_COMBOBOXINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COMPAREITEMSTRUCT
+;; DOC:
      WAPIST_COMPAREITEMSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRAWITEMSTRUCT
+;; DOC:
      WAPIST_DRAWITEMSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MEASUREITEMSTRUCT
+;; DOC:
      WAPIST_MEASUREITEMSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COMBOBOXEXITEM
+;; DOC:
      WAPIST_COMBOBOXEXITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCBEDRAGBEGIN
+;; DOC:
      WAPIST_NMCBEDRAGBEGIN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCBEENDEDIT
+;; DOC:
      WAPIST_NMCBEENDEDIT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMCOMBOBOXEX
+;; DOC:
      WAPIST_NMCOMBOBOXEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DATETIMEPICKERINFO
+;; DOC:
      WAPIST_DATETIMEPICKERINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMECHANGE
+;; DOC:
      WAPIST_NMDATETIMECHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEFORMAT
+;; DOC:
      WAPIST_NMDATETIMEFORMAT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEFORMATQUERY
+;; DOC:
      WAPIST_NMDATETIMEFORMATQUERY  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMESTRING
+;; DOC:
      WAPIST_NMDATETIMESTRING  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDATETIMEWMKEYDOWN
+;; DOC:
      WAPIST_NMDATETIMEWMKEYDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DRAGLISTINFO
+;; DOC:
      WAPIST_DRAGLISTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_EDITBALLOONTIP
+;; DOC:
      WAPIST_EDITBALLOONTIP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HDHITTESTINFO
+;; DOC:
      WAPIST_HDHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HDITEM
+;; DOC:
      WAPIST_HDITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HDLAYOUT
+;; DOC:
      WAPIST_HDLAYOUT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HDTEXTFILTER
+;; DOC:
      WAPIST_HDTEXTFILTER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMHDDISPINFO
+;; DOC:
      WAPIST_NMHDDISPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMHDFILTERBTNCLICK
+;; DOC:
      WAPIST_NMHDFILTERBTNCLICK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMHEADER
+;; DOC:
      WAPIST_NMHEADER  PRIVATE
 
 
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMIPADDRESS
+;; DOC:
      WAPIST_NMIPADDRESS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_DELETEITEMSTRUCT
+;; DOC:
      WAPIST_DELETEITEMSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MCGRIDINFO
+;; DOC:
      WAPIST_MCGRIDINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MCHITTESTINFO
+;; DOC:
      WAPIST_MCHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMDAYSTATE
+;; DOC:
      WAPIST_NMDAYSTATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMSELCHANGE
+;; DOC:
      WAPIST_NMSELCHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMVIEWCHANGE
+;; DOC:
      WAPIST_NMVIEWCHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMPGCALCSIZE
+;; DOC:
      WAPIST_NMPGCALCSIZE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMPGHOTITEM
+;; DOC:
      WAPIST_NMPGHOTITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMPGSCROLL
+;; DOC:
      WAPIST_NMPGSCROLL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PBRANGE
+;; DOC:
      WAPIST_PBRANGE  PRIVATE
 
 
 
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMREBARSPLITTER
+;; DOC:
      WAPIST_NMREBARSPLITTER  PRIVATE
 
 
 
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SCROLLBARINFO
+;; DOC:
      WAPIST_SCROLLBARINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SCROLLINFO
+;; DOC:
      WAPIST_SCROLLINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_LHITTESTINFO
+;; DOC:
      WAPIST_LHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMLINK
+;; DOC:
      WAPIST_NMLINK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTCKEYDOWN
+;; DOC:
      WAPIST_NMTCKEYDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TCHITTESTINFO
+;; DOC:
      WAPIST_TCHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TCITEM
+;; DOC:
      WAPIST_TCITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TCITEMHEADER
+;; DOC:
      WAPIST_TCITEMHEADER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COLORMAP
+;; DOC:
      WAPIST_COLORMAP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBCUSTOMDRAW
+;; DOC:
      WAPIST_NMTBCUSTOMDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBDISPINFO
+;; DOC:
      WAPIST_NMTBDISPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBGETINFOTIP
+;; DOC:
      WAPIST_NMTBGETINFOTIP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBHOTITEM
+;; DOC:
      WAPIST_NMTBHOTITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBRESTORE
+;; DOC:
      WAPIST_NMTBRESTORE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTBSAVE
+;; DOC:
      WAPIST_NMTBSAVE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTOOLBAR
+;; DOC:
      WAPIST_NMTOOLBAR  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBADDBITMAP
+;; DOC:
      WAPIST_TBADDBITMAP  PRIVATE
 
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBBUTTONINFOA
+;; DOC:
      WAPIST_TBBUTTONINFOA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBINSERTMARK
+;; DOC:
      WAPIST_TBINSERTMARK  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBMETRICS
+;; DOC:
      WAPIST_TBMETRICS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBREPLACEBITMAP
+;; DOC:
      WAPIST_TBREPLACEBITMAP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TBSAVEPARAMS
+;; DOC:
      WAPIST_TBSAVEPARAMS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTTCUSTOMDRAW
+;; DOC:
      WAPIST_NMTTCUSTOMDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTTDISPINFO
+;; DOC:
      WAPIST_NMTTDISPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TOOLINFO
+;; DOC:
      WAPIST_TOOLINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TTGETTITLE
+;; DOC:
      WAPIST_TTGETTITLE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TTHITTESTINFO
+;; DOC:
      WAPIST_TTHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTREEVIEW
+;; DOC:
      WAPIST_NMTREEVIEW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVASYNCDRAW
+;; DOC:
      WAPIST_NMTVASYNCDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVCUSTOMDRAW
+;; DOC:
      WAPIST_NMTVCUSTOMDRAW  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVDISPINFO
+;; DOC:
      WAPIST_NMTVDISPINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVDISPINFOEX
+;; DOC:
      WAPIST_NMTVDISPINFOEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVGETINFOTIP
+;; DOC:
      WAPIST_NMTVGETINFOTIP  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVITEMCHANGE
+;; DOC:
      WAPIST_NMTVITEMCHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVKEYDOWN
+;; DOC:
      WAPIST_NMTVKEYDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMTVSTATEIMAGECHANGING
+;; DOC:
      WAPIST_NMTVSTATEIMAGECHANGING  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVGETITEMPARTRECTINFO
+;; DOC:
      WAPIST_TVGETITEMPARTRECTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVHITTESTINFO
+;; DOC:
      WAPIST_TVHITTESTINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVINSERTSTRUCT
+;; DOC:
      WAPIST_TVINSERTSTRUCT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVITEM
+;; DOC:
      WAPIST_TVITEM  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVITEMEX
+;; DOC:
      WAPIST_TVITEMEX  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TVSORTCB
+;; DOC:
      WAPIST_TVSORTCB  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMUPDOWN
+;; DOC:
      WAPIST_NMUPDOWN  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_UDACCEL
+;; DOC:
      WAPIST_UDACCEL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_URL_COMPONENTS
+;; DOC:
      WAPIST_URL_COMPONENTS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_ASYNC_RESULT
+;; DOC:
      WAPIST_INTERNET_ASYNC_RESULT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp
+;; DOC:
      WAPIST_INTERNET_DIAGNOSTIC_SOCKET_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PROXY_INFO
+;; DOC:
      WAPIST_INTERNET_PROXY_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PER_CONN_OPTION
+;; DOC:
      WAPIST_INTERNET_PER_CONN_OPTION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_PER_CONN_OPTION_LIST
+;; DOC:
      WAPIST_INTERNET_PER_CONN_OPTION_LIST  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_VERSION_INFO
+;; DOC:
      WAPIST_INTERNET_VERSION_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_HTTP_VERSION_INFO
+;; DOC:
      WAPIST_HTTP_VERSION_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CONNECTED_INFO
+;; DOC:
      WAPIST_INTERNET_CONNECTED_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CERTIFICATE_INFO
+;; DOC:
      WAPIST_INTERNET_CERTIFICATE_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_BUFFERS
+;; DOC:
      WAPIST_INTERNET_BUFFERS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INCOMINGCOOKIESTATE
+;; DOC:
      WAPIST_INCOMINGCOOKIESTATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_OUTGOINGCOOKIESTATE
+;; DOC:
      WAPIST_OUTGOINGCOOKIESTATE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNETCOOKIEHISTORY
+;; DOC:
      WAPIST_INTERNETCOOKIEHISTORY  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_COOKIEDECISION
+;; DOC:
      WAPIST_COOKIEDECISION  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_AUTH_NOTIFY_DATA
+;; DOC:
      WAPIST_INTERNET_AUTH_NOTIFY_DATA  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_ENTRY_INFO
+;; DOC:
      WAPIST_INTERNET_CACHE_ENTRY_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_TIMESTAMPS
+;; DOC:
      WAPIST_INTERNET_CACHE_TIMESTAMPS  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_INTERNET_CACHE_GROUP_INFO
+;; DOC:
      WAPIST_INTERNET_CACHE_GROUP_INFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_AUTO_PROXY_SCRIPT_BUFFER
+;; DOC:
      WAPIST_AUTO_PROXY_SCRIPT_BUFFER  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp
+;; DOC:
      WAPIST_INTERNET_PER_CONN_OPTION___VALUE  PRIVATE
 
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_TRACKMOUSEEVENT
+;; DOC:
      WAPIST_TRACKMOUSEEVENT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_MOUSEMOVEPOINT
+;; DOC:
      WAPIST_MOUSEMOVEPOINT  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_PREVENT_MEDIA_REMOVAL
+;; DOC:
      WAPIST_PREVENT_MEDIA_REMOVAL  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SHFILEINFO
+;; DOC:
      WAPIST_SHFILEINFO  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_NMSELCHANGE
+;; DOC:
      WAPIST_NMSELCHANGE  PRIVATE
+
+
+
+;; SRC: winapi_CommonStructures.cpp:WAPIST_SHELLEXECUTEINFO
+;; DOC:
      WAPIST_SHELLEXECUTEINFO  PRIVATE
 
+;; CAPI: Container.cpp:_conGetFloat
+;; DOC:
+;; _CDECL_EXPORT_( _conGetFloat )
 
+;; CAPI: Container.cpp:_conPutFloat
+;; DOC:
+;; _CDECL_EXPORT_( _conPutFloat )
 
+;; CAPI: Container.cpp:_conGetQWord
+;; DOC:
+;; _CDECL_EXPORT_( _conGetQWord )
 
-;;-----------------------------------------------------------------------------
-;;;;;;;;;;  UNKNOW LINE #1176>>>-----------------------------------------<<<
-;; -------------------------  C EXPORTED FUNCTIONS
-;;;;;;;;;;  UNKNOW LINE #1178>>>_CDECL_EXPORT_( _conGetFloat  )<<<
-;;;;;;;;;;  UNKNOW LINE #1179>>>_CDECL_EXPORT_( _conPutFloat  )<<<
-;;;;;;;;;;  UNKNOW LINE #1180>>>_CDECL_EXPORT_( _conGetQWord  )<<<
-;;;;;;;;;;  UNKNOW LINE #1181>>>_CDECL_EXPORT_( _conPutQWord  )<<<
+;; CAPI: Container.cpp:_conPutQWord
+;; DOC:
+;; _CDECL_EXPORT_( _conPutQWord )

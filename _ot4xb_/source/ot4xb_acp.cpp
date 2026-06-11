@@ -424,12 +424,282 @@ static BOOL VProtect( DWORD dwa, DWORD dws , DWORD dw , DWORD* pdw)
 // -----------------------------------------------------------------------------------------------------------------
 BEGIN_EXTERN_C
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_ot4xb_task_internal_proc_</name>
+      <export>_OT4XB_TASK_INTERNAL_PROC_</export>
+      <source>ot4xb_acp.cpp:_OT4XB_TASK_INTERNAL_PROC_</source>
+      <category>tasks/internal</category>
+      <description>
+         Internal worker entry point used by OT4XB task threads.
+      </description>
+      <syntax>
+         _ot4xb_task_internal_proc_( nTaskCargo ) -> NIL
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nTaskCargo</name>
+            <type>numeric</type>
+            <description>
+               Internal task cargo pointer created by ot4xb_task_run().
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>nil</type>
+         <description>
+            Always returns NIL.
+         </description>
+      </return>
+      <remarks>
+         This is an internal worker function and must not be called directly
+         from application code.
+      </remarks>
+      <related>
+         <function>ot4xb_task_run</function>
+         <function>ot4xb_task_id</function>
+         <function>ot4xb_task_wait</function>
+         <function>ot4xb_task_pop</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( _OT4XB_TASK_INTERNAL_PROC_ ){ ot4xb_task::worker(pl); }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_task_id</name>
+      <export>OT4XB_TASK_ID</export>
+      <source>ot4xb_acp.cpp:OT4XB_TASK_ID</source>
+      <category>tasks</category>
+      <description>
+         Returns the OT4XB task id associated with the current thread.
+      </description>
+      <syntax>
+         ot4xb_task_id() -> nTaskId
+      </syntax>
+      <parameters/>
+      <return>
+         <type>numeric</type>
+         <description>
+            Current OT4XB task id, or 0 when the current thread is not running
+            an OT4XB task worker.
+         </description>
+      </return>
+      <related>
+         <function>ot4xb_task_run</function>
+         <function>ot4xb_task_wait</function>
+         <function>ot4xb_task_pop</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_TASK_ID              ){ _retnl(pl,(LONG)GetTlsHeapManager()->m_dwOt4xbTaskId ); }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_task_run</name>
+      <export>OT4XB_TASK_RUN</export>
+      <source>ot4xb_acp.cpp:OT4XB_TASK_RUN</source>
+      <category>tasks</category>
+      <description>
+         Evaluates a code block in a separate thread from the OT4XB thread
+         pool.
+      </description>
+      <syntax>
+         ot4xb_task_run( bBlock, ... ) -> nTaskId
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>bBlock</name>
+            <type>codeblock</type>
+            <description>
+               Code block to evaluate in the task thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the code block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>numeric</type>
+         <description>
+            Task id used by ot4xb_task_wait() and ot4xb_task_pop(), or NIL if a
+            task cannot be started.
+         </description>
+      </return>
+      <remarks>
+         The task result remains stored until it is retrieved with
+         ot4xb_task_pop().
+      </remarks>
+      <related>
+         <function>ot4xb_task_id</function>
+         <function>ot4xb_task_wait</function>
+         <function>ot4xb_task_pop</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_TASK_RUN             ){ ot4xb_task::run(pl); }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_task_wait</name>
+      <export>OT4XB_TASK_WAIT</export>
+      <source>ot4xb_acp.cpp:OT4XB_TASK_WAIT</source>
+      <category>tasks</category>
+      <description>
+         Waits for an OT4XB task to finish, or checks its completion state.
+      </description>
+      <syntax>
+         ot4xb_task_wait( nTaskId, [nTimeout] ) -> lFinished
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nTaskId</name>
+            <type>numeric</type>
+            <description>
+               Task id returned by ot4xb_task_run().
+            </description>
+         </parameter>
+         <parameter>
+            <name>nTimeout</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Time to wait in milliseconds. 0 checks the current status
+               without waiting. -1 waits indefinitely.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>logical | nil</type>
+         <description>
+            TRUE when the task has finished, FALSE when the timeout expires, or
+            NIL when the task is not found or its result was already retrieved.
+         </description>
+      </return>
+      <remarks>
+         When nTaskId is omitted, OT4XB waits for any pending task and returns
+         the id of the task that finished, or 0 if none finished before the
+         timeout.
+      </remarks>
+      <related>
+         <function>ot4xb_task_run</function>
+         <function>ot4xb_task_pop</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_TASK_WAIT            ){ ot4xb_task::wait(pl); }
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_task_pop</name>
+      <export>OT4XB_TASK_POP</export>
+      <source>ot4xb_acp.cpp:OT4XB_TASK_POP</source>
+      <category>tasks</category>
+      <description>
+         Retrieves the result of a finished OT4XB task and releases the task
+         resources.
+      </description>
+      <syntax>
+         ot4xb_task_pop( nTaskId ) -> uResult
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nTaskId</name>
+            <type>numeric</type>
+            <description>
+               Task id returned by ot4xb_task_run().
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>any | nil</type>
+         <description>
+            The value returned by the task code block, or NIL if the task is
+            still running, was not found, or its result was already retrieved.
+         </description>
+      </return>
+      <remarks>
+         Calling ot4xb_task_pop() without parameters returns the current size of
+         the internal task list.
+      </remarks>
+      <related>
+         <function>ot4xb_task_run</function>
+         <function>ot4xb_task_wait</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_TASK_POP             ){ ot4xb_task::pop(pl); }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_apc_post_cb</name>
+      <export>OT4XB_APC_POST_CB</export>
+      <source>ot4xb_acp.cpp:OT4XB_APC_POST_CB</source>
+      <category>threads/apc</category>
+      <description>
+         Queues a code block APC for a target thread.
+      </description>
+      <syntax>
+         ot4xb_apc_post_cb( oThread, bBlock, ... ) -> lQueued
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>oThread</name>
+            <type>object</type>
+            <description>
+               Xbase++ Thread object for the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>bBlock</name>
+            <type>codeblock</type>
+            <description>
+               Code block to evaluate in the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the code block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>logical</type>
+         <description>
+            TRUE if the APC was queued, otherwise FALSE.
+         </description>
+      </return>
+      <remarks>
+         OT4XB queues the code block with QueueUserAPC() and returns
+         immediately. The code block result is not returned to the caller.
+      </remarks>
+      <remarks>
+         The target thread must enter an alertable wait state for the APC to
+         run the queued code block, for example by calling
+         @kernel32:SleepEx( nMilliseconds, 1 ).
+      </remarks>
+      <related>
+         <function>ot4xb_apc_send_cb</function>
+         <function>ot4xb_apc_post_cb_h</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_APC_POST_CB ) // ot4xb_apc_post_cb(oThread,cb, ... params .... )
 {
    TXppParamList xpp(pl);
@@ -452,6 +722,72 @@ _XPP_REG_FUN_( OT4XB_APC_POST_CB ) // ot4xb_apc_post_cb(oThread,cb, ... params .
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_apc_post_cb_h</name>
+      <export>OT4XB_APC_POST_CB_H</export>
+      <source>ot4xb_acp.cpp:OT4XB_APC_POST_CB_H</source>
+      <category>threads/apc</category>
+      <description>
+         Queues a code block APC for a target thread handle.
+      </description>
+      <syntax>
+         ot4xb_apc_post_cb_h( hThread, bBlock, ... ) -> lQueued
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>hThread</name>
+            <type>numeric</type>
+            <description>
+               Windows thread handle for the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>bBlock</name>
+            <type>codeblock</type>
+            <description>
+               Code block to evaluate in the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the code block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>logical</type>
+         <description>
+            TRUE if the APC was queued, otherwise FALSE.
+         </description>
+      </return>
+      <remarks>
+         OT4XB queues the code block with QueueUserAPC() and returns
+         immediately. The code block result is not returned to the caller.
+      </remarks>
+      <remarks>
+         The thread handle can be obtained from an Xbase++ Thread object by
+         calling the OT4XB C API function with the @ot4xb: syntax:
+         @ot4xb:_ot4xb_ThreadObject2hThread( oThread ). Pass 0 to obtain the
+         current thread handle:
+         @ot4xb:_ot4xb_ThreadObject2hThread( 0 ).
+      </remarks>
+      <remarks>
+         The target thread must enter an alertable wait state for the APC to
+         run the queued code block, for example by calling
+         @kernel32:SleepEx( nMilliseconds, 1 ).
+      </remarks>
+      <related>
+         <function>ot4xb_apc_send_cb</function>
+         <function>ot4xb_apc_post_cb</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_APC_POST_CB_H ) // ot4xb_apc_post_cb_h(hThread,cb, ... params .... )
 {
    TXppParamList xpp(pl);
@@ -495,6 +831,74 @@ OT4XB_API void __stdcall _ot4xb_apcproc_stksync_(DWORD* pdw )
    SetEvent( (HANDLE) pdw[0] );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_apc_send_cb</name>
+      <export>OT4XB_APC_SEND_CB</export>
+      <source>ot4xb_acp.cpp:OT4XB_APC_SEND_CB</source>
+      <category>threads/apc</category>
+      <description>
+         Synchronously evaluates a code block in a target thread that enters an
+         alertable wait state.
+      </description>
+      <syntax>
+         ot4xb_apc_send_cb( oThread, bBlock, ... ) -> uResult
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>oThread</name>
+            <type>object</type>
+            <description>
+               Xbase++ Thread object for the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>bBlock</name>
+            <type>codeblock</type>
+            <description>
+               Code block to evaluate in the target thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the code block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>any | nil</type>
+         <description>
+            The value returned by the code block, or NIL if the target thread
+            cannot be resolved or the arguments are invalid.
+         </description>
+      </return>
+      <remarks>
+         OT4XB queues the code block with QueueUserAPC() and waits until the APC
+         procedure signals completion. The target thread must enter an
+         alertable wait state for the APC to execute, for example by calling
+         @kernel32:SleepEx( nMilliseconds, 1 ).
+      </remarks>
+      <remarks>
+         Because this function waits for the code block result, it can deadlock
+         if the target thread does not enter an alertable wait state, or if the
+         target thread waits back on the caller while the caller is blocked in
+         ot4xb_apc_send_cb().
+      </remarks>
+      <remarks>
+         If oThread refers to the current thread, OT4XB evaluates the code block
+         directly instead of queuing an APC.
+      </remarks>
+      <related>
+         <function>ot4xb_apc_post_cb</function>
+         <function>ot4xb_apc_post_cb_h</function>
+      </related>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_APC_SEND_CB ) // ot4xb_apc_send_cb(oThread,cb, ... params .... )
 {
    HANDLE hThread;
@@ -983,6 +1387,44 @@ extern "C" OT4XB_API LPSTR  ot4xb_unmangle_cpp_name(LPSTR pName )
    return __unDName(0,pName,0,(DWORD) _xgrab, (DWORD)_xfree,0);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_unmangle_cpp_name</name>
+      <export>OT4XB_UNMANGLE_CPP_NAME</export>
+      <source>ot4xb_acp.cpp:OT4XB_UNMANGLE_CPP_NAME</source>
+      <category>cpp/symbols</category>
+      <description>
+         Converts a Microsoft C++ decorated symbol name into a readable C++
+         function or method signature.
+      </description>
+      <syntax>
+         ot4xb_unmangle_cpp_name( cMangledName ) -> cReadableName
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>cMangledName</name>
+            <type>string</type>
+            <description>
+               Microsoft C++ decorated symbol name.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>string | nil</type>
+         <description>
+            Readable undecorated C++ name, or NIL if the input is not a string
+            or the name cannot be decoded.
+         </description>
+      </return>
+      <remarks>
+         This function uses the Microsoft runtime __unDName() helper. It is
+         mainly useful when inspecting C++ exports, debug traces, or symbol
+         names returned by other tools.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_UNMANGLE_CPP_NAME )
 {
    TXppParamList xpp(pl,1);

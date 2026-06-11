@@ -77,6 +77,29 @@ OT4XB_API LPSTR oem2utf8(  LPSTR po ,int cb,int* pcb){ return mb2mb(po,cb,pcb,CP
 OT4XB_API LPSTR utf82ansi( LPSTR pu ,int cb,int* pcb){ return mb2mb(pu,cb,pcb,CP_UTF8,CP_ACP,0,0);}
 OT4XB_API LPSTR utf82oem(  LPSTR pu ,int cb,int* pcb){ return mb2mb(pu,cb,pcb,CP_UTF8,CP_OEMCP,0,0);}
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cSzAnsi2Wide</name>
+      <category>unicode</category>
+      <description>
+         Converts an ANSI string using the process ANSI code page to a wide-character binary string.
+      </description>
+      <syntax>cSzAnsi2Wide( cAnsi ) -> cWide</syntax>
+      <parameters>
+         <parameter>
+            <name>cAnsi</name>
+            <type>Character</type>
+            <description>ANSI string encoded with the current Windows ANSI code page.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>UTF-16 little-endian binary string, zero-terminated when the input was not already zero-terminated.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSZANSI2WIDE(XppParamList pl )
 {
    BOOL bByRef = FALSE;
@@ -104,6 +127,29 @@ XPPRET XPPENTRY CSZANSI2WIDE(XppParamList pl )
    else { _conReturn( pl, conr); _conRelease( conr); }
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cSzWide2Ansi</name>
+      <category>unicode</category>
+      <description>
+         Converts a wide-character binary string to an ANSI string using the process ANSI code page.
+      </description>
+      <syntax>cSzWide2Ansi( cWide ) -> cAnsi</syntax>
+      <parameters>
+         <parameter>
+            <name>cWide</name>
+            <type>Character</type>
+            <description>UTF-16 little-endian binary string.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>ANSI string decoded from cWide, or an empty string when cWide is empty.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CSZWIDE2ANSI(XppParamList pl )
 {
    BOOL bByRef = FALSE;
@@ -131,6 +177,76 @@ XPPRET XPPENTRY CSZWIDE2ANSI(XppParamList pl )
    else { _conReturn( pl, conr); _conRelease( conr); }
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>UNICODEDYNSTR</name>
+      <parent>GWST</parent>
+      <source>Unicode.cpp:UNICODEDYNSTR</source>
+      <category>unicode</category>
+      <description>
+         Structure-style helper class that encapsulates a pointer to a Windows Unicode string.
+         It is useful when a Win32/OT4XB call needs a writable pointer to a wide string, especially through
+         the OT4XB extended pointer mechanism.
+      </description>
+      <syntax>UNICODEDYNSTR():New() -> oUnicodeString</syntax>
+      <members>
+         <member type="LPWSTR" name="p" offset="0">
+            Pointer to the current wide string buffer.
+         </member>
+      </members>
+      <instance-variables>
+         <variable>
+            <name>_pp_</name>
+            <description>Internal pointer owned by this object when the buffer was assigned through ::cStr or ::wStr.</description>
+         </variable>
+         <variable>
+            <name>_nBytes_</name>
+            <description>Internal byte length of the assigned wide string, not including the terminating WCHAR.</description>
+         </variable>
+      </instance-variables>
+      <properties>
+         <property>
+            <name>UNICODEDYNSTR::cStr</name>
+            <syntax>::cStr := cAnsi</syntax>
+            <syntax>::cStr -> cAnsi</syntax>
+            <description>
+               Assigning an ANSI Xbase++ string converts it from CP_ACP to a zero-terminated WCHAR buffer,
+               stores the buffer pointer in ::p, and keeps ownership in the object. Reading converts the
+               pointed wide string back to ANSI.
+            </description>
+         </property>
+         <property>
+            <name>UNICODEDYNSTR::wStr</name>
+            <syntax>::wStr := cWideBytes</syntax>
+            <syntax>::wStr -> cWideBytes</syntax>
+            <description>
+               Assigning a binary WCHAR string stores a copy as a zero-terminated wide buffer and updates ::p.
+               Reading returns the wide string bytes.
+            </description>
+         </property>
+      </properties>
+      <remarks>
+         If ::p is changed to point to external memory, the object does not own that external memory.
+         When ::p differs from the internally owned pointer, ::cStr and ::wStr assume that ::p points to a
+         zero-terminated WCHAR string.
+      </remarks>
+      <remarks>
+         Assigning a new value to ::cStr or ::wStr releases the previous internally owned buffer. Assigning
+         NIL or any non-character value clears ::p and releases the owned buffer.
+      </remarks>
+      <example><![CDATA[
+local ws := UNICODEDYNSTR():New()
+
+ws:cStr := "caption"
+SomeApiThatExpectsWidePointer( ws )
+
+? ws:cStr
+ws:cStr := NIL
+      ]]></example>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY UNICODEDYNSTR( XppParamList pl )
 {
    ContainerHandle conco = _conClsObj("UNICODEDYNSTR");
@@ -266,6 +382,29 @@ static void UnicodeDynStr_wStr( TXbClsParams * px )
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cUtf8ToAnsi</name>
+      <category>unicode</category>
+      <description>
+         Converts UTF-8 text to ANSI using the process ANSI code page.
+      </description>
+      <syntax>cUtf8ToAnsi( cUtf8 ) -> cAnsi</syntax>
+      <parameters>
+         <parameter>
+            <name>cUtf8</name>
+            <type>Character</type>
+            <description>UTF-8 encoded text.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Text converted to the current Windows ANSI code page.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CUTF8TOANSI(XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -292,6 +431,29 @@ XPPRET XPPENTRY CUTF8TOANSI(XppParamList pl )
    _conReturn(pl,conr); _conRelease(conr);
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cAnsiToUtf8</name>
+      <category>unicode</category>
+      <description>
+         Converts ANSI text from the process ANSI code page to UTF-8.
+      </description>
+      <syntax>cAnsiToUtf8( cAnsi ) -> cUtf8</syntax>
+      <parameters>
+         <parameter>
+            <name>cAnsi</name>
+            <type>Character</type>
+            <description>ANSI text encoded with the current Windows ANSI code page.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>UTF-8 encoded text.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CANSITOUTF8(XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -318,6 +480,29 @@ XPPRET XPPENTRY CANSITOUTF8(XppParamList pl )
    _conReturn(pl,conr); _conRelease(conr);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cUtf8ToOem</name>
+      <category>unicode</category>
+      <description>
+         Converts UTF-8 text to the process OEM code page.
+      </description>
+      <syntax>cUtf8ToOem( cUtf8 ) -> cOem</syntax>
+      <parameters>
+         <parameter>
+            <name>cUtf8</name>
+            <type>Character</type>
+            <description>UTF-8 encoded text.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Text converted to the current Windows OEM code page.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CUTF8TOOEM(XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -344,6 +529,29 @@ XPPRET XPPENTRY CUTF8TOOEM(XppParamList pl )
    _conReturn(pl,conr); _conRelease(conr);
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cOemToUtf8</name>
+      <category>unicode</category>
+      <description>
+         Converts OEM text from the process OEM code page to UTF-8.
+      </description>
+      <syntax>cOemToUtf8( cOem ) -> cUtf8</syntax>
+      <parameters>
+         <parameter>
+            <name>cOem</name>
+            <type>Character</type>
+            <description>OEM text encoded with the current Windows OEM code page.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>UTF-8 encoded text.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY COEMTOUTF8(XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -403,6 +611,47 @@ OT4XB_API LPSTR pWStr2Ansi( WCHAR* pWide  , int cc, int* pcc)
 }
 // -----------------------------------------------------------------------------------------------------------------
 // Added behavior: PeekWStr(pMem,[@]nShift,-1) Assuming Zero terminated string
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>PeekWStr</name>
+      <category>unicode/memory</category>
+      <description>
+         Reads UTF-16 little-endian data from a memory buffer or pointer.
+      </description>
+      <syntax>PeekWStr( pMem, @nShift, nChars ) -> cWide</syntax>
+      <syntax>PeekWStr( pMem, @nShift, @cWide ) -> nBytes</syntax>
+      <syntax>PeekWStr( pMem, @nShift, aItems ) -> aItems</syntax>
+      <parameters>
+         <parameter>
+            <name>pMem</name>
+            <type>Pointer | Character</type>
+            <description>Source memory or binary string.</description>
+         </parameter>
+         <parameter>
+            <name>nShift</name>
+            <type>Numeric by reference</type>
+            <description>Byte offset in the source. It is updated after the read.</description>
+         </parameter>
+         <parameter>
+            <name>nChars | cWide | aItems</name>
+            <type>Numeric | Character by reference | Array</type>
+            <description>
+               Numeric values read that many UTF-16 characters. -1 reads a zero-terminated UTF-16 string. A character
+               by reference receives as many bytes as its current length. An array reads several fields in sequence;
+               character items use their current byte length and numeric items are interpreted as character counts.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns the UTF-16 binary string, the number of bytes written to the by-reference string, the updated array,
+            or NIL when the source cannot be locked.
+         </description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY PEEKWSTR(XppParamList pl) // PeekWStr(pMem,[@]nShift,nSize) -> cStr || PeekWStr(pMem,[@]nShift,@cStr) -> nSize
 {
     CON_PLKSTREX plk;
@@ -492,6 +741,29 @@ XPPRET XPPENTRY PEEKWSTR(XppParamList pl) // PeekWStr(pMem,[@]nShift,nSize) -> c
     _ret(pl);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>cUtf8ToWide</name>
+      <category>unicode</category>
+      <description>
+         Converts UTF-8 text to a UTF-16 little-endian binary string.
+      </description>
+      <syntax>cUtf8ToWide( cUtf8 ) -> cWide</syntax>
+      <parameters>
+         <parameter>
+            <name>cUtf8</name>
+            <type>Character</type>
+            <description>UTF-8 encoded text.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>UTF-16 little-endian binary string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CUTF8TOWIDE(XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -515,6 +787,44 @@ XPPRET XPPENTRY CUTF8TOWIDE(XppParamList pl )
    _conReturn(pl,conr); _conRelease(conr);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_mb2w</name>
+      <category>unicode</category>
+      <description>
+         Converts a multibyte string from a selected Windows code page to UTF-16.
+      </description>
+      <syntax>_mb2w( cText, nCodePage [, nFlags] [, lNoAddZero] ) -> cWide</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Source multibyte text.</description>
+         </parameter>
+         <parameter>
+            <name>nCodePage</name>
+            <type>Numeric</type>
+            <description>Windows code page, such as 0 for CP_ACP, 1 for CP_OEMCP, or 65001 for CP_UTF8.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>Flags passed to MultiByteToWideChar().</description>
+         </parameter>
+         <parameter>
+            <name>lNoAddZero</name>
+            <type>Logical</type>
+            <description>When .T., do not include an extra terminating zero byte in the source length.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>UTF-16 little-endian binary string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( _MB2W ) // _mb2w( str , nAcp , nFlags , lNoAddZero )
 {
    TXppParamList xpp(pl,4);
@@ -527,6 +837,44 @@ _XPP_REG_FUN_( _MB2W ) // _mb2w( str , nAcp , nFlags , lNoAddZero )
    _xfree((void*) pw);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_w2mb</name>
+      <category>unicode</category>
+      <description>
+         Converts a UTF-16 little-endian binary string to a selected Windows multibyte code page.
+      </description>
+      <syntax>_w2mb( cWide, nCodePage [, nFlags] [, lRemoveZero] ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cWide</name>
+            <type>Character</type>
+            <description>UTF-16 little-endian binary string.</description>
+         </parameter>
+         <parameter>
+            <name>nCodePage</name>
+            <type>Numeric</type>
+            <description>Windows code page, such as 0 for CP_ACP, 1 for CP_OEMCP, or 65001 for CP_UTF8.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>Numeric</type>
+            <description>Flags passed to WideCharToMultiByte().</description>
+         </parameter>
+         <parameter>
+            <name>lRemoveZero</name>
+            <type>Logical</type>
+            <description>When .T., remove one trailing zero byte from the converted result when present.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Converted multibyte string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( _W2MB )  // _w2mb( wstr , nAcp , nFlags , lRemoveZero )
 {
    TXppParamList xpp(pl,4);
@@ -546,6 +894,49 @@ _XPP_REG_FUN_( _W2MB )  // _w2mb( wstr , nAcp , nFlags , lRemoveZero )
 //#define CP_THREAD_ACP             3           // current thread's ANSI code page
 //#define CP_UTF8                   65001       // UTF-8 translation
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>_mb2mb</name>
+      <category>unicode</category>
+      <description>
+         Converts a multibyte string from one Windows code page to another.
+      </description>
+      <syntax>_mb2mb( cText, nCodePageFrom, nCodePageTo [, nFlagsFrom] [, nFlagsTo] ) -> cText</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Source multibyte text.</description>
+         </parameter>
+         <parameter>
+            <name>nCodePageFrom</name>
+            <type>Numeric</type>
+            <description>Source Windows code page.</description>
+         </parameter>
+         <parameter>
+            <name>nCodePageTo</name>
+            <type>Numeric</type>
+            <description>Destination Windows code page.</description>
+         </parameter>
+         <parameter>
+            <name>nFlagsFrom</name>
+            <type>Numeric</type>
+            <description>Flags passed to MultiByteToWideChar() for the source conversion.</description>
+         </parameter>
+         <parameter>
+            <name>nFlagsTo</name>
+            <type>Numeric</type>
+            <description>Flags passed to WideCharToMultiByte() for the destination conversion.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>Converted multibyte string.</description>
+      </return>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( _MB2MB) // _mb2mb( str , nAcpFrom , nAcpTo , nFlags1 , nFlags2 )
 {
    TXppParamList xpp(pl,5);

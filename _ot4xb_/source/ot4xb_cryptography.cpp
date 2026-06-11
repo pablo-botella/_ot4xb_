@@ -20,6 +20,46 @@
 #define OT4XB_HASH_FLAGS_GRANULARITY            0x00010000
 
 // -----------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>OT4XB_HASH</name>
+      <category>crypto/hash</category>
+      <description>
+         CryptoAPI-backed hashing helper class. It computes MD2, MD4, MD5, SHA, SHA1, SHA256, SHA384 and SHA512
+         hashes from a string, a file name, or an existing file handle.
+      </description>
+      <syntax>OT4XB_HASH():sha256( cInput | cFile | hFile, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash</syntax>
+      <class-methods>
+         <method name="sha" syntax="OT4XB_HASH():sha( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="sha1" syntax="OT4XB_HASH():sha1( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="sha256" syntax="OT4XB_HASH():sha256( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="sha384" syntax="OT4XB_HASH():sha384( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="sha512" syntax="OT4XB_HASH():sha512( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="md2" syntax="OT4XB_HASH():md2( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="md4" syntax="OT4XB_HASH():md4( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+         <method name="md5" syntax="OT4XB_HASH():md5( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
+      </class-methods>
+      <flags>
+         <flag value="0x00000000">Output hex string. This is the default.</flag>
+         <flag value="0x00000001">Output raw binary hash bytes.</flag>
+         <flag value="0x00000000">Input is the string value itself. This is the default input mode.</flag>
+         <flag value="0x00000010">Input is a file name.</flag>
+         <flag value="0x00000020">Input is an existing file handle.</flag>
+         <flag value="0x00000100">Use nOffset as the file start offset.</flag>
+         <flag value="0x00000200">Use nBytes as maximum file bytes to hash.</flag>
+         <flag value="0x00001000">Restore original file position after hashing an existing handle.</flag>
+         <flag value="0x00010000">Use nGranularity as file read buffer size, clamped internally between 64 KB and 8 MB.</flag>
+      </flags>
+      <remarks>
+         Combine flags with OR or nOr(). The filename mode opens the file read-only and closes it internally. The
+         handle mode leaves the handle open; use 0x00001000 when the current file position must be preserved.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 BEGIN_NAMESPACE( ot4xb_hash_ns )
       // ---------------------------------------------------------------------------------
       BOOL process_input_file( TXppParamList &  xpp  , DWORD dwFlags  , HCRYPTHASH hHash )

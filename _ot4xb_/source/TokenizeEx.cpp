@@ -5,7 +5,46 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( TOKENIZEEX ) // TokenizeEx( str, aSep , nFlags ) -> aToken
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>TokenizeEx</name>
+      <category>string</category>
+      <description>
+         Splits a character string using one literal separator or an array of literal separators.
+      </description>
+      <syntax>TokenizeEx( cText, xSeparator ) -> aTokens</syntax>
+      <parameters>
+         <parameter>
+            <name>cText</name>
+            <type>Character</type>
+            <description>Text to split.</description>
+         </parameter>
+         <parameter>
+            <name>xSeparator</name>
+            <type>Character | Array</type>
+            <description>
+               Literal separator string, or an array of literal separator strings. When an array is supplied, the
+               separators are tested in array order and the first matching separator is consumed.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <description>
+            Returns an array with all tokens, including empty tokens between consecutive separators and the final
+            empty token when cText ends with a separator. If no separator is supplied, the whole text is returned as
+            one token.
+         </description>
+      </return>
+      <remarks>
+         Separators are matched as literal strings, not as a character set. Unlike Tokenize(), this function can use
+         more than one separator string. Quotes are not interpreted; separators inside quoted text are still treated as
+         separators. No flags are currently processed by this function.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
+_XPP_REG_FUN_( TOKENIZEEX )
 {
    TokenizeEx_t k;
    k.run_xbase(pl);

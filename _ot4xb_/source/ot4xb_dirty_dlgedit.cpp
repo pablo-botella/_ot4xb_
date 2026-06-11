@@ -47,6 +47,8 @@
 #define OT4XB_DDN_BTNCLICK         8
 // -----------
 
+
+
 // -----------------------------------------------------------------------------------------------------------------
 namespace ot4xb_dirty_dlgedit_ns {  // BEGIN NAMESPACE
    // ---------------------------------------------------------------------------------
@@ -1816,6 +1818,103 @@ DWORD __stdcall ot4xb_dirty_dlgedit::thread_proc(void* ctx )
 //
 //
 // -----------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_dirty_dlgedit</name>
+      <category>ui/dialogs</category>
+      <description>
+         Quick tabbed editor dialog helper, in the style of the old alert() helpers but with edit controls,
+         checkboxes, combo pick lists and buttons. It builds the dialog from arrays and writes edited values back
+         into the edit descriptor array, so it is useful for quick application dialogs without declaring a full
+         Xbase++ dialog class.
+      </description>
+      <syntax>ot4xb_dirty_dlgedit( hParent, @aRect, nFlags, cTitle, aTabs, aButtons, @aEdits, hWndNotify, nActiveTab ) -> nResult | nThreadId | NIL</syntax>
+      <parameters>
+         <parameter name="hParent" type="numeric | object">Parent HWND or Xbase++ window/control object.</parameter>
+         <parameter name="aRect" type="array by reference">Dialog rectangle as {left, top, right, bottom}; updated with the final rectangle.</parameter>
+         <parameter name="nFlags" type="numeric">Display and behavior flags combined with OR or nOr().</parameter>
+         <parameter name="cTitle" type="character">Dialog title.</parameter>
+         <parameter name="aTabs" type="array">Tab captions. If omitted, a single tab using the title is created.</parameter>
+         <parameter name="aButtons" type="array">Button captions.</parameter>
+         <parameter name="aEdits" type="array by reference">Edit descriptors. Each item is {nTab, nFlags, cLabel, xValue [,aPickValues | cCaption]}.</parameter>
+         <parameter name="hWndNotify" type="numeric | object">Optional HWND or Xbase++ window/control object that receives dirty dialog notification messages.</parameter>
+         <parameter name="nActiveTab" type="numeric">Initial tab index.</parameter>
+      </parameters>
+      <edit-descriptor>
+         Each aEdits element describes one control as {nTab, nFlags, cLabel, xValue [,xExtra]}.
+         nTab is the 1-based tab number. nFlags is applied to character edit controls as Win32 EDIT style flags.
+         cLabel is the left-side label. xValue is the edited value and is written back into element 4 after a
+         synchronous dialog closes.
+
+         When xValue is logical, the control is a checkbox and xExtra, when present, is the checkbox caption.
+         When xValue is not logical, the value is edited as character data. If xExtra is an array, the control is
+         a dropdown combo populated with those pick values; otherwise it is a plain edit control.
+      </edit-descriptor>
+      <edit-flags>
+         <flag value="0x00000002">ES_RIGHT: right-align text in the edit control.</flag>
+         <flag value="0x00000020">ES_PASSWORD: password edit control.</flag>
+         <flag value="0x00000800">ES_READONLY: read-only edit control; it is not used as a tab-stop target.</flag>
+      </edit-flags>
+      <flags>
+         <flag value="0x00000001">Place on primary monitor.</flag>
+         <flag value="0x00000002">Place on the monitor that contains hParent.</flag>
+         <flag value="0x00000003">Place on the monitor that contains the mouse.</flag>
+         <flag value="0x00000004">Center the dialog.</flag>
+         <flag value="0x00000008">Maximize inside the selected bounds.</flag>
+         <flag value="0x00000010">Treat aRect as parent-window coordinates.</flag>
+         <flag value="0x00000030">Treat aRect as parent-client coordinates.</flag>
+         <flag value="0x00000100">Hide from taskbar.</flag>
+         <flag value="0x00000200">Create as child window.</flag>
+         <flag value="0x00000400">Disable parent while the dialog is active.</flag>
+         <flag value="0x00000800">Show title/caption behavior.</flag>
+         <flag value="0x00008000">Run in a new thread and return the thread id.</flag>
+         <flag value="0x00010000">Top-level mode.</flag>
+         <flag value="0x00020000">Dummy hit-test behavior for moving/caption handling.</flag>
+         <flag value="0x00040000">Buttons participate in tab-stop keyboard navigation.</flag>
+         <flag value="0x00080000">Subclass the parent for dialog coordination.</flag>
+         <flag value="0x01000000">Add a client edge around the tab client window.</flag>
+      </flags>
+      <notifications>
+         <notification value="1">Dialog created.</notification>
+         <notification value="2">Tab control created.</notification>
+         <notification value="3">Page created.</notification>
+         <notification value="4">Page container created.</notification>
+         <notification value="5">Label control created.</notification>
+         <notification value="6">Edit/control created.</notification>
+         <notification value="7">Button created.</notification>
+         <notification value="8">Button clicked.</notification>
+      </notifications>
+      <remarks>
+         Flags are combined with OR or nOr(), not with addition. When the dialog runs synchronously, closing it
+         with [X] or Alt+F4 returns 0. Pressing a button returns its 1-based position in aButtons and copies changed
+         values back into aEdits. With OT4XB_DDF_USETHREAD it starts a thread, returns the thread id and does not
+         synchronously collect edited values.
+      </remarks>
+      <example><![CDATA[
+local rc     := {0,0,640,420}
+local flags  := nOr( OT4XB_DDF_CHILD, OT4XB_DDF_COORD_WINDOW, OT4XB_DDF_DISPLAY_MAXIMIZED )
+local tabs   := {"Connection","Options"}
+local btns   := {"OK","Cancel"}
+local edits  := { ;
+   {1,0x0800,"Url", cUrl}, ;
+   {1,0x0002,"Retries", cPrintf("%i", nRetries)}, ;
+   {1,0,"HTTP method", cMethod, {"GET","POST"}}, ;
+   {2,0,"Use cache", lUseCache, "Cache responses"} ;
+}
+local result := ot4xb_dirty_dlgedit( SetAppWindow(), @rc, flags, "Settings", tabs, btns, @edits )
+
+if result == 1
+   cUrl       := edits[1,4]
+   nRetries  := Val(edits[2,4])
+   cMethod    := edits[3,4]
+   lUseCache  := edits[4,4]
+endif
+      ]]></example>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 
 // -----------------------------------------------------------------------------------------------------------------
 XPPRET XPPENTRY OT4XB_DIRTY_DLGEDIT( XppParamList pl )

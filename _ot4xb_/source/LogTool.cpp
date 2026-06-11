@@ -15,6 +15,59 @@ static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , L
 static BOOL bSendLogStr_internal( HWND * phWnd, LPSTR pWndCls, LPSTR pFmt , va_list arglist);
 static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr );
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>WM_COPYDATA log output helpers</name>
+      <source>LogTool.cpp</source>
+      <category>logging</category>
+      <description>
+         Sends formatted log text to a logging window using WM_COPYDATA. The non-OT4XB variants can be redirected
+         to an application-provided window class; the OT4XB variants use OT4XB's default log window class.
+      </description>
+      <functions>
+         <function>
+            <name>Register_User_Log_Uuid</name>
+            <syntax>Register_User_Log_Uuid( cWindowClass ) -> NIL</syntax>
+            <description>
+               Registers the window class searched by lSendLogStr() and lSendLogStrFL(). Calling it again replaces
+               the previous class name and resets the cached window handle.
+            </description>
+         </function>
+         <function>
+            <name>lSendLogStr</name>
+            <syntax>lSendLogStr( cFormat [, xParamN] ) -> lOk</syntax>
+            <description>Sends a printf-style formatted message to the registered user log window.</description>
+         </function>
+         <function>
+            <name>lSendLogStrFL</name>
+            <syntax>lSendLogStrFL( cFile, nLine, cFormat [, xParamN] ) -> lOk</syntax>
+            <description>
+               Sends a printf-style formatted message with UTC timestamp plus file and line metadata to the
+               registered user log window.
+            </description>
+         </function>
+         <function>
+            <name>ot4xb_lSendLogStr</name>
+            <syntax>ot4xb_lSendLogStr( cFormat [, xParamN] ) -> lOk</syntax>
+            <description>Sends a printf-style formatted message to the default OT4XB log window.</description>
+         </function>
+         <function>
+            <name>ot4xb_lSendLogStrFL</name>
+            <syntax>ot4xb_lSendLogStrFL( cFile, nLine, cFormat [, xParamN] ) -> lOk</syntax>
+            <description>
+               Sends a printf-style formatted message with UTC timestamp plus file and line metadata to the
+               default OT4XB log window.
+            </description>
+         </function>
+      </functions>
+      <remarks>
+         The functions return .F. when no target window can be found. The formatted payload is delivered with
+         WM_COPYDATA and is intended for diagnostic/log-viewer tooling, not for high-volume IPC.
+      </remarks>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY REGISTER_USER_LOG_UUID( XppParamList pl )
 {
    if( user_pWndCls ) 

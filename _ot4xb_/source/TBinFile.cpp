@@ -12,6 +12,131 @@
                               px->SetErrorGenCode(0x00105000 + n);
 //----------------------------------------------------------------------------------------------------------------------
 
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>lMemoWrite</name>
+      <category>file/binary</category>
+      <description>
+         Writes a character buffer to a disk file. Unlike the old Clipper-style memo writer, it writes exactly the
+         bytes provided by the Xbase++ string and does not append a Ctrl+Z end-of-file marker.
+      </description>
+      <syntax>lMemoWrite( cFile, cBuffer, [lAppend := .F.] ) -> lOk</syntax>
+      <parameters>
+         <parameter name="cFile" type="character">Target file name.</parameter>
+         <parameter name="cBuffer" type="character">Bytes to write.</parameter>
+         <parameter name="lAppend" type="logical">When .T., appends at the end of the file; otherwise creates or truncates the file.</parameter>
+      </parameters>
+      <return><type>logical</type><description>.T. when the write succeeds.</description></return>
+   </function>
+
+   <function>
+      <name>cMemoReadEx</name>
+      <category>file/binary</category>
+      <description>
+         Reads a slice of a file into an Xbase++ character buffer, optionally advancing the offset parameter by
+         reference and supporting a MIME/email-header read mode.
+      </description>
+      <syntax>cMemoReadEx( cFile, [@nOffset := 0], [nMaxBytes := -1], [nFlags := 0] ) -> cBuffer | NIL</syntax>
+      <parameters>
+         <parameter name="cFile" type="character">File to read.</parameter>
+         <parameter name="nOffset" type="numeric by reference">Start offset. On success it is updated to the next byte after the returned block.</parameter>
+         <parameter name="nMaxBytes" type="numeric">Maximum number of bytes to read. -1 means read up to the internal limit or EOF.</parameter>
+         <parameter name="nFlags" type="numeric">Flags combined with OR.</parameter>
+      </parameters>
+      <flags>
+         <flag value="0x0001">Open without file-sharing flags.</flag>
+         <flag value="0x0002">Return NIL on open/read failure instead of returning an empty string.</flag>
+         <flag value="0x8000">Email header mode: stop returned data at the first empty line (CRLFCRLF or LFLF).</flag>
+      </flags>
+      <return>
+         <type>character | NIL</type>
+         <description>Read bytes, an empty string when no data is returned, or NIL when requested by flag 0x0002.</description>
+      </return>
+   </function>
+
+   <function-group>
+      <name>Structured storage memo functions</name>
+      <category>file/structured-storage</category>
+      <description>
+         Helpers for reading and writing streams inside a COM structured storage file. Storage and stream names are
+         addressed with backslash-separated paths.
+      </description>
+      <functions>
+         <function>
+            <name>lMemoStgWrite</name>
+            <syntax>lMemoStgWrite( cStgFile, cName, cBuffer, [lAppend := .F.] ) -> lOk</syntax>
+            <description>
+               Creates or opens the structured storage file, creates any missing nested storages in cName, and writes
+               cBuffer to the final stream. When cName ends with a backslash only the storage path is created. Passing
+               -1 as the third parameter deletes the named stream.
+            </description>
+         </function>
+         <function>
+            <name>cMemoStgRead</name>
+            <syntax>cMemoStgRead( cStgFile, cName, [nStart := 0], [nBytes := -1] ) -> cBuffer</syntax>
+            <description>Reads bytes from the named stream. nBytes &lt; 0 reads to the end of the stream.</description>
+         </function>
+         <function>
+            <name>lMemoStgImport</name>
+            <syntax>lMemoStgImport( cStgFile, cName, cInputFile | hInputFile, [lAppend := .F.] ) -> lOk</syntax>
+            <description>Copies bytes from a disk file or existing file handle into the named storage stream.</description>
+         </function>
+         <function>
+            <name>lMemoStgExport</name>
+            <syntax>lMemoStgExport( cStgFile, cName, cOutputFile | hOutputFile ) -> lOk</syntax>
+            <description>Copies the named storage stream to a disk file or existing file handle.</description>
+         </function>
+         <function>
+            <name>cMemoStgList</name>
+            <syntax>cMemoStgList( cStgFile ) -> aItems</syntax>
+            <description>
+               Recursively lists the structured storage file as { { cName, nType, nSize, aChildren | NIL }, ... }.
+            </description>
+         </function>
+      </functions>
+   </function-group>
+
+   <class>
+      <name>TBinFile</name>
+      <category>file/binary</category>
+      <description>
+         Low-level Win32 file-handle wrapper for binary file access, pointer-extended reads and writes, manual seeking,
+         buffered line reads, and MIME header reads.
+      </description>
+      <syntax>TBinFile():new( [hFile] ) -> oFile</syntax>
+      <properties>
+         <property name="hFile" type="numeric" access="readonly">Current Win32 file handle, or NIL when no file is attached.</property>
+      </properties>
+      <methods>
+         <method name="Release" syntax="::Release() -> Self">Releases the C++ wrapper without closing an attached file handle.</method>
+         <method name="Close" syntax="::Close() -> Self">Closes the attached file handle and releases the wrapper.</method>
+         <method name="Open" syntax="::Open( cFile, [cAccess], [cShare], [lOpenAlways] ) -> lOk">Opens an existing file, or opens/creates it when lOpenAlways is .T.</method>
+         <method name="Create" syntax="::Create( cFile, [cAccess], [cShare], [pSecurity | lInherit], [dwFunc], [dwAttrib], [hTemplate] ) -> lOk">Creates or opens a file using CreateFile-style options.</method>
+         <method name="Read" syntax="::Read( NIL, nBytes, [@nRead] ) -> cBytes | NIL">Allocates and returns a character buffer with up to nBytes bytes.</method>
+         <method name="Read" syntax="::Read( @ptEx, [nBytes], [@nRead] ) -> nRead | NIL">Reads into an OT4XB extended pointer target.</method>
+         <method name="Write" syntax="::Write( @ptEx, [nBytes] ) -> nWritten | NIL">Writes from an OT4XB extended pointer source.</method>
+         <method name="GetPos" syntax="::GetPos( [@uPos] ) -> nPos | uPos">Returns the current 64-bit file position as a double, qword string, or {lo,hi} array.</method>
+         <method name="GoTo" syntax="::GoTo( nSkip, nFrom ) -> lOk">Moves the file pointer. nFrom follows Win32 FILE_BEGIN=0, FILE_CURRENT=1, FILE_END=2.</method>
+         <method name="GoBof" syntax="::GoBof( nSkip ) -> lOk">Moves from the beginning of file.</method>
+         <method name="SkipBytes" syntax="::SkipBytes( nSkip ) -> lOk">Moves relative to the current position.</method>
+         <method name="GoEof" syntax="::GoEof( nSkip ) -> lOk">Moves relative to the end of file.</method>
+         <method name="SetEof" syntax="::SetEof() -> lOk">Sets the physical end of file at the current pointer position.</method>
+         <method name="Commit" syntax="::Commit() -> lOk">Flushes file buffers.</method>
+         <method name="ReadLine" syntax="::ReadLine( @lEof, @lEol ) -> cLine">Reads one line and reports EOF/EOL state by reference.</method>
+         <method name="ReadMimeHeader" syntax="::ReadMimeHeader( @lEof, @lEoh ) -> cHeader">Reads MIME header bytes until end-of-header or EOF.</method>
+         <method name="ResetBuffer" syntax="::ResetBuffer( [nSize] ) -> NIL">Resets the internal read buffer, optionally changing its size.</method>
+         <method name="LoadBuffer" syntax="::LoadBuffer( @lEof, [lSkip := .T.] ) -> nBytes">Loads the internal buffer; with lSkip=.F. restores the previous file position.</method>
+         <method name="PeekBytesFromBuffer" syntax="::PeekBytesFromBuffer( [nRelOffset := 0], [nBytes := 0] ) -> cBytes">Returns bytes already loaded in the internal buffer.</method>
+      </methods>
+      <remarks>
+         cAccess may be numeric, logical, or a string containing r and/or w. cShare may be numeric, logical, or a
+         string containing r, w and/or d. Extended pointer parameters accept OT4XB pointer-compatible values.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 //-----------------------------------------------------------------------------------------------------------------------
 static void TBinFile_GetAccessAndShare( TXbClsParams * px , ULONG npa,DWORD * pdwa , ULONG nps,DWORD * pdws );
 static void TBinFile_GetSecurityAttrib( TXbClsParams * px , ULONG np, SECURITY_ATTRIBUTES* psl,SECURITY_ATTRIBUTES** ppsa);

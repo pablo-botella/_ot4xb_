@@ -6,6 +6,139 @@
 // -----------------------------------------------------------------------------------------------------------------
 #include <ot4xb_api.h>
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>DispHelper COM wrappers</name>
+      <source>ot4xb_disphelper.cpp</source>
+      <category>interop/com</category>
+      <description>
+         Thin OT4XB exports over the bundled DispHelper COM helper library. They make it possible to create,
+         retrieve, invoke and enumerate IDispatch-based COM objects from Xbase++ code.
+      </description>
+      <status>Low-level COM interop API.</status>
+      <remarks>
+         The first call initializes DispHelper for Unicode mode and calls CoInitialize internally through
+         dhInitializeImp(.T., .T.). DispHelper exceptions are disabled by default, so the wrappers return the
+         HRESULT produced by the underlying dh* function. The latest Win32 error captured by the wrapper can be
+         read with nFpGetLastError().
+
+         Parameters follow the C DispHelper signatures. Interface pointers such as IDispatch*, IUnknown* and
+         IEnumVARIANT* are numeric pointer values in Xbase++. Out parameters are passed by reference. String
+         member names and ProgIds are OLE strings in the underlying API; use the same string representation
+         expected by the called DispHelper entry point.
+
+         DispHelper format identifiers are case-sensitive. Common identifiers are d=VT_I4, u=VT_UI4, e=VT_R8,
+         b=VT_BOOL, v=VARIANT, m=missing optional argument, B=BSTR, S=wide string, s=ANSI string, T=current
+         DispHelper text mode string, o=IDispatch, O=IUnknown, D=DATE, t=time_t, W=SYSTEMTIME, f=FILETIME and
+         p=pointer value.
+      </remarks>
+      <functions>
+         <function>
+            <name>_dh_createobject</name>
+            <syntax>_dh_createobject( cProgId, cMachine, @pDispatch ) -> nHRESULT</syntax>
+            <description>Creates a COM object by ProgId and returns its IDispatch pointer in @pDispatch.</description>
+         </function>
+         <function>
+            <name>_dh_getobject</name>
+            <syntax>_dh_getobject( cFile, cProgId, @pDispatch ) -> nHRESULT</syntax>
+            <description>Gets an existing COM object or loads an object from a file and returns IDispatch in @pDispatch.</description>
+         </function>
+         <function>
+            <name>_dh_createobjectex</name>
+            <syntax>_dh_createobjectex( cProgId, pIID, nClsContext, pServerInfo, @pInterface ) -> nHRESULT</syntax>
+            <description>Extended object creation that requests a specific interface and class context.</description>
+         </function>
+         <function>
+            <name>_dh_getobjectex</name>
+            <syntax>_dh_getobjectex( cFile, cProgId, pIID, nClsContext, pReserved, @pInterface ) -> nHRESULT</syntax>
+            <description>Extended get-object helper that requests a specific interface.</description>
+         </function>
+         <function>
+            <name>_dh_callmethod</name>
+            <syntax>_dh_callmethod( pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Invokes a method or method path on an IDispatch object.</description>
+         </function>
+         <function>
+            <name>_dh_putvalue</name>
+            <syntax>_dh_putvalue( pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Sets a property value through IDispatch.</description>
+         </function>
+         <function>
+            <name>_dh_putref</name>
+            <syntax>_dh_putref( pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Sets a property by reference through IDispatch.</description>
+         </function>
+         <function>
+            <name>_dh_getvalue</name>
+            <syntax>_dh_getvalue( cIdentifier, @xResult, pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Gets a property or method result converted according to cIdentifier.</description>
+         </function>
+         <function>
+            <name>_dh_invoke</name>
+            <syntax>_dh_invoke( nInvokeType, nReturnType, pVariantResult, pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Generic IDispatch invocation wrapper.</description>
+         </function>
+         <function>
+            <name>_dh_invokearray</name>
+            <syntax>_dh_invokearray( nInvokeType, pVariantResult, nArgs, pDispatch, cMember, pVariantArgs ) -> nHRESULT</syntax>
+            <description>Generic IDispatch invocation using an existing VARIANT argument array.</description>
+         </function>
+         <function>
+            <name>_dh_callmethodv</name>
+            <syntax>_dh_callmethodv( pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_callmethod(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_putvaluev</name>
+            <syntax>_dh_putvaluev( pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_putvalue(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_putrefv</name>
+            <syntax>_dh_putrefv( pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_putref(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_getvaluev</name>
+            <syntax>_dh_getvaluev( cIdentifier, pResult, pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_getvalue(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_invokev</name>
+            <syntax>_dh_invokev( nInvokeType, nReturnType, pVariantResult, pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_invoke(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_enumbegin</name>
+            <syntax>_dh_enumbegin( @pEnum, pDispatch, cMember, ... ) -> nHRESULT</syntax>
+            <description>Starts enumeration over a COM collection and returns an IEnumVARIANT pointer in @pEnum.</description>
+         </function>
+         <function>
+            <name>_dh_enumbeginv</name>
+            <syntax>_dh_enumbeginv( @pEnum, pDispatch, cMember, pVaList ) -> nHRESULT</syntax>
+            <description>va_list variant of _dh_enumbegin(); mainly useful for C-level integration.</description>
+         </function>
+         <function>
+            <name>_dh_enumnextobject</name>
+            <syntax>_dh_enumnextobject( pEnum, @pDispatch ) -> nHRESULT</syntax>
+            <description>Reads the next enumerated item as an IDispatch pointer.</description>
+         </function>
+         <function>
+            <name>_dh_enumnextvariant</name>
+            <syntax>_dh_enumnextvariant( pEnum, pVariantResult ) -> nHRESULT</syntax>
+            <description>Reads the next enumerated item into a VARIANT buffer.</description>
+         </function>
+         <function>
+            <name>_dh_toggleexceptions</name>
+            <syntax>_dh_toggleexceptions( lShow ) -> nHRESULT</syntax>
+            <description>Enables or disables DispHelper exception display.</description>
+         </function>
+      </functions>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
+// -----------------------------------------------------------------------------------------------------------------
 BEGIN_EXTERN_C
 // -----------------------------------------------------------------------------------------------------------------
 HRESULT dhCreateObject(LPCOLESTR szProgId, LPCWSTR szMachine, IDispatch ** ppDisp);

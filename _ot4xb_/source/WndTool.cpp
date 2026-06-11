@@ -96,6 +96,83 @@ static LRESULT __stdcall _ot4xbxbwndprocwithxbobj_(OT4XB_WND_CARGO * pc,HWND hWn
    return ( bDefault ? CallWindowProc( pc->pOldProc , hWnd,nMsg,wp,lp ) : result );
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_CreateGenericWindow</name>
+      <export>OT4XB_CREATEGENERICWINDOW</export>
+      <source>WndTool.cpp:OT4XB_CREATEGENERICWINDOW</source>
+      <category>windows/window</category>
+      <description>
+         Creates a non-visual OT4XB window that receives window messages in the
+         Xbase++ UI thread and dispatches them to a selected Xbase++ method.
+      </description>
+      <syntax>
+         ot4xb_CreateGenericWindow( oHandler, [nParentHWnd], [nAutoResetMsg], [cMethod] ) -> nHWnd
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>oHandler</name>
+            <type>object</type>
+            <description>
+               Xbase++ object or class object used to process the window
+               procedure callbacks.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nParentHWnd</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Parent window handle passed to CreateWindowEx(). If omitted, 0
+               is used. Use HWND_MESSAGE (-3) to create a message-only window.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nAutoResetMsg</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Message that restores the previous window procedure and releases
+               the callback cargo. If omitted or 0, WM_NCDESTROY is used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cMethod</name>
+            <type>string</type>
+            <optional>true</optional>
+            <description>
+               Method name invoked on oHandler for window procedure callbacks.
+               If omitted, "WndProc" is used. If oHandler is an object
+               instance, the method must be an instance method. If oHandler is
+               a class object, it may be a class method.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>numeric</type>
+         <description>
+            The HWND of the created generic window, or NIL if oHandler is not
+            an object or the window cannot be created.
+         </description>
+      </return>
+      <remarks>
+         The callback method receives hWnd, nMsg, nWParam, nLParam, and
+         nOldWndProc.
+      </remarks>
+      <remarks>
+         If the callback method returns a numeric value, that value is used as
+         the window procedure result. If it returns NIL or any non-numeric
+         value, OT4XB calls the previous window procedure.
+      </remarks>
+      <remarks>
+         The created window uses the internal "_OT4XB_GENERIC_WINDOW_" class.
+         After the subclass procedure is installed, OT4XB posts WM_NCCREATE and
+         WM_CREATE to the new window.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_CREATEGENERICWINDOW( XppParamList pl)
 {
    BOOL bByRef = FALSE;
@@ -127,6 +204,85 @@ XPPRET XPPENTRY OT4XB_CREATEGENERICWINDOW( XppParamList pl)
    _conRelease(conr);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_SubclassWindow</name>
+      <export>OT4XB_SUBCLASSWINDOW</export>
+      <source>WndTool.cpp:OT4XB_SUBCLASSWINDOW</source>
+      <category>windows/window</category>
+      <description>
+         Subclasses an existing window and dispatches its window messages to a
+         selected Xbase++ method.
+      </description>
+      <syntax>
+         ot4xb_SubclassWindow( nHWnd, oHandler, [nAutoResetMsg], [cMethod], [nFlags] ) -> lSuccess
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nHWnd</name>
+            <type>numeric</type>
+            <description>
+               Handle of the existing window to subclass.
+            </description>
+         </parameter>
+         <parameter>
+            <name>oHandler</name>
+            <type>object</type>
+            <description>
+               Xbase++ object or class object used to process the window
+               procedure callbacks.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nAutoResetMsg</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Message that restores the previous window procedure and releases
+               the callback cargo. If omitted or 0, WM_NCDESTROY is used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cMethod</name>
+            <type>string</type>
+            <optional>true</optional>
+            <description>
+               Method name invoked on oHandler for window procedure callbacks.
+               If omitted, "WndProc" is used. If oHandler is an object
+               instance, the method must be an instance method. If oHandler is
+               a class object, it may be a class method.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nFlags</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Optional subclassing mode. Set bit 0x8000 to subclass the window
+               through the Unicode window procedure slot; otherwise the ANSI
+               slot is used.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>logical</type>
+         <description>
+            TRUE if the window was subclassed, otherwise FALSE.
+         </description>
+      </return>
+      <remarks>
+         The callback method receives hWnd, nMsg, nWParam, nLParam, and
+         nOldWndProc.
+      </remarks>
+      <remarks>
+         If the callback method returns a numeric value, that value is used as
+         the window procedure result. If it returns NIL or any non-numeric
+         value, OT4XB calls the previous window procedure.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_SUBCLASSWINDOW( XppParamList pl) // ot4xb_subclasswindow( hWnd,oHandler, nMsgReset,cMethod,nFlags)
 {
    BOOL bByRef = FALSE;
@@ -279,6 +435,60 @@ HWND OT4XB_API __cdecl _ot4xb_gen_hwnd_delegate_(HWND hWnd)
    return _hWndDelegate_;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_register_delegate_hwnd</name>
+      <export>OT4XB_REGISTER_DELEGATE_HWND</export>
+      <source>WndTool.cpp:OT4XB_REGISTER_DELEGATE_HWND</source>
+      <category>windows/delegation</category>
+      <description>
+         Ensures that the internal OT4XB delegate window exists and returns its window handle.
+      </description>
+      <syntax>
+         ot4xb_register_delegate_hwnd( [hWnd | oXbp] ) -> hDelegateWnd
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>hWnd</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Optional existing window handle used to create the delegate window in the UI thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>oXbp</name>
+            <type>object</type>
+            <optional>true</optional>
+            <description>
+               Optional Xbase++ presentation object whose ::GetHWND() value is used as the window handle.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>numeric</type>
+         <description>
+            Window handle of the internal OT4XB delegate window, or 0 if it could not be created.
+         </description>
+      </return>
+      <remarks>
+         This function is normally called automatically when OT4XB needs to delegate messages or
+         execute code in the UI thread of the Xbase++ application.
+
+         The delegate window is a shared OT4XB infrastructure window. Many OT4XB functions reuse
+         this same window to marshal calls or messages to the UI thread.
+
+         Applications may call it explicitly during startup to guarantee that the delegate window
+         already exists before the first delegated operation. Calling it more than once is safe:
+         the second and subsequent calls only return the already registered delegate window handle.
+
+         When no window is supplied, OT4XB creates a temporary XbpStatic object, uses its HWND to
+         create the delegate window in the UI thread, and destroys the temporary object afterwards.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_REGISTER_DELEGATE_HWND( XppParamList pl)
 {
    if( !_hWndDelegate_ )
@@ -356,6 +566,60 @@ static ContainerHandle _delegated_xbase_call_( XppParamList pl , LPSTR pFName , 
    return conr;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>delegated_xbase_call</name>
+      <export>DELEGATED_XBASE_CALL</export>
+      <source>WndTool.cpp:DELEGATED_XBASE_CALL</source>
+      <category>windows/delegation</category>
+      <description>
+         Executes an Xbase++ function in the thread that runs the target window
+         procedure.
+      </description>
+      <syntax>
+         delegated_xbase_call( nHWnd, cFunctionName, ... ) -> uResult
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nHWnd</name>
+            <type>numeric</type>
+            <description>
+               Handle of the window whose procedure will receive the delegated
+               call message. If NIL, empty, or 0, OT4XB uses its internal
+               delegate window, which runs in the Xbase++ UI thread.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cFunctionName</name>
+            <type>string</type>
+            <description>
+               Name of the Xbase++ function to call.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the target Xbase++ function.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>any</type>
+         <description>
+            The value returned by the delegated Xbase++ function.
+         </description>
+      </return>
+      <remarks>
+         The call is sent synchronously with SendMessage(), so the caller waits
+         until the target window procedure dispatches the function and returns
+         the result.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY DELEGATED_XBASE_CALL( XppParamList pl) // DELEGATED_XBASE_CALL( hWnd , fn,... )
 {
    char fn[256]; ZeroMemory(fn,sizeof(fn));
@@ -365,6 +629,66 @@ XPPRET XPPENTRY DELEGATED_XBASE_CALL( XppParamList pl) // DELEGATED_XBASE_CALL( 
    _conRelease(conr);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>delegated_FPQCall</name>
+      <export>DELEGATED_FPQCALL</export>
+      <source>WndTool.cpp:DELEGATED_FPQCALL</source>
+      <category>windows/delegation</category>
+      <description>
+         Executes FPQCall in the Xbase++ UI thread through the internal OT4XB
+         delegate window.
+      </description>
+      <syntax>
+         delegated_FPQCall( uFunction, cCallTemplate, ... ) -> uResult
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>uFunction</name>
+            <type>numeric | array</type>
+            <description>
+               Target function. A numeric value must be a pointer to a cdecl or
+               stdcall function. An array value must have the form
+               { hDllOrDllName, cProcName }, where the first element is a DLL
+               handle or DLL name and the second element is the exported
+               procedure name.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cCallTemplate</name>
+            <type>string</type>
+            <description>
+               FPQCall qualification string. Each four-character group
+               describes one item: the first group describes the return value
+               and each following group describes one parameter.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the target function according to
+               cCallTemplate.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>any</type>
+         <description>
+            The value returned by FPQCall after the target function completes.
+         </description>
+      </return>
+      <remarks>
+         The delegated call uses FPQCall and therefore supports cdecl and
+         stdcall functions. It does not support fastcall or other calling
+         conventions that pass arguments through registers or use a different
+         stack discipline.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY DELEGATED_FPQCALL( XppParamList pl)
 {
    ContainerHandle   conr = _delegated_xbase_call_(pl,"FPQCALL");
@@ -372,6 +696,50 @@ XPPRET XPPENTRY DELEGATED_FPQCALL( XppParamList pl)
    _conRelease(conr);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>delegated_eval</name>
+      <export>DELEGATED_EVAL</export>
+      <source>WndTool.cpp:DELEGATED_EVAL</source>
+      <category>windows/delegation</category>
+      <description>
+         Evaluates a code block in the Xbase++ UI thread through the internal
+         OT4XB delegate window.
+      </description>
+      <syntax>
+         delegated_eval( bBlock, ... ) -> uResult
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>bBlock</name>
+            <type>codeblock</type>
+            <description>
+               Code block to evaluate.
+            </description>
+         </parameter>
+         <parameter>
+            <name>...</name>
+            <type>any</type>
+            <optional>true</optional>
+            <description>
+               Parameters passed to the code block.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>any</type>
+         <description>
+            The value returned by the evaluated code block.
+         </description>
+      </return>
+      <remarks>
+         The call is delegated synchronously, so the caller waits until the code
+         block is evaluated and the result is returned.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY DELEGATED_EVAL( XppParamList pl)
 {
    ContainerHandle   conr = _delegated_xbase_call_(pl,"EVAL");
@@ -451,6 +819,83 @@ static DWORD ot4xb_single_instance_internal(LPSTR pUuid, ContainerHandle cono , 
    return ( bMustQuit ? dwOldProc : 0 ) ;
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_single_instance</name>
+      <export>OT4XB_SINGLE_INSTANCE</export>
+      <source>WndTool.cpp:OT4XB_SINGLE_INSTANCE</source>
+      <category>windows/application</category>
+      <description>
+         Registers the current process as the single running instance for an
+         application identifier, or notifies the already running instance when
+         one is found.
+      </description>
+      <syntax>
+         ot4xb_single_instance( cUniqueId, oController, [aParams], [@nOldProcessId] ) -> lFound
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>cUniqueId</name>
+            <type>string</type>
+            <description>
+               Unique application identifier. A GUID string is commonly used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>oController</name>
+            <type>object</type>
+            <description>
+               Controller object for the current application instance. If this
+               process becomes the registered instance, the object is stored and
+               later used by this same instance to handle ::OnNewInstance()
+               calls.
+            </description>
+         </parameter>
+         <parameter>
+            <name>aParams</name>
+            <type>array</type>
+            <optional>true</optional>
+            <description>
+               Parameters sent to the already running instance. If omitted,
+               OT4XB sends the new process command line parameters.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nOldProcessId</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <byref>true</byref>
+            <description>
+               Receives the process id of the already running instance when one
+               is found.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>logical</type>
+         <description>
+            TRUE when another running instance was found and notified;
+            otherwise FALSE.
+         </description>
+      </return>
+      <remarks>
+         Each process calls ot4xb_single_instance() with its own controller
+         object. If no previous instance is found, the current process stores
+         that object as the controller for its single-instance delegate window.
+      </remarks>
+      <remarks>
+         If a previous instance is found, the new process sends aParams to that
+         instance and returns TRUE. The previous instance then calls
+         ::OnNewInstance( aParams ) on its own stored controller object.
+      </remarks>
+      <remarks>
+         A typical ::OnNewInstance() handler brings the existing application
+         window to the foreground and lets the new process exit.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_SINGLE_INSTANCE( XppParamList pl ) //  s:_cAppUUID_ , oApp , aParams ,[@dwOldProcessId] )
 {
 
@@ -487,15 +932,20 @@ extern "C" DWORD OT4XB_API str2ipicture(void* p , ULONG cb)
    if( p && cb )
    {
       HGLOBAL   hGlb     = GlobalAlloc(GMEM_MOVEABLE,cb);
+      if( !hGlb ) {return 0; }
       void*     pData    = GlobalLock( hGlb );
       _bcopy((LPBYTE) pData,(LPBYTE) p,cb);
       IStream * pStream  = NULL;
       GlobalUnlock(hGlb);
-      CreateStreamOnHGlobal(hGlb,TRUE,&pStream);
-      if( pStream )
+      HRESULT hr = CreateStreamOnHGlobal(hGlb,TRUE,&pStream);
+      if( SUCCEEDED(hr) && pStream )
       {
-         OleLoadPicture(pStream,0,FALSE,IID_IPicture,(void**)&pPicture);
+         HRESULT hr = OleLoadPicture(pStream,0,FALSE,IID_IPicture,(void**)&pPicture);
          pStream->Release();
+         if (FAILED(hr) || pPicture == NULL)
+         {
+            GlobalFree(hGlb);
+         }
       }
       else GlobalFree(hGlb);
    }
@@ -506,7 +956,7 @@ extern "C" DWORD OT4XB_API ipicture2file(DWORD dwpic,  LPSTR fn )
 {
    IPicture* pi = (IPicture*) dwpic;
    BSTR bsfn = 0;
-   HRESULT result = -1;
+   HRESULT result = (HRESULT)  - 1;
    if (pi && fn)
    {
       UINT cb = _xstrlen(fn);
@@ -606,7 +1056,8 @@ extern "C" DWORD OT4XB_API str2istream(void* p , ULONG cb)
          _bcopy((LPBYTE)pData, (LPBYTE)p, cb);
          IStream* pStream = NULL;
          GlobalUnlock(hGlb);
-         if (SUCCEEDED(CreateStreamOnHGlobal(hGlb, TRUE, &pStream) && pStream) )
+         HRESULT hr = CreateStreamOnHGlobal(hGlb, TRUE, &pStream);
+         if (SUCCEEDED(hr) && pStream)
          {
             return (DWORD)pStream;
          }
@@ -624,38 +1075,128 @@ static BOOL ot4xb_hooktype_from_string( LPSTR pStr , int* pht , LPSTR* ppxm )
    if( !pStr ){ return FALSE; }
    switch( dwCrc32Lower(0,(LPBYTE) pStr, _xstrlen(pStr)) )
    {
-      case 0xF2D74027:{static char sz[] = "journalrecord_hookproc";pht[0]= WH_JOURNALRECORD;
+      case 0xF2D74027: /* "journalrecord" */ {static char sz[] = "journalrecord_hookproc";pht[0]= WH_JOURNALRECORD;
                        ppxm[0] = sz;return TRUE;}
-      case 0x5A77879A:{static char sz[] = "journalplayback_hookproc";pht[0]= WH_JOURNALPLAYBACK;
+      case 0x5A77879A: /* "journalplayback" */ {static char sz[] = "journalplayback_hookproc";pht[0]= WH_JOURNALPLAYBACK;
                        ppxm[0] = sz;return TRUE;}
-      case 0x83748095:{static char sz[] = "keyboard_hookproc";pht[0]= WH_KEYBOARD;
+      case 0x83748095: /* "keyboard" */ {static char sz[] = "keyboard_hookproc";pht[0]= WH_KEYBOARD;
                        ppxm[0] = sz;return TRUE;}
-      case 0xC58EC3FF:{static char sz[] = "getmessage_hookproc";pht[0]= WH_GETMESSAGE;
+      case 0xC58EC3FF: /* "getmessage" */ {static char sz[] = "getmessage_hookproc";pht[0]= WH_GETMESSAGE;
                        ppxm[0] = sz;return TRUE;}
-      case 0xDC90E3F5:{static char sz[] = "callwndproc_hookproc";pht[0]= WH_CALLWNDPROC;
+      case 0xDC90E3F5: /* "callwndproc" */ {static char sz[] = "callwndproc_hookproc";pht[0]= WH_CALLWNDPROC;
                        ppxm[0] = sz;return TRUE;}
-      case 0xB573106B:{static char sz[] = "cbt_hookproc";pht[0]= WH_CBT;
+      case 0xB573106B: /* "cbt" */ {static char sz[] = "cbt_hookproc";pht[0]= WH_CBT;
                        ppxm[0] = sz;return TRUE;}
-      case 0xBFF4BBD3:{static char sz[] = "sysmsgfilter_hookproc";pht[0]= WH_SYSMSGFILTER;
+      case 0xBFF4BBD3: /* "sysmsgfilter" */ {static char sz[] = "sysmsgfilter_hookproc";pht[0]= WH_SYSMSGFILTER;
                        ppxm[0] = sz;return TRUE;}
-      case 0xAF35B6ED:{static char sz[] = "mouse_hookproc";pht[0]= WH_MOUSE;
+      case 0xAF35B6ED: /* "mouse" */ {static char sz[] = "mouse_hookproc";pht[0]= WH_MOUSE;
                        ppxm[0] = sz;return TRUE;}
-      case 0x6CA547A7:{static char sz[] = "debug_hookproc";pht[0]= WH_DEBUG;
+      case 0x6CA547A7: /* "debug" */ {static char sz[] = "debug_hookproc";pht[0]= WH_DEBUG;
                        ppxm[0] = sz;return TRUE;}
-      case 0x4592B2FD:{static char sz[] = "shell_hookproc";pht[0]= WH_SHELL;
+      case 0x4592B2FD: /* "shell" */ {static char sz[] = "shell_hookproc";pht[0]= WH_SHELL;
                        ppxm[0] = sz;return TRUE;}
-      case 0x9C0CFB4D:{static char sz[] = "foregroundidle_hookproc";pht[0]= WH_FOREGROUNDIDLE;
+      case 0x9C0CFB4D: /* "foregroundidle" */ {static char sz[] = "foregroundidle_hookproc";pht[0]= WH_FOREGROUNDIDLE;
                        ppxm[0] = sz;return TRUE;}
-      case 0xD185CD67:{static char sz[] = "callwndprocret_hookproc";pht[0]= WH_CALLWNDPROCRET;
+      case 0xD185CD67: /* "callwndprocret" */ {static char sz[] = "callwndprocret_hookproc";pht[0]= WH_CALLWNDPROCRET;
                        ppxm[0] = sz;return TRUE;}
-      case 0x82DEEEB1:{static char sz[] = "keyboard_ll_hookproc";pht[0]= WH_KEYBOARD_LL;
+      case 0x82DEEEB1: /* "keyboard_ll" */ {static char sz[] = "keyboard_ll_hookproc";pht[0]= WH_KEYBOARD_LL;
                        ppxm[0] = sz;return TRUE;}
-      case 0x50FB3706:{static char sz[] = "mouse_ll_hookproc";pht[0]= WH_MOUSE_LL;
+      case 0x50FB3706: /* "mouse_ll" */ {static char sz[] = "mouse_ll_hookproc";pht[0]= WH_MOUSE_LL;
                        ppxm[0] = sz;return TRUE;}
    }
    return FALSE;
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_HookThread</name>
+      <export>OT4XB_HOOKTHREAD</export>
+      <source>WndTool.cpp:OT4XB_HOOKTHREAD</source>
+      <category>windows/hooks</category>
+      <description>
+         Installs a Windows hook inside the current process and dispatches hook
+         callbacks to a method of an Xbase++ handler object.
+      </description>
+      <syntax>
+         ot4xb_HookThread( cHookType, oHandler, [nThreadId] ) -> nHookCargo
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>cHookType</name>
+            <type>string</type>
+            <description>
+               Hook type name recognized by OT4XB. Valid values are
+               "journalrecord", "journalplayback", "keyboard", "getmessage",
+               "callwndproc", "cbt", "sysmsgfilter", "mouse", "debug",
+               "shell", "foregroundidle", "callwndprocret", "keyboard_ll", and
+               "mouse_ll".
+            </description>
+         </parameter>
+         <parameter>
+            <name>oHandler</name>
+            <type>object</type>
+            <description>
+               Xbase++ object that implements the hook callback method selected
+               by cHookType.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nThreadId</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Target thread id. If omitted, the current thread id is used. The
+               target thread must belong to the current process context.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>numeric</type>
+         <description>
+            Internal hook cargo pointer used later by ot4xb_UnhookThread(), or
+            0 if the hook cannot be installed.
+         </description>
+      </return>
+      <remarks>
+         When the hook is no longer needed, pass the returned nHookCargo value
+         to ot4xb_UnhookThread() to remove the hook and release its internal
+         callback resources.
+      </remarks>
+      <remarks>
+         The selected handler method receives nCode, nWParam, nLParam, and
+         nHookCargo.
+      </remarks>
+      <remarks>
+         If the handler method returns a numeric value, that value is returned
+         from the hook procedure and OT4XB does not call CallNextHookEx(). If it
+         returns NIL or any non-numeric value, OT4XB calls CallNextHookEx().
+      </remarks>
+      <remarks>
+         This function is for hooks that run inside the current process. OT4XB
+         passes NULL as the module handle to SetWindowsHookEx(), so the hook
+         procedure is not supplied from a DLL that Windows can inject into other
+         processes.
+      </remarks>
+      <remarks>
+         Global hooks for external processes are not supported. A global hook
+         would require a native DLL that Windows can load into arbitrary target
+         processes, but an Xbase++ extension DLL requires an already initialized
+         Xbase++ process.
+      </remarks>
+      <remarks>
+         The hook type selects one of these handler methods:
+         ::journalrecord_hookproc(), ::journalplayback_hookproc(),
+         ::keyboard_hookproc(), ::getmessage_hookproc(),
+         ::callwndproc_hookproc(), ::cbt_hookproc(),
+         ::sysmsgfilter_hookproc(), ::mouse_hookproc(), ::debug_hookproc(),
+         ::shell_hookproc(), ::foregroundidle_hookproc(),
+         ::callwndprocret_hookproc(), ::keyboard_ll_hookproc(), and
+         ::mouse_ll_hookproc().
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_HOOKTHREAD ) //  ot4xb_hookthread(cHType,Self,dwThreadId)
 {
    TXppParamList xpp(pl,4);
@@ -690,6 +1231,46 @@ _XPP_REG_FUN_( OT4XB_HOOKTHREAD ) //  ot4xb_hookthread(cHType,Self,dwThreadId)
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_UnhookThread</name>
+      <export>OT4XB_UNHOOKTHREAD</export>
+      <source>WndTool.cpp:OT4XB_UNHOOKTHREAD</source>
+      <category>windows/hooks</category>
+      <description>
+         Removes a thread hook installed by ot4xb_HookThread() and releases the
+         internal hook callback resources.
+      </description>
+      <syntax>
+         ot4xb_UnhookThread( nHookCargo ) -> NIL
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>nHookCargo</name>
+            <type>numeric</type>
+            <description>
+               Internal hook cargo pointer returned by ot4xb_HookThread().
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>nil</type>
+         <description>
+            Always returns NIL.
+         </description>
+      </return>
+      <remarks>
+         If nHookCargo is not 0, OT4XB calls UnhookWindowsHookEx(), releases the
+         stored Xbase++ handler object, deletes the callback wrapper, and frees
+         the hook cargo block.
+      </remarks>
+      <remarks>
+         The nHookCargo value must not be reused after this function returns.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_UNHOOKTHREAD ) // ot4xb_unhookthread(pc)
 {
    OT4XB_HOOK_CARGO * pc = (OT4XB_HOOK_CARGO *) _parLong(pl,1,0);
@@ -933,7 +1514,7 @@ class ot4xb_automatic_scroll_focus_t : public T_ot4xb_base
       GetClientRect(m_hDlg, &rc);
       if( m_height < 1 ){ m_height = rc.bottom; }      
       m_max_scroll = m_height - rc.bottom;   
-      SetWindowPos(m_hPanel,0,0,0,rc.right,m_height,SWP_NOOWNERZORDER|SWP_NOZORDER);            
+      SetWindowPos(m_hPanel,(HWND) 0,0,0,rc.right,m_height,SWP_NOOWNERZORDER|SWP_NOZORDER);
       m_scroll_pos = 0;
       if( m_max_scroll < 0 ){ m_max_scroll = 0; }
       SCROLLINFO si; ZeroMemory( &si , sizeof(si)); si.cbSize = sizeof(si);
@@ -1016,7 +1597,21 @@ class ot4xb_automatic_scroll_focus_t : public T_ot4xb_base
       }
    }
    // ---------------------------------------------------------------------------------   
-   static _TSTDCTXCBK_PROXI_WNDPROC_( proxi_dlgproc , ot4xb_automatic_scroll_focus_t , dlg_proc );      
+   static LRESULT __stdcall proxi_dlgproc( DWORD* ctx, HWND hWnd, UINT nMsg, WPARAM wp, LPARAM lp )
+   {
+      WNDPROC old_proc = (WNDPROC) ctx[ 1 ]; if( ( nMsg == g_nMsgProxiRemoveSubclass ) || ( nMsg == 0x0082 ) )
+      {
+         WNDPROC oldproc = reinterpret_cast<WNDPROC>( ctx[ 1 ] );
+         reinterpret_cast<ot4xb_automatic_scroll_focus_t*>( ctx[ 0 ] )->dlg_proc( hWnd, nMsg, wp, lp, old_proc );
+         SetWindowLongA( hWnd, ( -4 ), ctx[ 1 ] );
+         delete reinterpret_cast<TStdCtxCbk*>( ctx[ 2 ] );
+         _xfree( (void*) ctx );
+         if( nMsg == g_nMsgProxiRemoveSubclass )
+         {
+            return 0;
+         } return CallWindowProcA( oldproc, hWnd, nMsg, wp, lp );
+      } return reinterpret_cast<ot4xb_automatic_scroll_focus_t*>( ctx[ 0 ] )->dlg_proc( hWnd, nMsg, wp, lp, old_proc );
+   };
    LRESULT dlg_proc( HWND hWnd , UINT nMsg,WPARAM wp , LPARAM lp , WNDPROC oldproc)   
    {
       switch( nMsg)
@@ -1043,7 +1638,16 @@ class ot4xb_automatic_scroll_focus_t : public T_ot4xb_base
       return CallWindowProcA(oldproc,hWnd,nMsg,wp,lp);      
    }
    // ---------------------------------------------------------------------------------
-   static _TSTDCTXCBK_PROXI_WNDPROC_( proxi_panelproc , ot4xb_automatic_scroll_focus_t , panel_proc );         
+   static LRESULT __stdcall proxi_panelproc( DWORD* ctx, HWND hWnd, UINT nMsg, WPARAM wp, LPARAM lp )
+   {
+      WNDPROC old_proc = (WNDPROC) ctx[ 1 ]; if( ( nMsg == g_nMsgProxiRemoveSubclass ) || ( nMsg == 0x0082 ) )
+      {
+         WNDPROC oldproc = reinterpret_cast<WNDPROC>( ctx[ 1 ] ); reinterpret_cast< ot4xb_automatic_scroll_focus_t* >( ctx[ 0 ] )->panel_proc( hWnd, nMsg, wp, lp, old_proc ); SetWindowLongA( hWnd, ( -4 ), ctx[ 1 ] ); delete reinterpret_cast<TStdCtxCbk*>( ctx[ 2 ] ); _xfree( (void*) ctx ); if( nMsg == g_nMsgProxiRemoveSubclass )
+         {
+            return 0;
+         } return CallWindowProcA( oldproc, hWnd, nMsg, wp, lp );
+      } return reinterpret_cast< ot4xb_automatic_scroll_focus_t* >( ctx[ 0 ] )->panel_proc( hWnd, nMsg, wp, lp, old_proc );
+   };
    LRESULT panel_proc( HWND hWnd , UINT nMsg,WPARAM wp , LPARAM lp , WNDPROC oldproc)   
    {
       if( nMsg == _nMsgFollowFocus_ )
@@ -1074,6 +1678,94 @@ class ot4xb_automatic_scroll_focus_t : public T_ot4xb_base
         
 };
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_automatic_scroll_focus</name>
+      <export>OT4XB_AUTOMATIC_SCROLL_FOCUS</export>
+      <source>WndTool.cpp:OT4XB_AUTOMATIC_SCROLL_FOCUS</source>
+      <category>windows/scrolling</category>
+      <description>
+         Enables automatic vertical scrolling for a dialog/container and its
+         child panel, keeping the focused child control visible.
+      </description>
+      <syntax>
+         ot4xb_automatic_scroll_focus( hDlg, hPanel, nContentHeight, [nStep], [lDisableWheel] ) -> nFollowFocusMsg
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>hDlg</name>
+            <type>numeric | object</type>
+            <description>
+               HWND or Xbase Part object for the dialog or container that
+               receives the vertical scrollbar.
+            </description>
+         </parameter>
+         <parameter>
+            <name>hPanel</name>
+            <type>numeric | object</type>
+            <description>
+               HWND or Xbase Part object for the child panel that contains the
+               controls and is moved vertically inside hDlg.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nContentHeight</name>
+            <type>numeric</type>
+            <description>
+               Total virtual height of the panel content. If less than 1, the
+               current client height of hDlg is used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nStep</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Scroll step and focus margin size. If omitted, 20 is used.
+            </description>
+         </parameter>
+         <parameter>
+            <name>lDisableWheel</name>
+            <type>logical</type>
+            <optional>true</optional>
+            <description>
+               If TRUE, mouse wheel messages forwarded by the follow-focus hook
+               are ignored by this automatic scroll handler.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>numeric</type>
+         <description>
+            Registered internal follow-focus message id used by the installed
+            hooks and subclass procedures.
+         </description>
+      </return>
+      <remarks>
+         hDlg is subclassed to handle WM_SIZE and WM_VSCROLL. hPanel is
+         subclassed to receive the internal follow-focus message used for focus
+         and mouse wheel forwarding.
+      </remarks>
+      <remarks>
+         When a child control receives focus, OT4XB calculates its position
+         inside hPanel. If the control is outside the visible client area of
+         hDlg, hPanel is moved vertically so the control becomes visible.
+      </remarks>
+      <remarks>
+         OT4XB installs thread-local WH_GETMESSAGE and WH_CALLWNDPROC hooks the
+         first time this feature is enabled. These hooks observe WM_MOUSEWHEEL
+         and WM_SETFOCUS in the current thread and post the internal
+         follow-focus message to the parent window.
+      </remarks>
+      <remarks>
+         Mouse wheel scrolling is skipped when lDisableWheel is TRUE. It is also
+         skipped when the focused child window has the "WantTheWheel" property,
+         allowing that control to keep the wheel message for its own use.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_AUTOMATIC_SCROLL_FOCUS )
 {
    TXppParamList xpp(pl,5);
@@ -1127,6 +1819,77 @@ static void PaintTheMsgRect( HDC hDC , RECT * prct , COLORREF * pclr , LPSTR pTe
   return;
 } 
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>ot4xb_PaintTheMsgBar</name>
+      <export>OT4XB_PAINTTHEMSGBAR</export>
+      <source>WndTool.cpp:OT4XB_PAINTTHEMSGBAR</source>
+      <category>windows/painting</category>
+      <description>
+         Paints a message bar with text and an optional progress/meter area
+         using the client area of a window or control.
+      </description>
+      <syntax>
+         ot4xb_PaintTheMsgBar( hWnd, nMeter, cMeter, cCaption, [nTextFlags] ) -> NIL
+      </syntax>
+      <parameters>
+         <parameter>
+            <name>hWnd</name>
+            <type>numeric</type>
+            <description>
+               Window or control handle whose client area is painted.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nMeter</name>
+            <type>numeric</type>
+            <description>
+               Meter value. If less than 0, the meter area is not painted.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cMeter</name>
+            <type>string</type>
+            <description>
+               Text drawn inside the meter area when nMeter is enabled.
+            </description>
+         </parameter>
+         <parameter>
+            <name>cCaption</name>
+            <type>string</type>
+            <description>
+               Text drawn in the main caption area.
+            </description>
+         </parameter>
+         <parameter>
+            <name>nTextFlags</name>
+            <type>numeric</type>
+            <optional>true</optional>
+            <description>
+               Additional DrawText() flags ORed with DT_LEFT for the caption
+               area.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>nil</type>
+         <description>
+            Always returns NIL.
+         </description>
+      </return>
+      <remarks>
+         This is a legacy quick-and-dirty GDI painting helper. It paints
+         directly over the client area of the target window or control and does
+         not implement a full status bar control.
+      </remarks>
+      <remarks>
+         The optional meter area uses a fixed 161-pixel width and an old custom
+         scale for nMeter.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_PAINTTHEMSGBAR ) //ot4xb_PaintTheMsgBar( hWnd , nMeter , cMeter,cCaption)
 {
   HWND    hWnd      = ( HWND ) _parnl(pl,1);

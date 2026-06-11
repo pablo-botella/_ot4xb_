@@ -80,45 +80,35 @@ void _API_DrTool_ExitProc(void)
       DeleteCriticalSection( &_drcs_ );
 }
 //----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>GetCommandLine</name><category>runtime</category>
+<description>Returns the raw command line of the current process.</description>
+<syntax>GetCommandLine() -> cCommandLine</syntax>
+<return><type>Character</type><description>String returned by the Win32 GetCommandLine() API.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY GETCOMMANDLINE( XppParamList pl ){ _retc(pl, GetCommandLine()); }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cAppPath</name><category>filesystem</category>
+<description>Returns the directory path of the running executable, including the trailing backslash.</description>
+<syntax>cAppPath() -> cPath</syntax>
+<return><type>Character</type><description>Executable directory including the trailing path separator.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CAPPPATH( XppParamList pl ){ _retclen(pl,_pAppName_,(ULONG) _dwAppPath_+1);}
 // ---------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cAppDir</name><category>filesystem</category>
+<description>Returns the directory path of the running executable without the trailing backslash.</description>
+<syntax>cAppDir() -> cPath</syntax>
+<return><type>Character</type><description>Executable directory without the trailing path separator.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CAPPDIR( XppParamList pl ){ _retclen(pl,_pAppName_,(ULONG) _dwAppPath_);}
 //----------------------------------------------------------------------------------------------------------------------
 // like CopyFile() but using the ACLs of the destination folder
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 static BOOL ot4xb_CopyFile( LPSTR pSrc , LPSTR pDst , BOOL bFailIfExist )
 {
    HANDLE hSrc = INVALID_HANDLE_VALUE;
@@ -177,12 +167,17 @@ static BOOL ot4xb_CopyFile( LPSTR pSrc , LPSTR pDst , BOOL bFailIfExist )
 //----------------------------------------------------------------------------------------------------------------------
 // lCopyFile( cSrc,cDst,lOverwrite,lReplaceACLWithDestContainer)
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lCopyFile</name><category>filesystem</category>
+<description>Copies a file.</description>
+<syntax>lCopyFile( cSource, cTarget [, lOverwrite := .T.] [, lUseTargetFolderAcl := .F.] ) -> lOk</syntax>
+<parameters>
+<parameter><name>cSource</name><type>Character</type><description>Source file name.</description></parameter>
+<parameter><name>cTarget</name><type>Character</type><description>Target file name.</description></parameter>
+<parameter><name>lOverwrite</name><type>Logical</type><description>When omitted, defaults to .T. Pass .F. to fail if the target exists.</description></parameter>
+<parameter><name>lUseTargetFolderAcl</name><type>Logical</type><description>When .T., uses the internal copy routine so the created target receives the ACLs inherited from the destination folder.</description></parameter>
+</parameters>
+<return><type>Logical</type><description>.T. when the copy succeeds; otherwise .F.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LCOPYFILE( XppParamList pl)
 {
@@ -215,12 +210,12 @@ XPPRET XPPENTRY LCOPYFILE( XppParamList pl)
 ///<return>.T. If path exist or created and is directory, .F. if not a directory or cannot create any of the components </return>
 ///</xpp_function> 
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lMakePath</name><category>filesystem</category>
+<description>Checks that a path exists and creates missing directory components when possible.</description>
+<syntax>lMakePath( cPath ) -> lOk</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Directory path to check or create.</description></parameter></parameters>
+<return><type>Logical</type><description>.T. when the path exists or was created as a directory; otherwise .F.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LMAKEPATH( XppParamList pl)
 {
@@ -236,14 +231,6 @@ XPPRET XPPENTRY LMAKEPATH( XppParamList pl)
 //----------------------------------------------------------------------------------------------------------------------
 // Check the existence of a path or try to create it
 // return TRUE if the path is valid and existing or succesfully created
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 OT4XB_API BOOL bCheckAndMakePath(LPSTR _pPath_ )
 {
   int nLen = (int) _xstrlen(_pPath_);
@@ -310,12 +297,16 @@ OT4XB_API BOOL bCheckAndMakePath(LPSTR _pPath_ )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cCreateTmpFile</name><category>filesystem</category>
+<description>Creates or reserves a temporary file name using the Windows temporary-file API.</description>
+<syntax>cCreateTmpFile( [cPath] [, cPrefix] [, lCreate] ) -> cFileName | NIL</syntax>
+<parameters>
+<parameter><name>cPath</name><type>Character</type><description>Optional directory. When omitted, the Windows temporary path is used.</description></parameter>
+<parameter><name>cPrefix</name><type>Character</type><description>Optional file prefix. Defaults to "tmp".</description></parameter>
+<parameter><name>lCreate</name><type>Logical</type><description>Passed as the unique number argument to GetTempFileName(); .F. lets Windows create a unique name.</description></parameter>
+</parameters>
+<return><type>Character | NIL</type><description>Temporary file name, or NIL if Windows cannot create one.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CCREATETMPFILE( XppParamList pl) // cCreateTmpFile(cPath[,cPrefix][,lCreate]) -> cNewFile / NIL if fails
 {
@@ -332,12 +323,11 @@ XPPRET XPPENTRY CCREATETMPFILE( XppParamList pl) // cCreateTmpFile(cPath[,cPrefi
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cGetTmpPath</name><category>filesystem</category>
+<description>Returns the Windows temporary directory path.</description>
+<syntax>cGetTmpPath() -> cPath</syntax>
+<return><type>Character</type><description>Path returned by GetTempPath().</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CGETTMPPATH( XppParamList pl) // cGetTmpPath() -> cTmpPath / NIL if fails
 {
@@ -348,12 +338,12 @@ XPPRET XPPENTRY CGETTMPPATH( XppParamList pl) // cGetTmpPath() -> cTmpPath / NIL
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>nGetDriveType</name><category>filesystem</category>
+<description>Returns the Windows drive type for a root path.</description>
+<syntax>nGetDriveType( cRoot ) -> nType</syntax>
+<parameters><parameter><name>cRoot</name><type>Character</type><description>Drive root or volume path.</description></parameter></parameters>
+<return><type>Numeric</type><description>Drive type returned by GetDriveType(), or DRIVE_NO_ROOT_DIR when no path is supplied.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY NGETDRIVETYPE( XppParamList pl)
 {
@@ -368,12 +358,13 @@ XPPRET XPPENTRY NGETDRIVETYPE( XppParamList pl)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lChDir</name><category>filesystem</category>
+<description>Changes the Win32 current directory.</description>
+<syntax>lChDir( cDir ) -> lOk</syntax>
+<parameters><parameter><name>cDir</name><type>Character</type><description>Directory to set as current.</description></parameter></parameters>
+<return><type>Logical</type><description>.T. when SetCurrentDirectory() succeeds; otherwise .F.</description></return>
+<remarks>The Win32 current directory belongs to the process and may affect other threads.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LCHDIR(XppParamList pl) // lChDir( <cDir> ) -> lOk
 {
@@ -388,12 +379,11 @@ XPPRET XPPENTRY LCHDIR(XppParamList pl) // lChDir( <cDir> ) -> lOk
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cDrives</name><category>filesystem</category>
+<description>Returns the available drive letters as a compact character string.</description>
+<syntax>cDrives() -> cLetters</syntax>
+<return><type>Character</type><description>String containing one letter per available logical drive, for example "CZ".</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CDRIVES( XppParamList pl )
 {
@@ -407,12 +397,11 @@ XPPRET XPPENTRY CDRIVES( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>aDrives</name><category>filesystem</category>
+<description>Returns the available logical drive roots as an array.</description>
+<syntax>aDrives() -> aRoots | NIL</syntax>
+<return><type>Array | NIL</type><description>Array of drive roots such as "C:\"; NIL if Windows returns no drive strings.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY ADRIVES( XppParamList pl )
 {
@@ -440,12 +429,12 @@ XPPRET XPPENTRY ADRIVES( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cGetShortFileName</name><category>filesystem</category>
+<description>Returns the short 8.3 path name for a file path when Windows can provide one.</description>
+<syntax>cGetShortFileName( cPath ) -> cShortPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to convert.</description></parameter></parameters>
+<return><type>Character</type><description>Short path returned by GetShortPathName(), or an empty string when no path is supplied or conversion fails.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CGETSHORTFILENAME( XppParamList pl )
 {
@@ -461,12 +450,43 @@ XPPRET XPPENTRY CGETSHORTFILENAME( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <class>
+      <name>_TDriveInfo_</name>
+      <category>filesystem</category>
+      <description>
+         Data container used by GetDriveInfo() to return Windows volume information.
+      </description>
+      <remarks>
+         The object stores the raw volume flags in ::nFlags. The read-only logical
+         properties simply test ::nFlags against their corresponding Windows flag mask.
+      </remarks>
+      <members>
+         <member><name>cRoot</name><type>Character</type><description>Root path used to query the volume.</description></member>
+         <member><name>cLabel</name><type>Character</type><description>Volume label.</description></member>
+         <member><name>nSerial</name><type>Numeric</type><description>Volume serial number.</description></member>
+         <member><name>nMaxCompLen</name><type>Numeric</type><description>Maximum component length reported by Windows.</description></member>
+         <member><name>cFileSystem</name><type>Character</type><description>File system name.</description></member>
+         <member><name>nFlags</name><type>Numeric</type><description>Raw file system flags reported by Windows.</description></member>
+         <member><name>nDriveType</name><type>Numeric</type><description>Drive type returned by GetDriveType().</description></member>
+      </members>
+      <properties>
+         <property><name>lNamedStreams</name><type>Logical</type><description>.T. when ::nFlags contains 0x40000.</description></property>
+         <property><name>lReadOnlyVolume</name><type>Logical</type><description>.T. when ::nFlags contains 0x80000.</description></property>
+         <property><name>lObjectIds</name><type>Logical</type><description>.T. when ::nFlags contains 0x10000.</description></property>
+         <property><name>lReparsePoints</name><type>Logical</type><description>.T. when ::nFlags contains 0x00080.</description></property>
+         <property><name>lSupportsSparseFiles</name><type>Logical</type><description>.T. when ::nFlags contains 0x00040.</description></property>
+         <property><name>lVolumeQuotas</name><type>Logical</type><description>.T. when ::nFlags contains 0x00020.</description></property>
+         <property><name>lCaseIsPreserved</name><type>Logical</type><description>.T. when ::nFlags contains 0x00002.</description></property>
+         <property><name>lCaseSensitive</name><type>Logical</type><description>.T. when ::nFlags contains 0x00001.</description></property>
+         <property><name>lFileCompression</name><type>Logical</type><description>.T. when ::nFlags contains 0x00010.</description></property>
+         <property><name>lFileEncryption</name><type>Logical</type><description>.T. when ::nFlags contains 0x20000.</description></property>
+         <property><name>lPersistentAcls</name><type>Logical</type><description>.T. when ::nFlags contains 0x00008.</description></property>
+         <property><name>lUnicodeStoredOnDisk</name><type>Logical</type><description>.T. when ::nFlags contains 0x00004.</description></property>
+         <property><name>lVolIsCompressed</name><type>Logical</type><description>.T. when ::nFlags contains 0x08000.</description></property>
+      </properties>
+   </class>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY _TDRIVEINFO_( XppParamList pl )
 {
@@ -535,12 +555,52 @@ DWORD WINAPI lDiskReady_internal(void * lp )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>lDiskReady</name>
+      <category>filesystem</category>
+      <description>
+         Checks whether a drive or volume path can return volume information.
+      </description>
+      <syntax>lDiskReady( cPath [, @nTimeoutSeconds] ) -> lReady</syntax>
+      <parameters>
+         <parameter>
+            <name>cPath</name>
+            <type>Character</type>
+            <description>Drive root or volume path to test.</description>
+         </parameter>
+         <parameter>
+            <name>nTimeoutSeconds</name>
+            <type>Numeric by reference</type>
+            <description>
+               Optional timeout in seconds. This parameter changes the execution logic:
+               when supplied with a value greater than zero, the check is performed in a
+               helper thread instead of calling GetVolumeInformation() directly in the
+               caller thread. On return the same parameter is overwritten with a logical
+               value: .T. when the helper thread did not complete before the timeout,
+               .F. when it completed in time.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>
+            .T. when GetVolumeInformation() succeeds for the path; otherwise .F. A timeout
+            also returns .F. and sets the second parameter to .T.
+         </description>
+      </return>
+      <remarks>
+         Without a positive timeout the function calls GetVolumeInformation() directly.
+         With a positive timeout it starts a helper thread and waits for the requested
+         number of seconds. If the check is still pending, the helper thread is left to
+         finish later and the function returns immediately with the timeout flag set.
+      </remarks>
+      <remarks>
+         This helper is useful for slow, removable or network drives where a direct
+         volume query may block longer than the application wants to wait.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LDISKREADY( XppParamList pl ) // -> lReady
 {
@@ -640,12 +700,29 @@ XPPRET XPPENTRY LDISKREADY( XppParamList pl ) // -> lReady
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>GetDriveInfo</name>
+      <category>filesystem</category>
+      <description>
+         Returns volume information for a drive or root path as a _TDriveInfo_ object.
+      </description>
+      <syntax>GetDriveInfo( cRoot ) -> oDriveInfo | NIL</syntax>
+      <parameters>
+         <parameter>
+            <name>cRoot</name>
+            <type>Character</type>
+            <description>Drive root or path passed to the Windows volume query.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>_TDriveInfo_ | NIL</type>
+         <description>
+            A _TDriveInfo_ data object when Windows returns volume information; otherwise NIL.
+         </description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY GETDRIVEINFO( XppParamList pl ) // -> oInfo
 {
@@ -683,12 +760,12 @@ XPPRET XPPENTRY GETDRIVEINFO( XppParamList pl ) // -> oInfo
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lIsDir</name><category>filesystem</category>
+<description>Checks whether a path exists and is a directory.</description>
+<syntax>lIsDir( cDir ) -> lIsDirectory</syntax>
+<parameters><parameter><name>cDir</name><type>Character</type><description>Path to test.</description></parameter></parameters>
+<return><type>Logical</type><description>.T. when GetFileAttributes() succeeds and FILE_ATTRIBUTE_DIRECTORY is set; otherwise .F.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LISDIR(XppParamList pl) // lIsDir(<cDir>)
 {
@@ -707,12 +784,12 @@ XPPRET XPPENTRY LISDIR(XppParamList pl) // lIsDir(<cDir>)
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lIsFile</name><category>filesystem</category>
+<description>Checks whether a path exists and is not a directory.</description>
+<syntax>lIsFile( cFile ) -> lIsFile</syntax>
+<parameters><parameter><name>cFile</name><type>Character</type><description>Path to test.</description></parameter></parameters>
+<return><type>Logical</type><description>.T. when GetFileAttributes() succeeds and FILE_ATTRIBUTE_DIRECTORY is not set; otherwise .F.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( LISFILE ) // lIsFile( cFile) 
 {
@@ -731,12 +808,11 @@ _XPP_REG_FUN_( LISFILE ) // lIsFile( cFile)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>GetWinDir</name><category>filesystem</category>
+<description>Returns the Windows directory.</description>
+<syntax>GetWinDir() -> cPath</syntax>
+<return><type>Character</type><description>Path returned by GetWindowsDirectory().</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY GETWINDIR(XppParamList pl)
 {
@@ -747,12 +823,11 @@ XPPRET XPPENTRY GETWINDIR(XppParamList pl)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>GetSysDir</name><category>filesystem</category>
+<description>Returns the Windows system directory.</description>
+<syntax>GetSysDir() -> cPath</syntax>
+<return><type>Character</type><description>Path returned by GetSystemDirectory().</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY GETSYSDIR(XppParamList pl)
 {
@@ -763,12 +838,13 @@ XPPRET XPPENTRY GETSYSDIR(XppParamList pl)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathCombine</name><category>filesystem</category>
+<description>Combines path components using backslash separators.</description>
+<syntax>cPathCombine( cPart1 [, cPartN...] ) -> cPath</syntax>
+<parameters><parameter><name>cPartN</name><type>Character</type><description>Path component. Non-character parameters are ignored.</description></parameter></parameters>
+<return><type>Character</type><description>Combined path, or an empty string when no character components are supplied.</description></return>
+<remarks>Forward slashes in components are converted to backslashes. Leading and trailing spaces are trimmed from each component.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHCOMBINE( XppParamList pl ) // cPathCombine( cPathComponent,... ) -> cPath
 {
@@ -825,12 +901,13 @@ XPPRET XPPENTRY CPATHCOMBINE( XppParamList pl ) // cPathCombine( cPathComponent,
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cUrlCombine</name><category>filesystem</category>
+<description>Combines URL or path components using slash separators.</description>
+<syntax>cUrlCombine( cPart1 [, cPartN...] ) -> cUrl</syntax>
+<parameters><parameter><name>cPartN</name><type>Character</type><description>URL component. Non-character parameters are ignored.</description></parameter></parameters>
+<return><type>Character</type><description>Combined URL/path, or an empty string when no character components are supplied.</description></return>
+<remarks>Backslashes in components are converted to slashes. Leading and trailing spaces are trimmed from each component.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CURLCOMBINE( XppParamList pl ) // cUrlCombine( cPathComponent,... ) -> cPath
 {
@@ -888,12 +965,15 @@ XPPRET XPPENTRY CURLCOMBINE( XppParamList pl ) // cUrlCombine( cPathComponent,..
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathDefExt</name><category>filesystem</category>
+<description>Adds a default extension to a path when the file name has no extension.</description>
+<syntax>cPathDefExt( cPath, cDefaultExt ) -> cPath</syntax>
+<parameters>
+<parameter><name>cPath</name><type>Character</type><description>Path to inspect.</description></parameter>
+<parameter><name>cDefaultExt</name><type>Character</type><description>Extension to add. Leading dots and spaces are ignored.</description></parameter>
+</parameters>
+<return><type>Character</type><description>Path with the default extension added when applicable.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHDEFEXT( XppParamList pl) // cPathDefExt( cPath , cDefaultExt )
 {
@@ -937,12 +1017,12 @@ XPPRET XPPENTRY CPATHDEFEXT( XppParamList pl) // cPathDefExt( cPath , cDefaultEx
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathBuildRoot</name><category>filesystem</category>
+<description>Builds a drive root string.</description>
+<syntax>cPathBuildRoot( cDrive | nDrive ) -> cRoot</syntax>
+<parameters><parameter><name>cDrive | nDrive</name><type>Character | Numeric</type><description>Drive letter, or zero-based drive number where 0 is A.</description></parameter></parameters>
+<return><type>Character</type><description>Drive root such as "C:\", or an empty string for invalid input.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHBUILDROOT( XppParamList pl) // cPathBuildRoot(cnDrive)
 {
@@ -1033,12 +1113,13 @@ OT4XB_API TList * Path2TList( LPSTR pPath ) // C++ only
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>aSplitPath</name><category>filesystem</category>
+<description>Splits a path into root and component parts.</description>
+<syntax>aSplitPath( cPath ) -> aParts</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to split.</description></parameter></parameters>
+<return><type>Array</type><description>Array of path components. Root components such as drive roots or UNC roots are preserved.</description></return>
+<remarks>Forward slashes are converted to backslashes before splitting.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY ASPLITPATH( XppParamList pl) // aSplitPath(cPath) -> aPathComponents
 {
@@ -1084,12 +1165,13 @@ XPPRET XPPENTRY ASPLITPATH( XppParamList pl) // aSplitPath(cPath) -> aPathCompon
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathCanonicalize</name><category>filesystem</category>
+<description>Canonicalizes a path by resolving "." and ".." components where possible.</description>
+<syntax>cPathCanonicalize( cPath ) -> cPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to canonicalize.</description></parameter></parameters>
+<return><type>Character</type><description>Canonicalized path using backslash separators.</description></return>
+<remarks>This is an internal path component normalizer; it does not verify that the resulting path exists.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHCANONICALIZE( XppParamList pl) // cPathCanonicalize(cPath)
 {
@@ -1188,12 +1270,12 @@ XPPRET XPPENTRY CPATHCANONICALIZE( XppParamList pl) // cPathCanonicalize(cPath)
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathGetExt</name><category>filesystem</category>
+<description>Returns the extension of the file name part of a path.</description>
+<syntax>cPathGetExt( cPath ) -> cExt</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to inspect.</description></parameter></parameters>
+<return><type>Character</type><description>Extension without the dot, or an empty string when no extension is found.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHGETEXT( XppParamList pl )
 {
@@ -1213,12 +1295,12 @@ XPPRET XPPENTRY CPATHGETEXT( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathRemoveExt</name><category>filesystem</category>
+<description>Removes the extension from the file name part of a path.</description>
+<syntax>cPathRemoveExt( cPath ) -> cPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to modify.</description></parameter></parameters>
+<return><type>Character</type><description>Path without the final file extension.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHREMOVEEXT( XppParamList pl )
 {
@@ -1237,6 +1319,17 @@ XPPRET XPPENTRY CPATHREMOVEEXT( XppParamList pl )
    _xfree(pPath);
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc><function><name>cPathChangeExt</name><category>filesystem</category>
+<description>Replaces or adds the extension of the file name part of a path.</description>
+<syntax>cPathChangeExt( cPath, cNewExt ) -> cPath</syntax>
+<parameters>
+<parameter><name>cPath</name><type>Character</type><description>Path to modify.</description></parameter>
+<parameter><name>cNewExt</name><type>Character</type><description>New extension. Leading dots and spaces are ignored.</description></parameter>
+</parameters>
+<return><type>Character</type><description>Path with the requested extension.</description></return>
+</function></xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY CPATHCHANGEEXT( XppParamList pl ) // cPathChangeExt( cPath , cNewExt )
 {
    ULONG nExtSize  = _parclen(pl,2,0);
@@ -1284,12 +1377,12 @@ XPPRET XPPENTRY CPATHCHANGEEXT( XppParamList pl ) // cPathChangeExt( cPath , cNe
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathGetFileName</name><category>filesystem</category>
+<description>Returns the file name part of a path.</description>
+<syntax>cPathGetFileName( cPath ) -> cFileName</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to inspect.</description></parameter></parameters>
+<return><type>Character</type><description>Text after the last backslash or drive separator.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHGETFILENAME( XppParamList pl )
 {
@@ -1306,12 +1399,12 @@ XPPRET XPPENTRY CPATHGETFILENAME( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathRemoveBackSlash</name><category>filesystem</category>
+<description>Removes trailing backslashes from a path.</description>
+<syntax>cPathRemoveBackSlash( cPath ) -> cPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to modify.</description></parameter></parameters>
+<return><type>Character</type><description>Path without trailing backslashes, or an empty string when no path is supplied.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHREMOVEBACKSLASH( XppParamList pl )
 {
@@ -1326,12 +1419,12 @@ XPPRET XPPENTRY CPATHREMOVEBACKSLASH( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathAddBackSlash</name><category>filesystem</category>
+<description>Ensures that a path ends with one backslash.</description>
+<syntax>cPathAddBackSlash( cPath ) -> cPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to modify.</description></parameter></parameters>
+<return><type>Character</type><description>Path with exactly one trailing backslash.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHADDBACKSLASH( XppParamList pl )
 {
@@ -1349,12 +1442,12 @@ XPPRET XPPENTRY CPATHADDBACKSLASH( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathGetPath</name><category>filesystem</category>
+<description>Returns the directory part of a path.</description>
+<syntax>cPathGetPath( cPath ) -> cPathPart</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to inspect.</description></parameter></parameters>
+<return><type>Character</type><description>Path up to the last directory separator or drive separator.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHGETPATH( XppParamList pl )
 {
@@ -1376,12 +1469,13 @@ XPPRET XPPENTRY CPATHGETPATH( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathGetRoot</name><category>filesystem</category>
+<description>Returns the root part of a path.</description>
+<syntax>cPathGetRoot( cPath ) -> cRoot</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to inspect.</description></parameter></parameters>
+<return><type>Character</type><description>UNC root, drive root, single backslash root, or an empty string when no root is present.</description></return>
+<remarks>Forward slashes are converted to backslashes before parsing.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHGETROOT( XppParamList pl )
 {
@@ -1428,12 +1522,13 @@ XPPRET XPPENTRY CPATHGETROOT( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>cPathRemoveRoot</name><category>filesystem</category>
+<description>Removes the root part of a path.</description>
+<syntax>cPathRemoveRoot( cPath ) -> cPath</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to modify.</description></parameter></parameters>
+<return><type>Character</type><description>Path without its UNC, drive or leading-backslash root.</description></return>
+<remarks>Forward slashes are converted to backslashes before parsing.</remarks>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CPATHREMOVEROOT( XppParamList pl )
 {
@@ -1487,12 +1582,12 @@ XPPRET XPPENTRY CPATHREMOVEROOT( XppParamList pl )
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc><function><name>lPathIsRelative</name><category>filesystem</category>
+<description>Checks whether a path is relative according to the simple OT4XB path test.</description>
+<syntax>lPathIsRelative( cPath ) -> lRelative</syntax>
+<parameters><parameter><name>cPath</name><type>Character</type><description>Path to test.</description></parameter></parameters>
+<return><type>Logical</type><description>.F. when the path starts with "\" or has ":" as the second character; otherwise .T.</description></return>
+</function></xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY LPATHISRELATIVE( XppParamList pl )
 {
@@ -1507,12 +1602,79 @@ static void FindFiles_Next( TXbClsParams * px );   // ::FindNext() -> lFound
 static void FindFiles_Close( TXbClsParams * px );  // FindClose() -> NIL
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <class>
+      <name>WIN32_FIND_DATA</name>
+      <category>filesystem</category>
+      <description>
+         OT4XB structure class that exposes the Windows WIN32_FIND_DATA structure
+         and provides a small FindFirst/FindNext/FindClose search helper.
+      </description>
+      <syntax>WIN32_FIND_DATA():New() -> oFindData</syntax>
+      <remarks>
+         The documented members are the WIN32_FIND_DATA fields. They are filled by
+         ::FindFirst() and ::FindNext(). The logical attribute properties map directly
+         to the corresponding bits in ::dwFileAttributes. Call ::FindClose() when a
+         search is no longer needed.
+      </remarks>
+      <remarks>
+         A newly created WIN32_FIND_DATA object can be used directly with ::FindFirst()
+         and ::FindNext(); it is not necessary to call ::_alloc_() or ::_link_() first.
+         For normal enumeration, calling ::FindClose() at the end is enough.
+      </remarks>
+      <members>
+         <member><name>dwFileAttributes</name><type>Numeric</type><description>Raw Windows file attribute flags.</description></member>
+         <member><name>ftCreationTime</name><type>FILETIME64</type><description>Creation time.</description></member>
+         <member><name>ftLastAccessTime</name><type>FILETIME64</type><description>Last access time.</description></member>
+         <member><name>ftLastWriteTime</name><type>FILETIME64</type><description>Last write time.</description></member>
+         <member><name>nFileSizeHigh</name><type>Numeric</type><description>High DWORD of the file size.</description></member>
+         <member><name>nFileSizeLow</name><type>Numeric</type><description>Low DWORD of the file size.</description></member>
+         <member><name>dwReserved0</name><type>Numeric</type><description>Windows reserved field.</description></member>
+         <member><name>dwReserved1</name><type>Numeric</type><description>Windows reserved field.</description></member>
+         <member><name>cFileName</name><type>Character</type><description>Primary file name.</description></member>
+         <member><name>cAlternateFileName</name><type>Character</type><description>Alternate 8.3 file name, when available.</description></member>
+      </members>
+      <properties>
+         <property><name>nFileSize</name><type>Numeric</type><description>Combined file size mapped to ::nFileSizeHigh and ::nFileSizeLow. Since Xbase++ numeric values are internally signed integers or doubles, large values are returned as double when needed.</description></property>
+         <property><name>lArchive</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_ARCHIVE bit in ::dwFileAttributes.</description></property>
+         <property><name>lCompressed</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_COMPRESSED bit in ::dwFileAttributes.</description></property>
+         <property><name>lDevice</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_DEVICE bit in ::dwFileAttributes.</description></property>
+         <property><name>lDirectory</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_DIRECTORY bit in ::dwFileAttributes.</description></property>
+         <property><name>lEncrypted</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_ENCRYPTED bit in ::dwFileAttributes.</description></property>
+         <property><name>lHidden</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_HIDDEN bit in ::dwFileAttributes.</description></property>
+         <property><name>lNormal</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_NORMAL bit in ::dwFileAttributes.</description></property>
+         <property><name>lNotContentIndexed</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_NOT_CONTENT_INDEXED bit in ::dwFileAttributes.</description></property>
+         <property><name>lOffline</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_OFFLINE bit in ::dwFileAttributes.</description></property>
+         <property><name>lReadonly</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_READONLY bit in ::dwFileAttributes.</description></property>
+         <property><name>lReparsePoint</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_REPARSE_POINT bit in ::dwFileAttributes.</description></property>
+         <property><name>lSparseFile</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_SPARSE_FILE bit in ::dwFileAttributes.</description></property>
+         <property><name>lSystem</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_SYSTEM bit in ::dwFileAttributes.</description></property>
+         <property><name>lTemporary</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_TEMPORARY bit in ::dwFileAttributes.</description></property>
+         <property><name>lVirtual</name><type>Logical</type><description>Reads or writes the FILE_ATTRIBUTE_VIRTUAL bit in ::dwFileAttributes.</description></property>
+      </properties>
+      <methods>
+         <method><name>FindFirst</name><syntax>::FindFirst( cMask ) -> lFound</syntax><description>Starts a search and fills the structure with the first matching entry.</description></method>
+         <method><name>FindNext</name><syntax>::FindNext() -> lFound</syntax><description>Moves to the next matching entry and updates the structure.</description></method>
+         <method><name>FindClose</name><syntax>::FindClose() -> NIL</syntax><description>Closes the current search handle.</description></method>
+      </methods>
+      <example><![CDATA[
+      PROC Main()
+         LOCAL fd := WIN32_FIND_DATA():New()
+         LOCAL lFound
+
+         lFound := fd:FindFirst( cPathCombine( cAppPath(), "*.bat" ) )
+         WHILE lFound
+            ? fd:cFileName, " - "
+            ?? fd:ftLastAccessTime:ElapSeconds()
+            lFound := fd:FindNext()
+         ENDDO
+         fd:FindClose()
+         fd := NIL
+         Inkey(0)
+      RETURN
+      ]]></example>
+   </class>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
 {
@@ -1556,7 +1718,7 @@ XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
       pc->PropertyCBMask("lTemporary",          0x00100 ,"dwFileAttributes");
       pc->PropertyCBMask("lVirtual",            0x10000 ,"dwFileAttributes");
       // ---------------------------
-      pc->Var( "_find_handle_" );
+      pc->Var( "_find_handle_" ); // Xbase++ instance state, not part of the WIN32_FIND_DATA structure.
       // ---------------------------
       pc->Method("FindFirst",FindFiles_First,1,",@s:_find_handle_"); // ::FindFirst( cMask ) -> lFound
       pc->Method("FindNext" ,FindFiles_Next,0,",@s:_find_handle_");  // ::FindNext() -> lFound
@@ -1570,12 +1732,14 @@ XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
    _conRelease(conco);
 }
 // -----------------------------------------------------------------------------------------------------------------
-static void FindFiles_First( TXbClsParams * px )  // ::FindStart( cMask ) -> lFound
+static void FindFiles_First( TXbClsParams * px )  // ::FindFirst( cMask ) -> lFound
 {
    if( px->CheckExtraType(1,XPP_NUMERIC) ) FindClose((HANDLE) px->GetExtraLong(1));
    px->PutExtra(1,NULLCONTAINER);
    if( px->CheckParamType(1,XPP_CHARACTER) )
    {
+      // GWST Lock() exposes the structure buffer: allocated/attached memory when present,
+      // otherwise the locked Xbase++ string backing store.
       HANDLE h = FindFirstFile(px->ParamLockStr(1),(WIN32_FIND_DATA*) px->Lock());
       px->ParamUnlockStr(1); px->Unlock();
       if( !( h == INVALID_HANDLE_VALUE ) )
@@ -1606,12 +1770,33 @@ static void FindFiles_Close( TXbClsParams * px )  // FindClose() -> NIL
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>cCpuSerial</name>
+      <category>system</category>
+      <description>
+         Returns a legacy CPU identification string obtained with the x86 CPUID instruction.
+      </description>
+      <syntax>cCpuSerial() -> cSerial</syntax>
+      <remarks>
+         The function calls CPUID with EAX=1 and checks the Processor Serial Number
+         feature bit in EDX. When that bit is present, it calls CPUID with EAX=3 and
+         formats the reported serial data together with the EAX=1 value. Otherwise it
+         returns a short hexadecimal string built from the low word of EAX=1.
+      </remarks>
+      <remarks>
+         This is a legacy helper. It was useful only for the Intel Pentium III
+         Processor Serial Number feature. That feature stopped being useful as a CPU
+         serial source when Pentium 4 and later processors no longer supported it.
+         On current CPUs the returned value is not a real processor serial number and
+         should not be treated as a stable hardware identity.
+      </remarks>
+      <return>
+         <type>Character</type>
+         <description>Formatted hexadecimal CPU identification string.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 XPPRET XPPENTRY CCPUSERIAL( XppParamList pl )
 {
@@ -1649,14 +1834,45 @@ XPPRET XPPENTRY CCPUSERIAL( XppParamList pl )
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>GetProcessArgv</name>
+      <category>runtime</category>
+      <description>
+         Returns the current process command-line arguments as an array.
+      </description>
+      <syntax>GetProcessArgv() -> aArgs</syntax>
+      <remarks>
+         The function reads the process command line, skips the executable name and
+         parses the remaining text into separate arguments. Quoted arguments are kept
+         together and backslash-escaped quotes are handled by the internal parser.
+      </remarks>
+      <remarks>
+         GetProccessArgv() is kept as a backward-compatible alias for the historical
+         misspelling and delegates to GetProcessArgv().
+      </remarks>
+      <remarks>
+         When the program is launched through xppdbg, the first array element may be the
+         program name and the user arguments may therefore appear shifted by one position.
+      </remarks>
+      <example><![CDATA[
+      // Compensate the xppdbg argument shift when wrapping argv-style access.
+      INLINE METHOD argv(n)
+         RETURN __aPeek( GetProccessArgv(), n + iif( IsDebug(), 1, 0 ) )
+      ]]></example>
+      <remarks>
+         The corrected GetProcessArgv() name is available in ot4xb.dll
+         Version:{1,7,14,0}.
+      </remarks>
+      <return>
+         <type>Array</type>
+         <description>Array with the arguments passed after the executable name.</description>
+      </return>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
-_XPP_REG_FUN_( GETPROCCESSARGV )
+_XPP_REG_FUN_( GETPROCCESSARGV ) { GETPROCESSARGV( pl ); }
+_XPP_REG_FUN_( GETPROCESSARGV )
 {
    LPSTR p = ot4xb_pszz_proc_params(0);
    ContainerHandle cona = _conPszz2Array( p );
@@ -1718,12 +1934,39 @@ LPSTR OT4XB_API ot4xb_pszz_proc_params(DWORD* pcb) // TODO:  ot4xb_pszz_proc_par
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ot4xb_pushdir</name>
+      <category>filesystem</category>
+      <description>
+         Pushes the current directory onto the current thread's directory stack.
+      </description>
+      <syntax>ot4xb_pushdir( [cNewDir] ) -> NIL | lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>cNewDir</name>
+            <type>Character</type>
+            <description>Optional directory to set after the current directory has been pushed.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>NIL | Logical</type>
+         <description>
+            NIL when only the current directory is pushed. When cNewDir is supplied,
+            returns .T. if the directory change succeeds, otherwise .F.
+         </description>
+      </return>
+      <remarks>
+         The saved directories are stored in a thread-local stack. Each thread has its
+         own push/pop directory stack, so a thread only pops entries it pushed itself.
+      </remarks>
+      <remarks>
+         The stack is thread-local, but the actual directory change uses the Win32
+         current directory through SetCurrentDirectory(). That current directory belongs
+         to the process, so changing it can affect other threads.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_PUSHDIR ) // ot4xb_pushdir( [cNewDir] ) -> NIL | lOk if cNewDir provided and directory changed
 {
@@ -1767,12 +2010,32 @@ _XPP_REG_FUN_( OT4XB_PUSHDIR ) // ot4xb_pushdir( [cNewDir] ) -> NIL | lOk if cNe
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ot4xb_popdir</name>
+      <category>filesystem</category>
+      <description>
+         Restores the last directory saved with ot4xb_pushdir() in the current thread.
+      </description>
+      <syntax>ot4xb_popdir() -> lOk | NIL</syntax>
+      <return>
+         <type>Logical | NIL</type>
+         <description>
+            .T. when the saved directory is restored, .F. when the restore fails, or NIL
+            when the current thread's directory stack is empty.
+         </description>
+      </return>
+      <remarks>
+         The stack is thread-local, so ot4xb_popdir() can only restore directories pushed
+         by the same thread.
+      </remarks>
+      <remarks>
+         The restore operation uses SetCurrentDirectoryW(). The saved stack entry is
+         thread-local, but the Win32 current directory being restored belongs to the
+         process and can affect other threads.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_POPDIR ) // ot4xb_popdir() // -> lOk | NIL if stack empty
 {
@@ -1786,12 +2049,41 @@ _XPP_REG_FUN_( OT4XB_POPDIR ) // ot4xb_popdir() // -> lOk | NIL if stack empty
 }
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
+<xbdoc>
+   <function>
+      <name>ot4xb_curdir</name>
+      <category>filesystem</category>
+      <description>
+         Gets or sets the current directory.
+      </description>
+      <syntax>ot4xb_curdir() -> cCurDir</syntax>
+      <syntax>ot4xb_curdir( cNewDir ) -> lOk</syntax>
+      <parameters>
+         <parameter>
+            <name>cNewDir</name>
+            <type>Character</type>
+            <description>Optional directory to set as the current directory.</description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character | Logical | NIL</type>
+         <description>
+            Without parameters, returns the current directory as a full path. With cNewDir,
+            returns .T. if the directory change succeeds, otherwise .F. Returns NIL when
+            the current directory cannot be obtained or the parameter is not character.
+         </description>
+      </return>
+      <remarks>
+         This function reads or changes the Win32 current directory directly. It does not
+         push or pop the thread-local directory stack used by ot4xb_pushdir() and
+         ot4xb_popdir().
+      </remarks>
+      <remarks>
+         Unlike the push/pop stack, the current directory changed by SetCurrentDirectoryW()
+         belongs to the process, so changing it can affect other threads.
+      </remarks>
+   </function>
+</xbdoc>
 *******************************************************************************************************************/
 _XPP_REG_FUN_( OT4XB_CURDIR ) // ot4xb_curdir() -> cCurDir |   ot4xb_curdir(cNewDir) -> lOk
 {

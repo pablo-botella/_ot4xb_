@@ -11,6 +11,45 @@
                               px->SetErrorDescription( d ); \
                               px->SetErrorGenCode(0x00101000 + n);
 //----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>GWST</name>
+      <category>structures</category>
+      <description>
+         Base class used by OT4XB structure classes. GWST instances expose a C-compatible memory layout through
+         Xbase++ members and can be passed to OT4XB calls that accept extended pointers.
+      </description>
+      <syntax>GWST():new( [oParent], [nShift] ) -> oStructure</syntax>
+      <remarks>
+         Application code normally uses concrete structure classes declared with BEGIN STRUCTURE or WAPIST_* WinAPI
+         structure factories, not GWST directly. A structure instance starts with Xbase++ character-buffer backed
+         storage. It can also allocate memory with ::_alloc_() or attach to an existing pointer with ::_link_().
+         When passed as an OT4XB extended pointer, the object is locked before the call and unlocked afterwards.
+      </remarks>
+      <methods>
+         <method name="_alloc_" syntax="::_alloc_( [lCopy := .T.], [@pMem] ) -> Self">Allocates owned memory for the structure, optionally copying the current buffer contents.</method>
+         <method name="_free_" syntax="::_free_( [lCopy := .T.] ) -> Self">Frees owned memory, optionally copying memory back to the Xbase++ buffer first.</method>
+         <method name="_link_" syntax="::_link_( pMem, [lCopy := .T.] ) -> Self">Links the structure to an existing memory pointer, optionally copying data from that pointer.</method>
+         <method name="_unlink_" syntax="::_unlink_( [lCopy := .T.] ) -> Self | pMem">Detaches from an external pointer. A negative numeric flag returns the pointer without copying.</method>
+         <method name="_lock_" syntax="::_lock_( [@nLen] ) -> pMem">Locks storage and returns a memory pointer suitable for native calls.</method>
+         <method name="_unlock_" syntax="::_unlock_() -> NIL">Releases a pointer obtained with ::_lock_().</method>
+         <method name="_zeromemory_" syntax="::_zeromemory_() -> Self">Fills the structure storage with zero bytes.</method>
+         <method name="_sizeof_" syntax="::_sizeof_( [cMember | nFlags] ) -> nBytes">Returns the structure size, a member size, or a flag-selected size combination.</method>
+         <method name="_addressof_" syntax="::_addressof_( [cMember], [@nShift] ) -> pMem">Returns the address of the structure or named member.</method>
+         <method name="_offsetof_" syntax="::_offsetof_( cMember ) -> nOffset">Returns the byte offset of a named member.</method>
+         <method name="_read_" syntax="::_read_( [@cBuffer | pMem | oGwst], [nPos], [nBytes] ) -> nBytes | cBuffer">Reads bytes from structure storage.</method>
+         <method name="_write_" syntax="::_write_( cBuffer | pMem | oGwst, [nPos], [nBytes] ) -> nBytes">Writes bytes into structure storage.</method>
+         <method name="_scast_" syntax="::_scast_( oClass ) -> oStructure">Creates another GWST structure object linked to this structure address.</method>
+      </methods>
+      <properties>
+         <property name="_nExtraSize_" type="numeric">Extra bytes available beyond the declared structure size when linked or allocated with larger storage.</property>
+      </properties>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 static GWST_SORT_ITEM * _gwst_get_member_info_array_( ContainerHandle conoGwst , ContainerHandle conaMNames );
 
 //-----------------------------------------------------------------------------------------------------------------------
@@ -29,14 +68,6 @@ static void gwst_xb_unlock        ( TXbClsParams * px ); // 0 // ::_unlock_()
 static void gwst_xb_nExtraSize_( TXbClsParams * px );// 1 // ::_nExtraSize_
 
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY GWST(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("GWST");

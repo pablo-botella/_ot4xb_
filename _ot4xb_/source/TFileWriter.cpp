@@ -11,6 +11,55 @@
                               px->SetErrorDescription( d ); \
                               px->SetErrorGenCode(0x00105000 + n);
 //----------------------------------------------------------------------------------------------------------------------
+
+/*******************************************************************************************************************
+<xbdoc>
+   <class>
+      <name>TFileWriter</name>
+      <category>file/binary</category>
+      <description>
+         Buffered writer that can write to a disk file, an attached Win32 file handle, or an internal memory buffer.
+         It can also decode selected transfer encodings while data is being added.
+      </description>
+      <syntax>TFileWriter():new() -> oWriter</syntax>
+      <class-properties>
+         <property name="e_enc_none" type="numeric">No transfer decoding.</property>
+         <property name="e_enc_base64_decode" type="numeric">Decode Base64 input before storing or writing it.</property>
+         <property name="e_enc_uu_decode" type="numeric">Decode uuencoded input before storing or writing it.</property>
+         <property name="e_enc_qp_decode" type="numeric">Decode quoted-printable input before storing or writing it.</property>
+         <property name="e_enc_ot4xb_encode" type="numeric">Use the OT4XB internal encoder used by the XML writer helpers.</property>
+         <property name="e_enc_count" type="numeric">Number of encoder identifiers.</property>
+      </class-properties>
+      <properties>
+         <property name="buffer" type="character" access="readonly">Internal buffer contents when the writer is in memory-only mode.</property>
+         <property name="buffer_len" type="numeric" access="readonly">Internal buffer length in memory-only mode; -1 when writing to a file handle.</property>
+         <property name="file_size" type="numeric" access="readonly">Current output file size, or 0 in memory-only mode.</property>
+      </properties>
+      <methods>
+         <method name="Release" syntax="::Release() -> Self">Releases the internal C++ writer object.</method>
+         <method name="Create" syntax="::Create( cFilename, [lPreserveBuffer := .F.] ) -> lOk">Creates the target file. If creation fails the object remains in memory-only mode.</method>
+         <method name="AttachFileHandle" syntax="::AttachFileHandle( hFile, [lPreserveBuffer := .F.] ) -> NIL">Uses an existing Win32 file handle as the output target.</method>
+         <method name="DetachFileHandle" syntax="::DetachFileHandle() -> hFile">Detaches and returns the current file handle; the writer switches back to memory-only mode.</method>
+         <method name="GetFileHandle" syntax="::GetFileHandle() -> hFile">Returns the current output file handle.</method>
+         <method name="Close" syntax="::Close() -> NIL">Closes the current file target and switches back to memory-only mode.</method>
+         <method name="SetEncoderEngine" syntax="::SetEncoderEngine( nEncoder, [nFlags := 0] ) -> lOk">Selects one of the e_enc_* transfer decoders.</method>
+         <method name="SetCacheSize" syntax="::SetCacheSize( nBytes ) -> NIL">Changes the cache size used before flushing to the file target.</method>
+         <method name="Add" syntax="::Add( cBytes, [nBytes] ) -> lOk">Adds bytes to the writer. The selected encoder is applied before the data is stored or flushed.</method>
+         <method name="xml_ot4xb_wa_field_col" syntax="::xml_ot4xb_wa_field_col( nWorkArea, cFieldName ) -> lOk">Writes one work-area field value as an XML col node.</method>
+         <method name="write_xml_node_from_value" syntax="::write_xml_node_from_value( xValue, cTag, [nFlags], [cNodeName] ) -> lOk">Writes an XML node for an Xbase++ value.</method>
+         <method name="write_xml_value" syntax="::write_xml_value( xValue ) -> lOk">Writes an XML representation of an Xbase++ value.</method>
+         <method name="Write" syntax="::Write() -> lOk">Flushes pending cached data to the file target. It is a no-op success in memory-only mode.</method>
+         <method name="Commit" syntax="::Commit() -> NIL">Flushes pending data and commits the file buffers.</method>
+         <method name="truncate_buffer" syntax="::truncate_buffer() -> NIL">Clears the internal memory cache.</method>
+      </methods>
+      <remarks>
+         A newly created instance starts in memory-only mode. Use ::Create() or ::AttachFileHandle() to send output to
+         a file. The readonly buffer helpers are intended for the memory-only mode.
+      </remarks>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+
 static void TFileWriter_init( TXbClsParams * px );               // 1 // ::New() -> Self
 static void TFileWriter_Release( TXbClsParams * px );            // 0 // ::Release() -> Self
 static void TFileWriter_Create( TXbClsParams * px );             // 1 //    BOOL   Create( LPSTR pFilename , BOOL bPreserveBuffer);

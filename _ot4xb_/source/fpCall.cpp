@@ -20,6 +20,233 @@ static DWORD _dwGetFpParam_( XppParamList pl , ULONG nPos);
 static DWORD vtlbn2fp( LONG n , LONG v );
 static DWORD pt_list_get_pointer( LONG n , LONG v );
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>Function pointer calls</name>
+      <source>fpCall.cpp</source>
+      <category>interop/function-pointer</category>
+      <description>
+         Low-level OT4XB helpers for loading DLLs, resolving function pointers and calling stdcall or cdecl
+         functions from Xbase++.
+      </description>
+      <remarks>
+         These functions are intended for Win32 interop code. The caller is responsible for using the correct
+         function pointer, calling convention, return type and parameter layout. Fastcall and thiscall functions
+         are not supported.
+
+         The fp parameter accepted by nFpCall(), ndFpCall(), qwFpCall() and FpQCall() can be a numeric function
+         pointer, a DllPrepareCall() template string, or an array { hDllOrDllName, cProcName }.
+
+         nFpCall(), ndFpCall() and qwFpCall() infer parameter conversion from the supplied Xbase++ values:
+         logical values are passed as BOOL, numeric values as LONG, character values as LPCSTR or LPSTR when
+         passed by reference, numeric arrays as temporary arrays of 32-bit values, and GWST objects as OT4XB
+         extended pointers locked for the duration of the call. A NIL marker before a character value passes an
+         8-byte integer value; a NIL marker before a numeric value passes a double value.
+
+         FpQCall(), IFpQCall(), FpLQCall() and FpLQCall2() use a prototype string. The string contains one
+         4-character template for the return value followed by one template for each parameter.
+      </remarks>
+      <functions>
+         <function>
+            <name>set_fpcall_flags</name>
+            <syntax>set_fpcall_flags( [nFlags] ) -> nOldFlags</syntax>
+            <description>Reads or replaces the global fpCall error flags. Flag 1 raises a BASE error when a function pointer cannot be resolved.</description>
+         </function>
+         <function>
+            <name>_fpcall_pushflags_</name>
+            <syntax>_fpcall_pushflags_( nFlags ) -> NIL</syntax>
+            <description>Pushes flags for the next fpCall on the current thread. Flag 1 disables by-reference parameter conversion for that call.</description>
+         </function>
+         <function>
+            <name>nfpget</name>
+            <syntax>nfpget( fpSpec ) -> pFunction</syntax>
+            <description>Resolves a numeric pointer, DllPrepareCall() template or { hDllOrDllName, cProcName } array to a function pointer.</description>
+         </function>
+         <function>
+            <name>f2t</name>
+            <syntax>f2t( pFunction ) -> cDllTemplate</syntax>
+            <description>Builds a small Xbase++ DLL call template string for a function pointer in the current module.</description>
+         </function>
+         <function>
+            <name>xbfpcall</name>
+            <syntax>xbfpcall( @cTemplateOrPointer, ... ) -> xResult</syntax>
+            <description>Calls the Xbase++ runtime DLLEXECUTECALL entry after storing an OT4XB template in the first parameter.</description>
+         </function>
+         <function>
+            <name>nfpcall</name>
+            <syntax>nfpcall( fpSpec, ... ) -> n32BitResult</syntax>
+            <description>Calls a stdcall or cdecl function and returns the 32-bit result from EAX.</description>
+         </function>
+         <function>
+            <name>ndfpcall</name>
+            <syntax>ndfpcall( fpSpec, ... ) -> nDouble</syntax>
+            <description>Calls a stdcall or cdecl function that returns a 64-bit floating point value.</description>
+         </function>
+         <function>
+            <name>qwfpcall</name>
+            <syntax>qwfpcall( fpSpec, ... ) -> cQword</syntax>
+            <description>Calls a stdcall or cdecl function that returns a 64-bit integer and returns the raw 8-byte value.</description>
+         </function>
+         <function>
+            <name>nfpgetlasterror</name>
+            <syntax>nfpgetlasterror() -> nLastError</syntax>
+            <description>Returns the Win32 GetLastError() value saved by the latest fpCall operation on the current thread.</description>
+         </function>
+         <function>
+            <name>qfpgetlastpointer</name>
+            <syntax>qfpgetlastpointer() -> pPointer</syntax>
+            <description>Returns the thread-local last pointer value stored by OT4XB helper code.</description>
+         </function>
+         <function>
+            <name>qfpsetlastpointer</name>
+            <syntax>qfpsetlastpointer( pPointer ) -> NIL</syntax>
+            <description>Stores a thread-local last pointer value for OT4XB helper code.</description>
+         </function>
+         <function>
+            <name>nloadlibrary</name>
+            <syntax>nloadlibrary( cDllName [, @nLastError] ) -> hDll</syntax>
+            <description>Loads a DLL and returns its module handle. @nLastError receives GetLastError() when loading fails.</description>
+         </function>
+         <function>
+            <name>lfreelibrary</name>
+            <syntax>lfreelibrary( hDll ) -> lOk</syntax>
+            <description>Releases a module handle with FreeLibrary().</description>
+         </function>
+         <function>
+            <name>ngetprocaddress</name>
+            <syntax>ngetprocaddress( hDllOrDllName, cProcName | nOrdinal ) -> pFunction</syntax>
+            <description>Returns a DLL export pointer. A DLL name is loaded if the module is not already loaded.</description>
+         </function>
+         <function>
+            <name>fpqcall</name>
+            <syntax>fpqcall( fpSpec, cPrototype, ... ) -> xResult</syntax>
+            <description>Calls a stdcall or cdecl function using a 4-character prototype template for the return value and each parameter.</description>
+         </function>
+         <function>
+            <name>ifpqcall</name>
+            <syntax>ifpqcall( nVTableIndex, cPrototype, pInterface, ... ) -> xResult</syntax>
+            <description>Calls a COM interface method resolved from the interface vtable.</description>
+         </function>
+         <function>
+            <name>fplqcall</name>
+            <syntax>fplqcall( nIndex, cPrototype, pPointerList, ... ) -> xResult</syntax>
+            <description>Calls a function pointer read from a pointer list and passes user parameters after the list argument.</description>
+         </function>
+         <function>
+            <name>fplqcall2</name>
+            <syntax>fplqcall2( nIndex, cPrototype, pThisOrList, ... ) -> xResult</syntax>
+            <description>Variant of fplqcall() that reads the function pointer directly from the supplied pointer list.</description>
+         </function>
+         <function>
+            <name>_dummystdcbk</name>
+            <syntax>_dummystdcbk( nParams ) -> pFunction | NIL</syntax>
+            <description>Returns a dummy stdcall callback pointer that returns 0 and pops nParams DWORD parameters. Supported values are 0 through 16.</description>
+         </function>
+         <function>
+            <name>pt2gp</name>
+            <syntax>pt2gp( pPointer ) -> oGenericPointer</syntax>
+            <description>Wraps a numeric pointer in an OT4XB_GENERIC_POINTER object so it can be used where an OT4XB extended pointer is expected.</description>
+         </function>
+         <function>
+            <name>cprintf</name>
+            <syntax>cprintf( cFormat, ... ) -> cText</syntax>
+            <description>Formats a string with C sprintf() conversion rules and returns the generated text.</description>
+         </function>
+         <function>
+            <name>cprintf</name>
+            <syntax>cprintf( NIL, cFormatWithEscapes, ... ) -> cText</syntax>
+            <description>Same as cprintf(), but first expands C-style escapes such as \n, \r, \t, \xHH, \dDDD, \q and \\.</description>
+         </function>
+         <function>
+            <name>__printf</name>
+            <syntax>__printf( cFormat, ... ) -> nChars</syntax>
+            <description>Prints with C printf() conversion rules and returns the number of characters written.</description>
+         </function>
+         <function>
+            <name>lWriteLogLine</name>
+            <syntax>lWriteLogLine( cFile, cFormat, ... ) -> lOk</syntax>
+            <description>Formats a log line using C formatting rules and appends it to a log file.</description>
+         </function>
+         <function>
+            <name>cFmtSysMsg</name>
+            <syntax>cFmtSysMsg( nMessageId [, nLangId] ) -> cMessage</syntax>
+            <description>Formats a system message with FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM).</description>
+         </function>
+         <function>
+            <name>cFmtResMsg</name>
+            <syntax>cFmtResMsg( hDll, nMessageId [, nLangId], ... ) -> cMessage</syntax>
+            <description>Formats a message resource from a module. When hDll is NIL or 0, the current executable module is used.</description>
+         </function>
+         <function>
+            <name>cFmtStrMsg</name>
+            <syntax>cFmtStrMsg( cTemplate, ... ) -> cMessage</syntax>
+            <description>Formats an in-memory message template with FormatMessage(FORMAT_MESSAGE_FROM_STRING).</description>
+         </function>
+      </functions>
+      <templates name="FpQCall prototype">
+         <template code="__vo" type="VOID" />
+         <template code="__xb" type="PXBASEVAR" />
+         <template code="__bo" type="BOOL" />
+         <template code="__sc" type="INT8" />
+         <template code="__uc" type="BYTE" />
+         <template code="__ss" type="INT16" />
+         <template code="__us" type="WORD" />
+         <template code="__sl" type="INT32" />
+         <template code="__ul" type="DWORD" />
+         <template code="__sq" type="INT64" />
+         <template code="__uq" type="QWORD" />
+         <template code="__f4" type="FLOAT" />
+         <template code="__f8" type="DOUBLE" />
+         <template code="__pt" type="POINTER" />
+         <template code="?@sl" type="PSL_OR_PT" />
+         <template code="_@bo" type="LPBOOL" />
+         <template code="_@sc" type="LPINT8" />
+         <template code="_@uc" type="LPUINT8" />
+         <template code="_@ss" type="LPINT16" />
+         <template code="_@us" type="LPWORD" />
+         <template code="_@sl" type="LPINT32" />
+         <template code="_@ul" type="LPDWORD" />
+         <template code="_@sq" type="LPINT64" />
+         <template code="_@uq" type="LPQWORD" />
+         <template code="_@f4" type="LPFLOAT" />
+         <template code="_@f8" type="LPDOUBLE" />
+         <template code="c_sw" type="STR2WIDE" />
+         <template code="c@sw" type="STR2WIDE_W" />
+         <template code="c_sz" type="ZSTRING" />
+         <template code="__hw" type="HWND" />
+         <template code="__vt" type="VARIANT" />
+      </templates>
+      <example><![CDATA[
+local hUser32 := nLoadLibrary( "user32.dll" )
+local pMsgBox := nGetProcAddress( hUser32, "MessageBoxA" )
+
+nFpCall( pMsgBox, 0, "Hello from OT4XB", "fpCall", 0 )
+lFreeLibrary( hUser32 )
+      ]]></example>
+   </function-family>
+
+   <class>
+      <name>OT4XB_GENERIC_POINTER</name>
+      <source>fpCall.cpp:OT4XB_GENERIC_POINTER</source>
+      <category>interop/pointer</category>
+      <description>
+         Minimal wrapper over a numeric pointer. The object exposes ::_lock_() and ::_unlock_() so it can be
+         passed to OT4XB functions that accept extended pointers.
+      </description>
+      <syntax>OT4XB_GENERIC_POINTER():new( pPointer ) -> Self</syntax>
+      <members>
+         <member name="_m__pt_" type="numeric">Stored pointer value.</member>
+      </members>
+      <methods>
+         <method name="init" returns="Self">Stores the pointer value, or 0 when NIL is supplied.</method>
+         <method name="_lock_" returns="numeric">Returns the stored pointer value.</method>
+         <method name="_unlock_" returns="NIL">No-op unlock method for extended pointer compatibility.</method>
+      </methods>
+   </class>
+</xbdoc>
+*******************************************************************************************************************/
+//----------------------------------------------------------------------------------------------------------------------
 static DWORD _dwGetFpParam_( XppParamList pl , ULONG nPos)
 {
    DWORD dw = _partype(pl,nPos);
@@ -64,14 +291,6 @@ static DWORD _dwGetFpParam_( XppParamList pl , ULONG nPos)
 }
 //----------------------------------------------------------------------------------------------------------------------
 // static DWORD _dwFpCallErrorFlags_= 1;
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY SET_FPCALL_FLAGS( XppParamList pl )
 {
    DWORD dw = _dwFpCallErrorFlags_;
@@ -79,28 +298,12 @@ XPPRET XPPENTRY SET_FPCALL_FLAGS( XppParamList pl )
    _retnl( pl, (LONG) dw);
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NFPGET( XppParamList pl )
 {
    LONG nfp = (LONG ) _dwGetFpParam_(pl,1);
    _retnl( pl, nfp );
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY F2T( XppParamList pl ) // function pointer to  _XPP_DLL_TEMPLATE_
 {
    _XPP_DLL_TEMPLATE_ tp[2];  
@@ -118,14 +321,6 @@ OT4XB_API void next_xbfpcall_use_critical_section( CRITICAL_SECTION * pcs)
    GetTlsHeapManager()->m_next_call_critical_section = pcs;
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY XBFPCALL( XppParamList pl )
 {
 
@@ -152,24 +347,8 @@ XPPRET XPPENTRY XBFPCALL( XppParamList pl )
    
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY _FPCALL_PUSHFLAGS_( XppParamList pl ){ GetTlsHeapManager()->PushNextFpFlags( (DWORD) _parLong(pl,1,0)); _ret(pl);}
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NFPCALL( XppParamList pl )
 {
    LONG nParams,n;
@@ -217,14 +396,6 @@ XPPRET XPPENTRY NFPCALL( XppParamList pl )
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NDFPCALL( XppParamList pl )
 {
    LONG nParams,n;
@@ -271,14 +442,6 @@ XPPRET XPPENTRY NDFPCALL( XppParamList pl )
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY QWFPCALL( XppParamList pl )
 {
    LONG nParams,n;
@@ -328,42 +491,10 @@ XPPRET XPPENTRY QWFPCALL( XppParamList pl )
 OT4XB_API DWORD __cdecl ot4xb_GetFpLastError(void){ return GetTlsHeapManager()->GetLastError(); }
 OT4XB_API void  __cdecl ot4xb_PutFpLastError(DWORD dw){ GetTlsHeapManager()->PutLastError(dw); }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NFPGETLASTERROR( XppParamList pl ){ _retnl(pl,(LONG) GetTlsHeapManager()->GetLastError()); }
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY QFPGETLASTPOINTER( XppParamList pl ){ _retnl(pl,(LONG) GetTlsHeapManager()->GetLastPointer()); }
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY QFPSETLASTPOINTER( XppParamList pl ){ GetTlsHeapManager()->PutLastPointer((DWORD) _parLong(pl,1));_ret(pl);}
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NGETPROCADDRESS( XppParamList pl ) // nGetProcAddress( hDLL , cFuncName ) -> fp
 {
    CHAR sz[260];
@@ -406,14 +537,6 @@ XPPRET XPPENTRY NGETPROCADDRESS( XppParamList pl ) // nGetProcAddress( hDLL , cF
    _retnl(pl,nFp);
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY NLOADLIBRARY( XppParamList pl ) // nLoadLibrary( cDllName [,@nLastError] ) -> hDll
 {
    LPSTR    pName  = _pszParam(pl,1);
@@ -432,14 +555,6 @@ XPPRET XPPENTRY NLOADLIBRARY( XppParamList pl ) // nLoadLibrary( cDllName [,@nLa
    _retnl(pl,(LONG) hDll );
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY LFREELIBRARY( XppParamList pl ) // lFreeLibrary( hDll ) -> hDll
 {
    HMODULE  hDll    = (HMODULE) _parLong(pl,1);
@@ -459,14 +574,6 @@ static DWORD _format_msg_(DWORD dwf,void* ps,DWORD id,DWORD lan,LPSTR pb,DWORD c
    return result;
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY CFMTSYSMSG( XppParamList pl ) // cFmtSysMsg(nId,nLang)
 {
    LPSTR pBuffer = 0;
@@ -481,14 +588,6 @@ XPPRET XPPENTRY CFMTSYSMSG( XppParamList pl ) // cFmtSysMsg(nId,nLang)
    if( pBuffer ) LocalFree( pBuffer );
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY CFMTRESMSG( XppParamList pl ) // cFmtResMsg(hDll,nId,nLang,...)
 {
    LONG nParams,n;
@@ -552,14 +651,6 @@ XPPRET XPPENTRY CFMTRESMSG( XppParamList pl ) // cFmtResMsg(hDll,nId,nLang,...)
    if( pBuffer ) LocalFree( pBuffer );
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY CFMTSTRMSG( XppParamList pl ) // cFmtStrMsg(cStr,...)
 {
    LONG nParams,n;
@@ -788,14 +879,6 @@ extern "C" LPSTR OT4XB_API __cdecl _ot4xb_cprintf_c_escape_( LPSTR pStr )
    return pOut;
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY CPRINTF( XppParamList pl )
 {
    ContainerHandle conr = _conPutC(NULLCONTAINER,"");   
@@ -863,14 +946,6 @@ XPPRET XPPENTRY __PRINTF( XppParamList pl )
 	
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY PT2GP(XppParamList pl)
 {
    ContainerHandle conp = _conPutNL( NULLCONTAINER , _parLong(pl,1));
@@ -880,14 +955,6 @@ XPPRET XPPENTRY PT2GP(XppParamList pl)
    _conRelease(cono);
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY OT4XB_GENERIC_POINTER(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("OT4XB_GENERIC_POINTER");
@@ -917,14 +984,6 @@ XPPRET XPPENTRY OT4XB_GENERIC_POINTER(XppParamList pl)
    _conRelease(conco);
 }
 //-----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY FPQCALL( XppParamList pl ) // FpQCall( fp,q,params... )
 {
    ContainerHandle conr = _conNew( NULLCONTAINER);
@@ -982,14 +1041,6 @@ BOOL OT4XB_API bWriteLogLine( LPSTR pFName , LPSTR pFmt , ... )
    return bOk;
 }
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY LWRITELOGLINE( XppParamList pl ) // lWriteLogLine( cFile , cStr , ... )
 {
    LONG nParams,n;
@@ -1049,14 +1100,6 @@ static __declspec( naked ) void dummy14(void){ DUMMY_N( 0x38 ) }
 static __declspec( naked ) void dummy15(void){ DUMMY_N( 0x3C ) }
 static __declspec( naked ) void dummy16(void){ DUMMY_N( 0x40 ) }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY _DUMMYSTDCBK( XppParamList pl )
 {
    LONG n = 0;
@@ -1084,14 +1127,6 @@ XPPRET XPPENTRY _DUMMYSTDCBK( XppParamList pl )
    else _ret(pl);
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY FPLQCALL2( XppParamList pl ) // FPLQCALL2(n,q,this,params... )
 {                                                
    if( _partype(pl,0) < 3 ){ _ret(pl); return;}
@@ -1132,14 +1167,6 @@ XPPRET XPPENTRY FPLQCALL2( XppParamList pl ) // FPLQCALL2(n,q,this,params... )
    _conReturn( pl,conr ); _conRelease( conr );
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY IFPQCALL( XppParamList pl ) // IFpQCall(n,q,this,params... )
 {                                                
    if( _partype(pl,0) < 3 ){ _ret(pl); return;}
@@ -1207,14 +1234,6 @@ static DWORD vtlbn2fp( LONG n , LONG v )
    return 0;
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-==> /docs/xb/functions/xb_function_+++.md ==>
-### function `()`
-* +++
-* Syntax:
-`+++`
-<== <==
-*******************************************************************************************************************/
 XPPRET XPPENTRY FPLQCALL( XppParamList pl ) // FplQCall(n,q,list,params... )
 {                                                
    if( _partype(pl,0) < 3 ){ _ret(pl); return;}

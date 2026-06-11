@@ -522,6 +522,76 @@ BOOL vcmp_ns::compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flag
    return match;
 }
 // --------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__vcmp</name>
+      <category>value/compare</category>
+      <description>
+         Compares two Xbase++ values with optional type conversion and comparison flags.
+      </description>
+      <syntax>__vcmp( xValue1, xValue2 [, nFlags | cFlags] ) -> lMatch</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue1</name>
+            <type>Any</type>
+            <description>First value to compare.</description>
+         </parameter>
+         <parameter>
+            <name>xValue2</name>
+            <type>Any</type>
+            <description>Second value to compare.</description>
+         </parameter>
+         <parameter>
+            <name>nFlags | cFlags</name>
+            <type>Numeric | Character</type>
+            <description>
+               Optional flags. Flags can be supplied as text tokens separated by comma, semicolon, or '|', using the
+               same parser as __vtran(). Numeric flags are used as a bit mask. Common text tokens include nocase,
+               niltonull, ltrim, rtrim, alltrim, str, int, double, logical, date, dtos, date8, date10, yesno,
+               truefalse, casttoleft, casttoright, and setprecission0 through setprecission15.
+               Numeric flags are:
+               0x00000001 - case-insensitive character comparison.
+               0x00000002 - compare NIL as an empty value of the other side type.
+               0x00000004 - ignore missing left value; used by map comparison.
+               0x00000008 - ignore missing right value; used by map comparison.
+               0x00000010 - left-trim character values before comparison.
+               0x00000020 - right-trim character values before comparison.
+               0x00000100 - compare maps; reserved, not implemented yet.
+               0x00000200 - stringify changes; used with value transformation helpers.
+               0x00001000 - use the precision byte in 0x000F0000 for double comparison.
+               0x00002000 - use minimal numeric string representation.
+               0x000F0000 - double precision byte, values 0 to 15.
+               0x00100000 - cast the right value to the left value type.
+               0x00200000 - cast the left value to the right value type.
+               0x00300000 - cast both values to string.
+               0x00400000 - cast both values to uppercase string.
+               0x00500000 - cast both values to lowercase string.
+               0x00600000 - cast both values to date string yyyymmdd.
+               0x00700000 - cast both values to date string yyyy-mm-dd.
+               0x00800000 - cast both values to Y/N string.
+               0x00900000 - cast both values to true/false string.
+               0x00A00000 - cast both values to integer.
+               0x00B00000 - cast both values to double.
+               0x00C00000 - cast both values to date.
+               0x00D00000 - cast both values to logical.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Logical</type>
+         <description>.T. when the values match after the requested conversion and comparison rules; otherwise .F.</description>
+      </return>
+      <remarks>
+         Character comparison can be case-insensitive and/or trimmed. Numeric comparison of doubles uses an epsilon
+         controlled by the precision flags; the default precision is 4 decimal places. Date values compare by their
+         date string. When no cast is requested, values of different basic types do not match. Combine numeric flags
+         with bitwise OR, for example with nOr( flag1, ..., flagX ). The numeric flag constants are declared in the
+         ot4xb_vcmp.ch header file.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags  ) ->  lMatch
 {
    TXppParamList xpp( pl, 4 );
@@ -549,6 +619,45 @@ _XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags  ) ->  lMatch
 
 // -----------------------------------------------------------------------------------------------------------------
 // __vtran( v , flags )
+/*******************************************************************************************************************
+<xbdoc>
+   <function>
+      <name>__vtran</name>
+      <category>value/transform</category>
+      <description>
+         Transforms a Xbase++ value to its character representation.
+      </description>
+      <syntax>__vtran( xValue [, cFlags | nFlags] ) -> cValue</syntax>
+      <parameters>
+         <parameter>
+            <name>xValue</name>
+            <type>Any</type>
+            <description>Value to transform to text.</description>
+         </parameter>
+         <parameter>
+            <name>cFlags | nFlags</name>
+            <type>Character | Numeric</type>
+            <description>
+               Optional flags. Flags can be supplied as text tokens separated by comma, semicolon, or '|'; this uses
+               the same parser as __vcmp(). The useful text flags for __vtran() are ltrim, rtrim, and alltrim. Numeric
+               flags may also be supplied, using the same VCMP_* constants declared in ot4xb_vcmp.ch.
+            </description>
+         </parameter>
+      </parameters>
+      <return>
+         <type>Character</type>
+         <description>
+            Character representation of xValue, or an empty string when no text can be produced.
+         </description>
+      </return>
+      <remarks>
+         Character values are returned as text, optionally trimmed by the text flags. Numeric values are formatted as
+         text, logical values as .T. or .F., and dates as yyyymmdd. __vtran() shares the flag parser with __vcmp(), but
+         it does not perform the full comparison/cast workflow; it is primarily a value-to-text transformer.
+      </remarks>
+   </function>
+</xbdoc>
+*******************************************************************************************************************/
 _XPP_REG_FUN_( __VTRAN )
 {
    TXppParamList xpp( pl, 4 );

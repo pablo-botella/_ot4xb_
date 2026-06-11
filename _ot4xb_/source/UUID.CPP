@@ -5,6 +5,65 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 //----------------------------------------------------------------------------------------------------------------------
+/*******************************************************************************************************************
+<xbdoc>
+   <function-family>
+      <name>UUID helpers</name>
+      <source>UUID.CPP</source>
+      <category>uuid</category>
+      <description>
+         Helpers around the Windows RPC UUID functions. Binary UUID values are returned as 16-byte strings;
+         textual UUID values use the standard RPC string form unless a name-oriented helper explicitly removes
+         separators.
+      </description>
+      <functions>
+         <function>
+            <name>UUIDCreate</name>
+            <syntax>UUIDCreate() -> cUuid16</syntax>
+            <description>
+               Creates a UUID with UuidCreate() and returns the raw 16-byte UUID string. The header maps
+               UUIDCreate to the exported _UUIDCreate symbol.
+            </description>
+         </function>
+         <function>
+            <name>UUIDCreateStr</name>
+            <syntax>UUIDCreateStr() -> cUuid</syntax>
+            <description>Creates a UUID and returns its textual RPC representation.</description>
+         </function>
+         <function>
+            <name>cUuidCreateName</name>
+            <syntax>cUuidCreateName( [cPrefix] ) -> cName</syntax>
+            <description>
+               Returns cPrefix followed by a freshly generated UUID string without hyphen separators.
+            </description>
+         </function>
+         <function>
+            <name>cUuidCreateNameEx</name>
+            <syntax>cUuidCreateNameEx( [cPrefix], nMode ) -> cName</syntax>
+            <description>Returns cPrefix followed by one of several UUID-based sortable/name-friendly formats.</description>
+            <flags>
+               <flag value="0">Same format as cUuidCreateName(): UUID without hyphens.</flag>
+               <flag value="1">Uses UuidCreateSequential() and returns reordered UUID bytes as hexadecimal text.</flag>
+               <flag value="2">Prefixes a FILETIME timestamp to UUID data rendered as hexadecimal text.</flag>
+               <flag value="3">Encodes FILETIME plus UUID bytes using base32hex.</flag>
+            </flags>
+         </function>
+         <function>
+            <name>UUIDFromString</name>
+            <syntax>UUIDFromString( cUuid ) -> cUuid16 | NIL</syntax>
+            <description>
+               Parses a UUID string and returns the raw 16-byte UUID string. Surrounding braces are accepted.
+            </description>
+         </function>
+         <function>
+            <name>UUIDToString</name>
+            <syntax>UUIDToString( cUuid16 ) -> cUuid | NIL</syntax>
+            <description>Converts a raw 16-byte UUID string to the standard textual RPC representation.</description>
+         </function>
+      </functions>
+   </function-family>
+</xbdoc>
+*******************************************************************************************************************/
 XPPRET XPPENTRY _UUIDCREATE(XppParamList pl)
 {
    UUID * pu;
