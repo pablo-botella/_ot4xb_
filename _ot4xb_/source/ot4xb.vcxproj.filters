@@ -125,7 +125,7 @@
     <ClCompile Include="ot4xb_ndtk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ot4xb_regexp.cpp">
+    <ClCompile Include="ot4xb_vb_regexp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ot4xb_socket.cpp">
@@ -258,9 +258,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ot4xb_expando.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ot4xb_pcl_tool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ot4xb_regex.cpp">
@@ -400,9 +397,6 @@
     <ClInclude Include="ot4xb_statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="atomic_resource_lock_t.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ot4xb_sqlstr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -424,6 +418,32 @@
     </None>
     <None Include="ot4xb.VersionInfo" />
     <None Include="ot4xb.xbmac" />
+    <None Include="postbuild_debug.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="postbuild_release.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="prebuild_debug.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="prebuild_release.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="cpp.hint" />
+    <None Include="packages.config" />
+    <None Include="__mk_package.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="__mklib.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="ot4xb_extract_all.bat">
+      <Filter>bat</Filter>
+    </None>
+    <None Include="ot4xb_ch_doc_only.cpp">
+      <Filter>Source Files</Filter>
+    </None>
     <None Include="ch\apiset_constants.ch">
       <Filter>ch</Filter>
     </None>
@@ -511,6 +531,9 @@
     <None Include="ch\wininet_prototypes.ch">
       <Filter>ch</Filter>
     </None>
+    <None Include="ch\WinNetWk.ch">
+      <Filter>ch</Filter>
+    </None>
     <None Include="ch\WinReg_constants.ch">
       <Filter>ch</Filter>
     </None>
@@ -531,32 +554,6 @@
     </None>
     <None Include="ch\WinUser_constants.ch">
       <Filter>ch</Filter>
-    </None>
-    <None Include="ch\WinNetWk.ch">
-      <Filter>ch</Filter>
-    </None>
-    <None Include="postbuild_debug.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="postbuild_release.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="prebuild_debug.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="prebuild_release.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="cpp.hint" />
-    <None Include="packages.config" />
-    <None Include="__mk_package.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="__mklib.bat">
-      <Filter>bat</Filter>
-    </None>
-    <None Include="ot4xb_extract_all.bat">
-      <Filter>bat</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,25 @@
 #include <ot4xb_api.h>
 #include <shlwapi.h>
 //----------------------------------------------------------------------------------------------------------------------
-extern "C" int OT4XB_API __cdecl ot4xb_peek_safe(LPBYTE p_from , int cb_to_read, LPBYTE p_out, int cb_out) // -> bytes_readed
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_peek_safe
+            | syntax_: `int ot4xb_peek_safe( LPBYTE p_from, int cb_to_read, LPBYTE p_out, int cb_out )`
+            | header: ot4xb_c_exported.h
+            | category: memory
+            | mangled-name: ot4xb_peek_safe
+            | _kw_: peek, read memory, safe read, access violation, IsBadReadPtr
+   }}*/
+/*{{|desc: Copies bytes from an arbitrary address into a caller buffer without raising an access violation.
+      The transfer is done with ReadProcessMemory() on the current process, so an unreadable source address
+      produces an error result instead of a crash.
+    | params:
+    - `p_from` LPBYTE - Source address to read from.
+    - `cb_to_read` int - Number of bytes to read.
+    - `p_out` LPBYTE - Buffer receiving the bytes.
+    - `cb_out` int - Size of the output buffer. The copy length is the smaller of cb_to_read and cb_out.
+
+    Returns int - Number of bytes actually read, or -1 when the read fails. }}*/
+extern "C" int OT4XB_API __cdecl ot4xb_peek_safe(LPBYTE p_from , int cb_to_read, LPBYTE p_out, int cb_out)
 {
 	int bytes_readed = 0;
 	try
@@ -19,6 +37,7 @@ extern "C" int OT4XB_API __cdecl ot4xb_peek_safe(LPBYTE p_from , int cb_to_read,
 	catch (int) { bytes_readed = -1; }
 	return bytes_readed;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 // Added behavior: PeekStr(pMem,[@]nShift,-1) Assuming Zero terminated string
 // variants of -1:
@@ -43,101 +62,53 @@ extern "C" int OT4XB_API __cdecl ot4xb_peek_safe(LPBYTE p_from , int cb_to_read,
 // Added behavior: PeekStr(pMem,[@]nShift,-76)  // like -1 but with max size = 76 
 
 // Added behavior: PeekStr(pMem,[@]nShift,-64)  // get base64 string removing trailing spaces and CRLF 
+//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: PeekStr
+            | syntax_: `PeekStr( pMem, @nShift, nSize [, cDelimiter] )`
+            | category: memory
+            | _kw_: peek, read bytes, extended pointer, offset, memory read
+   }}*/
+/*{{|desc: Reads character data from an OT4XB extended pointer parameter, using and optionally updating a byte
+      offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated as
+      a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced by
+      the bytes consumed.
+    - `nSize` Numeric - Number of bytes to read, or one of the special negative modes listed below.
+    - `@cStr` Character by reference - Receives bytes copied from pMem. The return value is the number of
+      bytes copied.
+    - `aItems` Array - Reads several fields in sequence. Character items use their current length. Numeric
+      items give the byte count; negative numeric items read a zero-terminated ANSI string.
+    - `cDelimiter` Character - Delimiter used by the -17 family of modes.
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>PeekStr</name>
-      <category>memory</category>
-      <description>
-         Reads character data from an OT4XB extended pointer parameter, using and optionally updating a byte offset.
-      </description>
-      <syntax>PeekStr( pMem, @nShift, nSize [, cDelimiter] ) -> cStr</syntax>
-      <syntax>PeekStr( pMem, @nShift, @cStr ) -> nSize</syntax>
-      <syntax>PeekStr( pMem, @nShift, aItems ) -> aItems</syntax>
-      <parameters>
-         <parameter>
-            <name>pMem</name>
-            <type>Numeric | Character | Object | Array</type>
-            <description>
-               OT4XB extended pointer source. A numeric value is treated as a pointer; a character value locks its
-               internal buffer; an object must provide the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally
-               through a GWST subclass; an array is treated as a temporary LONG buffer.
-            </description>
-         </parameter>
-         <parameter>
-            <name>@nShift</name>
-            <type>Numeric by reference</type>
-            <description>Byte offset inside pMem. When passed by reference, it is advanced by the bytes consumed.</description>
-         </parameter>
-         <parameter>
-            <name>nSize</name>
-            <type>Numeric</type>
-            <description>Number of bytes to read, or one of the special negative modes listed below.</description>
-         </parameter>
-         <parameter>
-            <name>@cStr</name>
-            <type>Character by reference</type>
-            <description>Receives bytes copied from pMem. The return value is the number of bytes copied.</description>
-         </parameter>
-         <parameter>
-            <name>aItems</name>
-            <type>Array</type>
-            <description>
-               Reads several fields in sequence. Character items use their current length. Numeric items give the
-               byte count; negative numeric items read a zero-terminated ANSI string.
-            </description>
-         </parameter>
-         <parameter>
-            <name>cDelimiter</name>
-            <type>Character</type>
-            <description>Delimiter used by the -17 family of modes.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Character | Numeric | Array | NIL</type>
-         <description>Read value, copied byte count, updated array, or NIL when the parameters are not usable.</description>
-      </return>
-      <remarks>
-         The first parameter uses the OT4XB extended pointer locking mechanism, not a native Xbase++ pointer type.
-         This allows PeekStr() to work with raw numeric pointers, character buffers, compatible structure objects,
-         and temporary LONG arrays.
+    Returns Character/Numeric/Array/NIL - Read value, copied byte count, updated array, or NIL when the
+      parameters are not usable.
 
-         Special nSize modes:
+    |note: Also PeekStr( pMem, @nShift, @cStr ) -> nSize
 
-         -1  reads an ANSI zero-terminated string and advances past the final zero byte.
-         -21 is -1 with leading and trailing space or TAB trimmed.
-         -31 is -1 converted to lower case.
-         -41 is -1 trimmed and converted to lower case.
+    |note: Also PeekStr( pMem, @nShift, aItems ) -> aItems
 
-         -2  reads a UTF-16 zero-terminated string as raw wide-character bytes and advances past the final wide zero.
-         -3  reads a UTF-16 zero-terminated string and converts it to ANSI.
+    |note: The first parameter uses the OT4XB extended pointer locking mechanism, not a native Xbase++ pointer
+      type. This allows PeekStr() to work with raw numeric pointers, character buffers, compatible structure
+      objects, and temporary LONG arrays. Special nSize modes: -1 reads an ANSI zero-terminated string and
+      advances past the final zero byte. -21 is -1 with leading and trailing space or TAB trimmed. -31 is -1
+      converted to lower case. -41 is -1 trimmed and converted to lower case. -2 reads a UTF-16 zero-terminated
+      string as raw wide-character bytes and advances past the final wide zero. -3 reads a UTF-16
+      zero-terminated string and converts it to ANSI. -17 reads up to cDelimiter. The delimiter is not included
+      in the result, and nShift advances past it. -27 is -17 with leading and trailing space or TAB trimmed. -37
+      is -17 converted to lower case. -47 is -17 trimmed and converted to lower case. -76 reads an ANSI
+      zero-terminated string with a maximum returned size of 76 bytes. -64 is intended for MIME/base64 bodies:
+      if a CRLF CRLF separator is found, it consumes the source range up to and including that separator;
+      otherwise it falls back to an ANSI zero-terminated source string. The returned value is transformed by
+      removing TAB, LF, CR, and space, so its length can be shorter than the consumed source range.
 
-         -17 reads up to cDelimiter. The delimiter is not included in the result, and nShift advances past it.
-         -27 is -17 with leading and trailing space or TAB trimmed.
-         -37 is -17 converted to lower case.
-         -47 is -17 trimmed and converted to lower case.
-
-         -76 reads an ANSI zero-terminated string with a maximum returned size of 76 bytes.
-         -64 is intended for MIME/base64 bodies: if a CRLF CRLF separator is found, it consumes the source range up
-         to and including that separator; otherwise it falls back to an ANSI zero-terminated source string. The
-         returned value is transformed by removing TAB, LF, CR, and space, so its length can be shorter than the
-         consumed source range.
-      </remarks>
-      <example><![CDATA[
-local sh := 0
-local header := PeekStr( cMime, @sh, -17, __i8(13,10,13,10) )
-local body   := PeekStr( cMime, @sh, -64 )
-
-sh := 0
-PeekStr( header, @sh, -17, "Content-Type: " )
-header := PeekStr( header, @sh, -17, ";" )
-
-return "data:" + header + ";base64," + body
-      ]]></example>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    |example: local sh := 0 local header := PeekStr( cMime, @sh, -17, __i8(13,10,13,10) ) local body :=
+      PeekStr( cMime, @sh, -64 ) sh := 0 PeekStr( header, @sh, -17, "Content-Type: " ) header := PeekStr(
+      header, @sh, -17, ";" ) return "data:" + header + ";base64," + body }}*/
 XPPRET XPPENTRY PEEKSTR(XppParamList pl)
 {
    CON_PLKSTREX plk;
@@ -360,55 +331,33 @@ XPPRET XPPENTRY PEEKSTR(XppParamList pl)
    _conUnLockStrEx_(&plk);
    _ret(pl);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>PokeStr</name>
-      <category>memory</category>
-      <description>
-         Writes character data into an OT4XB extended pointer parameter, using and optionally updating a byte offset.
-      </description>
-      <syntax>PokeStr( pMem, @nShift, cStr ) -> nBytes</syntax>
-      <syntax>PokeStr( pMem, @nShift, aStr ) -> nBytes</syntax>
-      <parameters>
-         <parameter>
-            <name>pMem</name>
-            <type>Numeric | Character | Object | Array</type>
-            <description>
-               OT4XB extended pointer destination. A numeric value is treated as a pointer; a character value locks
-               its internal buffer for writing; an object must provide the OT4XB ::_lock_()/::_unlock_() pointer
-               protocol, normally through a GWST subclass; an array is treated as a temporary LONG buffer.
-            </description>
-         </parameter>
-         <parameter>
-            <name>@nShift</name>
-            <type>Numeric by reference</type>
-            <description>Byte offset inside pMem. When passed by reference, it is advanced by the bytes written.</description>
-         </parameter>
-         <parameter>
-            <name>cStr</name>
-            <type>Character</type>
-            <description>Bytes to copy into pMem at the current offset.</description>
-         </parameter>
-         <parameter>
-            <name>aStr</name>
-            <type>Array</type>
-            <description>Array of character values written sequentially into pMem.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric | NIL</type>
-         <description>Number of bytes written, or NIL when the parameters are not usable.</description>
-      </return>
-      <remarks>
-         PokeStr() uses the OT4XB extended pointer locking mechanism for the destination parameter. It does not append
-         a terminating zero byte unless that byte is already present in the supplied character data.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-XPPRET XPPENTRY POKESTR(XppParamList pl) // PokeStr(pMem,[@]nShift,[@]cStr|aStr) -> nBytes
+/*{{begin-function}}*/
+/*{{function_: PokeStr
+            | syntax_: `PokeStr( pMem, @nShift, cStr )`
+            | category: memory
+            | _kw_: poke, write bytes, extended pointer, offset, memory write
+   }}*/
+/*{{|desc: Writes character data into an OT4XB extended pointer parameter, using and optionally updating a byte
+      offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide the
+      OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced by
+      the bytes written.
+    - `cStr` Character - Bytes to copy into pMem at the current offset.
+    - `aStr` Array - Array of character values written sequentially into pMem.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeStr( pMem, @nShift, aStr ) -> nBytes
+
+    |note: PokeStr() uses the OT4XB extended pointer locking mechanism for the destination parameter. It does
+      not append a terminating zero byte unless that byte is already present in the supplied character data. }}*/
+XPPRET XPPENTRY POKESTR(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LPSTR p      = (LPSTR) _conParamWLockStrEx(pl,1,&plk);
@@ -468,6 +417,7 @@ XPPRET XPPENTRY POKESTR(XppParamList pl) // PokeStr(pMem,[@]nShift,[@]cStr|aStr)
     _conUnLockStrEx_(&plk);
     _ret(pl);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
 <xbdoc>
@@ -670,7 +620,29 @@ XPPRET XPPENTRY PEEKBYTE(XppParamList pl) // PeekByte(pMem,[@]nShift[,nItems]) -
     }
 }
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEBYTE(XppParamList pl) // PokeByte(pMem,[@]nShift,nValue,...) | PokeByte(pMem,[@]nShift,aValues)
+/*{{begin-function}}*/
+/*{{function_: PokeByte
+            | syntax_: `PokeByte( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write byte, extended pointer, offset
+   }}*/
+/*{{|desc: Writes one or more numeric values as single bytes into an OT4XB extended pointer parameter, using
+      and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as one byte. Only the lowest 8 bits are stored. Each additional
+      numeric parameter is written in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, one byte each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeByte( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEBYTE(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -714,10 +686,30 @@ XPPRET XPPENTRY POKEBYTE(XppParamList pl) // PokeByte(pMem,[@]nShift,nValue,...)
        _conUnLockStrEx_(&plk);
        _retnl( pl, nItems * sizeof(BYTE) );
     }
-    else _conUnLockStrEx_(&plk); _ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKWORD(XppParamList pl) // PeekWORD(pMem,[@]nShift[,@c]) -> nWORD
+/*{{begin-function}}*/
+/*{{function_: PeekWord
+            | syntax_: `PeekWord( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read word, 16-bit, extended pointer, offset
+   }}*/
+/*{{|desc: Reads one or more unsigned 16-bit values in host byte order from an OT4XB extended pointer
+      parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable. }}*/
+XPPRET XPPENTRY PEEKWORD(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -748,8 +740,28 @@ XPPRET XPPENTRY PEEKWORD(XppParamList pl) // PeekWORD(pMem,[@]nShift[,@c]) -> nW
        _conUnLockStrEx_(&plk);_retnl(pl,(LONG) n);
     }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKSHORT(XppParamList pl) // PeekShort(pMem,[@]nShift[,@c]) -> nShort
+/*{{begin-function}}*/
+/*{{function_: PeekShort
+            | syntax_: `PeekShort( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read short, signed 16-bit, extended pointer
+   }}*/
+/*{{|desc: Reads one or more signed 16-bit values in host byte order from an OT4XB extended pointer
+      parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable. }}*/
+XPPRET XPPENTRY PEEKSHORT(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -780,8 +792,28 @@ XPPRET XPPENTRY PEEKSHORT(XppParamList pl) // PeekShort(pMem,[@]nShift[,@c]) -> 
        _conUnLockStrEx_(&plk);_retnl(pl,(LONG) n);
     }
 }
+/*{{end-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKWORDNET(XppParamList pl) // PeekWORDNET(pMem,[@]nShift[,@c]) -> nWORD
+/*{{begin-function}}*/
+/*{{function_: PeekWordNet
+            | syntax_: `PeekWordNet( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read word, network byte order, big endian, ntohs
+   }}*/
+/*{{|desc: Reads one or more unsigned 16-bit values stored in network byte order from an OT4XB extended
+      pointer parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable. }}*/
+XPPRET XPPENTRY PEEKWORDNET(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -812,8 +844,31 @@ XPPRET XPPENTRY PEEKWORDNET(XppParamList pl) // PeekWORDNET(pMem,[@]nShift[,@c])
        _conUnLockStrEx_(&plk);_retnl(pl,(LONG) ntohs(n));
     }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEWORD(XppParamList pl) // PokeWORD(pMem,[@]nShift,nValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeWord
+            | syntax_: `PokeWord( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write word, 16-bit, extended pointer
+   }}*/
+/*{{|desc: Writes one or more numeric values as 16-bit words in host byte order into an OT4XB extended
+      pointer parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 16-bit word. Only the lowest 16 bits are stored. Each
+      additional numeric parameter is written in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, two bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeWord( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEWORD(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -855,10 +910,33 @@ XPPRET XPPENTRY POKEWORD(XppParamList pl) // PokeWORD(pMem,[@]nShift,nValue|cVal
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(WORD) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEWORDNET(XppParamList pl) // PokeWORDNET(pMem,[@]nShift,nValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeWordNet
+            | syntax_: `PokeWordNet( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write word, network byte order, big endian, htons
+   }}*/
+/*{{|desc: Writes one or more numeric values as 16-bit words in network byte order into an OT4XB extended
+      pointer parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 16-bit word. Only the lowest 16 bits are stored. Each
+      additional numeric parameter is written in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, two bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeWordNet( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEWORDNET(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -900,10 +978,33 @@ XPPRET XPPENTRY POKEWORDNET(XppParamList pl) // PokeWORDNET(pMem,[@]nShift,nValu
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(WORD) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKDWORD(XppParamList pl) // PeekDWORD(pMem,[@]nShift[,@c]) -> nDWORD
+/*{{begin-function}}*/
+/*{{function_: PeekDWord
+            | syntax_: `PeekDWord( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read DWORD, 32-bit, extended pointer, offset
+   }}*/
+/*{{|desc: Reads one or more 32-bit values in host byte order from an OT4XB extended pointer parameter,
+      using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable.
+
+    |note: Values are returned through a signed 32-bit conversion: a value with the high bit set appears as
+      a negative number. }}*/
+XPPRET XPPENTRY PEEKDWORD(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -934,8 +1035,31 @@ XPPRET XPPENTRY PEEKDWORD(XppParamList pl) // PeekDWORD(pMem,[@]nShift[,@c]) -> 
        _conUnLockStrEx_(&plk);_retnl(pl,(LONG) n);
     }
 }
+/*{{end-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKDWORDNET(XppParamList pl) // PeekDWORDNET(pMem,[@]nShift[,@c]) -> nDWORD
+/*{{begin-function}}*/
+/*{{function_: PeekDWordNet
+            | syntax_: `PeekDWordNet( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read DWORD, network byte order, big endian, ntohl
+   }}*/
+/*{{|desc: Reads one or more 32-bit values stored in network byte order from an OT4XB extended pointer
+      parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable.
+
+    |note: Values are returned through a signed 32-bit conversion: a value with the high bit set appears as
+      a negative number. }}*/
+XPPRET XPPENTRY PEEKDWORDNET(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -966,8 +1090,31 @@ XPPRET XPPENTRY PEEKDWORDNET(XppParamList pl) // PeekDWORDNET(pMem,[@]nShift[,@c
        _conUnLockStrEx_(&plk);_retnl(pl,(LONG) ntohl(n));
     }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEDWORD(XppParamList pl) // PokeDWORD(pMem,[@]nShift,nValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeDWord
+            | syntax_: `PokeDWord( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write DWORD, 32-bit, extended pointer
+   }}*/
+/*{{|desc: Writes one or more numeric values as 32-bit values in host byte order into an OT4XB extended
+      pointer parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 32-bit value. Each additional numeric parameter is written
+      in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, four bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeDWord( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEDWORD(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -1009,10 +1156,33 @@ XPPRET XPPENTRY POKEDWORD(XppParamList pl) // PokeDWORD(pMem,[@]nShift,nValue|cV
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(DWORD) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEDWORDNET(XppParamList pl) // PokeDWORDNET(pMem,[@]nShift,nValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeDWordNet
+            | syntax_: `PokeDWordNet( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write DWORD, network byte order, big endian, htonl
+   }}*/
+/*{{|desc: Writes one or more numeric values as 32-bit values in network byte order into an OT4XB extended
+      pointer parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 32-bit value. Each additional numeric parameter is written
+      in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, four bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeDWordNet( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEDWORDNET(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -1054,10 +1224,30 @@ XPPRET XPPENTRY POKEDWORDNET(XppParamList pl) // PokeDWORDNET(pMem,[@]nShift,nVa
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(DWORD) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKDOUBLE(XppParamList pl) // Peekdouble(pMem,[@]nShift[,@c]) -> nDouble
+/*{{begin-function}}*/
+/*{{function_: PeekDouble
+            | syntax_: `PeekDouble( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read double, 64-bit float, extended pointer
+   }}*/
+/*{{|desc: Reads one or more 64-bit floating point values from an OT4XB extended pointer parameter, using
+      and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable. }}*/
+XPPRET XPPENTRY PEEKDOUBLE(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -1088,8 +1278,31 @@ XPPRET XPPENTRY PEEKDOUBLE(XppParamList pl) // Peekdouble(pMem,[@]nShift[,@c]) -
        _conUnLockStrEx_(&plk);_retnd(pl, n);
     }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEDOUBLE(XppParamList pl) // PokeDouble(pMem,[@]nShift,ndValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeDouble
+            | syntax_: `PokeDouble( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write double, 64-bit float, extended pointer
+   }}*/
+/*{{|desc: Writes one or more numeric values as 64-bit floating point values into an OT4XB extended pointer
+      parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 64-bit floating point value. Each additional numeric
+      parameter is written in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, eight bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeDouble( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEDOUBLE(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -1131,10 +1344,30 @@ XPPRET XPPENTRY POKEDOUBLE(XppParamList pl) // PokeDouble(pMem,[@]nShift,ndValue
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(double) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PEEKFLOAT(XppParamList pl) // PeekFloat(pMem,[@]nShift[,@c]) -> nFloat
+/*{{begin-function}}*/
+/*{{function_: PeekFloat
+            | syntax_: `PeekFloat( pMem, @nShift [, nItems] )`
+            | category: memory
+            | _kw_: peek, read float, 32-bit float, extended pointer
+   }}*/
+/*{{|desc: Reads one or more 32-bit floating point values from an OT4XB extended pointer parameter, using
+      and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer source. A numeric value is treated
+      as a pointer; a character value locks its internal buffer; an object must provide the OT4XB
+      ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is treated as a
+      temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes read.
+    - `nItems` Numeric - Optional number of consecutive values to read. When present, the result is an
+      array of nItems values.
+
+    Returns Numeric/Array/NIL - Single value, array of values, or NIL when pMem is not usable. }}*/
+XPPRET XPPENTRY PEEKFLOAT(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamRLockStrEx(pl,1,&plk);
@@ -1165,8 +1398,31 @@ XPPRET XPPENTRY PEEKFLOAT(XppParamList pl) // PeekFloat(pMem,[@]nShift[,@c]) -> 
        _conUnLockStrEx_(&plk);_retnd(pl,(double) n);
     }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY POKEFLOAT(XppParamList pl) // PokeFloat(pMem,[@]nShift,nfValue|cValue)
+/*{{begin-function}}*/
+/*{{function_: PokeFloat
+            | syntax_: `PokeFloat( pMem, @nShift, nValue [, nValueN] )`
+            | category: memory
+            | _kw_: poke, write float, 32-bit float, extended pointer
+   }}*/
+/*{{|desc: Writes one or more numeric values as 32-bit floating point values into an OT4XB extended pointer
+      parameter, using and optionally updating a byte offset.
+    | params:
+    - `pMem` Numeric/Character/Object/Array - OT4XB extended pointer destination. A numeric value is
+      treated as a pointer; a character value locks its internal buffer for writing; an object must provide
+      the OT4XB ::_lock_()/::_unlock_() pointer protocol, normally through a GWST subclass; an array is
+      treated as a temporary LONG buffer.
+    - `@nShift` Numeric by reference - Byte offset inside pMem. When passed by reference, it is advanced
+      by the bytes written.
+    - `nValue` Numeric - Value written as a 32-bit floating point value. Each additional numeric
+      parameter is written in the same way.
+    - `aValues` Array - Array of numeric values written sequentially, four bytes each.
+
+    Returns Numeric/NIL - Number of bytes written, or NIL when the parameters are not usable.
+
+    |note: Also PokeFloat( pMem, @nShift, aValues ) -> nBytes }}*/
+XPPRET XPPENTRY POKEFLOAT(XppParamList pl)
 {
     CON_PLKSTREX plk;
     LONG np = (LONG)  _conParamWLockStrEx(pl,1,&plk);
@@ -1208,9 +1464,22 @@ XPPRET XPPENTRY POKEFLOAT(XppParamList pl) // PokeFloat(pMem,[@]nShift,nfValue|c
        }
        _conUnLockStrEx_(&plk);_retnl( pl, nItems * sizeof(FLOAT) );
     }
-    else _conUnLockStrEx_(&plk);_ret(pl);
+    else { _conUnLockStrEx_(&plk); _ret(pl); }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __i8
+            | syntax_: `__i8( nValue [, nValueN] )`
+            | category: memory/packing
+            | _kw_: pack bytes, binary string, int8, struct packing
+   }}*/
+/*{{|desc: Packs its numeric parameters into a binary string, one byte per parameter.
+    | params:
+    - `nValue` Numeric - Value stored as one byte. Only the lowest 8 bits are used.
+
+    Returns Character - Binary string with one byte per parameter, or an empty string when called without
+      parameters. }}*/
 XPPRET XPPENTRY __I8( XppParamList pl )
 {
    ULONG np = _partype(pl,0);
@@ -1225,7 +1494,21 @@ XPPRET XPPENTRY __I8( XppParamList pl )
    }
    else _retc(pl,"");
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __i16
+            | syntax_: `__i16( nValue [, nValueN] )`
+            | category: memory/packing
+            | _kw_: pack words, binary string, int16, struct packing
+   }}*/
+/*{{|desc: Packs its numeric parameters into a binary string, one 16-bit word per parameter, using host byte
+      order.
+    | params:
+    - `nValue` Numeric - Value stored as a 16-bit word. Only the lowest 16 bits are used.
+
+    Returns Character - Binary string with two bytes per parameter, or an empty string when called without
+      parameters. }}*/
 XPPRET XPPENTRY __I16( XppParamList pl )
 {
    ULONG np = _partype(pl,0);
@@ -1240,7 +1523,21 @@ XPPRET XPPENTRY __I16( XppParamList pl )
    }
    else _retc(pl,"");
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __i32
+            | syntax_: `__i32( nValue [, nValueN] )`
+            | category: memory/packing
+            | _kw_: pack DWORDs, binary string, int32, struct packing
+   }}*/
+/*{{|desc: Packs its numeric parameters into a binary string, one 32-bit value per parameter, using host byte
+      order.
+    | params:
+    - `nValue` Numeric - Value stored as a 32-bit value.
+
+    Returns Character - Binary string with four bytes per parameter, or an empty string when called without
+      parameters. }}*/
 XPPRET XPPENTRY __I32( XppParamList pl )
 {
    ULONG np = _partype(pl,0);
@@ -1255,7 +1552,20 @@ XPPRET XPPENTRY __I32( XppParamList pl )
    }
    else _retc(pl,"");
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __f32
+            | syntax_: `__f32( nValue [, nValueN] )`
+            | category: memory/packing
+            | _kw_: pack floats, binary string, float, struct packing
+   }}*/
+/*{{|desc: Packs its numeric parameters into a binary string, one 32-bit floating point value per parameter.
+    | params:
+    - `nValue` Numeric - Value stored as a 32-bit floating point value.
+
+    Returns Character - Binary string with four bytes per parameter, or an empty string when called without
+      parameters. }}*/
 XPPRET XPPENTRY __F32( XppParamList pl )
 {
    ULONG np = _partype(pl,0);
@@ -1270,7 +1580,20 @@ XPPRET XPPENTRY __F32( XppParamList pl )
    }
    else _retc(pl,"");
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __f64
+            | syntax_: `__f64( nValue [, nValueN] )`
+            | category: memory/packing
+            | _kw_: pack doubles, binary string, double, struct packing
+   }}*/
+/*{{|desc: Packs its numeric parameters into a binary string, one 64-bit floating point value per parameter.
+    | params:
+    - `nValue` Numeric - Value stored as a 64-bit floating point value.
+
+    Returns Character - Binary string with eight bytes per parameter, or an empty string when called without
+      parameters. }}*/
 XPPRET XPPENTRY __F64( XppParamList pl )
 {
    ULONG np = _partype(pl,0);
@@ -1285,6 +1608,7 @@ XPPRET XPPENTRY __F64( XppParamList pl )
    }
    else _retc(pl,"");
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 /*******************************************************************************************************************
 <xbdoc>
@@ -1373,7 +1697,21 @@ XPPRET XPPENTRY PPVTBL2A(XppParamList pl) // ppVtbl2A(p,mc)
     _ret(pl);
 }
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY PPVTBL2N(XppParamList pl) // ppVtbl2N(p,n)
+/*{{begin-function}}*/
+/*{{function_: ppVtbl2N
+            | syntax_: `ppVtbl2N( pInterface, nIndex )`
+            | category: memory/com
+            | _kw_: vtable, COM interface, method pointer, virtual table entry
+   }}*/
+/*{{|desc: Returns one entry from the virtual table of a COM-style interface pointer.
+    | params:
+    - `pInterface` Numeric - Raw pointer to an interface or object whose first DWORD is the pointer to
+      its virtual table. This parameter is a plain numeric pointer, not an OT4XB extended pointer.
+    - `nIndex` Numeric - Zero-based index of the virtual table entry.
+
+    Returns Numeric/NIL - Function pointer stored at the requested index, or NIL when pInterface or its
+      virtual table pointer is zero. }}*/
+XPPRET XPPENTRY PPVTBL2N(XppParamList pl)
 {
    DWORD** ppv = (DWORD**) _parLong(pl,1,0);
    DWORD*  pv  = 0;
@@ -1386,4 +1724,5 @@ XPPRET XPPENTRY PPVTBL2N(XppParamList pl) // ppVtbl2N(p,n)
     }
     _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------

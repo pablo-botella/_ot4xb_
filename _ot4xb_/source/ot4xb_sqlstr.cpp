@@ -7,49 +7,29 @@
 #include <ot4xb_api.h>
 #include  <math.h>
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>__sqlstr_money</name>
-      <category>sql/string</category>
-      <description>
-         Converts a numeric or character value to a SQL-style money string with two decimal places.
-      </description>
-      <syntax>__sqlstr_money( xValue [, aFormat] ) -> cMoney</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue</name>
-            <type>Numeric | Character</type>
-            <description>
-               Value to format. Numeric values are converted to cents internally. Character values are parsed
-               as money text and may use "." or "," as decimal separators.
-            </description>
-         </parameter>
-         <parameter>
-            <name>aFormat</name>
-            <type>Array</type>
-            <description>Optional { nFlags, nPad } format array.</description>
-         </parameter>
-      </parameters>
-      <flags>
-         <flag value="0x00000002">For negative values, append a credit marker instead of using a leading minus sign.</flag>
-         <flag value="0x00000004">For non-negative values, append a debit marker.</flag>
-         <flag value="0x00000010">Use H/Hb instead of C/Cr for negative values.</flag>
-         <flag value="0x00000020">Use the long marker form: Cr, Hb or Db.</flag>
-      </flags>
-      <return>
-         <type>Character</type>
-         <description>Formatted money string. nPad left-pads the result with spaces up to the requested width.</description>
-      </return>
-      <remarks>
-         With nFlags == 0, negative values are formatted with a leading minus sign. With nonzero flags,
-         negative values are formatted as an absolute amount; a marker is appended only when flag 0x00000002
-         is present.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-_XPP_REG_FUN_(__SQLSTR_MONEY) // __sqlstr_money(v, {flags,pad})
+/*{{begin-function}}*/
+/*{{function_: __sqlstr_money
+            | syntax_: `__sqlstr_money( xValue [, aFormat] )`
+            | category: sql/string
+            | _kw_: money, sql string, two decimals, amount format, currency
+   }}*/
+/*{{|desc: Converts a numeric or character value to a SQL-style money string with two decimal places.
+    | params:
+    - `xValue` Numeric/Character - Value to format. Numeric values are converted to cents internally.
+      Character values are parsed as money text and may use "." or "," as decimal separators.
+    - `aFormat` Array - Optional { nFlags, nPad } format array.
+
+    Returns Character - Formatted money string. nPad left-pads the result with spaces up to the requested
+      width.
+
+    |note: With nFlags == 0, negative values are formatted with a leading minus sign. With nonzero flags,
+      negative values are formatted as an absolute amount; a marker is appended only when flag 0x00000002 is
+      present.
+
+    |flags: For negative values, append a credit marker instead of using a leading minus sign.For non-negative
+      values, append a debit marker.Use H/Hb instead of C/Cr for negative values.Use the long marker form: Cr,
+      Hb or Db. }}*/
+_XPP_REG_FUN_(__SQLSTR_MONEY)
 {
    TXppParamList xpp(pl, 2);
    LONGLONG qn = xpp[1]->GetSqlStrMoney();
@@ -71,9 +51,30 @@ _XPP_REG_FUN_(__SQLSTR_MONEY) // __sqlstr_money(v, {flags,pad})
 
    xpp[0]->PutSqlStrMoney(qn, flags, pad);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: __sqlstr_str2money
+            | syntax_: `BOOL __sqlstr_str2money( LPSTR buffer, DWORD buffer_cb, LONGLONG & qn )`
+            | category: sql/string
+            | header: ot4xb_c_exported.h
+            | mangled-name: __sqlstr_str2money
+            | _kw_: money, parse amount, cents, hundredths, int64, currency
+   }}*/
+/*{{|desc: Parses money text into a 64-bit integer amount with two implied decimals, i.e. the value in
+      hundredths. This is the character-value parser behind the __sqlstr_money() family.
+    | params:
+    - `buffer` LPSTR - Money text to parse. Digits with optional "." or "," separators; a separator
+      followed by a second separator, or by more than two digits, is reclassified as a thousands separator.
+      Spaces and tabs are skipped. A "-" negates the amount parsed so far; "c" or "C" (credit marker)
+      negates it and ends the parse; any other character ends the parse.
+    - `buffer_cb` DWORD - Length of buffer in bytes.
+    - `qn` LONGLONG & - Receives the amount scaled by 100 (two implied decimals); zeroed before parsing.
+
+    Returns BOOL - FALSE when buffer is NULL or buffer_cb is 0; TRUE otherwise, even when the parse stops
+      early. }}*/
 OT4XB_API BOOL __sqlstr_str2money(LPSTR buffer, DWORD buffer_cb, LONGLONG& qn)
 {
 
@@ -140,6 +141,7 @@ OT4XB_API BOOL __sqlstr_str2money(LPSTR buffer, DWORD buffer_cb, LONGLONG& qn)
    }
    return TRUE;
 }
+/*{{end-c-function}}*/
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void money_sum_internal(XppParamList pl, BOOL bSubstract)
 {
@@ -184,85 +186,52 @@ static void money_sum_internal(XppParamList pl, BOOL bSubstract)
    xpp[0]->PutSqlStrMoney(qt, flags, pad);
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>__sqlstr_money_sum</name>
-      <category>sql/string</category>
-      <description>
-         Sums one or more money values and returns the result formatted as a SQL-style money string.
-      </description>
-      <syntax>__sqlstr_money_sum( xValue1 [, xValueN] [, aFormat] ) -> cMoney</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue1...xValueN</name>
-            <type>Numeric | Character</type>
-            <description>Money values to add. Each value is converted using the same parser as __sqlstr_money().</description>
-         </parameter>
-         <parameter>
-            <name>aFormat</name>
-            <type>Array</type>
-            <description>Optional final { nFlags, nPad } format array.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Character</type>
-         <description>Formatted sum.</description>
-      </return>
-      <remarks>
-         When aFormat is supplied with any nonzero nFlags value, each input value is converted to its absolute
-         value before being added. The same nFlags and nPad values are then used to format the final result.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-_XPP_REG_FUN_(__SQLSTR_MONEY_SUM)  // __sqlstr_money_sum(...)
+/*{{begin-function}}*/
+/*{{function_: __sqlstr_money_sum
+            | syntax_: `__sqlstr_money_sum( xValue1 [, xValueN] [, aFormat] )`
+            | category: sql/string
+            | _kw_: money, add amounts, sql string, currency, sum
+   }}*/
+/*{{|desc: Sums one or more money values and returns the result formatted as a SQL-style money string.
+    | params:
+    - `xValue1...xValueN` Numeric/Character - Money values to add. Each value is converted using the same
+      parser as __sqlstr_money().
+    - `aFormat` Array - Optional final { nFlags, nPad } format array.
+
+    Returns Character - Formatted sum.
+
+    |note: When aFormat is supplied with any nonzero nFlags value, each input value is converted to its
+      absolute value before being added. The same nFlags and nPad values are then used to format the final
+      result. }}*/
+_XPP_REG_FUN_(__SQLSTR_MONEY_SUM)
 {
    money_sum_internal(pl, 0);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>__sqlstr_money_substract</name>
-      <category>sql/string</category>
-      <description>
-         Subtracts money values from the first value and returns the result formatted as a SQL-style money string.
-      </description>
-      <syntax>__sqlstr_money_substract( xValue1, xValue2 [, xValueN] [, aFormat] ) -> cMoney</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue1</name>
-            <type>Numeric | Character</type>
-            <description>Initial money value.</description>
-         </parameter>
-         <parameter>
-            <name>xValue2...xValueN</name>
-            <type>Numeric | Character</type>
-            <description>Money values subtracted from the first value.</description>
-         </parameter>
-         <parameter>
-            <name>aFormat</name>
-            <type>Array</type>
-            <description>Optional final { nFlags, nPad } format array.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Character</type>
-         <description>Formatted result.</description>
-      </return>
-      <remarks>
-         The exported name keeps the historical spelling "substract". When aFormat is supplied with any
-         nonzero nFlags value, each input value is converted to its absolute value before the subtraction
-         sequence is applied.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-_XPP_REG_FUN_(__SQLSTR_MONEY_SUBSTRACT) // __sqlstr_money_sum(...)
+/*{{begin-function}}*/
+/*{{function_: __sqlstr_money_substract
+            | syntax_: `__sqlstr_money_substract( xValue1, xValue2 [, xValueN] [, aFormat] )`
+            | category: sql/string
+            | _kw_: money, subtract amounts, sql string, currency
+   }}*/
+/*{{|desc: Subtracts money values from the first value and returns the result formatted as a SQL-style money
+      string.
+    | params:
+    - `xValue1` Numeric/Character - Initial money value.
+    - `xValue2...xValueN` Numeric/Character - Money values subtracted from the first value.
+    - `aFormat` Array - Optional final { nFlags, nPad } format array.
+
+    Returns Character - Formatted result.
+
+    |note: The exported name keeps the historical spelling "substract". When aFormat is supplied with any
+      nonzero nFlags value, each input value is converted to its absolute value before the subtraction sequence
+      is applied. }}*/
+_XPP_REG_FUN_(__SQLSTR_MONEY_SUBSTRACT)
 {
    money_sum_internal(pl, 1);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DWORD escape_to_sql_required_size(LPBYTE p, DWORD cb)
 {
@@ -414,7 +383,26 @@ DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, DWORD flags
    return dw;
 }
 // -------------------------------------------------------------------------------------------------------------------
-// escape_to_sql_buffer_flags
+/*{{begin-c-function}}*/
+/*{{c-function_: escape_to_sql
+            | syntax_: `LPSTR escape_to_sql( LPSTR pIn, UINT * pcbOut, DWORD flags )`
+            | category: sql/string
+            | header: ot4xb_c_exported.h
+            | mangled-name: escape_to_sql
+            | _kw_: sql escape, quote string, sql literal, injection
+   }}*/
+/*{{|desc: Escapes a zero-terminated string for use inside a SQL string literal, returning the result as a
+      newly allocated buffer. Backspace, tab, Ctrl+Z, LF, CR, double quote, single quote and backslash are
+      escaped with a backslash sequence; the SQL wildcards "%" and "_" are escaped only when the
+      wildcard_escape flag (0x0008) is set.
+    | params:
+    - `pIn` LPSTR - Zero-terminated string to escape.
+    - `pcbOut` UINT * - Optional; when not NULL, receives the length in bytes of the escaped string,
+      not counting the terminating zero.
+    - `flags` DWORD - escape_to_sql_buffer_flags combination. Only wildcard_escape (0x0008) is relevant
+      here; the input is always processed as zero-terminated.
+
+    Returns LPSTR - Allocated buffer with the escaped, zero-terminated copy; free it with _xfree. }}*/
 OT4XB_API LPSTR escape_to_sql(LPSTR pIn, UINT* pcbOut, DWORD flags)
 {
    DWORD cb = escape_to_sql_required_size((LPBYTE)pIn, (DWORD)-1) + 4;
@@ -425,27 +413,7 @@ OT4XB_API LPSTR escape_to_sql(LPSTR pIn, UINT* pcbOut, DWORD flags)
    }
    return buffer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*{{end-c-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ot4xb_sql_type_flag ot4xb_str_to_sql_type_flag(LPSTR p)
 {
@@ -602,50 +570,29 @@ ot4xb_sql_type ot4xb_str_to_sql_type_enum(LPSTR p)
    return ot4xb_sql_type::Invalid;
 }
 // --------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ot4xb_sql_escape_string_ansi
+            | syntax_: `ot4xb_sql_escape_string_ansi( cString, [nFlags] )`
+            | category: sql/string
+            | _kw_: sql escape, quote string, sql literal, injection, ANSI
+   }}*/
+/*{{|desc: Escapes an ANSI string so it can be used inside a SQL string literal.
+    | params:
+    - `cString` Character - String to escape.
+    - `nFlags` Numeric - Escape flags. Combine flags with nOr().
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_sql_escape_string_ansi</name>
-      <category>sql/string</category>
-      <description>
-         Escapes an ANSI string so it can be used inside a SQL string literal.
-      </description>
-      <syntax>ot4xb_sql_escape_string_ansi( cString, [nFlags] ) -> cEscaped</syntax>
-      <parameters>
-         <parameter>
-            <name>cString</name>
-            <type>Character</type>
-            <description>String to escape.</description>
-         </parameter>
-         <parameter>
-            <name>nFlags</name>
-            <type>Numeric</type>
-            <description>Escape flags. Combine flags with nOr().</description>
-         </parameter>
-      </parameters>
-      <flags>
-         <flag value="0x0001">Treat input as zero-terminated. This is the default when 0x0002 is not set.</flag>
-         <flag value="0x0002">Treat input as a binary Xbase++ string and process its full length.</flag>
-         <flag value="0x0008">Also escape SQL wildcard characters "%" and "_".</flag>
-         <flag value="0x1000">Wrap the escaped result in single quotes.</flag>
-      </flags>
-      <return>
-         <type>Character</type>
-         <description>
-            Escaped string. The function escapes NUL, backspace, tab, Ctrl+Z, LF, CR, double quote,
-            single quote and backslash; wildcards are escaped only when flag 0x0008 is set.
-         </description>
-      </return>
-      <remarks>
-         Without 0x0002, the function behaves as zero-terminated input and stops at the first NUL byte.
-         With 0x0002, NUL bytes are escaped as "\0" and the full Xbase++ string length is used.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-// flags 0x1000 =quote ; 1 sz ,  2 bin  , 8  escape percent and underscore
-_XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)     //  ot4xb_sql_escape_string_ansi( cStr , flags ) -> Escaped Str 
+    Returns Character - Escaped string. The function escapes NUL, backspace, tab, Ctrl+Z, LF, CR, double
+      quote, single quote and backslash; wildcards are escaped only when flag 0x0008 is set.
+
+    |note: Without 0x0002, the function behaves as zero-terminated input and stops at the first NUL byte. With
+      0x0002, NUL bytes are escaped as "\0" and the full Xbase++ string length is used.
+
+    |flags: Treat input as zero-terminated. This is the default when 0x0002 is not set.Treat input as a binary
+      Xbase++ string and process its full length.Also escape SQL wildcard characters "%" and "_".Wrap the
+      escaped result in single quotes.
+
+    |include-note-id: sql-type-flags }}*/
+_XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)
 {
    TXppParamList xpp(pl, 2);
    DWORD flags = xpp[2]->GetDWord();
@@ -680,6 +627,7 @@ _XPP_REG_FUN_(OT4XB_SQL_ESCAPE_STRING_ANSI)     //  ot4xb_sql_escape_string_ansi
    _xfree((void*)buffer);
    buffer = 0;
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------
 static void sql_dump_value::to_integer_value(TXppParamList& xpp, LONGLONG min, LONGLONG max, DWORD flags)
 {
@@ -787,7 +735,7 @@ void sql_dump_value::put_decimal_max_value(TXppParamList& xpp, int len, int dec,
 void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWORD flags)
 {
    DWORD t = xpp[1]->GetType();
-   char buffer[255] = { 0 };
+   char buffer[512] = { 0 };
    if (len < 0 || len > 65) { len = 65; }
    if (dec >= len) { dec = len - 1; }
    if (dec < 0) { dec = 0; }
@@ -888,7 +836,8 @@ void sql_dump_value::to_decimal_value(TXppParamList& xpp, int len, int dec, DWOR
          double nd = xpp[1]->GetDouble();
          negative = !(nd >= fabs(nd));   // nd < 0.0
 
-         cb = sprintf_s(buffer, sizeof(buffer), "%.*f", dec, nd);
+         cb = _scprintf("%.*f", dec, nd);   // measure first: _scprintf only counts, never writes or kills
+         if (cb < (int) sizeof(buffer)) { sprintf_s(buffer, sizeof(buffer), "%.*f", dec, nd); }
       }
       else
       {
@@ -1056,7 +1005,7 @@ void sql_dump_value::to_date_value(TXppParamList& xpp, DWORD flags)
             if (*ps >= '0' && *ps <= '9') { *pd = *ps; pd++; cb++; }
          }
          *pd = '\''; pd++;
-         if (buffer[1] < '0' || buffer[1] < '9')
+         if (buffer[1] < '0' || buffer[1] > '9')
          {
             if (flags & (DWORD)ot4xb_sql_type_flag::NotNull)
             {
@@ -1192,7 +1141,7 @@ void sql_dump_value::to_char_value(TXppParamList& xpp, int len, DWORD flags)
    _xfree((void*)pd); pd = 0;
 }
 // ------------------------------------------------------------------------------------------------------------------------------
-LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, char alt_buffer[256], DWORD* pcb)
+LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, LPSTR alt_buffer, DWORD* pcb)
 {
    DWORD t = xpp[1]->GetType();
    switch (t & 0xFF)
@@ -1210,12 +1159,12 @@ LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, char alt_buffer[256], DWO
       if (t & _xpp_DOUBLE)
       {
          double nd = xpp[1]->GetDouble();
-         *pcb = sprintf_s(p, sizeof(alt_buffer), "%.15g", nd);
+         *pcb = sprintf_s(p, 256, "%.15g", nd); // alt_buffer is 256 bytes by contract
       }
       else
       {
          long nl = xpp[1]->GetLong();
-         *pcb = sprintf_s(p, sizeof(alt_buffer), "%i", nl);
+         *pcb = sprintf_s(p, 256, "%i", nl); // alt_buffer is 256 bytes by contract
       }
       return p;
    }
@@ -1243,34 +1192,18 @@ LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, char alt_buffer[256], DWO
 
 }
 // ------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_get_sql_type_len</name>
-      <category>sql/string</category>
-      <description>
-         Extracts the length part from a SQL type declaration or returns a positive numeric value unchanged.
-      </description>
-      <syntax>ot4xb_get_sql_type_len( cType | nLen ) -> nLen</syntax>
-      <parameters>
-         <parameter>
-            <name>cType</name>
-            <type>Character</type>
-            <description>SQL type text such as "varchar(64)" or "decimal(12,2)".</description>
-         </parameter>
-         <parameter>
-            <name>nLen</name>
-            <type>Numeric</type>
-            <description>Length value to pass through.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Parsed positive length, or 0 when no positive length can be found.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb_get_sql_type_len
+            | syntax_: `ot4xb_get_sql_type_len( cType | nLen )`
+            | category: sql/string
+            | _kw_: sql type, length, VARCHAR(n), type declaration, parse
+   }}*/
+/*{{|desc: Extracts the length part from a SQL type declaration or returns a positive numeric value unchanged.
+    | params:
+    - `cType` Character - SQL type text such as "varchar(64)" or "decimal(12,2)".
+    - `nLen` Numeric - Length value to pass through.
+
+    Returns Numeric - Parsed positive length, or 0 when no positive length can be found. }}*/
 _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_LEN)
 {
    TXppParamList xpp(pl, 1);
@@ -1303,35 +1236,21 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_LEN)
    }
    xpp[0]->PutDWord(len);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_get_sql_type_dec</name>
-      <category>sql/string</category>
-      <description>
-         Extracts the decimal-scale part from a SQL type declaration or returns a positive numeric value unchanged.
-      </description>
-      <syntax>ot4xb_get_sql_type_dec( cType | nDec ) -> nDec</syntax>
-      <parameters>
-         <parameter>
-            <name>cType</name>
-            <type>Character</type>
-            <description>SQL type text such as "decimal(12,2)".</description>
-         </parameter>
-         <parameter>
-            <name>nDec</name>
-            <type>Numeric</type>
-            <description>Decimal-scale value to pass through.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Parsed positive decimal-scale value, or 0 when no positive value can be found.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb_get_sql_type_dec
+            | syntax_: `ot4xb_get_sql_type_dec( cType | nDec )`
+            | category: sql/string
+            | _kw_: sql type, decimals, scale, DECIMAL(n,d), type declaration
+   }}*/
+/*{{|desc: Extracts the decimal-scale part from a SQL type declaration or returns a positive numeric value
+      unchanged.
+    | params:
+    - `cType` Character - SQL type text such as "decimal(12,2)".
+    - `nDec` Numeric - Decimal-scale value to pass through.
+
+    Returns Numeric - Parsed positive decimal-scale value, or 0 when no positive value can be found. }}*/
 _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_DEC)
 {
    TXppParamList xpp(pl, 1);
@@ -1369,158 +1288,84 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_DEC)
    }
    xpp[0]->PutDWord(len);
 }
-
-
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_get_sql_type_flag_enum</name>
-      <category>sql/string</category>
-      <description>
-         Converts a SQL dump flag string to the numeric ot4xb_sql_type_flag bit mask.
-      </description>
-      <syntax>ot4xb_get_sql_type_flag_enum( cFlags | nFlags ) -> nFlags</syntax>
-      <parameters>
-         <parameter>
-            <name>cFlags</name>
-            <type>Character</type>
-            <description>
-               Comma-separated flag names. Accepted names include LTrim, RTrim, AllTrim, wildcard_escape,
-               LeftAlign, RightAlign, Truncate, ToUtf8, NotNull, OvNull, OvMin, OvMax and OvZero.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nFlags</name>
-            <type>Numeric</type>
-            <description>Numeric flag mask to pass through.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Numeric flag mask. Constants are declared in ot4xb.ch as ot4xb_sql_type_flag.*.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb_get_sql_type_flag_enum
+            | syntax_: `ot4xb_get_sql_type_flag_enum( cFlags | nFlags )`
+            | category: sql/string
+            | _kw_: sql dump flags, flag names, bit mask, enumeration
+   }}*/
+/*{{|desc: Converts a SQL dump flag string to the numeric ot4xb_sql_type_flag bit mask.
+    | params:
+    - `cFlags` Character - Comma-separated flag names. Accepted names include LTrim, RTrim, AllTrim,
+      wildcard_escape, LeftAlign, RightAlign, Truncate, ToUtf8, NotNull, OvNull, OvMin, OvMax and OvZero.
+    - `nFlags` Numeric - Numeric flag mask to pass through.
+
+    Returns Numeric - Numeric flag mask. Constants are declared in ot4xb.ch as ot4xb_sql_type_flag.*. }}*/
 _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_FLAG_ENUM)
 {
    TXppParamList xpp(pl, 1);
    DWORD  flags = (DWORD)(xpp[1]->CheckType(XPP_CHARACTER) ? (DWORD)ot4xb_str_to_sql_type_flag(xpp[1]->LockStr()) : xpp[1]->GetDWord());
    xpp[0]->PutDWord(flags);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_get_sql_type_enum</name>
-      <category>sql/string</category>
-      <description>
-         Converts a SQL type name to the numeric ot4xb_sql_type enumeration value.
-      </description>
-      <syntax>ot4xb_get_sql_type_enum( cType | nType ) -> nType</syntax>
-      <parameters>
-         <parameter>
-            <name>cType</name>
-            <type>Character</type>
-            <description>
-               SQL type name. Matching is case-insensitive and supports TinyInt, SmallInt, MediumInt,
-               Int, BigInt, Decimal, Float, Double, Bit, Date, Time, DateTime, TimeStamp, Year,
-               Char, VarChar, Binary, VarBinary, TinyBlob, Blob, MediumBlob, LongBlob, TinyText,
-               Text, MediumText, LongText, Enum, Set and Json.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nType</name>
-            <type>Numeric</type>
-            <description>Numeric type value to pass through.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            Numeric SQL type value. Constants are declared in ot4xb.ch as ot4xb_sql_type.*.
-            Unknown character type names return ot4xb_sql_type.Invalid.
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb_get_sql_type_enum
+            | syntax_: `ot4xb_get_sql_type_enum( cType | nType )`
+            | category: sql/string
+            | _kw_: sql type name, enumeration, type code, VARCHAR INT DATE
+   }}*/
+/*{{|desc: Converts a SQL type name to the numeric ot4xb_sql_type enumeration value.
+    | params:
+    - `cType` Character - SQL type name. Matching is case-insensitive and supports TinyInt, SmallInt,
+      MediumInt, Int, BigInt, Decimal, Float, Double, Bit, Date, Time, DateTime, TimeStamp, Year, Char, VarChar,
+      Binary, VarBinary, TinyBlob, Blob, MediumBlob, LongBlob, TinyText, Text, MediumText, LongText, Enum, Set
+      and Json.
+    - `nType` Numeric - Numeric type value to pass through.
+
+    Returns Numeric - Numeric SQL type value. Constants are declared in ot4xb.ch as ot4xb_sql_type.*. Unknown
+      character type names return ot4xb_sql_type.Invalid. }}*/
 _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_ENUM)
 {
    TXppParamList xpp(pl, 1);
    ot4xb_sql_type q = (xpp[1]->CheckType(XPP_CHARACTER) ? ot4xb_str_to_sql_type_enum(xpp[1]->LockStr()) : (ot4xb_sql_type)xpp[1]->GetLong());
    xpp[0]->PutLong((LONG)q);
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ot4xb_sql_dump_value_ansi
+            | syntax_: `ot4xb_sql_dump_value_ansi( xValue, cType | nType, nLen, nDec, cFlags | nFlags )`
+            | category: sql/string
+            | _kw_: sql literal, value to sql, dump value, quote, type conversion, insert statement
+   }}*/
+/*{{|desc: Converts an Xbase++ value to an ANSI SQL literal according to a SQL type, length, decimals and
+      flags.
+    | params:
+    - `xValue` Any - Value to dump as SQL text.
+    - `cType` Character - SQL type name accepted by ot4xb_get_sql_type_enum().
+    - `nType` Numeric - Numeric ot4xb_sql_type value.
+    - `nLen` Numeric - SQL length or precision. For text/blob families, 0 means no explicit limit.
+    - `nDec` Numeric - Decimal scale for Decimal values.
+    - `cFlags` Character - Comma-separated SQL dump flag names accepted by ot4xb_get_sql_type_flag_enum().
+    - `nFlags` Numeric - Numeric ot4xb_sql_type_flag mask.
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_sql_dump_value_ansi</name>
-      <category>sql/string</category>
-      <description>
-         Converts an Xbase++ value to an ANSI SQL literal according to a SQL type, length, decimals and flags.
-      </description>
-      <syntax>ot4xb_sql_dump_value_ansi( xValue, cType | nType, nLen, nDec, cFlags | nFlags ) -> cSqlValue</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue</name>
-            <type>Any</type>
-            <description>Value to dump as SQL text.</description>
-         </parameter>
-         <parameter>
-            <name>cType</name>
-            <type>Character</type>
-            <description>SQL type name accepted by ot4xb_get_sql_type_enum().</description>
-         </parameter>
-         <parameter>
-            <name>nType</name>
-            <type>Numeric</type>
-            <description>Numeric ot4xb_sql_type value.</description>
-         </parameter>
-         <parameter>
-            <name>nLen</name>
-            <type>Numeric</type>
-            <description>SQL length or precision. For text/blob families, 0 means no explicit limit.</description>
-         </parameter>
-         <parameter>
-            <name>nDec</name>
-            <type>Numeric</type>
-            <description>Decimal scale for Decimal values.</description>
-         </parameter>
-         <parameter>
-            <name>cFlags</name>
-            <type>Character</type>
-            <description>Comma-separated SQL dump flag names accepted by ot4xb_get_sql_type_flag_enum().</description>
-         </parameter>
-         <parameter>
-            <name>nFlags</name>
-            <type>Numeric</type>
-            <description>Numeric ot4xb_sql_type_flag mask.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Character</type>
-         <description>
-            SQL literal text: numeric text for numeric types, quoted escaped text for character/blob/text/json
-            types, b'...' for Bit character input, or "null" where the current type and flags request a SQL NULL.
-         </description>
-      </return>
-      <remarks>
-         Implemented specific type handling covers integer types, Decimal, Float/Double, Bit, Date,
-         Char/VarChar, Binary/VarBinary, Blob/Text families and Json. Time, DateTime, TimeStamp,
-         Year, Enum and Set currently fall through to the default conversion path.
-      </remarks>
-      <remarks>
-         Character flags control trimming, alignment, truncation, UTF-8 conversion and NotNull behavior.
-         Overflow flags control numeric/decimal out-of-range handling: return null, clamp to min/max,
-         or force zero depending on the selected flag.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value , 2sql_type , 3len , 4dec, 5 flags )
+    Returns Character - SQL literal text: numeric text for numeric types, quoted escaped text for
+      character/blob/text/json types, b'...' for Bit character input, or "null" where the current type and flags
+      request a SQL NULL.
+
+    |note: Implemented specific type handling covers integer types, Decimal, Float/Double, Bit, Date,
+      Char/VarChar, Binary/VarBinary, Blob/Text families and Json. Time, DateTime, TimeStamp, Year, Enum and Set
+      currently fall through to the default conversion path.
+
+    |note: Character flags control trimming, alignment, truncation, UTF-8 conversion and NotNull behavior.
+      Overflow flags control numeric/decimal out-of-range handling: return null, clamp to min/max, or force zero
+      depending on the selected flag.
+
+    |include-note-id: sql-types }}*/
+_XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)
 {
    TXppParamList xpp(pl, 5);
    ot4xb_sql_type q = (xpp[2]->CheckType(XPP_CHARACTER) ? ot4xb_str_to_sql_type_enum(xpp[2]->LockStr()) : (ot4xb_sql_type)xpp[2]->GetLong());
@@ -1684,3 +1529,4 @@ _XPP_REG_FUN_(OT4XB_SQL_DUMP_VALUE_ANSI)    // ot4xb_sql_dump_value_ansi( value 
    }
    }
 }
+/*{{end-function}}*/

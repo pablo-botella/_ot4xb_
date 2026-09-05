@@ -12,32 +12,6 @@ static GdipGetImageEncodersSize_ft* fpGetImageEncodersSize = (GdipGetImageEncode
 static GdipGetImageEncoders_ft* fpGetImageEncoders = (GdipGetImageEncoders_ft*)0;
 static HMODULE hGdiplusDll = (HMODULE)0;
 //----------------------------------------------------------------------------------------------------------------------
-
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>GDIPLUS_HELPER</name>
-      <category>gdiplus</category>
-      <description>
-         Small GDI+ helper class. It loads gdiplus.dll on demand and exposes helpers used by OT4XB image code.
-      </description>
-      <syntax>GDIPLUS_HELPER() -> oClass</syntax>
-      <class-methods>
-         <method name="font_spec_t" syntax="GDIPLUS_HELPER():font_spec_t( cFontName, nSize, [nStyle := 0] ) -> cFontSpec">
-            Builds the binary font_spec_t buffer used by OT4XB GDI+ helpers.
-         </method>
-         <method name="get_encoder_clsid" syntax="GDIPLUS_HELPER():get_encoder_clsid( cMimeType ) -> cClsid16 | NIL">
-            Returns the 16-byte CLSID of the image encoder that matches cMimeType, for example "image/png".
-         </method>
-      </class-methods>
-      <remarks>
-         The helper keeps the GDI+ entry points resolved after the first successful load. cClsid16 is the raw CLSID
-         bytes, not a formatted GUID string.
-      </remarks>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
-
 BEGIN_NAMESPACE(gdiplus_helper_ns)
 
 BOOL  load_gdiplus_table()
@@ -97,6 +71,11 @@ static void method_get_encoder_clsid(TXbClsParams* px)
                pImageCodecInfo = NULL;
             }
          }
+         if( format )
+         {
+            _xfree((void*)format);
+            format = 0;
+         }
       }
    }
 }
@@ -122,9 +101,33 @@ static void method_font_spec(TXbClsParams* px)
 }
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: GDIPLUS_HELPER
+            | _slug_: gdiplus_helper
+            | class-function: GDIPLUS_HELPER
+            | category: gdiplus
+            | syntax: `GDIPLUS_HELPER() -> oClass`
+            | desc: Small GDI+ helper class. It loads gdiplus.dll on demand and exposes helpers used by OT4XB image
+              code.
+            | note: The helper keeps the GDI+ entry points resolved after the first successful load.
+            | _kw_: GDI+, gdiplus.dll, image, load on demand
+   }}*/
 void AddXbMethods(TXbClass* pc)
 {
+   /*{{|class-method_: - CLASS METHOD font_spec_t( cFontName, nSize [, nStyle] )
+            | return: cFontSpec
+            | desc_: Builds the binary font_spec_t buffer used by OT4XB GDI+ helpers. cFontName is stored inside the
+              buffer as UTF-16 text, nSize as the font size and nStyle (default 0) as the font style. The buffer
+              also carries its own byte count and a CRC32.
+   }}*/
    pc->ClassMethod("font_spec_t", method_font_spec, 3);
+   /*{{|class-method_: - CLASS METHOD get_encoder_clsid( cMimeType )
+            | return: cClsid16 / NIL
+            | desc_: Returns the 16-byte CLSID of the image encoder that matches cMimeType, for example "image/png".
+              Returns NIL when gdiplus.dll cannot be loaded or no encoder matches cMimeType.
+            | note: cClsid16 is the raw CLSID bytes, not a formatted GUID string.
+   }}*/
+   /*{{|:**END CLASS** }}*/
    pc->ClassMethod("get_encoder_clsid", method_get_encoder_clsid, 1 );
 }
 // -----------------------------------------------------------------------------------------------------------------
@@ -135,4 +138,5 @@ BEGIN_XBASE_CLASS(GDIPLUS_HELPER)
    gdiplus_helper_ns::AddXbMethods(pc);
 }
 END_XBASE_CLASS
+/*{{end-class}}*/
 // -----------------------------------------------------------------------------------------------------------------

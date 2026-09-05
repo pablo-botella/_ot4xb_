@@ -21,44 +21,35 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>OT4XB_HASH</name>
-      <category>crypto/hash</category>
-      <description>
-         CryptoAPI-backed hashing helper class. It computes MD2, MD4, MD5, SHA, SHA1, SHA256, SHA384 and SHA512
-         hashes from a string, a file name, or an existing file handle.
-      </description>
-      <syntax>OT4XB_HASH():sha256( cInput | cFile | hFile, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash</syntax>
-      <class-methods>
-         <method name="sha" syntax="OT4XB_HASH():sha( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="sha1" syntax="OT4XB_HASH():sha1( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="sha256" syntax="OT4XB_HASH():sha256( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="sha384" syntax="OT4XB_HASH():sha384( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="sha512" syntax="OT4XB_HASH():sha512( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="md2" syntax="OT4XB_HASH():md2( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="md4" syntax="OT4XB_HASH():md4( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-         <method name="md5" syntax="OT4XB_HASH():md5( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] ) -> cHash" />
-      </class-methods>
-      <flags>
-         <flag value="0x00000000">Output hex string. This is the default.</flag>
-         <flag value="0x00000001">Output raw binary hash bytes.</flag>
-         <flag value="0x00000000">Input is the string value itself. This is the default input mode.</flag>
-         <flag value="0x00000010">Input is a file name.</flag>
-         <flag value="0x00000020">Input is an existing file handle.</flag>
-         <flag value="0x00000100">Use nOffset as the file start offset.</flag>
-         <flag value="0x00000200">Use nBytes as maximum file bytes to hash.</flag>
-         <flag value="0x00001000">Restore original file position after hashing an existing handle.</flag>
-         <flag value="0x00010000">Use nGranularity as file read buffer size, clamped internally between 64 KB and 8 MB.</flag>
-      </flags>
-      <remarks>
-         Combine flags with OR or nOr(). The filename mode opens the file read-only and closes it internally. The
-         handle mode leaves the handle open; use 0x00001000 when the current file position must be preserved.
-      </remarks>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-note-id}}*/
+/*{{note-id: ot4xb-hash-methods
+            | title_: OT4XB_HASH method arguments and flags }}*/
+/*{{|:
+   Every OT4XB_HASH hash method is a class method with the same argument list, called directly on the class
+   object with no instance needed:
+
+   OT4XB_HASH():<method>( uInput, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash
+
+   uInput is the data to hash. What it holds, and how the hash value is returned, is selected with nFlags, a
+   combination (nOr) of:
+
+   - 0x00000000 : uInput is a Character value and its bytes are hashed as-is. Default input mode.
+   - 0x00000010 : uInput is a file name. The file is opened read-only, hashed and closed internally.
+   - 0x00000020 : uInput is an already open Windows file handle, given as a Numeric. The handle is left open
+                  and hashing starts at the current file position.
+   - 0x00000100 : hashing starts at file position nOffset, in bytes from the beginning of the file.
+   - 0x00000200 : at most nBytes bytes are hashed. Without this flag the file is hashed up to the end.
+   - 0x00001000 : the original file position is restored after hashing an already open handle.
+   - 0x00010000 : nGranularity sets the file read buffer size in bytes, clamped between 64 KB (the default)
+                  and 8 MB.
+   - 0x00000000 : the hash is returned as an uppercase hexadecimal Character string. Default output mode.
+   - 0x00000001 : the hash is returned as its raw binary bytes in a Character string.
+
+   nOffset, nBytes and nGranularity are read only when the matching flag is set, and they only apply to file
+   input. On any failure - the file cannot be opened, the handle is not usable, a read fails, or the
+   CryptoAPI reports an error - the method returns NIL instead of a Character value.
+}}*/
+/*{{end-note-id}}*/
 
 BEGIN_NAMESPACE( ot4xb_hash_ns )
       // ---------------------------------------------------------------------------------
@@ -111,7 +102,7 @@ BEGIN_NAMESPACE( ot4xb_hash_ns )
 
          if( ( dwFlags & OT4XB_HASH_FLAGS_INPUT_MAX_BYTES ) == OT4XB_HASH_FLAGS_INPUT_MAX_BYTES )
          {
-            max_bytes.QuadPart = xpp[6]->GetQWord();
+            max_bytes.QuadPart = xpp[7]->GetQWord();
          }
          BOOL bEof = FALSE;
          if( bOk )
@@ -236,6 +227,19 @@ BEGIN_NAMESPACE( ot4xb_hash_ns )
       END_NAMESPACE() // ot4xb_hash_ns
 // -----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: OT4XB_HASH
+            | _slug_: ot4xb_hash
+            | class-function: OT4XB_HASH
+            | category: crypto/hash
+            | desc: Hashing class over the Windows CryptoAPI. All hash methods (md2, md4, md5, sha, sha1, sha256,
+              sha384, sha512) are class methods, called directly on the class object with no instance needed, for
+              example OT4XB_HASH():sha256( cData ). Each method hashes a Character value, a file given by name, or
+              an open file handle, selected with nFlags, and returns the hash value as a hex Character string, or
+              as raw binary bytes when output flag 0x01 is set. For file input, nFlags can also select a start
+              offset, a maximum byte count and the read buffer size. sha and sha1 are the same algorithm (SHA-1).
+   | _kw_: hash, md5, sha1, sha256, sha512, CryptoAPI, digest, hmac
+   }}*/
 _XPP_REG_FUN_( OT4XB_HASH )
 {
    XppFuncType fp = _mk_ptr_( XppFuncType, _parLong(pl,1,0) , 0 );
@@ -248,19 +252,63 @@ _XPP_REG_FUN_( OT4XB_HASH )
    if( conco == NULLCONTAINER )
    {
       TXbClass * pc = new TXbClass;pc->ClassName("OT4XB_HASH");
+      /*{{|:**BEGIN CLASS  OT4XB_HASH** }}*/
       pc->EXPORTED();
+      /*{{|ivar_: - VAR __m_v0
+               | desc_: Internal variable; no method of the class uses it.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var( "__m_v0" );
+      /*{{|ivar_: - VAR __m_v1
+               | desc_: Internal variable; no method of the class uses it.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var( "__m_v1" );
       // -----
 	  //...(  p1 input , 5 p2 nFlags , 6 p3 qwOffsetFrom , 7 dwBytes , 8 granularity )
 	  // hash(1 pt , 2 Self , 3 dwAlgorithm , 4 p1 input , 5 p2 nFlags , 6 p3 qwOffsetFrom , 7 dwBytes , 8 granularity )
+      /*{{|class-method_: - CLASS METHOD sha( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: SHA-1 hash of uInput: 40 hexadecimal characters, or 20 raw bytes with output flag 0x01.
+                 ::sha and ::sha1 run the same algorithm.
+      }}*/
       pc->ClassMethod_cbbs("sha"   , "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_SHA     );
+      /*{{|class-method_: - CLASS METHOD sha1( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: SHA-1 hash of uInput: 40 hexadecimal characters, or 20 raw bytes with output flag 0x01.
+                 Same algorithm as ::sha.
+      }}*/
       pc->ClassMethod_cbbs("sha1"  , "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_SHA1    );
+      /*{{|class-method_: - CLASS METHOD sha256( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: SHA-256 hash of uInput: 64 hexadecimal characters, or 32 raw bytes with output flag 0x01.
+      }}*/
       pc->ClassMethod_cbbs("sha256", "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_SHA_256 );
+      /*{{|class-method_: - CLASS METHOD sha384( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: SHA-384 hash of uInput: 96 hexadecimal characters, or 48 raw bytes with output flag 0x01.
+      }}*/
       pc->ClassMethod_cbbs("sha384", "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_SHA_384 );
+      /*{{|class-method_: - CLASS METHOD sha512( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: SHA-512 hash of uInput: 128 hexadecimal characters, or 64 raw bytes with output flag 0x01.
+      }}*/
       pc->ClassMethod_cbbs("sha512", "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_SHA_512 );
+      /*{{|class-method_: - CLASS METHOD md2( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: MD2 hash of uInput: 32 hexadecimal characters, or 16 raw bytes with output flag 0x01.
+      }}*/
       pc->ClassMethod_cbbs("md2"   , "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_MD2     );
+      /*{{|class-method_: - CLASS METHOD md4( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: MD4 hash of uInput: 32 hexadecimal characters, or 16 raw bytes with output flag 0x01.
+      }}*/
       pc->ClassMethod_cbbs("md4"   , "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_MD4     );
+      /*{{|class-method_: - CLASS METHOD md5( uInput, [nFlags], [nOffset], [nBytes], [nGranularity] )
+               | return: cHash / NIL
+               | desc_: MD5 hash of uInput: 32 hexadecimal characters, or 16 raw bytes with output flag 0x01.
+      }}*/
+      /*{{|:**END CLASS** }}*/
       pc->ClassMethod_cbbs("md5"   , "{|s,p1,p2,p3,p4,p5| ot4xb_hash(%i,s,%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_MD5     );
       // -----      
       ///////////////////////////////////pc->ClassMethod_cbbs("hmac_sign", "{|s,cSpec,cStr,cPwd,p4,p5| ot4xb_hash(%i,s,__vlower(cSpec,''),%i,@p1,@p2,@p3,@p4,@p5) }" , ot4xb_hash_ns::hash, CALG_MD5     );      
@@ -277,4 +325,7 @@ _XPP_REG_FUN_( OT4XB_HASH )
    _conReturn(pl,conco);
    _conRelease(conco);
 }
+/*{{include-note-id: ot4xb-hash-methods}}*/
+/*{{include-note-id: hash-flags}}*/
+/*{{end-class}}*/
 // -----------------------------------------------------------------------------------------------------------------

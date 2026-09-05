@@ -95,11 +95,11 @@ namespace base32_ns
    {
       if( !pDigitTable || !pSource || !pDestination || cbSource == 0 || cbMaxDestination < 8 )
       {
-         return 0; // Validación de entrada
+         return 0; // Validaciï¿½n de entrada
       }
 
       BYTE input_block[ 5 ] = { 0 };
-      DWORD input_size = ( cbSource < 5 ) ? cbSource : 5; // Tamaño real del bloque de entrada
+      DWORD input_size = ( cbSource < 5 ) ? cbSource : 5; // Tamaï¿½o real del bloque de entrada
       char output_block[ 8 ] = { 0 };
 
       // Copiar datos de entrada al bloque de trabajo
@@ -117,7 +117,7 @@ namespace base32_ns
 
       // Manejo de flags para case insensitive
       if( flags & 0x0010 )
-      { // Convertir a mayúsculas
+      { // Convertir a mayï¿½sculas
          for( int i = 0; i < 8; ++i )
          {
             if( output_block[ i ] >= 'a' && output_block[ i ] <= 'z' )
@@ -127,7 +127,7 @@ namespace base32_ns
          }
       }
       else if( flags & 0x0030 )
-      { // Convertir a minúsculas
+      { // Convertir a minï¿½sculas
          for( int i = 0; i < 8; ++i )
          {
             if( output_block[ i ] >= 'A' && output_block[ i ] <= 'Z' )
@@ -147,7 +147,7 @@ namespace base32_ns
       pSource += input_size;
       cbSource -= input_size;
 
-      return input_size; // Retornar el tamaño del bloque procesado
+      return input_size; // Retornar el tamaï¿½o del bloque procesado
    }
 
    // --------------------------------------------------------------------------------------------------------------
@@ -246,7 +246,7 @@ namespace base32_ns
    {
       DWORD bytes_written = 0;
 
-      // Arreglos de tamaño fijo
+      // Arreglos de tamaï¿½o fijo
       BYTE decoded_block[ 5 ]; // Para almacenar los bytes decodificados
       char input_block[ 8 ];   // Para almacenar un bloque de entrada de 8 caracteres
 
@@ -316,16 +316,31 @@ namespace base32_ns
       month = crockford_char_to_index( ckf32ts[ 1 ] );
       day = crockford_char_to_index( ckf32ts[ 2 ] );
       int v =crockford_char_to_index( ckf32ts[ 3 ] ); v <<= 5;
-      v |= crockford_char_to_index( ckf32ts[ 3 ] ); v <<= 5;
       v |= crockford_char_to_index( ckf32ts[ 4 ] ); v <<= 5;
       v |= crockford_char_to_index( ckf32ts[ 5 ] ); v <<= 5;
-      v |= crockford_char_to_index( ckf32ts[ 6 ] );
+      v |= crockford_char_to_index( ckf32ts[ 6 ] ); v <<= 5;
+      v |= crockford_char_to_index( ckf32ts[ 7 ] );
       day_milliseconds = max( 0, min( (v * 3) , 86399999 ) );
    }
 
 }
 // ------------------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_base32_encode_required_length
+            | syntax_: `int ot4xb_base32_encode_required_length( int nSrcLen )`
+            | category: string/encoding
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_base32_encode_required_length
+            | _kw_: base32, encode, buffer size, required length
+   }}*/
+/*{{|desc: Returns the number of significant Base32 digits for nSrcLen source bytes. This is a lower
+      bound only: the encoder writes complete 8-character '='-padded blocks plus a null terminator,
+      so it needs a buffer of ceil( nSrcLen / 5 ) * 8 + 1 bytes.
+    | params:
+    - `nSrcLen` int - Source length in bytes.
+
+    Returns int - Base32 digit count; 0 when nSrcLen is less than 1. }}*/
 OT4XB_API int ot4xb_base32_encode_required_length( int nSrcLen )
 {
    if( nSrcLen < 1 )
@@ -334,7 +349,33 @@ OT4XB_API int ot4xb_base32_encode_required_length( int nSrcLen )
    }
    return (int) base32_ns::encode_required_size( (int) nSrcLen );
 }
+/*{{end-c-function}}*/
 // -------------------------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_base32_encode_with_table
+            | syntax_: ```
+                 BOOL ot4xb_base32_encode_with_table( LPSTR pTable, LPBYTE pSrc, int nSrcLen, LPSTR szDest, int * pnDestLen, DWORD flags )
+              ```
+            | category: string/encoding
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_base32_encode_with_table
+            | _kw_: base32, encode, alphabet table, padding
+   }}*/
+/*{{|desc: Encodes binary data as Base32 text into a caller buffer, written as complete 8-character
+      blocks padded with '=' plus a null terminator, so the real capacity needed is
+      ceil( nSrcLen / 5 ) * 8 + 1 bytes; the entry check only demands the smaller
+      ot4xb_base32_encode_required_length() value, and blocks that do not fit are silently dropped.
+      A NULL pTable selects the built-in Crockford alphabet; flags 0x0001 and 0x0002 force a
+      built-in alphabet ignoring pTable.
+    | params:
+    - `pTable` LPSTR - Custom 32-character alphabet, or NULL to default to Crockford.
+    - `pSrc` LPBYTE - Source bytes.
+    - `nSrcLen` int - Source length in bytes.
+    - `szDest` LPSTR - Destination buffer.
+    - `pnDestLen` int * - On entry the destination capacity in bytes; on return the encoded length.
+    - `flags` DWORD - 0x0001 Crockford, 0x0002 RFC 4648, 0x0010 upper case output, 0x0020 lower case.
+
+    Returns BOOL - FALSE when nSrcLen is less than 1 or the entry capacity check fails; TRUE otherwise. }}*/
 OT4XB_API BOOL ot4xb_base32_encode_with_table( LPSTR pTable, LPBYTE pSrc, int nSrcLen, LPSTR szDest, int* pnDestLen, DWORD flags)
 {
    if( nSrcLen < 1 )
@@ -348,9 +389,23 @@ OT4XB_API BOOL ot4xb_base32_encode_with_table( LPSTR pTable, LPBYTE pSrc, int nS
    pnDestLen[ 0 ] = base32_ns::encode_to_buffer( pTable, pSrc, (DWORD) nSrcLen, szDest, pnDestLen[ 0 ] , flags );
    return TRUE;
 }
+/*{{end-c-function}}*/
 // -------------------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------
-// Calcula el tamaño requerido para decodificar un texto Base32
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_base32_decode_required_length
+            | syntax_: `int ot4xb_base32_decode_required_length( int nEncodedLen )`
+            | category: string/encoding
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_base32_decode_required_length
+            | _kw_: base32, decode, buffer size, required length
+   }}*/
+/*{{|desc: Returns a destination capacity able to hold the decode of nEncodedLen Base32 characters:
+      five bytes per started 8-character block, plus one spare byte.
+    | params:
+    - `nEncodedLen` int - Encoded length in characters.
+
+    Returns int - Required destination capacity in bytes; 0 when nEncodedLen is less than 1. }}*/
 OT4XB_API int ot4xb_base32_decode_required_length(int nEncodedLen) 
 {
     if (nEncodedLen < 1) {
@@ -358,17 +413,44 @@ OT4XB_API int ot4xb_base32_decode_required_length(int nEncodedLen)
     }
     return (int)base32_ns::decode_required_size((DWORD)nEncodedLen);
 }
+/*{{end-c-function}}*/
 // -------------------------------------------------------------------------------------------------------------------------------------
-// Decodifica un texto Base32 usando una tabla proporcionada
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_base32_decode_with_table
+            | syntax_: ```
+                 BOOL ot4xb_base32_decode_with_table( LPSTR pTable, LPCSTR szEncoded, int nEncodedLen, LPBYTE pDest, int * pnDestLen, DWORD flags )
+              ```
+            | category: string/encoding
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_base32_decode_with_table
+            | _kw_: base32, decode, alphabet table
+   }}*/
+/*{{|desc: Decodes Base32 text into a caller buffer, which must be at least
+      ot4xb_base32_decode_required_length( nEncodedLen ) bytes. The input is consumed in 8-character
+      blocks and must be '='-padded to a complete final block; a character outside the active
+      alphabet makes the whole call fail. Flags 0x0001 and 0x0002 select a built-in alphabet
+      ignoring pTable; a NULL pTable defaults to Crockford, whose decode table also accepts O as 0
+      and I or L as 1.
+    | params:
+    - `pTable` LPSTR - Custom 32-character alphabet, or NULL to default to Crockford.
+    - `szEncoded` LPCSTR - Base32 source text.
+    - `nEncodedLen` int - Encoded length in characters.
+    - `pDest` LPBYTE - Destination buffer.
+    - `pnDestLen` int * - On entry the destination capacity in bytes; on return the decoded length.
+    - `flags` DWORD - 0x0001 Crockford, 0x0002 RFC 4648; 0x0010 folds the input to upper case,
+      0x0020 to lower case.
+
+    Returns BOOL - TRUE on success; FALSE when a required pointer is NULL, the destination is too
+      small, the input is empty or it holds an invalid character. }}*/
 OT4XB_API BOOL ot4xb_base32_decode_with_table(LPSTR pTable, LPCSTR szEncoded, int nEncodedLen, LPBYTE pDest, int* pnDestLen, DWORD flags) {
     if (nEncodedLen < 1 || !szEncoded || !pDest || !pnDestLen) {
-        return FALSE; // Parámetros inválidos
+        return FALSE; // Parï¿½metros invï¿½lidos
     }
 
     // Verificar si el buffer de destino tiene suficiente espacio
     int requiredLength = ot4xb_base32_decode_required_length(nEncodedLen);
     if (pnDestLen[0] < requiredLength) {
-        return FALSE; // Buffer de destino demasiado pequeño
+        return FALSE; // Buffer de destino demasiado pequeï¿½o
     }
 
     DWORD decodedLength = base32_ns::decode_to_buffer(
@@ -376,10 +458,10 @@ OT4XB_API BOOL ot4xb_base32_decode_with_table(LPSTR pTable, LPCSTR szEncoded, in
     );
 
     if (decodedLength == 0) {
-        return FALSE; // Error durante la decodificación
+        return FALSE; // Error durante la decodificaciï¿½n
     }
 
-    pnDestLen[0] = (int)decodedLength; // Actualizar el tamaño real de los datos decodificados
-    return TRUE; // Decodificación exitosa
+    pnDestLen[0] = (int)decodedLength; // Actualizar el tamaï¿½o real de los datos decodificados
+    return TRUE; // Decodificaciï¿½n exitosa
 }
-
+/*{{end-c-function}}*/

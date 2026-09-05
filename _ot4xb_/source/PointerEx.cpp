@@ -8,29 +8,78 @@
 static LPSTR _conParamLockStrEx_( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo, BOOL bWrite);
 static LPSTR _conParamLockStrExFloat_( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo, BOOL bWrite);
 //----------------------------------------------------------------------------------------------------------------------
-// Retrieve a READ ONLY memory pointer from a param of Xbase++ type:
-// CHARACTER: Lock the container internal buffer
-// NUMERIC:  Will consider it as a memory pointer so will cast value to LPSTR
-// OBJECT:   Must be a GST subclass or contain ::_lock_() and ::_unlock_() methods to provide and release pointers
-// ARRAY:    Elements must contain numeric values, a string of sizeof(LONG) * Len(aItems) will be created
-//           to hold temporally the values
-// Must be released with _conParamUnLockStrEx()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamRLockStrEx
+            | syntax_: `LPSTR _conParamRLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamRLockStrEx
+            | _kw_: lock parameter, read pointer, string lock, array lock, GWST lock
+   }}*/
+/*{{|desc: Retrieves a read only memory pointer from an Xbase++ parameter. Character: locks the internal
+      buffer of the string. Numeric: the value is taken as a memory address and returned cast to LPSTR.
+      Object: must provide the _lock_() and _unlock_() methods (the GWST structure classes do) that return
+      and release the pointer. Array: a temporary buffer with one LONG per element is allocated and filled
+      with the element values. Release the lock with _conParamUnLockStrEx().
+    | params:
+    - `pl` XppParamList - Opaque handle to the Xbase++ parameter list.
+    - `nParam` ULONG - Position of the parameter (1-based).
+    - `pInfo` CON_PLKSTREX * - Lock state block filled by the call; release with _conParamUnLockStrEx().
+
+    Returns LPSTR - The memory pointer, or NULL on failure (a Numeric 0 or an empty Array also yield NULL). }}*/
 OT4XB_API LPSTR _conParamRLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo)
 { return _conParamLockStrEx_(pl,nParam,pInfo,FALSE); }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-// Retrieve a READ/WRITEmemory pointer from a param of Xbase++ type:
-// CHARACTER: Lock the container internal buffer ( must be passed by reference)
-// NUMERIC:  Will consider it as a memory pointer so will cast value to LPSTR
-// OBJECT:   Must be a GST subclass or contain ::_lock_() and ::_unlock_() methods to provide and release pointers
-// ARRAY:    Elements must contain numeric values, a string of sizeof(LONG) * Len(aItems) will be created
-//           to hold temporally the values ( must be passed by reference), the LONG items will be written back to
-//           it's corresponding array positions on the next call of _conParamUnLockStrEx.
-// Must be released with _conParamUnLockStrEx()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamWLockStrEx
+            | syntax_: `LPSTR _conParamWLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamWLockStrEx
+            | _kw_: lock parameter, write pointer, string lock, array lock, GWST lock
+   }}*/
+/*{{|desc: Retrieves a read/write memory pointer from an Xbase++ parameter. Character: write locks the
+      internal buffer of the string; pass the string by reference so the changes reach the caller. Numeric:
+      the value is taken as a memory address and returned cast to LPSTR. Object: must provide the _lock_()
+      and _unlock_() methods (the GWST structure classes do) that return and release the pointer. Array: a
+      temporary buffer with one LONG per element is allocated and filled with the element values; pass the
+      array by reference, at unlock time the LONG values are written back to the array elements. Release the
+      lock with _conParamUnLockStrEx().
+    | params:
+    - `pl` XppParamList - Opaque handle to the Xbase++ parameter list.
+    - `nParam` ULONG - Position of the parameter (1-based).
+    - `pInfo` CON_PLKSTREX * - Lock state block filled by the call; release with _conParamUnLockStrEx().
+
+    Returns LPSTR - The memory pointer, or NULL on failure (a Numeric 0 or an empty Array also yield NULL). }}*/
 OT4XB_API LPSTR _conParamWLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo)
 { return _conParamLockStrEx_(pl,nParam,pInfo,TRUE); }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-// Like _conParamRLockStrEx() and _conParamWLockStrEx() but using a container instead of the Xbase++ paramList pointer
-// Must be released with _conUnLockStrEx_()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conLockStrEx_
+            | syntax_: ```
+                 LPSTR _conLockStrEx_( ContainerHandle con, ULONG nType, BOOL bByRef, CON_PLKSTREX * pInfo, BOOL bWrite )
+              ```
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conLockStrEx_
+            | _kw_: lock container, memory pointer, string lock, array lock
+   }}*/
+/*{{|desc: Locks a container as a memory pointer, with the same type handling as _conParamRLockStrEx() and
+      _conParamWLockStrEx() but taking the container, its XPP type and the by reference flag directly
+      instead of reading them from a parameter list. Release the lock with _conUnLockStrEx_().
+    | params:
+    - `con` ContainerHandle - Container holding the value to lock.
+    - `nType` ULONG - XPP type of the value in con; only XPP_CHARACTER, XPP_NUMERIC, XPP_ARRAY and
+      XPP_OBJECT are accepted.
+    - `bByRef` BOOL - TRUE keeps con owned by the caller; FALSE makes the call release it once it is no
+      longer needed (at lock or at unlock time depending on the type).
+    - `pInfo` CON_PLKSTREX * - Lock state block filled by the call; release with _conUnLockStrEx_().
+    - `bWrite` BOOL - FALSE for a read only lock; TRUE for a read/write lock (write lock on a Character
+      buffer, Array values written back at unlock time).
+
+    Returns LPSTR - The memory pointer, or NULL on failure (a Numeric 0 or an empty Array also yield NULL). }}*/
 OT4XB_API LPSTR _conLockStrEx_( ContainerHandle con , ULONG nType , BOOL bByRef , CON_PLKSTREX * pInfo, BOOL bWrite)
 {
    if( pInfo != NULL )
@@ -108,6 +157,7 @@ OT4XB_API LPSTR _conLockStrEx_( ContainerHandle con , ULONG nType , BOOL bByRef 
    }
    return NULL;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static LPSTR _conParamLockStrEx_( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo, BOOL bWrite)
 {
@@ -121,10 +171,39 @@ static LPSTR _conParamLockStrEx_( XppParamList pl, ULONG nParam, CON_PLKSTREX * 
    return NULL;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Unlock a param previous locked with _conParamRLockStrEx() or _conParamWLockStrEx()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamUnLockStrEx
+            | syntax_: `void _conParamUnLockStrEx( CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamUnLockStrEx
+            | _kw_: unlock parameter, release lock, write back
+   }}*/
+/*{{|desc: Releases a lock obtained with _conParamRLockStrEx() or _conParamWLockStrEx(). For a write locked
+      Array the LONG values of the temporary buffer are written back to the array elements before the buffer
+      is freed; for an Object the _unlock_() method is called.
+    | params:
+    - `pInfo` CON_PLKSTREX * - The lock state block filled by the lock call; reset to empty on return.
+
+    Returns void }}*/
 OT4XB_API void _conParamUnLockStrEx(CON_PLKSTREX * pInfo){ _conUnLockStrEx_(pInfo); }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-// Unlock a param previous locked with _conLockStrEx_()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conUnLockStrEx_
+            | syntax_: `void _conUnLockStrEx_( CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conUnLockStrEx_
+            | _kw_: unlock container, release lock, write back
+   }}*/
+/*{{|desc: Releases a lock obtained with _conLockStrEx_(). For a write locked Array the LONG values of the
+      temporary buffer are written back to the array elements before the buffer is freed; for an Object the
+      _unlock_() method is called; the container is released unless it was flagged as by reference.
+    | params:
+    - `pInfo` CON_PLKSTREX * - The lock state block filled by the lock call; reset to empty on return.
+
+    Returns void }}*/
 OT4XB_API void _conUnLockStrEx_(CON_PLKSTREX * pInfo)
 {
    if( pInfo != NULL )
@@ -186,18 +265,52 @@ OT4XB_API void _conUnLockStrEx_(CON_PLKSTREX * pInfo)
       pInfo->nType = 0; pInfo->nLen=0;pInfo->bByRef=FALSE;pInfo->pStr=0;pInfo->con = 0;
    }
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-// Like _conParamRLockStrEx() but if the param is a Xbase++ array must translate it to an
-// array of float values
-// Mjst be released with _conParamUnLockStrExFloat()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamRLockStrExFloat
+            | syntax_: `LPSTR _conParamRLockStrExFloat( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamRLockStrExFloat
+            | _kw_: lock parameter, read pointer, float array, packed floats
+   }}*/
+/*{{|desc: Retrieves a read only memory pointer from an Xbase++ parameter. Same type handling as
+      _conParamRLockStrEx() except for an Array: the temporary buffer holds one FLOAT per element instead of
+      one LONG. Release the lock with _conParamUnLockStrExFloat().
+    | params:
+    - `pl` XppParamList - Opaque handle to the Xbase++ parameter list.
+    - `nParam` ULONG - Position of the parameter (1-based).
+    - `pInfo` CON_PLKSTREX * - Lock state block filled by the call; release with
+      _conParamUnLockStrExFloat().
+
+    Returns LPSTR - The memory pointer, or NULL on failure (a Numeric 0 or an empty Array also yield NULL). }}*/
 OT4XB_API LPSTR _conParamRLockStrExFloat( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo)
 { return _conParamLockStrExFloat_(pl,nParam,pInfo,FALSE); }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-// Like _conParamWLockStrEx() but if the param is a Xbase++ array must translate it to an
-// array of float values
-// Mjst be released with _conParamUnLockStrExFloat()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamWLockStrExFloat
+            | syntax_: `LPSTR _conParamWLockStrExFloat( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamWLockStrExFloat
+            | _kw_: lock parameter, write pointer, float array, packed floats
+   }}*/
+/*{{|desc: Retrieves a read/write memory pointer from an Xbase++ parameter. Same type handling as
+      _conParamWLockStrEx() except for an Array: the temporary buffer holds one FLOAT per element instead of
+      one LONG, and the FLOAT values are written back to the array elements at unlock time. Release the lock
+      with _conParamUnLockStrExFloat().
+    | params:
+    - `pl` XppParamList - Opaque handle to the Xbase++ parameter list.
+    - `nParam` ULONG - Position of the parameter (1-based).
+    - `pInfo` CON_PLKSTREX * - Lock state block filled by the call; release with
+      _conParamUnLockStrExFloat().
+
+    Returns LPSTR - The memory pointer, or NULL on failure (a Numeric 0 or an empty Array also yield NULL). }}*/
 OT4XB_API LPSTR _conParamWLockStrExFloat( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo)
 { return _conParamLockStrExFloat_(pl,nParam,pInfo,TRUE); }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static LPSTR _conParamLockStrExFloat_( XppParamList pl, ULONG nParam, CON_PLKSTREX * pInfo, BOOL bWrite)
 {
@@ -277,7 +390,21 @@ static LPSTR _conParamLockStrExFloat_( XppParamList pl, ULONG nParam, CON_PLKSTR
    return NULL;
 }
 //----------------------------------------------------------------------------------------------------------------------
-// Unlock a param previous locked with _conParamRLockStrExFloat() or _conParamWLockStrExFloat()
+/*{{begin-c-function}}*/
+/*{{c-function_: _conParamUnLockStrExFloat
+            | syntax_: `void _conParamUnLockStrExFloat( CON_PLKSTREX * pInfo )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conParamUnLockStrExFloat
+            | _kw_: unlock parameter, float array, write back
+   }}*/
+/*{{|desc: Releases a lock obtained with _conParamRLockStrExFloat() or _conParamWLockStrExFloat(). For a
+      write locked Array the FLOAT values of the temporary buffer are written back to the array elements
+      before the buffer is freed; for an Object the _unlock_() method is called.
+    | params:
+    - `pInfo` CON_PLKSTREX * - The lock state block filled by the lock call; reset to empty on return.
+
+    Returns void }}*/
 OT4XB_API void _conParamUnLockStrExFloat(CON_PLKSTREX * pInfo)
 {
    if( pInfo != NULL )
@@ -339,5 +466,5 @@ OT4XB_API void _conParamUnLockStrExFloat(CON_PLKSTREX * pInfo)
       pInfo->nType = 0; pInfo->nLen=0;pInfo->bByRef=FALSE;pInfo->pStr=0;pInfo->con = 0;
    }
 }
-
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------

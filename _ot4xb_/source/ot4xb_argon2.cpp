@@ -12,62 +12,37 @@
 // argon2_hash( 1 pwd , 2 salt , 3 @error_code, 4 flags = 0x02  , 5 size_in_bytes   = 32 ,  6 time_cost = 3 , 7 memory_cost =0x10000 ) -> hash_str | NIL
 // argon2_verify( 1 pwd , 2 hash ,3 @error_code,  4 flags 0x02 ) -> lOk | NIL
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>argon2_hash</name>
-      <category>crypto/password</category>
-      <description>
-         Computes an Argon2 password hash using the bundled Argon2 implementation. The result can be an encoded
-         Argon2 string or raw hash bytes depending on nFlags.
-      </description>
-      <syntax>argon2_hash( cPassword, cSalt, @nErrorCode, nFlags, [nSize := 32], [nTimeCost := 3], [nMemoryCost := 0x10000] ) -> cHash | NIL</syntax>
-      <parameters>
-         <parameter name="cPassword" type="character">Password bytes.</parameter>
-         <parameter name="cSalt" type="character">Salt bytes.</parameter>
-         <parameter name="nErrorCode" type="numeric by reference">Receives the Argon2 result code. 0 means success.</parameter>
-         <parameter name="nFlags" type="numeric">Algorithm and output selector. Pass this explicitly.</parameter>
-         <parameter name="nSize" type="numeric">Hash size in bytes.</parameter>
-         <parameter name="nTimeCost" type="numeric">Argon2 time cost.</parameter>
-         <parameter name="nMemoryCost" type="numeric">Argon2 memory cost. The default value represents 64 MB.</parameter>
-      </parameters>
-      <flags>
-         <flag value="0x0000">Argon2d encoded output.</flag>
-         <flag value="0x0001">Argon2i encoded output.</flag>
-         <flag value="0x0002">Argon2id encoded output. Recommended default for new code.</flag>
-         <flag value="0x0010">Argon2d raw output.</flag>
-         <flag value="0x0011">Argon2i raw output.</flag>
-         <flag value="0x0012">Argon2id raw output.</flag>
-      </flags>
-      <remarks>
-         Always pass nFlags explicitly in current builds. Encoded output is suitable for argon2_verify(); raw output
-         is binary bytes and is not accepted by argon2_verify().
-      </remarks>
-      <return>
-         <type>character | NIL</type>
-         <description>Hash string or raw hash bytes on success; NIL when the hash cannot be produced.</description>
-      </return>
-   </function>
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: argon2_hash
+            | syntax_: ```
+                 argon2_hash( cPassword, cSalt, @nErrorCode, nFlags, [nSize := 32], [nTimeCost := 3], [nMemoryCost := 0x10000] )
+              ```
+            | category: crypto/password
+            | _kw_: argon2, password hash, key derivation, salt, encoded hash
+   }}*/
+/*{{|desc: Computes an Argon2 password hash using the bundled Argon2 implementation. The result can be an
+      encoded Argon2 string or raw hash bytes depending on nFlags.
+    | params:
+    - `cPassword` character - Password bytes.
+    - `cSalt` character - Salt bytes.
+    - `nErrorCode` numeric by reference - Receives the Argon2 result code. 0 means success.
+    - `nFlags` numeric - Algorithm and output selector. Pass this explicitly.
+    - `nSize` numeric - Hash size in bytes.
+    - `nTimeCost` numeric - Argon2 time cost.
+    - `nMemoryCost` numeric - Argon2 memory cost. The default value represents 64 MB.
+    | flags:
+    - `0x0000` Argon2d encoded output.
+    - `0x0001` Argon2i encoded output.
+    - `0x0002` Argon2id encoded output. Recommended default for new code.
+    - `0x0010` Argon2d raw output.
+    - `0x0011` Argon2i raw output.
+    - `0x0012` Argon2id raw output.
 
-   <function>
-      <name>argon2_verify</name>
-      <category>crypto/password</category>
-      <description>Verifies a password against an encoded Argon2 hash.</description>
-      <syntax>argon2_verify( cPassword, cEncodedHash, @nErrorCode, nFlags ) -> lOk</syntax>
-      <parameters>
-         <parameter name="cPassword" type="character">Password bytes to verify.</parameter>
-         <parameter name="cEncodedHash" type="character">Encoded Argon2 hash string.</parameter>
-         <parameter name="nErrorCode" type="numeric by reference">Receives the Argon2 result code. 0 means success.</parameter>
-         <parameter name="nFlags" type="numeric">Algorithm selector. Use 0x0000 for Argon2d, 0x0001 for Argon2i or 0x0002 for Argon2id.</parameter>
-      </parameters>
-      <return>
-         <type>logical</type>
-         <description>.T. when the password verifies; .F. otherwise.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns character / NIL - Hash string or raw hash bytes on success; NIL when the hash cannot be produced.
 
+    |note: Always pass nFlags explicitly in current builds. Encoded output is suitable for argon2_verify(); raw
+      output is binary bytes and is not accepted by argon2_verify(). }}*/
 _XPP_REG_FUN_( ARGON2_HASH )
 {
    TXppParamList xpp( pl, 7 );
@@ -78,7 +53,7 @@ _XPP_REG_FUN_( ARGON2_HASH )
    LPSTR salt = xpp[ 2 ]->LockStrEx();
    uint32_t salt_cb = xpp[ 2 ]->ExLen();
 
-   uint32_t flags = ( xpp[ 4 ]->CheckType( XPP_NUMERIC ) ? xpp[ 4 ]->GetDWord() : 0x20 );
+   uint32_t flags = ( xpp[ 4 ]->CheckType( XPP_NUMERIC ) ? xpp[ 4 ]->GetDWord() : 0x02 );
 
    uint32_t size_in_bytes = ( xpp[ 5 ]->CheckType( XPP_NUMERIC ) ? xpp[ 5 ]->GetDWord() : 32 );
    uint32_t time_cost = ( xpp[ 6 ]->CheckType( XPP_NUMERIC ) ? xpp[ 6 ]->GetDWord() : 3 );
@@ -226,8 +201,27 @@ _XPP_REG_FUN_( ARGON2_HASH )
    }
    xpp[ 3 ]->PutLong( result );
 }
+/*{{end-function}}*/
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// argon2_verify( 1 pwd , 2 hash ,3 @error_code,  4 flags 0x02 ) -> lOk | NIL
+/*{{begin-function}}*/
+/*{{function_: argon2_verify
+            | syntax_: `argon2_verify( cPassword, cEncodedHash, @nErrorCode, nFlags )`
+            | category: crypto/password
+            | _kw_: argon2, verify password, password hash
+   }}*/
+/*{{|desc: Verifies a password against an encoded Argon2 hash.
+    | params:
+    - `cPassword` character - Password bytes to verify.
+    - `cEncodedHash` character - Encoded Argon2 hash string.
+    - `nErrorCode` numeric by reference - Receives the Argon2 result code. 0 means success.
+    - `nFlags` numeric - Algorithm selector. Use 0x0000 for Argon2d, 0x0001 for Argon2i or 0x0002 for
+      Argon2id.
+    | flags:
+    - `0x0000` Argon2d encoded output.
+    - `0x0001` Argon2i encoded output.
+    - `0x0002` Argon2id encoded output. Recommended default for new code.
+
+    Returns logical - .T. when the password verifies; .F. otherwise. }}*/
 _XPP_REG_FUN_( ARGON2_VERIFY )
 {
    TXppParamList xpp( pl, 7 );
@@ -238,7 +232,7 @@ _XPP_REG_FUN_( ARGON2_VERIFY )
    LPSTR hash = xpp[ 2 ]->LockStrEx();
    uint32_t hash_cb = xpp[ 2 ]->ExLen();
 
-   uint32_t flags = ( xpp[ 4 ]->CheckType( XPP_NUMERIC ) ?  xpp[ 4 ]->GetDWord() : 0x20 );
+   uint32_t flags = ( xpp[ 4 ]->CheckType( XPP_NUMERIC ) ?  xpp[ 4 ]->GetDWord() : 0x02 );
 
    int32_t result = ARGON2_MISSING_ARGS;
 
@@ -275,6 +269,7 @@ _XPP_REG_FUN_( ARGON2_VERIFY )
    xpp[ 3 ]->PutLong( result );
    xpp[ 0 ]->PutBool( result ? 0 : 1 );
 }
+/*{{end-function}}*/
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

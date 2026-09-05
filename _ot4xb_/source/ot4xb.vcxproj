@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
-      <Command>call prebuild_debug.bat $(IntDir)ot4xb.obj</Command>
+      <Command>ot4xb-tool -tool "$(SolutionDir)ot4xb.ot4xb-tool" -bs pre.debug</Command>
     </PreBuildEvent>
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -98,13 +98,12 @@
       <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
     </Xdcmake>
     <PostBuildEvent>
-      <Command>call postbuild_debug.bat   $(ProjectDir)   $(TargetDir)</Command>
+      <Command>ot4xb-tool -tool "$(SolutionDir)ot4xb.ot4xb-tool" -bs post.debug</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PreBuildEvent>
-      <Command>call prebuild_release.bat $(IntDir)ot4xb.obj
-</Command>
+      <Command>ot4xb-tool -tool "$(SolutionDir)ot4xb.ot4xb-tool" -bs pre.release</Command>
     </PreBuildEvent>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -141,8 +140,7 @@
       <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
     </Xdcmake>
     <PostBuildEvent>
-      <Command>echo on
-call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
+      <Command>ot4xb-tool -tool "$(SolutionDir)ot4xb.ot4xb-tool" -bs post.release</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -215,9 +213,8 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClCompile Include="ot4xb_ndtg.cpp" />
     <ClCompile Include="ot4xb_ndtg_xstack.cpp" />
     <ClCompile Include="ot4xb_ndtk.cpp" />
-    <ClCompile Include="ot4xb_pcl_tool.cpp" />
     <ClCompile Include="ot4xb_regex.cpp" />
-    <ClCompile Include="ot4xb_regexp.cpp" />
+    <ClCompile Include="ot4xb_vb_regexp.cpp" />
     <ClCompile Include="ot4xb_register.cpp" />
     <ClCompile Include="ot4xb_socket.cpp" />
     <ClCompile Include="ot4xb_sqlstr.cpp" />
@@ -268,7 +265,6 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <ClInclude Include="CRC32.HPP" />
     <ClInclude Include="disphelper.hpp" />
     <ClInclude Include="gdiplus_helper.h" />
-    <ClInclude Include="atomic_resource_lock_t.h" />
     <ClInclude Include="ndtg_internal.hpp" />
     <ClInclude Include="ot4xb_api.h" />
     <ClInclude Include="ot4xb_base32.h" />
@@ -351,12 +347,8 @@ call postbuild_release.bat  $(ProjectDir)   $(TargetDir)</Command>
     <None Include="ot4xbCpp.def" />
     <None Include="ot4xb_extract_all.bat" />
     <None Include="packages.config" />
-    <None Include="postbuild_debug.bat" />
-    <None Include="postbuild_release.bat" />
-    <None Include="prebuild_debug.bat" />
-    <None Include="prebuild_release.bat" />
-    <None Include="__mklib.bat" />
-    <None Include="__mk_package.bat" />
+    <None Include="..\ot4xb.ot4xb-tool" />
+    <None Include="..\ot4xb.ot4xb-tool.user" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="disphelper_readme.txt" />

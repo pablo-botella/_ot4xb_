@@ -21,6 +21,23 @@ static void _conPutLong_pv_( ContainerHandle con , void* pValue)
    _conPutNL(con, reinterpret_cast<LONG*>(pValue)[0] );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _conaGetLen
+            | syntax_: `ULONG _conaGetLen( ContainerHandle cona, ULONG * pIndex, ULONG nDepth )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conaGetLen
+            | _kw_: array element length, nested array, indices, size
+   }}*/
+/*{{|desc: Gets the length of the array or string element addressed by an array of indices. Wrapper for
+      _conSizeA that builds the null-terminated index list from pIndex/nDepth. With pIndex NULL or
+      nDepth 0 it returns the length of cona itself.
+    | params:
+    - `cona` ContainerHandle - Container handle of the array.
+    - `pIndex` ULONG * - Array of nDepth 1-based indices, one per nesting level; may be NULL.
+    - `nDepth` ULONG - Number of indices taken from pIndex.
+
+    Returns ULONG - Length of the addressed element, or 0 if invalid. }}*/
 OT4XB_API ULONG _conaGetLen(ContainerHandle cona , ULONG * pIndex, ULONG nDepth)
 {
    ULONG    ul  = 0;
@@ -60,7 +77,25 @@ OT4XB_API ULONG _conaGetLen(ContainerHandle cona , ULONG * pIndex, ULONG nDepth)
    
    return ul;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _conaGetType
+            | syntax_: `ULONG _conaGetType( ContainerHandle cona, ULONG * pIndex, ULONG nDepth )`
+            | category: container
+            | header: ot4xb_c_exported.h
+            | mangled-name: _conaGetType
+            | _kw_: array element type, nested array, indices, XPP type
+   }}*/
+/*{{|desc: Gets the XPP type flags of the element addressed by an array of indices. Wrapper for _conTypeA
+      that builds the null-terminated index list from pIndex/nDepth. With pIndex NULL or nDepth 0 it
+      returns the type of cona itself.
+    | params:
+    - `cona` ContainerHandle - Container handle of the array.
+    - `pIndex` ULONG * - Array of nDepth 1-based indices, one per nesting level; may be NULL.
+    - `nDepth` ULONG - Number of indices taken from pIndex.
+
+    Returns ULONG - XPP type flags of the addressed element, or 0 if invalid. }}*/
 OT4XB_API ULONG _conaGetType(ContainerHandle cona , ULONG * pIndex, ULONG nDepth)
 {
    ULONG    ul  = 0;
@@ -100,6 +135,7 @@ OT4XB_API ULONG _conaGetType(ContainerHandle cona , ULONG * pIndex, ULONG nDepth
    
    return ul;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 TList * _conRecurseArrayIndex(ContainerHandle cona, ULONG* pBase, ULONG nDepth, TList * pList)
 {

@@ -12,69 +12,6 @@
                               px->SetErrorGenCode(0x00102000 + n);
 //----------------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>TXbClass</name>
-      <category>runtime/classes</category>
-      <description>
-         Low-level runtime class builder used internally by OT4XB to create exported Xbase++ classes and GWST
-         structure classes. It is the object-level API behind many OT4XB dynamic class and structure helpers.
-      </description>
-      <syntax>TXbClass():new( cClassName ) -> oBuilder</syntax>
-      <remarks>
-         Most application code should use the higher-level OT4XB class and structure commands. TXbClass is documented
-         because it is exported and because many generated classes in OT4XB are built with it. Builder methods return
-         Self unless otherwise noted, so calls can be chained while declaring a class.
-      </remarks>
-      <class-methods>
-         <method name="AddHook" syntax="TXbClass():AddHook( cClassName, oHook | bHook ) -> nHookId">
-            Registers a hook evaluated when a matching class is created. Object hooks receive ::OnClassCreate(oTXbClass);
-            codeblock hooks are evaluated with the TXbClass builder object.
-         </method>
-      </class-methods>
-      <methods>
-         <method name="DisableHooks" syntax="::DisableHooks() -> NIL">Disables class creation hooks for this builder.</method>
-         <method name="Destroy" syntax="::Destroy() -> Self">Destroys the underlying builder object.</method>
-         <method name="Create" syntax="::Create() -> oClass">Creates and returns the Xbase++ class object.</method>
-         <method name="_Parent" syntax="::_Parent( cParentClass | oParentClass ) -> Self">Adds a parent class.</method>
-         <method name="_GwstParent" syntax="::_GwstParent( [cParentClass | oParentClass] ) -> Self">Marks the class as a GWST-derived structure class.</method>
-         <method name="_Exported" syntax="::_Exported() -> Self">Sets following declarations to exported scope.</method>
-         <method name="_Hidden" syntax="::_Hidden() -> Self">Sets following declarations to hidden scope.</method>
-         <method name="_Protected" syntax="::_Protected() -> Self">Sets following declarations to protected scope.</method>
-         <method name="_Var" syntax="::_Var( cName, [nExtraFlags] ) -> Self">Adds an instance variable.</method>
-         <method name="_ClassVar" syntax="::_ClassVar( cName, [nExtraFlags] ) -> Self">Adds a class variable.</method>
-         <method name="_SharedClassVar" syntax="::_SharedClassVar( cName, [nExtraFlags] ) -> Self">Adds a shared class variable.</method>
-         <method name="_Method" syntax="::_Method( cName, cCodeBlock | bCodeBlock ) -> Self">Adds an instance method.</method>
-         <method name="_ClassMethod" syntax="::_ClassMethod( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a class method.</method>
-         <method name="_Property" syntax="::_Property( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a read/write property.</method>
-         <method name="_ClassProperty" syntax="::_ClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a class read/write property.</method>
-         <method name="_ROProperty" syntax="::_ROProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a readonly property.</method>
-         <method name="_ROClassProperty" syntax="::_ROClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a readonly class property.</method>
-         <method name="_WOProperty" syntax="::_WOProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a write-only property.</method>
-         <method name="_WOClassProperty" syntax="::_WOClassProperty( cName, cCodeBlock | bCodeBlock ) -> Self">Adds a write-only class property.</method>
-         <method name="_AddGwstStyleMembers" syntax="::_AddGwstStyleMembers() -> Self">Adds GWST-style pointer support members.</method>
-         <method name="_GwstReadOnly" syntax="::_GwstReadOnly() -> Self">Declares generated GWST members as readonly.</method>
-         <method name="_GwstReadWrite" syntax="::_GwstReadWrite() -> Self">Declares generated GWST members as read/write.</method>
-         <method name="_GwstBeginUnion" syntax="::_GwstBeginUnion() -> Self">Starts a GWST union layout block.</method>
-         <method name="_GwstEndUnion" syntax="::_GwstEndUnion() -> Self">Ends the current GWST union layout block.</method>
-         <method name="_GwstSkipBytes" syntax="::_GwstSkipBytes( nBytes ) -> Self">Advances the current GWST offset by nBytes.</method>
-         <method name="_GwstAdjustSize" syntax="::_GwstAdjustSize( nSize ) -> Self">Ensures the GWST class size is at least nSize bytes.</method>
-         <method name="_GwstAlignNextMember" syntax="::_GwstAlignNextMember( nPack ) -> Self">Aligns the next GWST member offset.</method>
-         <method name="_GwstGetOffset" syntax="::_GwstGetOffset() -> nOffset">Returns the next GWST member offset.</method>
-         <method name="_GwstSetOffset" syntax="::_GwstSetOffset( nOffset ) -> Self">Sets the next GWST member offset.</method>
-         <method name="_GwstBack" syntax="::_GwstBack() -> Self">Moves the GWST offset back to the previous member start.</method>
-         <method name="_Child" syntax="::_Child( cName, cClass | oClass ) -> Self">Adds an embedded child GWST structure.</method>
-         <method name="_Member" syntax="::_Member( cName, nMemberType, nSize ) -> Self">Adds a raw GWST member declaration.</method>
-         <method name="_Member_*" syntax="::_Member_DWord( cName ), ::_Member_szStr( cName, nSize ), ... -> Self">
-            Adds a typed GWST member. The exported helpers cover integer, pointer, handle, string, date, floating
-            point, bit-field and network-byte-order member variants.
-         </method>
-      </methods>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
-
 static void TXbClass_cm_AddClassHook(TXbClsParams * px);
 //----------------------------------------------------------------------------------------------------------------------
 static void TXbClass_DisableHooks(TXbClsParams * px);
@@ -155,6 +92,25 @@ static void TXbClass_Member_XppGuiWnd(TXbClsParams * px);           // 1 // ::_M
 static void TXbClass_method_(TXbClsParams * px ,    TXbClass * psc , ULONG nFlags); // 2 // ::_Method...(cName , uBlock)
 static void TXbClass_property_(TXbClsParams * px ,    TXbClass * psc , ULONG nFlags); // 2 // ::_Method...(cName , uBlock)
 //-----------------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: TXbClass
+            | _slug_: txbclass
+            | class-function: TXBCLASS
+            | category: runtime/classes
+            | desc: Low-level runtime class builder used by OT4XB to create its exported Xbase++ classes and GWST
+              structure classes. TXbClass():new(cClassName) returns a builder; the declaration methods (_Parent,
+              _Exported, _Var, _Method, _Member_*, the _Gwst* layout family) return Self so calls can be chained
+              while declaring, and ::Create() builds and returns the finished class object. A new builder starts
+              with exported member scope. The AddHook class method registers an object or codeblock hook that is
+              evaluated when a matching class is created.
+            | note: Most application code should use the dynamic class and structure commands of ot4xb.ch, which
+              expand to calls on this builder. TXbClass is documented because it is exported and because many
+              classes shipped by OT4XB are built with it.
+            | note: Calling a method of an object whose native builder was never created, or was already
+              destroyed, raises an OT4XB runtime error; only ::DisableHooks() silently does nothing in that state.
+            | see-also: BEGIN DYNAMIC CLASS, BEGIN STRUCTURE
+            | _kw_: class builder, create class, ClassCreate, runtime class, GWST builder
+   }}*/
 XPPRET XPPENTRY TXBCLASS( XppParamList pl )
 {
    ContainerHandle conco = _conClsObj("TXbClass");
@@ -163,90 +119,461 @@ XPPRET XPPENTRY TXBCLASS( XppParamList pl )
       TXbClass * pc = new TXbClass;
       pc->m_bDisableHooks = TRUE;
       pc->ClassName("TXbClass");
+      /*{{|:**BEGIN CLASS  TXbClass** }}*/
       pc->EXPORTED();
       pc->GwstReadWrite();
       pc->AddGwstStyleMembers();
       // ---------------------------
       // TXbClass()::AddHook( cClsName, oHook|bHook) -> dwHookId
+      /*{{|class-method_: - CLASS METHOD AddHook( cClassName, `oHook | bHook` )
+               | return: nHookId
+               | desc_: Registers a hook evaluated when a class named cClassName is created through a TXbClass
+                 builder: ::Create() evaluates the hooks registered for the class name just before building the
+                 class object, unless hooks are disabled on that builder. An Object hook receives the builder
+                 through its ::OnClassCreate( oTXbClass ) method; a CodeBlock hook is evaluated with the builder
+                 as its only parameter. Several hooks can be registered for the same class name, and 0 is returned
+                 when the parameters are not valid.
+      }}*/
       pc->ClassMethod( "AddHook", TXbClass_cm_AddClassHook,2);
 
+      /*{{|method_: - METHOD DisableHooks()
+               | return: NIL
+               | desc_: Disables class creation hooks for this builder: ::Create() will not evaluate the hooks
+                 registered for the class name. See the AddHook class method.
+      }}*/
       pc->Method( "DisableHooks"          , TXbClass_DisableHooks ); // ::DisableHooks()
       // ---------------------------
+      /*{{|method_: - METHOD new( cClassName )
+               | return: oBuilder
+               | desc_: Creates the native builder of a class named cClassName. A new builder starts with exported
+                 member scope. Initializing an already initialized object raises a runtime error.
+               | note: A Numeric parameter instead of cClassName is an internal form attaching the object to an
+                 existing native builder; it is how the builder object received by class creation hooks is built.
+      }}*/
       pc->Method( "init"                  , TXbClass_Init               , 1 ); // ::init( cClassName )
+      /*{{|method_: - METHOD Destroy()
+               | return: Self
+               | desc_: Destroys the underlying native builder. The object cannot be used afterwards.
+      }}*/
       pc->Method( "Destroy"               , TXbClass_Destroy                ); // ::Destroy()
+      /*{{|method_: - METHOD Create()
+               | return: oClass
+               | desc_: Creates and returns the Xbase++ class object from the declarations collected by the builder,
+                 evaluating first the class creation hooks (see the AddHook class method). The builder is not
+                 destroyed: call ::Destroy() when it is no longer needed.
+      }}*/
       pc->Method( "Create"                , TXbClass_Create                 ); // ::Create()
       // ---------------------------
+      /*{{|method_: - METHOD _Parent( `cParentClass | oParentClass` )
+               | return: Self
+               | desc_: Adds a parent class, given by name or as a class object.
+      }}*/
       pc->Method( "_Parent"               , TXbClass_Parent             , 1 ); // ::_Parent(oParent)
+      /*{{|method_: - METHOD _GwstParent( [`cParentClass | oParentClass`] )
+               | return: Self
+               | desc_: Marks the class being built as a GWST structure class. The parent structure class can be
+                 given by name or as a class object and its binary layout is inherited, with the structure offset
+                 starting after it; without parameter the class descends directly from GWST.
+      }}*/
       pc->Method( "_GwstParent"           , TXbClass_GwstParent         , 1 ); // ::_GwstParent(oParent)
       // ---------------------------
+      /*{{|method_: - METHOD _Exported()
+               | return: Self
+               | desc_: Sets to EXPORTED the member scope applied to the following declarations.
+      }}*/
       pc->Method( "_Exported"             , TXbClass_Exported           , 0 ); // ::_Exported()
+      /*{{|method_: - METHOD _Hidden()
+               | return: Self
+               | desc_: Sets to HIDDEN the member scope applied to the following declarations.
+      }}*/
       pc->Method( "_Hidden"               , TXbClass_Hidden             , 0 ); // ::_Hidden()
+      /*{{|method_: - METHOD _Protected()
+               | return: Self
+               | desc_: Sets to PROTECTED the member scope applied to the following declarations.
+      }}*/
       pc->Method( "_Protected"            , TXbClass_Protected          , 0 ); // ::_Protected()
       // ---------------------------
+      /*{{|method_: - METHOD _Var( cName [, nExtraFlags] )
+               | return: Self
+               | desc_: Adds an instance variable with the current member scope. nExtraFlags contains optional
+                 attribute flags ORed into the variable declaration.
+      }}*/
       pc->Method( "_Var"                  , TXbClass_Var                , 2 ); // ::_Var(cName, cExtraFlags)
+      /*{{|method_: - METHOD _ClassVar( cName [, nExtraFlags] )
+               | return: Self
+               | desc_: Adds a class variable, living on the class object, with the current member scope. nExtraFlags
+                 contains optional attribute flags ORed into the variable declaration.
+      }}*/
       pc->Method( "_ClassVar"             , TXbClass_ClassVar           , 2 ); // ::_ClassVar(cName, cExtraFlags)
+      /*{{|method_: - METHOD _SharedClassVar( cName [, nExtraFlags] )
+               | return: Self
+               | desc_: Adds a shared class variable, SHARED meaning the same as in the declarative CLASS VAR syntax.
+                 nExtraFlags contains optional attribute flags ORed into the variable declaration.
+      }}*/
       pc->Method( "_SharedClassVar"       , TXbClass_SharedClassVar     , 2 ); // ::_SharedClassVar(cName, cExtraFlags)
       // ---------------------------
+      /*{{|method_: - METHOD _Method( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds an instance method with the current member scope, implemented by a code block receiving
+                 the object as its first parameter followed by the call parameters. The implementation can be given
+                 as a CodeBlock or as its source in a Character value, macro-compiled when the method is added.
+      }}*/
       pc->Method( "_Method"              , TXbClass_Method              , 2 ); // ::_Method(cName , uBlock)
+      /*{{|method_: - METHOD _ClassMethod( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a class method, living on the class object. The implementation forms are those of
+                 ::_Method().
+      }}*/
       pc->Method( "_ClassMethod"         , TXbClass_ClassMethod         , 2 ); // ::_ClassMethod(cName , uBlock)
+      /*{{|method_: - METHOD _Property( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a read/write property with the current member scope, implemented by a code block
+                 evaluated with the object to read the property and with the object plus the assigned value to
+                 write it, as in `{|Self,v| iif( PCount() > 1, <write>, <read> ) }`. The implementation can be given
+                 as a CodeBlock or as its source in a Character value, macro-compiled when the property is added.
+      }}*/
       pc->Method( "_Property"            , TXbClass_Property            , 2 ); // ::_Property(cName , uBlock)
+      /*{{|method_: - METHOD _ClassProperty( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a read/write property living on the class object. The implementation forms are those of
+                 ::_Property().
+      }}*/
       pc->Method( "_ClassProperty"       , TXbClass_ClassProperty       , 2 ); // ::_ClassProperty(cName , uBlock)
+      /*{{|method_: - METHOD _ROProperty( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a read-only property: only the read side of ::_Property() is registered.
+      }}*/
       pc->Method( "_ROProperty"          , TXbClass_ROProperty          , 2 ); // ::_ROProperty(cName , uBlock)
+      /*{{|method_: - METHOD _ROClassProperty( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a read-only property living on the class object.
+      }}*/
       pc->Method( "_ROClassProperty"     , TXbClass_ROClassProperty     , 2 ); // ::_ROClassProperty(cName , uBlock)
+      /*{{|method_: - METHOD _WOProperty( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a write-only property: only the write side of ::_Property() is registered.
+      }}*/
       pc->Method( "_WOProperty"          , TXbClass_WOProperty          , 2 ); // ::_WOProperty(cName , uBlock)
+      /*{{|method_: - METHOD _WOClassProperty( cName, `cCodeBlock | bCodeBlock` )
+               | return: Self
+               | desc_: Adds a write-only property living on the class object.
+      }}*/
       pc->Method( "_WOClassProperty"     , TXbClass_WOClassProperty     , 2 ); // ::_WOClassProperty(cName , uBlock)
       // ---------------------------
+      /*{{|method_: - METHOD _AddGwstStyleMembers()
+               | return: Self
+               | desc_: Adds the GWST-style pointer support members: the instance variable _m__pt_ and the methods
+                 :_lock_() and :_unlock_().
+      }}*/
       pc->Method( "_AddGwstStyleMembers" , TXbClass_AddGwstStyleMembers , 0 ); // ::_AddGwstStyleMembers()
       // ---------------------------
+      /*{{|method_: - METHOD _GwstReadOnly()
+               | return: Self
+               | desc_: Makes the following structure members generate read-only properties.
+      }}*/
       pc->Method( "_GwstReadOnly"       , TXbClass_GwstReadOnly         , 0);  // ::_GwstReadOnly()
+      /*{{|method_: - METHOD _GwstReadWrite()
+               | return: Self
+               | desc_: Makes the following structure members generate read/write properties.
+      }}*/
       pc->Method( "_GwstReadWrite"      , TXbClass_GwstReadWrite        , 0);  // ::_GwstReadWrite()
+      /*{{|method_: - METHOD _GwstBeginUnion()
+               | return: Self
+               | desc_: Starts a union: the following members are laid out at the same offset and the union takes
+                 the size of its biggest member. Union blocks cannot be nested.
+      }}*/
       pc->Method( "_GwstBeginUnion"     , TXbClass_GwstBeginUnion       , 0);  // ::_GwstBeginUnion()
+      /*{{|method_: - METHOD _GwstEndUnion()
+               | return: Self
+               | desc_: Ends the union started by ::_GwstBeginUnion() and advances the structure offset by the
+                 union size.
+      }}*/
       pc->Method( "_GwstEndUnion"       , TXbClass_GwstEndUnion         , 0);  // ::_GwstEndUnion()
+      /*{{|method_: - METHOD _GwstSkipBytes( nBytes )
+               | return: Self
+               | desc_: Advances the offset of the next member by nBytes bytes; inside a union it grows the union
+                 size to at least nBytes bytes.
+      }}*/
       pc->Method( "_GwstSkipBytes"      , TXbClass_GwstSkipBytes        , 1);  // ::_GwstSkipBytes( nBytes)
+      /*{{|method_: - METHOD _GwstAdjustSize( nSize )
+               | return: Self
+               | desc_: Ensures the structure size reached so far is at least nSize bytes.
+      }}*/
       pc->Method( "_GwstAdjustSize"     , TXbClass_GwstAdjustSize       , 1);  // ::_GwstAdjustSize(nSize)
+      /*{{|method_: - METHOD _GwstGetOffset()
+               | return: nOffset
+               | desc_: Returns the offset where the next member will be placed.
+      }}*/
       pc->Method( "_GwstGetOffset"      , TXbClass_GwstGetOffset        , 0);  // ::_GwstGetOffset() -> nNextOffSet
+      /*{{|method_: - METHOD _GwstSetOffset( nOffset )
+               | return: Self
+               | desc_: Sets the offset where the next member will be placed.
+      }}*/
       pc->Method( "_GwstSetOffset"      , TXbClass_GwstSetOffset        , 1);  // ::_GwstSetOffset(nOffset)
+      /*{{|method_: - METHOD _GwstBack()
+               | return: Self
+               | desc_: Moves the offset back to the start of the last defined member, so the next member overlays
+                 it.
+      }}*/
       pc->Method( "_GwstBack"           , TXbClass_GwstBack             , 0);  // ::_GwstBack(nOffset)
+      /*{{|method_: - METHOD _GwstAlignNextMember( nPack )
+               | return: Self
+               | desc_: Rounds the offset of the next member up to the next multiple of nPack bytes.
+      }}*/
       pc->Method( "_GwstAlignNextMember", TXbClass_GwstAlignNextMember  , 1);  // ::_GwstAlignNextMember(nPack)
       // ---------------------------
+      /*{{|method_: - METHOD _Child( cName, `cClass | oClass` )
+               | return: Self
+               | desc_: Embeds a child structure as member cName, its class given by name or as a class object. The
+                 child takes its class size in the layout and a read-only property returning the child instance is
+                 generated.
+      }}*/
       pc->Method( "_Child"             , TXbClass_Child                 , 2);  // ::_Child(cName,oClass)
+      /*{{|method_: - METHOD _Member( cName, nMemberType, nSize )
+               | return: Self
+               | desc_: Adds a raw structure member: nMemberType is the internal GWST member type and nSize its size
+                 in bytes. The member is placed at the current offset, the offset advances nSize bytes (inside a
+                 union the union size grows instead) and the member property is generated. The ::_Member_...()
+                 helpers call it with the right type and size for each supported member type.
+      }}*/
       pc->Method( "_Member"            , TXbClass_Member                , 3);  // ::_Member(cName,nMType,nSize)
+      /*{{|method_: - METHOD _Member_DWordNet( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member kept in network byte order, read and written as a host byte
+                 order Numeric value.
+               | see-also: MEMBER DWORDNET
+      }}*/
       pc->Method( "_Member_DWordNet"   , TXbClass_Member_DWordNet       , 1);  // ::_Member_DWordNet(cName)
+      /*{{|method_: - METHOD _Member_WordNet( cName )
+               | return: Self
+               | desc_: Adds a 2-byte integer member kept in network byte order, read and written as a host byte
+                 order Numeric value.
+               | see-also: MEMBER WORDNET
+      }}*/
       pc->Method( "_Member_WordNet"    , TXbClass_Member_WordNet        , 1);  // ::_Member_WordNet(cName)
+      /*{{|method_: - METHOD _Member_Bool( cName )
+               | return: Self
+               | desc_: Adds a 4-byte BOOL member, read and written as a Logical value.
+               | see-also: MEMBER BOOL
+      }}*/
       pc->Method( "_Member_Bool"       , TXbClass_Member_Bool           , 1);  // ::_Member_Bool(cName)
+      /*{{|method_: - METHOD _Member_ByteBool( cName )
+               | return: Self
+               | desc_: Adds a 1-byte boolean member, read and written as a Logical value.
+               | see-also: MEMBER BYTEBOOL
+      }}*/
       pc->Method( "_Member_ByteBool"   , TXbClass_Member_ByteBool       , 1);  // ::_Member_Bool(cName)
+      /*{{|method_: - METHOD _Member_Byte( cName )
+               | return: Self
+               | desc_: Adds a 1-byte unsigned integer member, read as a positive Numeric value, 0 to 255.
+               | see-also: MEMBER BYTE
+      }}*/
       pc->Method( "_Member_Byte"       , TXbClass_Member_Byte           , 1);  // ::_Member_Byte(cName)
+      /*{{|method_: - METHOD _Member_Word( cName )
+               | return: Self
+               | desc_: Adds a 2-byte unsigned integer member, read as a positive Numeric value, 0 to 65535.
+               | see-also: MEMBER WORD
+      }}*/
       pc->Method( "_Member_Word"       , TXbClass_Member_Word           , 1);  // ::_Member_Word(cName)
+      /*{{|method_: - METHOD _Member_Int16( cName )
+               | return: Self
+               | desc_: Adds a 2-byte unsigned integer member, exactly like ::_Member_Word().
+               | see-also: MEMBER WORD
+      }}*/
       pc->Method( "_Member_Int16"      , TXbClass_Member_Int16          , 1);  // ::_Member_Int16(cName)
+      /*{{|method_: - METHOD _Member_Short( cName )
+               | return: Self
+               | desc_: Adds a 2-byte unsigned integer member, exactly like ::_Member_Word().
+               | see-also: MEMBER WORD
+      }}*/
       pc->Method( "_Member_Short"      , TXbClass_Member_Short          , 1);  // ::_Member_Short(cName)
+      /*{{|method_: - METHOD _Member_DWord( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, read and written as an integer Numeric value; to keep the
+                 internal storage as a 32-bit integer, values >= 0x80000000 are represented as negative.
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_DWord"      , TXbClass_Member_DWord          , 1);  // ::_Member_DWord(cName)
+      /*{{|method_: - METHOD _Member_ULong( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_ULong"      , TXbClass_Member_ULong          , 1);  // ::_Member_ULong(cName)
+      /*{{|method_: - METHOD _Member_Long( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Long"       , TXbClass_Member_Long           , 1);  // ::_Member_Long(cName)
+      /*{{|method_: - METHOD _Member_UInt( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_UInt"       , TXbClass_Member_UInt           , 1);  // ::_Member_UInt(cName)
+      /*{{|method_: - METHOD _Member_Int( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Int"        , TXbClass_Member_Int            , 1);  // ::_Member_Int(cName)
+      /*{{|method_: - METHOD _Member_Int32( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Int32"      , TXbClass_Member_Int32          , 1);  // ::_Member_Int32(cName)
+      /*{{|method_: - METHOD _Member_LParam( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_LParam"     , TXbClass_Member_LParam         , 1);  // ::_Member_LParam(cName)
+      /*{{|method_: - METHOD _Member_WParam( cName )
+               | return: Self
+               | desc_: Adds a 4-byte integer member, exactly like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_WParam"     , TXbClass_Member_WParam         , 1);  // ::_Member_WParam(cName)
+      /*{{|method_: - METHOD _Member_Pointer( cName )
+               | return: Self
+               | desc_: Adds a 4-byte pointer member, handled as a plain 32-bit value like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Pointer"    , TXbClass_Member_Pointer        , 1);  // ::_Member_Pointer(cName)
+      /*{{|method_: - METHOD _Member_Pointer32( cName )
+               | return: Self
+               | desc_: Adds a 4-byte pointer member, exactly like ::_Member_Pointer().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Pointer32"  , TXbClass_Member_Pointer32      , 1);  // ::_Member_Pointer32(cName)
+      /*{{|method_: - METHOD _Member_Handle( cName )
+               | return: Self
+               | desc_: Adds a 4-byte Win32 handle member, handled as a plain 32-bit value like ::_Member_DWord().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_Handle"     , TXbClass_Member_Handle         , 1);  // ::_Member_Handle(cName)
+      /*{{|method_: - METHOD _Member_hWnd( cName )
+               | return: Self
+               | desc_: Adds a 4-byte window handle member, exactly like ::_Member_Handle().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_hWnd"       , TXbClass_Member_hWnd           , 1);  // ::_Member_hWnd(cName)
+      /*{{|method_: - METHOD _Member_hDC( cName )
+               | return: Self
+               | desc_: Adds a 4-byte device context handle member, exactly like ::_Member_Handle().
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_hDC"        , TXbClass_Member_hDC            , 1);  // ::_Member_hDC(cName)
+      /*{{|method_: - METHOD _Member_Xbase( cName )
+               | return: Self
+               | desc_: Adds a 4-byte member storing any Xbase++ value through an Xbase++ container kept in the
+                 structure. The container is not released automatically: assign NIL to release it.
+               | see-also: MEMBER PXBASEVAR
+      }}*/
       pc->Method( "_Member_Xbase"      , TXbClass_Member_Xbase          , 1);  // ::_Member_Xbase(cName)
+      /*{{|method_: - METHOD _Member_DWord64( cName )
+               | return: Self
+               | desc_: Adds an 8-byte unsigned integer member (QWORD), read as an 8-byte Character string; a
+                 Numeric value can also be assigned.
+               | see-also: MEMBER DWORD64
+      }}*/
       pc->Method( "_Member_DWord64"    , TXbClass_Member_DWord64        , 1);  // ::_Member_DWord64(cName)
+      /*{{|method_: - METHOD _Member_Double( cName )
+               | return: Self
+               | desc_: Adds an 8-byte floating point member, read and written as a Numeric value.
+               | see-also: MEMBER DOUBLE
+      }}*/
       pc->Method( "_Member_Double"     , TXbClass_Member_Double         , 1);  // ::_Member_Double(cName)
+      /*{{|method_: - METHOD _Member_Float( cName )
+               | return: Self
+               | desc_: Adds a 4-byte floating point member, read and written as a Numeric value.
+               | see-also: MEMBER FLOAT
+      }}*/
       pc->Method( "_Member_Float"      , TXbClass_Member_Float          , 1);  // ::_Member_Float(cName)
+      /*{{|method_: - METHOD _Member_lpStr( cName )
+               | return: Self
+               | desc_: Adds a 4-byte pointer member meant to hold the address of a C string; the member holds the
+                 pointer itself as a Numeric value and the pointed text is not touched.
+               | see-also: MEMBER LPSTR
+      }}*/
       pc->Method( "_Member_lpStr"      , TXbClass_Member_lpStr          , 1);  // ::_Member_lpStr(cName)
+      /*{{|method_: - METHOD _Member_BinStr( cName, nSize )
+               | return: Self
+               | desc_: Adds a binary string member of nSize bytes: a longer value is truncated, a shorter one is
+                 padded with chr(0), and reading returns exactly nSize characters.
+               | see-also: MEMBER BINSTR
+      }}*/
       pc->Method( "_Member_BinStr"     , TXbClass_Member_BinStr         , 2);  // ::_Member_BinStr(cName,nSize)
+      /*{{|method_: - METHOD _Member_szStr( cName, nSize )
+               | return: Self
+               | desc_: Adds a zero terminated string member of nSize bytes including the trailing chr(0); reading
+                 returns the text up to the first chr(0).
+               | see-also: MEMBER SZSTR
+      }}*/
       pc->Method( "_Member_szStr"      , TXbClass_Member_szStr          , 2);  // ::_Member_szStr(cName,nSize)
+      /*{{|method_: - METHOD _Member_szWStr( cName, nSize )
+               | return: Self
+               | desc_: Adds a zero terminated wide string member holding up to nSize wide characters; nSize * 2
+                 bytes are reserved in the structure.
+               | see-also: MEMBER SZWSTR
+      }}*/
       pc->Method( "_Member_szWStr"     , TXbClass_Member_szWStr         , 2);  // ::_Member_szWStr(cName,nSize)
+      /*{{|method_: - METHOD _Member_DynSz( cName )
+               | return: Self
+               | desc_: Adds a 4-byte pointer member managing its own text buffer: assigning a string allocates a
+                 buffer holding it plus a trailing chr(0), reading returns the pointed text, and assigning NIL
+                 releases the buffer.
+               | see-also: MEMBER DYNSZ
+      }}*/
       pc->Method( "_Member_DynSz"      , TXbClass_Member_DynSz          , 1);  // ::_Member_DynSz(cName)
+      /*{{|method_: - METHOD _Member_XppGuiWnd( cName )
+               | return: Self
+               | desc_: Adds a 4-byte member holding the C++ window pointer of an Xbase++ GUI object: a Numeric
+                 value is stored as is, an Object is asked for the pointer through its GetTwWinBaseCppPointer()
+                 method, and reading returns the pointer as a Numeric value.
+      }}*/
       pc->Method( "_Member_XppGuiWnd"  , TXbClass_Member_XppGuiWnd      , 1);  // ::_Member_XppGuiWnd(cName)
+      /*{{|method_: - METHOD _Member_SINT8( cName )
+               | return: Self
+               | desc_: Adds a 1-byte signed integer member; reading sign extends and returns -128 to 127.
+               | see-also: MEMBER BYTE
+      }}*/
       pc->Method( "_Member_SINT8"      , TXbClass_Member_SINT8          , 1);
+      /*{{|method_: - METHOD _Member_SINT16( cName )
+               | return: Self
+               | desc_: Adds a 2-byte signed integer member; reading sign extends and returns -32768 to 32767.
+               | see-also: MEMBER WORD
+      }}*/
       pc->Method( "_Member_SINT16"     , TXbClass_Member_SINT16         , 1);
+      /*{{|method_: - METHOD _Member_UINT32( cName )
+               | return: Self
+               | desc_: Adds a 4-byte unsigned integer member; reading never returns a negative value, above
+                 0x7FFFFFFF the member comes back as a floating point Numeric value.
+               | see-also: MEMBER DWORD
+      }}*/
       pc->Method( "_Member_UINT32"     , TXbClass_Member_UINT32         , 1);
+      /*{{|method_: - METHOD _Member_NINT64( cName )
+               | return: Self
+               | desc_: Adds an 8-byte signed integer member, read as an 8-byte Character string. A Character,
+                 Numeric, { nLow, nHigh } Array or Object value can be assigned.
+               | see-also: MEMBER N_INT64
+      }}*/
       pc->Method( "_Member_NINT64"     , TXbClass_Member_NINT64         , 1);
+      /*{{|method_: - METHOD _Member_XDate( cName )
+               | return: Self
+               | desc_: Adds an 8-byte Date member stored as YYYYMMDD text, read and written as a Date value.
+               | see-also: MEMBER XDATE
+      }}*/
       pc->Method( "_Member_XDate"      , TXbClass_Member_XDate          , 1);
+      /*{{|method_: - METHOD _Member_BitField( cName, cHolder, nShift, nBits, nHolderBits )
+               | return: Self
+               | desc_: Adds a read/write property cName exposing a bit field of another member: nBits bits starting
+                 at bit nShift of the numeric member cHolder, whose bit width is nHolderBits (8, 16 or 32; any
+                 other value selects 32). No structure bytes are reserved by this declaration.
+      }}*/
+      /*{{|:**END CLASS** }}*/
       pc->Method( "_Member_BitField"   , TXbClass_Member_BitField       , 5);      
       // pc->Method( "_Member_StructArray" , TXbClass_Member_StructArray, 5);            
       // ---------------------------
@@ -257,6 +584,7 @@ XPPRET XPPENTRY TXBCLASS( XppParamList pl )
    _conReturn(pl,conco);
    _conRelease(conco);
 }
+/*{{end-class}}*/
 //-----------------------------------------------------------------------------------------------------------------------
 static void TXbClass_Init(TXbClsParams * px)                  // 1 // ::init( cClassName | pTXbClass )
 {

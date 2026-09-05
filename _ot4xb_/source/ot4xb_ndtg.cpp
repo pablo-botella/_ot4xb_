@@ -9,116 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function-family>
-      <name>NDTG node trigger stack</name>
-      <source>ot4xb_ndtg.cpp</source>
-      <category>xml/node-trigger</category>
-      <description>
-         Low-level helpers for building Xbase++ values from a stream of nested node events. The API keeps an
-         internal stack, receives node depth/name/value/attributes, and returns the completed Xbase++ value when
-         the stack is ended.
-      </description>
-      <status>Advanced/internal-style API.</status>
-      <remarks>
-         NDTG has two modes. The typed mode starts with a type-definition table created by
-         ndtg_create_typedef_table(), where type and property names describe how node values are converted and
-         where child values are stored. Calling ndtg_stack_begin() without parameters creates the generic xstack
-         mode used for OT4XB serialized Xbase++ values.
 
-         A typical event flow is: create a stack, call ndtg_stack_step() for each node start with its depth and
-         name, call ndtg_stack_attrib() for each attribute, optionally call ndtg_stack_attrib_seal(), call
-         ndtg_stack_putval() with the node text while ndtg_stack_unsealed() is .T., call ndtg_stack_seal() when
-         the current node must ignore later text, and finally call ndtg_stack_end() to obtain the result and
-         destroy the stack handle.
-
-         Handles returned by this family are numeric pointers. A type-definition table created by the caller must
-         be released with ndtg_destroy_typedef_table(). A stack handle is released by ndtg_stack_end().
-      </remarks>
-      <functions>
-         <function>
-            <name>ndtg_create_typedef_table</name>
-            <syntax>ndtg_create_typedef_table( @pTable [, cPropertyPrefix] ) -> pTable</syntax>
-            <description>Creates a type-definition table. cPropertyPrefix is prepended when object members are assigned in typed mode.</description>
-         </function>
-         <function>
-            <name>ndtg_destroy_typedef_table</name>
-            <syntax>ndtg_destroy_typedef_table( @pTable ) -> NIL</syntax>
-            <description>Destroys a type-definition table and stores 0 in @pTable.</description>
-         </function>
-         <function>
-            <name>ndtg_add_type</name>
-            <syntax>ndtg_add_type( pTable, cTypeName, uItem, nAttrib ) -> pType</syntax>
-            <description>Adds or updates a named type. uItem can hold the class object, object factory, codeblock or other cargo used by the type.</description>
-         </function>
-         <function>
-            <name>ndtg_get_type</name>
-            <syntax>ndtg_get_type( pTable, cTypeName ) -> pType</syntax>
-            <description>Returns the type pointer for a name, or 0 when not found.</description>
-         </function>
-         <function>
-            <name>ndtg_add_prop</name>
-            <syntax>ndtg_add_prop( pType, cPropName, cTypeName, uItem, nAttrib ) -> pProp</syntax>
-            <description>Adds or updates a property definition under a type. The property's value is interpreted as cTypeName.</description>
-         </function>
-         <function>
-            <name>ndtg_set_attrib_cb</name>
-            <syntax>ndtg_set_attrib_cb( pType, bAttrib ) -> NIL</syntax>
-            <description>
-               Installs an attribute callback for a type. The codeblock receives
-               Eval( bAttrib, xItem, cKey, cValue, nKeyCrc32 ).
-            </description>
-         </function>
-         <function>
-            <name>ndtg_stack_begin</name>
-            <syntax>ndtg_stack_begin( pTable, cResultType, nResultFlags ) -> pStack</syntax>
-            <description>Creates a typed stack whose final result is described by cResultType.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_begin</name>
-            <syntax>ndtg_stack_begin() -> pStack</syntax>
-            <description>Creates a generic xstack used to rebuild serialized Xbase++ values.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_step</name>
-            <syntax>ndtg_stack_step( pStack, nDepth, cNodeName ) -> NIL</syntax>
-            <description>Starts a new node at nDepth and closes any open stack items at the same or deeper depth.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_attrib</name>
-            <syntax>ndtg_stack_attrib( pStack, cName, cValue ) -> NIL</syntax>
-            <description>Adds an attribute to the current node.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_attrib_seal</name>
-            <syntax>ndtg_stack_attrib_seal( pStack ) -> NIL</syntax>
-            <description>In generic xstack mode, converts the current node from its attributes and seals it.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_unsealed</name>
-            <syntax>ndtg_stack_unsealed( pStack ) -> lCanReceiveValue</syntax>
-            <description>Returns .T. when the current stack item can still receive text with ndtg_stack_putval().</description>
-         </function>
-         <function>
-            <name>ndtg_stack_putval</name>
-            <syntax>ndtg_stack_putval( pStack, cValue ) -> NIL</syntax>
-            <description>Stores the text value for the current node, applying the current type conversion when applicable.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_seal</name>
-            <syntax>ndtg_stack_seal( pStack ) -> NIL</syntax>
-            <description>Seals the current node so later text is ignored.</description>
-         </function>
-         <function>
-            <name>ndtg_stack_end</name>
-            <syntax>ndtg_stack_end( @pStack ) -> xResult</syntax>
-            <description>Closes the remaining stack items, returns the resulting Xbase++ value and stores 0 in @pStack.</description>
-         </function>
-      </functions>
-   </function-family>
-</xbdoc>
-*******************************************************************************************************************/
 // -----------------------------------------------------------------------------------------------------------------
 using namespace ndtg_ns;
 // -----------------------------------------------------------------------------------------------------------------
@@ -547,11 +438,11 @@ void ndtg_stack_t::pop_step(void)
             ZeroMemory(sz,512);
             if( m_pTypeList->m_pPropPrefix )
             {
-               sprintf_s(sz,512,"%s%s",m_pTypeList->m_pPropPrefix,pItem->m_pProp->m_pPropName);
+               _snprintf_s(sz,512,_TRUNCATE,"%s%s",m_pTypeList->m_pPropPrefix,pItem->m_pProp->m_pPropName);
             }
             else
             {
-               sprintf_s(sz,512,"%s",pItem->m_pProp->m_pPropName);
+               _snprintf_s(sz,512,_TRUNCATE,"%s",pItem->m_pProp->m_pPropName);
             }            
             _conSetMember( m_pLast->m_conItem , sz,pItem->m_conItem );
          }
@@ -606,6 +497,23 @@ void ndtg_stack_t::attrib(LPSTR pAttrib, LPSTR pVal)
 }
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ndtg_create_typedef_table
+            | syntax_: `ndtg_create_typedef_table( [@pTable] [, cPropertyPrefix] )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, type table, typed nodes, node tree, xml parser types
+   }}*/
+/*{{|desc: Creates an empty type-definition table for typed NDTG stacks and returns its handle. The types
+      and their properties are then described with ndtg_add_type() and ndtg_add_prop().
+    | params:
+    - `pTable` Numeric pointer - Optional variable; when passed by reference it also receives the new
+      table handle. A handle already stored there is overwritten, not destroyed.
+    - `cPropertyPrefix` Character - Optional prefix added to the property name when a child value is
+      assigned to an object member, so with prefix "_" the property "name" is assigned to member "_name".
+
+    Returns Numeric pointer - Handle of the new table. Release it with ndtg_destroy_typedef_table().
+
+    |seealso: See also: {{ilink: <function ndtg_add_type> ndtg_add_type}}, {{ilink: <function ndtg_stack_begin> ndtg_stack_begin}}, {{ilink: <function ndtg_destroy_typedef_table> ndtg_destroy_typedef_table}} }}*/
 _XPP_REG_FUN_( NDTG_CREATE_TYPEDEF_TABLE )
 {
    TXppParamList xpp(pl);
@@ -613,7 +521,25 @@ _XPP_REG_FUN_( NDTG_CREATE_TYPEDEF_TABLE )
    xpp[0]->PutDWord((DWORD) p );
    xpp[1]->PutDWord((DWORD) p );   
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ndtg_destroy_typedef_table
+            | syntax_: `ndtg_destroy_typedef_table( @pTable )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, type table, destroy, release
+   }}*/
+/*{{|desc: Destroys a type-definition table with every type and property definition it holds. When pTable is
+      passed by reference the variable is set to 0.
+    | params:
+    - `pTable` Numeric pointer - Table handle returned by ndtg_create_typedef_table(); 0 does nothing.
+
+    Returns NIL.
+
+    |note: Stacks created from the table keep a pointer to it: destroy the table only after every typed
+      stack using it has been closed with ndtg_stack_end().
+
+    |seealso: See also: {{ilink: <function ndtg_create_typedef_table> ndtg_create_typedef_table}} }}*/
 _XPP_REG_FUN_( NDTG_DESTROY_TYPEDEF_TABLE )
 {
    TXppParamList xpp(pl);
@@ -621,8 +547,35 @@ _XPP_REG_FUN_( NDTG_DESTROY_TYPEDEF_TABLE )
    if( p ){ delete p; }
    xpp[1]->PutDWord(0);   
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_ADD_TYPE ) // ndtg_add_type(pTable,cTypeName,uItem,nAttrib) -> pType
+/*{{begin-function}}*/
+/*{{function_: ndtg_add_type
+            | syntax_: `ndtg_add_type( pTable, cTypeName [, uItem] [, nAttrib] )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, add type, node type, typed stack
+   }}*/
+/*{{|desc: Adds the type cTypeName to a type-definition table and returns its handle. When the type already
+      exists it is updated instead: uItem replaces the stored item and the nAttrib bits are added to the
+      existing attributes.
+    | params:
+    - `pTable` Numeric pointer - Table handle returned by ndtg_create_typedef_table().
+    - `cTypeName` Character - Type name. NDTG matches type names case sensitively.
+    - `uItem` Object/CodeBlock - Item used to build node values: with XPP_OBJECT in nAttrib the class
+      object whose :new() creates the value, with XPP_BLOCK a codeblock whose Eval() result is the value.
+      With other attributes it is only stored. Logical, Date and NIL values are not stored.
+    - `nAttrib` Numeric - Type attributes. XPP_OBJECT (0x80) creates an object node value from uItem and
+      XPP_BLOCK (0x40) evaluates uItem; both seal the node, so its own text is ignored. For text nodes the
+      whole value must be one conversion code, applied by ndtg_stack_putval(): 0x03010000 Logical ("true" or
+      "yes" is .T.), 0x03020000 or 0x03040000 integer Numeric, 0x03180000 decimal Numeric, 0x03200000 or
+      0x03880000 Character, 0x03810000 FILETIME64 object loaded with :SetTimeStamp( cText ). With any other
+      value the node text is ignored.
+
+    Returns Numeric pointer - Type handle for ndtg_add_prop() and ndtg_set_attrib_cb(), or 0 when cTypeName
+      is missing. NIL when pTable is 0.
+
+    |seealso: See also: {{ilink: <function ndtg_add_prop> ndtg_add_prop}}, {{ilink: <function ndtg_get_type> ndtg_get_type}} }}*/
+_XPP_REG_FUN_( NDTG_ADD_TYPE )
 {
    TXppParamList xpp(pl);
    ndtg_typelist_t* pTable =  (ndtg_typelist_t*) xpp[1]->GetLong();
@@ -631,16 +584,57 @@ _XPP_REG_FUN_( NDTG_ADD_TYPE ) // ndtg_add_type(pTable,cTypeName,uItem,nAttrib) 
       xpp[0]->PutDWord((DWORD) pTable->Add( xpp[2]->LockStrEx(),xpp[3]->GetT(0xE6),xpp[4]->GetDWord()));            
    }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_GET_TYPE ) // ndtg_get_type( pTable , cTypeName ) -> pType
+/*{{begin-function}}*/
+/*{{function_: ndtg_get_type
+            | syntax_: `ndtg_get_type( pTable, cTypeName )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, get type, node type handle
+   }}*/
+/*{{|desc: Returns the handle of a type already defined in a type-definition table, without adding anything.
+    | params:
+    - `pTable` Numeric pointer - Table handle returned by ndtg_create_typedef_table().
+    - `cTypeName` Character - Type name, matched case sensitively.
+
+    Returns Numeric pointer - Type handle, or 0 when the name is not defined or pTable is 0.
+
+    |seealso: See also: {{ilink: <function ndtg_add_type> ndtg_add_type}} }}*/
+_XPP_REG_FUN_( NDTG_GET_TYPE )
 {
    TXppParamList xpp(pl);
    ndtg_typelist_t* pTable =  (ndtg_typelist_t*) xpp[1]->GetLong();   
-   if( pTable ){ xpp[0]->PutDWord( (DWORD) pTable->_find_(xpp[1]->LockStrEx()));}
+   if( pTable ){ xpp[0]->PutDWord( (DWORD) pTable->_find_(xpp[2]->LockStrEx()));}
    else xpp[0]->PutDWord(0);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_ADD_PROP) // ndtg_add_prop(pType,cPropName,cTypeName,uItem,nAttrib) -> pProp
+/*{{begin-function}}*/
+/*{{function_: ndtg_add_prop
+            | syntax_: `ndtg_add_prop( pType, cPropName, cTypeName [, uItem] [, nAttrib] )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, add property, child node, node property
+   }}*/
+/*{{|desc: Adds the property cPropName to a type and returns the property handle. A property describes a
+      child node of the nodes of type pType: the child value is built as cTypeName. When cTypeName is not yet
+      in the table an empty type is added for it, to be completed later with ndtg_add_type(). When the
+      property already exists it is updated: uItem replaces the stored item and the nAttrib bits are added.
+    | params:
+    - `pType` Numeric pointer - Type handle from ndtg_add_type() or ndtg_get_type().
+    - `cPropName` Character - Property name, matched case sensitively against child node names.
+    - `cTypeName` Character - Name of the type of the property value.
+    - `uItem` AnyType - Reserved; stored with the property but not used by the current version.
+    - `nAttrib` Numeric - Property attributes. XPP_ARRAY (0x20): the property value is an array and every
+      child node, whatever its name, is appended to it as a cTypeName value. XPP_OBJECT (0x80): child nodes
+      are resolved as properties of cTypeName and each child value is assigned to the member of the node
+      value named after the property (plus the table prefix); children whose name matches no property are not
+      captured. When both bits are present XPP_ARRAY wins.
+
+    Returns Numeric pointer - Property handle, or 0 when cPropName or cTypeName is missing. NIL when pType
+      is 0.
+
+    |seealso: See also: {{ilink: <function ndtg_add_type> ndtg_add_type}} }}*/
+_XPP_REG_FUN_( NDTG_ADD_PROP)
 {
    TXppParamList xpp(pl);
    ndtg_type_t* pt = reinterpret_cast<ndtg_type_t*>(xpp[1]->GetLong());
@@ -649,8 +643,30 @@ _XPP_REG_FUN_( NDTG_ADD_PROP) // ndtg_add_prop(pType,cPropName,cTypeName,uItem,n
       xpp[0]->PutDWord((DWORD) pt->AddProp(xpp[2]->str(),xpp[3]->str(),xpp[4]->GetT(0xE6),xpp[5]->GetDWord()) );            
    }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_SET_ATTRIB_CB) // ndtg_set_attrib_cb(pType,b) -> NIL
+/*{{begin-function}}*/
+/*{{function_: ndtg_set_attrib_cb
+            | syntax_: `ndtg_set_attrib_cb( pType, bAttrib )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, attribute callback, node attributes, code block
+   }}*/
+/*{{|desc: Installs the attribute callback of a type, replacing any previous one. When a node of the type is
+      closed in a typed stack, the codeblock is evaluated once per collected attribute as
+      Eval( bAttrib, xValue, cKey, cValue, nKeyCrc32 ), where xValue is the node value being completed and
+      nKeyCrc32 is the CRC32 of the lowercased attribute name. Without a callback the attributes of the
+      node are discarded.
+    | params:
+    - `pType` Numeric pointer - Type handle from ndtg_add_type() or ndtg_get_type().
+    - `bAttrib` CodeBlock - Attribute callback; any other value only removes the current one.
+
+    Returns NIL.
+
+    |note: Attributes are delivered when the node is closed, not when they are added, and in reverse order
+      of the ndtg_stack_attrib() calls.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_attrib> ndtg_stack_attrib}} }}*/
+_XPP_REG_FUN_( NDTG_SET_ATTRIB_CB)
 {
    TXppParamList xpp(pl);
    ndtg_type_t* pt = reinterpret_cast<ndtg_type_t*>(xpp[1]->GetLong());
@@ -660,8 +676,33 @@ _XPP_REG_FUN_( NDTG_SET_ATTRIB_CB) // ndtg_set_attrib_cb(pType,b) -> NIL
       if( xpp[2]->CheckType(XPP_BLOCK) ){ pt->m_conb_on_attrib = _conNew( xpp[2]->con()); }
    }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_BEGIN    ) // ndtg_stack_begin(tt,cRType,nRFlags)            
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_begin
+            | syntax_: `ndtg_stack_begin( [pTable, cResultType [, nResultFlags]] )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, node stack, begin, tree builder, xml to object
+   }}*/
+/*{{|desc: Creates a node trigger stack and returns its handle. With parameters the stack is typed: node
+      values are built as described by the pTable definitions, and the value of the first node, built as
+      cResultType, becomes the final result. Without parameters a generic xstack is created instead, which
+      rebuilds a Xbase++ value serialized in the OT4XB XML format.
+    | params:
+    - `pTable` Numeric pointer - Type-definition table handle. 0 generates a runtime error.
+    - `cResultType` Character - Name of an existing type in pTable describing the result value. A
+      runtime error is generated when the type is not defined.
+    - `nResultFlags` Numeric - Property attributes applied to the result, with the same meaning as
+      nAttrib in ndtg_add_prop(): XPP_OBJECT (0x80) resolves the children of the first node as properties of
+      cResultType, XPP_ARRAY (0x20) collects them into an array of cResultType values.
+
+    Returns Numeric pointer - Stack handle. Release it with ndtg_stack_end(), which also returns the
+      result.
+
+    |note: In typed mode the name of the first node is not checked; the result type is fixed by cResultType.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_step> ndtg_stack_step}}, {{ilink: <function ndtg_stack_end> ndtg_stack_end}}, {{ilink: <function ndtg_create_typedef_table> ndtg_create_typedef_table}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_BEGIN    )
 {
    TXppParamList xpp(pl);
    if( xpp.PCount() > 0 )
@@ -677,8 +718,31 @@ _XPP_REG_FUN_( NDTG_STACK_BEGIN    ) // ndtg_stack_begin(tt,cRType,nRFlags)
       xpp[0]->PutDWord( (DWORD) new ndtg_t( new ndtg_xstack_t() ) );   
    }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_STEP     ) // ndtg_stack_step( ndtg , nd , cc )              
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_step
+            | syntax_: `ndtg_stack_step( pStack, nDepth, cNodeName )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, open node, nesting level, depth, tree builder
+   }}*/
+/*{{|desc: Opens a new node at nesting level nDepth. Nodes still open at the same or a deeper level are
+      closed first and their completed values delivered to their parents, so there is no explicit close
+      call: a sibling or a shallower node closes the previous branch, and ndtg_stack_end() closes whatever
+      is left.
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+    - `nDepth` Numeric - Nesting level of the node. A child must use a deeper level than its parent;
+      siblings repeat the level. Typically the XML nesting depth.
+    - `cNodeName` Character - Node name. A runtime error is generated when it is missing.
+
+    Returns NIL.
+
+    |note: In a typed stack the node name selects the property of the parent node type (case sensitively);
+      when the parent expects an object and the name matches no property, the node is not captured.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_attrib> ndtg_stack_attrib}}, {{ilink: <function ndtg_stack_putval> ndtg_stack_putval}}, {{ilink: <function ndtg_stack_end> ndtg_stack_end}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_STEP     )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -703,8 +767,24 @@ _XPP_REG_FUN_( NDTG_STACK_STEP     ) // ndtg_stack_step( ndtg , nd , cc )
       }      
    }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_SEAL     ) // ndtg_stack_seal( ndtg )                        
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_seal
+            | syntax_: `ndtg_stack_seal( pStack )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, seal node, no more text
+   }}*/
+/*{{|desc: Seals the node currently open: later ndtg_stack_putval() calls are ignored for it and
+      ndtg_stack_unsealed() returns .F. for it. Child nodes opened afterwards are not affected. Does nothing
+      when no node is open.
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+
+    Returns NIL.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_unsealed> ndtg_stack_unsealed}}, {{ilink: <function ndtg_stack_putval> ndtg_stack_putval}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_SEAL     )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -725,8 +805,23 @@ _XPP_REG_FUN_( NDTG_STACK_SEAL     ) // ndtg_stack_seal( ndtg )
       }      
    }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_UNSEALED ) // ndtg_stack_unsealed( ndtg )                    
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_unsealed
+            | syntax_: `ndtg_stack_unsealed( pStack )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, node open, can receive text
+   }}*/
+/*{{|desc: Tells whether the node currently open can still receive its text with ndtg_stack_putval().
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+
+    Returns Logical - .T. while there is an open node that is not sealed; .F. when the node is sealed or no
+      node is open.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_putval> ndtg_stack_putval}}, {{ilink: <function ndtg_stack_seal> ndtg_stack_seal}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_UNSEALED )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -747,8 +842,29 @@ _XPP_REG_FUN_( NDTG_STACK_UNSEALED ) // ndtg_stack_unsealed( ndtg )
       }            
    }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_PUTVAL   ) // ndtg_stack_putval( ndtg , oXml:GetValue() )    
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_putval
+            | syntax_: `ndtg_stack_putval( pStack, cValue )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, node text, node value, typed conversion
+   }}*/
+/*{{|desc: Stores the text content of the node currently open. In a typed stack the text is converted as
+      selected by the conversion code in the type's nAttrib (see ndtg_add_type()); nodes whose type has no
+      conversion code ignore their text. In a generic xstack the text is decoded following the OT4XB
+      serialization rules for the node.
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+    - `cValue` Character - Node text. NIL is ignored.
+
+    Returns NIL.
+
+    |note: Ignored when the node is sealed or no node is open. Each call replaces the value stored by a
+      previous one: text arriving in chunks must be concatenated by the caller before the call.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_unsealed> ndtg_stack_unsealed}}, {{ilink: <function ndtg_stack_seal> ndtg_stack_seal}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_PUTVAL   )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -770,8 +886,29 @@ _XPP_REG_FUN_( NDTG_STACK_PUTVAL   ) // ndtg_stack_putval( ndtg , oXml:GetValue(
       }      
    }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_ATTRIB ) // ndtg_stack_attrib( ndtg , cAttrib , cValue)
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_attrib
+            | syntax_: `ndtg_stack_attrib( pStack, cName, cValue )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, node attribute, key value
+   }}*/
+/*{{|desc: Adds one attribute to the node currently open. In a typed stack attributes are kept until the
+      node is closed and then delivered to the attribute callback of the node type (see
+      ndtg_set_attrib_cb()); without callback they are discarded. In a generic xstack the attributes carry
+      the serialized description of the node value, consumed by ndtg_stack_attrib_seal().
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+    - `cName` Character - Attribute name.
+    - `cValue` Character - Attribute value.
+
+    Returns NIL.
+
+    |note: The call is ignored when no node is open or when cName or cValue is not a Character value.
+
+    |seealso: See also: {{ilink: <function ndtg_set_attrib_cb> ndtg_set_attrib_cb}}, {{ilink: <function ndtg_stack_attrib_seal> ndtg_stack_attrib_seal}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_ATTRIB )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -794,8 +931,28 @@ _XPP_REG_FUN_( NDTG_STACK_ATTRIB ) // ndtg_stack_attrib( ndtg , cAttrib , cValue
       }      
    }
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_ATTRIB_SEAL ) // ndtg_stack_attrib_seal( ndtg )
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_attrib_seal
+            | syntax_: `ndtg_stack_attrib_seal( pStack )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, attributes done, node created, xstack
+   }}*/
+/*{{|desc: In a generic xstack, closes the attribute phase of the node currently open: the node value is
+      created from the attributes collected so far. Call it once the start tag of a node is complete and
+      before any child node is stepped, because array and object values must exist before child values are
+      delivered into them. In a typed stack the call does nothing.
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+
+    Returns NIL.
+
+    |note: The node is not sealed against text: nodes whose serialized content travels as node text still
+      take it from ndtg_stack_putval().
+
+    |seealso: See also: {{ilink: <function ndtg_stack_attrib> ndtg_stack_attrib}}, {{ilink: <function ndtg_stack_putval> ndtg_stack_putval}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_ATTRIB_SEAL )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -810,8 +967,28 @@ _XPP_REG_FUN_( NDTG_STACK_ATTRIB_SEAL ) // ndtg_stack_attrib_seal( ndtg )
       }      
    }
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( NDTG_STACK_END ) // ndtg_stack_end( ndtg )                         
+/*{{begin-function}}*/
+/*{{function_: ndtg_stack_end
+            | syntax_: `ndtg_stack_end( @pStack )`
+            | category: xml/node-trigger
+            | _kw_: ndtg, close all, result value, tree builder, end
+   }}*/
+/*{{|desc: Closes every node still open, destroys the stack and returns the completed result value. When
+      pStack is passed by reference the variable is set to 0.
+    | params:
+    - `pStack` Numeric pointer - Stack handle from ndtg_stack_begin(). 0 generates a runtime error.
+
+    Returns AnyType - The completed value: for a typed stack the value of the first node, built as the
+      cResultType given to ndtg_stack_begin(); for a generic xstack the rebuilt Xbase++ value. NIL when no
+      node was ever opened.
+
+    |note: The handle is always destroyed by the call. The type-definition table of a typed stack is not
+      destroyed and can be reused.
+
+    |seealso: See also: {{ilink: <function ndtg_stack_begin> ndtg_stack_begin}}, {{ilink: <function ndtg_destroy_typedef_table> ndtg_destroy_typedef_table}} }}*/
+_XPP_REG_FUN_( NDTG_STACK_END )
 {
    TXppParamList xpp(pl);
    ndtg_t* ndtg = reinterpret_cast<ndtg_t*>(xpp[1]->GetDWord());
@@ -834,6 +1011,7 @@ _XPP_REG_FUN_( NDTG_STACK_END ) // ndtg_stack_end( ndtg )
    delete ndtg;
    xpp[1]->PutLong(0);   
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 
 

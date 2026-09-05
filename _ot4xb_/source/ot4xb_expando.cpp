@@ -82,7 +82,7 @@ static void method_add_from_server_cookie( XppParamList pl )
          ContainerHandle v = _conPutCL( NULLCONTAINER, (LPSTR) value, value_len );
          ContainerHandle r = _conNew( NULLCONTAINER );
 
-         // Llamar al método "set_prop" en el contenedor
+         // Llamar al mï¿½todo "set_prop" en el contenedor
          ContainerHandle pcon[ ] = { Self, k, v };
          _conCallMethodPa( r, "set_prop", 3, pcon );
 
@@ -99,13 +99,13 @@ static void method_add_from_server_cookie( XppParamList pl )
          if( equal_sign && equal_sign < cookie_end )
          {
             size_t name_len = equal_sign - cookie_start;  // Longitud del nombre (antes del '=')
-            size_t value_len = cookie_end - ( equal_sign + 1 );  // Longitud del valor (después del '=' y antes del ';')
+            size_t value_len = cookie_end - ( equal_sign + 1 );  // Longitud del valor (despuï¿½s del '=' y antes del ';')
             add_cookie( cookie_start, name_len, equal_sign + 1, value_len );  // Llamada a add_cookie con la cookie actual
          }
          cookie_start = cookie_end + 1;  // Avanzamos al siguiente cookie
       }
 
-      // Procesar la última cookie (si no termina con ';')
+      // Procesar la ï¿½ltima cookie (si no termina con ';')
       if( *cookie_start != '\0' )
       {
          const char* equal_sign = strchr( cookie_start, '=' );
@@ -113,7 +113,7 @@ static void method_add_from_server_cookie( XppParamList pl )
          {
             size_t name_len = equal_sign - cookie_start;
             size_t value_len = strlen( cookie_start ) - ( equal_sign - cookie_start ) - 1;
-            add_cookie( cookie_start, name_len, equal_sign + 1, value_len );  // Llamada para la última cookie
+            add_cookie( cookie_start, name_len, equal_sign + 1, value_len );  // Llamada para la ï¿½ltima cookie
          }
       }
    }
@@ -263,51 +263,27 @@ static void add_ini_string(TXppParamList& xpp)
 // flags   0x0001  skip NIL
 //         0x1000  replace value with codeblock result
 // 
+// ---------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ot4xb_iterate_array_cb
+            | syntax_: `ot4xb_iterate_array_cb( aArray, bEval [, xCargo] [, nFlags] )`
+            | category: container/iteration
+            | source: ot4xb_expando.cpp:OT4XB_ITERATE_ARRAY_CB
+            | _kw_: iterate array, for each, code block, visit elements
+   }}*/
+/*{{|desc: Iterates an Xbase++ array and evaluates a codeblock for each visited element.
+    | params:
+    - `aArray` Array - Array to visit.
+    - `bEval` Codeblock - Evaluated as Eval( bEval, xElement, nPos, xCargo ).
+    - `xCargo` Any - Optional user value passed unchanged to the codeblock.
+    - `nFlags` Numeric - Iteration flags, combined with OR or nOr().
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_iterate_array_cb</name>
-      <source>ot4xb_expando.cpp:OT4XB_ITERATE_ARRAY_CB</source>
-      <category>container/iteration</category>
-      <description>
-         Iterates an Xbase++ array and evaluates a codeblock for each visited element.
-      </description>
-      <syntax>ot4xb_iterate_array_cb( aArray, bEval [, xCargo] [, nFlags] ) -> NIL</syntax>
-      <parameters>
-         <parameter>
-            <name>aArray</name>
-            <type>Array</type>
-            <description>Array to visit.</description>
-         </parameter>
-         <parameter>
-            <name>bEval</name>
-            <type>Codeblock</type>
-            <description>Evaluated as Eval( bEval, xElement, nPos, xCargo ).</description>
-         </parameter>
-         <parameter>
-            <name>xCargo</name>
-            <type>Any</type>
-            <description>Optional user value passed unchanged to the codeblock.</description>
-         </parameter>
-         <parameter>
-            <name>nFlags</name>
-            <type>Numeric</type>
-            <description>Iteration flags, combined with OR or nOr().</description>
-         </parameter>
-      </parameters>
-      <flags>
-         <flag value="0x0001">Skip NIL elements.</flag>
-         <flag value="0x1000">Replace each visited element with the codeblock result.</flag>
-      </flags>
-      <remarks>
-         Pass 0 for nFlags when the iteration must be read-only. In the current implementation any non-zero
-         nFlags value writes the codeblock result back to the array; 0x1000 is the documented replace flag.
-      </remarks>
-      <return>NIL</return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns NIL
+
+    |note: Pass 0 for nFlags when the iteration must be read-only. Only the 0x1000 flag writes the codeblock
+      result back to the array.
+
+    |flags: Skip NIL elements.Replace each visited element with the codeblock result. }}*/
 _XPP_REG_FUN_(OT4XB_ITERATE_ARRAY_CB)
 {
    TXppParamList xpp(pl, 4);
@@ -330,19 +306,23 @@ _XPP_REG_FUN_(OT4XB_ITERATE_ARRAY_CB)
                ContainerHandle tmp = _conNew(NULLCONTAINER);
                if (!_conEvalB(tmp, codeblock, 3, item, con_item_pos, cargo))
                {
-                  if (flags && 0x1000) // store result
+                  if (flags & 0x1000) // store result
                   {
                      _conArrayPut(cona, tmp, item_pos, 0);
                   }
                }
-               _conRelease(tmp); tmp = NULLCONTAINER;
+               _conRelease(tmp);
+               tmp = NULLCONTAINER;
             }
-            _conRelease(item); item = NULLCONTAINER;
+            _conRelease( con_item_pos );
+            con_item_pos = NULLCONTAINER;
+            _conRelease(item);
+            item = NULLCONTAINER;
          }
       }
    }
 }
-
+/*{{end-function}}*/
 // ---------------------------------------------------------------------------------
 // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags)
 // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
@@ -377,7 +357,7 @@ static void method_iterate_cb(XppParamList pl)
                ContainerHandle tmp = _conNew(NULLCONTAINER);
                if (!_conEvalB(tmp, codeblock, 4, k, vv, self, cargo))
                {
-                  if (flags && 0x1000) // store result
+                  if (flags & 0x1000) // store result
                   {
                      _conArrayPut(cona, tmp, item_pos, 2, 0);
                   }
@@ -1061,257 +1041,265 @@ label_cleanup:;
    }
 }
 // ---------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>_ot4xb_expando_</name>
-      <source>ot4xb_expando.cpp:_OT4XB_EXPANDO_</source>
-      <category>container/expando</category>
-      <description>
-         Dynamic property container used by OT4XB to hold named values, JSON objects, XML nodes, environment
-         values, INI entries and other key/value data. Properties can be accessed through explicit methods or
-         as virtual instance variables.
-      </description>
-      <syntax>_ot4xb_expando_():new( [nFlags] ) -> oExpando</syntax>
-      <parameters>
-         <parameter>
-            <name>nFlags</name>
-            <type>Numeric</type>
-            <description>
-               Optional instance flags kept for compatibility and copied by ::_clone(). The current public
-               methods in this implementation do not branch on this value.
-            </description>
-         </parameter>
-      </parameters>
-      <members>
-         <member name="__m__props__" access="internal">Internal array of { cKey, xValue } pairs.</member>
-         <member name="__m__hash__" access="internal">Internal CRC32-lower hash table used for property lookup.</member>
-         <member name="__m__flags__" access="internal">Flags supplied to ::new().</member>
-         <member name="__m__json_flags__" access="internal">Default flags added by ::json_escape_self().</member>
-         <member name="__m__serial__" access="internal">Object serial used by JSON serialization to detect recursion.</member>
-         <member name="__m__cargo__" access="internal">Temporary cargo used by internal unserialize helpers.</member>
-      </members>
-      <methods>
-         <method name="::get_prop" syntax="o:get_prop( cKey ) -> xValue | NIL">
-            Returns the value stored under cKey, or NIL when the property is not present.
-         </method>
-         <method name="::set_prop" syntax="o:set_prop( cKey, xValue ) -> NIL">
-            Creates or replaces a property value. The same operation is used by virtual assignment, for example
-            o:name := "value".
-         </method>
-         <method name="::GetNoIVar" syntax="o:GetNoIVar( cKey ) -> xValue | NIL">
-            Virtual instance-variable getter used by Xbase++ member access on properties that are not declared
-            as real instance variables.
-         </method>
-         <method name="::SetNoIVar" syntax="o:SetNoIVar( cKey, xValue ) -> NIL">
-            Virtual instance-variable setter used by Xbase++ member assignment on properties that are not declared
-            as real instance variables.
-         </method>
-         <method name="::is_prop" syntax="o:is_prop( cKey ) -> lExists">
-            Returns .T. when a property exists.
-         </method>
-         <method name="::remove_prop" syntax="o:remove_prop( cKey ) -> xOldValue | NIL">
-            Removes a property and returns its previous value when it existed.
-         </method>
-         <method name="::find_prop_index" syntax="o:find_prop_index( cKey ) -> nIndex">
-            Returns the 1-based position in the internal property holder, or 0 when the key is not present.
-         </method>
-         <method name="::set_prop_add" syntax="o:set_prop_add( cKey, xValue ) -> NIL">
-            Adds a value preserving previous values. The first value is stored normally; if the key already
-            exists, the old value and the new value are held in an array, and following values are appended.
-         </method>
-         <method name="::add_env_strings" syntax="o:add_env_strings( [pEnvironment] ) -> Self">
-            Adds environment strings as properties. When pEnvironment is omitted or 0, the current process
-            environment block is used.
-         </method>
-         <method name="::add_ini_string" syntax="o:add_ini_string( cIniText, nFlags ) -> Self">
-            Adds properties parsed from INI-style text.
-         </method>
-         <method name="::add_from_array" syntax="o:add_from_array( aData [, nFlags] [, bGetKey] [, xCargo] ) -> Self">
-            Adds properties from an array. By default, each item is expected to be { cKey, xValue }.
-         </method>
-         <method name="::add_from_server_cookie" syntax="o:add_from_server_cookie( cCookieHeader ) -> Self">
-            Parses a server cookie string using semicolon-separated name=value items and stores each cookie
-            value as a property.
-         </method>
-         <method name="::iterate_cb" syntax="o:iterate_cb( bEval [, xCargo] [, nFlags] ) -> Self">
-            Iterates expando properties and evaluates Eval( bEval, cKey, xValue, Self, xCargo ).
-         </method>
-         <method name="::get_json_flags" syntax="o:get_json_flags() -> nFlags">
-            Returns the instance JSON flags used by ::json_escape_self().
-         </method>
-         <method name="::set_json_flags" syntax="o:set_json_flags( nFlags ) -> nFlags">
-            Stores default JSON flags used by ::json_escape_self().
-         </method>
-         <method name="::json_escape_self" syntax="o:json_escape_self( [nFlags] [, nDepth] [, pStack] ) -> cJson">
-            Serializes the expando object as a JSON object. This method is also the object callback used by
-            _ot4xb_expando_():json_serialize().
-         </method>
-         <method name="::_clone" syntax="o:_clone() -> oExpando">
-            Creates another expando object with a cloned internal property holder and copied hash and flags.
-            Stored values are not deep-cloned.
-         </method>
-         <method name="::_ToArray" syntax="o:_ToArray() -> aPairs">
-            Returns a cloned array of { cKey, xValue } pairs.
-         </method>
-         <method name="::_GetArray" syntax="o:_GetArray() -> aPairs">
-            Returns the internal property holder array. This is a low-level view, not a clone.
-         </method>
-      </methods>
-      <class-methods>
-         <method name="::from_xml" syntax="_ot4xb_expando_():from_xml( cXmlOrFile [, nFlags] ) -> xValue | NIL">
-            Parses XML using XmlLite and returns an expando/value tree. If cXmlOrFile contains a '&lt;' character
-            it is treated as XML text; otherwise it is treated as a file name.
-         </method>
-         <method name="::json_serialize" syntax="_ot4xb_expando_():json_serialize( xValue [, nFlags] [, nDepth] [, pStack] ) -> cJson">
-            Serializes any supported Xbase++ value as JSON. Objects are serialized by calling their
-            ::json_escape_self() method when present.
-         </method>
-      </class-methods>
-      <related-functions>
-         <function name="ot4xb_json_parse">
-            Parses JSON and builds Xbase++ values. JSON objects are created as _ot4xb_expando_ instances by default.
-         </function>
-      </related-functions>
-      <flags name="add_ini_string">
-         <flag value="0x0000">Ignore section lines.</flag>
-         <flag value="0x0001">Prefix entries with the section name using section\entry.</flag>
-         <flag value="0x0002">LTrim/RTrim values.</flag>
-         <flag value="0x0004">With 0x0001, collect section names as an additional section array.</flag>
-      </flags>
-      <flags name="add_from_array">
-         <flag value="0x0000">Use ::set_prop_add(); repeated keys are collected.</flag>
-         <flag value="0x0001">Use ::set_prop(); repeated keys replace previous values.</flag>
-         <flag value="0x0008">When the source value is an array, add each element as a separate value.</flag>
-         <flag value="0x0100">Use bGetKey to compute the key: Eval( bGetKey, xElement, nPos, Self, xCargo ).</flag>
-      </flags>
-      <flags name="iterate_cb">
-         <flag value="0x0001">Skip properties whose value is NIL.</flag>
-         <flag value="0x1000">Replace each visited value with the codeblock result.</flag>
-      </flags>
-      <flags name="from_xml">
-         <flag value="0x0001">Include the root element as a named property.</flag>
-         <flag value="0x0002">Treat CDATA nodes as text. Without this flag, CDATA nodes are ignored.</flag>
-         <flag value="0x0100">Use the simple expando XML parser. This flag is present in the default value.</flag>
-         <flag value="0x1000">Read XML attributes.</flag>
-         <flag value="0x2000">
-            With 0x1000, store attributes as { cName, cValue } pairs under m_attributes. Without 0x2000,
-            attributes are merged into the node object as normal properties.
-         </flag>
-      </flags>
-      <flags name="json_serialize">
-         <flag value="EXPANDO_FORMAT_DEBUG">Emit debug type wrappers around serialized values.</flag>
-         <flag value="EXPANDO_FORMAT_FLAT_ARRAY_KV_ITEMS">Format nested array key/value items in a flatter form.</flag>
-         <flag value="EXPANDO_FORMAT_ENFORCE_FLAT">Suppress pretty formatting inside expando object serialization.</flag>
-         <flag value="EXPANDO_FORMAT_PRETTY">Emit CRLF and indentation.</flag>
-         <flag value="EXPANDO_FORMAT_ND_PRECISSION(n)">Set numeric double precision, using the header macro.</flag>
-         <flag value="EXPANDO_FORMAT_ND_FIXED">Format doubles using fixed decimal notation.</flag>
-         <flag value="EXPANDO_FORMAT_ND_MINIMAL">Format doubles using minimal representation. This is the default for ::json_serialize().</flag>
-      </flags>
-      <remarks>
-         Property lookup uses a lowercase CRC32 hash, so property names are effectively case-insensitive.
-         Repeated names are normally collected by ::set_prop_add(), which is why JSON/XML imports can preserve
-         repeated fields when the caller selects the additive method.
+/*{{begin-class}}*/
+/*{{class-name_: _ot4xb_expando_
+            | _slug_: _ot4xb_expando_
+            | category: container/expando
+            | desc: Dynamic property container used by OT4XB to hold named values, JSON objects, XML nodes, environment
+              values, INI entries and other key/value data. Properties can be accessed through explicit methods or as
+              virtual instance variables.
+            | note: Property lookup uses a lowercase CRC32 hash, so property names are effectively case-insensitive.
+              Repeated names are normally collected by ::set_prop_add(), which is why JSON/XML imports can preserve
+              repeated fields when the caller selects the additive method.
+            | note: Combine flags with OR or nOr(); do not combine flags with addition.
+            | note: The methods m_unserialize_step() and m_on_unserialize_pop() are internal helper hooks kept on the
+              class for serializer/unserializer support and are not intended as normal application API.
+            | note: The __m__* instance variables are internal state, not meant to be manipulated outside the class;
+              they are registered EXPORTED only because Xbase++ does not allow HIDDEN or PROTECTED instance or class
+              variables to be manipulated from outside the class scope, where the code-block methods run.
+            | see-also: ot4xb_json_parse - Parses JSON and builds Xbase++ values. JSON objects are created as _ot4xb_expando_ instances by default.
+            | example: ```
+              proc main()
+                 local o := _ot4xb_expando_():new()
+                 local cJson
 
-         Combine flags with OR or nOr(); do not combine flags with addition.
+                 o:name := "demo"
+                 o:set_prop_add( "tag", "one" )
+                 o:set_prop_add( "tag", "two" )
 
-         The methods m_unserialize_step() and m_on_unserialize_pop() are internal helper hooks kept on the class
-         for serializer/unserializer support and are not intended as normal application API.
-      </remarks>
-      <example><![CDATA[
-proc main()
-   local o := _ot4xb_expando_():new()
-   local cJson
+                 cJson := _ot4xb_expando_():json_serialize( o, nOr( EXPANDO_FORMAT_PRETTY, EXPANDO_FORMAT_ND_MINIMAL ) )
+                 ? cJson
 
-   o:name := "demo"
-   o:set_prop_add( "tag", "one" )
-   o:set_prop_add( "tag", "two" )
-
-   cJson := _ot4xb_expando_():json_serialize( o, nOr( EXPANDO_FORMAT_PRETTY, EXPANDO_FORMAT_ND_MINIMAL ) )
-   ? cJson
-
-   o := ot4xb_json_parse( cJson )
-   ? o:name
-return
-      ]]></example>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
+                 o := ot4xb_json_parse( cJson )
+                 ? o:name
+              return
+              ```
+   | _kw_: expando, dynamic properties, property bag, JSON object, XML node, key value
+   }}*/
 static void create_class(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("_OT4XB_EXPANDO_");
    if (conco == NULLCONTAINER)
    {
       TXbClass* pc = new TXbClass; pc->ClassName("_OT4XB_EXPANDO_");
+      /*{{|:**BEGIN CLASS  _ot4xb_expando_** }}*/
       pc->EXPORTED();
+      /*{{|ivar_: - VAR __m__props__
+               | desc_: Internal array of { cKey, xValue } pairs.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__props__");
+      /*{{|ivar_: - VAR __m__hash__
+               | desc_: Internal CRC32-lower hash table used for property lookup.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__hash__");
+      /*{{|ivar_: - VAR __m__flags__
+               | desc_: Flags supplied to ::new().
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__flags__");
+      /*{{|ivar_: - VAR __m__json_flags__
+               | desc_: Default flags added by ::json_escape_self().
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__json_flags__");
+      /*{{|ivar_: - VAR __m__serial__
+               | desc_: Object serial used by JSON serialization to detect recursion.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__serial__");
+      /*{{|ivar_: - VAR __m__unserialize__info__
+               | desc_: Reserved for unserialize support.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__unserialize__info__");
+      /*{{|ivar_: - VAR __m__cargo__
+               | desc_: Temporary cargo used by internal unserialize helpers.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("__m__cargo__");
 
+      /*{{|method_: - METHOD new( [nFlags] )
+               | return: oExpando
+               | desc_: Calls ot4xb_expando_init to initialize the object.
+      }}*/
       pc->MethodCB("init", "{|s,f|  s:ot4xb_expando_init(f) , s }");
+      /*{{|method_: - METHOD ot4xb_expando_init( nFlags )
+               | return: Self
+               | desc_: Resets and initializes all expando properties.
+               | note: ::ot4xb_expando_init() can be used instead of ::_ot4xb_expando_:init() to initialize derived
+                 classes.
+      }}*/
       pc->Method_cbbs("ot4xb_expando_init", "{|s,f| s:__m__flags__ := f ,"
          "  s:__m__props__ := __anew() ,"
          " s:__m__hash__ := '',"
          " s:__m__serial__ := nFpCall(%i) ,"
          " s }", ot4xb_interlocked_next);
       // -----
-
-      if (method_get_prop == 0) { ; }
-      if (method_set_prop == 0) { ; }
-      if (method_is_prop == 0) { ; }
-      if (method_remove_prop == 0) { ; }
-      if (method_get_prop_index == 0) { ; }
-      if (method_set_prop_add == 0) { ; }
-      if (method_add_env_strings == 0) { ; }
-      if (method_add_ini_string == 0) { ; }
-      if (method_add_from_array == 0) { ; }
-      if (method_iterate_cb == 0) { ; }
-      if (method_json_escape_self == 0) { ; }
-      if (method_m_json_on_unserialize_pop == 0) { ; }
-      if (mc_envelope_from_xml == 0) { ; }
+ 
 
 
+      /*{{|method_: - METHOD get_prop( cKey )
+               | return: xValue / NIL
+               | desc_: Returns the value stored under cKey, or NIL when the property is not present.
+      }}*/
       pc->Method_cbbs("get_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
+      /*{{|method_: - METHOD GetNoIVar( cKey )
+               | return: xValue / NIL
+               | desc_: Virtual instance-variable getter used by Xbase++ member access on properties that are not
+                 declared as real instance variables.
+      }}*/
       pc->Method_cbbs("GetNoIVar", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
+      /*{{|method_: - METHOD set_prop( cKey, xValue )
+               | return: NIL
+               | desc_: Creates or replaces a property value. The same operation is used by virtual assignment, for
+                 example o:name := "value".
+      }}*/
       pc->Method_cbbs("set_prop", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
+      /*{{|method_: - METHOD SetNoIVar( cKey, xValue )
+               | return: NIL
+               | desc_: Virtual instance-variable setter used by Xbase++ member assignment on properties that are not
+                 declared as real instance variables.
+      }}*/
       pc->Method_cbbs("SetNoIVar", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
 
+      /*{{|method_: - METHOD is_prop( cKey ) | return: lExists | desc_: Returns .T. when a property exists. }}*/
       pc->Method_cbbs("is_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_is_prop);
+      /*{{|method_: - METHOD remove_prop( cKey )
+               | return: xOldValue / NIL
+               | desc_: Removes a property and returns its previous value when it existed.
+      }}*/
       pc->Method_cbbs("remove_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_remove_prop);
+      /*{{|method_: - METHOD find_prop_index( cKey )
+               | return: nIndex
+               | desc_: Returns the 1-based position in the internal property holder, or 0 when the key is not present.
+      }}*/
       pc->Method_cbbs("find_prop_index", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop_index);
 
       // -----
+      /*{{|method_: - METHOD set_prop_add( cKey, xValue )
+               | return: NIL
+               | desc_: Adds a value preserving previous values. The first value is stored normally; if the key already
+                 exists, the old value and the new value are held in an array, and following values are appended.
+      }}*/
       pc->Method_cbbs("set_prop_add", "{|s,k,v| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop_add);
+      /*{{|method_: - METHOD add_env_strings( [pEnvironment] )
+               | return: Self
+               | desc_: Adds environment strings as properties. When pEnvironment is omitted or 0, the current process
+                 environment block is used.
+      }}*/
       pc->Method_cbbs("add_env_strings", "{|s,p|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p)    , s}", method_add_env_strings);
+      /*{{|method_: - METHOD add_ini_string( cIniText, nFlags )
+               | return: Self
+               | desc_: Adds properties parsed from INI-style text.
+               | flags:
+                 - `0x0000` Ignore section lines.
+                 - `0x0001` Prefix entries with the section name using section\entry.
+                 - `0x0002` LTrim/RTrim values.
+                 - `0x0004` With 0x0001, collect section names as an additional section array.
+      }}*/
       pc->Method_cbbs("add_ini_string", "{|s,p,dw|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p,dw) , s}", method_add_ini_string);
+      /*{{|method_: - METHOD add_from_array( aData [, nFlags] [, bGetKey] [, xCargo] )
+               | return: Self
+               | desc_: Adds properties from an array. By default, each item is expected to be { cKey, xValue }.
+               | flags:
+                 - `0x0000` Use ::set_prop_add(); repeated keys are collected.
+                 - `0x0001` Use ::set_prop(); repeated keys replace previous values.
+                 - `0x0008` When the source value is an array, add each element as a separate value.
+                 - `0x0100` Use bGetKey to compute the key: Eval( bGetKey, xElement, nPos, Self, xCargo ).
+      }}*/
       pc->Method_cbbs("add_from_array", "{|s,aa,flags,get_key_cb,cargo|  XbFpCall(%i,s,aa,flags,get_key_cb,cargo) , s }", method_add_from_array);
+      /*{{|method_: - METHOD add_from_server_cookie( cCookieHeader )
+               | return: Self
+               | desc_: Parses a server cookie string using semicolon-separated name=value items and stores each cookie
+                 value as a property.
+      }}*/
       pc->Method_cbbs( "add_from_server_cookie", "{|s,str|  XbFpCall(%i,s,str) , s }", method_add_from_server_cookie );
 
 
 
+      /*{{|method_: - METHOD iterate_cb( bEval [, xCargo] [, nFlags] )
+               | return: Self
+               | desc_: Iterates expando properties and evaluates Eval( bEval, cKey, xValue, Self, xCargo ).
+               | flags:
+                 - `0x0001` Skip properties whose value is NIL.
+                 - `0x1000` Replace each visited value with the codeblock result.
+      }}*/
       pc->Method_cbbs("iterate_cb", "{|s,cb,cargo,flags|  XbFpCall(%i,s,s:__m__props__,cb,cargo,flags) , s }", method_iterate_cb); // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags) 
                                                                                                                                         // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
       // -----
+      /*{{|method_: - METHOD get_json_flags()
+               | return: nFlags
+               | desc_: Returns the instance JSON flags used by ::json_escape_self().
+      }}*/
       pc->MethodCB("get_json_flags", "{|s| s:__m__json_flags__  }");
+      /*{{|method_: - METHOD set_json_flags( nFlags )
+               | return: nFlags
+               | desc_: Stores default JSON flags used by ::json_escape_self().
+      }}*/
       pc->MethodCB("set_json_flags", "{|s,v| s:__m__json_flags__ := nOr(v)  }");
+      /*{{|method_: - METHOD json_escape_self( [nFlags] [, nDepth] [, pStack] )
+               | return: cJson
+               | desc_: Serializes the expando object as a JSON object. This method is also the object callback used by
+                 _ot4xb_expando_():json_serialize().
+      }}*/
       pc->Method_cbbs("json_escape_self", "{|s,mf,depth,pStack| XbFpCall(%i,s,s:__m__props__,s:__m__serial__,pStack,s, nOr(mf,s:__m__json_flags__),depth)   }", method_json_escape_self);
       // -----
+      /*{{|method_: - METHOD m_unserialize_step( xValue )
+               | return: Self
+               | desc_: Internal helper hook kept on the class for serializer/unserializer support; not intended as
+                 normal application API.
+      }}*/
       pc->MethodCB("m_unserialize_step", "{|s,v| s:__m__cargo__ := __vmask( 0x20,s:__m__cargo__,__anew()) , aadd( s:__m__cargo__ , v) , s }");
+      /*{{|method_: - METHOD m_on_unserialize_pop()
+               | return: Self
+               | desc_: Internal helper hook kept on the class for serializer/unserializer support; not intended as
+                 normal application API.
+      }}*/
       pc->Method_cbbs("m_on_unserialize_pop", "{|s| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,NIL,NIL,@s:__m__cargo__),s}", method_m_json_on_unserialize_pop);
       // -----
 
       // -----
+      /*{{|method_: - METHOD _clone()
+               | return: oExpando
+               | desc_: Creates another expando object with a cloned internal property holder and copied hash and flags.
+                 Stored values are not deep-cloned.
+      }}*/
       pc->MethodCB("_clone", "{|s| o := s:New(),o:__m__props__:= aclone(s:__m__props__),o:__m__hash__:=s:__m__hash__,o:__m__flags__:=s:__m__flags__,o }");
       // -----
+      /*{{|method_: - METHOD _ToArray()
+               | return: aPairs
+               | desc_: Returns a cloned array of { cKey, xValue } pairs.
+      }}*/
       pc->MethodCB("_ToArray", "{|s,kk| kk := s:__m__hash__ , aclone(  s:__m__props__  ) }");
+      /*{{|method_: - METHOD _GetArray()
+               | return: aPairs
+               | desc_: Returns the internal property holder array. This is a low-level view, not a clone.
+      }}*/
       pc->MethodCB("_GetArray", "{|s| s:__m__props__   }");
       // -----
+      /*{{|class-method_: - CLASS METHOD from_xml( cXmlOrFile [, nFlags] )
+               | return: xValue / NIL
+               | desc_: Parses XML using XmlLite and returns an expando/value tree. If cXmlOrFile contains a < character
+                 it is treated as XML text; otherwise it is treated as a file name.
+               | flags:
+                 - `0x0001` Include the root element as a named property.
+                 - `0x0002` Treat CDATA nodes as text. Without this flag, CDATA nodes are ignored.
+                 - `0x0100` Use the simple expando XML parser. This flag is present in the default value.
+                 - `0x1000` Read XML attributes.
+                 - `0x2000` With 0x1000, store attributes as { cName, cValue } pairs under m_attributes. Without
+                   0x2000, attributes are merged into the node object as normal properties.
+      }}*/
       pc->ClassMethod_cbbs("from_xml", "{|s,uXml,dwFlags| XbFpCall(%i,s,uXml , dwFlags )}", mc_envelope_from_xml);
 
+      /*{{|class-method_: - CLASS METHOD json_serialize( xValue [, nFlags] [, nDepth] [, pStack] )
+               | return: cJson
+               | desc_: Serializes any supported Xbase++ value as JSON. Objects are serialized by calling their
+                 ::json_escape_self() method when present.
+               | include-note-id: expando-serialize-flags
+      }}*/
+      /*{{|:**END CLASS** }}*/
       pc->ClassMethod_cbbs("json_serialize", "{|s,v,moreflags,ndepth,pStack| XbFpCall(%i,v,moreflags,ndepth,pStack) }", json_ns::serialize);
       // -----
 
@@ -1327,14 +1315,17 @@ static void create_class(XppParamList pl)
    _conReturn(pl, conco);
    _conRelease(conco);
 }
+/*{{end-class}}*/
 // ---------------------------------------------------------------------------------
 
 
 END_NAMESPACE()
 
 //----------------------------------------------------------------------------------------------------------------------
+// docu
 _XPP_REG_FUN_(_OT4XB_EXPANDO_)
 {
-         ot4xb_expando::create_class(pl);
+         ot4xb_expando::create_class(pl); // class documented with this static funcion 
 }
+
 // -----------------------------------------------------------------------------------------------------------------

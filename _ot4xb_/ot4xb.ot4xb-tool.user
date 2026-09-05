@@ -1,0 +1,44 @@
+{
+	"post.release": {
+		"folders": {
+			"pli": "C:/pli/ot4xb"
+		},
+		"steps": [
+			"srcsplit",
+			"deploy"
+		],
+		"srcsplit": [
+			{
+				"in": "<src>/ch/*.ch",
+				"code": "<pli>/*.ch",
+				"force": true
+			},
+			{
+				"in": "<src>/*.h",
+				"code": "<pli>/cppinc/*.h",
+				"force": true
+			},
+			{
+				"in": "<src>/*.hpp",
+				"code": "<pli>/cppinc/*.hpp",
+				"force": true
+			}
+		],
+		"deploy": {
+			"copy": [
+				{
+					"in": [
+						"<dst>/ot4xb.dll",
+						"<dst>/ot4xb.lib",
+						"<dst>/ot4xb_cpp.lib"
+					],
+					"out": "<pli>",
+					"create": false
+				}
+			]
+		}
+	},
+	"post.debug": {
+		"template": "post.release"
+	}
+}

@@ -36,109 +36,22 @@ class TGXbItem
      void operator delete( void * p);
 };
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>TGXbStack</name>
-      <category>runtime/containers</category>
-      <description>
-         Low-level double-ended container that stores Xbase++ values in an internal C++ linked list.
-      </description>
-      <syntax>TGXbStack():new( [lSyncMode] ) -> oStack</syntax>
-      <remarks>
-         TGXbStack keeps references to the values pushed into the stack. By default it is not synchronized and must
-         not be used from more than one thread at the same time unless the caller provides its own synchronization.
-         Use :new(.T.) to synchronize the public operations with an internal CriticalSection for multithread use. This
-         is a low-level utility; callers that use :Lock() directly must always pair it with :UnLock().
-      </remarks>
-      <methods>
-         <method>
-            <name>TGXbStack::init</name>
-            <syntax>::init( [lSyncMode] ) -> self</syntax>
-            <description>
-               Initializes the internal stack. It is normally called automatically by :new().
-            </description>
-         </method>
-         <method>
-            <name>TGXbStack::Destroy</name>
-            <syntax>::Destroy() -> NIL</syntax>
-            <description>
-               Destroys the internal stack and releases stored container references. Call it when the stack is no
-               longer needed so internal resources are not left alive unnecessarily.
-            </description>
-         </method>
-         <method>
-            <name>TGXbStack::Head</name>
-            <syntax>::Head() -> xValue</syntax>
-            <description>Returns the value at the top/head of the stack without removing it.</description>
-         </method>
-         <method>
-            <name>TGXbStack::Tos</name>
-            <syntax>::Tos() -> xValue</syntax>
-            <description>Alias of ::Head().</description>
-         </method>
-         <method>
-            <name>TGXbStack::Tail</name>
-            <syntax>::Tail() -> xValue</syntax>
-            <description>Returns the value at the tail/bottom of the stack without removing it.</description>
-         </method>
-         <method>
-            <name>TGXbStack::Push</name>
-            <syntax>::Push( xValue ) -> nCount</syntax>
-            <description>Adds xValue at the head/top of the stack and returns the new item count.</description>
-         </method>
-         <method>
-            <name>TGXbStack::Add</name>
-            <syntax>::Add( xValue ) -> nCount</syntax>
-            <description>Adds xValue at the tail/bottom of the stack and returns the new item count.</description>
-         </method>
-         <method>
-            <name>TGXbStack::Pop</name>
-            <syntax>::Pop() -> xValue</syntax>
-            <description>Removes and returns the value at the head/top of the stack.</description>
-         </method>
-         <method>
-            <name>TGXbStack::Count</name>
-            <syntax>::Count() -> nCount</syntax>
-            <description>Returns the current item count.</description>
-         </method>
-         <method>
-            <name>TGXbStack::SEval</name>
-            <syntax>::SEval( [bEval [, xCargo]] ) -> aValues | NIL</syntax>
-            <description>
-               Without parameters, returns the stack contents as an array from head to tail. With a codeblock,
-               evaluates it for each item from head to tail as bEval( xValue, xCargo, nIndex, nCount ).
-            </description>
-         </method>
-         <method>
-            <name>TGXbStack::QEval</name>
-            <syntax>::QEval( [bEval [, xCargo]] ) -> aValues | NIL</syntax>
-            <description>
-               Without parameters, returns the stack contents as an array from head to tail. With a codeblock,
-               evaluates it for each item from tail to head as bEval( xValue, xCargo, nIndex, nCount ).
-            </description>
-         </method>
-         <method>
-            <name>TGXbStack::Lock</name>
-            <syntax>::Lock() -> NIL</syntax>
-            <description>Enters the internal CriticalSection when the stack was created in synchronized mode.</description>
-         </method>
-         <method>
-            <name>TGXbStack::UnLock</name>
-            <syntax>::UnLock() -> NIL</syntax>
-            <description>Leaves the internal CriticalSection when the stack was created in synchronized mode.</description>
-         </method>
-      </methods>
-      <properties>
-         <property>
-            <name>TGXbStack::pCriticalSection</name>
-            <type>Numeric | NIL</type>
-            <description>Read-only pointer to the internal CriticalSection when synchronized mode is active.</description>
-         </property>
-      </properties>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-class}}*/
+/*{{class-name_: TGXbStack
+            | _slug_: tgxbstack
+            | class-function: TGXBSTACK
+            | category: container/stack
+            | desc: Low-level double-ended container that stores Xbase++ values in an internal C++ linked list.
+            | note: TGXbStack keeps references to the values pushed into the stack. By default it is not
+              synchronized and must not be used from more than one thread at the same time unless the caller
+              provides its own synchronization. Use :new(.T.) to synchronize the public operations with an
+              internal CriticalSection for multithread use.
+            | note: This is a low-level utility; callers that use :Lock() directly must always pair it with
+              :UnLock().
+            | note: The methods raise an ot4xb error when they are called on an object whose internal stack was
+              destroyed or not properly initialized.
+   | _kw_: stack, deque, double ended, container list, push pop
+   }}*/
 XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("TGXbStack");
@@ -147,23 +60,90 @@ XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
    {
       TXbClass * pc = new TXbClass;
       pc->ClassName( "TGXbStack" );
+      /*{{|:**BEGIN CLASS  TGXbStack** }}*/
       pc->EXPORTED();
       // ---------------------------------------------------------------------------------
+      /*{{|ivar_: - VAR _m__pt_
+               | type: Numeric
+               | desc_: Internal instance variable holding the pointer to the native stack object.
+               | note: Internal state, not meant to be manipulated outside the class.
+      }}*/
       pc->Var("_m__pt_"); 
+      /*{{|property_: - PROPERTY pCriticalSection
+               | type: `Numeric | NIL`
+               | desc_: Read-only pointer to the internal CriticalSection when synchronized mode is active,
+                 NIL otherwise.
+               | note: Read-only property.
+      }}*/
       pc->ROProperty("pCriticalSection" , TGXbStack_pCriticalSection); 
       // ---------------------------------------------------------------------------------
+      /*{{|method_: - METHOD new( [lSyncMode] )
+               | return: oStack
+               | desc_: Creates the object and initializes its internal stack. With lSyncMode == .T. the
+                 public operations are synchronized with an internal CriticalSection for multithread use.
+               | note: The underlying ::init() method can not be called explicitly on an already initialized
+                 object; doing so raises an error and destroys the internal stack.
+      }}*/
       pc->Method("init"     , TGXbStack_Init,1);
+      /*{{|method_: - METHOD Destroy()
+               | return: NIL
+               | desc_: Destroys the internal stack and releases stored container references. Call it when
+                 the stack is no longer needed so internal resources are not left alive unnecessarily.
+      }}*/
       pc->Method("Destroy"  , TGXbStack_Destroy);
+      /*{{|method_: - METHOD Head()
+               | return: xValue
+               | desc_: Returns the value at the top/head of the stack without removing it.
+      }}*/
       pc->Method("Head"     , TGXbStack_Head);
+      /*{{|method_: - METHOD Tos() | return: xValue | desc_: Alias of ::Head(). }}*/
       pc->Method("Tos"      , TGXbStack_Head);
+      /*{{|method_: - METHOD Tail()
+               | return: xValue
+               | desc_: Returns the value at the tail/bottom of the stack without removing it.
+      }}*/
       pc->Method("Tail"     , TGXbStack_Tail);
+      /*{{|method_: - METHOD Pop()
+               | return: xValue
+               | desc_: Removes and returns the value at the head/top of the stack.
+      }}*/
       pc->Method("Pop"      , TGXbStack_Pop);
+      /*{{|method_: - METHOD Push( xValue )
+               | return: nCount
+               | desc_: Adds xValue at the head/top of the stack and returns the new item count.
+      }}*/
       pc->Method("Push"     , TGXbStack_Push,1);
+      /*{{|method_: - METHOD Add( xValue )
+               | return: nCount
+               | desc_: Adds xValue at the tail/bottom of the stack and returns the new item count.
+      }}*/
       pc->Method("Add"      , TGXbStack_Add,1);
+      /*{{|method_: - METHOD Count() | return: nCount | desc_: Returns the current item count. }}*/
       pc->Method("Count"    , TGXbStack_Count);
+      /*{{|method_: - METHOD SEval( [bEval [, xCargo]] )
+               | return: `aValues | NIL`
+               | desc_: Without parameters, returns the stack contents as an array from head to tail. With a
+                 codeblock, evaluates it for each item from head to tail as bEval( xValue, xCargo, nIndex,
+                 nCount ), with nIndex starting at 0.
+      }}*/
       pc->Method("SEval"    , TGXbStack_SEval,2);
+      /*{{|method_: - METHOD QEval( [bEval [, xCargo]] )
+               | return: `aValues | NIL`
+               | desc_: Without parameters, returns the stack contents as an array from head to tail. With a
+                 codeblock, evaluates it for each item from tail to head as bEval( xValue, xCargo, nIndex,
+                 nCount ), with nIndex starting at 0.
+      }}*/
       pc->Method("QEval"    , TGXbStack_QEval,2);
+      /*{{|method_: - METHOD Lock()
+               | return: NIL
+               | desc_: Enters the internal CriticalSection when the stack was created in synchronized mode.
+      }}*/
       pc->Method("Lock"     , TGXbStack_Lock);
+      /*{{|method_: - METHOD UnLock()
+               | return: NIL
+               | desc_: Leaves the internal CriticalSection when the stack was created in synchronized mode.
+      }}*/
+      /*{{|:**END CLASS** }}*/
       pc->Method("UnLock"   , TGXbStack_UnLock);
       // ---------------------------------------------------------------------------------
       conco = pc->Create();
@@ -174,6 +154,7 @@ XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
    _conReturn(pl,conco);
    _conRelease(conco);
 }
+/*{{end-class}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static void TGXbStack_Init( TXbClsParams * px )
 {

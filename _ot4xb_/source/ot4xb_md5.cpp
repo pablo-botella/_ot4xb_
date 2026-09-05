@@ -5,27 +5,19 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>Str2Md5Hex</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>
-         Returns the 32-character hexadecimal MD5 digest of a string or OT4XB extended-pointer source.
-      </description>
-      <syntax>Str2Md5Hex( cData [, nLen] ) -> cHex32 | NIL</syntax>
-      <parameters>
-         <parameter><name>cData</name><type>Character | extended pointer</type><description>Source bytes.</description></parameter>
-         <parameter><name>nLen</name><type>Numeric</type><description>Optional number of bytes to hash.</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>32-character hexadecimal digest, or NIL when the source cannot be locked.</description></return>
-      <remarks>
-         MD5 is retained for compatibility and checksums. It should not be used for new security-sensitive password or signature designs.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: Str2Md5Hex
+            | syntax_: `Str2Md5Hex( cData [, nLen] )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash string, hex digest, checksum
+   }}*/
+/*{{|desc: Returns the 32-character hexadecimal MD5 digest of a string or OT4XB extended-pointer source.
+    | params:
+    - `cData` Character/extended pointer - Source bytes.
+    - `nLen` Numeric - Optional number of bytes to hash.
+
+    Returns Character/NIL - 32-character hexadecimal digest, or NIL when the source cannot be locked. }}*/
 XPPRET XPPENTRY STR2MD5HEX( XppParamList pl )
 {
    CON_PLKSTREX plk;
@@ -46,23 +38,21 @@ XPPRET XPPENTRY STR2MD5HEX( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>Str2Md5Bin</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Returns the 16-byte binary MD5 digest of a string or OT4XB extended-pointer source.</description>
-      <syntax>Str2Md5Bin( cData [, nLen] ) -> cBin16 | NIL</syntax>
-      <parameters>
-         <parameter><name>cData</name><type>Character | extended pointer</type><description>Source bytes.</description></parameter>
-         <parameter><name>nLen</name><type>Numeric</type><description>Optional number of bytes to hash.</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>16-byte binary digest, or NIL when the source cannot be locked.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: Str2Md5Bin
+            | syntax_: `Str2Md5Bin( cData [, nLen] )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash string, binary digest, 16 bytes
+   }}*/
+/*{{|desc: Returns the 16-byte binary MD5 digest of a string or OT4XB extended-pointer source.
+    | params:
+    - `cData` Character/extended pointer - Source bytes.
+    - `nLen` Numeric - Optional number of bytes to hash.
+
+    Returns Character/NIL - 16-byte binary digest, or NIL when the source cannot be locked. }}*/
 XPPRET XPPENTRY STR2MD5BIN( XppParamList pl )
 {
    CON_PLKSTREX plk;
@@ -83,22 +73,20 @@ XPPRET XPPENTRY STR2MD5BIN( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>HFile2Md5Hex</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Reads from an existing Win32 file handle and returns its MD5 digest as hexadecimal text.</description>
-      <syntax>HFile2Md5Hex( hFile ) -> cHex32 | NIL</syntax>
-      <parameters>
-         <parameter><name>hFile</name><type>Numeric</type><description>Readable Win32 file handle.</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>32-character hexadecimal digest, or NIL on failure.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: HFile2Md5Hex
+            | syntax_: `HFile2Md5Hex( hFile )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash file handle, hex digest, checksum
+   }}*/
+/*{{|desc: Reads from an existing Win32 file handle and returns its MD5 digest as hexadecimal text.
+    | params:
+    - `hFile` Numeric - Readable Win32 file handle.
+
+    Returns Character/NIL - 32-character hexadecimal digest, or NIL on failure. }}*/
 XPPRET XPPENTRY HFILE2MD5HEX( XppParamList pl )
 {
    ot4xb_md5_internal md((HANDLE) _parLong(pl,1,0));
@@ -111,22 +99,20 @@ XPPRET XPPENTRY HFILE2MD5HEX( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>HFile2Md5Bin</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Reads from an existing Win32 file handle and returns its MD5 digest as 16 raw bytes.</description>
-      <syntax>HFile2Md5Bin( hFile ) -> cBin16 | NIL</syntax>
-      <parameters>
-         <parameter><name>hFile</name><type>Numeric</type><description>Readable Win32 file handle.</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>16-byte binary digest, or NIL on failure.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: HFile2Md5Bin
+            | syntax_: `HFile2Md5Bin( hFile )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash file handle, binary digest
+   }}*/
+/*{{|desc: Reads from an existing Win32 file handle and returns its MD5 digest as 16 raw bytes.
+    | params:
+    - `hFile` Numeric - Readable Win32 file handle.
+
+    Returns Character/NIL - 16-byte binary digest, or NIL on failure. }}*/
 XPPRET XPPENTRY HFILE2MD5BIN( XppParamList pl )
 {
    ot4xb_md5_internal md((HANDLE) _parLong(pl,1,0));
@@ -139,22 +125,20 @@ XPPRET XPPENTRY HFILE2MD5BIN( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>File2Md5Hex</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Opens a file for reading and returns its MD5 digest as hexadecimal text.</description>
-      <syntax>File2Md5Hex( cFileName ) -> cHex32 | NIL</syntax>
-      <parameters>
-         <parameter><name>cFileName</name><type>Character</type><description>File name to open with CreateFile().</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>32-character hexadecimal digest, or NIL when the file cannot be read.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: File2Md5Hex
+            | syntax_: `File2Md5Hex( cFileName )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash file, hex digest, checksum, file integrity
+   }}*/
+/*{{|desc: Opens a file for reading and returns its MD5 digest as hexadecimal text.
+    | params:
+    - `cFileName` Character - File name to open with CreateFile().
+
+    Returns Character/NIL - 32-character hexadecimal digest, or NIL when the file cannot be read. }}*/
 XPPRET XPPENTRY FILE2MD5HEX( XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -173,22 +157,20 @@ XPPRET XPPENTRY FILE2MD5HEX( XppParamList pl )
    }
    _conReturn(pl,conr); _conRelease(conr);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>File2Md5Bin</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Opens a file for reading and returns its MD5 digest as 16 raw bytes.</description>
-      <syntax>File2Md5Bin( cFileName ) -> cBin16 | NIL</syntax>
-      <parameters>
-         <parameter><name>cFileName</name><type>Character</type><description>File name to open with CreateFile().</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>16-byte binary digest, or NIL when the file cannot be read.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: File2Md5Bin
+            | syntax_: `File2Md5Bin( cFileName )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hash file, binary digest
+   }}*/
+/*{{|desc: Opens a file for reading and returns its MD5 digest as 16 raw bytes.
+    | params:
+    - `cFileName` Character - File name to open with CreateFile().
+
+    Returns Character/NIL - 16-byte binary digest, or NIL when the file cannot be read. }}*/
 XPPRET XPPENTRY FILE2MD5BIN( XppParamList pl )
 {
    ContainerHandle conr = _conNew(NULLCONTAINER);
@@ -207,22 +189,20 @@ XPPRET XPPENTRY FILE2MD5BIN( XppParamList pl )
    }
    _conReturn(pl,conr); _conRelease(conr);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_new</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Allocates a low-level incremental MD5 context.</description>
-      <syntax>_md5_new( [@pMd5] ) -> pMd5</syntax>
-      <parameters>
-         <parameter><name>@pMd5</name><type>Numeric by reference</type><description>Optional existing context pointer to destroy and replace.</description></parameter>
-      </parameters>
-      <return><type>Numeric</type><description>Pointer to the new MD5 context.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_new
+            | syntax_: `_md5_new( [@pMd5] )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, incremental hash, context, streaming
+   }}*/
+/*{{|desc: Allocates a low-level incremental MD5 context.
+    | params:
+    - `@pMd5` Numeric by reference - Optional existing context pointer to destroy and replace.
+
+    Returns Numeric - Pointer to the new MD5 context. }}*/
 XPPRET XPPENTRY _MD5_NEW( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -231,24 +211,22 @@ XPPRET XPPENTRY _MD5_NEW( XppParamList pl )
    _stornl((LONG)psc, pl,1,0);
    _retnl( pl , (LONG) psc );
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_str</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Adds a string or OT4XB extended-pointer source to a low-level incremental MD5 context.</description>
-      <syntax>_md5_str( pMd5, cData [, nLen] ) -> lOk</syntax>
-      <parameters>
-         <parameter><name>pMd5</name><type>Numeric</type><description>Context pointer returned by _md5_new().</description></parameter>
-         <parameter><name>cData</name><type>Character | extended pointer</type><description>Source bytes to add to the digest.</description></parameter>
-         <parameter><name>nLen</name><type>Numeric</type><description>Optional number of bytes to add.</description></parameter>
-      </parameters>
-      <return><type>Logical</type><description>.T. when the chunk was added.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_str
+            | syntax_: `_md5_str( pMd5, cData [, nLen] )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, incremental hash, add string, update
+   }}*/
+/*{{|desc: Adds a string or OT4XB extended-pointer source to a low-level incremental MD5 context.
+    | params:
+    - `pMd5` Numeric - Context pointer returned by _md5_new().
+    - `cData` Character/extended pointer - Source bytes to add to the digest.
+    - `nLen` Numeric - Optional number of bytes to add.
+
+    Returns Logical - .T. when the chunk was added. }}*/
 XPPRET XPPENTRY _MD5_STR( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -263,53 +241,48 @@ XPPRET XPPENTRY _MD5_STR( XppParamList pl )
    }
    _retl(pl,bOk);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_hfile</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Adds file contents to a low-level incremental MD5 context.</description>
-      <syntax>_md5_hfile( pMd5, hFile ) -> lOk</syntax>
-      <parameters>
-         <parameter><name>pMd5</name><type>Numeric</type><description>Context pointer returned by _md5_new().</description></parameter>
-         <parameter><name>hFile</name><type>Numeric</type><description>Readable Win32 file handle.</description></parameter>
-      </parameters>
-      <return><type>Logical</type><description>.T. when the file contents were added.</description></return>
-      <remarks>
-         Low-level entry point. Verify the current implementation before using this function directly.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_hfile
+            | syntax_: `_md5_hfile( pMd5, hFile )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, incremental hash, add file, update
+   }}*/
+/*{{|desc: Adds file contents to a low-level incremental MD5 context.
+    | params:
+    - `pMd5` Numeric - Context pointer returned by _md5_new().
+    - `hFile` Numeric - Readable Win32 file handle.
+
+    Returns Logical - .T. when the file contents were added.
+
+    |note: Low-level entry point. }}*/
 XPPRET XPPENTRY _MD5_HFILE( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
    BOOL bOk = FALSE;
    if( psc )
    {  
-      HANDLE hFile = (HANDLE) _parLong(pl,1,0);
+      HANDLE hFile = (HANDLE) _parLong(pl,2,0);
       if( hFile && ( hFile != INVALID_HANDLE_VALUE ) ) bOk = psc->Update(hFile);
    }
    _retl(pl,bOk);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_finalize</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Finalizes a low-level incremental MD5 context.</description>
-      <syntax>_md5_finalize( pMd5 ) -> lOk</syntax>
-      <parameters>
-         <parameter><name>pMd5</name><type>Numeric</type><description>Context pointer returned by _md5_new().</description></parameter>
-      </parameters>
-      <return><type>Logical</type><description>.T. when the context was finalized.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_finalize
+            | syntax_: `_md5_finalize( pMd5 )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, incremental hash, finalize, digest
+   }}*/
+/*{{|desc: Finalizes a low-level incremental MD5 context.
+    | params:
+    - `pMd5` Numeric - Context pointer returned by _md5_new().
+
+    Returns Logical - .T. when the context was finalized. }}*/
 XPPRET XPPENTRY _MD5_FINALIZE( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -317,22 +290,20 @@ XPPRET XPPENTRY _MD5_FINALIZE( XppParamList pl )
    if( psc ) bOk = psc->Finalize();
    _retl(pl,bOk);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_gethex</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Returns the hexadecimal digest from a low-level MD5 context.</description>
-      <syntax>_md5_gethex( pMd5 ) -> cHex32 | NIL</syntax>
-      <parameters>
-         <parameter><name>pMd5</name><type>Numeric</type><description>Context pointer returned by _md5_new().</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>32-character hexadecimal digest, or NIL when unavailable.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_gethex
+            | syntax_: `_md5_gethex( pMd5 )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, hex digest, context
+   }}*/
+/*{{|desc: Returns the hexadecimal digest from a low-level MD5 context.
+    | params:
+    - `pMd5` Numeric - Context pointer returned by _md5_new().
+
+    Returns Character/NIL - 32-character hexadecimal digest, or NIL when unavailable. }}*/
 XPPRET XPPENTRY _MD5_GETHEX( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -348,22 +319,20 @@ XPPRET XPPENTRY _MD5_GETHEX( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_getbin</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Returns the binary digest from a low-level MD5 context.</description>
-      <syntax>_md5_getbin( pMd5 ) -> cBin16 | NIL</syntax>
-      <parameters>
-         <parameter><name>pMd5</name><type>Numeric</type><description>Context pointer returned by _md5_new().</description></parameter>
-      </parameters>
-      <return><type>Character | NIL</type><description>16-byte binary digest, or NIL when unavailable.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_getbin
+            | syntax_: `_md5_getbin( pMd5 )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, binary digest, context
+   }}*/
+/*{{|desc: Returns the binary digest from a low-level MD5 context.
+    | params:
+    - `pMd5` Numeric - Context pointer returned by _md5_new().
+
+    Returns Character/NIL - 16-byte binary digest, or NIL when unavailable. }}*/
 XPPRET XPPENTRY _MD5_GETBIN( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -379,22 +348,20 @@ XPPRET XPPENTRY _MD5_GETBIN( XppParamList pl )
    }
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_md5_destroy</name>
-      <source>ot4xb_md5.cpp</source>
-      <category>hash/md5</category>
-      <description>Destroys a low-level MD5 context and clears the caller's pointer slot.</description>
-      <syntax>_md5_destroy( @pMd5 ) -> 0</syntax>
-      <parameters>
-         <parameter><name>@pMd5</name><type>Numeric by reference</type><description>Context pointer returned by _md5_new().</description></parameter>
-      </parameters>
-      <return><type>Numeric</type><description>Always 0.</description></return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: _md5_destroy
+            | syntax_: `_md5_destroy( @pMd5 )`
+            | category: hash/md5
+            | source: ot4xb_md5.cpp
+            | _kw_: md5, destroy context, release
+   }}*/
+/*{{|desc: Destroys a low-level MD5 context and clears the caller's pointer slot.
+    | params:
+    - `@pMd5` Numeric by reference - Context pointer returned by _md5_new().
+
+    Returns Numeric - Always 0. }}*/
 XPPRET XPPENTRY _MD5_DESTROY( XppParamList pl )
 {
    ot4xb_md5_internal* psc = reinterpret_cast<ot4xb_md5_internal*>(_parLong(pl,1));
@@ -402,4 +369,5 @@ XPPRET XPPENTRY _MD5_DESTROY( XppParamList pl )
    _stornl(0,pl,1,0);
    _retnl(pl,0);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------

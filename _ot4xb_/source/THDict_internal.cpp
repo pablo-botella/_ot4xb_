@@ -66,7 +66,7 @@ LPSTR THDictKey::XbItemToPointer(ContainerHandle con, DWORD * pcb )
          {
             char szd[9];
             ZeroMemory(szd,9);
-            _conGetDS(con,pKey);
+            _conGetDS(con,szd);
             pKey = (LPSTR) _xgrab(16);
             pcb[0] = wsprintf(pKey,"date_%s",szd);
             return pKey;

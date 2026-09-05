@@ -15,59 +15,24 @@ static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , L
 static BOOL bSendLogStr_internal( HWND * phWnd, LPSTR pWndCls, LPSTR pFmt , va_list arglist);
 static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr );
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function-family>
-      <name>WM_COPYDATA log output helpers</name>
-      <source>LogTool.cpp</source>
-      <category>logging</category>
-      <description>
-         Sends formatted log text to a logging window using WM_COPYDATA. The non-OT4XB variants can be redirected
-         to an application-provided window class; the OT4XB variants use OT4XB's default log window class.
-      </description>
-      <functions>
-         <function>
-            <name>Register_User_Log_Uuid</name>
-            <syntax>Register_User_Log_Uuid( cWindowClass ) -> NIL</syntax>
-            <description>
-               Registers the window class searched by lSendLogStr() and lSendLogStrFL(). Calling it again replaces
-               the previous class name and resets the cached window handle.
-            </description>
-         </function>
-         <function>
-            <name>lSendLogStr</name>
-            <syntax>lSendLogStr( cFormat [, xParamN] ) -> lOk</syntax>
-            <description>Sends a printf-style formatted message to the registered user log window.</description>
-         </function>
-         <function>
-            <name>lSendLogStrFL</name>
-            <syntax>lSendLogStrFL( cFile, nLine, cFormat [, xParamN] ) -> lOk</syntax>
-            <description>
-               Sends a printf-style formatted message with UTC timestamp plus file and line metadata to the
-               registered user log window.
-            </description>
-         </function>
-         <function>
-            <name>ot4xb_lSendLogStr</name>
-            <syntax>ot4xb_lSendLogStr( cFormat [, xParamN] ) -> lOk</syntax>
-            <description>Sends a printf-style formatted message to the default OT4XB log window.</description>
-         </function>
-         <function>
-            <name>ot4xb_lSendLogStrFL</name>
-            <syntax>ot4xb_lSendLogStrFL( cFile, nLine, cFormat [, xParamN] ) -> lOk</syntax>
-            <description>
-               Sends a printf-style formatted message with UTC timestamp plus file and line metadata to the
-               default OT4XB log window.
-            </description>
-         </function>
-      </functions>
-      <remarks>
-         The functions return .F. when no target window can be found. The formatted payload is delivered with
-         WM_COPYDATA and is intended for diagnostic/log-viewer tooling, not for high-volume IPC.
-      </remarks>
-   </function-family>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: Register_User_Log_Uuid
+            | syntax_: `Register_User_Log_Uuid( cWndClass ) -> NIL`
+            | category: log
+            | _kw_: log window, register, WM_COPYDATA, user log, class name
+   }}*/
+/*{{|desc: Registers the window class name of the user log window targeted by lSendLogStr() and
+      lSendLogStrFL(). Any previously registered class name is released and the cached window handle is
+      reset, so the next send looks the target window up again by the new class name. Passing NIL, a
+      non-Character value or an empty string clears the registration, and the log functions fall back to
+      the default OT4XB log window.
+    | params:
+    - `cWndClass` Character - Window class name of the user log window. Despite the Uuid in the
+      function name, no format is enforced; any window class name is accepted.
+
+    Returns NIL
+
+    |seealso: See also: {{ilink: <function lSendLogStr> lSendLogStr}}, {{ilink: <function lSendLogStrFL> lSendLogStrFL}} }}*/
 XPPRET XPPENTRY REGISTER_USER_LOG_UUID( XppParamList pl )
 {
    if( user_pWndCls ) 
@@ -80,11 +45,82 @@ XPPRET XPPENTRY REGISTER_USER_LOG_UUID( XppParamList pl )
    user_pWndCls = _pszParam(pl,1);
    _ret(pl);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: lSendLogStr
+            | syntax_: `lSendLogStr( cFormat, ... ) -> lOk`
+            | category: log
+            | _kw_: log, send log, WM_COPYDATA, debug output, printf
+   }}*/
+/*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the user log window registered with
+      Register_User_Log_Uuid(); when no window class is registered it falls back to the default OT4XB log
+      window.
+    | params:
+    - `cFormat` Character - printf-style format string.
+    - `...` Any - Values to format.
+
+    Returns Logical - .T. when the message was delivered, .F. when no log window was found or formatting
+      failed. }}*/
 XPPRET XPPENTRY LSENDLOGSTR( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD) bSendLogStr);}
+/*{{end-function}}*/
+// -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: lSendLogStrFL
+            | syntax_: `lSendLogStrFL( cFile, nLine, cFormat, ... ) -> lOk`
+            | category: log
+            | _kw_: log, send log, file and line, timestamp, WM_COPYDATA
+   }}*/
+/*{{|desc: Sends a printf-style formatted message, preceded by a header line holding the UTC timestamp and
+      the given source file and line, to the user log window registered with Register_User_Log_Uuid(); when
+      no window class is registered it falls back to the default OT4XB log window.
+    | params:
+    - `cFile` Character - Source file name written into the header.
+    - `nLine` Numeric - Source line number written into the header.
+    - `cFormat` Character - printf-style format string.
+    - `...` Any - Values to format.
+
+    Returns Logical - .T. when the message was delivered, .F. when no log window was found or formatting
+      failed. }}*/
 XPPRET XPPENTRY LSENDLOGSTRFL( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD) bSendLogStrFL);}
+/*{{end-function}}*/
+// -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ot4xb_lSendLogStr
+            | syntax_: `ot4xb_lSendLogStr( cFormat, ... ) -> lOk`
+            | category: log
+            | _kw_: log, send log, ot4xb log window, WM_COPYDATA, debug output
+   }}*/
+/*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the default OT4XB log window, ignoring
+      any window class registered with Register_User_Log_Uuid().
+    | params:
+    - `cFormat` Character - printf-style format string.
+    - `...` Any - Values to format.
+
+    Returns Logical - .T. when the message was delivered, .F. when no log window was found or formatting
+      failed. }}*/
 XPPRET XPPENTRY OT4XB_LSENDLOGSTR( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD) ot4xb_bSendLogStr);}
+/*{{end-function}}*/
+// -----------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: ot4xb_lSendLogStrFL
+            | syntax_: `ot4xb_lSendLogStrFL( cFile, nLine, cFormat, ... ) -> lOk`
+            | category: log
+            | _kw_: log, send log, file and line, timestamp, ot4xb log window
+   }}*/
+/*{{|desc: Sends a printf-style formatted message, preceded by a header line holding the UTC timestamp and
+      the given source file and line, to the default OT4XB log window, ignoring any window class registered
+      with Register_User_Log_Uuid().
+    | params:
+    - `cFile` Character - Source file name written into the header.
+    - `nLine` Numeric - Source line number written into the header.
+    - `cFormat` Character - printf-style format string.
+    - `...` Any - Values to format.
+
+    Returns Logical - .T. when the message was delivered, .F. when no log window was found or formatting
+      failed. }}*/
 XPPRET XPPENTRY OT4XB_LSENDLOGSTRFL( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD) ot4xb_bSendLogStrFL);}
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr )
 {
@@ -124,18 +160,104 @@ static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr )
    _retl(pl,(BOOL) dw);
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: bSendLogStrFL
+            | syntax_: `BOOL bSendLogStrFL( LPSTR cFile, LONG nLine, LPSTR pFmt, ... )`
+            | category: log
+            | header: ot4xb_c_exported.h
+            | mangled-name: bSendLogStrFL
+            | _kw_: log, send log, file and line, timestamp, WM_COPYDATA
+   }}*/
+/*{{|desc: Sends a printf-style formatted message, preceded by a "YYYYMMDD-HH:MM:SS.mmm {File:...,Line:...}"
+      UTC header line, via WM_COPYDATA to the user log window registered with Register_User_Log_Uuid()
+      (default OT4XB log window when no class is registered). C primitive behind lSendLogStrFL(). The
+      expanded text is capped at 1MB; a failing format returns FALSE instead of crashing.
+    | params:
+    - `cFile` LPSTR - Source file name written into the header (typically __FILE__).
+    - `nLine` LONG - Source line number written into the header (typically __LINE__).
+    - `pFmt` LPSTR - printf-style format string; the variadic arguments follow.
+    - `...` Values formatted into pFmt.
+
+    Returns BOOL - TRUE when the message was delivered, FALSE when no log window was found or formatting
+      failed. }}*/
 BOOL OT4XB_API bSendLogStrFL( LPSTR cFile , LONG nLine , LPSTR pFmt , ... )
 {
    va_list(arglist);
    va_start(arglist, pFmt);
    return bSendLogStrFL_internal( &user_hWndLogOut,user_pWndCls,cFile,nLine,pFmt,arglist);
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_bSendLogStrFL
+            | syntax_: `BOOL ot4xb_bSendLogStrFL( LPSTR cFile, LONG nLine, LPSTR pFmt, ... )`
+            | category: log
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_bSendLogStrFL
+            | _kw_: log, send log, file and line, timestamp, ot4xb log window
+   }}*/
+/*{{|desc: Sends a printf-style formatted message, preceded by a "YYYYMMDD-HH:MM:SS.mmm {File:...,Line:...}"
+      UTC header line, via WM_COPYDATA to the default OT4XB log window. C primitive behind
+      ot4xb_lSendLogStrFL(). The expanded text is capped at 1MB; a failing format returns FALSE instead of
+      crashing.
+    | params:
+    - `cFile` LPSTR - Source file name written into the header (typically __FILE__).
+    - `nLine` LONG - Source line number written into the header (typically __LINE__).
+    - `pFmt` LPSTR - printf-style format string; the variadic arguments follow.
+    - `...` Values formatted into pFmt.
+
+    Returns BOOL - TRUE when the message was delivered, FALSE when no log window was found or formatting
+      failed. }}*/
 BOOL OT4XB_API ot4xb_bSendLogStrFL( LPSTR cFile , LONG nLine , LPSTR pFmt , ... )
 {
    va_list(arglist);
    va_start(arglist, pFmt);
    return bSendLogStrFL_internal( &ot4xb_hWndLogOut,0,cFile,nLine,pFmt,arglist);
+}
+/*{{end-c-function}}*/
+// -----------------------------------------------------------------------------------------------------------------
+// Composes a log line into a size-guarded heap buffer (caller _xfree's it) and returns it, setting *pcb to its
+// length; returns 0 on failure. cFile != 0 prepends the "YYYYMMDD-HH:MM:SS.mmm {File:...,Line:...}" header. The
+// caller's format+args are expanded with vsnprintf under __try/__except and capped at 1MB, so neither an oversized
+// output nor a bad format/args can overflow or crash the process.
+static LPSTR compose_log_line( LPSTR cFile, LONG nLine, LPSTR pFmt, va_list arglist, DWORD* pcb )
+{
+   char       sz[1024];
+   SYSTEMTIME st;
+   LPSTR      p;
+   LPSTR      pUse;
+   int        n = -1;
+
+   if( cFile )
+   {
+      GetSystemTime( &st );
+      snprintf( sz, sizeof(sz), "%04.4u%02.2u%02.2u-%02.2u:%02.2u:%02.2u.%03.3u {File:%s,Line:%u}\r\n%s\r\n",
+                st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+                cFile, nLine, pFmt );
+      pUse = sz;      // header + caller's format ( format text capped at sizeof(sz) )
+   }
+   else
+   {
+      pUse = pFmt;    // no header -> caller's format used directly, uncapped
+   }
+   p = (LPSTR) _xgrab( 0x100000 );   // 1MB size guard
+   __try
+   {
+      n = vsnprintf( p, 0x100000, pUse, arglist );
+   }
+   __except( EXCEPTION_EXECUTE_HANDLER )
+   {
+      n = -1;   // bad caller format / args -> fail safely instead of crashing
+   }
+   if( n < 0 )
+   {
+      _xfree( p );
+      if( pcb ) { *pcb = 0; }
+      return 0;
+   }
+   if( n >= 0x100000 ) { n = 0x100000 - 1; }   // truncated
+   if( pcb ) { *pcb = (DWORD) n; }
+   return p;
 }
 // -----------------------------------------------------------------------------------------------------------------
 static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , LONG nLine , LPSTR pFmt , va_list arglist)
@@ -152,19 +274,14 @@ static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , L
    if( phWnd[0] )
    {
       COPYDATASTRUCT cds;
-      SYSTEMTIME     st;
-      LPSTR          pStr = (LPSTR) _xgrab(1024);
-      GetSystemTime(&st);
-      sprintf( pStr , "%04.4u%02.2u%02.2u-%02.2u:%02.2u:%02.2u.%03.3u {File:%s,Line:%u}\r\n%s\r\n",
-               st.wYear,st.wMonth,st.wDay,st.wHour,st.wMinute,st.wSecond,st.wMilliseconds,
-               cFile , nLine , pFmt );
       cds.dwData = 0;
-      cds.lpData = _xgrab(0x040000);
-      cds.cbData = (DWORD) vsprintf( (LPSTR) cds.lpData, pStr, arglist );
-      SendMessage( phWnd[0] , WM_COPYDATA, 0 , (LPARAM) ((void*) &cds) );
-      _xfree(cds.lpData);
-      _xfree((void*) pStr);
-      bOk = TRUE;
+      cds.lpData = compose_log_line( cFile, nLine, pFmt, arglist, &cds.cbData );
+      if( cds.lpData )
+      {
+         SendMessage( phWnd[0] , WM_COPYDATA, 0 , (LPARAM) ((void*) &cds) );
+         _xfree( cds.lpData );
+         bOk = TRUE;
+      }
    }
    return bOk;
 }
@@ -173,19 +290,55 @@ static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , L
 // static HWND  user_hWndLogOut  = 0;
 // static LPSTR user_pWndCls     = 0;
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: bSendLogStr
+            | syntax_: `BOOL bSendLogStr( LPSTR pFmt, ... )`
+            | category: log
+            | header: ot4xb_c_exported.h
+            | mangled-name: bSendLogStr
+            | _kw_: log, send log, WM_COPYDATA, debug output, printf
+   }}*/
+/*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the user log window registered with
+      Register_User_Log_Uuid() (default OT4XB log window when no class is registered). C primitive behind
+      lSendLogStr(). The expanded text is capped at 1MB; a failing format returns FALSE instead of crashing.
+    | params:
+    - `pFmt` LPSTR - printf-style format string; the variadic arguments follow.
+    - `...` Values formatted into pFmt.
+
+    Returns BOOL - TRUE when the message was delivered, FALSE when no log window was found or formatting
+      failed. }}*/
 BOOL OT4XB_API bSendLogStr( LPSTR pFmt , ... )
 {
    va_list(arglist);
    va_start(arglist, pFmt);
    return bSendLogStr_internal(&user_hWndLogOut,user_pWndCls,pFmt,arglist);
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: ot4xb_bSendLogStr
+            | syntax_: `BOOL ot4xb_bSendLogStr( LPSTR pFmt, ... )`
+            | category: log
+            | header: ot4xb_c_exported.h
+            | mangled-name: ot4xb_bSendLogStr
+            | _kw_: log, send log, ot4xb log window, WM_COPYDATA, debug output
+   }}*/
+/*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the default OT4XB log window, ignoring
+      any window class registered with Register_User_Log_Uuid(). C primitive behind ot4xb_lSendLogStr(). The
+      expanded text is capped at 1MB; a failing format returns FALSE instead of crashing.
+    | params:
+    - `pFmt` LPSTR - printf-style format string; the variadic arguments follow.
+    - `...` Values formatted into pFmt.
+
+    Returns BOOL - TRUE when the message was delivered, FALSE when no log window was found or formatting
+      failed. }}*/
 BOOL OT4XB_API ot4xb_bSendLogStr( LPSTR pFmt , ... )
 {
    va_list(arglist);
    va_start(arglist, pFmt);
    return bSendLogStr_internal( &ot4xb_hWndLogOut,0,pFmt,arglist);
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 static BOOL bSendLogStr_internal( HWND * phWnd, LPSTR pWndCls, LPSTR pFmt , va_list arglist)
 {
@@ -201,14 +354,14 @@ static BOOL bSendLogStr_internal( HWND * phWnd, LPSTR pWndCls, LPSTR pFmt , va_l
    if( phWnd[0] )
    {
       COPYDATASTRUCT cds;
-
-      va_start(arglist, pFmt);
       cds.dwData = 0;
-      cds.lpData = _xgrab(0x40000);
-      cds.cbData = (DWORD) vsprintf( (LPSTR) cds.lpData, pFmt, arglist );
-      SendMessage( phWnd[0] , WM_COPYDATA, 0 , (LPARAM) ((void*) &cds) );
-      _xfree(cds.lpData);
-      bOk = TRUE;
+      cds.lpData = compose_log_line( 0, 0, pFmt, arglist, &cds.cbData );   // cFile == 0 -> no header
+      if( cds.lpData )
+      {
+         SendMessage( phWnd[0] , WM_COPYDATA, 0 , (LPARAM) ((void*) &cds) );
+         _xfree( cds.lpData );
+         bOk = TRUE;
+      }
    }
    return bOk;
 }

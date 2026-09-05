@@ -5,65 +5,21 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function-family>
-      <name>UUID helpers</name>
-      <source>UUID.CPP</source>
-      <category>uuid</category>
-      <description>
-         Helpers around the Windows RPC UUID functions. Binary UUID values are returned as 16-byte strings;
-         textual UUID values use the standard RPC string form unless a name-oriented helper explicitly removes
-         separators.
-      </description>
-      <functions>
-         <function>
-            <name>UUIDCreate</name>
-            <syntax>UUIDCreate() -> cUuid16</syntax>
-            <description>
-               Creates a UUID with UuidCreate() and returns the raw 16-byte UUID string. The header maps
-               UUIDCreate to the exported _UUIDCreate symbol.
-            </description>
-         </function>
-         <function>
-            <name>UUIDCreateStr</name>
-            <syntax>UUIDCreateStr() -> cUuid</syntax>
-            <description>Creates a UUID and returns its textual RPC representation.</description>
-         </function>
-         <function>
-            <name>cUuidCreateName</name>
-            <syntax>cUuidCreateName( [cPrefix] ) -> cName</syntax>
-            <description>
-               Returns cPrefix followed by a freshly generated UUID string without hyphen separators.
-            </description>
-         </function>
-         <function>
-            <name>cUuidCreateNameEx</name>
-            <syntax>cUuidCreateNameEx( [cPrefix], nMode ) -> cName</syntax>
-            <description>Returns cPrefix followed by one of several UUID-based sortable/name-friendly formats.</description>
-            <flags>
-               <flag value="0">Same format as cUuidCreateName(): UUID without hyphens.</flag>
-               <flag value="1">Uses UuidCreateSequential() and returns reordered UUID bytes as hexadecimal text.</flag>
-               <flag value="2">Prefixes a FILETIME timestamp to UUID data rendered as hexadecimal text.</flag>
-               <flag value="3">Encodes FILETIME plus UUID bytes using base32hex.</flag>
-            </flags>
-         </function>
-         <function>
-            <name>UUIDFromString</name>
-            <syntax>UUIDFromString( cUuid ) -> cUuid16 | NIL</syntax>
-            <description>
-               Parses a UUID string and returns the raw 16-byte UUID string. Surrounding braces are accepted.
-            </description>
-         </function>
-         <function>
-            <name>UUIDToString</name>
-            <syntax>UUIDToString( cUuid16 ) -> cUuid | NIL</syntax>
-            <description>Converts a raw 16-byte UUID string to the standard textual RPC representation.</description>
-         </function>
-      </functions>
-   </function-family>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: UUIDCreate
+            | syntax_: `UUIDCreate() -> cUuid16`
+            | category: uuid
+   }}*/
+/*{{|desc: Creates a new UUID with the Windows RPC API UuidCreate() and returns it in raw binary form: a
+      16-byte Character string holding the UUID structure image. Use UUIDToString() to convert this
+      binary form to the standard textual form.
+
+    Returns Character - The new UUID as a 16-byte binary string.
+
+    |note: The exported C symbol is _UUIDCREATE; ot4xb.ch maps the UUIDCreate() call to it with
+      #pragma Map().
+
+    |seealso: See also: {{ilink: <function UUIDCreateStr> UUIDCreateStr}}, {{ilink: <function UUIDToString> UUIDToString}}, {{ilink: <function UUIDFromString> UUIDFromString}}, {{ilink: <function cUuidCreateName> cUuidCreateName}} }}*/
 XPPRET XPPENTRY _UUIDCREATE(XppParamList pl)
 {
    UUID * pu;
@@ -72,7 +28,20 @@ XPPRET XPPENTRY _UUIDCREATE(XppParamList pl)
    _retclen(pl,(LPSTR) pu,sizeof(UUID));
    _xfree((void*) pu);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: UUIDCreateStr
+            | syntax_: `UUIDCreateStr() -> cUuid`
+            | category: uuid
+   }}*/
+/*{{|desc: Creates a new UUID with the Windows RPC API UuidCreate() and returns its textual
+      representation as produced by the RPC API UuidToString(): hexadecimal digits in the
+      hyphen-separated "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" layout, without braces.
+
+    Returns Character - The new UUID as a 36-character string.
+
+    |seealso: See also: {{ilink: <function UUIDCreate> UUIDCreate}}, {{ilink: <function UUIDToString> UUIDToString}}, {{ilink: <function cUuidCreateName> cUuidCreateName}} }}*/
 XPPRET XPPENTRY UUIDCREATESTR(XppParamList pl)
 {
    UUID * pu;
@@ -84,7 +53,24 @@ XPPRET XPPENTRY UUIDCREATESTR(XppParamList pl)
    _xfree((void*) pu);
    RpcStringFree((LPBYTE*)&pRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: UUIDFromString
+            | syntax_: `UUIDFromString( cUuid ) -> cUuid16 | NIL`
+            | category: uuid
+   }}*/
+/*{{|desc: Parses a textual UUID with the Windows RPC API UuidFromString() and returns it in raw binary
+      form: a 16-byte Character string holding the UUID structure image. The expected layout is
+      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; a value wrapped in braces like
+      "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}" is accepted too, the braces are stripped before parsing.
+    | params:
+    - `cUuid` Character - The UUID in textual form, with or without surrounding braces.
+
+    Returns Character - The UUID as a 16-byte binary string, or NIL when cUuid is not a Character value
+      or cannot be parsed as a UUID.
+
+    |seealso: See also: {{ilink: <function UUIDToString> UUIDToString}}, {{ilink: <function UUIDCreate> UUIDCreate}}, {{ilink: <function UUIDCreateStr> UUIDCreateStr}} }}*/
 XPPRET XPPENTRY UUIDFROMSTRING(XppParamList pl)
 {          
    ContainerHandle conr = _conNew( NULLCONTAINER);
@@ -104,7 +90,24 @@ XPPRET XPPENTRY UUIDFROMSTRING(XppParamList pl)
    }
    _conReturn(pl,conr); _conRelease(conr);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: UUIDToString
+            | syntax_: `UUIDToString( cUuid16 ) -> cUuid | NIL`
+            | category: uuid
+   }}*/
+/*{{|desc: Converts a binary UUID, as returned by UUIDCreate() or UUIDFromString(), to its textual
+      representation as produced by the Windows RPC API UuidToString(): hexadecimal digits in the
+      hyphen-separated "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" layout, without braces.
+    | params:
+    - `cUuid16` Character - The binary UUID; the first 16 bytes of the string are taken as the UUID
+      structure image, the string length is not validated.
+
+    Returns Character - The UUID as a 36-character string, or NIL when cUuid16 is not a Character value
+      or the conversion fails.
+
+    |seealso: See also: {{ilink: <function UUIDFromString> UUIDFromString}}, {{ilink: <function UUIDCreate> UUIDCreate}}, {{ilink: <function UUIDCreateStr> UUIDCreateStr}} }}*/
 XPPRET XPPENTRY UUIDTOSTRING(XppParamList pl)
 {
    BOOL bByRef = FALSE;
@@ -125,12 +128,27 @@ XPPRET XPPENTRY UUIDTOSTRING(XppParamList pl)
    if(bOk) _retc(pl,(LPSTR) pStr); else _ret(pl);
    RpcStringFree((LPBYTE*)&pStr);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 namespace uuidcreatename_ns
 {
 
 	
 	//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: timestamp_and_uuid_48
+            | syntax_: `void __cdecl timestamp_and_uuid_48( XppParamList pl )`
+            | category: uuid/internal
+   }}*/
+/*{{|desc: Worker for cUuidCreateNameEx() format 2. Returns to the Xbase++ caller the prefix taken from
+      parameter 1 followed by 48 uppercase hexadecimal characters: the current FILETIME from
+      GetSystemTimeAsFileTime() rendered high DWORD first (16 digits), then the 32 digits of a new
+      UuidCreate() UUID in textual digit order. Composed with sprintf_s() in a 256-byte work buffer; the
+      room for the prefix is 128 bytes.
+    | params:
+    - `pl` XppParamList - The Xbase++ parameter list; parameter 1 is the optional Character prefix.
+
+    Returns void - The composed name is returned through pl with _retc(). }}*/
 	void __cdecl  timestamp_and_uuid_48(XppParamList pl)
 	{
 		char buffer[256]; ZeroMemory(buffer, sizeof(buffer));
@@ -146,7 +164,23 @@ namespace uuidcreatename_ns
 		_retc(pl, buffer);
 		return;
 	}
+/*{{end-internal-function}}*/
 	//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: timestamp_and_uuid_40_base32hex
+            | syntax_: `void __cdecl timestamp_and_uuid_40_base32hex( XppParamList pl )`
+            | category: uuid/internal
+   }}*/
+/*{{|desc: Worker for cUuidCreateNameEx() format 3. Composes a 24-byte block: the current FILETIME from
+      ft64_now() in big-endian byte order (8 bytes) followed by the 16 bytes of a new UuidCreate() UUID
+      rearranged to textual digit order (Data1, Data2 and Data3 swapped to big-endian). The block is
+      encoded with ot4xb_base32_encode_with_table() using the default Crockford alphabet - despite the
+      _base32hex name - into 40 characters ending with one '=' pad, appended to the prefix taken from
+      parameter 1. The room for the prefix in the 256-byte work buffer is 128 bytes.
+    | params:
+    - `pl` XppParamList - The Xbase++ parameter list; parameter 1 is the optional Character prefix.
+
+    Returns void - The composed name is returned through pl with _retc(). }}*/
 	void __cdecl  timestamp_and_uuid_40_base32hex(XppParamList pl) 
 	{
 		char buffer[256]; ZeroMemory(buffer, sizeof(buffer));
@@ -192,7 +226,21 @@ namespace uuidcreatename_ns
 
 		return;
 	}
+/*{{end-internal-function}}*/
 	//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: newsequentialid
+            | syntax_: `void __cdecl newsequentialid( XppParamList pl )`
+            | category: uuid/internal
+   }}*/
+/*{{|desc: Worker for cUuidCreateNameEx() format 1. Creates a UUID with UuidCreateSequential(),
+      rearranges its 16 bytes to textual digit order (Data1, Data2 and Data3 swapped to big-endian) and
+      appends them with Bin2Hex_buffer() as 32 uppercase hexadecimal characters to the prefix taken from
+      parameter 1. The room for the prefix in the 256-byte work buffer is 223 bytes.
+    | params:
+    - `pl` XppParamList - The Xbase++ parameter list; parameter 1 is the optional Character prefix.
+
+    Returns void - The composed name is returned through pl with _retc(). }}*/
    void __cdecl  newsequentialid(XppParamList pl)
 	{
 		char buffer[256]; ZeroMemory(buffer, sizeof(buffer));
@@ -211,7 +259,22 @@ namespace uuidcreatename_ns
 		_retc(pl, buffer);
 		return;
 	}
+/*{{end-internal-function}}*/
 	//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: old_ot4xb_cuuidcreatename
+            | syntax_: `void __cdecl old_ot4xb_cuuidcreatename( XppParamList pl )`
+            | category: uuid/internal
+   }}*/
+/*{{|desc: Worker for cUuidCreateName() and for cUuidCreateNameEx() format 0, which is also the fallback
+      for unlisted format values. Creates a UUID with UuidCreate(), renders it with the RPC API
+      UuidToString() and appends it to the prefix taken from parameter 1 with the '-' separators removed:
+      32 hexadecimal characters. The name is built in a 128-byte heap buffer; the room for the prefix is
+      64 bytes.
+    | params:
+    - `pl` XppParamList - The Xbase++ parameter list; parameter 1 is the optional Character prefix.
+
+    Returns void - The composed name is returned through pl with _retc(). }}*/
 	void __cdecl  old_ot4xb_cuuidcreatename(XppParamList pl)
 	{
 		UUID   uu;
@@ -225,8 +288,38 @@ namespace uuidcreatename_ns
 		_retc(pl, pBuffer);
 		_xfree((void*)pBuffer);
 	}
+/*{{end-internal-function}}*/
 }
 // --------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: cUuidCreateNameEx
+            | syntax_: `cUuidCreateNameEx( [cPrefix], [nMode] ) -> cName`
+            | category: uuid
+   }}*/
+/*{{|desc: Returns cPrefix followed by freshly generated UUID-based text in one of several formats
+      selected by nMode. All formats produce separator-free text suitable for building names; formats 2
+      and 3 start with a big-endian render of the current FILETIME, making those names sortable by
+      creation time.
+    | params:
+    - `cPrefix` Character - Optional prefix copied verbatim in front of the generated text. The name
+      is composed in a fixed work buffer; the room for the prefix is 64 bytes in format 0, 223 bytes in
+      format 1 and 128 bytes in formats 2 and 3.
+    - `nMode` Numeric - The output format, see the flag list; when missing or not a listed value,
+      format 0 is used.
+    | flags:
+    - `0` Same output as cUuidCreateName(): a UuidCreate() UUID rendered by the RPC API
+      UuidToString() with the '-' separators removed (32 hexadecimal characters).
+    - `1` A UuidCreateSequential() UUID with Data1, Data2 and Data3 swapped to big-endian, rendered
+      as 32 uppercase hexadecimal characters in textual digit order.
+    - `2` The current FILETIME from GetSystemTimeAsFileTime(), high DWORD first, followed by a
+      UuidCreate() UUID in textual digit order: 48 uppercase hexadecimal characters.
+    - `3` The current FILETIME from ft64_now(), big-endian, followed by a UuidCreate() UUID in
+      textual digit order: 24 bytes encoded as 40 characters of Crockford Base32 ('0'-'9' and uppercase
+      letters excluding I, L, O and U), the last one a '=' pad.
+
+    Returns Character - The composed name.
+
+    |seealso: See also: {{ilink: <function cUuidCreateName> cUuidCreateName}}, {{ilink: <function UUIDCreate> UUIDCreate}}, {{ilink: <function UUIDCreateStr> UUIDCreateStr}} }}*/
 XPPRET XPPENTRY CUUIDCREATENAMEEX(XppParamList pl)
 {
 	DWORD flags = (DWORD)_parnl(pl, 2);
@@ -262,10 +355,26 @@ XPPRET XPPENTRY CUUIDCREATENAMEEX(XppParamList pl)
 	}
 	
 }
+/*{{end-function}}*/
+//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: cUuidCreateName
+            | syntax_: `cUuidCreateName( [cPrefix] ) -> cName`
+            | category: uuid
+   }}*/
+/*{{|desc: Returns cPrefix followed by a freshly generated UuidCreate() UUID rendered by the RPC API
+      UuidToString() with the '-' separators removed: 32 hexadecimal characters. Same output as
+      cUuidCreateNameEx( cPrefix, 0 ).
+    | params:
+    - `cPrefix` Character - Optional prefix copied verbatim in front of the generated text; the room
+      for it in the internal work buffer is 64 bytes.
+
+    Returns Character - The composed name.
+
+    |seealso: See also: {{ilink: <function cUuidCreateNameEx> cUuidCreateNameEx}}, {{ilink: <function UUIDCreateStr> UUIDCreateStr}}, {{ilink: <function UUIDCreate> UUIDCreate}} }}*/
 XPPRET XPPENTRY CUUIDCREATENAME(XppParamList pl)
 {
 	uuidcreatename_ns::old_ot4xb_cuuidcreatename(pl);
 }
-
-
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------

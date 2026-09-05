@@ -7,44 +7,6 @@
 #include <bcrypt.h>
 // -----------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>OT4XB_CNG</name>
-      <category>crypto/cng</category>
-      <description>
-         Windows CNG helper class for symmetric encryption helpers. The current exported Xbase++ surface exposes AES
-         encrypt/decrypt and RC4 encrypt/decrypt class methods.
-      </description>
-      <syntax>OT4XB_CNG():aes_encrypt( cPlain, oFlags ) -> cEncrypted</syntax>
-      <class-methods>
-         <method name="aes_encrypt" syntax="OT4XB_CNG():aes_encrypt( cPlain, oFlags ) -> cEncrypted">Encrypts cPlain using AES.</method>
-         <method name="aes_decrypt" syntax="OT4XB_CNG():aes_decrypt( cEncrypted, oFlags ) -> cPlain">Decrypts AES data.</method>
-         <method name="rc4_encrypt" syntax="OT4XB_CNG():rc4_encrypt( cPlain, oFlags ) -> cEncrypted">Applies RC4 to the input.</method>
-         <method name="rc4_decrypt" syntax="OT4XB_CNG():rc4_decrypt( cEncrypted, oFlags ) -> cPlain">Applies RC4 to the input; RC4 uses the same operation for encryption and decryption.</method>
-      </class-methods>
-      <parameters>
-         <parameter name="oFlags" type="object">
-            Object that responds to ::get_prop(cName). The implementation reads keys such as key, iv, mode,
-            encode_input, encode_output, encode_key, encode_iv and aes_block_padding.
-         </parameter>
-      </parameters>
-      <flags>
-         <flag name="encode_input">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
-         <flag name="encode_output">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
-         <flag name="encode_key">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
-         <flag name="encode_iv">"bin", "hex", "base64" or "b64". Default is "bin".</flag>
-         <flag name="mode">AES mode. "cbc" selects CBC. The legacy spelling "ebc" selects ECB.</flag>
-         <flag name="aes_block_padding">Logical property enabling BCRYPT_BLOCK_PADDING for AES.</flag>
-      </flags>
-      <remarks>
-         AES keys must decode to 16, 24 or 32 bytes. When AES mode is not supplied, CBC is selected if an IV is
-         supplied; otherwise ECB is used. RC4 reads key and encode_key from the same flags object. All byte encodings
-         are applied before or after the CNG call according to the encode_* properties.
-      </remarks>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
 
 BEGIN_NAMESPACE( ot4xb_cng_ns )
 //----------------------------------------------------------------------------------------------------------------------
@@ -977,6 +939,25 @@ void __cdecl rc4_encrypt_decrypt(XppParamList pl) // rc4_encrypt_decrypt(input,k
 END_NAMESPACE() // ot4xb_cng_ns
 // ---------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: OT4XB_CNG
+            | _slug_: ot4xb_cng
+            | class-function: OT4XB_CNG
+            | category: crypto/cipher
+            | desc: Class interface to the Windows CNG (BCrypt) API: AES and RC4 encryption and decryption
+              exposed as class methods. The AES methods call BCrypt; the RC4 methods run a cipher implemented
+              inside ot4xb. All data travels as Character buffers.
+            | note: Every method takes the data as its first parameter and a flags object as its second one:
+              any object exposing a :get_prop(cName) method, for example an _ot4xb_expando_ instance. The key
+              material and the cipher options are read from its properties.
+            | note: The oFlags properties encode_input, encode_output, encode_key and encode_iv select how the
+              matching buffer is exchanged: "bin" (raw bytes), "hex" or "base64"/"b64", compared without case.
+              The input is decoded before the cipher runs and the result is encoded back per encode_output.
+              encode_input and encode_output default to "bin".
+            | note: OT4XB_CNG() returns NIL instead of the class object when the CNG runtime (ncrypt.dll)
+              cannot be loaded.
+   | _kw_: CNG, BCrypt, AES, RC4, encrypt, decrypt, cipher, cryptography
+   }}*/
 _XPP_REG_FUN_( OT4XB_CNG )
 {
    if( ! ot4xb_cng_ns::init_module() )
@@ -990,13 +971,73 @@ _XPP_REG_FUN_( OT4XB_CNG )
    {
 
       TXbClass * pc = new TXbClass;pc->ClassName("OT4XB_CNG");
+      /*{{|:**BEGIN CLASS  OT4XB_CNG** }}*/
       pc->EXPORTED();
-      pc->ClassVar( "__mc__ht" );
       // -----
+      /*{{|class-method_: - CLASS METHOD aes_encrypt( cPlain, oFlags )
+               | return: cEncrypted / NIL
+               | desc_: Encrypts cPlain with AES through BCrypt, using the key, mode and encodings taken from
+                 the oFlags object; the result is encoded per encode_output. Returns NIL when the key or the
+                 iv do not meet the sizes below or when a BCrypt call fails.
+               | flags:
+                 - `key` AES key, Character. After decoding per encode_key it must be 16, 24 or 32 bytes
+                   long (AES-128/192/256). Required.
+                 - `iv` Initialization vector, Character. After decoding per encode_iv it must be at least
+                   one AES block (16 bytes); only the first block is used. Ignored in ECB mode.
+                 - `mode` "cbc" selects CBC; the legacy spelling "ebc" selects ECB. Any other value selects
+                   the default: CBC when an iv property is present, ECB otherwise.
+                 - `encode_key` Encoding of the key property: "bin" (default), "hex", "base64"/"b64".
+                 - `encode_iv` Encoding of the iv property: "bin" (default), "hex", "base64"/"b64".
+                 - `aes_block_padding` Logical. When .T. the plain text is padded to whole AES blocks
+                   (BCRYPT_BLOCK_PADDING); otherwise its length must already be a multiple of 16 bytes.
+      }}*/
       pc->ClassMethod_cbbs("aes_encrypt" , "{|s,plain,flags| XbFpCall(%i,plain,flags) }" , ot4xb_cng_ns::aes_encrypt );
+      /*{{|class-method_: - CLASS METHOD aes_decrypt( cEncrypted, oFlags )
+               | return: cPlain / NIL
+               | desc_: Decrypts cEncrypted with AES through BCrypt, using the key, mode and encodings taken
+                 from the oFlags object; cEncrypted is decoded per encode_input first. Returns NIL when the
+                 key or the iv do not meet the sizes below or when a BCrypt call fails.
+               | flags:
+                 - `key` AES key, Character. After decoding per encode_key it must be 16, 24 or 32 bytes
+                   long (AES-128/192/256). Required.
+                 - `iv` Initialization vector, Character. After decoding per encode_iv it must be at least
+                   one AES block (16 bytes); only the first block is used. Ignored in ECB mode.
+                 - `mode` "cbc" selects CBC; the legacy spelling "ebc" selects ECB. Any other value selects
+                   the default: CBC when an iv property is present, ECB otherwise.
+                 - `encode_key` Encoding of the key property: "bin" (default), "hex", "base64"/"b64".
+                 - `encode_iv` Encoding of the iv property: "bin" (default), "hex", "base64"/"b64".
+                 - `aes_block_padding` Logical. Must match the value used to encrypt: when .T. the pad
+                   bytes are removed from the decrypted data (BCRYPT_BLOCK_PADDING).
+      }}*/
       pc->ClassMethod_cbbs("aes_decrypt" , "{|s,encr,flags| XbFpCall(%i,encr,flags) }"   , ot4xb_cng_ns::aes_decrypt ); 
 		// ----- 
+      /*{{|class-method_: - CLASS METHOD rc4_encrypt( cPlain, oFlags )
+               | return: cEncrypted / NIL
+               | desc_: Applies the RC4 stream cipher to cPlain using the key property of the oFlags object;
+                 the result is encoded per encode_output. RC4 is symmetric, so rc4_encrypt() and rc4_decrypt()
+                 perform the same operation over the byte stream. The cipher is implemented inside ot4xb and
+                 does not call BCrypt. Returns NIL when the input is not a Character value decoding to at
+                 least one byte, or when the key is missing or empty.
+               | flags:
+                 - `key` RC4 key, Character. Any length above zero after decoding per encode_key. Required.
+                 - `encode_key` Encoding of the key property: "bin", "hex", "base64"/"b64".
+               | note: The RC4 helper does not preset a default key encoding; pass encode_key explicitly in
+                 oFlags.
+      }}*/
 		pc->ClassMethod_cbbs("rc4_encrypt", "{|s,plain,flags| XbFpCall(%i,plain,flags) }", ot4xb_cng_ns::rc4_encrypt_decrypt );
+      /*{{|class-method_: - CLASS METHOD rc4_decrypt( cEncrypted, oFlags )
+               | return: cPlain / NIL
+               | desc_: Applies the RC4 stream cipher to cEncrypted using the key property of the oFlags
+                 object; running the cipher again with the key used to encrypt restores the original data.
+                 The result is encoded per encode_output. Returns NIL when the input is not a Character value
+                 decoding to at least one byte, or when the key is missing or empty.
+               | flags:
+                 - `key` RC4 key, Character. Any length above zero after decoding per encode_key. Required.
+                 - `encode_key` Encoding of the key property: "bin", "hex", "base64"/"b64".
+               | note: The RC4 helper does not preset a default key encoding; pass encode_key explicitly in
+                 oFlags.
+      }}*/
+      /*{{|:**END CLASS** }}*/
 		pc->ClassMethod_cbbs("rc4_decrypt", "{|s,encr,flags| XbFpCall(%i,encr,flags) }", ot4xb_cng_ns::rc4_encrypt_decrypt   );
       // -----
       conco = pc->Create();
@@ -1010,5 +1051,6 @@ _XPP_REG_FUN_( OT4XB_CNG )
    _conReturn(pl,conco);
    _conRelease(conco);
 }
+/*{{end-class}}*/
 // -----------------------------------------------------------------------------------------------------------------
 

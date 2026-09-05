@@ -296,7 +296,7 @@ TLdList_Item * TLdList_Master::CloneItems( LONG nItems , LONG * pnCount)
    pnCount[0] = 0;
    if( nItems == -1 ) nItems = 0x7FFFFFFF;
    else if( m_dwStatus ) nItems = 0; // cannot clone partial list if eof or bof
-   if( m_dwStatus  && pSrc && (nItems > 0) )
+   if( pSrc && (nItems > 0) ) // partial-clone status rule already applied above; full clone ignores status
    {
       TLdList_Item * pDst  = CloneItem( pSrc );
       TLdList_Item * p     = pDst;
@@ -345,7 +345,7 @@ TLdList_Item * TLdList_Master::DetachItems( LONG nItems , LONG * pnCount)
       {
          pFirst->m_pPrev->m_pNext = m_pCurrent =  pLast->m_pNext;
          pLast->m_pNext->m_pPrev = pFirst->m_pPrev;
-         m_dwStatus = 7;
+         m_dwStatus = 0; // items remain and current is repositioned: the list stays navigable
          pFirst->m_pPrev = 0;
          pLast->m_pNext  = 0;
          return pFirst;

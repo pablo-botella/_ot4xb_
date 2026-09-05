@@ -12,44 +12,6 @@
                               px->SetErrorGenCode(0x00101000 + n);
 //----------------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>GWST</name>
-      <category>structures</category>
-      <description>
-         Base class used by OT4XB structure classes. GWST instances expose a C-compatible memory layout through
-         Xbase++ members and can be passed to OT4XB calls that accept extended pointers.
-      </description>
-      <syntax>GWST():new( [oParent], [nShift] ) -> oStructure</syntax>
-      <remarks>
-         Application code normally uses concrete structure classes declared with BEGIN STRUCTURE or WAPIST_* WinAPI
-         structure factories, not GWST directly. A structure instance starts with Xbase++ character-buffer backed
-         storage. It can also allocate memory with ::_alloc_() or attach to an existing pointer with ::_link_().
-         When passed as an OT4XB extended pointer, the object is locked before the call and unlocked afterwards.
-      </remarks>
-      <methods>
-         <method name="_alloc_" syntax="::_alloc_( [lCopy := .T.], [@pMem] ) -> Self">Allocates owned memory for the structure, optionally copying the current buffer contents.</method>
-         <method name="_free_" syntax="::_free_( [lCopy := .T.] ) -> Self">Frees owned memory, optionally copying memory back to the Xbase++ buffer first.</method>
-         <method name="_link_" syntax="::_link_( pMem, [lCopy := .T.] ) -> Self">Links the structure to an existing memory pointer, optionally copying data from that pointer.</method>
-         <method name="_unlink_" syntax="::_unlink_( [lCopy := .T.] ) -> Self | pMem">Detaches from an external pointer. A negative numeric flag returns the pointer without copying.</method>
-         <method name="_lock_" syntax="::_lock_( [@nLen] ) -> pMem">Locks storage and returns a memory pointer suitable for native calls.</method>
-         <method name="_unlock_" syntax="::_unlock_() -> NIL">Releases a pointer obtained with ::_lock_().</method>
-         <method name="_zeromemory_" syntax="::_zeromemory_() -> Self">Fills the structure storage with zero bytes.</method>
-         <method name="_sizeof_" syntax="::_sizeof_( [cMember | nFlags] ) -> nBytes">Returns the structure size, a member size, or a flag-selected size combination.</method>
-         <method name="_addressof_" syntax="::_addressof_( [cMember], [@nShift] ) -> pMem">Returns the address of the structure or named member.</method>
-         <method name="_offsetof_" syntax="::_offsetof_( cMember ) -> nOffset">Returns the byte offset of a named member.</method>
-         <method name="_read_" syntax="::_read_( [@cBuffer | pMem | oGwst], [nPos], [nBytes] ) -> nBytes | cBuffer">Reads bytes from structure storage.</method>
-         <method name="_write_" syntax="::_write_( cBuffer | pMem | oGwst, [nPos], [nBytes] ) -> nBytes">Writes bytes into structure storage.</method>
-         <method name="_scast_" syntax="::_scast_( oClass ) -> oStructure">Creates another GWST structure object linked to this structure address.</method>
-      </methods>
-      <properties>
-         <property name="_nExtraSize_" type="numeric">Extra bytes available beyond the declared structure size when linked or allocated with larger storage.</property>
-      </properties>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
-
 static GWST_SORT_ITEM * _gwst_get_member_info_array_( ContainerHandle conoGwst , ContainerHandle conaMNames );
 
 //-----------------------------------------------------------------------------------------------------------------------
@@ -68,6 +30,20 @@ static void gwst_xb_unlock        ( TXbClsParams * px ); // 0 // ::_unlock_()
 static void gwst_xb_nExtraSize_( TXbClsParams * px );// 1 // ::_nExtraSize_
 
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: GWST
+            | _slug_: gwst
+            | class-function: GWST
+            | category: structures
+            | desc: Base class of the OT4XB binary structure classes: concrete structures (BEGIN STRUCTURE
+              declarations, WAPIST_* WinAPI structures) inherit its storage engine and add typed members mapped over
+              one memory image. Storage starts as a plain Xbase++ character buffer; ::_alloc_() switches to owned
+              memory, ::_link_() attaches an external address and ::_lock_() returns the real memory address for
+              native calls. Members declared as nested structures are child GWST objects sharing the parent memory.
+              When a structure object is passed to an OT4XB call as an extended pointer, it is locked before the
+              call and unlocked afterwards.
+   | _kw_: structure, binary structure, base class, BEGIN STRUCTURE, WinAPI struct, memory layout
+   }}*/
 XPPRET XPPENTRY GWST(XppParamList pl)
 {
    ContainerHandle conco = _conClsObj("GWST");
@@ -76,31 +52,71 @@ XPPRET XPPENTRY GWST(XppParamList pl)
    {
       TXbClass * pc = new TXbClass;
       pc->ClassName( "GWST" );
+      /*{{|:**BEGIN CLASS  GWST** }}*/
       pc->EXPORTED();
       // ---------------------------------------------------------------------------------
-      pc->SharedClassVar( "_mc__chdef_" ); // {{1class,2shift,3size},...}     // Nested structure members
-      pc->SharedClassVar( "_mc__mdef_" );  // "Crc32(MName)+SHIFT+SIZE+CHPOS" // Member Attributes
-      pc->SharedClassVar( "_mc__size_"  ); // Default Structure size
-      pc->Var( "_m__size_"  );  // Object Structure size ::_mc__size_ by default but can be changed within instances
-      pc->Var( "_m__shift_" );  // Offset from the owner of the memory pointer
-      pc->Var( "_m__child_" );  // array of child objects of the instance
-      pc->Var( "_m__pto_"   );  // Owner object of the memory pointer
-      pc->Var( "_m__pt_"    );  // memory pointer ,character buffer or parent object
-      pc->Var( "_m__lk_"    );  // Lock Counter
-      pc->Var( "_m__con_"   );  // ContainerHandle if buffer is character and locked
-      pc->Var( "_m__ghpt_"   ); 
+      pc->SharedClassVar( "_mc__chdef_" ); /*{{|class-var_: - CLASS VAR _mc__chdef_ | desc_: Nested structure members: `{{class, shift, size}, ...}` }}*/
+      pc->SharedClassVar( "_mc__mdef_" );  /*{{|class-var_: - CLASS VAR _mc__mdef_ | desc_: Member attributes: `Crc32(MName)+SHIFT+SIZE+CHPOS` }}*/
+      pc->SharedClassVar( "_mc__size_"  ); /*{{|class-var_: - CLASS VAR _mc__size_ | desc_: Default structure size }}*/
+      pc->Var( "_m__size_"  );  /*{{|ivar_: - VAR _m__size_ | desc_: Object structure size, ::_mc__size_ by default; can be changed per instance }}*/
+      pc->Var( "_m__shift_" );  /*{{|ivar_: - VAR _m__shift_ | desc_: Offset from the owner of the memory pointer }}*/
+      pc->Var( "_m__child_" );  /*{{|ivar_: - VAR _m__child_ | desc_: Array of child objects of the instance }}*/
+      pc->Var( "_m__pto_"   );  /*{{|ivar_: - VAR _m__pto_ | desc_: Owner object of the memory pointer }}*/
+      pc->Var( "_m__pt_"    );  /*{{|ivar_: - VAR _m__pt_ | desc_: Memory pointer, character buffer or parent object }}*/
+      pc->Var( "_m__lk_"    );  /*{{|ivar_: - VAR _m__lk_ | desc_: Lock counter }}*/
+      pc->Var( "_m__con_"   );  /*{{|ivar_: - VAR _m__con_ | desc_: ContainerHandle when the buffer is a character string and it is locked }}*/
+      pc->Var( "_m__ghpt_"   ); /*{{|ivar_: - VAR _m__ghpt_ | desc_: Helper pointer for derived classes: {{ilink: <slug tldlist> TldList}} keeps there the pointer to the current item }}*/
       // ---------------------------------------------------------------------------------
-      pc->ClassMethodCB( "_xgrab_array_" ,"{|s,n| iif(Empty(n),0,_xgrab( n * s:_mc__size_ ))}");            
+      /*{{|class-method_: - CLASS METHOD _xgrab_array_( n ) | return: pMem | desc_: Allocates memory for n elements of this structure (`n * ::_mc__size_`, like `n * sizeof(type)` in C) and returns the pointer; 0 when n is empty. }}*/
+      pc->ClassMethodCB( "_xgrab_array_" ,"{|s,n| iif(Empty(n),0,_xgrab( n * s:_mc__size_ ))}");
     // ---------------------------------------------------------------------------------
+      /*{{|method_: - METHOD new( [oParent] , [nShift] )
+               | return: oStructure
+               | desc_: Creates a structure instance. oParent and nShift are used when the instance is a nested
+                 structure member: the child maps its storage over the parent memory at nShift bytes.
+      }}*/
       pc->MethodCB( "init"       , "{|s,p1,p2| s:_gwst_(p1,p2),s}");
+      /*{{|method_: - METHOD _gwst_( [oParent] , [nShift] )
+               | return: Self
+               | desc_: Initializes only the structure part of the instance (storage, parent and shift). It exists to
+                 make inheritance easy: the default ::init() just calls it and returns Self, so a derived class
+                 with an init of its own calls ::_gwst_( oParent, nShift ) and goes on with its own setup.
+      }}*/
       pc->Method( "_gwst_"       , gwst_xb_gwst       , 2 ,",@s:_mc__chdef_"   );         // ::_gwst_(oParent,nShift)
+      /*{{|method_: - METHOD _alloc_( [lCopy := .T.] , [@pMem] )
+               | return: Self
+               | desc_: Allocates owned memory for the structure, optionally copying the current buffer contents.
+                 @pMem receives the allocated address.
+      }}*/
       pc->Method( "_alloc_"      , gwst_xb_alloc      , 2 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_alloc_(lCopy,pMem)
+      /*{{|method_: - METHOD _free_( [lCopy := .T.] )
+               | return: Self
+               | desc_: Frees owned memory, optionally copying memory back to the Xbase++ buffer first.
+      }}*/
       pc->Method( "_free_"       , gwst_xb_free       , 1 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_free_(lCopy)
+      /*{{|method_: - METHOD _link_( pMem , [lCopy := .T.] )
+               | return: Self
+               | desc_: Links the structure to an existing memory pointer, optionally copying data from that pointer.
+      }}*/
       pc->Method( "_link_"       , gwst_xb_link       , 2 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_link_(pMem,lCopy)
+      /*{{|method_: - METHOD _scast_( oClass )
+               | return: oStructure
+               | desc_: Creates another GWST structure object linked to this structure address.
+      }}*/
       pc->MethodCB( "_scast_"    , "{|s,oc,oo| oo := iif( Valtype(oc) == 'O',oc:New(),),"
                                                "iif( oo != NIL , oo:_link_(s:_addressof_(),.F.),),"
                                                "oo }");
+      /*{{|method_: - METHOD _unlink_( [lCopy := .T.] )
+               | return: Self, or the detached pointer
+               | desc_: Detaches from an external pointer. A negative numeric flag returns the pointer without
+                 copying.
+      }}*/
       pc->Method( "_unlink_"     , gwst_xb_unlink     , 1 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_unlink_(lCopy)
+      /*{{|method_: - METHOD _lock_( [@nLen] )
+               | return: pMem
+               | desc_: Locks storage and returns a memory pointer suitable for native calls. @nLen receives the
+                 structure size.
+      }}*/
       pc->Method( "_lock_"       , gwst_xb_lock       , 1 ,",@s:_m__pto_:_m__pt_"    // e1
                                                            ",@s:_m__pto_:_m__lk_"    // e2
                                                            ",@s:_m__pto_:_m__con_"   // e3
@@ -108,24 +124,52 @@ XPPRET XPPENTRY GWST(XppParamList pl)
                                                            ",@s:_m__size_"           // e5
                                                            ",@s:_m__shift_"          // e6
                                                                                           ); //::_lock_(@n)// -> p
+      /*{{|method_: - METHOD _unlock_() | return: NIL | desc_: Releases a pointer obtained with ::_lock_(). }}*/
       pc->Method( "_unlock_"     , gwst_xb_unlock     , 0 ,",@s:_m__pto_:_m__pt_"    // e1
                                                            ",@s:_m__pto_:_m__lk_"    // e2
                                                            ",@s:_m__pto_:_m__con_"   // e3
                                                                                           ); //::_unlock_()
+      /*{{|method_: - METHOD _zeromemory_() | return: Self | desc_: Fills the structure storage with zero bytes. }}*/
       pc->Method( "_zeromemory_" , gwst_xb_zeromemory , 0 , ",@s:_m__size_"                ); // ::_zeromemory_()
+      /*{{|method_: - METHOD _sizeof_( [cMember \| nFlags] )
+               | return: nBytes
+               | desc_: Returns the structure size, a member size, or a flag-selected size combination.
+      }}*/
       pc->Method( "_sizeof_"     , gwst_xb_sizeof     , 1 ,",@s:_m__size_,@s:_mc__mdef_");// ::_sizeof_([member])
+      /*{{|method_: - METHOD _addressof_( [cMember] , [@nShift] )
+               | return: pMem
+               | desc_: Returns the address of the structure or named member.
+      }}*/
       pc->Method( "_addressof_"  , gwst_xb_addressof  , 3 ,",@s:_m__pto_:_m__pt_ "   // e1
                                                            ",@s:_m__shift_"          // e2
                                                            ",@s:_mc__mdef_"          // e3
                                                             );// ::_addressof_([member],[@shift]) -> pMem
+      /*{{|method_: - METHOD _read_( [@cBuffer \| pMem \| oGwst] , [nPos] , [nBytes] )
+               | return: nBytes, or a Character value with the read bytes when no target is given
+               | desc_: Reads bytes from structure storage.
+      }}*/
       pc->Method( "_read_"       , gwst_xb_read       , 3 ,",@s:_m__size_"); // ::_read_(@cBuffer,[nPos][,nBytes])
+      /*{{|method_: - METHOD _write_( cBuffer \| pMem \| oGwst , [nPos] , [nBytes] )
+               | return: nBytes
+               | desc_: Writes bytes into structure storage.
+      }}*/
       pc->Method( "_write_"      , gwst_xb_write      , 3 ,",@s:_m__size_"); // ::_write_(cBuffer,[nPos][,nBytes])
 
+      /*{{|property_: - PROPERTY _nExtraSize_
+               | type: Numeric
+               | desc_: Extra bytes available beyond the declared structure size when linked or allocated with
+                 larger storage.
+      }}*/
       pc->Property( "_nExtraSize_" , gwst_xb_nExtraSize_ , 1, ",@s:_m__pt_"         // e1
                                                               ",@s:_m__lk_"         // e2
                                                               ",@s:_m__size_"       // e3
                                                               ",@s:_mc__size_" );   // e4
       // ---------------------------------------------------------------------------------
+      /*{{|method_: - METHOD _offsetof_( cMember )
+               | return: nOffset
+               | desc_: Returns the byte offset of a named member.
+      }}*/
+      /*{{|:**END CLASS** }}*/
       pc->MethodCB("_offsetof_","{|s,m,n| n := 0 , s:_addressof_(m,@n) , n}");
       // ---------------------------------------------------------------------------------
       
@@ -141,6 +185,7 @@ XPPRET XPPENTRY GWST(XppParamList pl)
    if(pl) _conReturn(pl,conco);
    _conRelease(conco);
 }
+/*{{end-class}}*/
 //-----------------------------------------------------------------------------------------------------------------------
 static void gwst_xb_gwst( TXbClsParams * px ) // 2 // ::_gwst_(1oParent,2nShift) // e1 := @s:_mc__chdef_
 {
@@ -366,7 +411,7 @@ static void gwst_xb_lock( TXbClsParams * px )//1//::_lock_(@nLen) // -> p
    else
    {
       px->PutReturnDWord(px->GetExtraDWord(1) + dwShift);
-      px->PutExtraLong(2,1);
+      px->PutExtraLong(2, nCounter + 1 ); // e2 := @s:_m__pto_:_m__lk_ // nested lock: one more level
    }
 }
 //-----------------------------------------------------------------------------------------------------------------------
@@ -374,10 +419,14 @@ static void gwst_xb_lock( TXbClsParams * px )//1//::_lock_(@nLen) // -> p
 static void gwst_xb_unlock( TXbClsParams * px ) // 0 // ::_unlock_()
 {
    LONG             nCounter      = px->GetExtraLong(2); // e2 := @s:_m__pto_:_m__lk_
-   if( nCounter != 0 )
+   if( nCounter > 1 )
+   {
+      px->PutExtraLong(2, nCounter - 1 ); // nested lock: drop one level, the buffer stays locked
+   }
+   else if( nCounter != 0 )
    {
       ContainerHandle con = (ContainerHandle) px->GetExtraLong(3); // e3 := @s:_m__pto_:_m__con_
-      if( con != NULLCONTAINER ) 
+      if( con != NULLCONTAINER )
       {
          ot4xb_conUnlockC( con );
          _conPut( px->GetExtra(1) , con);
@@ -522,43 +571,45 @@ static void gwst_xb_read( TXbClsParams * px ) // 3 // ::_read_(1@cBuffer,2nPos[,
    
    if( nlPos < 0 )    nlPos = ((0 - nlPos) + px->GetMemberLong( "_mc__size_"  )) - 1;
    nPos          = (UINT) nlPos;
-   if( nPos > nSize ) return; // -> NIL
-   nSize -= nPos;
-   pMem = (  (LPBYTE) (((DWORD) pMem) + ((DWORD) nPos ) ) );
-
-   if( pMem )
+   if( nPos <= nSize )
    {
-       if( px->CheckParamType(1,(XPP_CHARACTER | XPP_OBJECT | XPP_ARRAY)) )
-       {
-          LPBYTE pOut      = (LPBYTE) px->ParamWLockStrEx(1);
-          if( pOut )
-          {
-             UINT   nBuffSize = (UINT) px->ParamExLen(1);
-             UINT   nBytes    = ( px->CheckParamType(3,XPP_NUMERIC)  ? ((UINT)px->GetParamDWord(3)) : nBuffSize );
-             if( nBytes > nBuffSize ) nBytes = nBuffSize;
-             if( nBytes > nSize ) nBytes = nSize;
-             if( nBytes ) _bcopy(pOut,pMem,nBytes);
-             px->PutReturnDWord( (DWORD) nBytes );
-          }
-          px->ParamUnLockStrEx(1);
-       }
-       else if( px->CheckParamType(1,XPP_NUMERIC) )
-       {
-          LPBYTE pOut      = (LPBYTE) px->GetParamLong(1);
-          if( pOut )
-          {
-             UINT   nBytes    = (UINT)px->GetParamDWord(3);
-             if( nBytes > nSize ) nBytes = nSize;
-             if( nBytes ) _bcopy(pOut,pMem,nBytes);
-             px->PutReturnDWord( (DWORD) nBytes );
-          }
-       }
-       else if( (px->PCount() < 1) || px->CheckParamType(1,XPP_UNDEF) )
-       {
-          ULONG nBytes    = (ULONG)( px->CheckParamType(3,XPP_NUMERIC) ? ((ULONG)px->GetParamDWord(3)) : nSize );
-          if( nBytes > nSize ) nBytes = nSize;
-          _conPutCL( px->GetReturn() ,(LPSTR) pMem , nBytes ); 
-       }
+      nSize -= nPos;
+      pMem = ( (LPBYTE) ( ( (DWORD) pMem ) + ( (DWORD) nPos ) ) );
+
+      if( pMem )
+      {
+         if( px->CheckParamType( 1, ( XPP_CHARACTER | XPP_OBJECT | XPP_ARRAY ) ) )
+         {
+            LPBYTE pOut = (LPBYTE) px->ParamWLockStrEx( 1 );
+            if( pOut )
+            {
+               UINT   nBuffSize = (UINT) px->ParamExLen( 1 );
+               UINT   nBytes = ( px->CheckParamType( 3, XPP_NUMERIC ) ? ( (UINT) px->GetParamDWord( 3 ) ) : nBuffSize );
+               if( nBytes > nBuffSize ) nBytes = nBuffSize;
+               if( nBytes > nSize ) nBytes = nSize;
+               if( nBytes ) _bcopy( pOut, pMem, nBytes );
+               px->PutReturnDWord( (DWORD) nBytes );
+            }
+            px->ParamUnLockStrEx( 1 );
+         }
+         else if( px->CheckParamType( 1, XPP_NUMERIC ) )
+         {
+            LPBYTE pOut = (LPBYTE) px->GetParamLong( 1 );
+            if( pOut )
+            {
+               UINT   nBytes = (UINT) px->GetParamDWord( 3 );
+               if( nBytes > nSize ) nBytes = nSize;
+               if( nBytes ) _bcopy( pOut, pMem, nBytes );
+               px->PutReturnDWord( (DWORD) nBytes );
+            }
+         }
+         else if( ( px->PCount() < 1 ) || px->CheckParamType( 1, XPP_UNDEF ) )
+         {
+            ULONG nBytes = (ULONG) ( px->CheckParamType( 3, XPP_NUMERIC ) ? ( (ULONG) px->GetParamDWord( 3 ) ) : nSize );
+            if( nBytes > nSize ) nBytes = nSize;
+            _conPutCL( px->GetReturn(), (LPSTR) pMem, nBytes );
+         }
+      }
    }
    _conMCallVoid(Self,"_unlock_");
 }
@@ -576,37 +627,39 @@ static void gwst_xb_write ( TXbClsParams * px ) // 3 // ::_write_(cBuffer,nPos[,
    
    if( nlPos < 0 )    nlPos = ((0 - nlPos) + px->GetMemberLong( "_mc__size_"  )) - 1;
    nPos          = (UINT) nlPos;
-   if( nPos > nSize ) return; // -> NIL
-   nSize -= nPos;
-   pMem = (  (LPBYTE) (((DWORD) pMem) + ((DWORD) nPos ) ) );
-
-   if( pMem )
+   if( nPos <= nSize )
    {
-       if( px->CheckParamType(1,(XPP_CHARACTER | XPP_OBJECT | XPP_ARRAY)) )
-       {
-          LPBYTE pSrc      = (LPBYTE) px->ParamRLockStrEx(1);
-          if( pSrc )
-          {
-             UINT   nBuffSize = (UINT) px->ParamExLen(1);
-             UINT   nBytes    = ( px->CheckParamType(3,XPP_NUMERIC)  ? ((UINT)px->GetParamDWord(3)) : nBuffSize );
-             if( nBytes > nBuffSize ) nBytes = nBuffSize;
-             if( nBytes > nSize ) nBytes = nSize;
-             if( nBytes ) _bcopy(pMem,pSrc,nBytes);
-             px->PutReturnDWord( (DWORD) nBytes );
-          }
-          px->ParamUnLockStrEx(1);          
-       }
-       else if( px->CheckParamType(1,XPP_NUMERIC) )
-       {
-          LPBYTE pSrc      = (LPBYTE) px->GetParamLong(1);
-          if( pSrc )
-          {
-             UINT   nBytes    = (UINT)px->GetParamDWord(3);
-             if( nBytes > nSize ) nBytes = nSize;
-             if( nBytes ) _bcopy(pMem,pSrc,nBytes);
-             px->PutReturnDWord( (DWORD) nBytes );
-          }
-       }
+      nSize -= nPos;
+      pMem = ( (LPBYTE) ( ( (DWORD) pMem ) + ( (DWORD) nPos ) ) );
+
+      if( pMem )
+      {
+         if( px->CheckParamType( 1, ( XPP_CHARACTER | XPP_OBJECT | XPP_ARRAY ) ) )
+         {
+            LPBYTE pSrc = (LPBYTE) px->ParamRLockStrEx( 1 );
+            if( pSrc )
+            {
+               UINT   nBuffSize = (UINT) px->ParamExLen( 1 );
+               UINT   nBytes = ( px->CheckParamType( 3, XPP_NUMERIC ) ? ( (UINT) px->GetParamDWord( 3 ) ) : nBuffSize );
+               if( nBytes > nBuffSize ) nBytes = nBuffSize;
+               if( nBytes > nSize ) nBytes = nSize;
+               if( nBytes ) _bcopy( pMem, pSrc, nBytes );
+               px->PutReturnDWord( (DWORD) nBytes );
+            }
+            px->ParamUnLockStrEx( 1 );
+         }
+         else if( px->CheckParamType( 1, XPP_NUMERIC ) )
+         {
+            LPBYTE pSrc = (LPBYTE) px->GetParamLong( 1 );
+            if( pSrc )
+            {
+               UINT   nBytes = (UINT) px->GetParamDWord( 3 );
+               if( nBytes > nSize ) nBytes = nSize;
+               if( nBytes ) _bcopy( pMem, pSrc, nBytes );
+               px->PutReturnDWord( (DWORD) nBytes );
+            }
+         }
+      }
    }
    _conMCallVoid(Self,"_unlock_");
 }
@@ -653,6 +706,26 @@ static void gwst_xb_nExtraSize_( TXbClsParams * px ) // 1 // ::_nExtraSize_ | ::
    else px->PutReturnLong( px->GetExtraLong(3) - px->GetExtraLong(4) );
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _gwst_get_member_info
+            | syntax_: `GWST_SORT_ITEM * _gwst_get_member_info( ContainerHandle conoGwst, ContainerHandle conMName )`
+            | category: structures
+            | header: ot4xb_c_exported.h
+            | mangled-name: _gwst_get_member_info
+            | _kw_: GWST, member layout, offset, size, structure member
+   }}*/
+/*{{|desc: Retrieves the layout of one member of a GWST structure object as a newly allocated
+      GWST_SORT_ITEM: dwGwstType is the member type (a __GWST_MEMBER_*__ code from ot4xb_constants.h),
+      dwShift is the byte displacement of the member from the start of the structure storage (a child
+      structure adds its own displacement inside the owner), dwSize is the member byte size; the other
+      fields are zero.
+    | params:
+    - `conoGwst` ContainerHandle - Opaque handle to a GWST structure object.
+    - `conMName` ContainerHandle - Member name as a CHARACTER value, or an ARRAY walking nested
+      objects: every element but the last must name an Object member, the last one names the target member.
+
+    Returns GWST_SORT_ITEM * - Pointer to a newly allocated item; release it with _xfree() when no longer
+      needed. NULL when conoGwst is not an object or when the member name or path cannot be resolved. }}*/
 OT4XB_API GWST_SORT_ITEM * _gwst_get_member_info( ContainerHandle conoGwst , ContainerHandle conMName )
 {
    if( !_conCheckType(conoGwst, XPP_OBJECT)  ) return 0;
@@ -667,6 +740,7 @@ OT4XB_API GWST_SORT_ITEM * _gwst_get_member_info( ContainerHandle conoGwst , Con
    }
    return 0;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static GWST_SORT_ITEM * _gwst_get_member_info_array_( ContainerHandle conoGwst , ContainerHandle conaMName )
 {
@@ -674,8 +748,8 @@ static GWST_SORT_ITEM * _gwst_get_member_info_array_( ContainerHandle conoGwst ,
    ULONG n; 
    GWST_SORT_ITEM * psi = 0;
    ContainerHandle cono = NULLCONTAINER;
-   if( _conSizeA( conaMName , &nItems, 0 ) ) return 0;
-   _conPut(cono,conoGwst );
+   if( _conSizeA( conaMName, &nItems, 0 ) ) { return 0; }
+   cono = _conPut(cono,conoGwst );
    for( n = 1; n < nItems; n++ )
    {
       LPSTR pMName = _conArrayGetXStrDup(conaMName,n,0);

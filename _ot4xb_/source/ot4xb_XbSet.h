@@ -7,19 +7,48 @@
 #define _APIcpp_XbSettings_h_
 #ifdef __cplusplus
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-cpp-class}}*/
+/*{{cpp-class_: XbSet
+   | category: c-api/classes , ot4xb-api
+   | desc: The Xbase++ Set() function from C++: static methods only, each one calling Set() through the
+     container API with the _SET_* index of the setting. The generic forms take the index and a value of the
+     right C type; the named forms (Exact, Decimals, DateFormat, Epoch, Path, Century, Collation, ...) cover
+     every setting of set.ch, one overload to read the current value and one to change it, which returns
+     the previous value as Set() does. A string comes back as a copy in the ot4xb heap: free it with _xfree.
+   | note: Set() is executed by the calling thread, so the value read or written is the one of the current
+   | _kw_: Set(), settings, set.ch, Exact Decimals DateFormat, C++
+     Xbase++ thread. }}*/
 class OT4XB_API XbSet
 {
    public:
+   /*{{|method_: `static BOOL SetBool( LONG idx, BOOL value )` | desc_: Set( idx, value ) for a Logical
+      setting; returns the previous value. }}*/
    static BOOL   SetBool(LONG,BOOL);
+   /*{{|method_: `static BOOL SetBool( LONG idx )` | desc_: Set( idx ) for a Logical setting. }}*/
    static BOOL   SetBool(LONG);
+   /*{{|method_: `static LONG SetLong( LONG idx, LONG value )` | desc_: Set( idx, value ) for a Numeric
+      setting; returns the previous value. }}*/
    static LONG   SetLong(LONG,LONG);
+   /*{{|method_: `static LONG SetLong( LONG idx )` | desc_: Set( idx ) for a Numeric setting. }}*/
    static LONG   SetLong(LONG);
+   /*{{|method_: `static double SetDouble( LONG idx, double value )` | desc_: Set( idx, value ) for a Numeric
+      setting with decimals; returns the previous value. }}*/
    static double SetDouble(LONG,double);
+   /*{{|method_: `static double SetDouble( LONG idx )` | desc_: Set( idx ) for such a setting. }}*/
    static double SetDouble(LONG);
+   /*{{|method_: `static LPSTR SetPsz( LONG idx, LPSTR value )` | desc_: Set( idx, value ) for a Character
+      setting; returns a copy of the previous value (free it with _xfree). }}*/
    static LPSTR  SetPsz(LONG,LPSTR);
+   /*{{|method_: `static LPSTR SetPsz( LONG idx )` | desc_: Set( idx ) for a Character setting, as a copy. }}*/
    static LPSTR  SetPsz(LONG);
+   /*{{|method_: `static LPSTR SetPszAdditive( LONG idx, LPSTR value, BOOL bAdditive )` | desc_: Set( idx,
+      value, bAdditive ) for the file settings that take the ADDITIVE flag (alternate and print files). }}*/
    static LPSTR  SetPszAdditive(LONG,LPSTR, BOOL);
    // --------------------------------------------------------------------
+   /*{{|method_: `static <type> <Setting>( <type> value )` | desc_: One pair of overloads per setting of
+      set.ch, from Exact() to SmartFilter(): with the value, changes the setting and returns the previous
+      value; without it, reads it. The C type follows the setting (BOOL, LONG, double or LPSTR); AltFile() and
+      PrintFile() take the ADDITIVE flag as second argument. }}*/
    static BOOL   Exact(BOOL value);
    static BOOL   Exact(void);
    static BOOL   Fixed(BOOL value);
@@ -117,6 +146,7 @@ class OT4XB_API XbSet
    static BOOL   SmartFilter(BOOL value);
    static BOOL   SmartFilter(void);
 };
+/*{{end-cpp-class}}*/
 //----------------------------------------------------------------------------------------------------------------------
 extern "C" {
 #endif

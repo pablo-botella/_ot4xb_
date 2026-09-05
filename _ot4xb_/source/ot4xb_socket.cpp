@@ -11,23 +11,31 @@
 #include <ws2def.h>
 #include <ws2tcpip.h>
 #include <ot4xb_api.h>
-//----------------------------------------------------------------------------------------------------------------------
-/*
-void defout( LPSTR & ps , int* pcb , LPSTR def , DWORD val , LPSTR old)
-{
-   int cb = wsprintf( ps,"\r\n#define %s 0x%08.8X " "/" "/ %s" , def , val , old );
-   ps = _mk_ptr_(LPSTR,ps,cb);
-   pcb[0] = pcb[0] + cb;
-}
-//----------------------------------------------------------------------------------------------------------------------
-#define o( d , o ) defout( ps,pcb,#d,(DWORD)d,#o)
-*/
+
 //----------------------------------------------------------------------------------------------------------------------
 BEGIN_EXTERN_C
 // -----------------------------------------------------------------------------------------------------------------
 
 #pragma warning( disable : 4127 )
-OT4XB_API int  wsa_select(SOCKET s , int ms , DWORD mask ) // mask: 1 read , 2 write , 4 error 
+// -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: wsa_select
+            | syntax_: `int wsa_select( SOCKET s, int ms, DWORD mask )`
+            | header: ot4xb_c_exported.h
+            | category: c-api/socket
+            | mangled-name: wsa_select
+            | _kw_: socket, select, readiness, timeout, winsock
+   }}*/
+/*{{|desc: Tests one socket for readiness with a single select() call, waiting at most ms milliseconds.
+    | params:
+    - `s` SOCKET - Socket to test.
+    - `ms` int - Timeout in milliseconds. 0 reports the current state without waiting; -1 skips the
+      test completely and returns 0.
+    - `mask` DWORD - Conditions to test, any combination of: 1 readable, 2 writable, 4 error.
+
+    Returns int - Positive when the socket is ready for at least one requested condition, 0 on timeout
+      (always 0 when ms is -1), SOCKET_ERROR when select() fails. }}*/
+OT4XB_API int  wsa_select(SOCKET s , int ms , DWORD mask )
 {
     if( ms == -1 ){ return 0; }
     fd_set r_st;
@@ -49,9 +57,28 @@ OT4XB_API int  wsa_select(SOCKET s , int ms , DWORD mask ) // mask: 1 read , 2 w
     if( mask & 4 ){ e = &e_st; FD_ZERO(e); FD_SET(s,e); }    
     return select(1,r,w,e,&tv);
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 #pragma warning( default : 4127 )
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: wsa_send_data
+            | syntax_: `BOOL wsa_send_data( SOCKET s, LPSTR p, int cb, int ms )`
+            | header: ot4xb_c_exported.h
+            | category: c-api/socket
+            | mangled-name: wsa_send_data
+            | _kw_: socket, send, send all, WSAEWOULDBLOCK, winsock, tcp
+   }}*/
+/*{{|desc: Sends a data block through a socket, looping until every byte is sent. On WSAEWOULDBLOCK it
+      retries every 100 ms, up to 6 times in a row, then gives up; any other send error aborts.
+    | params:
+    - `s` SOCKET - Connected socket to send through.
+    - `p` LPSTR - Data to send.
+    - `cb` int - Number of bytes to send; -1 sends p as a zero terminated string.
+    - `ms` int - Milliseconds to wait for the socket to become writable before sending; 0 or -1 start
+      sending at once. A timed out wait does not abort the send, only a failed select() does.
+
+    Returns BOOL - TRUE when the whole block was sent, FALSE on error or when the retry limit is reached. }}*/
 OT4XB_API BOOL wsa_send_data( SOCKET s , LPSTR p , int cb , int ms )
 {
    int i = 0;
@@ -77,7 +104,27 @@ OT4XB_API BOOL wsa_send_data( SOCKET s , LPSTR p , int cb , int ms )
    }
    return TRUE;
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: wsa_receive_data
+            | syntax_: `int wsa_receive_data( SOCKET s, LPBYTE buffer, int buffer_size, int ms )`
+            | header: ot4xb_c_exported.h
+            | category: c-api/socket
+            | mangled-name: wsa_receive_data
+            | _kw_: socket, recv, receive, WSAEWOULDBLOCK, winsock, tcp
+   }}*/
+/*{{|desc: Receives up to buffer_size bytes from a socket. The buffer is zero filled first. On
+      WSAEWOULDBLOCK it waits up to 1 ms more for data and retries; still not readable, it returns 0.
+    | params:
+    - `s` SOCKET - Connected socket to read from.
+    - `buffer` LPBYTE - Destination buffer, zero filled before receiving.
+    - `buffer_size` int - Capacity of buffer in bytes.
+    - `ms` int - Milliseconds to wait for data before reading; 0 or -1 read at once; -2 performs one
+      single recv() attempt with no wait and no retry.
+
+    Returns int - Number of bytes received, or 0 on timeout, on error or when the peer closed the
+      connection. }}*/
 OT4XB_API int wsa_receive_data( SOCKET s , LPBYTE buffer , int buffer_size , int ms )
 {
    int result = 0;
@@ -95,13 +142,30 @@ OT4XB_API int wsa_receive_data( SOCKET s , LPBYTE buffer , int buffer_size , int
          if( ms == -2 ){ return 0; }
          int code = WSAGetLastError();
          if( code != WSAEWOULDBLOCK ){ return 0; }
-         if( wsa_select(s,1,1) < 0) return 0;
+         if( wsa_select(s,1,1) <= 0){ return 0; }   // not readable within the wait: give up
+         result = 0;                              // readable: loop back and retry recv
       } 
-      return result;     
+      if( result > 0 ){ return result; }     
    }
    return 0;
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: get_connected_socket
+            | syntax_: `SOCKET get_connected_socket( LPSTR host, int port )`
+            | header: ot4xb_c_exported.h
+            | category: c-api/socket
+            | mangled-name: get_connected_socket
+            | _kw_: socket, connect, tcp, resolve host, gethostbyname, IPv4
+   }}*/
+/*{{|desc: Resolves a host name and opens a TCP connection to it (IPv4 only).
+    | params:
+    - `host` LPSTR - Host name or dotted IP address to connect to.
+    - `port` int - TCP port to connect to.
+
+    Returns SOCKET - Connected socket, or INVALID_SOCKET when resolution or connection fails. Release it
+      with closesocket(). }}*/
 OT4XB_API SOCKET get_connected_socket( LPSTR host , int port )
 {
    addrinfo   hints;
@@ -133,7 +197,25 @@ OT4XB_API SOCKET get_connected_socket( LPSTR host , int port )
    }
    return INVALID_SOCKET;
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: get_connected_socket2
+            | syntax_: `SOCKET get_connected_socket2( LPSTR host, int port, LPSTR bind_ip )`
+            | header: ot4xb_c_exported.h
+            | category: c-api/socket
+            | mangled-name: get_connected_socket2
+            | _kw_: socket, connect, bind local address, tcp, network interface
+   }}*/
+/*{{|desc: Same as get_connected_socket() but the new socket is bound to a local IP address before
+      connecting, so the caller chooses the outgoing interface.
+    | params:
+    - `host` LPSTR - Host name or dotted IP address to connect to.
+    - `port` int - TCP port to connect to.
+    - `bind_ip` LPSTR - Local IP address (dotted string) to bind the socket to; the local port is
+      left to the system. NULL behaves exactly like get_connected_socket().
+
+    Returns SOCKET - Connected socket, or INVALID_SOCKET when resolution, bind or connection fails. }}*/
 OT4XB_API SOCKET get_connected_socket2( LPSTR host , int port , LPSTR bind_ip )
 {
    if( !bind_ip)
@@ -173,7 +255,6 @@ OT4XB_API SOCKET get_connected_socket2( LPSTR host , int port , LPSTR bind_ip )
             {
                closesocket(s);
                freeaddrinfo(info);
-               bind_ip[0] = 0;
                return INVALID_SOCKET;
             }
             if( connect(s,info->ai_addr,sizeof(sockaddr)) != 0 ){ closesocket(s); s = INVALID_SOCKET; }
@@ -185,7 +266,35 @@ OT4XB_API SOCKET get_connected_socket2( LPSTR host , int port , LPSTR bind_ip )
    }
    return INVALID_SOCKET;
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: socks5_ssc_connect
+            | syntax_: ```
+            | header: ot4xb_c_exported.h
+                 int socks5_ssc_connect( SOCKET s, LPSTR host, int port, LPSTR user, LPSTR pwd, DWORD flags, void * * keep_response )
+              ```
+            | category: c-api/socket
+            | mangled-name: socks5_ssc_connect
+            | _kw_: socks5, proxy, connect through proxy, handshake, tcp
+   }}*/
+/*{{|desc: Runs the SOCKS5 client handshake on a socket already connected to a proxy server, asking the
+      proxy to connect to host:port. On success the socket has become a tunnel to that target.
+    | params:
+    - `s` SOCKET - Socket already connected to the SOCKS5 proxy.
+    - `host` LPSTR - Target host, 1 to 255 characters. See flags for how it is sent to the proxy.
+    - `port` int - Target TCP port, 1 to 65535.
+    - `user` LPSTR - User name, 1 to 255 characters; NULL for no authentication. When both user and
+      pwd are given the proxy may still pick no authentication.
+    - `pwd` LPSTR - Password, 1 to 255 characters; NULL for no authentication.
+    - `flags` DWORD - Low byte 3 sends host as a name for the proxy to resolve; any other value
+      converts host with inet_addr() and sends it as an IPv4 address.
+    - `keep_response` void * * - Optional; when not NULL receives a _xgrab() block holding the raw
+      proxy answer to the connect request: a LONG byte count followed by the answer bytes. Release it with
+      _xfree(). Left NULL when the handshake fails before that answer.
+
+    Returns int - 0 on success. Negative on failure: -(1000+n) is a proxy denial with SOCKS5 reply code
+      n, other values flag bad parameters, authentication or send/receive errors. }}*/
 OT4XB_API int socks5_ssc_connect( SOCKET s , LPSTR host , int port , LPSTR user , LPSTR pwd , DWORD flags, void** keep_response)
 {
    int cb_host = (int) ( host ? _xstrlen(host) : 0 );
@@ -278,7 +387,7 @@ OT4XB_API int socks5_ssc_connect( SOCKET s , LPSTR host , int port , LPSTR user 
    if( buffer){ _xfree( buffer ); buffer = 0; }
    return result;
 }
-
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
      
 END_EXTERN_C

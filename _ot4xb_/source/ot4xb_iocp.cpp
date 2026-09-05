@@ -14,36 +14,6 @@
                               px->SetErrorGenCode(n);
 // -----------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <class>
-      <name>OT4XB_IOCP</name>
-      <category>winapi/io</category>
-      <description>
-         Experimental legacy wrapper over Windows I/O completion ports. It creates an IOCP handle, associates
-         file/socket handles with completion keys, posts packets and retrieves queued completions.
-      </description>
-      <syntax>OT4XB_IOCP():new( [nThreads := 1] ) -> oIocp</syntax>
-      <properties>
-         <property name="nLastError" type="numeric" access="class read/write">Thread-local LastError captured by the most recent IOCP wrapper call.</property>
-      </properties>
-      <methods>
-         <method name="release" syntax="::release() -> lOk">Closes the IOCP handle.</method>
-         <method name="add_handle" syntax="::add_handle( hFile, nKey ) -> lOk">Associates hFile with the IOCP using nKey as completion key.</method>
-         <method name="post" syntax="::post( nBytes, nKey, pOverlapped ) -> lOk">Posts a completion packet manually.</method>
-         <method name="get" syntax="::get( @nBytes, @nKey, @pOverlapped, [nTimeout := 0] ) -> lOk">Waits for a queued completion and writes the completion data back by reference.</method>
-      </methods>
-      <remarks>
-         Deprecated pending review. This helper was never fully validated in production use, so treat it as
-         experimental and prefer a reviewed IOCP layer for new code.
-         The class is available only when the needed kernel32 IOCP entry points are present. Handles and OVERLAPPED
-         pointers are numeric Win32 values; callers are responsible for the lifetime of associated handles and
-         overlapped structures.
-      </remarks>
-   </class>
-</xbdoc>
-*******************************************************************************************************************/
-
 BEGIN_NAMESPACE( ot4xb_iocp_ns )
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
@@ -210,6 +180,25 @@ static void ot4xb_iocp_methods( TXbClass* pc )
 // -----------------------------------------------------------------------------------------------------------------
 END_NAMESPACE()
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-class}}*/
+/*{{class-name_: OT4XB_IOCP
+            | _slug_: ot4xb_iocp
+            | class-function: OT4XB_IOCP
+            | category: winapi/io
+            | desc: Experimental legacy wrapper over Windows I/O completion ports. It creates an IOCP handle,
+              associates file/socket handles with completion keys, posts packets and retrieves queued completions.
+              Instantiate with OT4XB_IOCP():new( [nThreads := 1] ) -> oIocp. Methods: ::release() -> lOk closes
+              the IOCP handle; ::add_handle( hFile, nKey ) -> lOk associates hFile with the IOCP using nKey as
+              completion key; ::post( nBytes, nKey, pOverlapped ) -> lOk posts a completion packet manually;
+              ::get( @nBytes, @nKey, @pOverlapped, [nTimeout := 0] ) -> lOk waits for a queued completion and
+              writes the completion data back by reference. The class-level read/write property ::nLastError
+              (Numeric) holds the thread-local LastError captured by the most recent IOCP wrapper call.
+            | note: Deprecated: this module may disappear. It was never used in production and never documented.
+            | note: The class is available only when the needed kernel32 IOCP entry points are present. Handles and
+              OVERLAPPED pointers are numeric Win32 values; callers are responsible for the lifetime of associated
+              handles and overlapped structures.
+   | _kw_: IOCP, completion port, overlapped io, experimental
+   }}*/
 extern "C" XPPRET XPPENTRY OT4XB_IOCP( XppParamList pl)
 {
    if( ! ot4xb_iocp_ns::fpCreateIoCompletionPort ){ _ret(pl); return; }
@@ -217,6 +206,7 @@ extern "C" XPPRET XPPENTRY OT4XB_IOCP( XppParamList pl)
    if( conco == NULLCONTAINER )
    {
       TXbClass * pc = new TXbClass;pc->ClassName("OT4XB_IOCP");
+      /*{{|:**BEGIN CLASS  OT4XB_IOCP** }}*/
       pc->EXPORTED();
       {
          ot4xb_iocp_ns::ot4xb_iocp_methods( pc );
@@ -228,5 +218,7 @@ extern "C" XPPRET XPPENTRY OT4XB_IOCP( XppParamList pl)
    _conReturn(pl,conco);
    _conRelease(conco);
 }
+   /*{{|:**END CLASS** }}*/
+/*{{end-class}}*/
 // -----------------------------------------------------------------------------------------------------------------
 

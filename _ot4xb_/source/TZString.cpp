@@ -251,7 +251,15 @@ void TZString::AddChar_1252_to_utf8(char ch)
       AddChar(0x20);
       return;
    }
-   WORD uc = (((code << 2) & 0x1FF) || (code & 0x1F00)) || 0xC080;
+   if (code > 0x7FF)
+   {
+      // 3-byte UTF-8: the 1252 0x80-0x9F range maps to codepoints above U+07FF (euro, TM, curly quotes...)
+      AddChar((char)(0xE0 | ((code >> 12) & 0x0F)));
+      AddChar((char)(0x80 | ((code >> 6) & 0x3F)));
+      AddChar((char)(0x80 | (code & 0x3F)));
+      return;
+   }
+   WORD uc = (WORD)(0xC080 | ((code << 2) & 0x1F00) | (code & 0x3F));
    AddChar((char)((uc >> 8) & 0xFF));
    AddChar((char)(uc & 0xFF));
 }
@@ -265,7 +273,7 @@ static DWORD svc_value_need_quotes(LPSTR p, DWORD cb, DWORD flags)
    for (n = 0; n < cb; n++)
    {
       BYTE ch = (BYTE)p[n];
-      if (ch == (BYTE)'\"' && flags && 0x800)
+      if (ch == (BYTE)'\"' && (flags & 0x800))
       {
          ch = (BYTE)'\'';
       }
@@ -370,7 +378,7 @@ void TZString::str_1252_to_svc_utf8_cell(LPSTR p, DWORD cb, DWORD flags)
    }
    if (need_quotes & 0x04)
    {
-      if (!(cb > 0 && (p[cb] == '\'' || (p[cb] == '\"' && flags & 0x800))))
+      if (!(cb > 0 && (p[0] == '\'' || (p[0] == '\"' && (flags & 0x800)))))
       {
          AddChar('\'');
       }
@@ -379,7 +387,7 @@ void TZString::str_1252_to_svc_utf8_cell(LPSTR p, DWORD cb, DWORD flags)
    for (pos = 0; pos < cb; pos++)
    {
       char ch = p[pos];
-      if (ch == (BYTE)'\"' && flags && 0x800)
+      if (ch == (BYTE)'\"' && (flags & 0x800))
       {
          ch = (BYTE)'\'';
       }
@@ -558,14 +566,27 @@ LPSTR TZString::_pt_(void)
 // -----------------------------------------------------------------------------------------------------------------
 #include <stdio.h>
 // -----------------------------------------------------------------------------------------------------------------
-void TZString::printf(LPSTR pt, ...)
+void TZString::printf( LPSTR pt, ... )
 {
-   if (pt)
+   if( pt )
    {
-      LPSTR p = _pt_next_(m_nMinPrintf);
-      va_list(arglist);
-      va_start(arglist, pt);
-      m_nLen += vsprintf(p, pt, arglist);
+      LPSTR p = _pt_next_( m_nMinPrintf );
+      va_list arglist;
+      va_start( arglist, pt );
+      int n = vsnprintf( p, m_nMinPrintf, pt, arglist );
+      va_end( arglist );
+      if( n >= (int) m_nMinPrintf )   // vsnprintf truncated: grow the per-call reserve (in 1024 blocks) and reformat
+      {
+         m_nMinPrintf = ( (UINT)( n + 1 ) + 1023 ) & ~1023U;   // round the needed size up to the next 1024 block
+         p = _pt_next_( m_nMinPrintf );
+         va_start( arglist, pt );
+         n = vsnprintf( p, m_nMinPrintf, pt, arglist );
+         va_end( arglist );
+      }
+      if( n > 0 )
+      {
+         m_nLen += n;
+      }
    }
 }
 // -----------------------------------------------------------------------------------------------------------------
@@ -2397,7 +2418,7 @@ void TZString::Add_to_sql_bin_q(LPBYTE p, DWORD cb)
    DWORD cbo = escape_to_sql_required_size(p, cb) + 1;
    LPBYTE buffer = (LPBYTE)_pt_next_(cbo);
    m_nLen += escape_to_sql_buffer(p, cb, buffer, cbo,
-      (DWORD)escape_to_sql_buffer_flags::binary_string || (DWORD)escape_to_sql_buffer_flags::add_quotes);
+      (DWORD)escape_to_sql_buffer_flags::binary_string | (DWORD)escape_to_sql_buffer_flags::add_quotes);
 }
 // -----------------------------------------------------------------------------------------------------------------
 void TZString::Add_to_xml(LPSTR pStr)
@@ -2732,136 +2753,562 @@ HRESULT STDMETHODCALLTYPE TByteStream::IByteStream::Stat(STATSTG* pStatstg, DWOR
 
 }
 // -----------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_new
+            | syntax_: `TByteStream * TByteStream_new( DWORD nInitialSize, DWORD nBlockSize )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_new
+            | _kw_: byte stream, create, growable buffer, IStream
+   }}*/
+/*{{|desc: Creates a TByteStream: a growable binary byte buffer that can also expose its content as a COM
+      IStream (see TByteStream_get_IStream).
+    | params:
+    - `nInitialSize` DWORD - Initial buffer capacity in bytes; 0 allocates nothing until first use.
+    - `nBlockSize` DWORD - Allocation granularity: capacities are rounded up to a multiple of this
+      value. A value below 3 disables the rounding. The C++ constructor defaults to 1024.
 
+    Returns TByteStream * - The new instance. Release it with TByteStream_destroy. }}*/
 OT4XB_API TByteStream* __cdecl TByteStream_new(DWORD nInitialSize, DWORD nBlockSize)
 {
    return new TByteStream(nInitialSize, nBlockSize);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_destroy
+            | syntax_: `void TByteStream_destroy( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_destroy
+            | _kw_: byte stream, destroy, release
+   }}*/
+/*{{|desc: Destroys a TByteStream created with TByteStream_new and frees its internal buffer.
+    | params:
+    - `pbs` TByteStream * - The instance to destroy.
+
+    Returns void }}*/
 OT4XB_API void __cdecl TByteStream_destroy(TByteStream* pbs)
 {
    delete pbs;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__grow_
+            | syntax_: `BOOL TByteStream__grow_( TByteStream * pbs, DWORD nNewSize )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__grow_
+            | _kw_: byte stream, capacity, grow, reserve
+   }}*/
+/*{{|desc: Ensures the buffer capacity is at least nNewSize bytes, reallocating and copying the current
+      content when needed. Content and length are preserved; the buffer address may change.
+    | params:
+    - `pbs` TByteStream * - The stream to grow.
+    - `nNewSize` DWORD - Wanted minimum capacity in bytes; rounded up to the block-size granularity.
+
+    Returns BOOL - TRUE when the capacity is available, FALSE when nNewSize is over the 2 GB signed range. }}*/
 OT4XB_API BOOL __cdecl TByteStream__grow_(TByteStream* pbs, DWORD nNewSize)
 {
    return pbs->_grow_(nNewSize);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__reserve_bytes_
+            | syntax_: `void * TByteStream__reserve_bytes_( TByteStream * pbs, DWORD nBytes )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__reserve_bytes_
+            | _kw_: byte stream, reserve, write pointer, append room
+   }}*/
+/*{{|desc: Makes room for nBytes more bytes after the current content and returns the address where they
+      can be written. The content length does not change: write the bytes, then commit them with
+      TByteStream__skip_bytes_.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `nBytes` DWORD - Number of bytes to reserve; must be at least 1.
+
+    Returns void * - Write position at the end of the content, or NULL when nBytes is less than 1 or the
+      grow fails. }}*/
 OT4XB_API void* __cdecl TByteStream__reserve_bytes_(TByteStream* pbs, DWORD nBytes)
 {
    return pbs->_reserve_bytes_(nBytes);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__reserve_bytes_at
+            | syntax_: `void * TByteStream__reserve_bytes_at( TByteStream * pbs, DWORD offset, DWORD nBytes )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__reserve_bytes_at
+            | _kw_: byte stream, reserve at offset, write pointer
+   }}*/
+/*{{|desc: Like TByteStream__reserve_bytes_ but at a given position: ensures the buffer can hold
+      offset + nBytes bytes and returns the address of offset. The content length does not change.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `offset` DWORD - Byte position where the reserved area starts; must not be past the current
+      content length.
+    - `nBytes` DWORD - Number of bytes to reserve; must be at least 1.
+
+    Returns void * - Pointer to offset inside the buffer, or NULL when offset is past the content, nBytes
+      is less than 1, or the grow fails. }}*/
 OT4XB_API void* __cdecl TByteStream__reserve_bytes_at(TByteStream* pbs, DWORD offset, DWORD nBytes)
 {
    return pbs->_reserve_bytes_(offset, nBytes);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__skip_bytes_
+            | syntax_: `BOOL TByteStream__skip_bytes_( TByteStream * pbs, DWORD nBytes )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__skip_bytes_
+            | _kw_: byte stream, commit bytes, advance length
+   }}*/
+/*{{|desc: Advances the content length by nBytes, growing the buffer when needed. Commit half of the
+      reserve, write, skip pattern: the skipped bytes keep whatever the caller wrote there.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `nBytes` DWORD - Number of bytes to add to the content length; must be at least 1.
+
+    Returns BOOL - TRUE when the length was advanced, FALSE when nBytes is less than 1 or the grow fails. }}*/
 OT4XB_API BOOL __cdecl TByteStream__skip_bytes_(TByteStream* pbs, DWORD nBytes)
 {
    return pbs->_skip_bytes_(nBytes);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__offset_ptr_
+            | syntax_: `void * TByteStream__offset_ptr_( TByteStream * pbs, DWORD offset, DWORD cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__offset_ptr_
+            | _kw_: byte stream, pointer at offset, content access
+   }}*/
+/*{{|desc: Returns a pointer into the content after checking that offset + cb bytes fit inside it.
+    | params:
+    - `pbs` TByteStream * - The stream to address.
+    - `offset` DWORD - Byte position the pointer must point to.
+    - `cb` DWORD - Number of bytes the caller intends to access at offset; used for the range check.
+
+    Returns void * - Pointer to offset inside the buffer, or NULL when offset + cb is past the content or
+      no buffer exists. }}*/
 OT4XB_API void* __cdecl TByteStream__offset_ptr_(TByteStream* pbs, DWORD offset, DWORD cb)
 {
    return pbs->_offset_ptr_(offset, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__offset_len_
+            | syntax_: `DWORD TByteStream__offset_len_( TByteStream * pbs, DWORD offset )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__offset_len_
+            | _kw_: byte stream, remaining length, offset
+   }}*/
+/*{{|desc: Returns how many content bytes remain from offset to the end of the content.
+    | params:
+    - `pbs` TByteStream * - The stream to measure.
+    - `offset` DWORD - Byte position to measure from.
+
+    Returns DWORD - Content length minus offset, or 0 when offset is at or past the end. }}*/
 OT4XB_API DWORD __cdecl TByteStream__offset_len_(TByteStream* pbs, DWORD offset)
 {
    return pbs->_offset_len_(offset);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__truncate_buffer_
+            | syntax_: `DWORD TByteStream__truncate_buffer_( TByteStream * pbs, DWORD len )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__truncate_buffer_
+            | _kw_: byte stream, truncate, cut length
+   }}*/
+/*{{|desc: Cuts the content length down to len bytes. It can only shrink: a len beyond the current length
+      is clamped to it. The buffer memory is kept allocated.
+    | params:
+    - `pbs` TByteStream * - The stream to truncate.
+    - `len` DWORD - Wanted content length in bytes.
+
+    Returns DWORD - The resulting content length. }}*/
 OT4XB_API DWORD __cdecl TByteStream__truncate_buffer_(TByteStream* pbs, DWORD len)
 {
    return pbs->_truncate_buffer_(len);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_buffer
+            | syntax_: `BOOL TByteStream_append_buffer( TByteStream * pbs, void * p, DWORD cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_buffer
+            | _kw_: byte stream, append bytes, write
+   }}*/
+/*{{|desc: Appends cb bytes from p to the content, growing the buffer as needed.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` void * - Source bytes.
+    - `cb` DWORD - Number of bytes to copy; (DWORD) -1 treats p as a null terminated string and
+      appends its strlen bytes.
+
+    Returns BOOL - TRUE when appended, FALSE when cb resolves to 0 or the space cannot be reserved. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_buffer(TByteStream* pbs, void* p, DWORD cb)
 {
    return pbs->append_buffer(p, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_BYTE
+            | syntax_: `BOOL TByteStream_append_BYTE( TByteStream * pbs, BYTE n )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_BYTE
+            | _kw_: byte stream, append byte, write
+   }}*/
+/*{{|desc: Appends one byte to the content.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `n` BYTE - The byte to append.
+
+    Returns BOOL - TRUE when appended, FALSE when the space cannot be reserved. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_BYTE(TByteStream* pbs, BYTE n)
 {
    return pbs->append_BYTE(n);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_WORD
+            | syntax_: `BOOL TByteStream_append_WORD( TByteStream * pbs, WORD n )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_WORD
+            | _kw_: byte stream, append word, little endian
+   }}*/
+/*{{|desc: Appends the two bytes of n to the content in memory order (little endian).
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `n` WORD - The value to append.
+
+    Returns BOOL - TRUE when appended, FALSE when the space cannot be reserved. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_WORD(TByteStream* pbs, WORD n)
 {
    return pbs->append_WORD(n);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_DWORD
+            | syntax_: `BOOL TByteStream_append_DWORD( TByteStream * pbs, DWORD n )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_DWORD
+            | _kw_: byte stream, append DWORD, little endian
+   }}*/
+/*{{|desc: Appends the four bytes of n to the content in memory order (little endian).
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `n` DWORD - The value to append.
+
+    Returns BOOL - TRUE when appended, FALSE when the space cannot be reserved. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_DWORD(TByteStream* pbs, DWORD n)
 {
    return pbs->append_DWORD(n);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_ansi_to_utf8
+            | syntax_: `BOOL TByteStream_append_ansi_to_utf8( TByteStream * pbs, LPSTR pa, int cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_ansi_to_utf8
+            | _kw_: byte stream, ANSI to UTF-8, append, convert
+   }}*/
+/*{{|desc: Converts ANSI text (the active Windows codepage) to UTF-8 and appends the converted bytes.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `pa` LPSTR - Source ANSI text.
+    - `cb` int - Number of source bytes; -1 takes the whole null terminated string.
+
+    Returns BOOL - TRUE when converted and appended, FALSE when pa is NULL. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_ansi_to_utf8(TByteStream* pbs, LPSTR pa, int cb)
 {
    return pbs->append_ansi_to_utf8(pa, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_ansi_to_xform_utf8
+            | syntax_: `BOOL TByteStream_append_ansi_to_xform_utf8( TByteStream * pbs, LPSTR p, int cb, int nLevel )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_ansi_to_xform_utf8
+            | _kw_: byte stream, url encoded UTF-8, append, percent encoding
+   }}*/
+/*{{|desc: Appends the source text transformed byte by byte from Windows-1252 to URL (percent) encoded
+      UTF-8.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` LPSTR - Source text.
+    - `cb` int - Number of source bytes; -1 takes the whole null terminated string.
+    - `nLevel` int - Escape level: 0 or 1 keeps : / ? # unescaped, 2 to 4 escapes them too, above 4
+      escapes everything that is not a letter or digit; below 0 only the percent sign is escaped. Space
+      turns into + below level 5.
+
+    Returns BOOL - TRUE when appended, FALSE when p is NULL or cb resolves to less than 1. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_ansi_to_xform_utf8(TByteStream* pbs, LPSTR p, int cb, int nLevel)
 {
    return pbs->append_ansi_to_xform_utf8(p, cb, nLevel);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_decode_base64
+            | syntax_: `BOOL TByteStream_append_decode_base64( TByteStream * pbs, LPSTR p, int cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_decode_base64
+            | _kw_: byte stream, base64 decode, append
+   }}*/
+/*{{|desc: Decodes base64 text and appends the decoded bytes to the content.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` LPSTR - Base64 encoded source text.
+    - `cb` int - Number of source bytes; -1 takes the whole null terminated string.
+
+    Returns BOOL - TRUE when decoded and appended, FALSE when p is NULL, cb resolves to less than 1, or
+      the data does not decode. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_decode_base64(TByteStream* pbs, LPSTR p, int cb)
 {
    return pbs->append_decode_base64(p, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-OT4XB_API BOOL __cdecl TByteStream_append_decode_qp(TByteStream* pbs, LPSTR p, int cb, DWORD nFlags)// flags: 1 dot , 2 add CRLF
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_decode_qp
+            | syntax_: `BOOL TByteStream_append_decode_qp( TByteStream * pbs, LPSTR p, int cb, DWORD nFlags )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_decode_qp
+            | _kw_: byte stream, quoted printable decode, append
+   }}*/
+/*{{|desc: Decodes quoted-printable text and appends the decoded bytes to the content.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` LPSTR - Quoted-printable source text.
+    - `cb` int - Number of source bytes; -1 takes the whole null terminated string.
+    - `nFlags` DWORD - Decoder flags: 1 undoes SMTP dot stuffing (a dot opening a line is dropped);
+      0x8000 keeps hard CRLF line breaks (without it the decoder drops every CR and LF).
+
+    Returns BOOL - TRUE when decoded and appended, FALSE when p is NULL, cb resolves to less than 1, or
+      the decode fails. }}*/
+OT4XB_API BOOL __cdecl TByteStream_append_decode_qp(TByteStream* pbs, LPSTR p, int cb, DWORD nFlags)
 {
    return pbs->append_decode_qp(p, cb, nFlags);// flags: 1 dot , 2 add CRLF;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_append_decode_uu
+            | syntax_: `BOOL TByteStream_append_decode_uu( TByteStream * pbs, LPSTR p, int cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_append_decode_uu
+            | _kw_: byte stream, uudecode, append
+   }}*/
+/*{{|desc: Decodes uuencoded data and appends the decoded bytes to the content.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` LPSTR - Uuencoded source data.
+    - `cb` int - Number of source bytes; -1 takes the whole null terminated string.
+
+    Returns BOOL - TRUE when decoded and appended, FALSE when p is NULL, cb resolves to less than 1, or
+      the data does not decode. }}*/
 OT4XB_API BOOL __cdecl TByteStream_append_decode_uu(TByteStream* pbs, LPSTR p, int cb)
 {
    return pbs->append_decode_uu(p, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_ansi_ZTrim
+            | syntax_: `void TByteStream_ansi_ZTrim( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_ansi_ZTrim
+            | _kw_: byte stream, trim zeros, trailing zero bytes
+   }}*/
+/*{{|desc: Shortens the content length while its last byte is a zero byte.
+    | params:
+    - `pbs` TByteStream * - The stream to trim.
+
+    Returns void }}*/
 OT4XB_API void __cdecl TByteStream_ansi_ZTrim(TByteStream* pbs)
 {
    return pbs->ansi_ZTrim();
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_ansi_ZSafe
+            | syntax_: `void TByteStream_ansi_ZSafe( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_ansi_ZSafe
+            | _kw_: byte stream, zero terminate, C string safe
+   }}*/
+/*{{|desc: Makes the content safe to read as a C string: when the stream is empty or its last byte is not
+      zero, one zero byte is appended and counted in the length.
+    | params:
+    - `pbs` TByteStream * - The stream to terminate.
+
+    Returns void }}*/
 OT4XB_API void __cdecl TByteStream_ansi_ZSafe(TByteStream* pbs)
 {
    return pbs->ansi_ZSafe();
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream__grow_cb_
+            | syntax_: `void TByteStream__grow_cb_( TByteStream * pbs, UINT cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream__grow_cb_
+            | _kw_: byte stream, capacity, grow
+   }}*/
+/*{{|desc: Ensures the buffer capacity is at least cb bytes, preserving the content. Same grow as
+      TByteStream__grow_ but without a result.
+    | params:
+    - `pbs` TByteStream * - The stream to grow.
+    - `cb` UINT - Wanted minimum capacity in bytes.
+
+    Returns void }}*/
 OT4XB_API void __cdecl TByteStream__grow_cb_(TByteStream* pbs, UINT cb)
 {
    return pbs->_grow_cb_(cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_Detach
+            | syntax_: `LPBYTE TByteStream_Detach( TByteStream * pbs, UINT * pcb, UINT * pcs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_Detach
+            | _kw_: byte stream, detach buffer, take ownership
+   }}*/
+/*{{|desc: Hands the internal buffer over to the caller and leaves the stream empty.
+    | params:
+    - `pbs` TByteStream * - The stream to detach the buffer from.
+    - `pcb` UINT * - Receives the content length in bytes; may be NULL.
+    - `pcs` UINT * - Receives the allocated buffer size in bytes; may be NULL.
+
+    Returns LPBYTE - The detached buffer, now owned by the caller (release it with _xfree), or NULL when
+      nothing was ever allocated. }}*/
 OT4XB_API LPBYTE __cdecl TByteStream_Detach(TByteStream* pbs, UINT* pcb, UINT* pcs)
 {
    return pbs->Detach(pcb, pcs);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_GetBuffer
+            | syntax_: `LPBYTE TByteStream_GetBuffer( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_GetBuffer
+            | _kw_: byte stream, buffer pointer, content
+   }}*/
+/*{{|desc: Returns the internal buffer address without transferring ownership. The pointer stays valid
+      only until the next operation that grows the buffer.
+    | params:
+    - `pbs` TByteStream * - The stream to look into.
+
+    Returns LPBYTE - Buffer address, or NULL when nothing has been allocated yet. }}*/
 OT4XB_API LPBYTE __cdecl TByteStream_GetBuffer(TByteStream* pbs)
 {
    return pbs->GetBuffer();
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_len
+            | syntax_: `ULONG TByteStream_len( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_len
+            | _kw_: byte stream, length, content size
+   }}*/
+/*{{|desc: Returns the number of content bytes in the stream.
+    | params:
+    - `pbs` TByteStream * - The stream to measure.
+
+    Returns ULONG - Content length in bytes. }}*/
 OT4XB_API ULONG __cdecl TByteStream_len(TByteStream* pbs)
 {
    return pbs->len();
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_Add
+            | syntax_: `BOOL TByteStream_Add( TByteStream * pbs, LPBYTE p, UINT cb )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_Add
+            | _kw_: byte stream, append, zero terminated
+   }}*/
+/*{{|desc: Appends cb bytes from p and keeps one zero byte after them that is not counted in the length,
+      so the content stays readable as a C string.
+    | params:
+    - `pbs` TByteStream * - The target stream.
+    - `p` LPBYTE - Source bytes.
+    - `cb` UINT - Number of bytes to copy; (UINT) -1 treats p as a null terminated string and appends
+      its strlen bytes.
+
+    Returns BOOL - TRUE when appended, FALSE when p is NULL, cb resolves to 0, or the space cannot be
+      reserved. }}*/
 OT4XB_API BOOL __cdecl TByteStream_Add(TByteStream* pbs, LPBYTE p, UINT cb)
 {
    return pbs->Add(p, cb);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: TByteStream_get_IStream
+            | syntax_: `IStream * TByteStream_get_IStream( TByteStream * pbs )`
+            | category: c-api/byte-stream
+            | header: ot4xb_TZString.h
+            | mangled-name: TByteStream_get_IStream
+            | _kw_: byte stream, IStream, COM stream, view
+   }}*/
+/*{{|desc: Creates a COM IStream view over the stream content. Read, Write, Seek and SetSize work with
+      32 bit sizes and writing past the end extends the content; Stat only reports the size
+      (STATFLAG_NONAME); the remaining members return E_NOTIMPL. The TByteStream must stay alive while the
+      view is in use; releasing the view never destroys it.
+    | params:
+    - `pbs` TByteStream * - The stream to expose.
+
+    Returns IStream * - A new view positioned at 0, with one reference; call its Release method when
+      done. }}*/
 OT4XB_API IStream* __cdecl TByteStream_get_IStream(TByteStream* pbs)
 {
    return pbs->get_IStream();
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 
 

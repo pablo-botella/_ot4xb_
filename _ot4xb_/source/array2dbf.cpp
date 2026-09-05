@@ -105,7 +105,7 @@ class TDbfHeader : public T_ot4xb_base
          SYSTEMTIME st;
          GetSystemTime(&st);
          m_nFileType = 0x30; // FoxBASE+/Dbase III plus, no memo
-         m_sLUpdate[0] = LOBYTE( st.wYear );
+         m_sLUpdate[0] = LOBYTE( st.wYear - 1900 );   // DBF header year is stored as years-since-1900
          m_sLUpdate[1] = LOBYTE( st.wMonth);
          m_sLUpdate[2] = LOBYTE( st.wDay  );
          m_nLastRec    = 0;
@@ -259,10 +259,10 @@ class TArray2Dbf : public T_ot4xb_base
                   {
                      double nd = 0.00F;
                      _conGetND(con,&nd);
-                     if( sprintf_s(p,cb+1,pFmt,nd) < 0 )
+                     if( _snprintf_s(p,cb+1,_TRUNCATE,pFmt,nd) < 0 )
                      {
                         InitBuffer(cb);
-                        sprintf_s(p,cb+1,pFmt,0.0F);
+                        _snprintf_s(p,cb+1,_TRUNCATE,pFmt,0.0F);
                         m_bOverFlow = TRUE;
                      }
                   }
@@ -270,10 +270,10 @@ class TArray2Dbf : public T_ot4xb_base
                   {
                      LONG n = 0;
                      _conGetLong(con,&n);
-                     if( sprintf_s(p,cb+1,pFmt,n) < 0 )
+                     if( _snprintf_s(p,cb+1,_TRUNCATE,pFmt,n) < 0 )
                      {
                         InitBuffer(cb);
-                        sprintf_s(p,cb+1,pFmt,0);
+                        _snprintf_s(p,cb+1,_TRUNCATE,pFmt,0);
                         m_bOverFlow = TRUE;
                      }
                   }
@@ -289,6 +289,11 @@ class TArray2Dbf : public T_ot4xb_base
                   break;
                }
             }
+            if( con )
+            {
+               _conRelease( con );  
+               con = NULLCONTAINER;
+            }
          }
       };
       // ---------------------------------------------------------------------------------
@@ -299,59 +304,26 @@ class TArray2Dbf : public T_ot4xb_base
 END_NAMESPACE() // a2dbf_ns
 // -----------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_a2dbf_</name>
-      <category>misc/dbf</category>
-      <description>
-      - Create a FOX database from the provided bidimensional array directly without use the DBE engine.
-      - Only supported types are C,N,L,D
-      </description>
-      <syntax>
-         _a2dbf_( aData , aStruct , cFName)  ->lOk
-      </syntax>
-      <parameters>
-         <parameter>
-            <name>aData</name>
-            <type>Array</type>
-            <description>
-                  Bidimensional array with the data to be stored in the DBF file.
-            </description>
-         </parameter>
-         <parameter>
-            <name>aStruct</name>
-            <type>Array</type>
-            <description>
-                  Array with the structure definition. Each element is an array with the following structure:
-                  [ cFieldName , cFieldType , nFieldLength , nFieldDecimals ]
-                  Supported field types are:
-                  C - Character
-                  N - Numeric
-                  L - Logical
-                  D - Date
-            </description>
-         </parameter>
-         <parameter>
-            <name>cFName</name>
-            <type>String</type>
-            <description>
-                  Complete path of the DBF file to be created.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Logical</type>
-         <description>
-                  .T. if the DBF file was created successfully, .F. otherwise.
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-// -----------------------------------------------------------------------------------------------------------------
-_XPP_REG_FUN_( _A2DBF_ ) // _a2dbf_( aData , aStruct , cFName)  ->lOk
+/*{{begin-function}}*/
+/*{{function_: _a2dbf_
+            | syntax_: `_a2dbf_( aData , aStruct , cFName )`
+            | category: misc/dbf
+            | _kw_: dbf, foxpro, create table, array to dbf, export, no DBE
+   }}*/
+/*{{|desc: Create a FOX database from the provided bidimensional array directly without use the DBE engine.
+      Only supported types are C, N, L, D.
+    | params:
+    - `aData` Array - Bidimensional array with the data to be stored in the DBF file.
+    - `aStruct` Array - Array with the structure definition. Each element is an array
+      with the following structure:
+      [ cFieldName , cFieldType , nFieldLength , nFieldDecimals ].
+      Supported field types are: C - Character, N - Numeric, L - Logical, D - Date.
+    - `cFName` String - Complete path of the DBF file to be created.
+
+    Returns Logical - .T. if the DBF file was created successfully, .F. otherwise. }}*/
+_XPP_REG_FUN_( _A2DBF_ ) 
 { 
+   
    BOOL bOk = FALSE;
    BOOL bStructByRef = FALSE;
    ContainerHandle conaStruct = _conTParam( pl,2,&bStructByRef,XPP_ARRAY );
@@ -383,6 +355,7 @@ _XPP_REG_FUN_( _A2DBF_ ) // _a2dbf_( aData , aStruct , cFName)  ->lOk
    }
    _retl(pl,bOk);
 }
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 
 

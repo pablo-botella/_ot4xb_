@@ -59,7 +59,7 @@ BOOL xstream_t::_grow_( DWORD nNewSize )
    if( m_nBuffSize >= nNewSize ){ return TRUE; } // nothing to do
    if( ((int) m_nBlockSize) > 2 ) // check if using granularity
    {
-      nNewSize += (nNewSize % m_nBlockSize);
+      if( nNewSize % m_nBlockSize ) { nNewSize += m_nBlockSize - (nNewSize % m_nBlockSize); }
    }
    void* p = _alloc_memory_( nNewSize );
    if( m_pBuffer )
@@ -141,12 +141,12 @@ BOOL xstream_t::_skip_bytes_( DWORD nBytes )
 // -----------------------------------------------------------------------------------------------------------------
 BOOL xstream_t::append_buffer(void* p , DWORD cb )
 {
-   LPBYTE dst = (LPBYTE) _reserve_bytes_(cb);
-   if( !dst ){ return FALSE; }
    if( cb == (DWORD) -1 )
    {
       cb = _xstrlen((LPSTR) p );
    }
+   LPBYTE dst = (LPBYTE) _reserve_bytes_(cb);
+   if( !dst ){ return FALSE; }
    _bcopy(dst,(LPBYTE) p , cb );
    m_nLen += cb;
    return TRUE;
@@ -270,7 +270,7 @@ BOOL xstream_t::append_encode_ot4xb(LPSTR ps, int cbs, DWORD nFlags) // 1 % , 2 
 		{
 			if (nFlags & 8)
 			{
-				if (n == (ULONG)cbs) { append_buffer((void*)"\\s", 2); }
+				if (n == (ULONG)(cbs - 1)) { append_buffer((void*)"\\s", 2); }
 				else
 				{
 					if (((BYTE)ps[(n + 1)]) == ch) { append_buffer((void*)"\\s", 2); }

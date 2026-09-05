@@ -108,7 +108,6 @@ THtcsItem * THtcsBucket::_insert_after_(  THtcsTable* pTable , THtcsItem * pItem
 // -----------------------------------------------------------------------------------------------------------------
 THtcsItem * THtcsBucket::_remove_item_(THtcsTable* pTable , THtcsItem * pItem)
 {
-   pTable->m_nCount--; m_nCount--;
    if( pItem == pTable->m_pFirstItem ) pTable->m_pFirstItem = pItem->m_pNext;
    if( pItem == m_pChain ) m_pChain = (( m_nCount > 1 ) ? pItem->m_pNext : 0);   
    if( pItem->m_pPrev ) pItem->m_pPrev->m_pNext = pItem->m_pNext;
@@ -188,7 +187,9 @@ void * THtcsTable::InsertItem(LPSTR pKey , DWORD cbKey, void * pData, BOOL bDest
    if( pItem )
    {
        void * p_data = pItem->m_pData;
-       if( bDestroyOnReplace && pData && m_pfnOnDestroyItem ){ (* m_pfnOnDestroyItem )( (void*) p_data , m_dwCargo);}
+       pItem->m_pData = 0;
+       delete pItem;
+       if( bDestroyOnReplace && p_data && m_pfnOnDestroyItem ){ (* m_pfnOnDestroyItem )( (void*) p_data , m_dwCargo);}
        else return p_data;
    }
    return 0;     

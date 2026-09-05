@@ -46,11 +46,53 @@
 
 #include <xpppar.h>
 #include <xppcon.h>
+/*{{ topic: cpp_helper_macros
+   | category: c-api/macros
+   | desc: Helper macros of ot4xb_api.h for C and C++ code built against ot4xb: byte-wise pointer arithmetic,
+     DWORD alignment, an Xbase++ error assert and a file-and-line log.
+   | macro_: `_mk_ptr_( cast, ptr, addValue )`
+   | desc_: Pointer arithmetic in bytes, whatever the type of ptr: the address ptr + addValue bytes, cast to
+   | _kw_: macros, pointer arithmetic, _mk_ptr_, xpp_assert, SendFLog, C++ helpers
+     **cast** (a pointer type). }}*/
 #define _mk_ptr_( cast, ptr, addValue ) ((cast)((void*)( (DWORD)(ptr)+(DWORD)(addValue))))
+/*{{ topic: cpp_helper_macros | macro_: `_mk_ptr_minus( cast, ptr, minusValue )`
+   | desc_: The address ptr - minusValue bytes, cast to **cast**. }}*/
 #define _mk_ptr_minus( cast, ptr, minusValue ) ((cast)((void*)( (DWORD)(ptr)-(DWORD)(minusValue))))
+/*{{ topic: cpp_helper_macros | macro_: `_align_dword_ptr_( cast, ptr )`
+   | desc_: ptr rounded up to the next DWORD (4-byte) boundary, cast to **cast**; an address already aligned is
+     returned as it is. }}*/
 #define _align_dword_ptr_( cast , ptr )  _mk_ptr_(cast,ptr,( (((DWORD) ptr) & 3) ? (4 - (((DWORD) ptr) & 3)) : 0 ))
+/*{{ topic: cpp_helper_macros | macro_: `xpp_assert( b, n, c )`
+   | desc_: Assert inside an Xbase++ entry point: when the condition **b** is false an Xbase++ Error object is
+     built with subsystem "ot4xb", gencode **n**, operation the name of the current C++ function and description
+     **c**, it is launched, and the macro **returns from the current function** (which must return void, as an
+     _XPP_REG_FUN_ does). When b is true nothing happens.
+   | note: The condition is expanded as `!b` without parentheses: wrap a compound condition in its own parentheses.
+   | example:
+     _XPP_REG_FUN_( NDTG_STACK_BEGIN )
+     {
+        TXppParamList xpp(pl);
+        if( xpp.PCount() > 0 )
+        {
+           ndtg_typelist_t* ptl = reinterpret_cast<ndtg_typelist_t*>(xpp[1]->GetDWord());
+           xpp_assert( ptl , -1 , "Invalid param: 1" );
+           ndtg_type_t* prt     = ptl->_find_(xpp[2]->LockStr());
+           xpp_assert( prt , -1, "Invalid param: 2");
+           xpp[0]->PutDWord( (DWORD) new ndtg_t( new ndtg_stack_t(ptl,prt,xpp[3]->GetDWord()) ) );
+        }
+        else
+        {
+           xpp[0]->PutDWord( (DWORD) new ndtg_t( new ndtg_xstack_t() ) );
+        }
+     } }}*/
 #define xpp_assert( b , n , c )  if( !b ){TXbGenError _e_(n,__FUNCTION__,c);_e_.Launch();return;}
 //----------------------------------------------------------------------------
+/*{{ topic: cpp_helper_macros | macro_: `ot4xb_SendFLog( fmt, ... )`
+   | desc_: Debug log with the source location: when **OT4XB_DEBUG** is defined it expands to a call to
+     {{ilink: <c-function ot4xb_bSendLogStrFL> ot4xb_bSendLogStrFL}} with the file and line of the macro (`__FILE__`,
+     `__LINE__`) followed by the printf-style format and its arguments; otherwise it expands to nothing, so the
+     arguments are not even evaluated.
+   | see_also: {{ilink: <topic ot4xb_ch_debug_commands> ot4xb_ch_debug_commands}} for the Xbase++ side of the log. }}*/
 #ifdef OT4XB_DEBUG
 #define ot4xb_SendFLog(...)                             ot4xb_bSendLogStrFL( __FILE__ , __LINE__ ,__VA_ARGS__)
 #else

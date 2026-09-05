@@ -1028,7 +1028,6 @@ BOOL TFileWriter::write_xml_value_from_container( ContainerHandle con )
 						{
 							SetEncoderEngine( TFileWriter::enc_e::e_enc_none );
 						}
-						break;
 					}
 					_conUnlockC( con );
 				}

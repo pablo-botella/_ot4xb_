@@ -175,25 +175,7 @@ function __app()                                                                
 
       
       
-#xcommand DECLARE APPLICATION COUT CLASS METHODS =>                   ;
-;INLINE CLASS METHOD QQOut()                                          ;
-;       local np := PCount()                                          ;
-;       local n                                                       ;
-;       local cc := ""                                                ;
-;       for n := 1 to np                                              ;
-;          cc += var2char( PValue(n) ) + iif( n \< np, " " , "" )     ;
-;       next                                                          ;
-;       __printf(,"%s",cc)                                            ;
-;       return Self                                                   ;
-;INLINE CLASS METHOD QOut()                                           ;
-;       local np := PCount()                                          ;
-;       local n                                                       ;
-;       local cc := ""                                                ;
-;       for n := 1 to np                                              ;
-;          cc += var2char( PValue(n) ) + iif( n \< np, " " , "" )     ;
-;       next                                                          ;
-;       __printf(,"\r\n%s",cc)                                        ;
-;       return Self      
+
       
       
       

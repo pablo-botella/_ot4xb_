@@ -7,41 +7,26 @@
 #include <ot4xb_api.h>
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nOr</name>
-      <category>bitwise</category>
-      <description>
-         Combines all numeric or logical parameters with bitwise |.
-         nOr( x1, x2, ... ) starts with 0 and applies | to every parameter:
-         ((0 | x1) | x2) | ...
+/*{{begin-function}}*/
+/*{{function_: nOr
+            | syntax_: `nOr( x1, ... xN )`
+            | category: bitwise
+            | _kw_: bitwise or, OR, flags, combine, set bits
+   }}*/
+/*{{|desc: Combines all numeric or logical parameters with bitwise `|`. nOr( x1, x2, ... ) starts with 0 and
+      applies `|` to every parameter: `((0 | x1) | x2) | ...`
+    | params:
+    - `x1..xN` Numeric/Logical - Values to combine with bitwise `|`. If the first parameter is passed by
+      reference, the result is stored there.
 
-         Note: nOr( number ) with a single parameter is useful to force
-         Xbase++ to store the value internally as __int.
+    Returns Numeric - Result of combining all parameters with `|`.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nOr( x1, ... xN ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>x1..xN</name>
-            <type>Numeric | Logical</type>
-            <description>
-               Values to combine with bitwise |.
-               If the first parameter is passed by reference, the result is stored there.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Result of combining all parameters with |.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    |note: nOr( number ) with a single parameter is useful to force Xbase++ to store the value internally as
+      __int.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NOR(XppParamList pl)
 {
   ULONG nRet    = 0;
@@ -51,39 +36,25 @@ XPPRET XPPENTRY NOR(XppParamList pl)
   _stornl(nRet,pl,1,0);
   _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nXOr</name>
-      <category>bitwise</category>
-      <description>
-         Combines numeric or logical parameters with bitwise ^.
-         nXOr( x1, x2, ... ) starts with x1 and applies ^ to each remaining
-         parameter: ((x1 ^ x2) ^ x3) ...
+/*{{begin-function}}*/
+/*{{function_: nXOr
+            | syntax_: `nXOr( x1, ... xN )`
+            | category: bitwise
+            | _kw_: bitwise xor, XOR, exclusive or, toggle bits
+   }}*/
+/*{{|desc: Combines numeric or logical parameters with bitwise `^`. nXOr( x1, x2, ... ) starts with x1 and
+      applies `^` to each remaining parameter: `((x1 ^ x2) ^ x3) ...`
+    | params:
+    - `x1..xN` Numeric/Logical - Values for cumulative `^` operations. If the first parameter is passed by
+      reference, the result is stored there.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nXOr( x1, ... xN ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>x1..xN</name>
-            <type>Numeric | Logical</type>
-            <description>
-               Values for cumulative ^ operations.
-               If the first parameter is passed by reference, the result is stored there.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Result of cumulative ^ operations.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Result of cumulative `^` operations.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NXOR(XppParamList pl)
 {
   ULONG nMax    = _partype(pl,0);
@@ -93,39 +64,25 @@ XPPRET XPPENTRY NXOR(XppParamList pl)
   _stornl(nRet,pl,1,0);
   _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nAnd</name>
-      <category>bitwise</category>
-      <description>
-         Combines numeric or logical parameters with bitwise &amp;.
-         nAnd( x1, x2, ... ) starts with x1 and applies &amp; to each remaining
-         parameter: ((x1 &amp; x2) &amp; x3) ...
+/*{{begin-function}}*/
+/*{{function_: nAnd
+            | syntax_: `nAnd( x1, ... xN )`
+            | category: bitwise
+            | _kw_: bitwise and, AND, mask, test bits
+   }}*/
+/*{{|desc: Combines numeric or logical parameters with bitwise `&`. nAnd( x1, x2, ... ) starts with x1 and
+      applies `&` to each remaining parameter: `((x1 & x2) & x3) ...`
+    | params:
+    - `x1..xN` Numeric/Logical - Values for cumulative `&` operations. If the first parameter is passed by
+      reference, the result is stored there.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nAnd( x1, ... xN ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>x1..xN</name>
-            <type>Numeric | Logical</type>
-            <description>
-               Values for cumulative &amp; operations.
-               If the first parameter is passed by reference, the result is stored there.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Result of cumulative &amp; operations.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Result of cumulative `&` operations.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NAND(XppParamList pl)
 {
   ULONG nMax    = _partype(pl,0);
@@ -135,41 +92,26 @@ XPPRET XPPENTRY NAND(XppParamList pl)
   _stornl(nRet,pl,1,0);
   _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nAndNot</name>
-      <category>bitwise</category>
-      <description>
-         Removes bits from a mask.
-         nAndNot( mask, bits1, bits2, ... ) starts with mask and clears the
-         specified bits from it. Equivalent in C:
-         ((mask &amp; ~bits1) &amp; ~bits2) ...
+/*{{begin-function}}*/
+/*{{function_: nAndNot
+            | syntax_: `nAndNot( nMask, ... nBitsN )`
+            | category: bitwise
+            | _kw_: clear bits, remove flag, and not, mask off
+   }}*/
+/*{{|desc: Removes bits from a mask. nAndNot( mask, bits1, bits2, ... ) starts with mask and clears the
+      specified bits from it. Equivalent in C: `((mask & ~bits1) & ~bits2) ...`
+    | params:
+    - `nMask, nBits1..nBitsN` Numeric/Logical - First value is the base mask. Each following value is
+      complemented and combined with `&` to clear those bits. If the first parameter is passed by reference, the
+      result is stored there.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nAndNot( nMask, ... nBitsN ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nMask, nBits1..nBitsN</name>
-            <type>Numeric | Logical</type>
-            <description>
-               First value is the base mask. Each following value is complemented
-               and combined with &amp; to clear those bits.
-               If the first parameter is passed by reference, the result is stored there.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Result of nMask &amp; (~nBits1) &amp; (~nBits2) ...</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Result of `nMask & (~nBits1) & (~nBits2) ...`
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NANDNOT(XppParamList pl)
 {
   ULONG nMax    = _partype(pl,0);
@@ -179,38 +121,24 @@ XPPRET XPPENTRY NANDNOT(XppParamList pl)
   _stornl(nRet,pl,1,0);
   _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>lAnd</name>
-      <category>bitwise</category>
-      <description>
-         Combines numeric or logical parameters with bitwise &amp; and returns a
-         logical result. lAnd( x1, x2, ... ) starts with x1 and applies &amp; to
-         each remaining parameter.
-      </description>
-      <remarks>
-         This is useful for tests where values may arrive as numeric, logical or NIL.
-         Parameters are read through OT4XB numeric/logical conversion before the bitwise
-         operation, and the final non-zero result is returned as .T. or .F.
-         For example, lAnd( NIL ) returns .F.
-      </remarks>
-      <syntax>lAnd( x1, ... xN ) -> lResult</syntax>
-      <parameters>
-         <parameter>
-            <name>x1..xN</name>
-            <type>Numeric | Logical</type>
-            <description>Values to combine with cumulative bitwise &amp;.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Logical</type>
-         <description>.T. if result is non-zero, .F. otherwise.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: lAnd
+            | syntax_: `lAnd( x1, ... xN )`
+            | category: bitwise
+            | _kw_: bitwise and, AND, test flag, has bit, logical
+   }}*/
+/*{{|desc: Combines numeric or logical parameters with bitwise `&` and returns a logical result. lAnd( x1, x2,
+      ... ) starts with x1 and applies `&` to each remaining parameter.
+    | params:
+    - `x1..xN` Numeric/Logical - Values to combine with cumulative bitwise `&`.
+
+    Returns Logical - .T. if result is non-zero, .F. otherwise.
+
+    |note: This is useful for tests where values may arrive as numeric, logical or NIL. Parameters are read
+      through OT4XB numeric/logical conversion before the bitwise operation, and the final non-zero result is
+      returned as .T. or .F. For example, lAnd( NIL ) returns .F. }}*/
 XPPRET XPPENTRY LAND(XppParamList pl)
 {
   ULONG nMax    = _partype(pl,0);
@@ -219,263 +147,165 @@ XPPRET XPPENTRY LAND(XppParamList pl)
   for( n=2; n <= nMax ; n++){ nRet &= (ULONG) _parLongOrBool(pl,n); }
   _retl(pl,(BOOL) nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nNot</name>
-      <category>bitwise</category>
-      <description>
-         Performs bitwise ~ (complement) on a numeric value.
-         Inverts all bits.
+/*{{begin-function}}*/
+/*{{function_: nNot
+            | syntax_: `nNot( nValue )`
+            | category: bitwise
+            | _kw_: bitwise not, complement, invert bits, NOT
+   }}*/
+/*{{|desc: Performs bitwise `~` (complement) on a numeric value. Inverts all bits.
+    | params:
+    - `nValue` Numeric - Value to invert. If passed by reference, the result is stored there.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nNot( nValue ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Value to invert.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Bitwise complement of input value.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Bitwise complement of input value.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NNOT(XppParamList pl)
 {
    LONG nRet = (~(_parLongOrBool(pl,1)));
     _stornl(nRet,pl,1,0);
     _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nLShift</name>
-      <category>bitwise</category>
-      <description>
-         Performs left bit shift on a 32-bit value.
+/*{{begin-function}}*/
+/*{{function_: nLShift
+            | syntax_: `nLShift( nValue, nBits )`
+            | category: bitwise
+            | _kw_: shift left, <<, bit shift, multiply by 2
+   }}*/
+/*{{|desc: Performs left bit shift on a 32-bit value.
+    | params:
+    - `nValue` Numeric - Value to shift. If passed by reference, the result is stored there.
+    - `nBits` Numeric - Number of bit positions to shift left.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nLShift( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Value to shift.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to shift left.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Value shifted left by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Value shifted left by nBits positions.
 
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NLSHIFT(XppParamList pl)
 {
-   DWORD nRet = (DWORD) _parLong(pl,1) << (DWORD) _parLong(pl,2);
+   DWORD sh = (DWORD) _parLong( pl, 2 );
+   DWORD nRet = ( sh > 31 ? 0 : (DWORD) _parLong(pl,1) << sh);
    _stornl((LONG) nRet,pl,1,0);
    _retnl(pl,(LONG) nRet);    
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nRShift</name>
-      <category>bitwise</category>
-      <description>
-         Performs right bit shift on a 32-bit value.
+/*{{begin-function}}*/
+/*{{function_: nRShift
+            | syntax_: `nRShift( nValue, nBits )`
+            | category: bitwise
+            | _kw_: shift right, >>, bit shift, divide by 2
+   }}*/
+/*{{|desc: Performs right bit shift on a 32-bit value.
+    | params:
+    - `nValue` Numeric - Value to shift. If passed by reference, the result is stored there.
+    - `nBits` Numeric - Number of bit positions to shift right.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nRShift( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Value to shift.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to shift right.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Value shifted right by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Value shifted right by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NRSHIFT(XppParamList pl)
 {
-   DWORD nRet = (DWORD) _parLong(pl,1) >> (DWORD) _parLong(pl,2);
+   DWORD sh = (DWORD) _parLong( pl, 2 );
+   DWORD nRet = ( sh > 31 ? 0 : (DWORD) _parLong( pl, 1 ) >> sh );
    _stornl((LONG) nRet,pl,1,0);
    _retnl(pl,(LONG) nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nLRot</name>
-      <category>bitwise</category>
-      <description>
-         Performs left bit rotation on a 32-bit value.
-         Bits shifted out on the left re-enter on the right.
+/*{{begin-function}}*/
+/*{{function_: nLRot
+            | syntax_: `nLRot( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate left, rol, circular shift, 32-bit
+   }}*/
+/*{{|desc: Performs left bit rotation on a 32-bit value. Bits shifted out on the left re-enter on the right.
+    | params:
+    - `nValue` Numeric - Value to rotate. If passed by reference, the result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate left. Only nBits modulo 32 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nLRot( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Value to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate left (1-32).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Value rotated left by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Value rotated left by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NLROT(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 31) +1;
-   nRet = (n << nMask | (n >> (32-nMask)));
+   __asm
+   {
+      mov eax, n;
+      mov cl, nMask;
+      rol eax, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nRRot</name>
-      <category>bitwise</category>
-      <description>
-         Performs right bit rotation on a 32-bit value.
-         Bits shifted out on the right re-enter on the left.
+/*{{begin-function}}*/
+/*{{function_: nRRot
+            | syntax_: `nRRot( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate right, ror, circular shift, 32-bit
+   }}*/
+/*{{|desc: Performs right bit rotation on a 32-bit value. Bits shifted out on the right re-enter on the left.
+    | params:
+    - `nValue` Numeric - Value to rotate. If passed by reference, the result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate right. Only nBits modulo 32 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nRRot( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Value to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate right (1-32).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Value rotated right by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Value rotated right by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NRROT(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 31) +1;
-   nRet = (n >> nMask | (n << (32-nMask)));
+   __asm
+   {
+      mov eax, n;
+      mov cl, nMask;
+      ror eax, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_rt_r_</name>
-      <category>bitwise</category>
-      <description>
-         Rotates each byte in a buffer right by r bits.
-         Bits shifted out on the right re-enter on the left (circular rotation).
-         Unlike >> where shifted-out bits are lost, here no bits are discarded.
-      </description>
-      <syntax>void _str_rt_r_( LPBYTE p, DWORD cb, BYTE r )</syntax>
-      <prototype>void _str_rt_r_( LPBYTE p, DWORD cb, BYTE r );</prototype>
-      <xbase-syntax>@ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to byte buffer. Passed by reference - buffer is modified in place.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-         <parameter>
-            <name>r</name>
-            <type>BYTE</type>
-            <description>Number of bits to rotate right.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_rt_r_
+            | syntax_: `void _str_rt_r_( LPBYTE p, DWORD cb, BYTE r )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )
+            | mangled-name: _str_rt_r_
+            | _kw_: rotate right, ror, bytes, buffer, obfuscate
+   }}*/
+/*{{|desc: Rotates each byte in a buffer right by r bits. Bits shifted out on the right re-enter on the left
+      (circular rotation). Unlike `>>` where shifted-out bits are lost, here no bits are discarded.
+    | params:
+    - `p` LPBYTE - Pointer to byte buffer. Passed by reference - buffer is modified in place.
+    - `cb` DWORD - Number of bytes to process.
+    - `r` BYTE - Number of bits to rotate right.
+
+    Returns void }}*/
 extern "C" OT4XB_API void _str_rt_r_(LPBYTE p, DWORD cb , BYTE r )
 {
    while( p && cb )
@@ -496,44 +326,24 @@ extern "C" OT4XB_API void _str_rt_r_(LPBYTE p, DWORD cb , BYTE r )
       p++; cb--;
    }
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_rt_l_</name>
-      <category>bitwise</category>
-      <description>
-         Rotates each byte in a buffer left by r bits.
-         Bits shifted out on the left re-enter on the right (circular rotation).
-         Unlike &lt;&lt; where shifted-out bits are lost, here no bits are discarded.
-      </description>
-      <syntax>void _str_rt_l_( LPBYTE p, DWORD cb, BYTE r )</syntax>
-      <prototype>void _str_rt_l_( LPBYTE p, DWORD cb, BYTE r );</prototype>
-      <xbase-syntax>@ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to byte buffer. Passed by reference - buffer is modified in place.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-         <parameter>
-            <name>r</name>
-            <type>BYTE</type>
-            <description>Number of bits to rotate left.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_rt_l_
+            | syntax_: `void _str_rt_l_( LPBYTE p, DWORD cb, BYTE r )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )
+            | mangled-name: _str_rt_l_
+            | _kw_: rotate left, rol, bytes, buffer, obfuscate
+   }}*/
+/*{{|desc: Rotates each byte in a buffer left by r bits. Bits shifted out on the left re-enter on the right
+      (circular rotation). Unlike `<<` where shifted-out bits are lost, here no bits are discarded.
+    | params:
+    - `p` LPBYTE - Pointer to byte buffer. Passed by reference - buffer is modified in place.
+    - `cb` DWORD - Number of bytes to process.
+    - `r` BYTE - Number of bits to rotate left.
+
+    Returns void }}*/
 extern "C" OT4XB_API void _str_rt_l_(LPBYTE p, DWORD cb , BYTE r )
 {
    while( p && cb )
@@ -554,47 +364,26 @@ extern "C" OT4XB_API void _str_rt_l_(LPBYTE p, DWORD cb , BYTE r )
       p++; cb--;
    }
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_rt_r_ex_
+            | syntax_: `void _str_rt_r_ex_( LPBYTE p, DWORD cb, BYTE r )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )
+            | mangled-name: _str_rt_r_ex_
+            | _kw_: rotate right, ror, bytes, buffer, incremental, obfuscate
+   }}*/
+/*{{|desc: Processes each byte in a buffer: rotates it right by r bits, then increments r by 1. Since r is a
+      BYTE, it wraps naturally from 255 back to 0. Rotating a byte by 8 returns it to its original value. Bits
+      shifted out on the right re-enter on the left (circular rotation). Unlike `>>` where shifted-out bits are
+      lost, here no bits are discarded.
+    | params:
+    - `p` LPBYTE - Pointer to byte buffer. Passed by reference - buffer is modified in place.
+    - `cb` DWORD - Number of bytes to process.
+    - `r` BYTE - Initial number of bits to rotate right. Increments by 1 per byte, wraps at 256.
 
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_rt_r_ex_</name>
-      <category>bitwise</category>
-      <description>
-         Processes each byte in a buffer: rotates it right by r bits, then increments r by 1.
-         Since r is a BYTE, it wraps naturally from 255 back to 0.
-         Rotating a byte by 8 returns it to its original value.
-         Bits shifted out on the right re-enter on the left (circular rotation).
-         Unlike >> where shifted-out bits are lost, here no bits are discarded.
-      </description>
-      <syntax>void _str_rt_r_ex_( LPBYTE p, DWORD cb, BYTE r )</syntax>
-      <prototype>void _str_rt_r_ex_( LPBYTE p, DWORD cb, BYTE r );</prototype>
-      <xbase-syntax>@ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to byte buffer. Passed by reference - buffer is modified in place.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-         <parameter>
-            <name>r</name>
-            <type>BYTE</type>
-            <description>Initial number of bits to rotate right. Increments by 1 per byte, wraps at 256.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+    Returns void }}*/
 extern "C" OT4XB_API void _str_rt_r_ex_(LPBYTE p, DWORD cb, BYTE r)
 {
 	while (p && cb)
@@ -613,46 +402,26 @@ extern "C" OT4XB_API void _str_rt_r_ex_(LPBYTE p, DWORD cb, BYTE r)
 		p++; cb--; r++;
 	}
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_rt_l_ex_</name>
-      <category>bitwise</category>
-      <description>
-         Processes each byte in a buffer: rotates it left by r bits, then increments r by 1.
-         Since r is a BYTE, it wraps naturally from 255 back to 0.
-         Rotating a byte by 8 returns it to its original value.
-         Bits shifted out on the left re-enter on the right (circular rotation).
-         Unlike &lt;&lt; where shifted-out bits are lost, here no bits are discarded.
-      </description>
-      <syntax>void _str_rt_l_ex_( LPBYTE p, DWORD cb, BYTE r )</syntax>
-      <prototype>void _str_rt_l_ex_( LPBYTE p, DWORD cb, BYTE r );</prototype>
-      <xbase-syntax>@ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to byte buffer. Passed by reference - buffer is modified in place.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-         <parameter>
-            <name>r</name>
-            <type>BYTE</type>
-            <description>Initial number of bits to rotate left. Increments by 1 per byte, wraps at 256.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_rt_l_ex_
+            | syntax_: `void _str_rt_l_ex_( LPBYTE p, DWORD cb, BYTE r )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )
+            | mangled-name: _str_rt_l_ex_
+            | _kw_: rotate left, rol, bytes, buffer, incremental, obfuscate
+   }}*/
+/*{{|desc: Processes each byte in a buffer: rotates it left by r bits, then increments r by 1. Since r is a
+      BYTE, it wraps naturally from 255 back to 0. Rotating a byte by 8 returns it to its original value. Bits
+      shifted out on the left re-enter on the right (circular rotation). Unlike `<<` where shifted-out bits are
+      lost, here no bits are discarded.
+    | params:
+    - `p` LPBYTE - Pointer to byte buffer. Passed by reference - buffer is modified in place.
+    - `cb` DWORD - Number of bytes to process.
+    - `r` BYTE - Initial number of bits to rotate left. Increments by 1 per byte, wraps at 256.
+
+    Returns void }}*/
 extern "C" OT4XB_API void _str_rt_l_ex_(LPBYTE p, DWORD cb, BYTE r)
 {
 	while (p && cb)
@@ -671,240 +440,163 @@ extern "C" OT4XB_API void _str_rt_l_ex_(LPBYTE p, DWORD cb, BYTE r)
 		p++; cb--; r++;
 	}
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: nLRotByte
+            | syntax_: `nLRotByte( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate left, rol, byte, 8-bit, circular shift
+   }}*/
+/*{{|desc: Performs left bit rotation on an 8-bit value. Bits shifted out on the left re-enter on the right.
+    | params:
+    - `nValue` Numeric - Byte value to rotate; only the low 8 bits are used. If passed by reference, the
+      result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate left. Only nBits modulo 8 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
+    Returns Numeric - Byte value rotated left by nBits positions.
 
-
-
-
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nLRotByte</name>
-      <category>bitwise</category>
-      <description>
-         Performs left bit rotation on an 8-bit value.
-         Bits shifted out on the left re-enter on the right.
-
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nLRotByte( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Byte value (0-255) to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate left (1-8).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Byte value rotated left by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NLROTBYTE(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 7) +1;
-   nRet = ((n << nMask | (n >> (8-nMask)))&0x000000FF);
+   __asm
+   {
+      movzx eax, byte ptr n;
+      mov cl, nMask;
+      rol al, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nRRotByte</name>
-      <category>bitwise</category>
-      <description>
-         Performs right bit rotation on an 8-bit value.
-         Bits shifted out on the right re-enter on the left.
+/*{{begin-function}}*/
+/*{{function_: nRRotByte
+            | syntax_: `nRRotByte( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate right, ror, byte, 8-bit, circular shift
+   }}*/
+/*{{|desc: Performs right bit rotation on an 8-bit value. Bits shifted out on the right re-enter on the left.
+    | params:
+    - `nValue` Numeric - Byte value to rotate; only the low 8 bits are used. If passed by reference, the
+      result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate right. Only nBits modulo 8 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nRRotByte( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Byte value (0-255) to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate right (1-8).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Byte value rotated right by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Byte value rotated right by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NRROTBYTE(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 7) +1;
-   nRet  = ((n >> nMask | (n << (8-nMask)))&0x000000FF);
+   __asm
+   {
+      movzx eax, byte ptr n;
+      mov cl, nMask;
+      ror al, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nLRotWord</name>
-      <category>bitwise</category>
-      <description>
-         Performs left bit rotation on a 16-bit value.
-         Bits shifted out on the left re-enter on the right.
+/*{{begin-function}}*/
+/*{{function_: nLRotWord
+            | syntax_: `nLRotWord( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate left, rol, word, 16-bit, circular shift
+   }}*/
+/*{{|desc: Performs left bit rotation on a 16-bit value. Bits shifted out on the left re-enter on the right.
+    | params:
+    - `nValue` Numeric - Word value to rotate; only the low 16 bits are used. If passed by reference, the
+      result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate left. Only nBits modulo 16 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nLRotWord( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Word value (0-65535) to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate left (1-16).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Word value rotated left by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Word value rotated left by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NLROTWORD(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 15) +1;
-   nRet = ((n << nMask | (n >> (16-nMask)))&0x0000FFFF);
+   __asm
+   {
+      movzx eax, word ptr n;
+      mov cl, nMask;
+      rol ax, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>nRRotWord</name>
-      <category>bitwise</category>
-      <description>
-         Performs right bit rotation on a 16-bit value.
-         Bits shifted out on the right re-enter on the left.
+/*{{begin-function}}*/
+/*{{function_: nRRotWord
+            | syntax_: `nRRotWord( nValue, nBits )`
+            | category: bitwise
+            | _kw_: rotate right, ror, word, 16-bit, circular shift
+   }}*/
+/*{{|desc: Performs right bit rotation on a 16-bit value. Bits shifted out on the right re-enter on the left.
+    | params:
+    - `nValue` Numeric - Word value to rotate; only the low 16 bits are used. If passed by reference, the
+      result is stored there.
+    - `nBits` Numeric - Number of bit positions to rotate right. Only nBits modulo 16 matters: full turns
+      are discarded, so 0, negative or larger values are safe.
 
-         Note: The internal representation is preserved as __int32, so values
-         greater than 2147483647 (0x7FFFFFFF) may appear as negative.
-         Use Unsigned32( number ) to convert to double when unsigned underflow occurs and you need to prevent it.
-      </description>
-      <syntax>nRRotWord( nValue, nBits ) -> nResult</syntax>
-      <parameters>
-         <parameter>
-            <name>nValue</name>
-            <type>Numeric</type>
-            <description>
-               Word value (0-65535) to rotate.
-               If passed by reference, the result is stored there.
-            </description>
-         </parameter>
-         <parameter>
-            <name>nBits</name>
-            <type>Numeric</type>
-            <description>Number of bit positions to rotate right (1-16).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>Word value rotated right by nBits positions.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - Word value rotated right by nBits positions.
+
+    |note: The internal representation is preserved as __int32, so values greater than 2147483647 (0x7FFFFFFF)
+      may appear as negative. Use Unsigned32( number ) to convert to double when unsigned underflow occurs and
+      you need to prevent it. }}*/
 XPPRET XPPENTRY NRROTWORD(XppParamList pl)
 {
    ULONG n     = (ULONG) _parLong(pl,1);
-   ULONG nMask = (ULONG) _parLong(pl,2);
+   BYTE  nMask = (BYTE)( _parLong(pl,2) & 0xFF );
    LONG  nRet;
-   if( nMask < 1 ){_retnl(pl,n); return;}
-   nMask = ((nMask -1) & 65535) +1;
-   nRet = ((n >> nMask | (n << (16-nMask)))&0x0000FFFF);
+   __asm
+   {
+      movzx eax, word ptr n;
+      mov cl, nMask;
+      ror ax, cl;
+      mov nRet, eax;
+   }
    _stornl(nRet,pl,1,0);
    _retnl(pl,nRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>lDwBitOnOff</name>
-      <category>bitwise</category>
-      <description>
-         Gets or sets a specific bit in a 32-bit value.
-         If lOnOff is passed, sets the bit and updates nValue by reference.
-         Always returns the current state of the bit.
-      </description>
-      <syntax>lDwBitOnOff( @nValue, nBit, [lOnOff] ) -> lOnOff</syntax>
-      <parameters>
-         <parameter>
-            <name>@nValue</name>
-            <type>Numeric</type>
-            <description>Value to get/set bit. Passed by reference for modification.</description>
-         </parameter>
-         <parameter>
-            <name>nBit</name>
-            <type>Numeric</type>
-            <description>Bit position (1-32).</description>
-         </parameter>
-         <parameter>
-            <name>lOnOff</name>
-            <type>Logical</type>
-            <description>Optional. If provided, sets the bit on (.T.) or off (.F.).</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Logical</type>
-         <description>.T. if bit is set, .F. if bit is clear.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-XPPRET XPPENTRY LDWBITONOFF(XppParamList pl) // lDwBitOnOff( 1@nNum , 2nBit ,[3lOnOff]) -> lOnOff
+/*{{begin-function}}*/
+/*{{function_: lDwBitOnOff
+            | syntax_: `lDwBitOnOff( @nValue, nBit, [lOnOff] )`
+            | category: bitwise
+            | _kw_: bit, get bit, set bit, test bit, flag, by reference
+   }}*/
+/*{{|desc: Gets or sets a specific bit in a 32-bit value. If lOnOff is passed, sets the bit and updates nValue
+      by reference. Always returns the current state of the bit.
+    | params:
+    - `@nValue` Numeric - Value to get/set bit. Passed by reference for modification.
+    - `nBit` Numeric - Bit position (1-32).
+    - `lOnOff` Logical - Optional. If provided, sets the bit on (.T.) or off (.F.).
+
+    Returns Logical - .T. if bit is set, .F. if bit is clear. }}*/
+XPPRET XPPENTRY LDWBITONOFF(XppParamList pl)
 {
    DWORD nNum  = (DWORD) _parLong(pl,1,0);
    DWORD nMask = (1 << ((_parLong(pl,2,0)-1) & 0xFF));
@@ -914,45 +606,25 @@ XPPRET XPPENTRY LDWBITONOFF(XppParamList pl) // lDwBitOnOff( 1@nNum , 2nBit ,[3l
       else nNum &= (~nMask);
       _stornl((LONG)nNum,pl,1,0);
    }
-   _retl(pl, (BOOL) nNum & nMask);
+   _retl(pl, (BOOL) (nNum & nMask) ) ;
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_dw_bf_get_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Extracts a bitfield from a DWORD value.
-         Returns cb bits starting at bit position sh.
-      </description>
-      <syntax>DWORD _dw_bf_get_( DWORD dw, DWORD sh, DWORD cb )</syntax>
-      <prototype>DWORD _dw_bf_get_( DWORD dw, DWORD sh, DWORD cb );</prototype>
-      <xbase-syntax>@ot4xb:_dw_bf_get_( nValue, nShift, nBits )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>dw</name>
-            <type>DWORD</type>
-            <description>Source value to extract bits from.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>DWORD</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bits to extract.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>DWORD</type>
-         <description>Extracted bitfield value, right-aligned.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _dw_bf_get_
+            | syntax_: `DWORD _dw_bf_get_( DWORD dw, DWORD sh, DWORD cb )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_dw_bf_get_( nValue, nShift, nBits )
+            | mangled-name: _dw_bf_get_
+            | _kw_: bitfield, bit field, extract bits, DWORD
+   }}*/
+/*{{|desc: Extracts a bitfield from a DWORD value. Returns cb bits starting at bit position sh.
+    | params:
+    - `dw` DWORD - Source value to extract bits from.
+    - `sh` DWORD - Bit position (shift) where the bitfield starts.
+    - `cb` DWORD - Number of bits to extract.
+
+    Returns DWORD - Extracted bitfield value, right-aligned. }}*/
 OT4XB_API DWORD _dw_bf_get_(DWORD dw,DWORD sh, DWORD cb)
 {
    DWORD mask = 0;
@@ -960,93 +632,49 @@ OT4XB_API DWORD _dw_bf_get_(DWORD dw,DWORD sh, DWORD cb)
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    return ((dw >> sh) & mask);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_dw_bf_set_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Writes a value into a bitfield of a DWORD.
-         Sets cb bits starting at bit position sh to the value v.
-      </description>
-      <syntax>DWORD _dw_bf_set_( DWORD dw, DWORD sh, DWORD cb, DWORD v )</syntax>
-      <prototype>DWORD _dw_bf_set_( DWORD dw, DWORD sh, DWORD cb, DWORD v );</prototype>
-      <xbase-syntax>@ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>dw</name>
-            <type>DWORD</type>
-            <description>Source value to modify.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>DWORD</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>DWORD</type>
-            <description>Number of bits in the bitfield.</description>
-         </parameter>
-         <parameter>
-            <name>v</name>
-            <type>DWORD</type>
-            <description>Value to write into the bitfield.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>DWORD</type>
-         <description>Modified DWORD with the bitfield set to v.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _dw_bf_set_
+            | syntax_: `DWORD _dw_bf_set_( DWORD dw, DWORD sh, DWORD cb, DWORD v )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )
+            | mangled-name: _dw_bf_set_
+            | _kw_: bitfield, bit field, write bits, DWORD
+   }}*/
+/*{{|desc: Writes a value into a bitfield of a DWORD. Sets cb bits starting at bit position sh to the value v.
+    | params:
+    - `dw` DWORD - Source value to modify.
+    - `sh` DWORD - Bit position (shift) where the bitfield starts.
+    - `cb` DWORD - Number of bits in the bitfield.
+    - `v` DWORD - Value to write into the bitfield.
+
+    Returns DWORD - Modified DWORD with the bitfield set to v. }}*/
 OT4XB_API DWORD _dw_bf_set_(DWORD dw,DWORD sh, DWORD cb , DWORD v)
 {
    DWORD mask = 0;
    DWORD n,ns;
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    dw &= ~(mask << sh);
-   return (dw | (v << sh));
+   return (dw | ((v & mask) << sh));
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_b1_bf_get_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Extracts a bitfield from a BYTE value.
-         Returns cb bits starting at bit position sh.
-      </description>
-      <syntax>BYTE _b1_bf_get_( BYTE b, BYTE sh, BYTE cb )</syntax>
-      <prototype>BYTE _b1_bf_get_( BYTE b, BYTE sh, BYTE cb );</prototype>
-      <xbase-syntax>@ot4xb:_b1_bf_get_( nValue, nShift, nBits )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>b</name>
-            <type>BYTE</type>
-            <description>Source value to extract bits from.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>BYTE</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>BYTE</type>
-            <description>Number of bits to extract.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>BYTE</type>
-         <description>Extracted bitfield value, right-aligned.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _b1_bf_get_
+            | syntax_: `BYTE _b1_bf_get_( BYTE b, BYTE sh, BYTE cb )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_b1_bf_get_( nValue, nShift, nBits )
+            | mangled-name: _b1_bf_get_
+            | _kw_: bitfield, bit field, extract bits, BYTE
+   }}*/
+/*{{|desc: Extracts a bitfield from a BYTE value. Returns cb bits starting at bit position sh.
+    | params:
+    - `b` BYTE - Source value to extract bits from.
+    - `sh` BYTE - Bit position (shift) where the bitfield starts.
+    - `cb` BYTE - Number of bits to extract.
+
+    Returns BYTE - Extracted bitfield value, right-aligned. }}*/
 OT4XB_API BYTE _b1_bf_get_(BYTE b,BYTE sh, BYTE cb)
 {
    BYTE mask = 0;
@@ -1054,93 +682,49 @@ OT4XB_API BYTE _b1_bf_get_(BYTE b,BYTE sh, BYTE cb)
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    return ((b >> sh) & mask);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_b1_bf_set_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Writes a value into a bitfield of a BYTE.
-         Sets cb bits starting at bit position sh to the value v.
-      </description>
-      <syntax>BYTE _b1_bf_set_( BYTE b, BYTE sh, BYTE cb, BYTE v )</syntax>
-      <prototype>BYTE _b1_bf_set_( BYTE b, BYTE sh, BYTE cb, BYTE v );</prototype>
-      <xbase-syntax>@ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>b</name>
-            <type>BYTE</type>
-            <description>Source value to modify.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>BYTE</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>BYTE</type>
-            <description>Number of bits in the bitfield.</description>
-         </parameter>
-         <parameter>
-            <name>v</name>
-            <type>BYTE</type>
-            <description>Value to write into the bitfield.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>BYTE</type>
-         <description>Modified BYTE with the bitfield set to v.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _b1_bf_set_
+            | syntax_: `BYTE _b1_bf_set_( BYTE b, BYTE sh, BYTE cb, BYTE v )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )
+            | mangled-name: _b1_bf_set_
+            | _kw_: bitfield, bit field, write bits, BYTE
+   }}*/
+/*{{|desc: Writes a value into a bitfield of a BYTE. Sets cb bits starting at bit position sh to the value v.
+    | params:
+    - `b` BYTE - Source value to modify.
+    - `sh` BYTE - Bit position (shift) where the bitfield starts.
+    - `cb` BYTE - Number of bits in the bitfield.
+    - `v` BYTE - Value to write into the bitfield.
+
+    Returns BYTE - Modified BYTE with the bitfield set to v. }}*/
 OT4XB_API BYTE _b1_bf_set_(BYTE b ,BYTE sh, BYTE cb , BYTE v)
 {
    BYTE mask = 0;
    BYTE n,ns;
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    b &= ~(mask << sh);
-   return (b | (v << sh));
+   return (b | ((v & mask) << sh));
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_w_bf_get_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Extracts a bitfield from a WORD (int16) value.
-         Returns cb bits starting at bit position sh.
-      </description>
-      <syntax>WORD _w_bf_get_( WORD w, WORD sh, WORD cb )</syntax>
-      <prototype>WORD _w_bf_get_( WORD w, WORD sh, WORD cb );</prototype>
-      <xbase-syntax>@ot4xb:_w_bf_get_( nValue, nShift, nBits )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>w</name>
-            <type>WORD</type>
-            <description>Source value to extract bits from.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>WORD</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>WORD</type>
-            <description>Number of bits to extract.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>WORD</type>
-         <description>Extracted bitfield value, right-aligned.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _w_bf_get_
+            | syntax_: `WORD _w_bf_get_( WORD w, WORD sh, WORD cb )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_w_bf_get_( nValue, nShift, nBits )
+            | mangled-name: _w_bf_get_
+            | _kw_: bitfield, bit field, extract bits, WORD
+   }}*/
+/*{{|desc: Extracts a bitfield from a WORD (int16) value. Returns cb bits starting at bit position sh.
+    | params:
+    - `w` WORD - Source value to extract bits from.
+    - `sh` WORD - Bit position (shift) where the bitfield starts.
+    - `cb` WORD - Number of bits to extract.
+
+    Returns WORD - Extracted bitfield value, right-aligned. }}*/
 OT4XB_API WORD _w_bf_get_(WORD w,WORD sh, WORD cb)
 {
    WORD mask = 0;
@@ -1148,83 +732,48 @@ OT4XB_API WORD _w_bf_get_(WORD w,WORD sh, WORD cb)
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    return ((w >> sh) & mask);
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_w_bf_set_</name>
-      <category>bitwise/bitfield</category>
-      <description>
-         Writes a value into a bitfield of a WORD (int16).
-         Sets cb bits starting at bit position sh to the value v.
-      </description>
-      <syntax>WORD _w_bf_set_( WORD w, WORD sh, WORD cb, WORD v )</syntax>
-      <prototype>WORD _w_bf_set_( WORD w, WORD sh, WORD cb, WORD v );</prototype>
-      <xbase-syntax>@ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>w</name>
-            <type>WORD</type>
-            <description>Source value to modify.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>WORD</type>
-            <description>Bit position (shift) where the bitfield starts.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>WORD</type>
-            <description>Number of bits in the bitfield.</description>
-         </parameter>
-         <parameter>
-            <name>v</name>
-            <type>WORD</type>
-            <description>Value to write into the bitfield.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>WORD</type>
-         <description>Modified WORD with the bitfield set to v.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _w_bf_set_
+            | syntax_: `WORD _w_bf_set_( WORD w, WORD sh, WORD cb, WORD v )`
+            | category: bitwise/bitfield
+            | xbase-syntax: @ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )
+            | mangled-name: _w_bf_set_
+            | _kw_: bitfield, bit field, write bits, WORD
+   }}*/
+/*{{|desc: Writes a value into a bitfield of a WORD (int16). Sets cb bits starting at bit position sh to the
+      value v.
+    | params:
+    - `w` WORD - Source value to modify.
+    - `sh` WORD - Bit position (shift) where the bitfield starts.
+    - `cb` WORD - Number of bits in the bitfield.
+    - `v` WORD - Value to write into the bitfield.
+
+    Returns WORD - Modified WORD with the bitfield set to v. }}*/
 OT4XB_API WORD _w_bf_set_(WORD w ,WORD sh, WORD cb , WORD v)
 {
    WORD mask = 0;
    WORD n,ns;
    for( n=0,ns=0; n < cb; n++,ns++ ) mask |= (1 << ns);
    w &= ~(mask << sh);
-   return (w | (v << sh));
+   return (w | ((v & mask) << sh));
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_byteflipbits_</name>
-      <category>bitwise</category>
-      <description>
-         Reverses the bit order of a BYTE.
-         bit 0 becomes bit 7, bit 1 becomes bit 6, and so on.
-      </description>
-      <syntax>BYTE _byteflipbits_( BYTE n )</syntax>
-      <prototype>BYTE _byteflipbits_( BYTE n );</prototype>
-      <xbase-syntax>@ot4xb:_byteflipbits_( nByte )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>n</name>
-            <type>BYTE</type>
-            <description>Byte value to reverse.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>BYTE</type>
-         <description>Byte with bits in reversed order.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _byteflipbits_
+            | syntax_: `BYTE _byteflipbits_( BYTE n )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_byteflipbits_( nByte )
+            | mangled-name: _byteflipbits_
+            | _kw_: reverse bits, mirror bits, bit order, byte
+   }}*/
+/*{{|desc: Reverses the bit order of a BYTE. bit 0 becomes bit 7, bit 1 becomes bit 6, and so on.
+    | params:
+    - `n` BYTE - Byte value to reverse.
+
+    Returns BYTE - Byte with bits in reversed order. }}*/
 OT4XB_API BYTE _byteflipbits_(BYTE n)
 {
    BYTE nn = ((n >> 7) & 0x01);
@@ -1237,43 +786,24 @@ OT4XB_API BYTE _byteflipbits_(BYTE n)
         nn |= ((n << 7) & 0x80);
    return nn;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_byte_xor_</name>
-      <category>bitwise</category>
-      <description>
-         Computes the cumulative XOR of cb bytes in a buffer starting at offset sh.
-         Result is the XOR of all bytes in the specified range.
-      </description>
-      <syntax>BYTE _str_byte_xor_( LPBYTE p, UINT sh, UINT cb )</syntax>
-      <prototype>BYTE _str_byte_xor_( LPBYTE p, UINT sh, UINT cb );</prototype>
-      <xbase-syntax>@ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to the buffer.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>UINT</type>
-            <description>Offset in bytes from the start of the buffer.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>UINT</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>BYTE</type>
-         <description>Cumulative XOR of all bytes in the range.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_byte_xor_
+            | syntax_: `BYTE _str_byte_xor_( LPBYTE p, UINT sh, UINT cb )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )
+            | mangled-name: _str_byte_xor_
+            | _kw_: xor checksum, xor bytes, buffer, checksum
+   }}*/
+/*{{|desc: Computes the cumulative XOR of cb bytes in a buffer starting at offset sh. Result is the XOR of all
+      bytes in the specified range.
+    | params:
+    - `p` LPBYTE - Pointer to the buffer.
+    - `sh` UINT - Offset in bytes from the start of the buffer.
+    - `cb` UINT - Number of bytes to process.
+
+    Returns BYTE - Cumulative XOR of all bytes in the range. }}*/
 OT4XB_API BYTE _str_byte_xor_(LPBYTE p , UINT sh , UINT cb)
 {
    BYTE   b = 0;
@@ -1286,42 +816,23 @@ OT4XB_API BYTE _str_byte_xor_(LPBYTE p , UINT sh , UINT cb)
    }
    return b;
 }
+/*{{end-c-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_byte_sum_</name>
-      <category>bitwise</category>
-      <description>
-         Computes the cumulative sum of cb bytes in a buffer starting at offset sh.
-      </description>
-      <syntax>BYTE _str_byte_sum_( LPBYTE p, UINT sh, UINT cb )</syntax>
-      <prototype>BYTE _str_byte_sum_( LPBYTE p, UINT sh, UINT cb );</prototype>
-      <xbase-syntax>@ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to the buffer.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>UINT</type>
-            <description>Offset in bytes from the start of the buffer.</description>
-         </parameter>
-         <parameter>
-            <name>cb</name>
-            <type>UINT</type>
-            <description>Number of bytes to process.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>BYTE</type>
-         <description>Cumulative sum of all bytes in the range.</description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_byte_sum_
+            | syntax_: `BYTE _str_byte_sum_( LPBYTE p, UINT sh, UINT cb )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )
+            | mangled-name: _str_byte_sum_
+            | _kw_: byte sum, checksum, buffer, add bytes
+   }}*/
+/*{{|desc: Computes the cumulative sum of cb bytes in a buffer starting at offset sh.
+    | params:
+    - `p` LPBYTE - Pointer to the buffer.
+    - `sh` UINT - Offset in bytes from the start of the buffer.
+    - `cb` UINT - Number of bytes to process.
+
+    Returns BYTE - Cumulative sum of all bytes in the range. }}*/
 OT4XB_API BYTE _str_byte_sum_(LPBYTE p , UINT sh , UINT cb)
 {
    BYTE   b = 0;
@@ -1338,43 +849,24 @@ OT4XB_API BYTE _str_byte_sum_(LPBYTE p , UINT sh , UINT cb)
    }
    return b;
 }
+/*{{end-c-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-c>
-   <function>
-      <name>_str_reverse_bytes_</name>
-      <category>bitwise</category>
-      <description>
-         Reverses the order of count bytes in a buffer starting at offset sh.
-         The buffer is modified in place.
-      </description>
-      <syntax>void _str_reverse_bytes_( LPBYTE p, UINT sh, UINT count )</syntax>
-      <prototype>void _str_reverse_bytes_( LPBYTE p, UINT sh, UINT count );</prototype>
-      <xbase-syntax>@ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )</xbase-syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>LPBYTE</type>
-            <description>Pointer to the buffer. Modified in place.</description>
-         </parameter>
-         <parameter>
-            <name>sh</name>
-            <type>UINT</type>
-            <description>Offset in bytes from the start of the buffer.</description>
-         </parameter>
-         <parameter>
-            <name>count</name>
-            <type>UINT</type>
-            <description>Number of bytes to reverse.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-   </function>
-</ot4xb-c>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _str_reverse_bytes_
+            | syntax_: `void _str_reverse_bytes_( LPBYTE p, UINT sh, UINT count )`
+            | category: bitwise
+            | xbase-syntax: @ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )
+            | mangled-name: _str_reverse_bytes_
+            | _kw_: reverse bytes, byte order, swap, endian, in place
+   }}*/
+/*{{|desc: Reverses the order of count bytes in a buffer starting at offset sh. The buffer is modified in
+      place.
+    | params:
+    - `p` LPBYTE - Pointer to the buffer. Modified in place.
+    - `sh` UINT - Offset in bytes from the start of the buffer.
+    - `count` UINT - Number of bytes to reverse.
+
+    Returns void }}*/
 OT4XB_API void _str_reverse_bytes_(LPBYTE p, UINT sh, UINT count )
 {
    p = _mk_ptr_(LPBYTE, p, sh);
@@ -1385,8 +877,4 @@ OT4XB_API void _str_reverse_bytes_(LPBYTE p, UINT sh, UINT count )
       p[0] = swap;
    }
 }
-
-
-
-
-
+/*{{end-c-function}}*/

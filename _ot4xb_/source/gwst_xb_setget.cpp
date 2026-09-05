@@ -5,60 +5,7 @@
 //------------------------------------------------------------
 #include <ot4xb_api.h>
 //-----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function-family>
-      <name>GWST member accessors</name>
-      <source>gwst_xb_setget.cpp</source>
-      <category>structures/internal</category>
-      <description>
-         Internal read/write helpers used by OT4XB GWST structure classes to expose binary structure members as
-         Xbase++ properties. They are exported implementation details and are not intended to be called directly
-         from application code.
-      </description>
-      <status>Internal GWST support API; not intended for direct application calls.</status>
-      <remarks>
-         These functions are generated into GWST member accessors by the structure/class machinery. Application
-         code normally uses the structure member directly, for example oRect:left or oFindData:cFileName, and
-         does not call _gwst_xbsetget_*() functions by hand.
 
-         The common calling shape is _gwst_xbsetget_type_( @xValue, nPCount, @pStorage, nShift, nOffset,
-         nStorageSize, pGhost, nMemberSize ). When nPCount is greater than 1 the helper writes xValue into the
-         structure storage. Otherwise it reads the member and returns the converted Xbase++ value.
-
-         Storage can be the default Xbase++ character buffer used by GWST, a linked/allocated memory pointer, or
-         a direct ghost pointer supplied by the structure runtime. Character-buffer storage is locked while the
-         member is read or written and unlocked before returning.
-      </remarks>
-      <functions>
-         <function name="_gwst_xbsetget_bool_"        c-type="BOOL"       xbase-type="logical" description="Reads or writes a Win32 BOOL value." />
-         <function name="_gwst_xbsetget_bytebool_"    c-type="BYTE"       xbase-type="logical" description="Reads or writes a byte-sized boolean value." />
-         <function name="_gwst_xbsetget_byte_"        c-type="BYTE"       xbase-type="numeric" description="Reads or writes an unsigned 8-bit value." />
-         <function name="_gwst_xbsetget_sint8_"       c-type="INT8"       xbase-type="numeric" description="Reads or writes a signed 8-bit value with sign extension on read." />
-         <function name="_gwst_xbsetget_word_"        c-type="WORD"       xbase-type="numeric" description="Reads or writes an unsigned 16-bit value." />
-         <function name="_gwst_xbsetget_sint16_"      c-type="INT16"      xbase-type="numeric" description="Reads or writes a signed 16-bit value with sign extension on read." />
-         <function name="_gwst_xbsetget_dword_"       c-type="DWORD"      xbase-type="numeric" description="Reads or writes a 32-bit value using Xbase++ LONG representation." />
-         <function name="_gwst_xbsetget_uint32_"      c-type="UINT32"     xbase-type="numeric" description="Reads an unsigned 32-bit value as LONG or double when the high bit is set." />
-         <function name="_gwst_xbsetget_dword64_"     c-type="QWORD"      xbase-type="character" description="Reads or writes an unsigned 64-bit value as an 8-byte string." />
-         <function name="_gwst_xbsetget_nint64_"      c-type="INT64"      xbase-type="character" description="Reads or writes a signed 64-bit value as an 8-byte string." />
-         <function name="_gwst_xbsetget_pclipvar_"    c-type="PXBASEVAR"  xbase-type="any" description="Stores a retained Xbase++ container handle in the structure member." />
-         <function name="_gwst_xbsetget_xppguiwnd_"   c-type="pointer"    xbase-type="numeric" description="Stores a GUI window C++ pointer, resolving Xbase++ objects through ::GetTwWinBaseCppPointer()." />
-         <function name="_gwst_xbsetget_float_"       c-type="FLOAT"      xbase-type="numeric" description="Reads or writes a 32-bit floating point value." />
-         <function name="_gwst_xbsetget_double_"      c-type="DOUBLE"     xbase-type="numeric" description="Reads or writes a 64-bit floating point value." />
-         <function name="_gwst_xbsetget_lpstr_"       c-type="LPSTR"      xbase-type="numeric" description="Alias of the DWORD accessor for pointer-sized string pointers in 32-bit builds." />
-         <function name="_gwst_xbsetget_binstr_"      c-type="BYTE[]"     xbase-type="character" description="Reads or writes a fixed-size binary buffer." />
-         <function name="_gwst_xbsetget_szstr_"       c-type="SZSTR"      xbase-type="character" description="Reads or writes a fixed-size zero-terminated ANSI character buffer." />
-         <function name="_gwst_xbsetget_szwstr_"      c-type="SZWSTR"     xbase-type="character" description="Reads or writes a fixed-size Unicode buffer, converting to or from ANSI at the Xbase++ boundary." />
-         <function name="_gwst_xbsetget_dynsz_"       c-type="DYNSZ"      xbase-type="character" description="Reads or writes an owned dynamic ANSI string pointer allocated with _xgrab() and released with _xfree()." />
-         <function name="_gwst_xbsetget_wordnet_"     c-type="WORD"       xbase-type="numeric" description="Reads or writes a network-byte-order 16-bit value." />
-         <function name="_gwst_xbsetget_dwordnet_"    c-type="DWORD"      xbase-type="numeric" description="Reads or writes a network-byte-order 32-bit value." />
-         <function name="_gwst_xbsetget_xdate_"       c-type="CHAR[8]"    xbase-type="date" description="Reads or writes an 8-byte Xbase++ date representation." />
-         <function name="_gwst_xbsetget_pointer32_"   c-type="POINTER32"  xbase-type="numeric" description="Alias of the DWORD accessor for 32-bit pointers." />
-         <function name="_gwst_xbsetget_handle_"      c-type="HANDLE"     xbase-type="numeric" description="Alias of the DWORD accessor for Win32 handles." />
-      </functions>
-   </function-family>
-</xbdoc>
-*******************************************************************************************************************/
 //-----------------------------------------------------------------------------------------------------------------------
 typedef struct GWSTSG_strcut
 {                  
@@ -119,19 +66,53 @@ static void _gwst_sg_exit_( GWSTSG * psg )
 {
    if( psg->conpt || psg->pt )
    {
-      if( psg->bLock ) ot4xb_conUnlockC( psg->conpt );
-      if(psg->bWrite) _ret(psg->pl);
+      if( psg->bLock )
+      {
+         ot4xb_conUnlockC( psg->conpt );
+      }
+      if( psg->bWrite )
+      {
+         _ret( psg->pl );
+      }
       else
       {
          _conReturn( psg->pl , psg->conVal );
-         _conRelease( psg->conVal );
+         _conReleaseM( psg->conVal , NULLCONTAINER );
       }
       return;
    }
-   else _ret(psg->pl);
+   else 
+   {
+      if( !psg->bWrite )
+      {
+         _conReleaseM( psg->conVal, NULLCONTAINER );
+      }
+      _ret( psg->pl ); 
+   }
 }
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_BOOL_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_bool_
+            | syntax_: `_gwst_xbsetget_bool_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, BOOL member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a Win32 BOOL member (32 bit). A
+      written value that is not zero is stored as 1, zero as 0; reading returns the member as a Logical.
+    | params:
+    - `@xValue` Logical/Numeric - New member value; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other value selects read
+      mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure image or a Numeric
+      memory address. A NIL is replaced with a new Character buffer of nStorageSize bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached through the
+      pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Logical - Member value in read mode (.F. when the member cannot be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_BOOL_(XppParamList pl)
 {                  
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -149,8 +130,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_BOOL_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsi
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_BYTEBOOL_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_bytebool_
+            | syntax_: `_gwst_xbsetget_bytebool_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, byte boolean member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a boolean member
+      stored in a single byte. A written value that is not zero is stored as 1, zero as 0; reading returns
+      the member as a Logical.
+    | params:
+    - `@xValue` Logical/Numeric - New member value; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Logical - Member value in read mode (.F. when the member cannot be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_BYTEBOOL_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -172,8 +177,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_BYTEBOOL_(XppParamList pl) // (1@v,2np,3@pt,4ns,5
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_BYTE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_byte_
+            | syntax_: `_gwst_xbsetget_byte_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, BYTE member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
+      8 bit member. Reading returns 0 to 255.
+    | params:
+    - `@xValue` Numeric - New member value; only the low 8 bits are stored. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value 0 to 255 in read mode (0 when the member cannot be reached); NIL in
+      write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_BYTE_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -193,8 +222,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_BYTE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsi
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_SINT8_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_sint8_
+            | syntax_: `_gwst_xbsetget_sint8_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, signed byte member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 8 bit
+      member. Reading sign extends the byte and returns -128 to 127.
+    | params:
+    - `@xValue` Numeric - New member value; only the low 8 bits are stored. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value -128 to 127 in read mode (0 when the member cannot be reached); NIL in
+      write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_SINT8_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -215,8 +268,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_SINT8_(XppParamList pl) // (1@v,2np,3@pt,4ns,5nps
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_WORD_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_word_
+            | syntax_: `_gwst_xbsetget_word_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, WORD member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
+      16 bit member. Reading returns 0 to 65535.
+    | params:
+    - `@xValue` Numeric - New member value; only the low 16 bits are stored. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value 0 to 65535 in read mode (0 when the member cannot be reached); NIL in
+      write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_WORD_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -235,8 +312,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_WORD_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsi
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_SINT16_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_sint16_
+            | syntax_: `_gwst_xbsetget_sint16_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, signed 16-bit member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 16 bit
+      member. Reading sign extends the value and returns -32768 to 32767.
+    | params:
+    - `@xValue` Numeric - New member value; only the low 16 bits are stored. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value -32768 to 32767 in read mode (0 when the member cannot be reached); NIL
+      in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_SINT16_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -256,8 +357,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_SINT16_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_DWORD_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_dword_
+            | syntax_: `_gwst_xbsetget_dword_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, DWORD member, LONG
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit member.
+      The member is read back with signed semantics, so values above 0x7FFFFFFF appear negative.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member as a signed 32 bit value in read mode (0 when the member cannot be reached);
+      NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_DWORD_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -274,8 +399,33 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORD_(XppParamList pl) // (1@v,2np,3@pt,4ns,5nps
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_UINT32_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_uint32_
+            | syntax_: `_gwst_xbsetget_uint32_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, unsigned 32-bit member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
+      32 bit member. Reading never returns a negative value: above 0x7FFFFFFF the member comes back as a
+      floating point Numeric.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value 0 to 4294967295 in read mode (0 when the member cannot be reached); NIL
+      in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_UINT32_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -294,8 +444,37 @@ XPPRET XPPENTRY _GWST_XBSETGET_UINT32_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_DWORD64_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_dword64_
+            | syntax_: `_gwst_xbsetget_dword64_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, QWORD member, 64-bit
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
+      64 bit member (QWORD). Reading returns the raw member as an 8 byte Character string. Writing clears
+      the member first and then stores xValue according to its type; unlisted types leave the member
+      cleared.
+    | params:
+    - `@xValue` Character/Numeric/Array/Object - New member value; only used in write mode. A Character
+      supplies the first 8 bytes; an integer Numeric sets the low 32 bits; a floating point Numeric is
+      converted to a 64 bit integer; an Array supplies { nLow, nHigh }; an Object supplies its Q member as
+      an 8 byte string.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Character - The member as an 8 byte string in read mode (8 zero bytes when the member cannot
+      be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_DWORD64_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -342,8 +521,36 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORD64_(XppParamList pl) // (1@v,2np,3@pt,4ns,5n
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_NINT64_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_nint64_
+            | syntax_: `_gwst_xbsetget_nint64_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, signed 64-bit member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 64 bit
+      member. Reading returns the raw member as an 8 byte Character string. Writing clears the member first
+      and then stores xValue according to its type; unlisted types leave the member cleared.
+    | params:
+    - `@xValue` Character/Numeric/Array/Object - New member value; only used in write mode. A Character
+      supplies the first 8 bytes; an integer Numeric sets the low 32 bits and sign extends when negative; a
+      floating point Numeric is converted to a 64 bit integer; an Array supplies { nLow, nHigh }; an Object
+      supplies its Q member as an 8 byte string.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Character - The member as an 8 byte string in read mode (8 zero bytes when the member cannot
+      be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_NINT64_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -391,8 +598,32 @@ XPPRET XPPENTRY _GWST_XBSETGET_NINT64_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_PCLIPVAR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_pclipvar_
+            | syntax_: `_gwst_xbsetget_pclipvar_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, Xbase++ value member, pClipVar
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code for members that hold a complete
+      Xbase++ value of any type. Every write releases the previously stored value; assigning NIL just
+      leaves the member empty. Reading returns the stored value.
+    | params:
+    - `@xValue` AnyType - New member value; NIL clears the member. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns AnyType - The stored value in read mode, NIL when the member is empty; NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_PCLIPVAR_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -416,8 +647,34 @@ XPPRET XPPENTRY _GWST_XBSETGET_PCLIPVAR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_XPPGUIWND_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_xppguiwnd_
+            | syntax_: `_gwst_xbsetget_xppguiwnd_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, GUI window member, XbpWindow
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code for members that hold the C++
+      window pointer of an Xbase++ GUI object. A Numeric is stored as is; an Object is asked for the
+      pointer through its GetTwWinBaseCppPointer() method; any other type stores 0. Reading returns the
+      pointer as a Numeric.
+    | params:
+    - `@xValue` Numeric/Object - New member value; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - The stored pointer in read mode (0 when the member cannot be reached); NIL in write
+      mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_XPPGUIWND_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -439,8 +696,31 @@ XPPRET XPPENTRY _GWST_XBSETGET_XPPGUIWND_(XppParamList pl) // (1@v,2np,3@pt,4ns,
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_FLOAT_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_float_
+            | syntax_: `_gwst_xbsetget_float_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, float member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit
+      floating point member.
+    | params:
+    - `@xValue` Numeric - New member value; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value in read mode (0.0 when the member cannot be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_FLOAT_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -457,8 +737,31 @@ XPPRET XPPENTRY _GWST_XBSETGET_FLOAT_(XppParamList pl) // (1@v,2np,3@pt,4ns,5nps
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_DOUBLE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_double_
+            | syntax_: `_gwst_xbsetget_double_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, double member
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a 64 bit
+      floating point member.
+    | params:
+    - `@xValue` Numeric - New member value; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value in read mode (0.0 when the member cannot be reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_DOUBLE_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -475,10 +778,61 @@ XPPRET XPPENTRY _GWST_XBSETGET_DOUBLE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_lpstr_
+            | syntax_: `_gwst_xbsetget_lpstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, LPSTR member, string pointer
+   }}*/
+/*{{|desc: Internal GWST member accessor for LPSTR members. Alias of the DWORD accessor: the member is
+      handled as a 32 bit pointer value, a Numeric address, not the text it points to.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member as a signed 32 bit value in read mode (0 when the member cannot be reached);
+      NIL in write mode. }}*/
 XPPRET XPPENTRY _GWST_XBSETGET_LPSTR_(XppParamList pl){ _GWST_XBSETGET_DWORD_(pl); }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_binstr_
+            | syntax_: `_gwst_xbsetget_binstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
+            | category: structures/internal
+            | _kw_: gwst accessor, binary member, fixed size
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
+      binary member of nMemberSize bytes. Writing copies a Character value into the member and zero fills
+      the rest of it; a non Character value zero fills the whole member. Reading returns the complete
+      member, embedded zero bytes included.
+    | params:
+    - `@xValue` Character - Bytes to store; anything beyond nMemberSize bytes is discarded. Only used
+      in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+    - `nMemberSize` Numeric - Byte size of the member buffer.
+
+    Returns Character - The whole member, nMemberSize bytes, in read mode; NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList pl)
 {
    DWORD dws = (DWORD) _parnl(pl,8);
    GWSTSG sg;        
@@ -504,8 +858,35 @@ XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_szstr_
+            | syntax_: `_gwst_xbsetget_szstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
+            | category: structures/internal
+            | _kw_: gwst accessor, zero terminated string member, char array
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
+      zero terminated ANSI member of nMemberSize bytes. Writing copies a Character value and zero fills the
+      rest of the member; a value of the full member size leaves no zero terminator. Reading returns the
+      member text up to the first zero byte.
+    | params:
+    - `@xValue` Character - Text to store; truncated to nMemberSize bytes. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+    - `nMemberSize` Numeric - Byte size of the member buffer.
+
+    Returns Character - Member text up to the first zero byte in read mode ("" when the member cannot be
+      reached); NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList pl)
 {
    DWORD dws = (DWORD) _parnl(pl,8);
    GWSTSG sg;        
@@ -523,8 +904,35 @@ XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5nps
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_szwstr_
+            | syntax_: `_gwst_xbsetget_szwstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
+            | category: structures/internal
+            | _kw_: gwst accessor, unicode string member, wchar array
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
+      Unicode member of nMemberSize bytes. Writing zero fills the member and converts the ANSI Character
+      value to Unicode into it, truncated to the member capacity minus one character. Reading converts the
+      member back to ANSI.
+    | params:
+    - `@xValue` Character - ANSI text to store; only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+    - `nMemberSize` Numeric - Byte size of the member buffer.
+
+    Returns Character - Member text converted to ANSI in read mode ("" when the member cannot be reached);
+      NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList pl)
 {
    DWORD dws = (DWORD) _parnl(pl,8);
    GWSTSG sg;        
@@ -560,8 +968,34 @@ XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList pl) // (1@v,2np,3@pt,4ns,5np
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList pl) // (1@v,2np,3@pt,4ns) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_dynsz_
+            | syntax_: `_gwst_xbsetget_dynsz_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
+            | category: structures/internal
+            | _kw_: gwst accessor, dynamic string member, allocated string
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code for members that point to a
+      dynamically allocated zero terminated ANSI string owned by the structure. Writing always releases the
+      current string first; a Character value is then duplicated and the member points to the copy, any
+      other value leaves the member cleared. Reading returns the text, or NIL when the member is cleared.
+    | params:
+    - `@xValue` Character - New text; any other type just clears the member. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+    - `nMemberSize` Numeric - Not used by this accessor; the string is sized dynamically.
+
+    Returns Character - Member text in read mode, NIL when the member holds no string; NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -588,8 +1022,33 @@ XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList pl) // (1@v,2np,3@pt,4ns)
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_wordnet_
+            | syntax_: `_gwst_xbsetget_wordnet_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, network byte order, big endian, WORD
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
+      16 bit member kept in network byte order (big endian). Bytes are swapped on write and on read, so
+      the Xbase++ side always sees a plain Numeric.
+    | params:
+    - `@xValue` Numeric - New member value; only the low 16 bits are stored. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member value 0 to 65535 in read mode (0 when the member cannot be reached); NIL in
+      write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -608,8 +1067,33 @@ XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList pl) // (1@v,2np,3@pt,4ns,5n
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_dwordnet_
+            | syntax_: `_gwst_xbsetget_dwordnet_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, network byte order, big endian, DWORD
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit member
+      kept in network byte order (big endian). Bytes are swapped on write and on read; the member is read
+      back with signed semantics, so values above 0x7FFFFFFF appear negative.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member as a signed 32 bit value in read mode (0 when the member cannot be reached);
+      NIL in write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -628,8 +1112,34 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList pl) // (1@v,2np,3@pt,4ns,5
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5npsize) 
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_xdate_
+            | syntax_: `_gwst_xbsetget_xdate_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, date member, YYYYMMDD
+   }}*/
+/*{{|desc: Internal GWST member accessor used by generated property code to read or write a Date member
+      stored as 8 characters in YYYYMMDD form. Writing clears the member and stores a Date as its YYYYMMDD
+      text, or copies a Character value as raw bytes. Reading builds a Date from the member.
+    | params:
+    - `@xValue` Date/Character - New value; a Date is stored as YYYYMMDD text, a Character is copied
+      as raw bytes (first 8). Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Date - Member date in read mode (an empty Date when the member cannot be reached); NIL in
+      write mode. }}*/
+XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList pl)
 {
    GWSTSG sg;
    if( _gwst_sg_init_(&sg,pl) )
@@ -660,9 +1170,59 @@ XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList pl) // (1@v,2np,3@pt,4ns,5nps
    }
    _gwst_sg_exit_(&sg);
 }
+/*{{end-internal-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_pointer32_
+            | syntax_: `_gwst_xbsetget_pointer32_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, pointer member
+   }}*/
+/*{{|desc: Internal GWST member accessor for 32 bit pointer members. Alias of the DWORD accessor: the
+      member is handled as a plain 32 bit value.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member as a signed 32 bit value in read mode (0 when the member cannot be reached);
+      NIL in write mode. }}*/
 XPPRET XPPENTRY _GWST_XBSETGET_POINTER32_(XppParamList pl) { _GWST_XBSETGET_DWORD_(pl); }
+/*{{end-internal-function}}*/
+//-----------------------------------------------------------------------------------------------------------------------
+/*{{begin-internal-function}}*/
+/*{{internal-function_: _gwst_xbsetget_handle_
+            | syntax_: `_gwst_xbsetget_handle_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
+            | category: structures/internal
+            | _kw_: gwst accessor, handle member, HWND, HANDLE
+   }}*/
+/*{{|desc: Internal GWST member accessor for Win32 handle members (HANDLE, HWND and the like). Alias of
+      the DWORD accessor: the member is handled as a plain 32 bit value.
+    | params:
+    - `@xValue` Numeric - New member value, stored as its 32 bit value. Only used in write mode.
+    - `nPCount` Numeric - Caller's PCount(); a value greater than 1 selects write mode, any other
+      value selects read mode.
+    - `@pStorage` Character/Numeric - Structure storage: a Character buffer holding the structure
+      image or a Numeric memory address. A NIL is replaced with a new Character buffer of nStorageSize
+      bytes.
+    - `nShift` Numeric - Byte displacement of the structure start inside the storage.
+    - `nOffset` Numeric - Byte offset of the member inside the structure.
+    - `nStorageSize` Numeric - Byte size of the Character buffer created when pStorage contains NIL.
+    - `pGhost` Numeric - Address of a C pointer variable; when it is not zero the member is reached
+      through the pointer stored there, plus nOffset, and both pStorage and nShift are ignored.
+
+    Returns Numeric - Member as a signed 32 bit value in read mode (0 when the member cannot be reached);
+      NIL in write mode. }}*/
 XPPRET XPPENTRY _GWST_XBSETGET_HANDLE_(XppParamList pl) { _GWST_XBSETGET_DWORD_(pl); }
+/*{{end-internal-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 
 

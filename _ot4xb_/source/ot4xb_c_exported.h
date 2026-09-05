@@ -85,6 +85,8 @@ OT4XB_API void*  __cdecl  _vgrab( UINT n);
 OT4XB_API void   __cdecl   _vfree( void * p);
 OT4XB_API void*  __cdecl  _pgrab( UINT );
 OT4XB_API void   __cdecl   _pfree( void * );
+OT4XB_API void*  __cdecl  _exec_m_grab( UINT );
+OT4XB_API void   __cdecl   _exec_m_free( void * );
 OT4XB_API void*  __cdecl  _xgrab( UINT );
 OT4XB_API void*  __cdecl  _xgrow(void* pp  , UINT n);
 OT4XB_API void*  __cdecl  _xxgrow(void* pp ,UINT nCurrent , UINT nNew);
@@ -95,6 +97,7 @@ OT4XB_API void   __cdecl   _mfree( void * );
 OT4XB_API void * __cdecl _mgrow(void* pp  , UINT n);
 OT4XB_API UINT   __cdecl _mmsize(void* p);
 OT4XB_API void * __cdecl _mcgrab(UINT nItems , UINT nItemSize );
+OT4XB_API LPSTR _conXGrabSz( ContainerHandle con, ULONG* puSize );
 // INTERLOCKED
 OT4XB_API void*  __cdecl ot4xb_interlocked_alloc(void);
 OT4XB_API DWORD  __cdecl ot4xb_interlocked_free(void*);
@@ -388,7 +391,9 @@ OT4XB_API BOOL ot4xb_base32_decode_with_table( LPSTR pTable, LPCSTR szEncoded, i
 // DrTool.cpp
 // ---------------------------------------------------------------------------
 OT4XB_API BOOL bCheckAndMakePath(LPSTR pPath);
+OT4XB_API LPSTR get_current_directory(void);
 OT4XB_API LPSTR get_currrent_directory(void);
+OT4XB_API BOOL  set_current_directory(LPSTR pa );
 OT4XB_API BOOL  set_currrent_directory(LPSTR pa );
 OT4XB_API BOOL bPathIsAbsolute(LPSTR pPath );
 OT4XB_API int  _PathCombineDefaultDir(LPSTR pOut , LPSTR pFileName , LPSTR pDefaultDir = 0 );
@@ -517,10 +522,33 @@ BOOL  OT4XB_API __cdecl ft64_now( FILETIME* pft );
 BOOL OT4XB_API __cdecl ft64_set_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] );
 BOOL OT4XB_API __cdecl ft64_get_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] );
 // -----------------------------------------------------------------------------------------------------------------
-BOOL  OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, int flags = 0, int match_flags = 0);
+int   OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, int flags = 0, int match_flags = 0);
 LPSTR OT4XB_API __cdecl ot4xb_regex_replace(LPSTR pattern, LPSTR input_string, LPSTR replacement, DWORD* pcb_out, int flags, int match_flags);
 
 
+// ----------------------------------------------------------------------------------------------------------------
+// memory.cpp - THDict filter callbacks
+BOOL  OT4XB_API __cdecl _hdict_filter_cmpi( LPSTR key, DWORD cb_key, LPSTR pat, DWORD cb_pat );
+BOOL  OT4XB_API __cdecl _hdict_filter_strstri( LPSTR key, DWORD cb_key, LPSTR pat, DWORD cb_pat );
+BOOL  OT4XB_API __cdecl _hdict_filter_wildcmpi( LPSTR key, DWORD cb_key, LPSTR pat, DWORD cb_pat );
+// ot4xb_socket.cpp
+int    OT4XB_API wsa_select( SOCKET s, int ms, DWORD mask );
+BOOL   OT4XB_API wsa_send_data( SOCKET s, LPSTR p, int cb, int ms );
+int    OT4XB_API wsa_receive_data( SOCKET s, LPBYTE buffer, int buffer_size, int ms );
+SOCKET OT4XB_API get_connected_socket( LPSTR host, int port );
+SOCKET OT4XB_API get_connected_socket2( LPSTR host, int port, LPSTR bind_ip );
+int    OT4XB_API socks5_ssc_connect( SOCKET s, LPSTR host, int port, LPSTR user, LPSTR pwd, DWORD flags, void** keep_response );
+// PeekPoke.cpp
+int    OT4XB_API __cdecl ot4xb_peek_safe( LPBYTE p_from, int cb_to_read, LPBYTE p_out, int cb_out );
+// string.cpp
+LPSTR  OT4XB_API rfc2047decode( LPSTR pIn, UINT* pcbOut, DWORD nOutCodePage, DWORD nBlockSize );
+// WndTool.cpp
+DWORD  OT4XB_API str2ipicture( void* p, ULONG cb );
+DWORD  OT4XB_API ipicture2file( DWORD dwpic, LPSTR fn );
+DWORD  OT4XB_API str2hbmp( void* p, ULONG cb, DWORD nFlags );
+LPVOID OT4XB_API istream2xgrab_mem( IStream* pStream, ULONG* pcb );
+LPSTR  OT4XB_API istream_release_and_get_content_as_base64( IStream* pStream, DWORD base64_flags );
+HFONT  OT4XB_API _create_font_( HDC hDC, LPSTR szFaceName, int iDeciPtHeight, int iDeciPtWidth, int iAttributes, BOOL fLogRes );
 // -----------------------------------------------------------------------------------------------------------------
 
 END_EXTERN_C

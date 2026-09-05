@@ -46,6 +46,30 @@ BEGIN_REGISTER_XBASE_TABLE()
 #include <ot4xb_xbfunclist.hpp>
 END_REGISTER_XBASE_TABLE()
 //----------------------------------------------------------------------------------------------------------------------
+static void init_ot4xb_on_start_process( void )
+{
+   WNDCLASSEX wc;
+   ZeroMemory( &wc, sizeof( WNDCLASSEX ) );
+   wc.cbSize = sizeof( WNDCLASSEX );
+   wc.lpfnWndProc = DefWindowProc;
+   wc.hIcon = LoadIcon( 0, IDI_APPLICATION );
+   wc.hIconSm = LoadIcon( 0, IDI_APPLICATION );
+   wc.hCursor = LoadCursor( 0, IDC_ARROW );
+   wc.hbrBackground = (HBRUSH) ( COLOR_WINDOW + 1 );
+   wc.hInstance = (HINSTANCE) GetModuleHandle( 0 );
+   wc.lpszClassName = "_OT4XB_GENERIC_WINDOW_";
+   RegisterClassEx( &wc );
+
+
+   _API_Memory_InitProc();
+   _API_DrTool_InitProc();  // init before TXbClass as it uses _drtool_get_pcs_()
+   TXbClass::InitHookList();
+   _APIcpp_Tls_InitProc();
+   _API_OSVer_InitProc();
+   // _hook_parclen();
+   ot4xb_iocp_ns::_init_proc_();
+}
+
 BOOL WINAPI DllMain( HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved )
 {
    lpReserved; // UNUSED PARAM
@@ -53,26 +77,11 @@ BOOL WINAPI DllMain( HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved )
    {
        case DLL_PROCESS_ATTACH:
        {
-          WNDCLASSEX wc;
-          ZeroMemory( &wc, sizeof(WNDCLASSEX));
-          wc.cbSize        = sizeof(WNDCLASSEX) ;
-          wc.lpfnWndProc   = DefWindowProc;
-          wc.hIcon         = LoadIcon(0, IDI_APPLICATION);
-          wc.hIconSm       = LoadIcon(0, IDI_APPLICATION);
-          wc.hCursor       = LoadCursor(0, IDC_ARROW);
-          wc.hbrBackground = (HBRUSH)(COLOR_WINDOW +1 );
-          wc.hInstance     = (HINSTANCE) GetModuleHandle(0);
-          wc.lpszClassName = "_OT4XB_GENERIC_WINDOW_";
-          RegisterClassEx(&wc);
-
           hOT4XBInstance = hDll;
-          _API_Memory_InitProc();
-          _API_DrTool_InitProc();  // init before TXbClass as it uses _drtool_get_pcs_()
-          TXbClass::InitHookList();
-          _APIcpp_Tls_InitProc();
-          _API_OSVer_InitProc();
-          // _hook_parclen();
-          ot4xb_iocp_ns::_init_proc_();
+          init_ot4xb_on_start_process();
+
+
+
           if (!_conRegisterDll((ULONG) hDll, &__dllreg__)) return 0;
           break;
        }
@@ -105,6 +114,8 @@ BOOL WINAPI DllMain( HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved )
 XBASE_INIT_PROC(  )
 {
     HMODULE hXppRt1;
+
+    
 
     _API_Memory_InitProcXBase(); // Init Heaps
     hXppRt1 = GetModuleHandle("XPPRT1");
@@ -186,30 +197,18 @@ XBASE_EXIT_PROC()
    return 1;
 }
 // -----------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_push_exit_cb</name>
-      <category>runtime</category>
-      <description>
-         Registers a codeblock to be evaluated when the Xbase++ runtime unloads ot4xb.
-         Registered codeblocks are stored in a synchronized internal stack and executed during XBASE_EXIT_PROC().
-      </description>
-      <syntax>ot4xb_push_exit_cb( bExit ) -> NIL</syntax>
-      <parameters>
-         <parameter>
-            <name>bExit</name>
-            <type>Codeblock</type>
-            <description>Codeblock to evaluate during ot4xb shutdown.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>NIL</type>
-         <description>No explicit value is returned.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb_push_exit_cb
+            | syntax_: `ot4xb_push_exit_cb( bExit )`
+            | category: runtime
+            | _kw_: exit, unload, shutdown, cleanup, atexit, codeblock
+   }}*/
+/*{{|desc: Registers a codeblock to be evaluated when the Xbase++ runtime unloads ot4xb. Registered codeblocks
+      are stored in a synchronized internal stack and executed during XBASE_EXIT_PROC().
+    | params:
+    - `bExit` Codeblock - Codeblock to evaluate during ot4xb shutdown.
+
+    Returns NIL - No explicit value is returned. }}*/
 _XPP_REG_FUN_( OT4XB_PUSH_EXIT_CB )
 {
    BOOL bByRef = FALSE;
@@ -224,60 +223,38 @@ _XPP_REG_FUN_( OT4XB_PUSH_EXIT_CB )
       }
    } __finally {if( conb && (!bByRef) ){_conRelease(conb);}}
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>AppInstance</name>
-      <export>APPINSTANCE</export>
-      <source>ot4xb.cpp:APPINSTANCE</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns the application instance handle.
-      </description>
-      <syntax>AppInstance() -> nHInstance</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            The application instance handle returned by the kernel32.dll function
-            GetModuleHandle(0).
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-XPPRET XPPENTRY APPINSTANCE( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle(0));}
-//-----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: AppInstance
+            | syntax_: `AppInstance()`
+            | category: runtime/windows
+            | export: APPINSTANCE
+            | source: ot4xb.cpp:APPINSTANCE
+            | _kw_: hInstance, application instance, module handle, GetModuleHandle
+   }}*/
+/*{{|desc: Returns the application instance handle.
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>GetCurrentProcessHandle</name>
-      <export>GETCURRENTPROCESSHANDLE</export>
-      <source>ot4xb.cpp:GETCURRENTPROCESSHANDLE</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns a cached real process handle for the current process.
-      </description>
-      <syntax>GetCurrentProcessHandle() -> nHandle</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            A Windows process HANDLE opened with PROCESS_DUP_HANDLE access for
-            the current process, or 0 if OpenProcess() fails.
-         </description>
-      </return>
-      <remarks>
-         The handle is opened on first use, cached for the lifetime of the
-         process, and closed during process cleanup.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+    Returns Numeric - The application instance handle returned by the kernel32.dll function
+      GetModuleHandle(0). }}*/
+XPPRET XPPENTRY APPINSTANCE( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle(0));}
+/*{{end-function}}*/
+//-----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: GetCurrentProcessHandle
+            | syntax_: `GetCurrentProcessHandle()`
+            | category: runtime/windows
+            | export: GETCURRENTPROCESSHANDLE
+            | source: ot4xb.cpp:GETCURRENTPROCESSHANDLE
+            | _kw_: process handle, current process, OpenProcess, DuplicateHandle
+   }}*/
+/*{{|desc: Returns a cached real process handle for the current process.
+
+    Returns Numeric - A Windows process HANDLE opened with PROCESS_DUP_HANDLE access for the current process,
+      or 0 if OpenProcess() fails.
+
+    |note: The handle is opened on first use, cached for the lifetime of the process, and closed during process
+      cleanup. }}*/
 XPPRET XPPENTRY GETCURRENTPROCESSHANDLE( XppParamList pl)
 {
    if( !hCurrentProcess )
@@ -288,257 +265,167 @@ XPPRET XPPENTRY GETCURRENTPROCESSHANDLE( XppParamList pl)
    }
    _retnl(pl,(LONG) hCurrentProcess);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>GetHKernel32</name>
-      <export>GETHKERNEL32</export>
-      <source>ot4xb.cpp:GETHKERNEL32</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns the module handle for kernel32.dll.
-      </description>
-      <syntax>GetHKernel32() -> nHModule</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            The module handle returned by GetModuleHandle("kernel32").
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: GetHKernel32
+            | syntax_: `GetHKernel32()`
+            | category: runtime/windows
+            | export: GETHKERNEL32
+            | source: ot4xb.cpp:GETHKERNEL32
+            | _kw_: kernel32, module handle, hmodule
+   }}*/
+/*{{|desc: Returns the module handle for kernel32.dll.
+
+    Returns Numeric - The module handle returned by GetModuleHandle("kernel32"). }}*/
 XPPRET XPPENTRY GETHKERNEL32( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle("kernel32"));}
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>GetHUser32</name>
-      <export>GETHUSER32</export>
-      <source>ot4xb.cpp:GETHUSER32</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns the module handle for user32.dll.
-      </description>
-      <syntax>GetHUser32() -> nHModule</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            The module handle returned by GetModuleHandle("user32").
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: GetHUser32
+            | syntax_: `GetHUser32()`
+            | category: runtime/windows
+            | export: GETHUSER32
+            | source: ot4xb.cpp:GETHUSER32
+            | _kw_: user32, module handle, hmodule
+   }}*/
+/*{{|desc: Returns the module handle for user32.dll.
+
+    Returns Numeric - The module handle returned by GetModuleHandle("user32"). }}*/
 XPPRET XPPENTRY GETHUSER32( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle("user32"));}
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>GetHOt4xb</name>
-      <export>GETHOT4XB</export>
-      <source>ot4xb.cpp:GETHOT4XB</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns the module handle for this OT4XB runtime library instance.
-      </description>
-      <syntax>GetHOt4xb() -> nHModule</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            The module instance handle captured during process initialization,
-            regardless of the DLL file name used to load this library.
-         </description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: GetHOt4xb
+            | syntax_: `GetHOt4xb()`
+            | category: runtime/windows
+            | export: GETHOT4XB
+            | source: ot4xb.cpp:GETHOT4XB
+            | _kw_: ot4xb.dll, module handle, hmodule, hInstance
+   }}*/
+/*{{|desc: Returns the module handle for this OT4XB runtime library instance.
+
+    Returns Numeric - The module instance handle captured during process initialization, regardless of the DLL
+      file name used to load this library. }}*/
 XPPRET XPPENTRY GETHOT4XB( XppParamList pl){_retnl(pl,(LONG)hOT4XBInstance);}
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>GetHShell32</name>
-      <export>GETHSHELL32</export>
-      <source>ot4xb.cpp:GETHSHELL32</source>
-      <category>runtime/windows</category>
-      <description>
-         Returns the module handle for shell32.dll.
-      </description>
-      <syntax>GetHShell32() -> nHModule</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>Numeric</type>
-         <description>
-            The module handle returned by LoadLibrary("shell32.dll"), normally
-            resolving a library already present in the process.
-         </description>
-      </return>
-      <remarks>
-         The handle is cached after the first call.
-      </remarks>
-      <internal-note>
-         __asm mov eax, hShell32, return the handle in a void function :-)
-      </internal-note>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: GetHShell32
+            | syntax_: `GetHShell32()`
+            | category: runtime/windows
+            | export: GETHSHELL32
+            | source: ot4xb.cpp:GETHSHELL32
+            | _kw_: shell32, module handle, hmodule
+   }}*/
+/*{{|desc: Returns the module handle for shell32.dll.
+
+    Returns Numeric - The module handle returned by LoadLibrary("shell32.dll"), normally resolving a library
+      already present in the process.
+
+    |note: The handle is cached after the first call.
+
+    |internal-note: __asm mov eax, hShell32, return the handle in a void function :-) }}*/
 XPPRET XPPENTRY GETHSHELL32( XppParamList pl)
 {
    if( hShell32  == NULL ) hShell32 = LoadLibrary( "shell32.dll" );
    if( pl ){ _retnl(pl,(LONG) hShell32 ); }
    __asm mov eax , hShell32 ;
 }
+/*{{end-function}}*/
 //-----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb</name>
-      <export>OT4XB</export>
-      <source>ot4xb.cpp:OT4XB</source>
-      <category>runtime</category>
-      <description>
-         Returns the OT4XB library version string.
-      </description>
-      <syntax>ot4xb() -> cVersion</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>String</type>
-         <description>
-            The version string compiled into the OT4XB library, formatted as
-            "mmm.nnn.ppp.bbb" with four zero-padded numeric groups.
-         </description>
-      </return>
-      <remarks>
-         The fixed-width format allows simple string comparison for minimum
-         version checks.
-      </remarks>
-      <example>
-         <code><![CDATA[
-            if ot4xb() < "001.007.000.000"
-               MsgBox( "This program requires OT4XB 1.7 or above." )
-            endif
-         ]]></code>
-      </example>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+/*{{begin-function}}*/
+/*{{function_: ot4xb
+            | syntax_: `ot4xb()`
+            | category: runtime
+            | export: OT4XB
+            | source: ot4xb.cpp:OT4XB
+            | _kw_: version, dll version, build number
+   }}*/
+/*{{|desc: Returns the OT4XB library version string.
+
+    Returns String - The version string compiled into the OT4XB library, formatted as "mmm.nnn.ppp.bbb" with
+      four zero-padded numeric groups.
+
+    |note: The fixed-width format allows simple string comparison for minimum version checks.
+
+    |example: if ot4xb() < "001.007.000.000" MsgBox( "This program requires OT4XB 1.7 or above." ) endif }}*/
 XPPRET XPPENTRY OT4XB( XppParamList pl){_retc(pl, OT4XB_VERSION_STRING );}
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<ot4xb-api>
-   <function>
-      <name>_ot4xb_stdctxcbk_new_</name>
-      <category>runtime/callback</category>
-      <header>ot4xb_c_exported.h</header>
-      <description>
-         Allocates a TStdCtxCbk callback thunk that pushes a DWORD context value and jumps to a target function pointer.
-      </description>
-      <syntax>void* _ot4xb_stdctxcbk_new_( DWORD dwCtx, DWORD dwFp )</syntax>
-      <parameters>
-         <parameter>
-            <name>dwCtx</name>
-            <type>DWORD</type>
-            <description>Context value embedded in the generated thunk.</description>
-         </parameter>
-         <parameter>
-            <name>dwFp</name>
-            <type>DWORD</type>
-            <description>Target function pointer address.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void*</type>
-         <description>Pointer to the allocated callback thunk.</description>
-      </return>
-      <see-also>_ot4xb_stdctxcbk_delete_</see-also>
-   </function>
-</ot4xb-api>
-*******************************************************************************************************************/
+/*{{begin-c-function}}*/
+/*{{c-function_: _ot4xb_stdctxcbk_new_
+            | syntax_: `void* _ot4xb_stdctxcbk_new_( DWORD dwCtx, DWORD dwFp )`
+            | category: runtime/callback
+            | header: ot4xb_c_exported.h
+            | mangled-name: _ot4xb_stdctxcbk_new_
+            | _kw_: thunk, callback, context, WNDPROC, TStdCtxCbk
+   }}*/
+/*{{|desc: Allocates a TStdCtxCbk callback thunk that pushes a DWORD context value and jumps to a target
+      function pointer.
+    | params:
+    - `dwCtx` DWORD - Context value embedded in the generated thunk.
+    - `dwFp` DWORD - Target function pointer address.
+
+    Returns void* - Pointer to the allocated callback thunk.
+
+    |seealso: See also: {{ilink: <c-function _ot4xb_stdctxcbk_delete_> _ot4xb_stdctxcbk_delete_}} }}*/
 OT4XB_API void* _ot4xb_stdctxcbk_new_(DWORD dwCtx , DWORD dwFp){return (void*) new TStdCtxCbk(dwCtx,dwFp);}
-/*******************************************************************************************************************
-<ot4xb-api>
-   <function>
-      <name>_ot4xb_stdctxcbk_delete_</name>
-      <category>runtime/callback</category>
-      <header>ot4xb_c_exported.h</header>
-      <description>
-         Releases a callback thunk previously allocated with _ot4xb_stdctxcbk_new_.
-      </description>
-      <syntax>void _ot4xb_stdctxcbk_delete_( void* p )</syntax>
-      <parameters>
-         <parameter>
-            <name>p</name>
-            <type>void*</type>
-            <description>Pointer returned by _ot4xb_stdctxcbk_new_.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-      <see-also>_ot4xb_stdctxcbk_new_</see-also>
-   </function>
-</ot4xb-api>
-*******************************************************************************************************************/
+/*{{end-c-function}}*/
+//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _ot4xb_stdctxcbk_delete_
+            | syntax_: `void _ot4xb_stdctxcbk_delete_( void* p )`
+            | category: runtime/callback
+            | header: ot4xb_c_exported.h
+            | mangled-name: _ot4xb_stdctxcbk_delete_
+            | _kw_: thunk, callback, TStdCtxCbk, release
+   }}*/
+/*{{|desc: Releases a callback thunk previously allocated with _ot4xb_stdctxcbk_new_.
+    | params:
+    - `p` void* - Pointer returned by _ot4xb_stdctxcbk_new_.
+
+    Returns void
+
+    |seealso: See also: {{ilink: <c-function _ot4xb_stdctxcbk_new_> _ot4xb_stdctxcbk_new_}} }}*/
 OT4XB_API void  _ot4xb_stdctxcbk_delete_(void* p){ delete reinterpret_cast<TStdCtxCbk*>(p);}
-/*******************************************************************************************************************
-<ot4xb-api>
-   <function>
-      <name>_ot4xb_thread_pool_push_</name>
-      <category>runtime/thread</category>
-      <header>ot4xb_c_exported.h</header>
-      <description>
-         Pushes an Xbase++ thread container into the internal synchronized thread pool stack.
-      </description>
-      <syntax>void _ot4xb_thread_pool_push_( ContainerHandle conThread )</syntax>
-      <parameters>
-         <parameter>
-            <name>conThread</name>
-            <type>ContainerHandle</type>
-            <description>Thread object/container to store in the internal pool.</description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>void</type>
-         <description></description>
-      </return>
-      <see-also>_ot4xb_thread_pool_pop_</see-also>
-   </function>
-</ot4xb-api>
-*******************************************************************************************************************/
+/*{{end-c-function}}*/
+//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _ot4xb_thread_pool_push_
+            | syntax_: `void _ot4xb_thread_pool_push_( ContainerHandle conThread )`
+            | category: runtime/thread
+            | header: ot4xb_c_exported.h
+            | mangled-name: _ot4xb_thread_pool_push_
+            | _kw_: thread pool, thread, stack, reuse
+   }}*/
+/*{{|desc: Pushes an Xbase++ thread container into the internal synchronized thread pool stack.
+    | params:
+    - `conThread` ContainerHandle - Thread object/container to store in the internal pool.
+
+    Returns void
+
+    |seealso: See also: {{ilink: <c-function _ot4xb_thread_pool_pop_> _ot4xb_thread_pool_pop_}} }}*/
 OT4XB_API void __cdecl _ot4xb_thread_pool_push_(ContainerHandle conThread){_thread_pool_stack_->Add(conThread);}
-/*******************************************************************************************************************
-<ot4xb-api>
-   <function>
-      <name>_ot4xb_thread_pool_pop_</name>
-      <category>runtime/thread</category>
-      <header>ot4xb_c_exported.h</header>
-      <description>
-         Pops one Xbase++ thread container from the internal synchronized thread pool stack.
-      </description>
-      <syntax>ContainerHandle _ot4xb_thread_pool_pop_( void )</syntax>
-      <parameters>
-      </parameters>
-      <return>
-         <type>ContainerHandle</type>
-         <description>ContainerHandle removed from the internal pool, or 0 if the stack is empty.</description>
-      </return>
-      <see-also>_ot4xb_thread_pool_push_</see-also>
-   </function>
-</ot4xb-api>
-*******************************************************************************************************************/
+/*{{end-c-function}}*/
+//----------------------------------------------------------------------------------------------------------------------
+/*{{begin-c-function}}*/
+/*{{c-function_: _ot4xb_thread_pool_pop_
+            | syntax_: `ContainerHandle _ot4xb_thread_pool_pop_( void )`
+            | category: runtime/thread
+            | header: ot4xb_c_exported.h
+            | mangled-name: _ot4xb_thread_pool_pop_
+            | _kw_: thread pool, thread, stack, reuse
+   }}*/
+/*{{|desc: Pops one Xbase++ thread container from the internal synchronized thread pool stack.
+
+    Returns ContainerHandle - ContainerHandle removed from the internal pool, or 0 if the stack is empty.
+
+    |seealso: See also: {{ilink: <c-function _ot4xb_thread_pool_push_> _ot4xb_thread_pool_push_}} }}*/
 OT4XB_API ContainerHandle __cdecl  _ot4xb_thread_pool_pop_(void){ return _thread_pool_stack_->Pop(); }
+/*{{end-c-function}}*/
+//----------------------------------------------------------------------------------------------------------------------
 END_EXTERN_C
 //----------------------------------------------------------------------------------------------------------------------
 void * T_ot4xb_base::operator new( unsigned int n ){ return _xgrab(n); }
@@ -575,7 +462,7 @@ void T_ot4xb_base_with_vheap::vheap_on_destroy( void )
 // ---------------------------------------------------------------------------------
 void* T_ot4xb_base_with_vheap::alloc_bytes( UINT nBytes )
 {
-	if ( m_vheap_flags == e_use_custom_heap )
+	if ( m_vheap_flags & e_use_custom_heap )
 	{
 		if ( m_vheap )
 		{
@@ -591,7 +478,7 @@ void* T_ot4xb_base_with_vheap::alloc_bytes( UINT nBytes )
 //----------------------------------------------------------------------------------------------------------------------
 void  T_ot4xb_base_with_vheap::free_bytes( void* p )
 {
-	if ( m_vheap_flags == e_use_custom_heap )
+	if ( m_vheap_flags & e_use_custom_heap )
 	{
 		if ( m_vheap )
 		{
@@ -605,6 +492,9 @@ void  T_ot4xb_base_with_vheap::free_bytes( void* p )
 }
 // ---------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------
+void * TStdCtxCbk::operator new( unsigned int n ){ return _exec_m_grab(n); }
+void TStdCtxCbk::operator delete( void * p){ _exec_m_free( p ); }
+// -----------------------------------------------------------------------------------------------------------------
 TStdCtxCbk::TStdCtxCbk(DWORD dwCtx,DWORD dwFp )
 {
    DWORD dw = static_cast<DWORD>( static_cast<LONG>(dwFp) - (reinterpret_cast<LONG>(this)+12) );
@@ -612,14 +502,12 @@ TStdCtxCbk::TStdCtxCbk(DWORD dwCtx,DWORD dwFp )
    m_pw[1] = LOWORD( dwCtx ); m_pw[2] = HIWORD( dwCtx );
    m_pw[3] = 0xE950;
    m_pw[4] = LOWORD( dw ); m_pw[5] = HIWORD( dw );
-   dw = 0; VirtualProtect(reinterpret_cast<void*>(this),12,64,&dw);
-   m_pw[6] = LOWORD( dw ); m_pw[7] = HIWORD( dw );
+   // no VirtualProtect: the executable heap (_exec_m_grab) already hands out RWX pages
 }
 // -----------------------------------------------------------------------------------------------------------------
 TStdCtxCbk::~TStdCtxCbk(void)
 {
-   DWORD dw  = reinterpret_cast<DWORD*>(this)[3];
-   VirtualProtect(reinterpret_cast<void*>(this),12,dw,&dw);
+   // nothing to restore: the memory is released by operator delete -> _exec_m_free
 }
 // -----------------------------------------------------------------------------------------------------------------
 DWORD TStdCtxCbk::GetCtx(void){ return MAKELONG( m_pw[1] , m_pw[2] ); }

@@ -7,12 +7,27 @@
 //----------------------------------------------------------------------------------------------------------------------
 // #pragma pack(push , 4)
 // #pragma pack(pop)
-class OT4XB_API resource_tool_base_t  : public T_ot4xb_base  
+/*{{begin-cpp-class}}*/
+/*{{cpp-class_: resource_tool_base_t
+   | parent: {{ilink: <cpp-class T_ot4xb_base> T_ot4xb_base}}
+   | category: c-api/classes , winapi/resources
+   | desc: Helpers for reading and writing the binary layout of Windows resources (dialog templates, and the
+     like): every Pt* function takes the pointer by reference, reads or writes one field at it, and moves
+     the pointer past the field, so a template is parsed or built by a plain sequence of calls. Strings in
+     resources are UTF-16 and are converted from and to the ANSI code page on the way. Meant to be the
+     | _kw_: resource template, dialog template, read write fields, UTF-16 strings
+     base of a resource-handling class; on its own it only holds static functions. }}*/
+class OT4XB_API resource_tool_base_t  : public T_ot4xb_base
 {
    public:
       // ---------------------------------------------------------------------------------
+      /*{{|method_: `static void PtAlignDWord( LPVOID& ptr )` | desc_: Rounds the pointer up to the next
+         DWORD boundary. }}*/
       static void PtAlignDWord( LPVOID & ptr ){ ptr = _align_dword_ptr_(LPVOID,ptr); };
       // ---------------------------------------------------------------------------------
+      /*{{|method_: `static LPSTR PtReadStr( LPVOID& ptr, DWORD* pcb = 0 )` | desc_: Reads a zero-terminated
+         UTF-16 string, returns it converted to ANSI as a new string in the ot4xb heap (its length in
+         **pcb**; free it with _xfree) and moves the pointer past the terminator. }}*/
       static LPSTR PtReadStr(LPVOID & ptr , DWORD * pcb = 0)
       {
          int cc = _xstrlenW( (LPWSTR) ptr );
@@ -21,6 +36,9 @@ class OT4XB_API resource_tool_base_t  : public T_ot4xb_base
          return pStr;
       };
       // ---------------------------------------------------------------------------------
+      /*{{|method_: `void PtWriteStr( LPVOID& ptr, LPSTR pu, int cb = -1 )` | desc_: Writes **cb** bytes of
+         an ANSI string (-1: up to the terminator) as a zero-terminated UTF-16 string at the pointer and
+         moves it past the terminator. }}*/
       void PtWriteStr(LPVOID & ptr , LPSTR pu , int cb = -1 )
       {
          if( cb == -1 ) cb = lstrlenA(pu);
@@ -30,18 +48,28 @@ class OT4XB_API resource_tool_base_t  : public T_ot4xb_base
          ptr = _mk_ptr_( LPVOID , ptr ,((cc+1) * sizeof(WCHAR)) );                  
       };
       // ---------------------------------------------------------------------------------
+      /*{{|method_: `static DWORD PtReadDWord( LPVOID& ptr )` | desc_: Reads a DWORD and moves the pointer 4
+         bytes; PtReadLong(), PtReadWord() and PtReadshort() do the same for a LONG, a WORD and a short. }}*/
       static DWORD PtReadDWord(LPVOID & ptr ){ DWORD n = _mk_ptr_(LPDWORD,ptr,0)[0]; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(DWORD)); return n; };
       static LONG  PtReadLong( LPVOID & ptr ){ LONG  n = _mk_ptr_(LPLONG,ptr,0)[0];  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(LONG));  return n; };
-      static WORD  PtReadWord( LPVOID & ptr ){ WORD  n = _mk_ptr_(LPWORD ,ptr,0)[0]; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(WORD) ); return n; };      
-      static short PtReadshort(LPVOID & ptr ){ short n = _mk_ptr_(PSHORT ,ptr,0)[0]; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(short)); return n; };            
+      static WORD  PtReadWord( LPVOID & ptr ){ WORD  n = _mk_ptr_(LPWORD ,ptr,0)[0]; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(WORD) ); return n; };
+      static short PtReadshort(LPVOID & ptr ){ short n = _mk_ptr_(PSHORT ,ptr,0)[0]; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(short)); return n; };
       // ---------------------------------------------------------------------------------
-      static void PtWriteDWord(LPVOID & ptr  , DWORD n ){ _mk_ptr_(LPDWORD,ptr,0)[0] = n; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(LPDWORD)); };
-      static void PtWriteLong( LPVOID & ptr  , LONG  n ){ _mk_ptr_(LPLONG,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(LPLONG)); };      
-      static void PtWriteWord( LPVOID & ptr  , WORD  n ){ _mk_ptr_(LPWORD,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(LPWORD)); };      
-      static void PtWriteShort(LPVOID & ptr  , short n ){ _mk_ptr_(PSHORT,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(PSHORT)); };      
-      // ---------------------------------------------------------------------------------      
+      /*{{|method_: `static void PtWriteDWord( LPVOID& ptr, DWORD n )` | desc_: Writes a DWORD and moves the
+         pointer 4 bytes; PtWriteLong(), PtWriteWord() and PtWriteShort() do the same for a LONG, a WORD
+         and a short. }}*/
+      static void PtWriteDWord(LPVOID & ptr  , DWORD n ){ _mk_ptr_(LPDWORD,ptr,0)[0] = n; ptr = _mk_ptr_( LPVOID , ptr ,sizeof(DWORD)); };
+      static void PtWriteLong( LPVOID & ptr  , LONG  n ){ _mk_ptr_(LPLONG,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(LONG)); };
+      static void PtWriteWord( LPVOID & ptr  , WORD  n ){ _mk_ptr_(LPWORD,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(WORD)); };
+      static void PtWriteShort(LPVOID & ptr  , short n ){ _mk_ptr_(PSHORT,ptr,0)[0] = n;  ptr = _mk_ptr_( LPVOID , ptr ,sizeof(short)); };
+      // ---------------------------------------------------------------------------------
+      /*{{|method_: `static LONG GdiGetCharDimensions( HDC hDC, TEXTMETRIC* pTm = 0, LONG* pHeight = 0 )`
+         | desc_: The average character width of the font selected in **hDC**, measured on the 52 letters
+           the way Windows computes dialog base units; the text height comes back in **pHeight** and the
+           metrics in **pTm** when asked for. 0 when the GDI calls fail. }}*/
       static LONG GdiGetCharDimensions(HDC hDC, TEXTMETRIC * pTm = 0 , LONG * pHeight = 0);
 };
+/*{{end-cpp-class}}*/
 //-------------------------------------------------------------------------------------------------------------------------
 /*
 class XPPGUI_API TResourceHeader : public TResTpBase

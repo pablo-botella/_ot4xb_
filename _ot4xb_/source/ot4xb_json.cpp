@@ -211,7 +211,7 @@ namespace json_ns
       bool Uint( unsigned u )
       {
          ContainerHandle con = NULLCONTAINER;
-         if( u & 0x8000000 )
+         if( u & 0x80000000 )
          {
             con = _conPutND( con, (double) u );
          }
@@ -225,7 +225,7 @@ namespace json_ns
       {
          ContainerHandle con = NULLCONTAINER;
 
-         if( i & 0xFFFFFFFF0000000 )
+         if( i & 0xFFFFFFFF80000000 )
          {
             con = _conPutND( con, (double) i );
          }
@@ -238,7 +238,7 @@ namespace json_ns
       bool Uint64( uint64_t u )
       {
          ContainerHandle con = NULLCONTAINER;
-         if( u & 0xFFFFFFFF8000000 )
+         if( u & 0xFFFFFFFF80000000 )
          {
             con = _conPutND( con, (double) u );
          }
@@ -374,6 +374,30 @@ namespace json_ns
       };
    };
    // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   /*{{begin-cpp-function}}*/
+/*{{cpp-function_: json_ns::parse_string_utf8(LPSTR,ContainerHandle,char*)
+            | _tg_: json_ns::parse_string_utf8
+            | syntax_: ```
+                 ContainerHandle parse_string_utf8( LPSTR source_string, ContainerHandle expando_class_object = 0, char * add_property_method_name = 0 )
+              ```
+            | category: json
+            | header: ot4xb_cpp_exported.h
+            | mangled-name: ?parse_string_utf8@json_ns@@YAPAUMomHandleEntry@@PADPAU2@0@Z
+            | _kw_: json parse, UTF-8, RapidJSON, expando, deserialize
+   }}*/
+/*{{|desc: Parses a zero terminated UTF-8 JSON string with the RapidJSON SAX reader and builds the
+      matching Xbase++ value; the C++ engine behind ot4xb_json_parse(). String values are converted from
+      UTF-8 to the current ANSI codepage. Each JSON object becomes an instance of the expando class,
+      filled by calling the add-property method once per member.
+    | params:
+    - `source_string` LPSTR - Zero terminated JSON text encoded in UTF-8.
+    - `expando_class_object` ContainerHandle - Class object instantiated for every JSON object;
+      passed as it is, never released. 0 uses the _ot4xb_expando_ class.
+    - `add_property_method_name` char * - Method called on the object being filled for every member,
+      with the member name and its value as parameters; 0 uses "set_prop".
+
+    Returns ContainerHandle - New container with the parsed value, or NULLCONTAINER when parsing fails;
+      release it with _conRelease. }}*/
    OT4XB_API ContainerHandle parse_string_utf8( LPSTR source_string, ContainerHandle expando_class_object = 0, char* add_property_method_name = 0 )
    {
 
@@ -388,6 +412,30 @@ namespace json_ns
       handler.__cleanup();
       return value;
    }
+/*{{end-cpp-function}}*/
+   // -----------------------------------------------
+   /*{{begin-cpp-function}}*/
+/*{{cpp-function_: json_ns::parse_string_ansi(LPSTR,ContainerHandle,char*)
+            | _tg_: json_ns::parse_string_ansi
+            | syntax_: ```
+                 ContainerHandle parse_string_ansi( LPSTR source_string, ContainerHandle expando_class_object = 0, char * add_property_method_name = 0 )
+              ```
+            | category: json
+            | header: ot4xb_cpp_exported.h
+            | mangled-name: ?parse_string_ansi@json_ns@@YAPAUMomHandleEntry@@PADPAU2@0@Z
+            | _kw_: json parse, ANSI, RapidJSON, expando, deserialize
+   }}*/
+/*{{|desc: Like parse_string_utf8(), but the JSON text is in the current ANSI codepage: it is converted
+      to UTF-8 first and then parsed.
+    | params:
+    - `source_string` LPSTR - Zero terminated JSON text in the current ANSI codepage.
+    - `expando_class_object` ContainerHandle - Class object instantiated for every JSON object;
+      passed as it is, never released. 0 uses the _ot4xb_expando_ class.
+    - `add_property_method_name` char * - Method called on the object being filled for every member,
+      with the member name and its value as parameters; 0 uses "set_prop".
+
+    Returns ContainerHandle - New container with the parsed value, or NULLCONTAINER when parsing fails;
+      release it with _conRelease. }}*/
    OT4XB_API ContainerHandle parse_string_ansi( LPSTR source_string, ContainerHandle expando_class_object = 0, char* add_property_method_name = 0 )
    {
       int utf8_cb = 0;
@@ -396,7 +444,36 @@ namespace json_ns
       _xfree( (void*) uft8_str ); uft8_str = 0;
       return result;
    }
+/*{{end-cpp-function}}*/
+      // -----------------------------------------------
+   /*{{begin-cpp-function}}*/
+/*{{cpp-function_: json_ns::serialize_value(TZString&,ContainerHandle,DWORD,DWORD,DWORD)
+            | _tg_: json_ns::serialize_value
+            | syntax_: ```
+                 void serialize_value( TZString & z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth )
+              ```
+            | category: json
+            | header: ot4xb_cpp_exported.h
+            | mangled-name: ?serialize_value@json_ns@@YAXAAVTZString@@PAUMomHandleEntry@@KKK@Z
+            | _kw_: json serialize, container to json, TZString, escape
+   }}*/
+/*{{|desc: Appends the JSON representation of a container value to a TZString. Character values are
+      written as JSON string literals, dates as "YYYYMMDD" strings, numerics as numbers, logicals as
+      true/false and arrays recursively as [ ... ]; objects serialize themselves through their
+      json_escape_self() method, and any other type produces null.
+    | params:
+    - `z` TZString & - Target dynamic string; the JSON text is appended to it.
+    - `con_value` ContainerHandle - Value to serialize; passed as it is, never released.
+    - `pStack` DWORD - TList pointer passed as DWORD, or 0: the stack of object serials already being
+      serialized, handed to json_escape_self() so cyclic object references are detected. Arrays push
+      nothing on it; a nesting cap of 256 levels guards array cycles instead, deeper arrays produce null.
+    - `nMoreFlags` DWORD - EXPANDO_FORMAT_* flags (ot4xb.ch): PRETTY indents arrays, ND_FIXED and
+      ND_MINIMAL format doubles with "%.Nf" / "%.Ng" where N comes from EXPANDO_FORMAT_ND_PRECISSION(n)
+      (15 when omitted), FLAT_ARRAY_KV_ITEMS prints nested arrays one per line without pretty printing
+      their items, DEBUG wraps every value in a JSON array tagged with its type letter.
+    - `nDepth` DWORD - Current nesting depth, used for indentation and for the array nesting cap.
 
+    Returns void }}*/
    OT4XB_API  void serialize_value( TZString& z, ContainerHandle con_value, DWORD pStack, DWORD nMoreFlags, DWORD nDepth )
    {
       ULONG ulType = 0;
@@ -520,6 +597,13 @@ namespace json_ns
          }
          case XPP_ARRAY:
          {
+            if( nDepth > 256 )
+            {
+               // arrays have no serial to push on pStack: a depth cap is the cycle guard here,
+               // so a self-referencing array emits null instead of overflowing the stack
+               z += "null";
+               return;
+            }
             DWORD nCount = _conGetArrayLen( con_value );
             DWORD n;
             DWORD item_array_flags = nMoreFlags;
@@ -560,7 +644,24 @@ namespace json_ns
          }
       }
    }
+/*{{end-cpp-function}}*/
    // ---------------------------------------------------------------------------------
+   /*{{begin-cpp-function}}*/
+/*{{cpp-function_: json_ns::serialize(XppParamList)                | syntax: `void serialize( XppParamList pl )`
+            | _tg_: json_ns::serialize
+            | category: json
+            | header: ot4xb_cpp_exported.h
+            | mangled-name: ?serialize@json_ns@@YAXPAX@Z
+            | _kw_: json serialize, entry point, expando, XbFpCall
+   }}*/
+/*{{|desc: XppParamList entry point over serialize_value(), wired through XbFpCall() as the engine of
+      _ot4xb_expando_():json_serialize(). Parameter 1 is the value to serialize, 2 the EXPANDO_FORMAT_*
+      flags (EXPANDO_FORMAT_ND_MINIMAL when not numeric), 3 the starting depth and 4 the cycle detection
+      stack pointer (0 for none). The JSON text is returned to the Xbase++ caller as a Character value.
+    | params:
+    - `pl` XppParamList - Opaque handle to the Xbase++ parameter list.
+
+    Returns void }}*/
    OT4XB_API void serialize( XppParamList pl )
    {
       TXppParamList xpp( pl, 4 );
@@ -571,86 +672,35 @@ namespace json_ns
       // pStack = 0;
       xpp[ 0 ]->PutStrLen( z._pt_(), z.len() );
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*{{end-cpp-function}}*/
+            // -----------------------------------------------
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>ot4xb_json_parse</name>
-      <source>ot4xb_json.cpp:OT4XB_JSON_PARSE</source>
-      <category>json</category>
-      <description>
-         Parses a JSON string using the RapidJSON SAX reader and returns the corresponding Xbase++ value.
-         JSON objects are created as _ot4xb_expando_ instances by default.
-      </description>
-      <syntax>ot4xb_json_parse( cJson [, nSourceCodePage] [, oExpandoClass] [, cAddPropertyMethod] ) -> xValue | NIL</syntax>
-      <parameters>
-         <parameter>
-            <name>cJson</name>
-            <type>Character</type>
-            <description>JSON text to parse.</description>
-         </parameter>
-         <parameter>
-            <name>nSourceCodePage</name>
-            <type>Numeric</type>
-            <description>
-               Source encoding selector. 65001 treats cJson as UTF-8. Other values use the current ANSI
-               codepage conversion path before parsing.
-            </description>
-         </parameter>
-         <parameter>
-            <name>oExpandoClass</name>
-            <type>Class object</type>
-            <description>
-               Optional class object used to instantiate JSON objects. Defaults to _ot4xb_expando_().
-            </description>
-         </parameter>
-         <parameter>
-            <name>cAddPropertyMethod</name>
-            <type>Character</type>
-            <description>
-               Method used to add object properties. Defaults to "set_prop"; "set_prop_add" can be used when
-               repeated property names must be collected instead of replaced.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Any | NIL</type>
-         <description>
-            Arrays become Xbase++ arrays, objects become expando instances, strings are converted from UTF-8
-            to ANSI strings, booleans become logical values, null becomes NIL, and numbers become Xbase++
-            numeric values. NIL is returned when parsing fails.
-         </description>
-      </return>
-      <remarks>
-         Serialization is provided by _ot4xb_expando_():json_serialize() and by the ::json_escape_self()
-         method implemented by _ot4xb_expando_ and other OT4XB classes.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-// ot4xb_json_parse_string( 1str ,  2 src_cp = 65001 ,  3expando_class_object = _ot4xb_expando_()  , 4 add_property_method_name = "set_prop" ) -> value or NIL
+/*{{begin-function}}*/
+/*{{function_: ot4xb_json_parse
+            | syntax_: `ot4xb_json_parse( cJson [, nSourceCodePage] [, oExpandoClass] [, cAddPropertyMethod] )`
+            | category: json
+            | source: ot4xb_json.cpp:OT4XB_JSON_PARSE
+            | _kw_: json parse, JSON to Xbase++, deserialize, RapidJSON, expando
+   }}*/
+/*{{|desc: Parses a JSON string using the RapidJSON SAX reader and returns the corresponding Xbase++ value.
+      JSON objects are created as _ot4xb_expando_ instances by default.
+    | params:
+    - `cJson` Character - JSON text to parse.
+    - `nSourceCodePage` Numeric - Source encoding selector. 65001 treats cJson as UTF-8. Other values use
+      the current ANSI codepage conversion path before parsing.
+    - `oExpandoClass` Class object - Optional class object used to instantiate JSON objects. Defaults to
+      _ot4xb_expando_().
+    - `cAddPropertyMethod` Character - Method used to add object properties. Defaults to "set_prop";
+      "set_prop_add" can be used when repeated property names must be collected instead of replaced.
+
+    Returns Any/NIL - Arrays become Xbase++ arrays, objects become expando instances, strings are converted
+      from UTF-8 to ANSI strings, booleans become logical values, null becomes NIL, and numbers become Xbase++
+      numeric values. NIL is returned when parsing fails.
+
+    |note: Serialization is provided by _ot4xb_expando_():json_serialize() and by the ::json_escape_self()
+      method implemented by _ot4xb_expando_ and other OT4XB classes. }}*/
 _XPP_REG_FUN_( OT4XB_JSON_PARSE )
 {
    TXppParamList xpp( pl, 4 );
@@ -677,4 +727,5 @@ _XPP_REG_FUN_( OT4XB_JSON_PARSE )
       result = NULLCONTAINER;
    }
 }
+/*{{end-function}}*/
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------

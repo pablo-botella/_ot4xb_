@@ -63,8 +63,10 @@ namespace vcmp_ns
    BOOL compare_date_values( ContainerHandle v1, ContainerHandle v2 );
    BOOL compare_generic_values( ContainerHandle v1, ContainerHandle v2 );
 
-   void* to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] );
-   void* to_date_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] );
+   // small_buffer is a caller-provided scratch buffer, expected to be at least 256 bytes by contract.
+   // str may point into it on return and shares its lifetime.
+   void* to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE* small_buffer );
+   void* to_date_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE* small_buffer );
 
    inline static double get_precission_epsilon( DWORD flags )
    {
@@ -87,7 +89,7 @@ namespace vcmp_ns
 
 }
 // --------------------------------------------------------------------------------------------------------------------
-void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] )
+void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& len, BYTE* small_buffer )
 {
    DWORD t;
    _conType( con, &t );
@@ -109,7 +111,7 @@ void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& l
                ByteMapTable_RO_RtrimEx( 0, p, cb, p, cb );
             }
             len = cb;
-            if( cb < sizeof( small_buffer ) )
+            if( cb < 256 ) // small_buffer is 256 bytes by contract
             {
                _bcopy( small_buffer, p, cb );
                small_buffer[ cb ] = 0;
@@ -139,13 +141,13 @@ void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& l
          {
             double nd = 0.0;
             _conGetND( con, &nd );
-            len = sprintf_s( str, sizeof( small_buffer ), "%.15g", nd );
+            len = sprintf_s( str, 256, "%.15g", nd );
          }
          else
          {
             LONG nl = 0;
             _conGetNL( con, &nl );
-            len = sprintf_s( str, sizeof( small_buffer ), "%i", nl );
+            len = sprintf_s( str, 256, "%i", nl );
          }
          return buffer;
       }
@@ -155,7 +157,7 @@ void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& l
          len = 0;
          BOOL  b = 0;
          _conGetL( con, &b );
-         len = sprintf_s( str, sizeof( small_buffer ), "%s", ( b ? ".T." : ".F." ) );
+         len = sprintf_s( str, 256, "%s", ( b ? ".T." : ".F." ) );
          return buffer;
       }
       case XPP_DATE:
@@ -176,7 +178,7 @@ void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& l
          {
             str = (LPSTR) small_buffer;
             len = 0;
-            len = sprintf_s( str, sizeof( small_buffer ), "Error converting value" );
+            len = sprintf_s( str, 256, "Error converting value" );
          }
          _conRelease( cc );
          return buffer;
@@ -184,7 +186,7 @@ void* vcmp_ns::to_string( ContainerHandle con, DWORD flags, LPSTR& str, DWORD& l
    }
 }
 // --------------------------------------------------------------------------------------------------------------------
-void* vcmp_ns::to_date_string( ContainerHandle con, DWORD, LPSTR& str, DWORD& len, BYTE small_buffer[ 256 ] )
+void* vcmp_ns::to_date_string( ContainerHandle con, DWORD, LPSTR& str, DWORD& len, BYTE* small_buffer )
 {
    DWORD t;
    _conType( con, &t );
@@ -252,7 +254,7 @@ BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, 
    void* buffer_1 = to_string( v1, flags, s1, cb1, small1 );
    void* buffer_2 = to_string( v2, flags, s2, cb2, small2 );
    BOOL match = FALSE;
-   if( s1 && s2 && cb1 && cb2 && cb1 == cb2 )
+   if( s1 && s2 && cb1 == cb2 ) // empty vs empty must match: only the lengths are compared here
    {
       match = TRUE;
       if( flags & VCMP_CASE_INSENSITIVE )
@@ -285,7 +287,7 @@ BOOL vcmp_ns::compare_character_values( ContainerHandle v1, ContainerHandle v2, 
    if( buffer_2 )
    {
       _xfree( buffer_2 );
-      buffer_1 = 0;
+      buffer_2 = 0;
    }
    return  match;
 }
@@ -456,7 +458,7 @@ BOOL vcmp_ns::compare_simple_values( ContainerHandle v1, DWORD t1, ContainerHand
 
       case VCMP_CAST_TO_LOGICAL:
       {
-         t1 = t2 = XPP_CHARACTER;
+         t1 = t2 = XPP_LOGICAL;
          break;
       }
    }
@@ -522,77 +524,119 @@ BOOL vcmp_ns::compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flag
    return match;
 }
 // --------------------------------------------------------------------------------------------------------------------
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>__vcmp</name>
-      <category>value/compare</category>
-      <description>
-         Compares two Xbase++ values with optional type conversion and comparison flags.
-      </description>
-      <syntax>__vcmp( xValue1, xValue2 [, nFlags | cFlags] ) -> lMatch</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue1</name>
-            <type>Any</type>
-            <description>First value to compare.</description>
-         </parameter>
-         <parameter>
-            <name>xValue2</name>
-            <type>Any</type>
-            <description>Second value to compare.</description>
-         </parameter>
-         <parameter>
-            <name>nFlags | cFlags</name>
-            <type>Numeric | Character</type>
-            <description>
-               Optional flags. Flags can be supplied as text tokens separated by comma, semicolon, or '|', using the
-               same parser as __vtran(). Numeric flags are used as a bit mask. Common text tokens include nocase,
-               niltonull, ltrim, rtrim, alltrim, str, int, double, logical, date, dtos, date8, date10, yesno,
-               truefalse, casttoleft, casttoright, and setprecission0 through setprecission15.
-               Numeric flags are:
-               0x00000001 - case-insensitive character comparison.
-               0x00000002 - compare NIL as an empty value of the other side type.
-               0x00000004 - ignore missing left value; used by map comparison.
-               0x00000008 - ignore missing right value; used by map comparison.
-               0x00000010 - left-trim character values before comparison.
-               0x00000020 - right-trim character values before comparison.
-               0x00000100 - compare maps; reserved, not implemented yet.
-               0x00000200 - stringify changes; used with value transformation helpers.
-               0x00001000 - use the precision byte in 0x000F0000 for double comparison.
-               0x00002000 - use minimal numeric string representation.
-               0x000F0000 - double precision byte, values 0 to 15.
-               0x00100000 - cast the right value to the left value type.
-               0x00200000 - cast the left value to the right value type.
-               0x00300000 - cast both values to string.
-               0x00400000 - cast both values to uppercase string.
-               0x00500000 - cast both values to lowercase string.
-               0x00600000 - cast both values to date string yyyymmdd.
-               0x00700000 - cast both values to date string yyyy-mm-dd.
-               0x00800000 - cast both values to Y/N string.
-               0x00900000 - cast both values to true/false string.
-               0x00A00000 - cast both values to integer.
-               0x00B00000 - cast both values to double.
-               0x00C00000 - cast both values to date.
-               0x00D00000 - cast both values to logical.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Logical</type>
-         <description>.T. when the values match after the requested conversion and comparison rules; otherwise .F.</description>
-      </return>
-      <remarks>
-         Character comparison can be case-insensitive and/or trimmed. Numeric comparison of doubles uses an epsilon
-         controlled by the precision flags; the default precision is 4 decimal places. Date values compare by their
-         date string. When no cast is requested, values of different basic types do not match. Combine numeric flags
-         with bitwise OR, for example with nOr( flag1, ..., flagX ). The numeric flag constants are declared in the
-         ot4xb_vcmp.ch header file.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-_XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags  ) ->  lMatch
+/*{{begin-note-id}}*/
+/*{{note-id: vtran-flags }}*/
+/*{{|:
+   The flags parameter of __vcmp() and __vtran() selects conversion and comparison behavior. It can be given
+   in two forms:
+
+   - as a Numeric bit mask combining the values below, e.g. with nOr(). The ot4xb_vcmp.ch header file declares
+     VCMP_* constants for the trim flags, the precision flags and the casts (plus VCMP_STRINGIFY_CHANGES); the
+     other comparison flags have no constant there, so write them by value.
+   - as a Character list of text tokens separated by comma, semicolon or `|`. Tokens are not case sensitive and
+     every character other than a letter or a digit is skipped, so "all-trim" and "AllTrim" both read as
+     "alltrim". Most tokens are matched by their leading characters, so "lower" and "lowercase" select the same
+     cast. Only the flags below that show a token form can be set from a string; the others are numeric-only
+     (see the last paragraph).
+
+   Trim flags (bits, freely combined with the rest):
+
+   - ltrim / 0x00000010 (VCMP_LTRIM): white space (space, tab, CR, LF) at the beginning of a Character value is
+     ignored when the value is compared by __vcmp() or converted by __vtran().
+   - rtrim / 0x00000020 (VCMP_RTRIM): the same for white space at the end of the value.
+   - alltrim / 0x00000030: shorthand for ltrim + rtrim.
+
+   Comparison flags (bits, numeric-only):
+
+   - 0x00000001 (VCMP_CASE_INSENSITIVE): Character values compare ignoring case; both sides are folded through
+     the ANSI lower-case table. The upper and lower casts below set this flag by themselves.
+   - 0x00000002 (VCMP_NIL_TO_NULL): a NIL on one side of the comparison adopts the basic type of the other
+     side, so both values are still compared under that type's rule instead of failing the type check.
+   - 0x00000004 (VCMP_IGNORE_MISSING_LEFT): for map comparison, an entry missing on the left side is not a
+     difference. Map traversal is not implemented yet, so today nothing marks an entry as missing.
+   - 0x00000008 (VCMP_IGNORE_MISSING_RIGHT): the same for entries missing on the right side.
+   - 0x00000040 / 0x00000080 (VCMP_MISSING_LEFT / VCMP_MISSING_RIGHT): internal marks reserved for the map
+     traversal; they are cleared when the caller provides them.
+   - 0x00000100 (VCMP_COMPARE_MAP): reserved: compare an expando Object or a key/value pair Array as a map.
+     Not implemented yet; with this flag set a comparison involving an Array or an Object returns .F.
+   - 0x00000200 (VCMP_STRINGIFY_CHANGES): reserved; accepted, but nothing reads this flag yet.
+   - 0x00000400 (VCMP_JUST_DUMP_VALUES): internal, reserved; it is cleared when the caller provides it.
+
+   Floating point precision (used by __vcmp() when a floating numeric is compared):
+
+   - 0x00001000 (VCMP_USE_PRECISSION_BYTE): take the number of decimals from the 0x000F0000 field below.
+     Without this flag two floating values match when their difference is below 1e-4 (4 decimals).
+   - 0x000F0000 (VCMP_DOUBLE_PRECISSION_BYTE): 4-bit field holding the number of decimals, 0 to 15: the values
+     match when their difference is below 1e-N, N being this number. The field is read only when 0x00001000 is
+     set; the VCMP_SET_PRECISSION( nFlags, nDecimals ) macro of ot4xb_vcmp.ch fills both at once. The
+     setprecission0 to setprecission15 tokens found in the parser do not work; see the last paragraph.
+   - 0x00002000 (VCMP_USE_MINIMAL_REPRESENTATION): reserved; accepted, but nothing reads this flag yet.
+
+   Cast selector: the 0x00F00000 field (VCMP_CAST_BYTE_MASK) is a single 4-bit selector, not a set of bits:
+   only one cast can be active, and in the token form the last cast token wins. It selects the type rule
+   __vcmp() uses to compare the two values, which otherwise never match when their basic types differ.
+   __vtran() accepts and ignores it. The values:
+
+   - 0x00100000 (VCMP_CAST_TO_LEFT), numeric-only: compare both values under the type of the left value.
+   - 0x00200000 (VCMP_CAST_TO_RIGHT), numeric-only: compare both values under the type of the right value.
+   - c, m, str, string, tostring, char, character, tochar / 0x00300000 (VCMP_CAST_TO_STRING): compare both
+     values as Character, each one converted to text with the __vtran() rules.
+   - upper, toupper / 0x00400000 (VCMP_CAST_TO_STRING_UPPER): as Character, ignoring case (sets 0x00000001).
+   - lower, tolower / 0x00500000 (VCMP_CAST_TO_STRING_LOWER): as Character, ignoring case; in the current code
+     it behaves exactly like the upper cast.
+   - dtos, date8 / 0x00600000 (VCMP_CAST_TO_STRING_DATE8): compare as Character; a Date value turns into its
+     yyyymmdd text, which is what the plain string cast already does, so today both compare alike.
+   - date10 / 0x00700000 (VCMP_CAST_TO_STRING_DATE10): reserved for a 10-character date text; the special
+     rendering is not implemented and today it compares like the plain string cast (dates give yyyymmdd).
+   - yn, yes, yesno / 0x00800000 (VCMP_CAST_TO_STRING_YES_NO): reserved for a yes/no rendering of Logical
+     values; not implemented, today it compares like the plain string cast (a Logical gives ".T." / ".F.").
+   - tf, true, truefalse / 0x00900000 (VCMP_CAST_TO_STRING_TRUE_FALSE): reserved for a true/false rendering;
+     not implemented, today it compares like the plain string cast.
+   - int, integer / 0x00A00000 (VCMP_CAST_TO_INTEGER): compare under the Numeric rule: Numeric and Logical
+     values compare by value (.T. counts as 1, .F. as 0); a value of any other type does not match.
+   - n, num, numeric, tonumeric, double, decimal, float / 0x00B00000 (VCMP_CAST_TO_DOUBLE): today it behaves
+     exactly like the integer cast: each value keeps its own integer or floating nature, and a floating value
+     on either side switches the comparison to the precision epsilon above.
+   - d, date, stod / 0x00C00000 (VCMP_CAST_TO_DATE): compare both values by their 8-character date string.
+   - l, bool, boolean, logical / 0x00D00000 (VCMP_CAST_TO_LOGICAL): compare under the Logical rule, the same
+     value comparison as the integer cast: .T. counts as 1, .F. as 0, Numeric values compare by value.
+
+   A generic string token (c, m, str, string, ...) does not override an already selected string-flavored cast,
+   so "upper,str" keeps the upper cast; the generic numeric tokens (n, num, numeric, tonumeric) keep an
+   already selected integer or double cast the same way.
+
+   Numeric-only flags: the token parser also contains long-form tokens for them (caseinsensitive, nocase,
+   niltonull, ignoremissingleft, ignoremissingright, comparemap, useprecissionbyte, useminimalrepresentation,
+   casttoleft, casttoright, the casttostring... family, casttointeger, casttodouble, casttodate, casttological
+   and setprecission0 to setprecission15), but as the code stands none of them is recognized: the match is done
+   against a misaligned portion of the token, so these tokens never set their flag. A "stringifychanges" token
+   is even captured by the leading "stri" of the string cast instead. Provide all these flags as numeric
+   values.
+}}*/
+/*{{end-note-id}}*/
+// --------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __vcmp
+            | syntax_: `__vcmp( xValue1, xValue2 [, xFlags] )`
+            | category: value/compare
+            | _kw_: compare values, type conversion, comparison flags, equal
+   }}*/
+/*{{|desc: Compares two Xbase++ values with optional type conversion and comparison flags.
+    | params:
+    - `xValue1` Any - First value to compare.
+    - `xValue2` Any - Second value to compare.
+    - `xFlags` Numeric/Character - Optional conversion and comparison flags, given either as a numeric
+      bit mask or as a text token list; see the note below for the complete flag set.
+
+    Returns Logical - .T. when the values match after the requested conversion and comparison rules; otherwise
+      .F.
+
+    |note: Character comparison can be case-insensitive and/or trimmed. Numeric comparison of doubles uses an
+      epsilon controlled by the precision flags; the default precision is 4 decimal places. Date values compare
+      by their date string. When no cast is requested, values of different basic types do not match.
+
+    |seealso: See also: {{ilink: <function __vtran> __vtran}} }}*/
+_XPP_REG_FUN_( __VCMP )
 {
    TXppParamList xpp( pl, 4 );
    ContainerHandle v1 = xpp[ 1 ]->con();
@@ -614,50 +658,33 @@ _XPP_REG_FUN_( __VCMP )	 // __vcmp( 1 v1 , 2 v2 , 3 flags  ) ->  lMatch
    BOOL result = vcmp_ns::compare_values( v1, v2, flags);
    xpp[ 0 ]->PutBool( result );
 }
-
-
-
+/*{{include-note-id: vtran-flags}}*/
+/*{{end-function}}*/
 // -----------------------------------------------------------------------------------------------------------------
 // __vtran( v , flags )
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>__vtran</name>
-      <category>value/transform</category>
-      <description>
-         Transforms a Xbase++ value to its character representation.
-      </description>
-      <syntax>__vtran( xValue [, cFlags | nFlags] ) -> cValue</syntax>
-      <parameters>
-         <parameter>
-            <name>xValue</name>
-            <type>Any</type>
-            <description>Value to transform to text.</description>
-         </parameter>
-         <parameter>
-            <name>cFlags | nFlags</name>
-            <type>Character | Numeric</type>
-            <description>
-               Optional flags. Flags can be supplied as text tokens separated by comma, semicolon, or '|'; this uses
-               the same parser as __vcmp(). The useful text flags for __vtran() are ltrim, rtrim, and alltrim. Numeric
-               flags may also be supplied, using the same VCMP_* constants declared in ot4xb_vcmp.ch.
-            </description>
-         </parameter>
-      </parameters>
-      <return>
-         <type>Character</type>
-         <description>
-            Character representation of xValue, or an empty string when no text can be produced.
-         </description>
-      </return>
-      <remarks>
-         Character values are returned as text, optionally trimmed by the text flags. Numeric values are formatted as
-         text, logical values as .T. or .F., and dates as yyyymmdd. __vtran() shares the flag parser with __vcmp(), but
-         it does not perform the full comparison/cast workflow; it is primarily a value-to-text transformer.
-      </remarks>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
+// --------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: __vtran
+            | syntax_: `__vtran( xValue [, xFlags] )`
+            | category: value/transform
+            | _kw_: value to string, transform, character representation, convert
+   }}*/
+/*{{|desc: Transforms a Xbase++ value to its character representation.
+    | params:
+    - `xValue` Any - Value to transform to text.
+    - `xFlags` Numeric/Character - Optional flags, given either as a numeric bit mask or as a text token
+      list, shared with __vcmp(); see the note below for the complete flag set. __vtran() only honors the
+      trim flags - ltrim (0x00000010), rtrim (0x00000020) and the alltrim token - and accepts and ignores
+      every other flag.
+
+    Returns Character - Character representation of xValue, or an empty string when no text can be produced.
+
+    |note: Character values are returned as text, optionally trimmed by the trim flags. Numeric values are
+      formatted as text, logical values as .T. or .F., and dates as yyyymmdd. __vtran() shares the flag parser
+      with __vcmp(), but it does not perform the comparison/cast workflow; it is primarily a value-to-text
+      transformer.
+
+    |seealso: See also: {{ilink: <function __vcmp> __vcmp}} }}*/
 _XPP_REG_FUN_( __VTRAN )
 {
    TXppParamList xpp( pl, 4 );
@@ -694,6 +721,8 @@ _XPP_REG_FUN_( __VTRAN )
 
 
 }
+/*{{include-note-id: vtran-flags}}*/
+/*{{end-function}}*/
 // --------------------------------------------------------------------------------------------------------------------
 
 DWORD vcmp_ns::__vtran_parse_flags( LPCSTR p )

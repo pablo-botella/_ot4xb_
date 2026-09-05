@@ -245,7 +245,7 @@ BOOL THpStrList::InsertBlank(UINT nPos,UINT nItems)
          {
             LPDWORD pSrc = _mk_ptr_( LPDWORD , m_pItems, ((m_nCount - 1) * 4) );
             LPDWORD pDst = _mk_ptr_( LPDWORD , pSrc, (nItems * 4) );
-            UINT n = ( nItems < m_nCount ? nItems : m_nCount);
+            UINT n = m_nCount - nPos; // shift every item from nPos to the end
             while(n)
             {
                n--;
@@ -253,6 +253,7 @@ BOOL THpStrList::InsertBlank(UINT nPos,UINT nItems)
                pDst = _mk_ptr_( LPDWORD,pDst,-4 );
                pSrc = _mk_ptr_( LPDWORD,pSrc,-4 );
             }
+            m_nCount += nItems;
             while(nItems){ m_pItems[nPos] = 0; nPos++; nItems--; }
             result = TRUE;
          }
@@ -312,14 +313,14 @@ UINT THpStrList::Find(UINT nStart,LPSTR p,UINT cb)
    {
       if( nStart < m_nCount )
       {
-         if( dwcrc )
+         if( dwcrc == 0 ) // empty search: find the first free slot
          {
             for( n = nStart; n < m_nCount; n++ )
             {
                if(!m_pItems[n])
                {
                   result = n;
-                  n = INFINITE;
+                  break;
                }
             }
          }
@@ -336,7 +337,7 @@ UINT THpStrList::Find(UINT nStart,LPSTR p,UINT cb)
                      if( _bcmpwithtable((LPBYTE)p,pp,cb, _lower_ansi_char_table_) == 0 )
                      {
                         result = n;
-                        n = INFINITE;
+                        break;
                      }
                   }
                }

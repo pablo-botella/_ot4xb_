@@ -50,6 +50,9 @@ namespace sql_dump_value
    static void to_bit_value(TXppParamList& xpp, int len);
    static void to_date_value(TXppParamList& xpp, DWORD flags);
    static void to_char_value(TXppParamList& xpp, int len, DWORD flags);
-   static LPSTR  grip_string(TXppParamList& xpp, char alt_buffer[256], DWORD* pcb);
+   // alt_buffer is a caller-provided scratch buffer, expected to be at least 256 bytes by contract.
+   // Numeric/logical values are formatted into it, so the returned pointer may point into alt_buffer
+   // and shares its lifetime.
+   static LPSTR  grip_string(TXppParamList& xpp, LPSTR alt_buffer, DWORD* pcb);
 
 }

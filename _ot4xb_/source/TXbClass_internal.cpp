@@ -6,30 +6,6 @@
 #include <ot4xb_api.h>
 //----------------------------------------------------------------------------------------------------------------------
 
-/*******************************************************************************************************************
-<xbdoc>
-   <function>
-      <name>_xbmtpf1_</name>
-      <category>structures/internal</category>
-      <description>
-         Internal GWST dispatcher used by generated method wrappers to invoke a C method pointer through
-         TXbClsParams. It is exported for the generated Xbase++ code emitted by OT4XB, not as a general application
-         API, and is not intended to be called directly from application code.
-      </description>
-      <status>Internal GWST support API; not intended for direct application calls.</status>
-      <syntax>_xbmtpf1_( @Self, nPtrLo, nPtrHi, @rt, @e, nPCount, nParams, ... ) -> lOk</syntax>
-      <remarks>
-         Application code should not call this function directly. It is documented only so the exported symbol is
-         accounted for and can be classified as internal GWST machinery.
-      </remarks>
-      <return>
-         <type>logical</type>
-         <description>.T. when the dispatched method reports a successful result.</description>
-      </return>
-   </function>
-</xbdoc>
-*******************************************************************************************************************/
-
 static LPSTR _GenCbParamBlock_( ULONG nParams );
 static LPSTR _GenCbParamBlockRef_( ULONG nParams );
 static DWORD _x_name2crc( LPSTR pName);
@@ -1226,15 +1202,31 @@ void TXbClass::GwstAlignNextMember(DWORD dwAlign)
    if(m_bGwstUnion)
    {
       DWORD dwRest = (m_dwGwstOffset + m_dwGwstUnionSize) % dwAlign;
-      if( dwRest ) m_dwGwstUnionSize += dwRest;
+      if( dwRest ) m_dwGwstUnionSize += (dwAlign - dwRest);
    }
    else
    {
       DWORD dwRest = m_dwGwstOffset %  dwAlign;
-      if( dwRest ) m_dwGwstOffset += dwRest;
+      if( dwRest ) m_dwGwstOffset += (dwAlign - dwRest);
    }
 }
 //----------------------------------------------------------------------------------------------------------------------
+/*{{begin-function}}*/
+/*{{function_: _xbmtpf1_
+            | syntax_: `_xbmtpf1_( @Self, nPtrLo, nPtrHi, @rt, @e, nPCount, nParams, ... )`
+            | category: structures/internal
+            | _kw_: GWST dispatcher, method wrapper, internal, C method pointer
+   }}*/
+/*{{|desc: Internal GWST dispatcher used by generated method wrappers to invoke a C method pointer through
+      TXbClsParams. It is exported for the generated Xbase++ code emitted by OT4XB, not as a general application
+      API, and is not intended to be called directly from application code.
+
+    Returns logical - .T. when the dispatched method reports a successful result.
+
+    |note: Application code should not call this function directly. It is documented only so the exported
+      symbol is accounted for and can be classified as internal GWST machinery.
+
+    |status: Internal GWST support API; not intended for direct application calls. }}*/
 XPPRET XPPENTRY _XBMTPF1_( XppParamList pl)
 {
    XbCMethodType pf = ( XbCMethodType )( MAKELONG(_parLong(pl,2),_parLong(pl,3)) );
@@ -1255,6 +1247,7 @@ XPPRET XPPENTRY _XBMTPF1_( XppParamList pl)
    }
    _retl(pl,bRet);
 }
+/*{{end-function}}*/
 //----------------------------------------------------------------------------------------------------------------------
 static LPSTR _GenCbParamBlock_( ULONG nParams )
 {
