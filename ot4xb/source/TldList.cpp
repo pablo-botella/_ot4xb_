@@ -123,13 +123,13 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
       }}*/
       pc->Var( "_m__pControlSt_" );
       // ---------------------------
-      /*{{|method_: - METHOD new()
+      /*{{|method_: - `METHOD new()`
                | return: Self
                | desc_: Creates a TldList instance and initializes its structure storage and list controller.
                  The new list is empty, positioned at BOF and EOF at the same time.
       }}*/
       pc->MethodCB( "init"      , "{|s| s:_gwst_(),s:_tld_init_(),s}");
-      /*{{|method_: - METHOD _tld_init_()
+      /*{{|method_: - `METHOD _tld_init_()`
                | return: NIL
                | desc_: Internal second stage of ::new(): creates the native list controller sized after the
                  GWST structure size of the actual instance. Raises an ot4xb error when the object is
@@ -138,62 +138,62 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
       // internal: TLdList_Init with param 1 == -1 makes a dummy list (no native controller, _m__pt_ and
       // _m__ghpt_ left at 0); not part of the documented interface
       pc->Method( "_tld_init_"  , TLdList_Init       ,0 );
-      /*{{|method_: - METHOD Destroy()
+      /*{{|method_: - `METHOD Destroy()`
                | return: NIL
                | desc_: Destroys the native list: every item is destroyed firing pf_OnDestroyItem, then
                  pf_OnDestroy fires once and the list controller is released. Call it when the list is no
                  longer needed so internal resources are not left alive unnecessarily.
       }}*/
       pc->Method( "Destroy"    , TLdList_Destroy     ,0 );
-      /*{{|method_: - METHOD Bof()
+      /*{{|method_: - `METHOD Bof()`
                | return: lBof
                | desc_: Returns .T. when the list is positioned before the first record. An empty list is at
                  BOF and EOF at the same time.
       }}*/
       pc->Method( "Bof"        , TLdList_Bof         ,0 );
-      /*{{|method_: - METHOD Eof()
+      /*{{|method_: - `METHOD Eof()`
                | return: lEof
                | desc_: Returns .T. when the list is positioned after the last record. An empty list is at
                  BOF and EOF at the same time.
       }}*/
       pc->Method( "Eof"        , TLdList_Eof         ,0 );
-      /*{{|method_: - METHOD RecNo()
+      /*{{|method_: - `METHOD RecNo()`
                | return: nRecord
                | desc_: Returns the current record number, from 1 to ::LastRec(). Returns 0 at BOF and on an
                  empty list, and ::LastRec() + 1 at EOF.
       }}*/
       pc->Method( "RecNo"      , TLdList_RecNo       ,0 );
                                                         
-      /*{{|method_: - METHOD LastRec()
+      /*{{|method_: - `METHOD LastRec()`
                | return: nLastRec
                | desc_: Returns the number of records stored in the list.
       }}*/
       pc->Method( "LastRec"    , TLdList_LastRec     ,0 );
-      /*{{|method_: - METHOD GoEof()
+      /*{{|method_: - `METHOD GoEof()`
                | return: Self
                | desc_: Moves the record pointer after the last record. On an empty list the BOF flag is set
                  too.
       }}*/
       pc->Method( "GoEof"      , TLdList_GoEof       ,0 );
-      /*{{|method_: - METHOD GoBof()
+      /*{{|method_: - `METHOD GoBof()`
                | return: Self
                | desc_: Moves the record pointer before the first record. On an empty list the EOF flag is
                  set too.
       }}*/
       pc->Method( "GoBof"      , TLdList_GoBof       ,0 );
                                                         
-      /*{{|method_: - METHOD GoTop()
+      /*{{|method_: - `METHOD GoTop()`
                | return: lOk
                | desc_: Moves the record pointer to the first record and returns .T., or .F. on an empty
                  list.
       }}*/
       pc->Method( "GoTop"      , TLdList_GoTop       ,0 );
-      /*{{|method_: - METHOD GoBottom()
+      /*{{|method_: - `METHOD GoBottom()`
                | return: lOk
                | desc_: Moves the record pointer to the last record and returns .T., or .F. on an empty list.
       }}*/
       pc->Method( "GoBottom"   , TLdList_GoBottom    ,0 );
-      /*{{|method_: - METHOD Skip( [nRecords := 1] )
+      /*{{|method_: - `METHOD Skip( [nRecords := 1] )`
                | return: lOk
                | desc_: Moves the record pointer nRecords records forward, or backwards when nRecords is
                  negative. Returns .T. when the whole movement was possible; when it runs past an end of
@@ -202,7 +202,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                | note: At BOF the movement starts counting from the first record, at EOF from the last one.
       }}*/
       pc->Method( "Skip"       , TLdList_Skip        ,1 );
-      /*{{|method_: - METHOD Skipper( nRecords )
+      /*{{|method_: - `METHOD Skipper( nRecords )`
                | return: nSkipped
                | desc_: Moves like ::Skip() but never leaves the record range: the movement stops at the
                  first or last record. Returns the signed number of records actually moved, 0 on an empty
@@ -210,7 +210,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                | note: At BOF the movement starts counting from the first record, at EOF from the last one.
       }}*/
       pc->Method( "Skipper"    , TLdList_Skipper     ,1 );
-      /*{{|method_: - METHOD Goto( nRecord )
+      /*{{|method_: - `METHOD Goto( nRecord )`
                | return: lOk
                | desc_: Moves the record pointer to record nRecord and returns .T. When nRecord is lower
                  than 1 the list is left at BOF, when it is greater than ::LastRec() at EOF, and .F. is
@@ -219,27 +219,27 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                  from the current position or from the nearest end of the list.
       }}*/
       pc->Method( "Goto"       , TLdList_Goto        ,1 );
-      /*{{|method_: - METHOD Insert()
+      /*{{|method_: - `METHOD Insert()`
                | return: lOk
                | desc_: Inserts a new zero-filled record at the current position and makes it the current
                  record; the record that occupied the position is shifted after it. At EOF the new record
                  is appended at the end of the list, at BOF it becomes the first record. Returns .T.
       }}*/
       pc->Method( "Insert"     , TLdList_Insert      ,0 );
-      /*{{|method_: - METHOD Append()
+      /*{{|method_: - `METHOD Append()`
                | return: lOk
                | desc_: Adds a new zero-filled record at the end of the list and makes it the current
                  record. Returns .T.
       }}*/
       pc->Method( "Append"     , TLdList_Append      ,0 );
-      /*{{|method_: - METHOD Delete()
+      /*{{|method_: - `METHOD Delete()`
                | return: lOk
                | desc_: Destroys the current record, firing pf_OnDestroyItem, and returns .T. The record
                  pointer moves to the record following the deleted one, or to the new last record when the
                  last one was deleted. Returns .F. at BOF or EOF and on an empty list.
       }}*/
       pc->Method( "Delete"     , TLdList_Delete      ,0 );
-      /*{{|method_: - METHOD CloneItems( [@nRecords] )
+      /*{{|method_: - `METHOD CloneItems( [@nRecords] )`
                | return: pFirstClonedItem
                | desc_: Clones records into a detached chain of new item blocks and returns the address of
                  its first item, or 0 when nothing was cloned. nRecords == -1 clones the whole list from
@@ -251,7 +251,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                | note: The cloned chain belongs to no list until it is attached with ::AttachItems().
       }}*/
       pc->Method( "CloneItems" , TLdList_CloneItems  ,2 );
-      /*{{|method_: - METHOD DetachItems( [@nRecords] )
+      /*{{|method_: - `METHOD DetachItems( [@nRecords] )`
                | return: pFirstDetachedItem
                | desc_: Unlinks records from the list into a detached chain and returns the address of its
                  first item, or 0 when nothing was detached. nRecords == -1 detaches the whole list,
@@ -264,7 +264,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                  the same item layout, or their memory stays allocated.
       }}*/
       pc->Method( "DetachItems", TLdList_DetachItems ,2 );
-      /*{{|method_: - METHOD AttachItems( pFirstItem )
+      /*{{|method_: - `METHOD AttachItems( pFirstItem )`
                | return: nRecords
                | desc_: Attaches a chain of detached item blocks, as returned by ::CloneItems() or
                  ::DetachItems(), and returns the number of records attached; 0 attaches nothing. At BOF
@@ -274,7 +274,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                  attached as it is, without checks.
       }}*/
       pc->Method( "AttachItems", TLdList_AttachItems ,1 );
-      /*{{|method_: - METHOD StealItems( oSrcList , nRecords )
+      /*{{|method_: - `METHOD StealItems( oSrcList , nRecords )`
                | return: nRecords
                | desc_: Detaches records from oSrcList, as ::DetachItems() does starting at the source
                  current record, and attaches them to this list at the current position. nRecords == -1
@@ -282,7 +282,7 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                  different, initialized TldList object or an ot4xb error is raised.
       }}*/
       pc->Method( "StealItems" , TLdList_StealItems  ,2 );
-      /*{{|method_: - METHOD MergeClone( oSrcList )
+      /*{{|method_: - `METHOD MergeClone( oSrcList )`
                | return: nRecords
                | desc_: Clones every record of oSrcList, firing its pf_OnCloneItem for each one, and
                  attaches the clones to this list at the current position, leaving oSrcList untouched.
@@ -290,14 +290,14 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
                  ot4xb error is raised.
       }}*/
       pc->Method( "MergeClone" , TLdList_MergeClone  ,1 );
-      /*{{|method_: - METHOD EatList( oSrcList )
+      /*{{|method_: - `METHOD EatList( oSrcList )`
                | return: nRecords
                | desc_: Steals every record of oSrcList and then destroys the source list by calling its
                  ::Destroy(). Returns the number of records moved. oSrcList must be a different,
                  initialized TldList object or an ot4xb error is raised.
       }}*/
       pc->Method( "EatList"    , TLdList_EatList     ,1 );
-      /*{{|method_: - METHOD SwapRecords( nRecord1 , nRecord2 )
+      /*{{|method_: - `METHOD SwapRecords( nRecord1 , nRecord2 )`
                | return: lOk
                | desc_: Exchanges the positions of two records and returns .T., or .F. when either record
                  number is out of the 1 to ::LastRec() range. The record pointer keeps its record number,
@@ -335,55 +335,55 @@ XPPRET XPPENTRY TLDLIST( XppParamList pl )
       }}*/
       pc->Property( "dwpfCargo"        , TLdList_dwpfCargo, 1 );
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD _lock_()
+      /*{{|method_: - `METHOD _lock_()`
                | return: pMem
                | desc_: GWST storage override: refreshes the instance memory pointer with the address of the
                  current item block, taken from the list controller, and returns that address. When there
                  is no current item the address is 0.
       }}*/
       pc->MethodCB( "_lock_"       , "{|s| s:_m__pt_ := PeekDWord(s:_m__ghpt_) }");
-      /*{{|method_: - METHOD _unlock_()
+      /*{{|method_: - `METHOD _unlock_()`
                | return: 0
                | desc_: GWST storage override: resets the instance memory pointer.
       }}*/
       pc->MethodCB( "_unlock_"     , "{|s| s:_m__pt_ := 0}");
-      /*{{|method_: - METHOD _alloc_()
+      /*{{|method_: - `METHOD _alloc_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_alloc_"      , "{|| NIL}");
-      /*{{|method_: - METHOD _free_()
+      /*{{|method_: - `METHOD _free_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_free_"       , "{|| NIL}");
-      /*{{|method_: - METHOD _link_()
+      /*{{|method_: - `METHOD _link_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_link_"       , "{|| NIL}");
-      /*{{|method_: - METHOD _unlink_()
+      /*{{|method_: - `METHOD _unlink_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_unlink_"     , "{|| NIL}");
-      /*{{|method_: - METHOD _zeromemory_()
+      /*{{|method_: - `METHOD _zeromemory_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_zeromemory_" , "{|| NIL}");
-      /*{{|method_: - METHOD _read_()
+      /*{{|method_: - `METHOD _read_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.
       }}*/
       pc->MethodCB( "_read_"       , "{|| NIL}");
-      /*{{|method_: - METHOD _write_()
+      /*{{|method_: - `METHOD _write_()`
                | return: NIL
                | desc_: Disabled GWST storage operation: the list controller owns the item memory, so the
                  method does nothing.

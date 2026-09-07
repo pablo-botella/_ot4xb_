@@ -1585,96 +1585,96 @@ BEGIN_XBASE_CLASS( THDICTEX )
             | desc_: Internal instance variable holding the wrapped dictionary handle; read it with ::h().
    }}*/
    pc->Var("m_23D7C8B01AF14A059D83551121621B91");
-   /*{{|method_: - METHOD h() | return: pHt | desc_: Returns the raw dictionary handle. }}*/
+   /*{{|method_: - `METHOD h()` | return: pHt | desc_: Returns the raw dictionary handle. }}*/
    pc->MethodCB("h","{|s| s:m_23D7C8B01AF14A059D83551121621B91 }");
-   /*{{|method_: - METHOD handle() | return: pHt | desc_: Returns the raw dictionary handle, like ::h(). }}*/
+   /*{{|method_: - `METHOD handle()` | return: pHt | desc_: Returns the raw dictionary handle, like ::h(). }}*/
    pc->MethodCB("handle","{|s| s:m_23D7C8B01AF14A059D83551121621B91 }");
-   /*{{|method_: - METHOD new( [lSync] )
+   /*{{|method_: - `METHOD new( [lSync] )`
             | return: oDict
             | desc_: Creates the object and its underlying case-insensitive dictionary. lSync is passed to
               _hdict_new(); with .T. the dictionary is synchronized and can be shared between threads.
    }}*/
    pc->MethodCB("init"       ,"{|s,lSync| s:m_23D7C8B01AF14A059D83551121621B91 := _hdict_new(@s:m_23D7C8B01AF14A059D83551121621B91,NIL,NIL,lSync),s}");
-   /*{{|method_: - METHOD destroy()
+   /*{{|method_: - `METHOD destroy()`
             | return: NIL
             | desc_: Destroys the wrapped dictionary and sets the handle member to NIL.
    }}*/
    pc->MethodCB("destroy"    ,"{|s| _HDICT_DESTROY(s:h()) , s:m_23D7C8B01AF14A059D83551121621B91 := NIL}");
-   /*{{|method_: - METHOD SetProp( xKey, xValue )
+   /*{{|method_: - `METHOD SetProp( xKey, xValue )`
             | return: NIL
             | desc_: Stores or replaces a value in the dictionary.
    }}*/
    pc->MethodCB("SetProp"   ,"{|s,k,v| _HDICT_SETPROP(s:h(),k,v) }");
-   /*{{|method_: - METHOD GetProp( xKey )
+   /*{{|method_: - `METHOD GetProp( xKey )`
             | return: `xValue | NIL`
             | desc_: Returns the value stored under a key, or NIL when the key does not exist.
    }}*/
    pc->MethodCB("GetProp"   ,"{|s,k| _HDICT_GETPROP(s:h(),k) }");
-   /*{{|method_: - METHOD SetNoIVar( cKey, xValue )
+   /*{{|method_: - `METHOD SetNoIVar( cKey, xValue )`
             | return: NIL
             | desc_: Virtual instance-variable setter: assigning an undeclared instance variable stores the
               value in the dictionary.
    }}*/
    pc->MethodCB("SetNoIVar"  ,"{|s,k,v| _HDICT_SETPROP(s:h(),k,v) }");
-   /*{{|method_: - METHOD GetNoIVar( cKey )
+   /*{{|method_: - `METHOD GetNoIVar( cKey )`
             | return: `xValue | NIL`
             | desc_: Virtual instance-variable getter: reading an undeclared instance variable returns the
               value stored under that name.
    }}*/
    pc->MethodCB("GetNoIVar"  ,"{|s,k| _HDICT_GETPROP(s:h(),k) }");
-   /*{{|method_: - METHOD IsProp( xKey )
+   /*{{|method_: - `METHOD IsProp( xKey )`
             | return: lExists
             | desc_: Returns .T. when the key exists in the dictionary.
    }}*/
    pc->MethodCB("IsProp"     ,"{|s,k| _HDICT_ISPROP(s:h(),k) }");
-   /*{{|method_: - METHOD RemoveProp( xKey ) | return: lRemoved | desc_: Removes one entry from the dictionary. }}*/
+   /*{{|method_: - `METHOD RemoveProp( xKey )` | return: lRemoved | desc_: Removes one entry from the dictionary. }}*/
    pc->MethodCB("RemoveProp" ,"{|s,k| _HDICT_REMOVEPROP(s:h(),k) }");
-   /*{{|method_: - METHOD RemoveAll() | return: NIL | desc_: Removes all entries from the dictionary. }}*/
+   /*{{|method_: - `METHOD RemoveAll()` | return: NIL | desc_: Removes all entries from the dictionary. }}*/
    pc->MethodCB("RemoveAll"  ,"{|s| _HDICT_REMOVEALL(s:h()) }");
-   /*{{|method_: - METHOD Count()
+   /*{{|method_: - `METHOD Count()`
             | return: nCount
             | desc_: Returns the number of entries stored in the dictionary.
    }}*/
    pc->MethodCB("Count"      ,"{|s| _HDICT_COUNT(s:h()) }");
-   /*{{|method_: - METHOD AddFromArray( aPairs )
+   /*{{|method_: - `METHOD AddFromArray( aPairs )`
             | return: NIL
             | desc_: Adds entries from an array of { xKey, xValue } pairs.
    }}*/
    pc->MethodCB("AddFromArray"     ,"{|s,aData| _HDICT_ADDPROPFROMARRAY(s:h(),aData) }");
-   /*{{|method_: - METHOD AddFromIniString( cIniText, nFlags )
+   /*{{|method_: - `METHOD AddFromIniString( cIniText, nFlags )`
             | return: `aSections | NIL`
             | desc_: Adds entries parsed from INI-style text; see _hdict_addpropfroministring() for the flags
               and the returned value.
    }}*/
    pc->MethodCB("AddFromIniString" ,"{|s,cStr,flags| _HDICT_ADDPROPFROMINISTRING(s:h(),cStr,flags) }");
-   /*{{|method_: - METHOD AddEnvStrings( [pEnvironment] )
+   /*{{|method_: - `METHOD AddEnvStrings( [pEnvironment] )`
             | return: NIL
             | desc_: Adds the environment variables of a Windows environment block or, when pEnvironment is
               omitted, of the current process.
    }}*/
    pc->MethodCB("AddEnvStrings" ,"{|s,pEnv| _HDICT_ADD_ENV_STRINGS(s:h(),pEnv) }");
-   /*{{|method_: - METHOD AddHttpHeaders( cHeaders )
+   /*{{|method_: - `METHOD AddHttpHeaders( cHeaders )`
             | return: NIL
             | desc_: Adds HTTP-style header lines formatted as "Name: value".
    }}*/
    pc->MethodCB("AddHttpHeaders" ,"{|s,cStr| _HDICT_ADD_HTTP_HEADERS(s:h(),cStr,flags) }");
-   /*{{|method_: - METHOD ToArray()
+   /*{{|method_: - `METHOD ToArray()`
             | return: aPairs
             | desc_: Returns the entries as an array of { cKey, xValue } pairs, _hdict_iterate_cb() operation 3.
    }}*/
    pc->MethodCB("ToArray" ,"{|s| _HDICT_ITERATE_CB(s:h(),3) }");
-   /*{{|method_: - METHOD FromZkdw( cZkdw )
+   /*{{|method_: - `METHOD FromZkdw( cZkdw )`
             | return: nItems
             | desc_: Imports the records of a ZKDW buffer and returns the number of entries imported.
    }}*/
    pc->MethodCB("FromZkdw" ,"{|s,zkdw| _HDICT_FROM_ZKDW(s:h(),zkdw) }");
-   /*{{|method_: - METHOD ToZkdw( [nDefault] )
+   /*{{|method_: - `METHOD ToZkdw( [nDefault] )`
             | return: cZkdw
             | desc_: Exports the entries as a ZKDW buffer, _hdict_iterate_cb() operation 5, with nDefault used
               for non-integer entries.
    }}*/
    pc->MethodCB("ToZkdw" ,"{|s,defval| _HDICT_ITERATE_CB(s:h(),5,defval) }");
-   /*{{|method_: - METHOD ResetZkdw( [nDefault] )
+   /*{{|method_: - `METHOD ResetZkdw( [nDefault] )`
             | return: NIL
             | desc_: Resets every entry to an integer Numeric value, nDefault or 0, _hdict_iterate_cb()
               operation 6.

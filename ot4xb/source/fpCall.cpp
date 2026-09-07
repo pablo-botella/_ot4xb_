@@ -1166,12 +1166,12 @@ XPPRET XPPENTRY PT2GP( XppParamList pl )
             | desc: Minimal wrapper over a numeric pointer. It exposes ::_lock_() and ::_unlock_() so the object
               can be passed to OT4XB functions that accept extended pointers. Created from PRG via pt2gp() or
               OT4XB_GENERIC_POINTER():new(pPointer). The class registers itself lazily and is EXPORTED.
-            | ivar _m__pt_: Numeric - Holds the wrapped pointer value (a memory pointer, character buffer or parent
+            | ivar_: - VAR _m__pt_ | type: Numeric | desc_: Holds the wrapped pointer value (a memory pointer, character buffer or parent
               object). Registered EXPORTED so Xbase++ can access it.
-            | method init: init(pPointer) -> Self - Stores pPointer, or 0 when NIL. Called from new().
-            | method _lock_: _lock_(@n) -> pPointer - Returns the stored pointer (sets n to 0); extended-pointer
+            | method_: - `init(pPointer) -> Self` | desc_: Stores pPointer, or 0 when NIL. Called from new().
+            | method_: - `_lock_(@n) -> pPointer` | desc_: Returns the stored pointer (sets n to 0); extended-pointer
               lock hook.
-            | method _unlock_: _unlock_() -> NIL - No-op unlock hook for extended-pointer compatibility.
+            | method_: - `_unlock_() -> NIL` | desc_: No-op unlock hook for extended-pointer compatibility.
             | _kw_: generic pointer, pointer wrapper, _lock_, _unlock_, extended pointer
    }}*/
 XPPRET XPPENTRY OT4XB_GENERIC_POINTER( XppParamList pl )

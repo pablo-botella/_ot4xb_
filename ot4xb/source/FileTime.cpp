@@ -1377,43 +1377,43 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       // ---------------------------
       /*{{|:**More Methods and Properties** }}*/
       
-      /*{{|method_: - METHOD SetTimeStamp( cTimeStamp , [@nShift] , [nFlags] )
+      /*{{|method_: - `METHOD SetTimeStamp( cTimeStamp , [@nShift] , [nFlags] )`
                | return: Self
                | desc_: Stores a timestamp string, a FILETIME64 object or now, by flags.
       }}*/
       pc->MethodCB("SetTimeStamp","{|s,c,sh,flags| ft64_SetTs(s,c,@sh,flags),s}");
-      /*{{|method_: - METHOD _GetTimeStamp_( [cFormat] )
+      /*{{|method_: - `METHOD _GetTimeStamp_( [cFormat] )`
                | return: Character
                | desc_: Formats the value with a printf-style format.
       }}*/
       pc->MethodCB("_GetTimeStamp_","{|s,f| ft64_GetTs(s,f)}");
-      /*{{|method_: - METHOD GetTimeStamp()
+      /*{{|method_: - `METHOD GetTimeStamp()`
                | return: Character
                | desc_: Returns YYYY-MM-DD hh:mm:ss (the default format).
       }}*/
       pc->MethodCB("GetTimeStamp","{|s| ft64_GetTs(s)}");
-      /*{{|method_: - METHOD strf( cFormat , [cLocale] )
+      /*{{|method_: - `METHOD strf( cFormat , [cLocale] )`
                | return: Character
                | desc_: Formats the value with the C runtime strftime() formatter.
       }}*/
       pc->MethodCB("strf","{|s,fmt,locale| FT64_STRF(s,fmt,locale)}");
       
-      /*{{|method_: - METHOD GetTimeStamp19()
+      /*{{|method_: - `METHOD GetTimeStamp19()`
                | return: Character
                | desc_: Returns YYYY-MM-DD hh:mm:ss, 19 characters (same as GetTimeStamp).
       }}*/
       pc->MethodCB("GetTimeStamp19","{|s| ft64_GetTs(s)}");
-      /*{{|method_: - METHOD GetTimeStamp14()
+      /*{{|method_: - `METHOD GetTimeStamp14()`
                | return: Character
                | desc_: Returns YYYYMMDDhhmmss, 14 characters (fixed format).
       }}*/
       pc->MethodCB("GetTimeStamp14","{|s| ft64_GetTs(s,'%04.4hu%02.2hu%02.2hu%02.2hu%02.2hu%02.2hu')}");
-      /*{{|method_: - METHOD GetIso8601()
+      /*{{|method_: - `METHOD GetIso8601()`
                | return: Character
                | desc_: Returns YYYY-MM-DDThh:mm:ss (fixed format).
       }}*/
       pc->MethodCB("GetIso8601","{|s| ft64_GetTs(s,'%04.4hu-%02.2hu-%02.2huT%02.2hu:%02.2hu:%02.2hu')}");
-      /*{{|method_: - METHOD json_escape_self()
+      /*{{|method_: - `METHOD json_escape_self()`
                | return: Character
                | desc_: Returns the value as a double-quoted JSON string, YYYY-MM-DDThh:mm:ss.mmm followed by
                  tls():json_timezone when present.
@@ -1427,76 +1427,76 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("cTimeStamp","{|s,v| iif(PCount() > 1,ft64_SetTs(s,v),ft64_GetTs(s))}");
       
-      /*{{|method_: - METHOD SetDateTime( dDate , [uTime] )
+      /*{{|method_: - `METHOD SetDateTime( dDate , [uTime] )`
                | return: Self
                | desc_: Stores an Xbase++ date/time pair.
       }}*/
       pc->MethodCB("SetDateTime","{|s,d,t| ft64_SetDateTime(s,d,t),s}");
-      /*{{|method_: - METHOD GetDateTime( @dDate , @cTime )
+      /*{{|method_: - `METHOD GetDateTime( @dDate , @cTime )`
                | return: Self
                | desc_: Extracts the date and a time string.
       }}*/
       pc->MethodCB("GetDateTime","{|s,d,t| ft64_GetDateTime(s,@d,@t),s}");
-      /*{{|method_: - METHOD GetDateTimeSec( @dDate , @nSeconds )
+      /*{{|method_: - `METHOD GetDateTimeSec( @dDate , @nSeconds )`
                | return: Self
                | desc_: Extracts the date and the time as seconds after midnight.
       }}*/
       pc->MethodCB("GetDateTimeSec","{|s,d,t| ft64_GetDateTimeSec(s,@d,@t),s}");
-      /*{{|method_: - METHOD Now( [lLocal] )
+      /*{{|method_: - `METHOD Now( [lLocal] )`
                | return: Self
                | desc_: Stores the current time, UTC or local.
       }}*/
       pc->MethodCB("Now","{|s,lLocal| ft64_Now(s,lLocal),s}");
-      /*{{|method_: - METHOD NowL()
+      /*{{|method_: - `METHOD NowL()`
                | return: Self
                | desc_: Stores the current local time (lLocal = .T.).
       }}*/
       pc->MethodCB("NowL","{|s| ft64_Now(s,.T.),s}");
-      /*{{|method_: - METHOD ElapMilliSeconds( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapMilliSeconds( [pft2] , [lLocal] )`
                | return: Numeric
                | desc_: Elapsed milliseconds from this value to pft2, or to now.
       }}*/
       pc->MethodCB("ElapMilliSeconds","{|s,t2,lLocal| ft64_ElapMilliSeconds(s,t2,lLocal)}");
-      /*{{|method_: - METHOD ElapMilliSecondsL( [pft2] )
+      /*{{|method_: - `METHOD ElapMilliSecondsL( [pft2] )`
                | return: Numeric
                | desc_: Elapsed milliseconds against local time when pft2 is omitted (lLocal = .T.).
       }}*/
       pc->MethodCB("ElapMilliSecondsL","{|s,t2| ft64_ElapMilliSeconds(s,t2,.T.)}");
-      /*{{|method_: - METHOD ElapTimeStr( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapTimeStr( [pft2] , [lLocal] )`
                | return: Character
                | desc_: Elapsed time as text (the cElapsed output).
       }}*/
       pc->MethodCB( "ElapTimeStr", "{|s,t2,lLocal,ts| ft64_ElapMilliSeconds(s,t2,lLocal,@ts) , ts}" );
-      /*{{|method_: - METHOD ElapSeconds( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapSeconds( [pft2] , [lLocal] )`
                | return: Numeric
                | desc_: Elapsed seconds from this value to pft2, or to now.
       }}*/
       pc->MethodCB("ElapSeconds","{|s,t2,lLocal| ft64_ElapSeconds(s,t2,lLocal)}");
-      /*{{|method_: - METHOD ElapSecondsL( [pft2] )
+      /*{{|method_: - `METHOD ElapSecondsL( [pft2] )`
                | return: Numeric
                | desc_: Elapsed seconds against local time when pft2 is omitted (lLocal = .T.).
       }}*/
       pc->MethodCB("ElapSecondsL","{|s,t2| ft64_ElapSeconds(s,t2,.T.)}");
-      /*{{|method_: - METHOD Compare( pft2 )
+      /*{{|method_: - `METHOD Compare( pft2 )`
                | return: Numeric
                | desc_: 0 when equal, 1 when this value is earlier than pft2, -1 when it is later.
       }}*/
       pc->MethodCB("Compare","{|s,t2| ft64_Compare(s,t2)}");
       // ---------------------------
-      /*{{|method_: - METHOD SETRFC822( cRfc822 , [@nShift] )
+      /*{{|method_: - `METHOD SETRFC822( cRfc822 , [@nShift] )`
                | return: Self
                | desc_: Stores an RFC822 timestamp string.
       }}*/
       pc->MethodCB("SETRFC822","{|s,c,sh| ft64_SetRfc822Date(s,c,@sh),s}");
       // ---------------------------
-      /*{{|method_: - METHOD Day() | return: Numeric | desc_: Day of month of the stored date (Day() over dDate). }}*/
+      /*{{|method_: - `METHOD Day()` | return: Numeric | desc_: Day of month of the stored date (Day() over dDate). }}*/
       pc->MethodCB("Day","{|s| Day(s:dDate)}");
-      /*{{|method_: - METHOD Month()
+      /*{{|method_: - `METHOD Month()`
                | return: Numeric
                | desc_: Month number of the stored date (Month() over dDate).
       }}*/
       pc->MethodCB("Month","{|s| Month(s:dDate)}");
-      /*{{|method_: - METHOD Year() | return: Numeric | desc_: Year of the stored date (Year() over dDate). }}*/
+      /*{{|method_: - `METHOD Year()` | return: Numeric | desc_: Year of the stored date (Year() over dDate). }}*/
       pc->MethodCB("Year","{|s| Year(s:dDate)}");
       /*{{|property_: - PROPERTY dDate
                | type: Date
@@ -1517,39 +1517,43 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nTime","{|s,v| iif(PCount() > 1, s:SetDateTime(,v) ,s:GetDateTimeSec(,@v)),v}");
       // ---------------------------
-      /*{{|method_: - METHOD AddMilliSeconds( nMilliseconds )
+      /*{{|method_: - `METHOD AddMilliSeconds( nMilliseconds )`
                | return: Self
                | desc_: Adds milliseconds (multiplier 1).
       }}*/
       pc->MethodCB("AddMilliSeconds","{|s,n| ft64_Add(s,n,1),s}");
-      /*{{|method_: - METHOD AddSeconds( nSeconds )
+      /*{{|method_: - `METHOD AddSeconds( nSeconds )`
                | return: Self
                | desc_: Adds seconds (multiplier 1000).
-               | param nSeconds: Numeric - Offset in seconds.
+               | params:
+               - `nSeconds` Numeric - Offset in seconds.
       }}*/
       pc->MethodCB("AddSeconds","{|s,n| ft64_Add(s,n,1000),s}");
-      /*{{|method_: - METHOD AddMinutes( nMinutes )
+      /*{{|method_: - `METHOD AddMinutes( nMinutes )`
                | return: Self
                | desc_: Adds minutes (multiplier 60000).
-               | param nMinutes: Numeric - Offset in minutes.
+               | params:
+               - `nMinutes` Numeric - Offset in minutes.
       }}*/
       pc->MethodCB("AddMinutes","{|s,n| ft64_Add(s,n,60000),s}");
-      /*{{|method_: - METHOD AddHours( nHours )
+      /*{{|method_: - `METHOD AddHours( nHours )`
                | return: Self
                | desc_: Adds hours (multiplier 3600000).
-               | param nHours: Numeric - Offset in hours.
+               | params:
+               - `nHours` Numeric - Offset in hours.
       }}*/
       pc->MethodCB("AddHours","{|s,n| ft64_Add(s,n,3600000),s}");
-      /*{{|method_: - METHOD AddDays( nDays )
+      /*{{|method_: - `METHOD AddDays( nDays )`
                | return: Self
                | desc_: Adds days (multiplier 86400000).
-               | param nDays: Numeric - Offset in days.
+               | params:
+               - `nDays` Numeric - Offset in days.
       }}*/
       pc->MethodCB("AddDays","{|s,n| ft64_Add(s,n,86400000),s}");
       // ---------------------------
-      /*{{|method_: - METHOD AddMonths( nMonths ) | return: Self | desc_: Adds months. }}*/
+      /*{{|method_: - `METHOD AddMonths( nMonths )` | return: Self | desc_: Adds months. }}*/
       pc->MethodCB("AddMonths","{|s,n| Ft64_Add_M(s,n),s}");
-      /*{{|method_: - METHOD AddYears( nYears ) | return: Self | desc_: Adds years. }}*/
+      /*{{|method_: - `METHOD AddYears( nYears )` | return: Self | desc_: Adds years. }}*/
       pc->MethodCB("AddYears","{|s,n| Ft64_Add_Y(s,n),s}");
       // ---------------------------
       /*{{|property_: - PROPERTY cHexTs
@@ -1558,25 +1562,26 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
                  (SetHexTs).
       }}*/
       pc->PropertyCB("cHexTs","{|s,v| iif(PCount() > 1, s:SetHexTs(v) ,s:GetHexTs())}");
-      /*{{|method_: - METHOD SetHexTs( cHex )
+      /*{{|method_: - `METHOD SetHexTs( cHex )`
                | return: NIL
                | desc_: Stores a 64-bit FILETIME value given as a hexadecimal string (nHex2Qw + PokeStr); non-character
                  values are ignored.
-               | param cHex: Character - Hexadecimal representation of the 64-bit value.
+               | params:
+               - `cHex` Character - Hexadecimal representation of the 64-bit value.
       }}*/
       pc->MethodCB("SetHexTs" , "{|s,v| iif( ValType(v) =='C',PokeStr(s,0,nHex2Qw(v)),),NIL }");
-      /*{{|method_: - METHOD GetHexTs()
+      /*{{|method_: - `METHOD GetHexTs()`
                | return: Character
                | desc_: Returns the 64-bit FILETIME value as a hexadecimal string (cQw2Hex over qft).
       }}*/
       pc->MethodCB("GetHexTs" , "{|s,v| cQw2Hex( s:qft ) }");
       // ---------------------------
-      /*{{|method_: - METHOD SetDosDateTime( nDosDateTime )
+      /*{{|method_: - `METHOD SetDosDateTime( nDosDateTime )`
                | return: Self
                | desc_: Stores a DOS FAT date/time DWORD.
       }}*/
       pc->MethodCB("SetDosDateTime","{|s,v| Ft64_From_DosDateTime(s,v),s}");
-      /*{{|method_: - METHOD GetDosDateTime()
+      /*{{|method_: - `METHOD GetDosDateTime()`
                | return: Numeric
                | desc_: Returns the value as a DOS FAT date/time DWORD.
       }}*/
@@ -1588,12 +1593,12 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
        }}*/
        pc->PropertyCB("nDosDateTime","{|s,v| iif(PCount() > 1,Ft64_From_DosDateTime(s,v),Ft64_To_DosDateTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD SetUnixTime( nUnixTime )
+      /*{{|method_: - `METHOD SetUnixTime( nUnixTime )`
                | return: Self
                | desc_: Stores a 32-bit Unix timestamp.
       }}*/
       pc->MethodCB("SetUnixTime","{|s,v| Ft64_From_UnixTime(s,v),s}");
-      /*{{|method_: - METHOD GetUnixTime()
+      /*{{|method_: - `METHOD GetUnixTime()`
                | return: Numeric
                | desc_: Returns the value as a 32-bit Unix timestamp in seconds.
       }}*/
@@ -1605,12 +1610,12 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nUnixTime","{|s,v| iif(PCount() > 1,Ft64_From_UnixTime(s,v),Ft64_To_UnixTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD SetExcelTime( nExcelTime )
+      /*{{|method_: - `METHOD SetExcelTime( nExcelTime )`
                | return: Self
                | desc_: Stores an Excel serial date/time number.
       }}*/
       pc->MethodCB("SetExcelTime","{|s,v| Ft64_From_ExcelTime(s,v),s}");
-      /*{{|method_: - METHOD GetExcelTime()
+      /*{{|method_: - `METHOD GetExcelTime()`
                | return: Numeric
                | desc_: Returns the value as an Excel serial date/time number.
       }}*/
@@ -1622,24 +1627,24 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nExcelTime","{|s,v| iif(PCount() > 1,Ft64_From_ExcelTime(s,v),Ft64_To_ExcelTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD ToHttp()
+      /*{{|method_: - `METHOD ToHttp()`
                | return: Character
                | desc_: Returns the value as an HTTP date string.
       }}*/
       pc->MethodCB("ToHttp","{|s| Ft64_ToHttp(s)}");
       // ---------------------------      
-      /*{{|method_: - METHOD ToLocalTime()
+      /*{{|method_: - `METHOD ToLocalTime()`
                | return: NIL
                | desc_: Converts the stored UTC value to local time in place.
       }}*/
       pc->MethodCB("ToLocalTime","{|s| FT64_TOLOCALTIME(s)}");
       // ---------------------------
-      /*{{|method_: - METHOD SetCkf32Ts( cCkf32Ts )
+      /*{{|method_: - `METHOD SetCkf32Ts( cCkf32Ts )`
                | return: Self
                | desc_: Stores a CKF32 timestamp string.
       }}*/
       pc->MethodCB( "SetCkf32Ts", "{|s,v| Ft64_Set_Ckf32Ts(s,v),s}" );
-      /*{{|method_: - METHOD GetCkf32Ts()
+      /*{{|method_: - `METHOD GetCkf32Ts()`
                | return: Character
                | desc_: Returns the value encoded as a CKF32 timestamp string.
       }}*/

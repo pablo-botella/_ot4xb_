@@ -418,36 +418,36 @@ static void create_class_rgx(XppParamList pl)
       }}*/
       pc->Var("m_hrgx");
       // -----
-      /*{{|method_: - METHOD init( [cPattern], [cFlags] )
+      /*{{|method_: - `METHOD init( [cPattern], [cFlags] )`
                | return: Self
                | desc_: Creates or reuses the internal ActiveX RegExp engine; invoked through _rgx():New( [cPattern],
                  [cFlags] ) -> oRgx.
       }}*/
       pc->MethodCB("init", "{|s,pat,flg| s:m_hrgx := _rgx_new(__vdef(s:m_hrgx,0),pat,flg) , s }");
-      /*{{|method_: - METHOD SetPattern( cPattern ) | return: NIL | desc_: Sets the regular expression pattern. }}*/
+      /*{{|method_: - `METHOD SetPattern( cPattern )` | return: NIL | desc_: Sets the regular expression pattern. }}*/
       pc->MethodCB("SetPattern", "{|s,pat| _rgx_set_pattern(s:m_hrgx,pat)}");
-      /*{{|method_: - METHOD SetFlags( cFlags )
+      /*{{|method_: - `METHOD SetFlags( cFlags )`
                | return: NIL
                | desc_: Sets the "g", "i" and "m" ActiveX RegExp flags. All three flags are reset before the letters
                  present in cFlags are applied.
       }}*/
       pc->MethodCB("SetFlags", "{|s,fl| _rgx_set_flags(s:m_hrgx,fl)}");
-      /*{{|method_: - METHOD Destroy()
+      /*{{|method_: - `METHOD Destroy()`
                | return: 0
                | desc_: Releases the internal ActiveX RegExp engine and clears the handle.
       }}*/
       pc->MethodCB("Destroy", "{|s| s:m_hrgx:=_rgx_destroy(s:m_hrgx)}");
-      /*{{|method_: - METHOD Test( cString )
+      /*{{|method_: - `METHOD Test( cString )`
                | return: lMatch / NIL
                | desc_: Tests cString with the current pattern: .T. on match, .F. on no match, NIL on engine errors.
       }}*/
       pc->MethodCB("Test", "{|s,cc| _rgx_test(s:m_hrgx,cc)}");
-      /*{{|method_: - METHOD Replace( cString, cReplacement )
+      /*{{|method_: - `METHOD Replace( cString, cReplacement )`
                | return: cResult / NIL
                | desc_: Replaces text with the current pattern.
       }}*/
       pc->MethodCB("Replace", "{|s,cc,cRep| _rgx_replace(s:m_hrgx,cc,cRep)}");
-      /*{{|method_: - METHOD Exec( cString, [lSubMatches] )
+      /*{{|method_: - `METHOD Exec( cString, [lSubMatches] )`
                | return: aMatches / NIL
                | desc_: Returns match positions and optionally captured submatches, as rows { nPos, nLen } or
                  { nPos, nLen, aSubMatches }.

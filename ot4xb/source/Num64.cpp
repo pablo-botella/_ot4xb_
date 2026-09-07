@@ -407,7 +407,7 @@ XPPRET XPPENTRY wapist_LARGE_INTEGER( XppParamList pl )
 
 
       // ---------------------------
-      /*{{|method_: - METHOD new( [oParent] [, nShift] )
+      /*{{|method_: - `METHOD new( [oParent] [, nShift] )`
                | return: Self
                | desc_: Initializes the object through the GWST ::_gwst_() initializer, so the structure can stand
                  alone or map a parent structure's storage at byte offset nShift, and starts ::nError at 0.
@@ -446,25 +446,25 @@ XPPRET XPPENTRY wapist_LARGE_INTEGER( XppParamList pl )
       }}*/
       pc->ROPropertyCB( "lError"    , "{|s|  lAnd( s:nError )  }" );
       // pc->Method("Plus" ,LARGE_INTEGER_Plus      ,2,",@s:q");// ::Plus( val   ,lStore = .F.)               -> cInt64Result
-      /*{{|method_: - METHOD Plus( vValue [, lStore] )
+      /*{{|method_: - `METHOD Plus( vValue [, lStore] )`
                | return: cInt64
                | desc_: Adds vValue to ::q with signed 64-bit arithmetic and returns the result as an 8-byte
                  binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Plus"  , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::large_integer_ns::Plus );
-      /*{{|method_: - METHOD Minus( vValue [, lStore] )
+      /*{{|method_: - `METHOD Minus( vValue [, lStore] )`
                | return: cInt64
                | desc_: Subtracts vValue from ::q with signed 64-bit arithmetic and returns the result as an
                  8-byte binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Minus" , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::large_integer_ns::Minus );
-      /*{{|method_: - METHOD Mul( vValue [, lStore] )
+      /*{{|method_: - `METHOD Mul( vValue [, lStore] )`
                | return: cInt64
                | desc_: Multiplies ::q by vValue with signed 64-bit arithmetic and returns the result as an
                  8-byte binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Mul"   , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::large_integer_ns::Mult );
-      /*{{|method_: - METHOD Div( vValue [, lStore] [, @cMod] )
+      /*{{|method_: - `METHOD Div( vValue [, lStore] [, @cMod] )`
                | return: cInt64
                | desc_: Divides ::q by vValue with signed 64-bit arithmetic and returns the quotient as an 8-byte
                  binary string; @cMod receives the remainder. On a zero divisor ::nError becomes 0xC0000094, on
@@ -472,7 +472,7 @@ XPPRET XPPENTRY wapist_LARGE_INTEGER( XppParamList pl )
                  ::nError is set to 0. With lStore .T. the quotient also replaces ::q.
       }}*/
       pc->Method_cbbs( "Div"   , "{|s,v,lStore,mod| XbFpCall(%i,@s:q ,@s:nError,v,lStore,@mod)}", ::large_integer_ns::Div);
-      /*{{|method_: - METHOD Mod( vValue [, lStore] [, @cDiv] )
+      /*{{|method_: - `METHOD Mod( vValue [, lStore] [, @cDiv] )`
                | return: cInt64
                | desc_: Divides ::q by vValue with signed 64-bit arithmetic and returns the remainder as an
                  8-byte binary string; @cDiv receives the quotient. On a zero divisor ::nError becomes
@@ -480,7 +480,7 @@ XPPRET XPPENTRY wapist_LARGE_INTEGER( XppParamList pl )
                  are 0; otherwise ::nError is set to 0. With lStore .T. the remainder also replaces ::q.
       }}*/
       pc->Method_cbbs( "Mod"   , "{|s,v,lStore,divresult| XbFpCall(%i,@s:q ,@s:nError,v,lStore,@divresult)}", ::large_integer_ns::Mod );
-      /*{{|method_: - METHOD Str() | return: Character | desc_: Returns ::q as signed decimal text. }}*/
+      /*{{|method_: - `METHOD Str()` | return: Character | desc_: Returns ::q as signed decimal text. }}*/
       /*{{|:**END STRUCTURE** }}*/
       pc->MethodCB("Str" ,  "{|s| cPrintf('%I64i',s:l,s:h)}");
       // pc->Method("SetDateTime"  ,LARGE_INTEGER_DateTime ,3,",@s:q");// ::SetDateTime(d,h,m,s,m divisor,lStore = .F.[, @DivResult] )-> cInt64Result
@@ -627,7 +627,7 @@ XPPRET XPPENTRY wapist_ULARGE_INTEGER( XppParamList pl )
                                       "( nd := ULongLong2Double(s:q,@l), iif(l,,s:nError := 0xC000008F,0) ,nd)"
                                  ")}");
       // ---------------------------
-      /*{{|method_: - METHOD new( [oParent] [, nShift] )
+      /*{{|method_: - `METHOD new( [oParent] [, nShift] )`
                | return: Self
                | desc_: Initializes the object through the GWST ::_gwst_() initializer, so the structure can stand
                  alone or map a parent structure's storage at byte offset nShift, and starts ::nError at 0.
@@ -659,25 +659,25 @@ XPPRET XPPENTRY wapist_ULARGE_INTEGER( XppParamList pl )
                | desc_: Read-only. .T. when ::nError holds any nonzero code.
       }}*/
       pc->ROPropertyCB( "lError"    , "{|s|  lAnd( s:nError )  }" );
-      /*{{|method_: - METHOD Plus( vValue [, lStore] )
+      /*{{|method_: - `METHOD Plus( vValue [, lStore] )`
                | return: cUInt64
                | desc_: Adds vValue to ::q with unsigned 64-bit arithmetic and returns the result as an 8-byte
                  binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Plus"  , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::ularge_integer_ns::Plus );
-      /*{{|method_: - METHOD Minus( vValue [, lStore] )
+      /*{{|method_: - `METHOD Minus( vValue [, lStore] )`
                | return: cUInt64
                | desc_: Subtracts vValue from ::q with unsigned 64-bit arithmetic and returns the result as an
                  8-byte binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Minus" , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::ularge_integer_ns::Minus );
-      /*{{|method_: - METHOD Mul( vValue [, lStore] )
+      /*{{|method_: - `METHOD Mul( vValue [, lStore] )`
                | return: cUInt64
                | desc_: Multiplies ::q by vValue with unsigned 64-bit arithmetic and returns the result as an
                  8-byte binary string; ::nError is set to 0. With lStore .T. the result also replaces ::q.
       }}*/
       pc->Method_cbbs( "Mul"   , "{|s,v,lStore| XbFpCall(%i,@s:q ,@s:nError,v,lStore)}", ::ularge_integer_ns::Mult );
-      /*{{|method_: - METHOD Div( vValue [, lStore] [, @cMod] )
+      /*{{|method_: - `METHOD Div( vValue [, lStore] [, @cMod] )`
                | return: cUInt64
                | desc_: Divides ::q by vValue with unsigned 64-bit arithmetic and returns the quotient as an
                  8-byte binary string; @cMod receives the remainder. On a zero divisor ::nError becomes
@@ -685,7 +685,7 @@ XPPRET XPPENTRY wapist_ULARGE_INTEGER( XppParamList pl )
                  also replaces ::q.
       }}*/
       pc->Method_cbbs( "Div"   , "{|s,v,lStore,mod| XbFpCall(%i,@s:q ,@s:nError,v,lStore,@mod)}", ::ularge_integer_ns::Div);
-      /*{{|method_: - METHOD Mod( vValue [, lStore] [, @cDiv] )
+      /*{{|method_: - `METHOD Mod( vValue [, lStore] [, @cDiv] )`
                | return: cUInt64
                | desc_: Divides ::q by vValue with unsigned 64-bit arithmetic and returns the remainder as an
                  8-byte binary string; @cDiv receives the quotient. On a zero divisor ::nError becomes
@@ -693,7 +693,7 @@ XPPRET XPPENTRY wapist_ULARGE_INTEGER( XppParamList pl )
                  remainder also replaces ::q.
       }}*/
       pc->Method_cbbs( "Mod"   , "{|s,v,lStore,divresult| XbFpCall(%i,@s:q ,@s:nError,v,lStore,@divresult)}", ::ularge_integer_ns::Mod );
-      /*{{|method_: - METHOD Str() | return: Character | desc_: Returns ::q as unsigned decimal text. }}*/
+      /*{{|method_: - `METHOD Str()` | return: Character | desc_: Returns ::q as unsigned decimal text. }}*/
       /*{{|:**END STRUCTURE** }}*/
       pc->MethodCB("Str" ,  "{|s| cPrintf('%I64u',s:l,s:h)}");
       // ---------------------------

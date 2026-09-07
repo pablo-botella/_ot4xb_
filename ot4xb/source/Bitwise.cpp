@@ -294,7 +294,7 @@ XPPRET XPPENTRY NRROT(XppParamList pl)
 /*{{c-function_: _str_rt_r_
             | syntax_: `void _str_rt_r_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_r_
             | _kw_: rotate right, ror, bytes, buffer, obfuscate
    }}*/
@@ -332,7 +332,7 @@ extern "C" OT4XB_API void _str_rt_r_(LPBYTE p, DWORD cb , BYTE r )
 /*{{c-function_: _str_rt_l_
             | syntax_: `void _str_rt_l_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_l_
             | _kw_: rotate left, rol, bytes, buffer, obfuscate
    }}*/
@@ -370,7 +370,7 @@ extern "C" OT4XB_API void _str_rt_l_(LPBYTE p, DWORD cb , BYTE r )
 /*{{c-function_: _str_rt_r_ex_
             | syntax_: `void _str_rt_r_ex_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_r_ex_
             | _kw_: rotate right, ror, bytes, buffer, incremental, obfuscate
    }}*/
@@ -408,7 +408,7 @@ extern "C" OT4XB_API void _str_rt_r_ex_(LPBYTE p, DWORD cb, BYTE r)
 /*{{c-function_: _str_rt_l_ex_
             | syntax_: `void _str_rt_l_ex_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_l_ex_
             | _kw_: rotate left, rol, bytes, buffer, incremental, obfuscate
    }}*/
@@ -614,7 +614,7 @@ XPPRET XPPENTRY LDWBITONOFF(XppParamList pl)
 /*{{c-function_: _dw_bf_get_
             | syntax_: `DWORD _dw_bf_get_( DWORD dw, DWORD sh, DWORD cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_dw_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_dw_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _dw_bf_get_
             | _kw_: bitfield, bit field, extract bits, DWORD
    }}*/
@@ -638,7 +638,7 @@ OT4XB_API DWORD _dw_bf_get_(DWORD dw,DWORD sh, DWORD cb)
 /*{{c-function_: _dw_bf_set_
             | syntax_: `DWORD _dw_bf_set_( DWORD dw, DWORD sh, DWORD cb, DWORD v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _dw_bf_set_
             | _kw_: bitfield, bit field, write bits, DWORD
    }}*/
@@ -664,7 +664,7 @@ OT4XB_API DWORD _dw_bf_set_(DWORD dw,DWORD sh, DWORD cb , DWORD v)
 /*{{c-function_: _b1_bf_get_
             | syntax_: `BYTE _b1_bf_get_( BYTE b, BYTE sh, BYTE cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_b1_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_b1_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _b1_bf_get_
             | _kw_: bitfield, bit field, extract bits, BYTE
    }}*/
@@ -688,7 +688,7 @@ OT4XB_API BYTE _b1_bf_get_(BYTE b,BYTE sh, BYTE cb)
 /*{{c-function_: _b1_bf_set_
             | syntax_: `BYTE _b1_bf_set_( BYTE b, BYTE sh, BYTE cb, BYTE v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _b1_bf_set_
             | _kw_: bitfield, bit field, write bits, BYTE
    }}*/
@@ -714,7 +714,7 @@ OT4XB_API BYTE _b1_bf_set_(BYTE b ,BYTE sh, BYTE cb , BYTE v)
 /*{{c-function_: _w_bf_get_
             | syntax_: `WORD _w_bf_get_( WORD w, WORD sh, WORD cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_w_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_w_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _w_bf_get_
             | _kw_: bitfield, bit field, extract bits, WORD
    }}*/
@@ -738,7 +738,7 @@ OT4XB_API WORD _w_bf_get_(WORD w,WORD sh, WORD cb)
 /*{{c-function_: _w_bf_set_
             | syntax_: `WORD _w_bf_set_( WORD w, WORD sh, WORD cb, WORD v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _w_bf_set_
             | _kw_: bitfield, bit field, write bits, WORD
    }}*/
@@ -765,7 +765,7 @@ OT4XB_API WORD _w_bf_set_(WORD w ,WORD sh, WORD cb , WORD v)
 /*{{c-function_: _byteflipbits_
             | syntax_: `BYTE _byteflipbits_( BYTE n )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_byteflipbits_( nByte )
+            | xbase-syntax: `@ot4xb:_byteflipbits_( nByte )`
             | mangled-name: _byteflipbits_
             | _kw_: reverse bits, mirror bits, bit order, byte
    }}*/
@@ -792,7 +792,7 @@ OT4XB_API BYTE _byteflipbits_(BYTE n)
 /*{{c-function_: _str_byte_xor_
             | syntax_: `BYTE _str_byte_xor_( LPBYTE p, UINT sh, UINT cb )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )
+            | xbase-syntax: `@ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )`
             | mangled-name: _str_byte_xor_
             | _kw_: xor checksum, xor bytes, buffer, checksum
    }}*/
@@ -822,7 +822,7 @@ OT4XB_API BYTE _str_byte_xor_(LPBYTE p , UINT sh , UINT cb)
 /*{{c-function_: _str_byte_sum_
             | syntax_: `BYTE _str_byte_sum_( LPBYTE p, UINT sh, UINT cb )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )
+            | xbase-syntax: `@ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )`
             | mangled-name: _str_byte_sum_
             | _kw_: byte sum, checksum, buffer, add bytes
    }}*/
@@ -855,7 +855,7 @@ OT4XB_API BYTE _str_byte_sum_(LPBYTE p , UINT sh , UINT cb)
 /*{{c-function_: _str_reverse_bytes_
             | syntax_: `void _str_reverse_bytes_( LPBYTE p, UINT sh, UINT count )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )
+            | xbase-syntax: `@ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )`
             | mangled-name: _str_reverse_bytes_
             | _kw_: reverse bytes, byte order, swap, endian, in place
    }}*/

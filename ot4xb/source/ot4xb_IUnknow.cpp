@@ -43,19 +43,19 @@ BEGIN_XBASE_CLASS( OT4XB_IUNKNOW )
    }}*/
    pc->Member_Pointer32("_m__vtbl_");
    
-   /*{{|method_: - METHOD QueryInterface( cIid, @pInterface )
+   /*{{|method_: - `METHOD QueryInterface( cIid, @pInterface )`
             | return: nHRESULT
             | desc_: Calls IUnknown::QueryInterface (vtable slot 0). Asks the object for the interface identified by
               the IID at cIid; on success pInterface receives the new interface pointer.
    }}*/
    pc->MethodCB("QueryInterface","{|s,iid,p| IFpQCall(0,\"__sl__sl__pt_@sl\",s:_m__pt_,iid,@p)}");
-   /*{{|method_: - METHOD AddRef()
+   /*{{|method_: - `METHOD AddRef()`
             | return: nRefCount
             | desc_: Calls IUnknown::AddRef (vtable slot 1). Increments the reference count of the linked interface
               and returns the new count.
    }}*/
    pc->MethodCB("AddRef","{|s| IFpQCall(1,\"__sl__sl\",s:_m__pt_)}");
-   /*{{|method_: - METHOD Release()
+   /*{{|method_: - `METHOD Release()`
             | return: nRefCount
             | desc_: Calls IUnknown::Release (vtable slot 2). Decrements the reference count of the linked interface
               and returns the new count.
@@ -83,19 +83,19 @@ BEGIN_XBASE_CLASS( OT4XB_IDISPATCH)
 {
    /*{{|:**BEGIN STRUCTURE  OT4XB_IDISPATCH  FROM OT4XB_IUNKNOW ** }}*/
    pc->Parent("OT4XB_IUNKNOW");
-   /*{{|method_: - METHOD GetTypeInfoCount( @nCount )
+   /*{{|method_: - `METHOD GetTypeInfoCount( @nCount )`
             | return: nHRESULT
             | desc_: Calls IDispatch::GetTypeInfoCount (vtable slot 3). nCount receives 1 when the object provides
               type information, 0 when it does not.
    }}*/
    pc->MethodCB("GetTypeInfoCount" ,"{|s,n| IFpQCall(3,\"__sl__sl_@sl\",s:_m__pt_,@n)}");
-   /*{{|method_: - METHOD GetTypeInfo( nIndex, nLocale, @pTypeInfo )
+   /*{{|method_: - `METHOD GetTypeInfo( nIndex, nLocale, @pTypeInfo )`
             | return: nHRESULT
             | desc_: Calls IDispatch::GetTypeInfo (vtable slot 4). Retrieves the type information of the object:
               pTypeInfo receives an ITypeInfo interface pointer for the type at nIndex in locale nLocale.
    }}*/
    pc->MethodCB("GetTypeInfo" ,"{|s,i,l,p| IFpQCall(4,\"__sl__sl__sl__sl_@sl\",s:_m__pt_,i,l,@p)}");
-   /*{{|method_: - METHOD GetIDsOfNames( pRiid, pNames, nCount, nLocale, @pDispIds )
+   /*{{|method_: - `METHOD GetIDsOfNames( pRiid, pNames, nCount, nLocale, @pDispIds )`
             | return: nHRESULT
             | desc_: Calls IDispatch::GetIDsOfNames (vtable slot 5). Maps member and argument names to dispatch
               identifiers: pNames addresses an array of nCount wide-string name pointers and pDispIds receives
@@ -104,7 +104,7 @@ BEGIN_XBASE_CLASS( OT4XB_IDISPATCH)
    pc->MethodCB("GetIDsOfNames","{|s,r,ppn,cb,l,ppi|"
                                 "IFpQCall( 5,\"__sl__sl__pt__pt__sl__sl__pt\","
                                 "s:_m__pt_,r,ppn,cb,l,@ppi)}");
-   /*{{|method_: - METHOD Invoke( nDispId, pRiid, nLocale, nFlags, @pDispParams, @pVarResult, @pExcepInfo, @nArgErr )
+   /*{{|method_: - `METHOD Invoke( nDispId, pRiid, nLocale, nFlags, @pDispParams, @pVarResult, @pExcepInfo, @nArgErr )`
             | return: nHRESULT
             | desc_: Calls IDispatch::Invoke (vtable slot 6). Invokes the dispatch member nDispId: nFlags selects
               the invoke kind, pDispParams addresses the DISPPARAMS block with the arguments, pVarResult and
@@ -135,13 +135,13 @@ BEGIN_XBASE_CLASS( OT4XB_ISEQUENTIALSTREAM )
 {
    /*{{|:**BEGIN STRUCTURE  OT4XB_ISEQUENTIALSTREAM  FROM OT4XB_IUNKNOW ** }}*/
    pc->Parent("OT4XB_IUNKNOW");
-   /*{{|method_: - METHOD Read( pBuffer, nBytes, @nRead )
+   /*{{|method_: - `METHOD Read( pBuffer, nBytes, @nRead )`
             | return: nHRESULT
             | desc_: Calls ISequentialStream::Read (vtable slot 3). Reads up to nBytes bytes from the stream into
               the memory at pBuffer; nRead receives the number of bytes actually read.
    }}*/
    pc->MethodCB("Read" ,"{|s,pv,cb,pcb| IFpQCall(3,\"__sl__sl__pt__sl_@sl\",s:_m__pt_,pv,cb,@pcb)}");
-   /*{{|method_: - METHOD Write( pBuffer, nBytes, @nWritten )
+   /*{{|method_: - `METHOD Write( pBuffer, nBytes, @nWritten )`
             | return: nHRESULT
             | desc_: Calls ISequentialStream::Write (vtable slot 4). Writes nBytes bytes from the memory at pBuffer
               into the stream; nWritten receives the number of bytes actually written.
@@ -169,54 +169,54 @@ BEGIN_XBASE_CLASS( OT4XB_ISTREAM )
 {
    /*{{|:**BEGIN STRUCTURE  OT4XB_ISTREAM  FROM OT4XB_ISEQUENTIALSTREAM ** }}*/
    pc->Parent("OT4XB_ISEQUENTIALSTREAM");
-   /*{{|method_: - METHOD Seek( nMove64, nOrigin, @nNewPos64 )
+   /*{{|method_: - `METHOD Seek( nMove64, nOrigin, @nNewPos64 )`
             | return: nHRESULT
             | desc_: Calls IStream::Seek (vtable slot 5). Moves the seek pointer nMove64 bytes relative to nOrigin
               (0 = begin, 1 = current position, 2 = end); nNewPos64 receives the new absolute position.
    }}*/
    pc->MethodCB("Seek","{|s,n,mt,pos| IFpQCall(5,\"__sl__sl__sq__sl_@sq\",s:_m__pt_,n,mt,@pos)}");
-   /*{{|method_: - METHOD SetSize( nSize64 )
+   /*{{|method_: - `METHOD SetSize( nSize64 )`
             | return: nHRESULT
             | desc_: Calls IStream::SetSize (vtable slot 6). Changes the size of the stream to nSize64 bytes.
    }}*/
    pc->MethodCB("SetSize","{|s,cb| IFpQCall(6,\"__sl__sl__sq\",s:_m__pt_,cb)}");
-   /*{{|method_: - METHOD CopyTo( pStream, nBytes64, @nRead64, @nWritten64 )
+   /*{{|method_: - `METHOD CopyTo( pStream, nBytes64, @nRead64, @nWritten64 )`
             | return: nHRESULT
             | desc_: Calls IStream::CopyTo (vtable slot 7). Copies nBytes64 bytes from the current seek pointer to
               the stream interface at pStream; nRead64 and nWritten64 receive the number of bytes read and written.
    }}*/
    pc->MethodCB("CopyTo","{|s,os,cb,pcbr,pcbw| IFpQCall(7,\"__sl__sl__pt__sq_@sq_@sq\",s:_m__pt_,os,cb,@pcbr,@pcbw)}");
-   /*{{|method_: - METHOD Commit( nFlags )
+   /*{{|method_: - `METHOD Commit( nFlags )`
             | return: nHRESULT
             | desc_: Calls IStream::Commit (vtable slot 8). Persists changes made to the stream according to the
               nFlags commit flags.
    }}*/
    pc->MethodCB("Commit","{|s,flags| IFpQCall(8,\"__sl__sl__sl\",s:_m__pt_,flags)}");
-   /*{{|method_: - METHOD Revert()
+   /*{{|method_: - `METHOD Revert()`
             | return: nHRESULT
             | desc_: Calls IStream::Revert (vtable slot 9). Discards the changes made to the stream since the last
               Commit.
    }}*/
    pc->MethodCB("Revert","{|s| IFpQCall(9,\"__sl__sl\",s:_m__pt_)}");
-   /*{{|method_: - METHOD LockRegion( nOffset64, nBytes64, nLockType )
+   /*{{|method_: - `METHOD LockRegion( nOffset64, nBytes64, nLockType )`
             | return: nHRESULT
             | desc_: Calls IStream::LockRegion (vtable slot 10). Locks nBytes64 bytes starting at nOffset64 with
               lock mode nLockType.
    }}*/
    pc->MethodCB("LockRegion","{|s,offset,cb,dw| IFpQCall(10,\"__sl__sl__sq__sq__sl\",s:_m__pt_,offset,cb,dw)}");
-   /*{{|method_: - METHOD UnlockRegion( nOffset64, nBytes64, nLockType )
+   /*{{|method_: - `METHOD UnlockRegion( nOffset64, nBytes64, nLockType )`
             | return: nHRESULT
             | desc_: Calls IStream::UnlockRegion (vtable slot 11). Removes a lock set by LockRegion; the parameters
               must match the ones used to lock.
    }}*/
    pc->MethodCB("UnlockRegion","{|s,offset,cb,dw| IFpQCall(11,\"__sl__sl__sq__sq__sl\",s:_m__pt_,offset,cb,dw)}");
-   /*{{|method_: - METHOD Stat( @pStatStg, nFlags )
+   /*{{|method_: - `METHOD Stat( @pStatStg, nFlags )`
             | return: nHRESULT
             | desc_: Calls IStream::Stat (vtable slot 12). Fills the STATSTG structure at pStatStg with information
               about the stream; nFlags selects how the name field is returned.
    }}*/
    pc->MethodCB("Stat","{|s,ps,dw| IFpQCall(12,\"__sl__sl__pt__sl\",s:_m__pt_,@ps,dw)}");
-   /*{{|method_: - METHOD Clone( @pStream )
+   /*{{|method_: - `METHOD Clone( @pStream )`
             | return: nHRESULT
             | desc_: Calls IStream::Clone (vtable slot 13). Creates a new stream object over the same bytes with an
               independent seek pointer; pStream receives the new interface pointer.

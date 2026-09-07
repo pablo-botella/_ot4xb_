@@ -3919,7 +3919,7 @@ OT4XB_API DWORD ByteMapTable_StrFindFlag( LPBYTE pSrc, int cb, int nStart, LPBYT
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 
@@ -3948,7 +3948,7 @@ OT4XB_API LPSTR cp850_to_html( LPSTR pIn, UINT* pcbOut, DWORD dwFlags )
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 
@@ -3977,7 +3977,7 @@ OT4XB_API LPSTR cp437_to_html( LPSTR pIn, UINT* pcbOut, DWORD dwFlags )
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 

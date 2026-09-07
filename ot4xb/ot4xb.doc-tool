@@ -305,7 +305,5 @@
 		"<src>/ch/*.*",
 		"<src>/moredoc/post/*.*"
 	],
-	"db": "<out>/ot4xb.db",
-	"templates": "./templates",
-	"site_title": "ot4xb Reference"
+	"db": "<out>/ot4xb.db"
 }

@@ -7,7 +7,7 @@
 /*{{c-function_: ot4xb_RGB
             | syntax_: `DWORD ot4xb_RGB( int r, int g, int b )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_RGB( nRed, nGreen, nBlue )
+            | xbase-syntax: `@ot4xb:ot4xb_RGB( nRed, nGreen, nBlue )`
             | mangled-name: ot4xb_RGB
             | _kw_: RGB, COLORREF, color, colour, red green blue
    }}*/
@@ -28,7 +28,7 @@ extern "C" DWORD OT4XB_API __cdecl ot4xb_RGB( int r, int g, int b)
 /*{{c-function_: ot4xb_RGB2R
             | syntax_: `DWORD ot4xb_RGB2R( COLORREF rgb )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_RGB2R( nRGB )
+            | xbase-syntax: `@ot4xb:ot4xb_RGB2R( nRGB )`
             | mangled-name: ot4xb_RGB2R
             | _kw_: GetRValue, red, COLORREF, color component
    }}*/
@@ -44,7 +44,7 @@ extern "C" DWORD OT4XB_API __cdecl ot4xb_RGB2R(COLORREF rgb){ return (DWORD) Get
 /*{{c-function_: ot4xb_RGB2G
             | syntax_: `DWORD ot4xb_RGB2G( COLORREF rgb )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_RGB2G( nRGB )
+            | xbase-syntax: `@ot4xb:ot4xb_RGB2G( nRGB )`
             | mangled-name: ot4xb_RGB2G
             | _kw_: GetGValue, green, COLORREF, color component
    }}*/
@@ -60,7 +60,7 @@ extern "C" DWORD OT4XB_API __cdecl ot4xb_RGB2G(COLORREF rgb){ return (DWORD) Get
 /*{{c-function_: ot4xb_RGB2B
             | syntax_: `DWORD ot4xb_RGB2B( COLORREF rgb )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_RGB2B( nRGB )
+            | xbase-syntax: `@ot4xb:ot4xb_RGB2B( nRGB )`
             | mangled-name: ot4xb_RGB2B
             | _kw_: GetBValue, blue, COLORREF, color component
    }}*/
@@ -76,7 +76,7 @@ extern "C" DWORD OT4XB_API __cdecl ot4xb_RGB2B(COLORREF rgb){ return (DWORD) Get
 /*{{c-function_: ot4xb_ARGB2RGB
             | syntax_: `COLORREF ot4xb_ARGB2RGB( DWORD argb )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_ARGB2RGB( nARGB )
+            | xbase-syntax: `@ot4xb:ot4xb_ARGB2RGB( nARGB )`
             | mangled-name: ot4xb_ARGB2RGB
             | _kw_: ARGB, COLORREF, GDI+, .NET color, alpha, convert color
    }}*/
@@ -157,7 +157,7 @@ static void rgb2hsl(int red, int green, int blue, int& hue, int& sat, int& lum)
 /*{{c-function_: ot4xb_HSL2RGB
             | syntax_: `COLORREF ot4xb_HSL2RGB( int h, int s, int l )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_HSL2RGB( nHue, nSat, nLum )
+            | xbase-syntax: `@ot4xb:ot4xb_HSL2RGB( nHue, nSat, nLum )`
             | mangled-name: ot4xb_HSL2RGB
             | _kw_: HSL, HLS, hue, saturation, luminance, ColorHLSToRGB, color
    }}*/
@@ -185,7 +185,7 @@ extern "C" COLORREF OT4XB_API __cdecl ot4xb_HSL2RGB( int h , int s , int l )
 /*{{c-function_: ot4xb_RGB2HSL
             | syntax_: `void ot4xb_RGB2HSL( COLORREF rgb, int* ph, int* ps, int* pl )`
             | category: winapi/color
-            | xbase-syntax: @ot4xb:ot4xb_RGB2HSL( nRGB, @nHue, @nSat, @nLum )
+            | xbase-syntax: `@ot4xb:ot4xb_RGB2HSL( nRGB, @nHue, @nSat, @nLum )`
             | mangled-name: ot4xb_RGB2HSL
             | _kw_: HSL, HLS, hue, saturation, luminance, ColorRGBToHLS, color
    }}*/

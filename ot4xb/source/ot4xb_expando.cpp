@@ -1120,12 +1120,12 @@ static void create_class(XppParamList pl)
       }}*/
       pc->Var("__m__cargo__");
 
-      /*{{|method_: - METHOD new( [nFlags] )
+      /*{{|method_: - `METHOD new( [nFlags] )`
                | return: oExpando
                | desc_: Calls ot4xb_expando_init to initialize the object.
       }}*/
       pc->MethodCB("init", "{|s,f|  s:ot4xb_expando_init(f) , s }");
-      /*{{|method_: - METHOD ot4xb_expando_init( nFlags )
+      /*{{|method_: - `METHOD ot4xb_expando_init( nFlags )`
                | return: Self
                | desc_: Resets and initializes all expando properties.
                | note: ::ot4xb_expando_init() can be used instead of ::_ot4xb_expando_:init() to initialize derived
@@ -1140,57 +1140,57 @@ static void create_class(XppParamList pl)
  
 
 
-      /*{{|method_: - METHOD get_prop( cKey )
+      /*{{|method_: - `METHOD get_prop( cKey )`
                | return: xValue / NIL
                | desc_: Returns the value stored under cKey, or NIL when the property is not present.
       }}*/
       pc->Method_cbbs("get_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
-      /*{{|method_: - METHOD GetNoIVar( cKey )
+      /*{{|method_: - `METHOD GetNoIVar( cKey )`
                | return: xValue / NIL
                | desc_: Virtual instance-variable getter used by Xbase++ member access on properties that are not
                  declared as real instance variables.
       }}*/
       pc->Method_cbbs("GetNoIVar", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop);
-      /*{{|method_: - METHOD set_prop( cKey, xValue )
+      /*{{|method_: - `METHOD set_prop( cKey, xValue )`
                | return: NIL
                | desc_: Creates or replaces a property value. The same operation is used by virtual assignment, for
                  example o:name := "value".
       }}*/
       pc->Method_cbbs("set_prop", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
-      /*{{|method_: - METHOD SetNoIVar( cKey, xValue )
+      /*{{|method_: - `METHOD SetNoIVar( cKey, xValue )`
                | return: NIL
                | desc_: Virtual instance-variable setter used by Xbase++ member assignment on properties that are not
                  declared as real instance variables.
       }}*/
       pc->Method_cbbs("SetNoIVar", "{|s,k,v|  XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop);
 
-      /*{{|method_: - METHOD is_prop( cKey ) | return: lExists | desc_: Returns .T. when a property exists. }}*/
+      /*{{|method_: - `METHOD is_prop( cKey )` | return: lExists | desc_: Returns .T. when a property exists. }}*/
       pc->Method_cbbs("is_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_is_prop);
-      /*{{|method_: - METHOD remove_prop( cKey )
+      /*{{|method_: - `METHOD remove_prop( cKey )`
                | return: xOldValue / NIL
                | desc_: Removes a property and returns its previous value when it existed.
       }}*/
       pc->Method_cbbs("remove_prop", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_remove_prop);
-      /*{{|method_: - METHOD find_prop_index( cKey )
+      /*{{|method_: - `METHOD find_prop_index( cKey )`
                | return: nIndex
                | desc_: Returns the 1-based position in the internal property holder, or 0 when the key is not present.
       }}*/
       pc->Method_cbbs("find_prop_index", "{|s,k| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k  )  }", method_get_prop_index);
 
       // -----
-      /*{{|method_: - METHOD set_prop_add( cKey, xValue )
+      /*{{|method_: - `METHOD set_prop_add( cKey, xValue )`
                | return: NIL
                | desc_: Adds a value preserving previous values. The first value is stored normally; if the key already
                  exists, the old value and the new value are held in an array, and following values are appended.
       }}*/
       pc->Method_cbbs("set_prop_add", "{|s,k,v| XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,k,v)  }", method_set_prop_add);
-      /*{{|method_: - METHOD add_env_strings( [pEnvironment] )
+      /*{{|method_: - `METHOD add_env_strings( [pEnvironment] )`
                | return: Self
                | desc_: Adds environment strings as properties. When pEnvironment is omitted or 0, the current process
                  environment block is used.
       }}*/
       pc->Method_cbbs("add_env_strings", "{|s,p|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p)    , s}", method_add_env_strings);
-      /*{{|method_: - METHOD add_ini_string( cIniText, nFlags )
+      /*{{|method_: - `METHOD add_ini_string( cIniText, nFlags )`
                | return: Self
                | desc_: Adds properties parsed from INI-style text.
                | flags:
@@ -1200,7 +1200,7 @@ static void create_class(XppParamList pl)
                  - `0x0004` With 0x0001, collect section names as an additional section array.
       }}*/
       pc->Method_cbbs("add_ini_string", "{|s,p,dw|XbFpCall(%i,s,@s:__m__props__,@s:__m__hash__,p,dw) , s}", method_add_ini_string);
-      /*{{|method_: - METHOD add_from_array( aData [, nFlags] [, bGetKey] [, xCargo] )
+      /*{{|method_: - `METHOD add_from_array( aData [, nFlags] [, bGetKey] [, xCargo] )`
                | return: Self
                | desc_: Adds properties from an array. By default, each item is expected to be { cKey, xValue }.
                | flags:
@@ -1210,7 +1210,7 @@ static void create_class(XppParamList pl)
                  - `0x0100` Use bGetKey to compute the key: Eval( bGetKey, xElement, nPos, Self, xCargo ).
       }}*/
       pc->Method_cbbs("add_from_array", "{|s,aa,flags,get_key_cb,cargo|  XbFpCall(%i,s,aa,flags,get_key_cb,cargo) , s }", method_add_from_array);
-      /*{{|method_: - METHOD add_from_server_cookie( cCookieHeader )
+      /*{{|method_: - `METHOD add_from_server_cookie( cCookieHeader )`
                | return: Self
                | desc_: Parses a server cookie string using semicolon-separated name=value items and stores each cookie
                  value as a property.
@@ -1219,7 +1219,7 @@ static void create_class(XppParamList pl)
 
 
 
-      /*{{|method_: - METHOD iterate_cb( bEval [, xCargo] [, nFlags] )
+      /*{{|method_: - `METHOD iterate_cb( bEval [, xCargo] [, nFlags] )`
                | return: Self
                | desc_: Iterates expando properties and evaluates Eval( bEval, cKey, xValue, Self, xCargo ).
                | flags:
@@ -1229,30 +1229,30 @@ static void create_class(XppParamList pl)
       pc->Method_cbbs("iterate_cb", "{|s,cb,cargo,flags|  XbFpCall(%i,s,s:__m__props__,cb,cargo,flags) , s }", method_iterate_cb); // method_iterate_cb(1 self,2 aprop,3 cb,4 cargo,5 flags) 
                                                                                                                                         // {|key,value,self,cargo |    ..... }  -> result ignore unless 0x1000
       // -----
-      /*{{|method_: - METHOD get_json_flags()
+      /*{{|method_: - `METHOD get_json_flags()`
                | return: nFlags
                | desc_: Returns the instance JSON flags used by ::json_escape_self().
       }}*/
       pc->MethodCB("get_json_flags", "{|s| s:__m__json_flags__  }");
-      /*{{|method_: - METHOD set_json_flags( nFlags )
+      /*{{|method_: - `METHOD set_json_flags( nFlags )`
                | return: nFlags
                | desc_: Stores default JSON flags used by ::json_escape_self().
       }}*/
       pc->MethodCB("set_json_flags", "{|s,v| s:__m__json_flags__ := nOr(v)  }");
-      /*{{|method_: - METHOD json_escape_self( [nFlags] [, nDepth] [, pStack] )
+      /*{{|method_: - `METHOD json_escape_self( [nFlags] [, nDepth] [, pStack] )`
                | return: cJson
                | desc_: Serializes the expando object as a JSON object. This method is also the object callback used by
                  _ot4xb_expando_():json_serialize().
       }}*/
       pc->Method_cbbs("json_escape_self", "{|s,mf,depth,pStack| XbFpCall(%i,s,s:__m__props__,s:__m__serial__,pStack,s, nOr(mf,s:__m__json_flags__),depth)   }", method_json_escape_self);
       // -----
-      /*{{|method_: - METHOD m_unserialize_step( xValue )
+      /*{{|method_: - `METHOD m_unserialize_step( xValue )`
                | return: Self
                | desc_: Internal helper hook kept on the class for serializer/unserializer support; not intended as
                  normal application API.
       }}*/
       pc->MethodCB("m_unserialize_step", "{|s,v| s:__m__cargo__ := __vmask( 0x20,s:__m__cargo__,__anew()) , aadd( s:__m__cargo__ , v) , s }");
-      /*{{|method_: - METHOD m_on_unserialize_pop()
+      /*{{|method_: - `METHOD m_on_unserialize_pop()`
                | return: Self
                | desc_: Internal helper hook kept on the class for serializer/unserializer support; not intended as
                  normal application API.
@@ -1261,19 +1261,19 @@ static void create_class(XppParamList pl)
       // -----
 
       // -----
-      /*{{|method_: - METHOD _clone()
+      /*{{|method_: - `METHOD _clone()`
                | return: oExpando
                | desc_: Creates another expando object with a cloned internal property holder and copied hash and flags.
                  Stored values are not deep-cloned.
       }}*/
       pc->MethodCB("_clone", "{|s| o := s:New(),o:__m__props__:= aclone(s:__m__props__),o:__m__hash__:=s:__m__hash__,o:__m__flags__:=s:__m__flags__,o }");
       // -----
-      /*{{|method_: - METHOD _ToArray()
+      /*{{|method_: - `METHOD _ToArray()`
                | return: aPairs
                | desc_: Returns a cloned array of { cKey, xValue } pairs.
       }}*/
       pc->MethodCB("_ToArray", "{|s,kk| kk := s:__m__hash__ , aclone(  s:__m__props__  ) }");
-      /*{{|method_: - METHOD _GetArray()
+      /*{{|method_: - `METHOD _GetArray()`
                | return: aPairs
                | desc_: Returns the internal property holder array. This is a low-level view, not a clone.
       }}*/

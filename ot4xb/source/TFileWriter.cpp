@@ -100,19 +100,19 @@ XPPRET XPPENTRY TFILEWRITER(XppParamList pl)
       pc->ClassProperty_cbbs( "e_enc_count"         , "{|s| %i }" , TFileWriter::e_enc_count          );
 
      // ---------------------------------------------------------------------------------      
-      /*{{|method_: - METHOD new()
+      /*{{|method_: - `METHOD new()`
                | return: oWriter
                | desc_: Creates the internal C++ writer. A new writer starts in memory-only mode, with the
                  e_enc_none engine selected and a cache threshold of 1 MB.
       }}*/
       pc->Method( "init"             , TFileWriter_init              , 0 ); // ::New() -> Self
-      /*{{|method_: - METHOD Release()
+      /*{{|method_: - `METHOD Release()`
                | return: Self
                | desc_: Destroys the internal C++ writer. An active file target receives the pending cached
                  data and is closed. Later method calls on the object are ignored.
       }}*/
       pc->Method( "Release"          , TFileWriter_Release           , 0 ); // ::Release() -> Self
-      /*{{|method_: - METHOD Create( cFilename, [lPreserveBuffer] )
+      /*{{|method_: - `METHOD Create( cFilename, [lPreserveBuffer] )`
                | return: lOk
                | desc_: Creates cFilename (an existing file is overwritten) and makes it the output target.
                  The memory cache is cleared first unless lPreserveBuffer is .T., which keeps already added
@@ -120,44 +120,44 @@ XPPRET XPPENTRY TFILEWRITER(XppParamList pl)
                  mode and .F. is returned.
       }}*/
       pc->Method( "Create"           , TFileWriter_Create            , 2 ); //    BOOL   Create( LPSTR pFilename , BOOL bPreserveBuffer);
-      /*{{|method_: - METHOD AttachFileHandle( hFile, [lPreserveBuffer] )
+      /*{{|method_: - `METHOD AttachFileHandle( hFile, [lPreserveBuffer] )`
                | return: NIL
                | desc_: Makes hFile, an open Win32 file handle, the output target; the previous file target,
                  when active, is closed. The memory cache is cleared first unless lPreserveBuffer is .T.
                  Passing 0 or -1 leaves the writer in memory-only mode.
       }}*/
       pc->Method( "AttachFileHandle" , TFileWriter_AttachFileHandle  , 2 ); //    void   AttachFileHandle( HANDLE hFile , BOOL bPreserveBuffer);
-      /*{{|method_: - METHOD DetachFileHandle()
+      /*{{|method_: - `METHOD DetachFileHandle()`
                | return: hFile
                | desc_: Disconnects and returns the output file handle without closing it; the writer goes
                  back to memory-only mode. Cached data pending to be written is not flushed.
       }}*/
       pc->Method( "DetachFileHandle" , TFileWriter_DetachFileHandle  , 0 ); //    HANDLE DetachFileHandle(void);
-      /*{{|method_: - METHOD GetFileHandle()
+      /*{{|method_: - `METHOD GetFileHandle()`
                | return: hFile
                | desc_: Returns the Win32 handle of the current output file, -1 when there is no file target.
       }}*/
       pc->Method( "GetFileHandle"    , TFileWriter_GetFileHandle     , 0 ); //    HANDLE GetFileHandle(void);
-      /*{{|method_: - METHOD Close()
+      /*{{|method_: - `METHOD Close()`
                | return: NIL
                | desc_: Flushes pending cached data, closes the output file and returns the writer to
                  memory-only mode.
       }}*/
       pc->Method( "Close"            , TFileWriter_Close             , 0 ); //    void   Close(void);
-      /*{{|method_: - METHOD SetEncoderEngine( nEncoder, [nFlags] )
+      /*{{|method_: - `METHOD SetEncoderEngine( nEncoder, [nFlags] )`
                | return: lOk
                | desc_: Selects the encoder engine applied by ::Add(): nEncoder is one of the e_enc_* class
                  constants and nFlags is kept with it, to be passed to the qp decoder or the ot4xb escape
                  encoder. Returns .F. and changes nothing when nEncoder is not a valid e_enc_* value.
       }}*/
       pc->Method( "SetEncoderEngine" , TFileWriter_SetEncoderEngine  , 2 ); //    BOOL   SetEncoderEngine( enc_e encoder , DWORD nFlags = 0 );
-      /*{{|method_: - METHOD SetCacheSize( nBytes )
+      /*{{|method_: - `METHOD SetCacheSize( nBytes )`
                | return: NIL
                | desc_: Sets the cache threshold: with a file target, ::Add() flushes the cache to the file
                  once it reaches nBytes. The default is 1 MB.
       }}*/
       pc->Method( "SetCacheSize"     , TFileWriter_SetCacheSize      , 1 ); //    void   SetCacheSize( DWORD nBytes);
-      /*{{|method_: - METHOD Add( cBytes )
+      /*{{|method_: - `METHOD Add( cBytes )`
                | return: lOk
                | desc_: Passes the bytes of cBytes through the selected encoder engine and appends the result
                  to the memory cache; with a file target the cache is flushed to the file when it reaches
@@ -167,16 +167,16 @@ XPPRET XPPENTRY TFILEWRITER(XppParamList pl)
                  length of cBytes is always processed.
       }}*/
       pc->Method( "Add"              , TFileWriter_Add               , 2 ); //    BOOL   Add( LPBYTE p , int cb = - 1 );
-      /*{{|method_: - METHOD xml_ot4xb_wa_field_col( nWorkArea, cFieldName )
+      /*{{|method_: - `METHOD xml_ot4xb_wa_field_col( nWorkArea, cFieldName )`
                | return: lOk
                | desc_: Reads field cFieldName from work area nWorkArea and writes it as an XML col node,
                  <col name="...">, with type and length attributes. Returns .F. when nWorkArea is 0 or the
                  field value cannot be obtained.
       }}*/
 	  pc->Method( "xml_ot4xb_wa_field_col", TFileWriter_xml_ot4xb_wa_field_col, 2); //    BOOL   xml_ot4xb_wa_field_col(int wa , LPSTR fname);
-      /*{{|method_: - METHOD write_xml_node_from_value( xValue, [cTag], [nFlags], [cNodeName] )
+      /*{{|method_: - `METHOD write_xml_node_from_value( xValue, [cTag], [nFlags], [cNodeName] )`
                | return: lOk
-               | desc_: Writes xValue as an XML node, <cTag>value</cTag>; cTag defaults to "col" and
+               | desc_: Writes xValue as an XML node, `<cTag>value</cTag>`; cTag defaults to "col" and
                  cNodeName, when given, is written as a name="..." attribute. Numeric, Logical, Date and
                  Character values are written; other types produce an empty node. Character content that
                  needs it is escaped or encoded, and marked with an enc="..." attribute.
@@ -192,21 +192,21 @@ XPPRET XPPENTRY TFILEWRITER(XppParamList pl)
                    `enc="base64"`, which are chosen automatically otherwise when the unsafe share is high)
       }}*/
 	  pc->Method( "write_xml_node_from_value", TFileWriter_write_xml_node_from_value, 4) ; //    BOOL   1 value , 2 tag , 3 flags , 4node_name
-      /*{{|method_: - METHOD write_xml_value( xValue )
+      /*{{|method_: - `METHOD write_xml_value( xValue )`
                | return: lOk
                | desc_: Writes the plain XML text form of xValue with no surrounding tag: Numeric with its
                  decimals, Logical as true or false, Date as YYYYMMDD, Character with the ot4xb escape
                  notation applied when the content holds XML-unsafe bytes. Other types write nothing.
       }}*/
 	  pc->Method( "write_xml_value", TFileWriter_write_xml_value, 1 ); //    BOOL   1 value 
-      /*{{|method_: - METHOD Write()
+      /*{{|method_: - `METHOD Write()`
                | return: lOk
                | desc_: Flushes the cached bytes to the output file. In memory-only mode, or when the cache
                  is empty, it returns .T. without doing anything. On success the cache is cleared; when the
                  Win32 write fails or is incomplete the file pointer is restored and the cache is kept.
       }}*/
       pc->Method( "Write"            , TFileWriter_Write             , 0 ); //    BOOL   Write(void);
-      /*{{|method_: - METHOD Commit()
+      /*{{|method_: - `METHOD Commit()`
                | return: NIL
                | desc_: Flushes the cached bytes and makes the OS write its file buffers to disk
                  (FlushFileBuffers). It does nothing in memory-only mode.
@@ -231,7 +231,7 @@ XPPRET XPPENTRY TFILEWRITER(XppParamList pl)
                  value.
       }}*/
       pc->ROProperty( "file_size"    , TFileWriter_file_size         , 0 ); //          
-      /*{{|method_: - METHOD truncate_buffer()
+      /*{{|method_: - `METHOD truncate_buffer()`
                | return: NIL
                | desc_: Discards the memory cache contents; cached data not yet written to the file target
                  is thrown away.

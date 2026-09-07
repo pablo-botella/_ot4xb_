@@ -5892,7 +5892,7 @@ XB_BEGIN_STRUCTURE( SOCKET_ADDRESS_LIST )
    }}*/
    pc->Member_EmbededStructArray( "Address","WAPIST_SOCKET_ADDRESS","_Address_","iAddressCount",
                                   pc->GwstGetOffset(),sizeof(SOCKET_ADDRESS) );
-   /*{{|method_: - METHOD ReqSize( n )
+   /*{{|method_: - `METHOD ReqSize( n )`
             | return: Numeric
             | desc_: Returns the byte size required for the requested address count.
    }}*/
@@ -6184,9 +6184,9 @@ XB_BEGIN_STRUCTURE( TIMEVAL )
    _XBST_LONG(  tv_sec  )
    /*{{|member_: - MEMBER LONG tv_usec }}*/
    _XBST_LONG(  tv_usec )
-   /*{{|method_: - METHOD IsSet() |return: Logical }}*/
+   /*{{|method_: - `METHOD IsSet()` |return: Logical }}*/
    pc->MethodCB("IsSet","{|s| nOr(s:tv_sec,s:tv_usec) != 0 }");
-   /*{{|method_: - METHOD Clear() |return: Self }}*/
+   /*{{|method_: - `METHOD Clear()` |return: Self }}*/
    pc->MethodCB("Clear","{|s| s:tv_sec := 0 , s:tv_usec := 0 , s}");
    /*{{|class-method_: - CLASS METHOD cmp( a , b ) }}*/
    pc->ClassMethodCB("cmp","{|s,a,b|i64cmp({a:tv_usec,a:tv_sec},{b:tv_usec,b:tv_sec})}");
@@ -7683,7 +7683,7 @@ XB_END_STRUCTURE
    }}*/
 /*{{|:**BEGIN STRUCTURE  MODULEENTRY32** }}*/
 XB_BEGIN_STRUCTURE( MODULEENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7726,7 +7726,7 @@ XB_END_STRUCTURE
    }}*/
 /*{{|:**BEGIN STRUCTURE  PROCESSENTRY32** }}*/
 XB_BEGIN_STRUCTURE( PROCESSENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7768,7 +7768,7 @@ XB_END_STRUCTURE
    }}*/
 /*{{|:**BEGIN STRUCTURE  THREADENTRY32** }}*/
 XB_BEGIN_STRUCTURE( THREADENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7804,7 +7804,7 @@ XB_END_STRUCTURE
    }}*/
 /*{{|:**BEGIN STRUCTURE  HEAPENTRY32** }}*/
 XB_BEGIN_STRUCTURE( HEAPENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7844,7 +7844,7 @@ XB_END_STRUCTURE
    }}*/
 /*{{|:**BEGIN STRUCTURE  HEAPLIST32** }}*/
 XB_BEGIN_STRUCTURE( HEAPLIST32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/

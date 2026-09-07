@@ -351,9 +351,9 @@ static DWORD svc_value_need_quotes(LPSTR p, DWORD cb, DWORD flags)
    // 0x0200 do not convert 1252-to-utf8
    // 0x0400 CR LF or TAB to space 
    // 0x0800 double quote to single
-   // 0x4000 limit length to 40
-   // 0x8000 limit length to 80
-   // 0xC000 limit length to 120
+   // 0x4000 limit length to 400
+   // 0x8000 limit length to 800
+   // 0xC000 limit length to 1200
 void TZString::str_1252_to_svc_utf8_cell(LPSTR p, DWORD cb, DWORD flags)
 {
 

@@ -28,7 +28,7 @@
    Every OT4XB_HASH hash method is a class method with the same argument list, called directly on the class
    object with no instance needed:
 
-   OT4XB_HASH():<method>( uInput, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash
+   `OT4XB_HASH():<method>( uInput, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash`
 
    uInput is the data to hash. What it holds, and how the hash value is returned, is selected with nFlags, a
    combination (nOr) of:

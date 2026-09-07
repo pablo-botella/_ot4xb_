@@ -29,11 +29,11 @@
 
              The prototype string is usually written directly, most often in a #xtranslate that hard-codes the
              4-byte codes, e.g.:
-               #xtranslate wsa.socket( [<p,...>] ) => FpQCall( {"ws2_32","socket"}, "__sl__sl__sl__sl" [,<p>] )
+               `#xtranslate wsa.socket( [<p,...>] ) => FpQCall( {"ws2_32","socket"}, "__sl__sl__sl__sl" [,<p>] )`
              ot4xb ships ready-made prototype tables built this way in its *_prototypes.ch files - see for
              example wininet_prototypes.ch (the whole WinInet API as FpQCall #xtranslate lines).
              ot4xb.ch also provides higher-level commands (DLL IMPORT / XIMPORT, QTEMPLATE) and readable
-             AS <TYPE> aliases that expand to these codes - see ot4xb.ch and the QTYPE system doc.
+             AS `<TYPE>` aliases that expand to these codes - see ot4xb.ch and the QTYPE system doc.
              The marshalling switch that consumes the codes lives in this file (TXbFpQParam).
              }}*/
 /*{{include-note-id: as-qtype-aliases}}*/

@@ -539,7 +539,7 @@ XPPRET XPPENTRY _TDRIVEINFO_( XppParamList pl )
       pc->Var("nFlags"); /*{{|ivar_: - VAR nFlags | type: Numeric | desc_: Raw file system flags reported by Windows. }}*/
       pc->Var("nDriveType"); /*{{|ivar_: - VAR nDriveType | type: Numeric | desc_: Drive type returned by GetDriveType(). }}*/
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD new()
+      /*{{|method_: - `METHOD new()`
                | return: oDriveInfo
                | desc_: Creates the object with all members reset to empty values.
       }}*/
@@ -1832,17 +1832,17 @@ XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
       }}*/
       pc->Var( "_find_handle_" );
       // ---------------------------
-      /*{{|method_: - METHOD FindFirst( cMask )
+      /*{{|method_: - `METHOD FindFirst( cMask )`
                | return: lFound
                | desc_: Starts a search and fills the structure with the first matching entry.
       }}*/
       pc->Method("FindFirst",FindFiles_First,1,",@s:_find_handle_");
-      /*{{|method_: - METHOD FindNext()
+      /*{{|method_: - `METHOD FindNext()`
                | return: lFound
                | desc_: Moves to the next matching entry and updates the structure.
       }}*/
       pc->Method("FindNext" ,FindFiles_Next,0,",@s:_find_handle_");
-      /*{{|method_: - METHOD FindClose() | return: NIL | desc_: Closes the current search handle. }}*/
+      /*{{|method_: - `METHOD FindClose()` | return: NIL | desc_: Closes the current search handle. }}*/
       pc->Method("FindClose",FindFiles_Close,0,",@s:_find_handle_");
       // ---------------------------
       /*{{|:**END STRUCTURE** }}*/

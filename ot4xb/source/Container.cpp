@@ -3295,7 +3295,7 @@ XPPRET XPPENTRY PPMARSHALL2ARRAY( XppParamList pl )
 
     |note: The returned memory is allocated with _xgrab(). The application owns that buffer and must release it
       with _xfree() when it is no longer required. The buffer layout is: LPSTR pStr1 ... LPSTR pStrN DWORD 0
-      String1 + Chr(0) ... StringN + Chr(0) This layout is suitable for C APIs that expect a char** or LPSTR*
+      String1 + Chr(0) ... StringN + Chr(0) This layout is suitable for C APIs that expect a `char**` or LPSTR*
       list terminated with a NULL pointer.
 
     |seealso: See also: {{ilink: <function ppMarshall2Array> ppMarshall2Array}}
