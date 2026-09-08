@@ -17,8 +17,8 @@
      Xbase++ class {{ilink: <class TGXbStack> TGXbStack}}.
    | note: The object is initialised by its `operator new`, not by a constructor, so it must be created with
      `new` and freed with `delete`. It is not synchronised until SyncMode() is called; from then on Lock() and
-     | _kw_: stack, deque, container list, push pop, code block eval
-     UnLock() bracket the accesses (the methods do not lock by themselves). }}*/
+     UnLock() bracket the accesses (the methods do not lock by themselves).
+     | _kw_: TGXbStack, Class }}*/
 class OT4XB_API TGXbStack
 {
    public:

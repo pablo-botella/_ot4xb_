@@ -50,7 +50,7 @@ class TGXbItem
               :UnLock().
             | note: The methods raise an ot4xb error when they are called on an object whose internal stack was
               destroyed or not properly initialized.
-   | _kw_: stack, deque, double ended, container list, push pop
+   | _kw_: TGXbStack, Class
    }}*/
 XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
 {
@@ -77,7 +77,7 @@ XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
       }}*/
       pc->ROProperty("pCriticalSection" , TGXbStack_pCriticalSection); 
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD new( [lSyncMode] )
+      /*{{|method_: - `METHOD new( [lSyncMode] )`
                | return: oStack
                | desc_: Creates the object and initializes its internal stack. With lSyncMode == .T. the
                  public operations are synchronized with an internal CriticalSection for multithread use.
@@ -85,61 +85,61 @@ XPPRET XPPENTRY TGXBSTACK(XppParamList pl)
                  object; doing so raises an error and destroys the internal stack.
       }}*/
       pc->Method("init"     , TGXbStack_Init,1);
-      /*{{|method_: - METHOD Destroy()
+      /*{{|method_: - `METHOD Destroy()`
                | return: NIL
                | desc_: Destroys the internal stack and releases stored container references. Call it when
                  the stack is no longer needed so internal resources are not left alive unnecessarily.
       }}*/
       pc->Method("Destroy"  , TGXbStack_Destroy);
-      /*{{|method_: - METHOD Head()
+      /*{{|method_: - `METHOD Head()`
                | return: xValue
                | desc_: Returns the value at the top/head of the stack without removing it.
       }}*/
       pc->Method("Head"     , TGXbStack_Head);
-      /*{{|method_: - METHOD Tos() | return: xValue | desc_: Alias of ::Head(). }}*/
+      /*{{|method_: - `METHOD Tos()` | return: xValue | desc_: Alias of ::Head(). }}*/
       pc->Method("Tos"      , TGXbStack_Head);
-      /*{{|method_: - METHOD Tail()
+      /*{{|method_: - `METHOD Tail()`
                | return: xValue
                | desc_: Returns the value at the tail/bottom of the stack without removing it.
       }}*/
       pc->Method("Tail"     , TGXbStack_Tail);
-      /*{{|method_: - METHOD Pop()
+      /*{{|method_: - `METHOD Pop()`
                | return: xValue
                | desc_: Removes and returns the value at the head/top of the stack.
       }}*/
       pc->Method("Pop"      , TGXbStack_Pop);
-      /*{{|method_: - METHOD Push( xValue )
+      /*{{|method_: - `METHOD Push( xValue )`
                | return: nCount
                | desc_: Adds xValue at the head/top of the stack and returns the new item count.
       }}*/
       pc->Method("Push"     , TGXbStack_Push,1);
-      /*{{|method_: - METHOD Add( xValue )
+      /*{{|method_: - `METHOD Add( xValue )`
                | return: nCount
                | desc_: Adds xValue at the tail/bottom of the stack and returns the new item count.
       }}*/
       pc->Method("Add"      , TGXbStack_Add,1);
-      /*{{|method_: - METHOD Count() | return: nCount | desc_: Returns the current item count. }}*/
+      /*{{|method_: - `METHOD Count()` | return: nCount | desc_: Returns the current item count. }}*/
       pc->Method("Count"    , TGXbStack_Count);
-      /*{{|method_: - METHOD SEval( [bEval [, xCargo]] )
+      /*{{|method_: - `METHOD SEval( [bEval [, xCargo]] )`
                | return: `aValues | NIL`
                | desc_: Without parameters, returns the stack contents as an array from head to tail. With a
                  codeblock, evaluates it for each item from head to tail as bEval( xValue, xCargo, nIndex,
                  nCount ), with nIndex starting at 0.
       }}*/
       pc->Method("SEval"    , TGXbStack_SEval,2);
-      /*{{|method_: - METHOD QEval( [bEval [, xCargo]] )
+      /*{{|method_: - `METHOD QEval( [bEval [, xCargo]] )`
                | return: `aValues | NIL`
                | desc_: Without parameters, returns the stack contents as an array from head to tail. With a
                  codeblock, evaluates it for each item from tail to head as bEval( xValue, xCargo, nIndex,
                  nCount ), with nIndex starting at 0.
       }}*/
       pc->Method("QEval"    , TGXbStack_QEval,2);
-      /*{{|method_: - METHOD Lock()
+      /*{{|method_: - `METHOD Lock()`
                | return: NIL
                | desc_: Enters the internal CriticalSection when the stack was created in synchronized mode.
       }}*/
       pc->Method("Lock"     , TGXbStack_Lock);
-      /*{{|method_: - METHOD UnLock()
+      /*{{|method_: - `METHOD UnLock()`
                | return: NIL
                | desc_: Leaves the internal CriticalSection when the stack was created in synchronized mode.
       }}*/

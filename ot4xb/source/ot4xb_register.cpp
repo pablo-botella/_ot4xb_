@@ -131,7 +131,7 @@ static HKEY ot4xb_get_open_hkey_name( LPSTR key_name, BOOL bCreate )
                  ot4xb_set_registry_value_as_string( cKey, cValueName, cValue [, nValueBytes] [, cEncoding] [, cKeyType] )
               ```
             | category: registry
-            | _kw_: registry, write value, RegSetValue, HKEY, string value, binary value
+            | _kw_: ot4xb_set_registry_value_as_string, Function
    }}*/
 /*{{|desc: Writes a registry value from a string or binary buffer, optionally applying a conversion encoding
       before storing it.
@@ -180,7 +180,7 @@ _XPP_REG_FUN_( OT4XB_SET_REGISTRY_VALUE_AS_STRING )
 /*{{function_: ot4xb_get_registry_value_as_string
             | syntax_: `ot4xb_get_registry_value_as_string( cKey, cValueName [, cEncoding] )`
             | category: registry
-            | _kw_: registry, read value, RegQueryValue, HKEY, string value
+            | _kw_: ot4xb_get_registry_value_as_string, Function
    }}*/
 /*{{|desc: Reads a registry value and returns it as a character string, optionally applying a conversion
       encoding.
@@ -222,7 +222,7 @@ _XPP_REG_FUN_( OT4XB_GET_REGISTRY_VALUE_AS_STRING )
             | category: registry
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_set_registry_value_as_string
-            | _kw_: registry, write value, RegSetValue, HKEY, string value, binary value
+            | _kw_: ot4xb_set_registry_value_as_string, Function
    }}*/
 /*{{|desc: Writes a registry value from a string or binary buffer, optionally applying a conversion encoding
       before storing it. The default mode converts the value text with strtoul()/strtoull() base 0 for the
@@ -434,7 +434,7 @@ OT4XB_API BOOL ot4xb_set_registry_value_as_string( LPSTR key_name, LPSTR valueNa
             | category: registry
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_get_registry_value_as_string
-            | _kw_: registry, read value, RegQueryValue, HKEY, string value
+            | _kw_: ot4xb_get_registry_value_as_string, Function
    }}*/
 /*{{|desc: Reads a registry value and returns it as a newly allocated string, optionally applying a
       conversion encoding. The default and "decimal" modes format REG_DWORD and REG_QWORD values as decimal

@@ -19,7 +19,7 @@
                  argon2_hash( cPassword, cSalt, @nErrorCode, nFlags, [nSize := 32], [nTimeCost := 3], [nMemoryCost := 0x10000] )
               ```
             | category: crypto/password
-            | _kw_: argon2, password hash, key derivation, salt, encoded hash
+            | _kw_: argon2_hash, Function
    }}*/
 /*{{|desc: Computes an Argon2 password hash using the bundled Argon2 implementation. The result can be an
       encoded Argon2 string or raw hash bytes depending on nFlags.
@@ -207,7 +207,7 @@ _XPP_REG_FUN_( ARGON2_HASH )
 /*{{function_: argon2_verify
             | syntax_: `argon2_verify( cPassword, cEncodedHash, @nErrorCode, nFlags )`
             | category: crypto/password
-            | _kw_: argon2, verify password, password hash
+            | _kw_: argon2_verify, Function
    }}*/
 /*{{|desc: Verifies a password against an encoded Argon2 hash.
     | params:

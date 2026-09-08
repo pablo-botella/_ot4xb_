@@ -46,7 +46,7 @@ static LONG  _watching_thread_count = 0;
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_get_xheap
-            | _kw_: vheap, heap descriptor, xheap, allocator
+            | _kw_: ot4xb_get_xheap, Function
    }}*/
 /*{{|desc: Returns the built-in OT4XB_VHEAP descriptor whose vgrab/vfree entries route to _xgrab() and
       _xfree(). It lets code working through the OT4XB_VHEAP interface allocate from the default OT4XB
@@ -65,7 +65,7 @@ OT4XB_API OT4XB_VHEAP*  ot4xb_get_xheap(void)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_xheap_alloc
-            | _kw_: vheap, xheap, allocate, vgrab
+            | _kw_: ot4xb_xheap_alloc, Function
    }}*/
 /*{{|desc: vgrab entry of the built-in xheap descriptor: allocates n bytes with _xgrab(), so the block comes
       zero-filled. The descriptor argument is ignored. Release with ot4xb_xheap_free() or _xfree().
@@ -86,7 +86,7 @@ OT4XB_API void* __cdecl ot4xb_xheap_alloc( OT4XB_VHEAP*  , UINT  n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_xheap_free
-            | _kw_: vheap, xheap, free, vfree
+            | _kw_: ot4xb_xheap_free, Function
    }}*/
 /*{{|desc: vfree entry of the built-in xheap descriptor: releases the block with _xfree(). The descriptor
       argument is ignored.
@@ -107,7 +107,7 @@ OT4XB_API void  __cdecl ot4xb_xheap_free( OT4XB_VHEAP*  , void* p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_xheap_min
-            | _kw_: heapmin, return memory, shrink heap, CRT heap
+            | _kw_: ot4xb_xheap_min, Function
    }}*/
 /*{{|desc: Returns unused CRT heap memory to the operating system by calling _heapmin().
 
@@ -124,7 +124,7 @@ OT4XB_API int  __cdecl ot4xb_xheap_min(void)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_vheap_alloc
-            | _kw_: vheap, private heap, allocate, HeapAlloc
+            | _kw_: ot4xb_vheap_alloc, Function
    }}*/
 /*{{|desc: vgrab entry used by descriptors built with ot4xb_vheap_create(): allocates n bytes from the Win32
       heap kept in vh->ctx, using the vh->flags1 allocation flags.
@@ -146,7 +146,7 @@ OT4XB_API void* __cdecl ot4xb_vheap_alloc( OT4XB_VHEAP* vh  , UINT  n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_vheap_free
-            | _kw_: vheap, private heap, free, HeapFree
+            | _kw_: ot4xb_vheap_free, Function
    }}*/
 /*{{|desc: vfree entry used by descriptors built with ot4xb_vheap_create(): releases a block allocated from
       the Win32 heap kept in vh->ctx, using the vh->flags2 flags.
@@ -167,7 +167,7 @@ OT4XB_API void  __cdecl ot4xb_vheap_free( OT4XB_VHEAP*  vh , void* p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_vheap_destroy
-            | _kw_: vheap, private heap, destroy, HeapDestroy, release all
+            | _kw_: ot4xb_vheap_destroy, Function
    }}*/
 /*{{|desc: Destroys a virtual heap created with ot4xb_vheap_create(): the Win32 heap is destroyed - every
       block allocated from it vanishes at once - and the descriptor itself is released.
@@ -195,7 +195,7 @@ OT4XB_API void __cdecl ot4xb_vheap_destroy( OT4XB_VHEAP* vheap)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_vheap_create
-            | _kw_: vheap, private heap, create, HeapCreate, descriptor
+            | _kw_: ot4xb_vheap_create, Function
    }}*/
 /*{{|desc: Creates a private Win32 heap (HeapCreate) and wraps it in a new OT4XB_VHEAP descriptor with
       vgrab/vfree set to ot4xb_vheap_alloc()/ot4xb_vheap_free() and both flags fields preset to
@@ -225,7 +225,7 @@ OT4XB_API OT4XB_VHEAP* __cdecl ot4xb_vheap_create( DWORD dwCreationFlags, DWORD 
             | category: atomic
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_interlocked_next
-            | _kw_: unique id, counter, interlocked, thread safe, sequence
+            | _kw_: ot4xb_interlocked_next, Function
    }}*/
 /*{{|desc: return a new integer id unique in the instance, thread safe
 
@@ -295,7 +295,7 @@ void _API_Memory_ExitProc( void)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _vpagesize
-            | _kw_: page size, virtual memory, VirtualAlloc, allocation granularity
+            | _kw_: _vpagesize, Function
    }}*/
 /*{{|desc: Returns the block size that makes a _vgrab() allocation fit exactly in one memory page: the
       system page size minus the 4-byte size header _vgrab() keeps in front of every block.
@@ -310,7 +310,7 @@ OT4XB_API UINT _vpagesize(void){ return (UINT)( _sys_inf_.dwPageSize  - sizeof( 
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _vgrab1page
-            | _kw_: virtual memory, one page, VirtualAlloc, locked memory
+            | _kw_: _vgrab1page, Function
    }}*/
 /*{{|desc: Allocates one page of virtual memory with _vgrab(), asking for _vpagesize() bytes. Release with
       _vfree().
@@ -332,7 +332,7 @@ OT4XB_API void * _vgrab1page(UINT * pnSize )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _vgrab
-            | _kw_: virtual memory, VirtualAlloc, VirtualLock, allocate, non paged
+            | _kw_: _vgrab, Function
    }}*/
 /*{{|desc: Allocates n bytes of virtual memory (VirtualAlloc, MEM_COMMIT, PAGE_READWRITE) and locks the
       region into physical memory. The block is zero-filled and a 4-byte size header sits in front of the
@@ -359,7 +359,7 @@ OT4XB_API void * _vgrab( UINT n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _vgetsize
-            | _kw_: block size, virtual memory, header, allocated size
+            | _kw_: _vgetsize, Function
    }}*/
 /*{{|desc: Returns the size stored in the header of a block allocated with _vgrab() or _vgrab1page(). The
       stored value includes the 4-byte header itself, so it is the requested size plus 4.
@@ -385,7 +385,7 @@ OT4XB_API UINT _vgetsize( void * p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _vfree
-            | _kw_: virtual memory, VirtualFree, release
+            | _kw_: _vfree, Function
    }}*/
 /*{{|desc: release a block of memory allocated with _vgrab() or _vgrab1page()
     | params:
@@ -408,7 +408,7 @@ OT4XB_API void _vfree( void * p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _pgrab
-            | _kw_: process heap, HeapAlloc, allocate, zero filled
+            | _kw_: _pgrab, Function
    }}*/
 /*{{|desc: Allocates n zero-filled bytes from the default process heap (HeapAlloc). Release with _pfree().
     | params:
@@ -428,7 +428,7 @@ OT4XB_API void * _pgrab( UINT n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _pfree
-            | _kw_: process heap, HeapFree, release
+            | _kw_: _pfree, Function
    }}*/
 /*{{|desc: release memory allocated with _pgrab()
     | params:
@@ -447,7 +447,7 @@ OT4XB_API void _pfree( void * p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _exec_m_grab
-            | _kw_: executable memory, executable heap, thunk, code buffer, RWX
+            | _kw_: _exec_m_grab, Function
    }}*/
 /*{{|desc: Allocates n zero-filled bytes from the executable heap (HEAP_CREATE_ENABLE_EXECUTE) for runtime
       code thunks / callbacks; the returned block may be executed and stays valid under DEP. Release with
@@ -468,7 +468,7 @@ OT4XB_API void * _exec_m_grab( UINT n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _exec_m_free
-            | _kw_: executable memory, executable heap, release
+            | _kw_: _exec_m_free, Function
    }}*/
 /*{{|desc: release memory allocated with _exec_m_grab()
     | params:
@@ -487,7 +487,7 @@ OT4XB_API void _exec_m_free( void * p)
             | category: memory
             | header: ot4xb_api.h
             | mangled-name: _xgrab
-            | _kw_: malloc, allocate, zero filled, default allocator, memory
+            | _kw_: _xgrab, Function
    }}*/
 /*{{|desc: Allocates n bytes with malloc() and zero-fills them. This is the default OT4XB allocator and the
       preferred allocation method. Release with _xfree().
@@ -514,7 +514,7 @@ OT4XB_API void * _xgrab( UINT n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _xgrow
-            | _kw_: realloc, grow block, resize memory
+            | _kw_: _xgrow, Function
    }}*/
 /*{{|desc: Grows a block to n bytes with realloc. NOTE (doc review): does NOT zero-fill the grown area, unlike
       _xgrab/_xxgrow - it cannot, the previous size is unknown here (realloc does not report it). Use
@@ -537,7 +537,7 @@ OT4XB_API void * _xgrow(void* pp  , UINT n)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _xxgrow
-            | _kw_: realloc, grow block, resize memory, zero filled
+            | _kw_: _xxgrow, Function
    }}*/
 /*{{|desc: Resizes a _xgrab() block from nCurrent to nNew bytes keeping the zero-fill promise. Growing
       allocates a new zero-filled block, copies nCurrent bytes and releases the old block, so the pointer
@@ -567,7 +567,7 @@ OT4XB_API void* _xxgrow(void* pp ,UINT nCurrent , UINT nNew)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _xxgrowa
-            | _kw_: realloc, grow array, resize memory, items, zero filled
+            | _kw_: _xxgrowa, Function
    }}*/
 /*{{|desc: Array version of _xxgrow(): resizes a _xgrab() block from nCurrent to nNew items of nItemSize
       bytes each. Item counts are turned into byte sizes and the _xxgrow() rules apply.
@@ -590,7 +590,7 @@ OT4XB_API void* _xxgrowa(void* pp ,UINT nCurrent , UINT nNew , UINT nItemSize)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _mgrab
-            | _kw_: malloc, allocate, uninitialized, memory
+            | _kw_: _mgrab, Function
    }}*/
 /*{{|desc: Allocates n bytes with malloc() without clearing them; unlike _xgrab() the content is undefined.
       Release with _mfree().
@@ -614,7 +614,7 @@ OT4XB_API void * _mgrab( UINT n)
             | category: memory
             | header: ot4xb_api.h
             | mangled-name: _xfree
-            | _kw_: free, release memory, malloc
+            | _kw_: _xfree, Function
    }}*/
 /*{{|desc: Release memory allocated with _xgrab()
     | params:
@@ -637,7 +637,7 @@ OT4XB_API void _xfree( void * p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _mfree
-            | _kw_: free, release memory, malloc
+            | _kw_: _mfree, Function
    }}*/
 /*{{|desc: Release memory allocated with _mgrab()
     | params:
@@ -660,7 +660,7 @@ OT4XB_API void _mfree( void * p)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _mmsize
-            | _kw_: _msize, block size, malloc, usable size
+            | _kw_: _mmsize, Function
    }}*/
 /*{{|desc: Returns the usable size of a malloc-based block, as reported by the CRT _msize().
     | params:
@@ -676,7 +676,7 @@ OT4XB_API UINT _mmsize(void* p){ return _msize(p);}
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _mgrow
-            | _kw_: realloc, grow block, resize memory
+            | _kw_: _mgrow, Function
    }}*/
 /*{{|desc: Resizes a malloc-based block with realloc(). The grown area is not cleared and the block may
       move; pp may be NULL to allocate a new block.
@@ -694,7 +694,7 @@ OT4XB_API void * _mgrow(void* pp  , UINT n){ return realloc(pp,n);}
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _mcgrab
-            | _kw_: calloc, allocate array, zero filled, items
+            | _kw_: _mcgrab, Function
    }}*/
 /*{{|desc: Allocates a zero-filled array of nItems items of nItemSize bytes each with calloc(). Release with
       _mfree().
@@ -710,7 +710,7 @@ OT4XB_API void * _mcgrab(UINT nItems , UINT nItemSize ){ return calloc(nItems , 
 /*{{function_: _xgrab_count_
             | syntax_: `_xgrab_count_()`
             | category: memory
-            | _kw_: leak counter, allocation count, diagnostic, deprecated
+            | _kw_: _xgrab_count_, Function
    }}*/
 /*{{|desc: Deprecated diagnostic counter for selected _xgrab() allocations that have not been released.
 
@@ -726,7 +726,7 @@ XPPRET XPPENTRY _XGRAB_COUNT_(XppParamList pl){ _retnl(pl,_xgrab_count_);}
 /*{{function_: _xgrab
             | syntax_: `_xgrab( nBytes )`
             | category: memory
-            | _kw_: allocate memory, malloc, zero filled, pointer, buffer
+            | _kw_: _xgrab, Function
    }}*/
 /*{{|desc: Allocates a memory block using the current malloc/free based OT4XB allocator and initializes it with
       zeroes.
@@ -751,7 +751,7 @@ XPPRET XPPENTRY _XGRAB(XppParamList pl){  __xb__grab(pl, _xgrab ); }
 /*{{function_: _xfree
             | syntax_: `_xfree( pMem [, @cValue [, nBytes]] )`
             | category: memory
-            | _kw_: free memory, release, pointer
+            | _kw_: _xfree, Function
    }}*/
 /*{{|desc: Releases a memory block allocated with _xgrab().
     | params:
@@ -771,7 +771,7 @@ XPPRET XPPENTRY _XFREE(XppParamList pl){  __xb__free(pl, _xfree ); }
 /*{{function_: _pgrab
             | syntax_: `_pgrab( nBytes )`
             | category: memory
-            | _kw_: process heap, allocate memory, HeapAlloc
+            | _kw_: _pgrab, Function
    }}*/
 /*{{|desc: Allocates a memory block from the process heap.
     | params:
@@ -794,7 +794,7 @@ XPPRET XPPENTRY _PGRAB(XppParamList pl){  __xb__grab(pl, _pgrab ); }
 /*{{function_: _pfree
             | syntax_: `_pfree( pMem [, @cValue [, nBytes]] )`
             | category: memory
-            | _kw_: process heap, free memory, HeapFree
+            | _kw_: _pfree, Function
    }}*/
 /*{{|desc: Releases a memory block allocated with _pgrab().
     | params:
@@ -814,7 +814,7 @@ XPPRET XPPENTRY _PFREE(XppParamList pl){  __xb__free(pl, _pfree ); }
 /*{{function_: _vgrab
             | syntax_: `_vgrab( nBytes )`
             | category: memory
-            | _kw_: virtual memory, allocate, VirtualAlloc
+            | _kw_: _vgrab, Function
    }}*/
 /*{{|desc: Allocates a memory block directly from virtual memory.
     | params:
@@ -838,7 +838,7 @@ XPPRET XPPENTRY _VGRAB(XppParamList pl){  __xb__grab(pl, _vgrab ); }
 /*{{function_: _vfree
             | syntax_: `_vfree( pMem [, @cValue [, nBytes]] )`
             | category: memory
-            | _kw_: virtual memory, free, VirtualFree
+            | _kw_: _vfree, Function
    }}*/
 /*{{|desc: Releases a memory block allocated with _vgrab().
     | params:
@@ -905,7 +905,7 @@ static void __xb__free(XppParamList pl, void (*pfnFree)(void *) )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conXGrabSz
-            | _kw_: container to string, copy string, xgrab, zero terminated
+            | _kw_: _conXGrabSz, Function
    }}*/
 /*{{|desc: copy a string from a Xbase++ container into a new _xgrab() memory block. The string is guaranteed to
       be zero terminated, but can contain more zeros at any position must be released with _xfree()
@@ -937,7 +937,7 @@ OT4XB_API LPSTR _conXGrabSz(ContainerHandle con,ULONG * puSize)
 /*{{function_: _bset
             | syntax_: `_bset( pMem, xByte, nBytes )`
             | category: memory
-            | _kw_: memset, fill memory, fill buffer, byte value
+            | _kw_: _bset, Function
    }}*/
 /*{{|desc: Fills a memory buffer with a byte value.
     | params:
@@ -963,7 +963,7 @@ XPPRET XPPENTRY _BSET( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bset
-            | _kw_: memset, fill memory, fill buffer, byte value
+            | _kw_: _bset, Function
    }}*/
 /*{{|desc: init nBytes from pStr with the ch value
     | params:
@@ -984,7 +984,7 @@ OT4XB_API LPBYTE _bset(LPBYTE pStr, BYTE ch , UINT nBytes)
 /*{{function_: _bmove
             | syntax_: `_bmove( pDest, pSrc, nBytes )`
             | category: memory
-            | _kw_: memmove, copy memory, overlapping, move bytes
+            | _kw_: _bmove, Function
    }}*/
 /*{{|desc: Copies bytes between memory buffers, allowing overlapping source and destination ranges.
     | params:
@@ -1005,7 +1005,7 @@ XPPRET XPPENTRY _BMOVE( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bmove
-            | _kw_: memmove, copy memory, overlapping, move bytes
+            | _kw_: _bmove, Function
    }}*/
 /*{{|desc: copy nBytes of memory from one location to another the locations can be overlapped
     | params:
@@ -1032,7 +1032,7 @@ OT4XB_API LPBYTE _bmove(LPBYTE pDest, LPBYTE pSrc , UINT nBytes)
 /*{{function_: _bdup
             | syntax_: `_bdup( pSrc, nBytes )`
             | category: memory
-            | _kw_: duplicate memory, clone buffer, copy bytes, xgrab
+            | _kw_: _bdup, Function
    }}*/
 /*{{|desc: Duplicates a memory buffer into a new _xgrab() block.
     | params:
@@ -1054,7 +1054,7 @@ XPPRET XPPENTRY _BDUP( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bdup
-            | _kw_: duplicate memory, clone buffer, copy bytes, xgrab
+            | _kw_: _bdup, Function
    }}*/
 /*{{|desc: Clone a memory buffer of nBytes using _xgrab() to allocate it .
     | params:
@@ -1079,7 +1079,7 @@ OT4XB_API LPBYTE _bdup(LPBYTE pSrc , UINT nBytes)
 /*{{function_: _bcopywithtable
             | syntax_: `_bcopywithtable( pDest, pSrc, nBytes, pTable )`
             | category: memory
-            | _kw_: copy with table, translate bytes, byte mapping, transcode
+            | _kw_: _bcopywithtable, Function
    }}*/
 /*{{|desc: Copies bytes from one buffer to another, translating each byte through a 256-byte table.
     | params:
@@ -1103,7 +1103,7 @@ XPPRET XPPENTRY _BCOPYWITHTABLE( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcopywithtable
-            | _kw_: copy with table, translate bytes, byte mapping, transcode
+            | _kw_: _bcopywithtable, Function
    }}*/
 /*{{|desc: Copy nBytes from pSrc to pDest using a mapping character table. pTable must be string at least 256
       BYTES
@@ -1129,7 +1129,7 @@ OT4XB_API LPBYTE _bcopywithtable(LPBYTE pDest, LPBYTE pSrc , UINT nBytes, LPBYTE
 /*{{function_: _bcopy
             | syntax_: `_bcopy( pDest, pSrc, nBytes )`
             | category: memory
-            | _kw_: memcpy, copy memory, copy bytes
+            | _kw_: _bcopy, Function
    }}*/
 /*{{|desc: Copies bytes from one memory buffer to another.
     | params:
@@ -1152,7 +1152,7 @@ XPPRET XPPENTRY _BCOPY( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcopy
-            | _kw_: memcpy, copy memory, copy bytes
+            | _kw_: _bcopy, Function
    }}*/
 /*{{|desc: copy nBytes of memory from one location to another if the locations are overlapped results can be
       unpredictables. For overlapped locations use _bmove() instead
@@ -1179,7 +1179,7 @@ OT4XB_API LPBYTE _bcopy(LPBYTE pDest, LPBYTE pSrc , UINT nBytes)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcopy_no_overlap
-            | _kw_: memmove, copy memory, overlapping safe
+            | _kw_: _bcopy_no_overlap, Function
    }}*/
 /*{{|desc: Copies nBytes from pSrc to pDest so that overlap between the source and destination ranges does not
       spoil the copy - which is what the name means. It copies forward when pSrc >= pDest and backward
@@ -1213,7 +1213,7 @@ OT4XB_API LPBYTE _bcopy_no_overlap(LPBYTE pDest, LPBYTE pSrc, UINT nBytes)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcopyex
-            | _kw_: memcpy, copy memory, offset, shifted pointers
+            | _kw_: _bcopyex, Function
    }}*/
 /*{{|desc: Copies nBytes like _bcopy() but shifts both pointers first: bytes go from pSrc + sshift to
       pDest + dshift. Overlapping ranges are not handled.
@@ -1242,7 +1242,7 @@ OT4XB_API LPBYTE __cdecl _bcopyex(LPBYTE pDest, DWORD dshift , LPBYTE pSrc , DWO
 /*{{function_: _bcopyf
             | syntax_: `_bcopyf( pDest, pSrc, nDestBytes, nSrcBytes )`
             | category: memory
-            | _kw_: copy fixed buffer, pad, memcpy, fixed size
+            | _kw_: _bcopyf, Function
    }}*/
 /*{{|desc: Copies bytes from a source buffer into a fixed-size destination buffer.
     | params:
@@ -1271,7 +1271,7 @@ XPPRET XPPENTRY _BCOPYF( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcopyf
-            | _kw_: copy fixed buffer, pad, memcpy, fixed size
+            | _kw_: _bcopyf, Function
    }}*/
 /*{{|desc: Copies min(nSrcSize, nDstSize) bytes from pSrc to pDest; if pSrc is shorter than pDest, the
       remaining destination bytes are space-padded (0x20).
@@ -1295,7 +1295,7 @@ OT4XB_API void _bcopyf(LPBYTE pDest, LPBYTE pSrc , UINT nDstSize, UINT nSrcSize)
 /*{{function_: _bscan
             | syntax_: `_bscan( pMem, nBytes, xByte )`
             | category: memory
-            | _kw_: memchr, find byte, search buffer, position
+            | _kw_: _bscan, Function
    }}*/
 /*{{|desc: Searches a byte value inside a memory buffer.
     | params:
@@ -1321,7 +1321,7 @@ XPPRET XPPENTRY _BSCAN( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bscan
-            | _kw_: memchr, find byte, search buffer, position
+            | _kw_: _bscan, Function
    }}*/
 /*{{|desc: Returns the zero-based position of the first occurrence of the byte ch within the buffer pStr.
       The result is less than nBytes only when ch was found.
@@ -1346,7 +1346,7 @@ OT4XB_API UINT  _bscan(LPBYTE pStr, UINT nBytes , BYTE ch)
 /*{{function_: _xstrcpy
             | syntax_: `_xstrcpy( pDest, pSrc )`
             | category: memory/string
-            | _kw_: strcpy, copy string, zero terminated
+            | _kw_: _xstrcpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string to a destination buffer.
     | params:
@@ -1366,7 +1366,7 @@ XPPRET XPPENTRY _XSTRCPY( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcpy
-            | _kw_: strcpy, copy string, zero terminated
+            | _kw_: _xstrcpy, Function
    }}*/
 /*{{|desc: Copy a NULL terminated string pointed to by pSrc to pDest memory location. return the destination
       buffer
@@ -1389,7 +1389,7 @@ OT4XB_API LPSTR _xstrcpy(LPSTR pDest, LPSTR pSrc)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcpyW
-            | _kw_: wcscpy, copy wide string, UTF-16
+            | _kw_: _xstrcpyW, Function
    }}*/
 /*{{|desc: Wide-character version of _xstrcpy(): copies a zero-terminated UTF-16 string, terminator
       included.
@@ -1410,7 +1410,7 @@ OT4XB_API LPWSTR _xstrcpyW(LPWSTR pDest, LPWSTR pSrc)
 /*{{function_: _xxstrcpy
             | syntax_: `_xxstrcpy( pDest, pSrc )`
             | category: memory/string
-            | _kw_: strcpy, copy string, end pointer, append
+            | _kw_: _xxstrcpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string and returns the destination pointer positioned at the final zero.
     | params:
@@ -1433,7 +1433,7 @@ XPPRET XPPENTRY _XXSTRCPY( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xxstrcpy
-            | _kw_: strcpy, copy string, end pointer, append
+            | _kw_: _xxstrcpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string like _xstrcpy() but returns the position of the terminating zero
       written in the destination, so successive copies can be chained to concatenate strings.
@@ -1453,7 +1453,7 @@ OT4XB_API LPSTR _xxstrcpy(LPSTR pDest, LPSTR pSrc)
 /*{{function_: _xstccpy
             | syntax_: `_xstccpy( pDest, pSrc, nMax )`
             | category: memory/string
-            | _kw_: strncpy, copy string, max bytes
+            | _kw_: _xstccpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string up to a maximum number of bytes.
     | params:
@@ -1474,7 +1474,7 @@ XPPRET XPPENTRY _XSTCCPY( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstccpy
-            | _kw_: strncpy, copy string, max bytes
+            | _kw_: _xstccpy, Function
    }}*/
 /*{{|desc: Copy a NULL terminated string pointed to by pSrc to pDest memory location stopping at nMax bytes if
       NULL not found before.
@@ -1497,7 +1497,7 @@ OT4XB_API UINT _xstccpy(LPSTR pDest, LPSTR pSrc, UINT nMax)
 /*{{function_: _xstrncpy
             | syntax_: `_xstrncpy( pDest, pSrc, nDestBytes )`
             | category: memory/string
-            | _kw_: strncpy, copy string, fixed buffer, truncate
+            | _kw_: _xstrncpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string into a fixed-size destination buffer.
     | params:
@@ -1524,7 +1524,7 @@ XPPRET XPPENTRY _XSTRNCPY( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrncpy
-            | _kw_: strncpy, copy string, fixed buffer, truncate
+            | _kw_: _xstrncpy, Function
    }}*/
 /*{{|desc: Copies a zero-terminated string into a destination buffer of destination_cb bytes, truncating
       when needed. The whole buffer is always written: the copy is padded with zeros, so the result is
@@ -1556,7 +1556,7 @@ OT4XB_API LPSTR _xstrncpy( LPSTR pDest, LPCSTR pSrc, UINT destination_cb )
 /*{{function_: _xstrcat
             | syntax_: `_xstrcat( pDest, pSrc )`
             | category: memory/string
-            | _kw_: strcat, append string, concatenate
+            | _kw_: _xstrcat, Function
    }}*/
 /*{{|desc: Appends a zero-terminated source string to a zero-terminated destination string.
     | params:
@@ -1576,7 +1576,7 @@ XPPRET XPPENTRY _XSTRCAT( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcat
-            | _kw_: strcat, append string, concatenate
+            | _kw_: _xstrcat, Function
    }}*/
 /*{{|desc: Append the string pointed to by pSrc to pDest . Assuming both strings are NULL terminated.
     | params:
@@ -1597,7 +1597,7 @@ OT4XB_API LPSTR _xstrcat( LPSTR pDest, LPSTR pSrc )
 /*{{function_: _xstpchr
             | syntax_: `_xstpchr( pStr, xChar )`
             | category: memory/string
-            | _kw_: strchr, find character, string search
+            | _kw_: _xstpchr, Function
    }}*/
 /*{{|desc: Finds a character inside a zero-terminated string.
     | params:
@@ -1620,7 +1620,7 @@ XPPRET XPPENTRY _XSTPCHR( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstpchr
-            | _kw_: strchr, find character, string search
+            | _kw_: _xstpchr, Function
    }}*/
 /*{{|desc: Returns the memory pointer of the first occurrence of the character ch within the zero-terminated
       string pStr, or 0 when the string ends before ch is found.
@@ -1641,7 +1641,7 @@ OT4XB_API LPSTR _xstpchr( LPSTR pStr , CHAR ch )
 /*{{function_: _xstpblk
             | syntax_: `_xstpblk( pStr )`
             | category: memory/string
-            | _kw_: skip blanks, skip whitespace, ltrim pointer
+            | _kw_: _xstpblk, Function
    }}*/
 /*{{|desc: Skips TAB, space, CR, and LF characters at the start of a zero-terminated string.
     | params:
@@ -1660,7 +1660,7 @@ XPPRET XPPENTRY _XSTPBLK( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstpblk
-            | _kw_: skip blanks, skip whitespace, ltrim pointer
+            | _kw_: _xstpblk, Function
    }}*/
 /*{{|desc: Skips TAB, space, CR and LF characters at the start of a zero-terminated string.
     | params:
@@ -1686,7 +1686,7 @@ OT4XB_API LPSTR _xstpblk(LPSTR pStr)
 /*{{function_: _xstrlen
             | syntax_: `_xstrlen( pStr )`
             | category: memory/string
-            | _kw_: strlen, string length, zero terminated
+            | _kw_: _xstrlen, Function
    }}*/
 /*{{|desc: Returns the length of a zero-terminated string.
     | params:
@@ -1705,7 +1705,7 @@ XPPRET XPPENTRY _XSTRLEN( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrlen
-            | _kw_: strlen, string length, zero terminated
+            | _kw_: _xstrlen, Function
    }}*/
 /*{{|desc: Count the characters of pStr up to the first NULL
     | params:
@@ -1726,7 +1726,7 @@ OT4XB_API UINT _xstrlen(LPSTR pStr)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrlenW
-            | _kw_: wcslen, wide string length, UTF-16
+            | _kw_: _xstrlenW, Function
    }}*/
 /*{{|desc: Wide-character version of _xstrlen(): counts the characters of a zero-terminated UTF-16 string.
     | params:
@@ -1745,7 +1745,7 @@ OT4XB_API UINT _xstrlenW(LPWSTR pStr)
 /*{{function_: _xstrdup
             | syntax_: `_xstrdup( pStr )`
             | category: memory/string
-            | _kw_: strdup, duplicate string, clone string, xgrab
+            | _kw_: _xstrdup, Function
    }}*/
 /*{{|desc: Duplicates a zero-terminated string into a new _xgrab() block.
     | params:
@@ -1766,7 +1766,7 @@ XPPRET XPPENTRY _XSTRDUP( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrdup
-            | _kw_: strdup, duplicate string, clone string, xgrab
+            | _kw_: _xstrdup, Function
    }}*/
 /*{{|desc: Clone a zero terminated string using _xgrab() to allocate it .
     | params:
@@ -1789,7 +1789,7 @@ OT4XB_API LPSTR _xstrdup(LPSTR pStr )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrdupandgetlen
-            | _kw_: strdup, duplicate string, length, xgrab
+            | _kw_: _xstrdupandgetlen, Function
    }}*/
 /*{{|desc: Like _xstrdup() but also reports the length: clones pStr into a new _xgrab() block and stores the
       string length, terminator excluded, in pnLen[0].
@@ -1817,7 +1817,7 @@ OT4XB_API LPSTR _xstrdupandgetlen(LPSTR pStr , UINT* pnLen)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xssr_
-            | _kw_: string slot, replace string, free and dup, string member
+            | _kw_: _xssr_, Function
    }}*/
 /*{{|desc: String slot replace: releases with _xfree() the string currently held in the pp slot, then stores
       a _xstrdup() copy of p in its place. With p == NULL the slot is just cleared. Handy to maintain an
@@ -1842,7 +1842,7 @@ OT4XB_API LPSTR _xssr_(LPSTR* pp , LPSTR p)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xssr_cb_
-            | _kw_: string slot, replace string, counted, string member
+            | _kw_: _xssr_cb_, Function
    }}*/
 /*{{|desc: Counted variant of _xssr_(): replaces the string held in the ppd slot with a copy of the first
       cbs bytes of ps and keeps the stored length in the optional pcbd slot. The previous string is released
@@ -1884,7 +1884,7 @@ OT4XB_API LPSTR _xssr_cb_(LPSTR * ppd , UINT * pcbd , LPSTR ps , UINT cbs  )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _assr_cb_
-            | _kw_: string slot, take ownership, assign string, string member
+            | _kw_: _assr_cb_, Function
    }}*/
 /*{{|desc: like xssr but get the ownership of the source pointer instead of allocate a new one
     | params:
@@ -1923,7 +1923,7 @@ OT4XB_API LPSTR  __cdecl _assr_cb_(LPSTR * ppd , UINT * pcbd , LPSTR ps , UINT c
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrdupW
-            | _kw_: wcsdup, duplicate wide string, UTF-16, xgrab
+            | _kw_: _xstrdupW, Function
    }}*/
 /*{{|desc: Wide-character version of _xstrdup(): clones a zero-terminated UTF-16 string into a new _xgrab()
       block.
@@ -1945,7 +1945,7 @@ OT4XB_API LPWSTR _xstrdupW(LPWSTR pStr )
 /*{{function_: _xstrat
             | syntax_: `_xstrat( pSep, nSepBytes, pStr, nStrBytes )`
             | category: memory/string
-            | _kw_: strstr, find substring, search bytes, position
+            | _kw_: _xstrat, Function
    }}*/
 /*{{|desc: Searches a byte sequence inside another byte sequence.
     | params:
@@ -1967,7 +1967,7 @@ XPPRET XPPENTRY _XSTRAT( XppParamList pl )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrat
-            | _kw_: strstr, find substring, search bytes, position
+            | _kw_: _xstrat, Function
    }}*/
 /*{{|desc: Return the position of the first occurrence of pSep within the string pointed to by pStr.
     | params:
@@ -2002,7 +2002,7 @@ OT4XB_API int _xstrat(LPSTR pSep, int cbSep , LPSTR pStr, int cbStr )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstr_nextline
-            | _kw_: next line, split lines, CRLF, text buffer, line iterator
+            | _kw_: _xstr_nextline, Function
    }}*/
 /*{{|desc: Steps to the next line inside a text buffer: finds the first CR, LF or CRLF break within the
       pcb[0] bytes at p, stores in pcb[0] the byte count remaining after the break and returns the position
@@ -2048,7 +2048,7 @@ OT4XB_API LPSTR __cdecl _xstr_nextline( LPSTR p , int* pcb )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcmp
-            | _kw_: strcmp, compare strings, case sensitive
+            | _kw_: _xstrcmp, Function
    }}*/
 /*{{|desc: Compares two zero-terminated strings byte by byte, case sensitive, taking each byte as unsigned.
     | params:
@@ -2080,7 +2080,7 @@ OT4XB_API int _xstrcmp( LPSTR p1 , LPSTR p2 )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcmpwithtable
-            | _kw_: compare strings, translation table, case folding
+            | _kw_: _xstrcmpwithtable, Function
    }}*/
 /*{{|desc: Compares two zero-terminated strings folding every byte through the 256-byte table pt before
       comparing - for example a lowercase table gives a case-insensitive order. With pt == NULL it behaves
@@ -2114,7 +2114,7 @@ OT4XB_API int    _xstrcmpwithtable( LPSTR p1 , LPSTR p2 , LPBYTE pt)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcmpi
-            | _kw_: stricmp, compare strings, case insensitive
+            | _kw_: _xstrcmpi, Function
    }}*/
 /*{{|desc: Case-insensitive version of _xstrcmp(): both strings are compared through the internal ANSI
       lowercase table, built with the Windows CharLower rules of the current locale.
@@ -2137,7 +2137,7 @@ OT4XB_API int    _xstrcmpi( LPSTR p1 , LPSTR p2 )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrcmpi_09az
-            | _kw_: compare strings, alphanumeric only, case insensitive, relaxed
+            | _kw_: _xstrcmpi_09az, Function
    }}*/
 /*{{|desc: Relaxed case-insensitive compare: characters are lowercased and everything outside 0-9 and a-z is
       skipped, so only the plain alphanumeric content of both strings is compared. NULL pointers are
@@ -2177,7 +2177,7 @@ OT4XB_API int _xstrcmpi_09az( LPSTR p1 , LPSTR p2 )
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xsstrcmp
-            | _kw_: compare counted strings, strncmp, case sensitive
+            | _kw_: _xsstrcmp, Function
    }}*/
 /*{{|desc: Compares two counted strings p1/p2 (cb1/cb2 are the buffer sizes). A string ends at the first
       `\0`, so bytes after a NUL are not part of the string and are not compared. For raw bytes / binary data
@@ -2215,7 +2215,7 @@ OT4XB_API int    _xsstrcmp( LPSTR p1 , ULONG cb1 , LPSTR p2 , ULONG cb2)
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xsstrcmpwithtable
-            | _kw_: compare counted strings, translation table, case folding
+            | _kw_: _xsstrcmpwithtable, Function
    }}*/
 /*{{|desc: Like _xsstrcmp but folds each byte through the translation table pt (e.g. a lowercase table for a
       case-insensitive compare). A string ends at the first `\0`, so bytes after a NUL are not part of the
@@ -2252,7 +2252,7 @@ OT4XB_API int    _xsstrcmpwithtable( LPSTR p1 , ULONG cb1 , LPSTR p2 , ULONG cb2
             | category: memory/string
             | header: ot4xb_c_exported.h
             | mangled-name: _xsstrcmpi
-            | _kw_: compare counted strings, strnicmp, case insensitive
+            | _kw_: _xsstrcmpi, Function
    }}*/
 /*{{|desc: Counted-string version of _xstrcmpi(): case-insensitive compare of two counted strings through
       the internal ANSI lowercase table, with the _xsstrcmp() rules for NULs and sizes.
@@ -2273,7 +2273,7 @@ OT4XB_API int    _xsstrcmpi( LPSTR p1 , ULONG cb1 , LPSTR p2 , ULONG cb2)
 /*{{function_: _bcmp
             | syntax_: `_bcmp( p1, p2, nBytes )`
             | category: memory
-            | _kw_: memcmp, compare memory, compare bytes
+            | _kw_: _bcmp, Function
    }}*/
 /*{{|desc: Compares two memory buffers byte by byte.
     | params:
@@ -2296,7 +2296,7 @@ XPPRET XPPENTRY _BCMP( XppParamList pl )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcmp
-            | _kw_: memcmp, compare memory, compare bytes
+            | _kw_: _bcmp, Function
    }}*/
 /*{{|desc: Binary compare of cb raw bytes of two buffers; zero bytes have no special meaning.
     | params:
@@ -2329,7 +2329,7 @@ OT4XB_API int   _bcmp(LPBYTE p1, LPBYTE p2 , UINT cb)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _bcmpwithtable
-            | _kw_: compare memory, translation table, case folding
+            | _kw_: _bcmpwithtable, Function
    }}*/
 /*{{|desc: Like _bcmp() but folds every byte through the 256-byte table pt before comparing - for example a
       lowercase table gives a case-insensitive binary compare. With pt == NULL it behaves like _bcmp().
@@ -2363,7 +2363,7 @@ OT4XB_API int _bcmpwithtable(LPBYTE p1, LPBYTE p2 , UINT cb, LPBYTE pt)
             | category: hash/crc32
             | header: ot4xb_c_exported.h
             | mangled-name: dwCrc32Lower
-            | _kw_: crc32, lowercase, case insensitive hash, checksum
+            | _kw_: dwCrc32Lower, Function
    }}*/
 /*{{|desc: CRC32 of a buffer folded to lowercase: every byte goes through the internal ANSI lowercase table
       before entering the CRC, so strings differing only in case give the same value. The CRC can be built
@@ -2386,7 +2386,7 @@ OT4XB_API DWORD dwCrc32Lower(DWORD dwCRC,LPBYTE pStr,ULONG nLen)
             | category: hash
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrhash
-            | _kw_: string hash, case insensitive, hash function
+            | _kw_: _xstrhash, Function
    }}*/
 /*{{|desc: Case-insensitive string hash: every byte is folded through the internal ANSI lowercase table and
       mixed with a shift-xor scheme.
@@ -2414,7 +2414,7 @@ OT4XB_API DWORD _xstrhash(LPSTR pKey, DWORD cb)
             | category: hash
             | header: ot4xb_c_exported.h
             | mangled-name: _xstrhtcs
-            | _kw_: string hash, case sensitive, hash function
+            | _kw_: _xstrhtcs, Function
    }}*/
 /*{{|desc: Case-sensitive variant of _xstrhash(): same shift-xor mixing, but bytes are hashed as they are.
     | params:
@@ -2441,7 +2441,7 @@ OT4XB_API DWORD _xstrhtcs(LPSTR pKey, DWORD cb)
             | category: atomic
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_interlocked_alloc
-            | _kw_: interlocked counter, atomic, allocate counter, thread safe
+            | _kw_: ot4xb_interlocked_alloc, Function
    }}*/
 /*{{|desc: Allocates a zero-initialized 4-byte counter from a private heap reserved for interlocked
       counters, ready for the Windows Interlocked* functions. Release with ot4xb_interlocked_free().
@@ -2459,7 +2459,7 @@ OT4XB_API void*  __cdecl ot4xb_interlocked_alloc(void)
             | category: atomic
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_interlocked_free
-            | _kw_: interlocked counter, atomic, free counter
+            | _kw_: ot4xb_interlocked_free, Function
    }}*/
 /*{{|desc: Releases a counter allocated with ot4xb_interlocked_alloc().
     | params:
@@ -2479,7 +2479,7 @@ OT4XB_API DWORD __cdecl ot4xb_interlocked_free(void* p)
             | header: ot4xb_c_exported.h
             | category: string/match
             | mangled-name: _hdict_filter_cmpi
-            | _kw_: hdict filter, prefix match, key filter, iterate
+            | _kw_: _hdict_filter_cmpi, Function
    }}*/
 /*{{|desc: Ready-made key filter for _hdict_iterate_step() (prefix match): accepts a key when its first
       cb_pat bytes equal pat ignoring case, through the internal ANSI lowercase table. A pattern longer than
@@ -2505,7 +2505,7 @@ extern "C" OT4XB_API BOOL  __cdecl _hdict_filter_cmpi(LPSTR key, DWORD cb_key, L
             | header: ot4xb_c_exported.h
             | category: string/match
             | mangled-name: _hdict_filter_strstri
-            | _kw_: hdict filter, substring match, key filter, iterate
+            | _kw_: _hdict_filter_strstri, Function
    }}*/
 /*{{|desc: Ready-made key filter for _hdict_iterate_step() (substring match): accepts a key when pat appears
       anywhere inside it, ignoring case (StrStrI). Both strings must be zero terminated; the lengths are
@@ -2531,7 +2531,7 @@ extern "C" OT4XB_API BOOL  __cdecl _hdict_filter_strstri(LPSTR key, DWORD cb_key
             | header: ot4xb_c_exported.h
             | category: string/match
             | mangled-name: _hdict_filter_wildcmpi
-            | _kw_: hdict filter, wildcard match, key filter, iterate
+            | _kw_: _hdict_filter_wildcmpi, Function
    }}*/
 /*{{|desc: Ready-made key filter for _hdict_iterate_step() (wildcard match): accepts a key when it matches
       the pattern with bStrWildCmpI(), a case-insensitive wildcard compare. Both strings must be zero
@@ -2554,7 +2554,7 @@ extern "C" OT4XB_API BOOL  __cdecl _hdict_filter_wildcmpi(LPSTR key, DWORD cb_ke
 /*{{function_: _shift_ptr_
             | syntax_: `_shift_ptr_( @pMem, @nBytes, nSkip )`
             | category: memory
-            | _kw_: pointer arithmetic, advance pointer, offset, byte count
+            | _kw_: _shift_ptr_, Function
    }}*/
 /*{{|desc: Shifts a pointer, and optionally reduces an associated byte count.
     | params:
@@ -2591,7 +2591,7 @@ _XPP_REG_FUN_( _SHIFT_PTR_  )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _dwscan
-            | _kw_: find DWORD, search array, position, scan
+            | _kw_: _dwscan, Function
    }}*/
 /*{{|desc: Return the 0 based position of dwValue into the DWORD array pdw or -1 if not found
     | params:
@@ -2630,7 +2630,7 @@ OT4XB_API int _dwscan(LPDWORD pdw, int item_count , DWORD dwValue )
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _dwscan_lwstrcrc32
-            | _kw_: find crc32, key lookup, DWORD array, lowercase crc
+            | _kw_: _dwscan_lwstrcrc32, Function
    }}*/
 /*{{|desc: Scans a DWORD array for the lowercase CRC32 of a key: computes dwCrc32Lower(0,k,cb) and returns
       its position inside pdw, or -1 when the value is not there.
@@ -2662,7 +2662,7 @@ OT4XB_API int _dwscan_lwstrcrc32(LPDWORD pdw, int item_count , LPSTR k , int cb,
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _dwscan_lwstrcrc32_ex
-            | _kw_: find crc32, key lookup, DWORD array, start item
+            | _kw_: _dwscan_lwstrcrc32_ex, Function
    }}*/
 /*{{|desc: Like _dwscan_lwstrcrc32() but the scan can start at a given item: with item_start > 0 the first
       item_start items are skipped.
@@ -2699,7 +2699,7 @@ OT4XB_API int _dwscan_lwstrcrc32_ex( LPDWORD pdw, int item_count, LPSTR k, int c
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _qwscan
-            | _kw_: find 64-bit, search array, ULONGLONG, position
+            | _kw_: _qwscan, Function
    }}*/
 /*{{|desc: Returns the zero-based position of a 64-bit value inside the ULONGLONG array pqw, or -1 when it
       is not there. The value to find is read from pvalue[0].
@@ -2730,7 +2730,7 @@ OT4XB_API int _qwscan(ULONGLONG * pqw, int item_count, ULONGLONG * pvalue)
             | category: memory
             | header: ot4xb_c_exported.h
             | mangled-name: _qwscan_atoqw
-            | _kw_: find 64-bit, decimal string, search array, ULONGLONG
+            | _kw_: _qwscan_atoqw, Function
    }}*/
 /*{{|desc: Like _qwscan() but the value arrives as text: int_string is parsed as a decimal unsigned 64-bit
       number (strtoull) and searched in the array.
@@ -2759,7 +2759,7 @@ OT4XB_API int _qwscan_atoqw(ULONGLONG * pqw, int item_count, LPSTR int_string, U
 /*{{debug-c-function_: begin_xwatch_thread
             | syntax_: `BOOL begin_xwatch_thread( void )`
             | category: memory
-            | _kw_: memory watch, leak detection, debug, thread
+            | _kw_: begin_xwatch_thread, Function
    }}*/
 /*{{|desc: Debug builds only. Starts a memory watch on the calling thread: resets the watch counter that _xgrab()/_mgrab()
       increment and _xfree()/_mfree() decrement while called from this thread. Only one thread can watch at a time.
@@ -2781,7 +2781,7 @@ extern "C" OT4XB_API BOOL __cdecl begin_xwatch_thread(void)
 /*{{debug-c-function_: count_xwatch_thread
             | syntax_: `LONG count_xwatch_thread( void )`
             | category: memory
-            | _kw_: memory watch, leak detection, balance, debug
+            | _kw_: count_xwatch_thread, Function
    }}*/
 /*{{|desc: Debug builds only. Returns the current balance of the memory watch started with
       begin_xwatch_thread(): allocations minus releases seen so far on the watched thread.
@@ -2801,7 +2801,7 @@ extern "C" OT4XB_API LONG  __cdecl count_xwatch_thread(void)
 /*{{debug-c-function_: end_xwatch_thread
             | syntax_: `LONG end_xwatch_thread( void )`
             | category: memory
-            | _kw_: memory watch, leak detection, report, debug
+            | _kw_: end_xwatch_thread, Function
    }}*/
 /*{{|desc: Debug builds only. Stops the memory watch started with begin_xwatch_thread() and reports the
       final balance; a non-zero value means unbalanced allocations on the watched thread.
@@ -2825,7 +2825,7 @@ extern "C" OT4XB_API LONG  __cdecl end_xwatch_thread(void)
 /*{{debug-c-function_: on_xwatch_thread
             | syntax_: `void on_xwatch_thread( LONG n )`
             | category: memory
-            | _kw_: memory watch, leak detection, counter, debug
+            | _kw_: on_xwatch_thread, Function
    }}*/
 /*{{|desc: Debug builds only. Adds n to the memory watch counter when the calling thread is the watched
       one. The allocation functions call it with 1 and the release functions with -1.

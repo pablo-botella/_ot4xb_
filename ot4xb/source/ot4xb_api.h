@@ -48,11 +48,11 @@
 #include <xppcon.h>
 /*{{ topic: cpp_helper_macros
    | category: c-api/macros
+   | book: cpp
    | desc: Helper macros of ot4xb_api.h for C and C++ code built against ot4xb: byte-wise pointer arithmetic,
      DWORD alignment, an Xbase++ error assert and a file-and-line log.
    | macro_: `_mk_ptr_( cast, ptr, addValue )`
    | desc_: Pointer arithmetic in bytes, whatever the type of ptr: the address ptr + addValue bytes, cast to
-   | _kw_: macros, pointer arithmetic, _mk_ptr_, xpp_assert, SendFLog, C++ helpers
      **cast** (a pointer type). }}*/
 #define _mk_ptr_( cast, ptr, addValue ) ((cast)((void*)( (DWORD)(ptr)+(DWORD)(addValue))))
 /*{{ topic: cpp_helper_macros | macro_: `_mk_ptr_minus( cast, ptr, minusValue )`

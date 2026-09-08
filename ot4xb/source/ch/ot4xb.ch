@@ -12,7 +12,6 @@
      | command_: SWAP a , b  |desc_:  Swap values between a and b
      | deprecated: kept for existing code only; do not use in new code
      | note: Not active when OT4XB_LEAN_AND_MEAN is defined before including ot4xb.ch: that define leaves
-     | _kw_: commands, ot4xb.ch, DEFAULT, SWAP, SET VARIANT, misc
        out old things of little use that existing code may still rely on, and SWAP is one of them. }}*/
 
 #ifndef OT4XB_LEAN_AND_MEAN
@@ -24,7 +23,6 @@
 // ---------------------------------------------------------------------------
 /*{{ topic: ot4xb_ch_debug_commands  
      | category: commands , ot4xb.ch , debug
-     | _kw_: commands, ot4xb.ch, assert, debug, SendLog, log with file line
      | command_: OT4XB ASSERT HEADER  |desc_:  throw an error if ot4xb.ch header is not compatible with the ot4xb.dll version }}*/
 
 #xcommand OT4XB ASSERT HEADER => ;
@@ -53,8 +51,9 @@ if <uVar1> == NIL ;
 /*{{   topic: ot4xb_ch_deprecated_commands
      | category: commands , ot4xb.ch , deprecated
      | note: This commands was created in early versions of ot4xb colected from another old stuff, but causing more noise than benefit.
-     | _kw_: commands, ot4xb.ch, deprecated, BYNAME, LEAN_AND_MEAN
         can de dissabled by defining **OT4XB_LEAN_AND_MEAN** before include **ot4xb.ch** }}*/ 
+
+     | _kw_: commands, ot4xb.ch, deprecated, BYNAME, LEAN_AND_MEAN }}*/
 
 /*{{|xtranslate: BYNAME v [, vN ]   |desc_:  assign the parameters with name v to the object variables with same names  }}*/
 
@@ -99,7 +98,8 @@ if <uVar1> == NIL ;
 | note: The function UuidCreate() was included in xpprt1.dll in Xbase++ 1.9.355 , 
         so to avoid conflicts and mantain compatibility ot4xb.dll renamed to 
         _UuidCreate() and added a `#pragma Map( UUIDCREATE, "_UUIDCREATE" )` in ot4xb.ch.
-        **OT4XB_LEAN_AND_MEAN** will dissable this function map }}*/
+        **OT4XB_LEAN_AND_MEAN** will dissable this function map
+| _kw_: _UuidCreate, Function }}*/
 #ifndef OT4XB_LEAN_AND_MEAN
 #pragma Map( UUIDCREATE, "_UUIDCREATE" )
 #endif
@@ -192,7 +192,7 @@ if <uVar1> == NIL ;
    | command_: ### _Assert_dll_fn_
    | syntax_: `_Assert_dll_fn_( <dll>, <function> )`
    | desc_: Raises an ot4xb error (severity 2, "Function X not found in dll Y") when nFpGet() cannot resolve the export
-     <function> of the DLL <dll>: the check the `@dll:function( ... )` shorthand runs before calling
+     `<function>` of the DLL `<dll>`: the check the `@dll:function( ... )` shorthand runs before calling
      ({{ilink: <topic quick_call_dll_functions> quick_call_dll_functions}}). Both names are written bare.
    | params:
      - `dll` DLL name.
@@ -221,7 +221,6 @@ if <uVar1> == NIL ;
      advances by the structure size, the memory is not copied. Usable anywhere.
    | params:
      - `oStructure` Structure object linked to the current element.
-   | _kw_: commands, ot4xb.ch, BEGIN STRUCTURE, MEMBER, GWST, binary structure
    | see-also: GwstArrayPrev, gwst_sizeof }}*/
 #xtranslate GwstArrayNext( <o> ) => <o>:_link_( <o>:_addressof_() + <o>:_sizeof_(),.F.)
 /*{{ topic: ot4xb_ch_structure_commands
@@ -242,7 +241,7 @@ if <uVar1> == NIL ;
      the auxiliary pseudo-functions adjust offsets and alignment. Every command here is a preprocessor command
      defined in ot4xb.ch.
    |: Every MEMBER command adds a member to the structure being defined and only makes sense between
-     BEGIN STRUCTURE and END STRUCTURE. In all of them <memberName> is the name of the member being added.
+     BEGIN STRUCTURE and END STRUCTURE. In all of them `<memberName>` is the name of the member being added.
    |: Auxiliary functions - #xtranslate pseudo-functions over the class builder, usable only inside a
      class or structure definition: `GwstAlignNextMember( n )`, `GwstGetOffset()`, `GwstSetOffset( n )`,
      `GwstSkipBytes( n )`. Each one is documented below. }}*/
@@ -349,7 +348,6 @@ if <uVar1> == NIL ;
      class object through a TXbClass builder the first time it is called, the DYNAMIC ... commands register
      variables, properties and methods on that builder, and END DYNAMIC CLASS creates the class object and
      returns it. A structure class is a dynamic class that additionally describes a binary memory layout:
-     | _kw_: commands, ot4xb.ch, BEGIN DYNAMIC CLASS, runtime class, dynamic class
      BEGIN STRUCTURE ... END STRUCTURE define it, adding the members with the MEMBER commands. }}*/
 /*{{ topic: ot4xb_ch_dynamic_class_commands
    | command_: ### NS_BEGIN DYNAMIC CLASS
@@ -404,7 +402,7 @@ if <uVar1> == NIL ;
    | params:
      - `cVarName` Name of the variable.
      - `nExtra` Numeric - Optional attribute flags, see below.
-   | flags: FLAGS <nExtra> is ORed into the attributes of the variable, on top of its kind and of the default
+   | flags: FLAGS `<nExtra>` is ORed into the attributes of the variable, on top of its kind and of the default
      scope of the class; the bits are the ones of ot4xb_constants.h:
      - `0x0001` xppCLASS_HIDDEN, `0x0002` xppCLASS_PROTECTED, `0x0003` xppCLASS_EXPORTED - access scope
      - `0x0010` xppVAR_ASSIGN_HIDDEN, `0x0020` xppVAR_ASSIGN_PROTECTED, `0x0030` xppVAR_ASSIGN_EXPORTED - assign scope
@@ -418,7 +416,7 @@ if <uVar1> == NIL ;
    | params:
      - `cVarName` Name of the variable.
      - `nExtra` Numeric - Optional attribute flags, see below.
-   | flags: FLAGS <nExtra> is ORed into the attributes of the variable, on top of its kind and of the default
+   | flags: FLAGS `<nExtra>` is ORed into the attributes of the variable, on top of its kind and of the default
      scope of the class; the bits are the ones of ot4xb_constants.h:
      - `0x0001` xppCLASS_HIDDEN, `0x0002` xppCLASS_PROTECTED, `0x0003` xppCLASS_EXPORTED - access scope
      - `0x0010` xppVAR_ASSIGN_HIDDEN, `0x0020` xppVAR_ASSIGN_PROTECTED, `0x0030` xppVAR_ASSIGN_EXPORTED - assign scope
@@ -432,7 +430,7 @@ if <uVar1> == NIL ;
    | params:
      - `cVarName` Name of the variable.
      - `nExtra` Numeric - Optional attribute flags, see below.
-   | flags: FLAGS <nExtra> is ORed into the attributes of the variable, on top of its kind and of the default
+   | flags: FLAGS `<nExtra>` is ORed into the attributes of the variable, on top of its kind and of the default
      scope of the class; the bits are the ones of ot4xb_constants.h:
      - `0x0001` xppCLASS_HIDDEN, `0x0002` xppCLASS_PROTECTED, `0x0003` xppCLASS_EXPORTED - access scope
      - `0x0010` xppVAR_ASSIGN_HIDDEN, `0x0020` xppVAR_ASSIGN_PROTECTED, `0x0030` xppVAR_ASSIGN_EXPORTED - assign scope
@@ -503,8 +501,8 @@ if <uVar1> == NIL ;
    | syntax_: `DYNAMIC [CLASS] PROPERTY <cName> COMPILE READ <cRead> [WRITE <cWrite>] [INSERT <p1> [, <pN>]]`
    | syntax_: `DYNAMIC [CLASS] PROPERTY <cName> COMPILE WRITE <cWrite> [INSERT <p1> [, <pN>]]`
    | desc_: Like the BLOCK / READ / WRITE forms, but the implementation is given as a Character string
-     with the source code, macro-compiled while the class is being built. In the first form <cString>
-     holds the source of a whole code block; in the READ / WRITE forms <cRead> and <cWrite> hold just
+     with the source code, macro-compiled while the class is being built. In the first form `<cString>`
+     holds the source of a whole code block; in the READ / WRITE forms `<cRead>` and `<cWrite>` hold just
      the expression source and are wrapped like the READ / WRITE expression forms. The INSERT clause
      formats the string first with `cPrintf( <cString>, <p1> [, <pN>] )`, so it can carry
      printf-style placeholders filled with values computed at class-building time.
@@ -622,7 +620,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_dynamic_class_commands
    | command_: ### DYNAMIC PROPERTY IS CONSTANT
    | syntax_: `DYNAMIC [CLASS] PROPERTY <cName> IS CONSTANT <uVal>`
-   | desc_: Defines a read-only property returning the fixed value <uVal> (it expands to
+   | desc_: Defines a read-only property returning the fixed value `<uVal>` (it expands to
      `DYNAMIC [CLASS] PROPERTY <cName> READ <uVal>`).
    | params:
      - `cName` Name of the constant.
@@ -707,7 +705,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### INLINE CLASS STRUCTURE
    | syntax_: `INLINE CLASS STRUCTURE <Tag> [ EXTENDING <SuperClass> ] [ local <local1>, ... ]`
-   | desc_: For use inside a declarative CLASS ... ENDCLASS block: defines an inline class method <Tag>
+   | desc_: For use inside a declarative CLASS ... ENDCLASS block: defines an inline class method `<Tag>`
      whose body builds (once) and returns a structure class named `<OuterClass><Tag>_st`, where
      OuterClass is the name of the declaring class. EXTENDING works as in BEGIN STRUCTURE.
    | see-also: BEGIN STRUCTURE, INLINE DYNAMIC CLASS
@@ -719,7 +717,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_dynamic_class_commands
    | command_: ### INLINE DYNAMIC CLASS
    | syntax_: `INLINE DYNAMIC CLASS <Tag> [ FROM <Parent1> [, <ParentN>] ] [ local <local1>, ... ]`
-   | desc_: For use inside a declarative CLASS ... ENDCLASS block: defines an inline class method <Tag>
+   | desc_: For use inside a declarative CLASS ... ENDCLASS block: defines an inline class method `<Tag>`
      whose body builds (once) and returns a dynamic class named `<OuterClass>_<Tag>_cls`, where
      OuterClass is the name of the declaring class. The clauses work as in BEGIN DYNAMIC CLASS.
    | see-also: BEGIN DYNAMIC CLASS, INLINE CLASS STRUCTURE
@@ -741,7 +739,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER @
    | syntax_: `MEMBER @ <memberClass> <memberName>`
-   | desc_: Embeds a child structure: <memberClass> is the class name of another gwst structure. Using
+   | desc_: Embeds a child structure: `<memberClass>` is the class name of another gwst structure. Using
      this command you can create nested structures of any depth level.
    | params:
      - `memberClass` Class name of the child member.
@@ -1148,10 +1146,10 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_dynamic_class_commands
    | command_: ### DYNAMIC BITFIELD
    | syntax_: `DYNAMIC BITFIELD <cName> FROM BYTE|WORD|DWORD <member> OFFSET <nBitOffset> BITS <nBits>`
-   | desc_: Defines a property exposing a bit field of a numeric member: reading extracts <nBits> bits
-     starting at bit <nBitOffset> of <member>; assigning writes the value back into those bits. The
-     FROM type is the binary type of <member> (BYTE, WORD or DWORD). Defined in ot4xb.ch as a
-     #xtranslate over `DYNAMIC PROPERTY ... BLOCK`.
+   | desc_: Defines a property exposing a bit field of a numeric member: reading extracts `<nBits>` bits
+     starting at bit `<nBitOffset>` of `<member>`; assigning writes the value back into those bits. The
+     FROM type is the binary type of `<member>` (BYTE, WORD or DWORD). Defined in ot4xb.ch as a
+     `#xtranslate` over `DYNAMIC PROPERTY ... BLOCK`.
    | params:
      - `cName` Name of the property.
      - `member` Numeric member of the same class holding the bits.
@@ -1181,10 +1179,10 @@ if <uVar1> == NIL ;
    | command_: ### MEMBER LPSTR DYNSZ
    | syntax_: `MEMBER LPSTR <memberName> DYNSZ <memberName2>`
    | syntax_: `MEMBER DYNSZ <memberName2> LPSTR <memberName>`
-   | desc_: Declares the pointer member <memberName> and a DYNSZ member <memberName2> overlaid on the
-     same 4 bytes (the expansion uses GWSTBACK): assigning a string to <memberName2> allocates the
-     buffer, and reading <memberName> returns its address as a Numeric value. Both clause orders
-     expand identically. Assigning NIL to <memberName2> releases the buffer (see MEMBER DYNSZ).
+   | desc_: Declares the pointer member `<memberName>` and a DYNSZ member `<memberName2>` overlaid on the
+     same 4 bytes (the expansion uses GWSTBACK): assigning a string to `<memberName2>` allocates the
+     buffer, and reading `<memberName>` returns its address as a Numeric value. Both clause orders
+     expand identically. Assigning NIL to `<memberName2>` releases the buffer (see MEMBER DYNSZ).
    | see-also: MEMBER LPSTR, MEMBER DYNSZ, GWSTBACK
  }}*/
 #xcommand MEMBER LPSTR  <m> DYNSZ <m2> => MEMBER LPSTR <m> ;
@@ -1199,7 +1197,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER LPSTR STRZ_READ
    | syntax_: `MEMBER LPSTR <memberName> STRZ_READ <cPropName>`
-   | desc_: Declares the pointer member <memberName> plus a read-only property <cPropName> returning
+   | desc_: Declares the pointer member `<memberName>` plus a read-only property `<cPropName>` returning
      the zero terminated string it points to, or an empty string when the pointer is 0.
    | see-also: MEMBER LPSTR, MEMBER LPSTR STR_READ_CB
  }}*/
@@ -1210,8 +1208,8 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER LPSTR STR_READ_CB
    | syntax_: `MEMBER LPSTR <memberName> STR_READ_CB <cPropName> CBFROM <sizeMember>`
-   | desc_: Declares the pointer member <memberName> plus a read-only property <cPropName> returning
-     the text it points to, reading exactly the number of bytes held by member <sizeMember> (an empty
+   | desc_: Declares the pointer member `<memberName>` plus a read-only property `<cPropName>` returning
+     the text it points to, reading exactly the number of bytes held by member `<sizeMember>` (an empty
      string when the pointer is 0).
    | see-also: MEMBER LPSTR, MEMBER LPSTR STRZ_READ
  }}*/
@@ -1222,9 +1220,9 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER POINTER32 LINK
    | syntax_: `MEMBER POINTER32 <memberName> LINK <cPropName> [ CLASS <StructClass> ]`
-   | desc_: Declares the pointer member <memberName> plus a read-only property <cPropName> returning a
-     new instance of structure class <StructClass> linked (`:_link_()`) to the address held in
-     <memberName>, or NIL when the pointer is 0. Without the CLASS clause the instance is of the same
+   | desc_: Declares the pointer member `<memberName>` plus a read-only property `<cPropName>` returning a
+     new instance of structure class `<StructClass>` linked (`:_link_()`) to the address held in
+     `<memberName>`, or NIL when the pointer is 0. Without the CLASS clause the instance is of the same
      class as the containing structure.
    | see-also: MEMBER LPSTR, MEMBER @
  }}*/
@@ -1240,8 +1238,8 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER BINSTR
    | syntax_: `MEMBER BINSTR <memberName> SIZE <nSize>`
-   | desc_: Stores a binary string of up to <nSize> characters: a longer value is truncated, a shorter
-     one is padded with `\0`. Reading returns a string of exactly <nSize> characters.
+   | desc_: Stores a binary string of up to `<nSize>` characters: a longer value is truncated, a shorter
+     one is padded with `\0`. Reading returns a string of exactly `<nSize>` characters.
    | params:
      - `memberName` Name of the structure member.
      - `nSize` Size reserved in the structure, in bytes.
@@ -1251,7 +1249,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER SZSTR
    | syntax_: `MEMBER SZSTR <memberName> SIZE <nSize>`
-   | desc_: Stores a zero terminated string of up to <nSize> characters including the trailing `\0`.
+   | desc_: Stores a zero terminated string of up to `<nSize>` characters including the trailing `\0`.
      Reading returns the text up to the first `\0` character.
    | params:
      - `memberName` Name of the structure member.
@@ -1262,7 +1260,7 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER SZWSTR
    | syntax_: `MEMBER SZWSTR <memberName> SIZE <nSize>`
-   | desc_: A zero terminated wide (UTF-16) string member holding up to <nSize> wide characters: <nSize> * 2 bytes are
+   | desc_: A zero terminated wide (UTF-16) string member holding up to `<nSize>` wide characters: `<nSize>` * 2 bytes are
      reserved in the structure, the terminator included; reading returns the text up to the first zero
      character, converted to ANSI.
    | desc_: Like MEMBER SZSTR but the member holds a zero terminated wide string.
@@ -1276,14 +1274,13 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_class_helper_commands
    | command_: ### DELEGATE METHOD WITH PARAMLIST
    | syntax_: `DELEGATE <oVar> METHOD <cMethod> WITH PARAMLIST`
-   | desc_: Inside a CLASS declaration: defines the method <cMethod> as a forwarder to the same method of the object held
-     in the instance variable <oVar>, passing along whatever parameters it received (any number; they are
+   | desc_: Inside a CLASS declaration: defines the method `<cMethod>` as a forwarder to the same method of the object held
+     in the instance variable `<oVar>`, passing along whatever parameters it received (any number; they are
      collected with PValue(), sent with {{ilink: <function lCallMethodPA> lCallMethodPA}} and written back, so
      by-reference parameters work) and returning its result.
    | params:
      - `oVar` Instance variable holding the object the call is delegated to.
      - `cMethod` Method name, the same on both sides.
-   | _kw_: commands, ot4xb.ch, DELEGATE, TLS CLASS VAR, PROPERTY IS MASK, class helpers
    | see-also: DELEGATE METHOD, DELEGATE VAR }}*/
 #xcommand DELEGATE <v> METHOD <cm> WITH PARAMLIST;
           =>;
@@ -1305,8 +1302,8 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_class_helper_commands
    | command_: ### DELEGATE METHOD
    | syntax_: `DELEGATE <oVar> METHOD <cMethod>( [<p1>] [, <pN>] )`
-   | desc_: Inside a CLASS declaration: defines the method <cMethod>( p1, ..., pN ) as `return ::<oVar>:<cMethod>( @p1, ..., @pN )`,
-     the declared parameters forwarded by reference to the same method of the object in <oVar>.
+   | desc_: Inside a CLASS declaration: defines the method `<cMethod>`( p1, ..., pN ) as `return ::<oVar>:<cMethod>( @p1, ..., @pN )`,
+     the declared parameters forwarded by reference to the same method of the object in `<oVar>`.
    | params:
      - `oVar` Instance variable holding the object the call is delegated to.
      - `cMethod` Method name, the same on both sides.
@@ -1321,9 +1318,9 @@ if <uVar1> == NIL ;
    | command_: ### DELEGATE VAR
    | syntax_: `DELEGATE <oVar> [CLASS] VAR <cName> [READONLY]`
    | syntax_: `DELEGATE [CLASS] VAR <cName> TO <expression> [READONLY]`
-   | desc_: Inside a CLASS declaration: exposes as the (class) variable <cName> - an INLINE ACCESS ASSIGN method, or
-     ACCESS only with READONLY - either the variable of the same name of the object held in <oVar>
-     (`::<oVar>:<cName>`), or any <expression>: reading returns it, assigning stores into it.
+   | desc_: Inside a CLASS declaration: exposes as the (class) variable `<cName>` - an INLINE ACCESS ASSIGN method, or
+     ACCESS only with READONLY - either the variable of the same name of the object held in `<oVar>`
+     (`::<oVar>:<cName>`), or any `<expression>`: reading returns it, assigning stores into it.
    | params:
      - `oVar` Instance variable holding the object whose variable is exposed.
      - `cName` Name of the exposed variable.
@@ -1663,12 +1660,12 @@ if <uVar1> == NIL ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### VARLEN EXTRA MEMBER
    | syntax_: `VARLEN EXTRA MEMBER <cName> SIZE TO <sizeMember>`
-   | desc_: Declares the variable-length member <cName>, stored after the fixed part of the structure;
-     assigning a string to it also stores its length into the fixed member <sizeMember>. Internally
-     it is a DYNAMIC VAR __<cName> exposed through a DYNAMIC PROPERTY <cName>.
+   | desc_: Declares the variable-length member `<cName>`, stored after the fixed part of the structure;
+     assigning a string to it also stores its length into the fixed member `<sizeMember>`. Internally
+     it is a DYNAMIC VAR __`<cName>` exposed through a DYNAMIC PROPERTY `<cName>`.
    | params:
      - `cName` Name of the variable-length member.
-     - `sizeMember` Numeric member of the fixed part keeping the current length of <cName>.
+     - `sizeMember` Numeric member of the fixed part keeping the current length of `<cName>`.
    | see-also: BEGIN VARLEN STRUCTURE, END VARLEN STRUCTURE
  }}*/
 #xcommand VARLEN EXTRA MEMBER <cc> SIZE TO <sz> =>  ;
@@ -1721,7 +1718,7 @@ METHOD <cls>:init(p1,p2,p3,p4,p5,p6)     ;
 #ifndef OT4XB_LEAN_AND_MEAN
 //-----------------------------------------------------------------------------------------------------------------------
 
-/*{{ note-id: as-qtype-aliases | title_: The AS <type> aliases of QTYPE codes (ot4xb.ch)
+/*{{ note-id: as-qtype-aliases | title_: The AS `<type>` aliases of QTYPE codes (ot4xb.ch)
    |: In QTEMPLATE and DLL ... IMPORT declarations a parameter or return type is written `AS <type>`; each name
      is a pseudo-constant of ot4xb.ch expanding to the Qualified-call type code (QTYPE) it stands for:
      {{begin-md}}
@@ -1840,7 +1837,6 @@ METHOD <cls>:init(p1,p2,p3,p4,p5,p6)     ;
      preprocessor is that you include the .ch where you need it and that is all. Those forms are documented in
      {{ilink: <topic quick_call_dll_functions> quick_call_dll_functions}}. The whole set is NOT active when OT4XB_LEAN_AND_MEAN is defined before including
      ot4xb.ch.
-   | _kw_: commands, ot4xb.ch, DLL IMPORT, DLL FUNCTION, DllFunction, wrapper, DELEGATED
    | include-note-id: as-qtype-aliases }}*/
 /*{{ note-id: dll-import-intermediate-commands | title_: The intermediate commands behind DLL IMPORT
    |: The prototype form `DLL <cDll> IMPORT <retType> <fnName>( <type> <param>, ... )` is a `#xtranslate` that rewrites
@@ -1986,7 +1982,7 @@ static function <fn>( [<p1>] [,<pN>] ) ;
    | command_: ### QTEMPLATE
    | syntax_: `[local | static] QTEMPLATE <cTemplate> AS QTYPE <cRet> [ PARAM AS QTYPE <cT1> [, PARAM AS QTYPE <cTN>] ]`
    | desc_: Builds a Qualified-call template string by hand: assigns `<cRet> + <cT1> + ... + <cTN>` to the
-     variable <cTemplate> (declaring it as local or static when the keyword is given), ready for FpQCall().
+     variable `<cTemplate>` (declaring it as local or static when the keyword is given), ready for FpQCall().
      The types are written with the `AS <type>` aliases or as `AS QTYPE "<code>"`.
    | params:
      - `cTemplate` Variable that receives the template string.
@@ -2008,7 +2004,7 @@ static function <fn>( [<p1>] [,<pN>] ) ;
    | command_: ### DLL IMPORT
    | syntax_: `[STATIC] [DELEGATED] DLL <cDll> IMPORT <retType> <fnName>( [<type1> <p1>] [, <typeN> <pN>] ) [ SYMBOL <cExport> ] [ DEFAULT <p> := <value> [, DEFAULT <pN> := <valueN>] ]`
    | desc_: Declares `function <fnName>( p1, ..., pN )` (a `static function` with STATIC) that calls the export
-     <cExport> - by default the function name - of the DLL <cDll>, written like a C prototype:
+     `<cExport>` - by default the function name - of the DLL `<cDll>`, written like a C prototype:
      `DLL "mydll" IMPORT LPSTR MyFunction( LONG p1, DOUBLE p2 )`. The types are the `AS <type>` aliases of the
      table above without the `AS` (or a QTYPE code in quotes). Every call resolves the address with
      nGetProcAddress(), asserts it with _Assert_fp_() and calls it with FpQCall() and the template built from the
@@ -2075,12 +2071,11 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
      Together with a `#xtranslate` in a .ch of your own, for example
      `#xtranslate Rm.EndSession( <h> ) => @rstrtmgr:["__sl__sl"]:RmEndSession( <h> )`,
      it replaces the DLL IMPORT family for most uses:
-     | _kw_: @dll, quick call, call dll export, FpQCall, DllCall, inline dll call
      include the .ch where you need it and that is all. }}*/
 /*{{ topic: quick_call_dll_functions
    | command_: ### @dll:function( ... )
    | syntax_: `@<dll>:<function>( [<p1>] [, <pN>] )`
-   | desc_: Calls the export <function> of the DLL <dll> through {{ilink: <function nFpCall> nFpCall}}, the
+   | desc_: Calls the export `<function>` of the DLL `<dll>` through {{ilink: <function nFpCall> nFpCall}}, the
      argument types being inferred from the values passed (`@user32:MessageBeep( 0 )`). Both names are written
      bare, without quotes. With OT4XB_ASSERT_LEVEL above 2 the export is first checked with _Assert_dll_fn_(),
      which raises an error when the DLL or the function cannot be found.
@@ -2100,8 +2095,8 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
 /*{{ topic: quick_call_dll_functions
    | command_: ### @dll:[prototype]:function( ... )
    | syntax_: `@<dll>:[<cPrototype>]:<function>( [<p1>] [, <pN>] )`
-   | desc_: Calls the export <function> of the DLL <dll> through {{ilink: <function FpQCall> FpQCall}} with the
-     Qualified-call prototype <cPrototype>, a QTYPE template string in quotes (`@kernel32:["__sl__sl"]:Sleep( 100 )`):
+   | desc_: Calls the export `<function>` of the DLL `<dll>` through {{ilink: <function FpQCall> FpQCall}} with the
+     Qualified-call prototype `<cPrototype>`, a QTYPE template string in quotes (`@kernel32:["__sl__sl"]:Sleep( 100 )`):
      the return value and every argument are converted exactly as the template says.
    | params:
      - `dll` DLL name, without extension.
@@ -2114,9 +2109,9 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER BINSTR DWORD ARRAY
    | syntax_: `MEMBER BINSTR <storageName> DWORD ARRAY <methodName> ITEMS <nItems>`
-   | desc_: Adds a binary string member <storageName> of <nItems> * 4 bytes plus a method
-     <methodName>( nIndex [, nValue] ) that reads or writes item nIndex of it as a DWORD (PeekDWord / PokeDWord):
-     nIndex is 0-based and checked against 0 .. <nItems> - 1; with nValue the item is written, and the value
+   | desc_: Adds a binary string member `<storageName>` of `<nItems>` * 4 bytes plus a method
+     `<methodName>`( nIndex [, nValue] ) that reads or writes item nIndex of it as a DWORD (PeekDWord / PokeDWord):
+     nIndex is 0-based and checked against 0 .. `<nItems>` - 1; with nValue the item is written, and the value
      is returned in both cases. The storage is locked during the access.
    | params:
      - `storageName` Name of the BINSTR member holding the items.
@@ -2133,9 +2128,9 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER BINSTR WORD ARRAY
    | syntax_: `MEMBER BINSTR <storageName> WORD ARRAY <methodName> ITEMS <nItems>`
-   | desc_: Adds a binary string member <storageName> of <nItems> * 2 bytes plus a method
-     <methodName>( nIndex [, nValue] ) that reads or writes item nIndex of it as a WORD (PeekWord / PokeWord):
-     nIndex is 0-based and checked against 0 .. <nItems> - 1; with nValue the item is written, and the value
+   | desc_: Adds a binary string member `<storageName>` of `<nItems>` * 2 bytes plus a method
+     `<methodName>`( nIndex [, nValue] ) that reads or writes item nIndex of it as a WORD (PeekWord / PokeWord):
+     nIndex is 0-based and checked against 0 .. `<nItems>` - 1; with nValue the item is written, and the value
      is returned in both cases. The storage is locked during the access.
    | params:
      - `storageName` Name of the BINSTR member holding the items.
@@ -2152,9 +2147,9 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
 /*{{ topic: ot4xb_ch_structure_commands
    | command_: ### MEMBER BINSTR BYTE ARRAY
    | syntax_: `MEMBER BINSTR <storageName> BYTE ARRAY <methodName> ITEMS <nItems>`
-   | desc_: Adds a binary string member <storageName> of <nItems> * 1 bytes plus a method
-     <methodName>( nIndex [, nValue] ) that reads or writes item nIndex of it as a BYTE (PeekWord / PokeWord as written today):
-     nIndex is 0-based and checked against 0 .. <nItems> - 1; with nValue the item is written, and the value
+   | desc_: Adds a binary string member `<storageName>` of `<nItems>` * 1 bytes plus a method
+     `<methodName>`( nIndex [, nValue] ) that reads or writes item nIndex of it as a BYTE (PeekWord / PokeWord as written today):
+     nIndex is 0-based and checked against 0 .. `<nItems>` - 1; with nValue the item is written, and the value
      is returned in both cases. The storage is locked during the access.
    | params:
      - `storageName` Name of the BINSTR member holding the items.
@@ -2185,7 +2180,6 @@ DELEGATED DLL <cDll> XIMPORT <fn> AS <rt> ;
    | note: The set was added to imitate Harbour's WITH OBJECT. In Harbour it is built into the language: the
      error handling and the stack know about it. Here it is a bolt-on over the preprocessor and a per-thread
      stack: pretty, and it works, but when something goes wrong inside it (an error, a Break, a forgotten END
-     | _kw_: commands, ot4xb.ch, WITH OBJECT, ITERATE ARRAY, Harbour, deprecated
      WITH) it gets in the way more than it helps. }}*/
 /*{{ topic: ot4xb_ch_with_object_commands
    | command_: ### ITERATE ARRAY
@@ -2556,7 +2550,8 @@ WithObjectStackPush( ErrorBlock({|__e__| Break(__e__)}) ) ;
 #xtranslate ISequentialStream.uuidof() => UuidFromString("0C733A30-2A1C-11CE-ADE5-00AA0044773D")
 #xtranslate IStream.uuidof() => UuidFromString("0000000C-0000-0000-C000-000000000046")
 // -----------------------------------------------------------------------------------------------------------------
-/*{{ function: ot4xb_dirty_dlgedit | _note_: the OT4XB_DDF_* flags and the OT4XB_DDN_* notification codes below are documented in the function }}*/
+/*{{ function: ot4xb_dirty_dlgedit | _note_: the OT4XB_DDF_* flags and the OT4XB_DDN_* notification codes below are documented in the function
+   | _kw_: ot4xb_dirty_dlgedit, Function }}*/
 // ---- bits 0  - 1  MONITOR FLAGS ( MUTUALLY EXCLUSIVE )
 #define OT4XB_DDF_MONITOR_DONTCARE   0x00000000    // DEFAULT
 #define OT4XB_DDF_MONITOR_PRIMARY    0x00000001  // display in primary monitor
@@ -2592,7 +2587,8 @@ WithObjectStackPush( ErrorBlock({|__e__| Break(__e__)}) ) ;
 #define OT4XB_DDN_CREATE_BTN       7
 #define OT4XB_DDN_BTNCLICK         8
 // -----------------------------------------------------------------------------------------------------------------
-/*{{ function: ot4xb_qloop | _note_: OT4XB_QLOOP_COMPILE_BLOCKS is documented in the nFlags parameter }}*/
+/*{{ function: ot4xb_qloop | _note_: OT4XB_QLOOP_COMPILE_BLOCKS is documented in the nFlags parameter
+   | _kw_: ot4xb_qloop, Function }}*/
 #define OT4XB_QLOOP_COMPILE_BLOCKS  0x01000000
 // -----------------------------------------------------------------------------------------------------------------
 /*{{ note-id: hash-flags | title_: OT4XB_HASH flag constants (ot4xb.ch)

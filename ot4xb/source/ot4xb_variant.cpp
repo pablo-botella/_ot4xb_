@@ -18,7 +18,7 @@
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_GetIUnknow
-            | _kw_: variant, VT_UNKNOWN, interface pointer, COM
+            | _kw_: _variant_t_GetIUnknow, Function
    }}*/
 /*{{|desc: Returns the interface pointer held by a VT_UNKNOWN variant.
     | params:
@@ -39,7 +39,7 @@ extern "C" LPVOID OT4XB_API _variant_t_GetIUnknow(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_VT_UI1Array2Str
-            | _kw_: variant, byte array, safearray, VT_UI1, to buffer
+            | _kw_: _variant_t_VT_UI1Array2Str, Function
    }}*/
 /*{{|desc: Copies the bytes of a VT_UI1 safearray variant into a newly allocated buffer. On an array
       with several dimensions only the extent of the last dimension is copied.
@@ -91,7 +91,7 @@ extern "C" LPBYTE OT4XB_API _variant_t_VT_UI1Array2Str(_variant_t* pv , UINT* pc
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_SetStrAsUI1Array
-            | _kw_: variant, byte array, safearray, VT_UI1, from buffer
+            | _kw_: _variant_t_SetStrAsUI1Array, Function
    }}*/
 /*{{|desc: Loads the variant with a copy of a byte buffer, stored as a VT_UI1 safearray (byte array).
     | params:
@@ -128,7 +128,7 @@ extern "C" void OT4XB_API _variant_t_SetStrAsUI1Array( _variant_t* pv , LPSTR pS
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: str2bstr
-            | _kw_: BSTR, ANSI to BSTR, SysAllocString, COM string
+            | _kw_: str2bstr, Function
    }}*/
 /*{{|desc: Converts an ANSI string into a newly allocated BSTR using the system ANSI code page.
     | params:
@@ -152,7 +152,7 @@ extern "C" BSTR OT4XB_API str2bstr(LPSTR p , int cb)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Get_Type
-            | _kw_: variant, VARTYPE, vt, type code
+            | _kw_: _variant_t_Get_Type, Function
    }}*/
 /*{{|desc: Returns the VARTYPE of the variant (its VT_xxxx type code).
     | params:
@@ -171,7 +171,7 @@ extern "C" LONG OT4XB_API _variant_t_Get_Type(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_SetString
-            | _kw_: variant, VT_BSTR, set string, ANSI to BSTR
+            | _kw_: _variant_t_SetString, Function
    }}*/
 /*{{|desc: Loads the variant with an ANSI string converted to a BSTR (VT_BSTR). The conversion uses the
       system ANSI code page.
@@ -195,7 +195,7 @@ extern "C" void OT4XB_API _variant_t_SetString(_variant_t* pv , LPSTR p)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_GetString
-            | _kw_: variant, get string, BSTR to ANSI, to text
+            | _kw_: _variant_t_GetString, Function
    }}*/
 /*{{|desc: Extracts the text of a variant into a newly allocated buffer. A VT_UI1 safearray is returned as
       its raw bytes; a VT_BSTR is converted to UTF-8.
@@ -223,7 +223,7 @@ extern "C" LPSTR OT4XB_API _variant_t_GetString(_variant_t* pv , UINT* pcb )
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Clear
-            | _kw_: variant, VariantClear, release, VT_EMPTY
+            | _kw_: _variant_t_Clear, Function
    }}*/
 /*{{|desc: Releases whatever the variant holds and leaves it empty (VT_EMPTY). Any exception raised while
       releasing is trapped; in that case the variant memory is simply zeroed.
@@ -265,7 +265,7 @@ extern "C" void OT4XB_API _variant_t_Clear(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_Missing
-            | _kw_: variant, missing parameter, optional, DISP_E_PARAMNOTFOUND
+            | _kw_: _variant_t_Set_Missing, Function
    }}*/
 /*{{|desc: Loads the variant with the value COM uses for omitted optional parameters: VT_ERROR with
       error code DISP_E_PARAMNOTFOUND.
@@ -287,7 +287,7 @@ extern "C" void OT4XB_API _variant_t_Set_Missing(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_I2
-            | _kw_: variant, VT_I2, short, 16-bit
+            | _kw_: _variant_t_Set_I2, Function
    }}*/
 /*{{|desc: Loads the variant with a 16 bit signed integer (VT_I2).
     | params:
@@ -309,7 +309,7 @@ extern "C" void OT4XB_API _variant_t_Set_I2(_variant_t* pv, short n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_UI2
-            | _kw_: variant, VT_UI2, unsigned short, 16-bit
+            | _kw_: _variant_t_Set_UI2, Function
    }}*/
 /*{{|desc: Loads the variant with a 16 bit unsigned integer (VT_UI2).
     | params:
@@ -331,7 +331,7 @@ extern "C" void OT4XB_API _variant_t_Set_UI2(_variant_t* pv, WORD n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_BOOL
-            | _kw_: variant, VT_BOOL, VARIANT_TRUE, logical
+            | _kw_: _variant_t_Set_BOOL, Function
    }}*/
 /*{{|desc: Loads the variant with a logical value (VT_BOOL).
     | params:
@@ -353,7 +353,7 @@ extern "C" void OT4XB_API _variant_t_Set_BOOL(_variant_t* pv, BOOL b)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Get_BOOL
-            | _kw_: variant, VT_BOOL, read logical
+            | _kw_: _variant_t_Get_BOOL, Function
    }}*/
 /*{{|desc: Reads a VT_BOOL variant into a C BOOL.
     | params:
@@ -377,7 +377,7 @@ extern "C" BOOL OT4XB_API _variant_t_Get_BOOL(_variant_t* pv, BOOL* pVal )
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_I4
-            | _kw_: variant, VT_I4, long, 32-bit
+            | _kw_: _variant_t_Set_I4, Function
    }}*/
 /*{{|desc: Loads the variant with a 32 bit signed integer (VT_I4).
     | params:
@@ -399,7 +399,7 @@ extern "C" void OT4XB_API _variant_t_Set_I4(_variant_t* pv, LONG n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Get_I4
-            | _kw_: variant, VT_I4, read long
+            | _kw_: _variant_t_Get_I4, Function
    }}*/
 /*{{|desc: Reads a VT_I4 variant into a LONG.
     | params:
@@ -420,7 +420,7 @@ extern "C" BOOL OT4XB_API _variant_t_Get_I4(_variant_t* pv, LONG* pn)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_UI4
-            | _kw_: variant, VT_UI4, unsigned long, DWORD
+            | _kw_: _variant_t_Set_UI4, Function
    }}*/
 /*{{|desc: Loads the variant with a 32 bit unsigned integer (VT_UI4).
     | params:
@@ -442,7 +442,7 @@ extern "C" void OT4XB_API _variant_t_Set_UI4(_variant_t* pv, DWORD n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Get_UI4
-            | _kw_: variant, VT_UI4, read DWORD
+            | _kw_: _variant_t_Get_UI4, Function
    }}*/
 /*{{|desc: Reads a VT_UI4 variant into a DWORD.
     | params:
@@ -463,7 +463,7 @@ extern "C" BOOL OT4XB_API _variant_t_Get_UI4(_variant_t* pv, DWORD* pn)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_INT
-            | _kw_: variant, VT_INT, integer
+            | _kw_: _variant_t_Set_INT, Function
    }}*/
 /*{{|desc: Loads the variant with a signed integer tagged as VT_INT.
     | params:
@@ -485,7 +485,7 @@ extern "C" void OT4XB_API _variant_t_Set_INT(_variant_t* pv, int n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_UINT
-            | _kw_: variant, VT_UINT, unsigned integer
+            | _kw_: _variant_t_Set_UINT, Function
    }}*/
 /*{{|desc: Loads the variant with an unsigned integer tagged as VT_UINT.
     | params:
@@ -507,7 +507,7 @@ extern "C" void OT4XB_API _variant_t_Set_UINT(_variant_t* pv, UINT n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Get_Int32
-            | _kw_: variant, read integer, any integer type, 32-bit
+            | _kw_: _variant_t_Get_Int32, Function
    }}*/
 /*{{|desc: Reads any integer variant of 32 bits or less into a LONG. Handled types: VT_I1, VT_UI1, VT_I2,
       VT_UI2, VT_I4, VT_UI4, VT_INT, VT_UINT and VT_BOOL (stored as 1 or 0). Signed values are
@@ -584,7 +584,7 @@ extern "C" BOOL OT4XB_API _variant_t_Get_Int32(_variant_t* pv, LONG* pn)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_R4
-            | _kw_: variant, VT_R4, float, single
+            | _kw_: _variant_t_Set_R4, Function
    }}*/
 /*{{|desc: Loads the variant with a floating point value narrowed to single precision (VT_R4).
     | params:
@@ -606,7 +606,7 @@ extern "C" void OT4XB_API _variant_t_Set_R4(_variant_t* pv, double n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_R8
-            | _kw_: variant, VT_R8, double
+            | _kw_: _variant_t_Set_R8, Function
    }}*/
 /*{{|desc: Loads the variant with a double precision floating point value (VT_R8).
     | params:
@@ -628,7 +628,7 @@ extern "C" void OT4XB_API _variant_t_Set_R8(_variant_t* pv, double n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_DATE
-            | _kw_: variant, VT_DATE, OLE date, DATE
+            | _kw_: _variant_t_Set_DATE, Function
    }}*/
 /*{{|desc: Loads the variant with an OLE Automation date (VT_DATE).
     | params:
@@ -650,7 +650,7 @@ extern "C" void OT4XB_API _variant_t_Set_DATE(_variant_t* pv, double n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_IUnknow
-            | _kw_: variant, VT_UNKNOWN, interface pointer, COM
+            | _kw_: _variant_t_Set_IUnknow, Function
    }}*/
 /*{{|desc: Loads the variant with a COM interface pointer (VT_UNKNOWN).
     | params:
@@ -674,7 +674,7 @@ extern "C" void OT4XB_API _variant_t_Set_IUnknow(_variant_t* pv,IUnknown* p, BOO
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_UI1
-            | _kw_: variant, VT_UI1, byte
+            | _kw_: _variant_t_Set_UI1, Function
    }}*/
 /*{{|desc: Loads the variant with an 8 bit unsigned integer (VT_UI1).
     | params:
@@ -696,7 +696,7 @@ extern "C" void OT4XB_API _variant_t_Set_UI1(_variant_t* pv, BYTE n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_I1
-            | _kw_: variant, VT_I1, signed byte, char
+            | _kw_: _variant_t_Set_I1, Function
    }}*/
 /*{{|desc: Loads the variant with an 8 bit signed integer (VT_I1).
     | params:
@@ -718,7 +718,7 @@ extern "C" void OT4XB_API _variant_t_Set_I1(_variant_t* pv, char n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_I8
-            | _kw_: variant, VT_I8, int64, 64-bit
+            | _kw_: _variant_t_Set_I8, Function
    }}*/
 /*{{|desc: Loads the variant with a 64 bit signed integer (VT_I8).
     | params:
@@ -740,7 +740,7 @@ extern "C" void OT4XB_API _variant_t_Set_I8(_variant_t* pv, LONGLONG n)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_Set_UI8
-            | _kw_: variant, VT_UI8, uint64, 64-bit
+            | _kw_: _variant_t_Set_UI8, Function
    }}*/
 /*{{|desc: Loads the variant with a 64 bit unsigned integer (VT_UI8).
     | params:
@@ -761,7 +761,7 @@ extern "C" void OT4XB_API _variant_t_Set_UI8(_variant_t* pv, ULONGLONG n)
             | syntax_: `void _variant_t_Set_LPITEMIDLIST( _variant_t * pv, LPITEMIDLIST p )`
             | category: c-api/variant
             | mangled-name: _variant_t_Set_LPITEMIDLIST
-            | _kw_: variant, PIDL, ITEMIDLIST, shell item, blob
+            | _kw_: _variant_t_Set_LPITEMIDLIST, Function
    }}*/
 /*{{|desc: Stores a shell item id list in a variant as a binary blob: walks the SHITEMID chain up to its
       terminator (cb == 0) and copies the whole list, terminator included, into pv as a VT_UI1 safearray
@@ -789,7 +789,7 @@ extern "C" void OT4XB_API _variant_t_Set_LPITEMIDLIST(_variant_t* pv,LPITEMIDLIS
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: simple_variant_t_2_con
-            | _kw_: variant to container, variant to Xbase++, convert, COM value
+            | _kw_: simple_variant_t_2_con, Function
    }}*/
 /*{{|desc: Builds a new Xbase++ value container from a simple variant. Integer types up to 32 bits, float
       types, VT_CY and VT_DECIMAL become Numeric; VT_BSTR (converted to ANSI) and VT_UI1 safearrays
@@ -931,7 +931,7 @@ extern "C" ContainerHandle OT4XB_API simple_variant_t_2_con(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _variant_t_VT_ARRAY_2d2con
-            | _kw_: variant, safearray, 2d array, to Xbase++ array, Excel range
+            | _kw_: _variant_t_VT_ARRAY_2d2con, Function
    }}*/
 /*{{|desc: Converts a variant holding a two-dimensional safearray into a new two-dimensional Xbase++
       Array. Each element becomes Numeric, Character, Logical, Date or NIL according to its variant
@@ -994,7 +994,7 @@ extern "C" ContainerHandle OT4XB_API _variant_t_VT_ARRAY_2d2con(_variant_t* pv)
             | category: c-api/variant
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_VariantChangeType
-            | _kw_: variant, VariantChangeType, convert type, coerce
+            | _kw_: _ot4xb_VariantChangeType, Function
    }}*/
 /*{{|desc: Converts a variant to the requested type. Same contract as the Win32 VariantChangeType(),
       but when the thread has a variant-to-string locale set (ot4xb_set_tls_variant_to_string_locale)

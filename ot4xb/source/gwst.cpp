@@ -42,7 +42,7 @@ static void gwst_xb_nExtraSize_( TXbClsParams * px );// 1 // ::_nExtraSize_
               native calls. Members declared as nested structures are child GWST objects sharing the parent memory.
               When a structure object is passed to an OT4XB call as an extended pointer, it is locked before the
               call and unlocked afterwards.
-   | _kw_: structure, binary structure, base class, BEGIN STRUCTURE, WinAPI struct, memory layout
+   | _kw_: GWST, Class
    }}*/
 XPPRET XPPENTRY GWST(XppParamList pl)
 {
@@ -70,49 +70,49 @@ XPPRET XPPENTRY GWST(XppParamList pl)
       /*{{|class-method_: - CLASS METHOD _xgrab_array_( n ) | return: pMem | desc_: Allocates memory for n elements of this structure (`n * ::_mc__size_`, like `n * sizeof(type)` in C) and returns the pointer; 0 when n is empty. }}*/
       pc->ClassMethodCB( "_xgrab_array_" ,"{|s,n| iif(Empty(n),0,_xgrab( n * s:_mc__size_ ))}");
     // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD new( [oParent] , [nShift] )
+      /*{{|method_: - `METHOD new( [oParent] , [nShift] )`
                | return: oStructure
                | desc_: Creates a structure instance. oParent and nShift are used when the instance is a nested
                  structure member: the child maps its storage over the parent memory at nShift bytes.
       }}*/
       pc->MethodCB( "init"       , "{|s,p1,p2| s:_gwst_(p1,p2),s}");
-      /*{{|method_: - METHOD _gwst_( [oParent] , [nShift] )
+      /*{{|method_: - `METHOD _gwst_( [oParent] , [nShift] )`
                | return: Self
                | desc_: Initializes only the structure part of the instance (storage, parent and shift). It exists to
                  make inheritance easy: the default ::init() just calls it and returns Self, so a derived class
                  with an init of its own calls ::_gwst_( oParent, nShift ) and goes on with its own setup.
       }}*/
       pc->Method( "_gwst_"       , gwst_xb_gwst       , 2 ,",@s:_mc__chdef_"   );         // ::_gwst_(oParent,nShift)
-      /*{{|method_: - METHOD _alloc_( [lCopy := .T.] , [@pMem] )
+      /*{{|method_: - `METHOD _alloc_( [lCopy := .T.] , [@pMem] )`
                | return: Self
                | desc_: Allocates owned memory for the structure, optionally copying the current buffer contents.
                  @pMem receives the allocated address.
       }}*/
       pc->Method( "_alloc_"      , gwst_xb_alloc      , 2 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_alloc_(lCopy,pMem)
-      /*{{|method_: - METHOD _free_( [lCopy := .T.] )
+      /*{{|method_: - `METHOD _free_( [lCopy := .T.] )`
                | return: Self
                | desc_: Frees owned memory, optionally copying memory back to the Xbase++ buffer first.
       }}*/
       pc->Method( "_free_"       , gwst_xb_free       , 1 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_free_(lCopy)
-      /*{{|method_: - METHOD _link_( pMem , [lCopy := .T.] )
+      /*{{|method_: - `METHOD _link_( pMem , [lCopy := .T.] )`
                | return: Self
                | desc_: Links the structure to an existing memory pointer, optionally copying data from that pointer.
       }}*/
       pc->Method( "_link_"       , gwst_xb_link       , 2 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_link_(pMem,lCopy)
-      /*{{|method_: - METHOD _scast_( oClass )
+      /*{{|method_: - `METHOD _scast_( oClass )`
                | return: oStructure
                | desc_: Creates another GWST structure object linked to this structure address.
       }}*/
       pc->MethodCB( "_scast_"    , "{|s,oc,oo| oo := iif( Valtype(oc) == 'O',oc:New(),),"
                                                "iif( oo != NIL , oo:_link_(s:_addressof_(),.F.),),"
                                                "oo }");
-      /*{{|method_: - METHOD _unlink_( [lCopy := .T.] )
+      /*{{|method_: - `METHOD _unlink_( [lCopy := .T.] )`
                | return: Self, or the detached pointer
                | desc_: Detaches from an external pointer. A negative numeric flag returns the pointer without
                  copying.
       }}*/
       pc->Method( "_unlink_"     , gwst_xb_unlink     , 1 ,",@s:_m__pt_ ,@s:_m__lk_");    // ::_unlink_(lCopy)
-      /*{{|method_: - METHOD _lock_( [@nLen] )
+      /*{{|method_: - `METHOD _lock_( [@nLen] )`
                | return: pMem
                | desc_: Locks storage and returns a memory pointer suitable for native calls. @nLen receives the
                  structure size.
@@ -124,19 +124,19 @@ XPPRET XPPENTRY GWST(XppParamList pl)
                                                            ",@s:_m__size_"           // e5
                                                            ",@s:_m__shift_"          // e6
                                                                                           ); //::_lock_(@n)// -> p
-      /*{{|method_: - METHOD _unlock_() | return: NIL | desc_: Releases a pointer obtained with ::_lock_(). }}*/
+      /*{{|method_: - `METHOD _unlock_()` | return: NIL | desc_: Releases a pointer obtained with ::_lock_(). }}*/
       pc->Method( "_unlock_"     , gwst_xb_unlock     , 0 ,",@s:_m__pto_:_m__pt_"    // e1
                                                            ",@s:_m__pto_:_m__lk_"    // e2
                                                            ",@s:_m__pto_:_m__con_"   // e3
                                                                                           ); //::_unlock_()
-      /*{{|method_: - METHOD _zeromemory_() | return: Self | desc_: Fills the structure storage with zero bytes. }}*/
+      /*{{|method_: - `METHOD _zeromemory_()` | return: Self | desc_: Fills the structure storage with zero bytes. }}*/
       pc->Method( "_zeromemory_" , gwst_xb_zeromemory , 0 , ",@s:_m__size_"                ); // ::_zeromemory_()
-      /*{{|method_: - METHOD _sizeof_( [cMember \| nFlags] )
+      /*{{|method_: - `METHOD _sizeof_( [cMember | nFlags] )`
                | return: nBytes
                | desc_: Returns the structure size, a member size, or a flag-selected size combination.
       }}*/
       pc->Method( "_sizeof_"     , gwst_xb_sizeof     , 1 ,",@s:_m__size_,@s:_mc__mdef_");// ::_sizeof_([member])
-      /*{{|method_: - METHOD _addressof_( [cMember] , [@nShift] )
+      /*{{|method_: - `METHOD _addressof_( [cMember] , [@nShift] )`
                | return: pMem
                | desc_: Returns the address of the structure or named member.
       }}*/
@@ -144,12 +144,12 @@ XPPRET XPPENTRY GWST(XppParamList pl)
                                                            ",@s:_m__shift_"          // e2
                                                            ",@s:_mc__mdef_"          // e3
                                                             );// ::_addressof_([member],[@shift]) -> pMem
-      /*{{|method_: - METHOD _read_( [@cBuffer \| pMem \| oGwst] , [nPos] , [nBytes] )
+      /*{{|method_: - `METHOD _read_( [@cBuffer | pMem | oGwst] , [nPos] , [nBytes] )`
                | return: nBytes, or a Character value with the read bytes when no target is given
                | desc_: Reads bytes from structure storage.
       }}*/
       pc->Method( "_read_"       , gwst_xb_read       , 3 ,",@s:_m__size_"); // ::_read_(@cBuffer,[nPos][,nBytes])
-      /*{{|method_: - METHOD _write_( cBuffer \| pMem \| oGwst , [nPos] , [nBytes] )
+      /*{{|method_: - `METHOD _write_( cBuffer | pMem | oGwst , [nPos] , [nBytes] )`
                | return: nBytes
                | desc_: Writes bytes into structure storage.
       }}*/
@@ -165,7 +165,7 @@ XPPRET XPPENTRY GWST(XppParamList pl)
                                                               ",@s:_m__size_"       // e3
                                                               ",@s:_mc__size_" );   // e4
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD _offsetof_( cMember )
+      /*{{|method_: - `METHOD _offsetof_( cMember )`
                | return: nOffset
                | desc_: Returns the byte offset of a named member.
       }}*/
@@ -712,7 +712,7 @@ static void gwst_xb_nExtraSize_( TXbClsParams * px ) // 1 // ::_nExtraSize_ | ::
             | category: structures
             | header: ot4xb_c_exported.h
             | mangled-name: _gwst_get_member_info
-            | _kw_: GWST, member layout, offset, size, structure member
+            | _kw_: _gwst_get_member_info, Function
    }}*/
 /*{{|desc: Retrieves the layout of one member of a GWST structure object as a newly allocated
       GWST_SORT_ITEM: dwGwstType is the member type (a __GWST_MEMBER_*__ code from ot4xb_constants.h),

@@ -383,7 +383,7 @@ namespace json_ns
             | category: json
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?parse_string_utf8@json_ns@@YAPAUMomHandleEntry@@PADPAU2@0@Z
-            | _kw_: json parse, UTF-8, RapidJSON, expando, deserialize
+            | _kw_: json_ns::parse_string_utf8, Function
    }}*/
 /*{{|desc: Parses a zero terminated UTF-8 JSON string with the RapidJSON SAX reader and builds the
       matching Xbase++ value; the C++ engine behind ot4xb_json_parse(). String values are converted from
@@ -423,7 +423,7 @@ namespace json_ns
             | category: json
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?parse_string_ansi@json_ns@@YAPAUMomHandleEntry@@PADPAU2@0@Z
-            | _kw_: json parse, ANSI, RapidJSON, expando, deserialize
+            | _kw_: json_ns::parse_string_ansi, Function
    }}*/
 /*{{|desc: Like parse_string_utf8(), but the JSON text is in the current ANSI codepage: it is converted
       to UTF-8 first and then parsed.
@@ -455,7 +455,7 @@ namespace json_ns
             | category: json
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?serialize_value@json_ns@@YAXAAVTZString@@PAUMomHandleEntry@@KKK@Z
-            | _kw_: json serialize, container to json, TZString, escape
+            | _kw_: json_ns::serialize_value, Function
    }}*/
 /*{{|desc: Appends the JSON representation of a container value to a TZString. Character values are
       written as JSON string literals, dates as "YYYYMMDD" strings, numerics as numbers, logicals as
@@ -652,7 +652,7 @@ namespace json_ns
             | category: json
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?serialize@json_ns@@YAXPAX@Z
-            | _kw_: json serialize, entry point, expando, XbFpCall
+            | _kw_: json_ns::serialize, Function
    }}*/
 /*{{|desc: XppParamList entry point over serialize_value(), wired through XbFpCall() as the engine of
       _ot4xb_expando_():json_serialize(). Parameter 1 is the value to serialize, 2 the EXPANDO_FORMAT_*
@@ -682,7 +682,7 @@ namespace json_ns
             | syntax_: `ot4xb_json_parse( cJson [, nSourceCodePage] [, oExpandoClass] [, cAddPropertyMethod] )`
             | category: json
             | source: ot4xb_json.cpp:OT4XB_JSON_PARSE
-            | _kw_: json parse, JSON to Xbase++, deserialize, RapidJSON, expando
+            | _kw_: ot4xb_json_parse, Function
    }}*/
 /*{{|desc: Parses a JSON string using the RapidJSON SAX reader and returns the corresponding Xbase++ value.
       JSON objects are created as _ot4xb_expando_ instances by default.

@@ -344,7 +344,7 @@ double list_of_float_double_t::CalculateSampleStandardDeviation( UINT nSkip, UIN
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_new
-            | _kw_: double list, statistics, create, vheap
+            | _kw_: list_of_float_double_t_new, Function
    }}*/
 /*{{|desc: Creates a new empty list of double values with simple statistics support and returns its handle.
       With flags 0 the value buffer is allocated from the Xbase++ runtime memory manager. flags takes
@@ -369,7 +369,7 @@ OT4XB_API void* list_of_float_double_t_new( DWORD flags, void* vheap )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_destroy
-            | _kw_: double list, statistics, destroy
+            | _kw_: list_of_float_double_t_destroy, Function
    }}*/
 /*{{|desc: Destroys a list created with list_of_float_double_t_new() and releases its value buffer. A
       private heap owned by the list is destroyed with it.
@@ -389,7 +389,7 @@ OT4XB_API void  list_of_float_double_t_destroy( void* ls )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_get_last_error
-            | _kw_: double list, last error, error code
+            | _kw_: list_of_float_double_t_get_last_error, Function
    }}*/
 /*{{|desc: Returns the error code set by the last operation on the list.
     | params:
@@ -409,7 +409,7 @@ OT4XB_API DWORD  list_of_float_double_t_get_last_error( void* ls )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_alloc_bytes
-            | _kw_: double list, allocate, list heap
+            | _kw_: list_of_float_double_t_alloc_bytes, Function
    }}*/
 /*{{|desc: Allocates a raw byte block from the same memory source the list uses for its values: the custom
       heap when the list has one, else the Xbase++ runtime memory manager.
@@ -430,7 +430,7 @@ OT4XB_API void* list_of_float_double_t_alloc_bytes( void* ls, UINT nBytes )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_free_bytes
-            | _kw_: double list, free, list heap
+            | _kw_: list_of_float_double_t_free_bytes, Function
    }}*/
 /*{{|desc: Releases a byte block allocated with list_of_float_double_t_alloc_bytes() on the same list.
     | params:
@@ -450,7 +450,7 @@ OT4XB_API void  list_of_float_double_t_free_bytes( void* ls, void* p )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_grow
-            | _kw_: double list, capacity, grow, reserve
+            | _kw_: list_of_float_double_t_grow, Function
    }}*/
 /*{{|desc: Grows the value buffer, rounding up to the next internal capacity step of at least nMin values.
       Stored values and the count are kept; the buffer never shrinks, and every call moves the
@@ -472,7 +472,7 @@ OT4XB_API void   list_of_float_double_t_grow( void* ls, UINT nMin )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_add
-            | _kw_: double list, append value, push
+            | _kw_: list_of_float_double_t_add, Function
    }}*/
 /*{{|desc: Appends a value at the end of the list, growing the buffer when needed.
     | params:
@@ -492,7 +492,7 @@ OT4XB_API double list_of_float_double_t_add( void* ls, double v )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_add_list
-            | _kw_: double list, append values, C array
+            | _kw_: list_of_float_double_t_add_list, Function
    }}*/
 /*{{|desc: Appends count values taken from a C array of double at the end of the list.
     | params:
@@ -514,7 +514,7 @@ OT4XB_API void   list_of_float_double_t_add_list( void* ls, double * pv, UINT co
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_get
-            | _kw_: double list, get value, position
+            | _kw_: list_of_float_double_t_get, Function
    }}*/
 /*{{|desc: Returns the value stored at a zero based position of the list.
     | params:
@@ -534,7 +534,7 @@ OT4XB_API double list_of_float_double_t_get( void* ls, DWORD n )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_replace
-            | _kw_: double list, replace value, position
+            | _kw_: list_of_float_double_t_replace, Function
    }}*/
 /*{{|desc: Overwrites the value at a zero based position of the list and returns the value it replaced.
     | params:
@@ -556,7 +556,7 @@ OT4XB_API double list_of_float_double_t_replace( void* ls, DWORD n, double v )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_replace_list
-            | _kw_: double list, replace values, C array
+            | _kw_: list_of_float_double_t_replace_list, Function
    }}*/
 /*{{|desc: Overwrites count values starting at a zero based position with the values of a C array of
       double. It never extends the list, and it stops at the first failed value: a position past the
@@ -580,7 +580,7 @@ OT4XB_API void list_of_float_double_t_replace_list( void* ls, DWORD pos, double 
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_count
-            | _kw_: double list, count, range, skip max
+            | _kw_: list_of_float_double_t_count, Function
    }}*/
 /*{{|desc: Returns the number of values in the range of the list selected by nSkip and nMax.
     | params:
@@ -601,7 +601,7 @@ OT4XB_API DWORD  list_of_float_double_t_count( void* ls, UINT nSkip , UINT nMax 
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_insert
-            | _kw_: double list, insert value, position
+            | _kw_: list_of_float_double_t_insert, Function
    }}*/
 /*{{|desc: Inserts a value at a zero based position of the list, shifting the following values one place
       up. With pos (DWORD) -1, or equal to the count, the value is appended at the end.
@@ -624,7 +624,7 @@ OT4XB_API double list_of_float_double_t_insert( void* ls, DWORD pos, double v )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_insert_list
-            | _kw_: double list, insert values, C array
+            | _kw_: list_of_float_double_t_insert_list, Function
    }}*/
 /*{{|desc: Inserts count values taken from a C array of double at a zero based position of the list,
       shifting the following values count places up. With pos (DWORD) -1, or on an empty list, the
@@ -650,7 +650,7 @@ OT4XB_API void   list_of_float_double_t_insert_list( void* ls, DWORD pos, double
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_remove
-            | _kw_: double list, remove value, position
+            | _kw_: list_of_float_double_t_remove, Function
    }}*/
 /*{{|desc: Removes the value at a zero based position of the list, shifting the following values one place
       down, and returns the removed value.
@@ -671,7 +671,7 @@ OT4XB_API double list_of_float_double_t_remove( void* ls, DWORD n )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_pop
-            | _kw_: double list, pop, last value
+            | _kw_: list_of_float_double_t_pop, Function
    }}*/
 /*{{|desc: Removes the last value of the list and returns it.
     | params:
@@ -690,7 +690,7 @@ OT4XB_API double list_of_float_double_t_pop( void* ls )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_truncate
-            | _kw_: double list, truncate, cut, count
+            | _kw_: list_of_float_double_t_truncate, Function
    }}*/
 /*{{|desc: Cuts the list down to new_count values, discarding the values past that point. It does nothing
       when the list is already that size or shorter, and the allocated capacity is kept.
@@ -711,7 +711,7 @@ OT4XB_API void   list_of_float_double_t_truncate( void* ls, UINT new_count )
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_sum
-            | _kw_: statistics, sum, total, double list
+            | _kw_: list_of_float_double_t_calculate_sum, Function
    }}*/
 /*{{|desc: Returns the sum of the range of the list selected by nSkip and nMax.
     | params:
@@ -732,7 +732,7 @@ OT4XB_API double list_of_float_double_t_calculate_sum( void* ls, UINT nSkip, UIN
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_mean
-            | _kw_: statistics, mean, average, double list
+            | _kw_: list_of_float_double_t_calculate_mean, Function
    }}*/
 /*{{|desc: Returns the arithmetic mean of the range of the list selected by nSkip and nMax.
     | params:
@@ -753,7 +753,7 @@ OT4XB_API double list_of_float_double_t_calculate_mean( void* ls, UINT nSkip , U
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_population_variance
-            | _kw_: statistics, variance, population, double list
+            | _kw_: list_of_float_double_t_calculate_population_variance, Function
    }}*/
 /*{{|desc: Returns the population variance (divisor N) of the range of the list selected by nSkip and nMax.
     | params:
@@ -774,7 +774,7 @@ OT4XB_API double list_of_float_double_t_calculate_population_variance( void* ls,
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_sample_variance
-            | _kw_: statistics, variance, sample, N-1, double list
+            | _kw_: list_of_float_double_t_calculate_sample_variance, Function
    }}*/
 /*{{|desc: Returns the sample variance (divisor N - 1) of the range of the list selected by nSkip and nMax.
     | params:
@@ -798,7 +798,7 @@ OT4XB_API double list_of_float_double_t_calculate_sample_variance( void* ls, UIN
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_population_standard_deviation
-            | _kw_: statistics, standard deviation, population, stddev
+            | _kw_: list_of_float_double_t_calculate_population_standard_deviation, Function
    }}*/
 /*{{|desc: Returns the population standard deviation of the range of the list selected by nSkip and nMax.
     | params:
@@ -821,7 +821,7 @@ OT4XB_API double list_of_float_double_t_calculate_population_standard_deviation(
             | category: statistics
             | header: ot4xb_statistics.h
             | mangled-name: list_of_float_double_t_calculate_sample_standard_deviation
-            | _kw_: statistics, standard deviation, sample, stddev, N-1
+            | _kw_: list_of_float_double_t_calculate_sample_standard_deviation, Function
    }}*/
 /*{{|desc: Returns the sample standard deviation of the range of the list selected by nSkip and nMax.
     | params:

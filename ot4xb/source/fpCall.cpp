@@ -97,7 +97,7 @@ static DWORD _dwGetFpParam_( XppParamList pl, ULONG nPos )
             | note: This flag only governs the not-found case. fpCall does not validate the calling convention,
                 argument layout or the pointer itself; a wrong prototype or an invalid pointer can crash the process
                 regardless of this flag.
-   | _kw_: fpCall, flags, error handling, function pointer call
+   | _kw_: Set_FpCall_Flags, Function
    }}*/
 XPPRET XPPENTRY SET_FPCALL_FLAGS( XppParamList pl )
 {
@@ -111,7 +111,7 @@ XPPRET XPPENTRY SET_FPCALL_FLAGS( XppParamList pl )
 /*{{function_: nFpGet
             | syntax_: `nFpGet( fp ) -> pFunction`
             | category: function-pointer
-            | _kw_: function pointer, resolve, GetProcAddress, dll function, address
+            | _kw_: nFpGet, Function
    }}*/
 /*{{|desc: Resolves a function-pointer specification (fp, see the note below) to a numeric function
       pointer, or 0 when it cannot be resolved. This is the Xbase++ face of the internal fp resolver; it
@@ -138,7 +138,7 @@ XPPRET XPPENTRY NFPGET( XppParamList pl )
 /*{{function_: F2T
             | syntax_: `F2T( pFunction [, nCallingConvention] ) -> cDllTemplate`
             | category: function-pointer
-            | _kw_: template, DllPrepareCall, function pointer, prototype
+            | _kw_: F2T, Function
    }}*/
 /*{{|desc: Builds a template string similar to the one created by DllPrepareCall(), wrapping the numeric
       function pointer pFunction and targeting the current module (GetModuleHandle(0)). Its only real use is
@@ -175,7 +175,7 @@ XPPRET XPPENTRY F2T( XppParamList pl )
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: next_xbfpcall_use_critical_section
-            | _kw_: XbFpCall, synchronized, critical section, SYNC
+            | _kw_: next_xbfpcall_use_critical_section, Function
    }}*/
 /*{{|desc: Building block for a synchronized (SYNC) XbFpCall. The function itself only passes a
       CRITICAL_SECTION pointer to the next XbFpCall on this thread, like a piece of cargo: it stores
@@ -205,7 +205,7 @@ OT4XB_API void next_xbfpcall_use_critical_section( CRITICAL_SECTION* pcs )
 /*{{function_: XbFpCall
             | syntax_: `XbFpCall( pFunction, ... ) -> xResult`
             | category: function-pointer
-            | _kw_: call function pointer, XPPENTRY, Xbase++ function pointer, forward arguments
+            | _kw_: XbFpCall, Function
    }}*/
 /*{{|desc: Calls pFunction - a pointer to an Xbase++-prototyped (XPPENTRY) function - forwarding the
       remaining arguments to it and returning whatever it returns. Unlike nFpCall/ndFpCall (which call C
@@ -264,7 +264,7 @@ XPPRET XPPENTRY XBFPCALL( XppParamList pl )
 /*{{function_: _FpCall_PushFlags_
             | syntax_: `_FpCall_PushFlags_( nFlags ) -> NIL`
             | category: function-pointer
-            | _kw_: fpCall, flags, next call, one-shot, TLS
+            | _kw_: _FpCall_PushFlags_, Function
    }}*/
 /*{{|desc: Sets flags that apply only to the next fpCall on the current thread. The value is stored in a
       one-shot per-thread TLS slot that the next call reads and clears, so it affects a single call and
@@ -287,7 +287,7 @@ XPPRET XPPENTRY _FPCALL_PUSHFLAGS_( XppParamList pl ) { GetTlsHeapManager()->Pus
 /*{{function_: nFpCall
             | syntax_: `nFpCall( fp, params... ) -> n32BitResult`
             | category: function-pointer
-            | _kw_: call function pointer, stdcall, cdecl, dll call, EAX, DllCall
+            | _kw_: nFpCall, Function
    }}*/
 /*{{|desc: Calls an stdcall or cdecl function through a function pointer and returns the 32-bit result
       (the EAX register) as a number.
@@ -358,7 +358,7 @@ XPPRET XPPENTRY NFPCALL( XppParamList pl )
 /*{{function_: ndFpCall
             | syntax_: `ndFpCall( fp, params... ) -> n64BitFloatResult`
             | category: function-pointer
-            | _kw_: call function pointer, double result, stdcall, cdecl, dll call
+            | _kw_: ndFpCall, Function
    }}*/
 /*{{|desc: Calls an stdcall or cdecl function that returns a 64-bit floating-point value and returns it
       as a number. Same as nFpCall except the result is taken from the FPU (ST0) instead of EAX.
@@ -423,7 +423,7 @@ XPPRET XPPENTRY NDFPCALL( XppParamList pl )
 /*{{function_: qwFpCall
             | syntax_: `qwFpCall( fp, params... ) -> n64BitInt`
             | category: function-pointer
-            | _kw_: call function pointer, 64-bit result, QWORD, stdcall, cdecl
+            | _kw_: qwFpCall, Function
    }}*/
 /*{{|desc: Calls an stdcall or cdecl function that returns a 64-bit integer and returns the raw 8-byte
       value as a character string. Same as nFpCall except the result is taken from the EDX:EAX register
@@ -491,7 +491,7 @@ XPPRET XPPENTRY QWFPCALL( XppParamList pl )
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_GetFpLastError
-            | _kw_: GetLastError, fpCall, last error, TLS
+            | _kw_: ot4xb_GetFpLastError, Function
    }}*/
 /*{{|desc: Returns the Win32 GetLastError() value that the most recent fpCall on this thread saved in the
       TLS heap manager. C primitive behind nFpGetLastError().
@@ -506,7 +506,7 @@ OT4XB_API DWORD __cdecl ot4xb_GetFpLastError( void ) { return GetTlsHeapManager(
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_PutFpLastError
-            | _kw_: SetLastError, fpCall, last error, TLS
+            | _kw_: ot4xb_PutFpLastError, Function
    }}*/
 /*{{|desc: Stores dw as the fpCall last-error value in the TLS heap manager for the current thread.
     | params:
@@ -520,7 +520,7 @@ OT4XB_API void  __cdecl ot4xb_PutFpLastError( DWORD dw ) { GetTlsHeapManager()->
 /*{{function_: nFpGetLastError
             | syntax_: `nFpGetLastError() -> nLastError`
             | category: function-pointer
-            | _kw_: GetLastError, last error, fpCall, win32 error
+            | _kw_: nFpGetLastError, Function
    }}*/
 /*{{|desc: Returns the Win32 GetLastError() value saved by the most recent fpCall on the current thread.
 
@@ -534,7 +534,7 @@ XPPRET XPPENTRY NFPGETLASTERROR( XppParamList pl ) { _retnl( pl, (LONG) GetTlsHe
 /*{{function_: QFpGetLastPointer
             | syntax_: `QFpGetLastPointer() -> pPointer`
             | category: function-pointer
-            | _kw_: FpQCall, last pointer, out parameter, TLS
+            | _kw_: QFpGetLastPointer, Function
    }}*/
 /*{{|desc: Returns the last pointer value for the last FpQCall() on this thread. See the notes below.
 
@@ -549,7 +549,7 @@ XPPRET XPPENTRY QFPGETLASTPOINTER( XppParamList pl ) { _retnl( pl, (LONG) GetTls
 /*{{function_: QFpSetLastPointer
             | syntax_: `QFpSetLastPointer( pPointer ) -> NIL`
             | category: function-pointer
-            | _kw_: FpQCall, last pointer, override, TLS
+            | _kw_: QFpSetLastPointer, Function
    }}*/
 /*{{|desc: The QFpSetLastPointer() only exist
       to override the  slot, but cannot think now in a good reason to do it.
@@ -577,7 +577,7 @@ XPPRET XPPENTRY QFPSETLASTPOINTER( XppParamList pl ) { GetTlsHeapManager()->PutL
 /*{{function_: nGetProcAddress
             | syntax_: `nGetProcAddress( hDllOrName, cProcNameOrOrdinal ) -> pFunction`
             | category: function-pointer
-            | _kw_: GetProcAddress, dll export, function address, function pointer
+            | _kw_: nGetProcAddress, Function
    }}*/
 /*{{|desc: Returns the address of a DLL export as a numeric function pointer. The module is taken from a
       numeric handle, or from GetModuleHandle()/LoadLibrary() when a name is given. The export is resolved
@@ -661,7 +661,7 @@ it (often not the DLL's size but the environment it sets up) is worth paying. Ot
 /*{{function_: nLoadLibrary
             | syntax_: `nLoadLibrary( cDllName [, @nLastError] ) -> hDll`
             | category: function-pointer
-            | _kw_: LoadLibrary, load dll, module handle
+            | _kw_: nLoadLibrary, Function
    }}*/
 /*{{|desc: Loads a DLL with LoadLibrary() and returns its module handle, or 0 on failure. When loading
       fails, the optional nLastError argument receives the Win32 GetLastError() code.
@@ -696,7 +696,7 @@ XPPRET XPPENTRY NLOADLIBRARY( XppParamList pl )
 /*{{function_: lFreeLibrary
             | syntax_: `lFreeLibrary( hDll ) -> lOk`
             | category: function-pointer
-            | _kw_: FreeLibrary, unload dll, module handle
+            | _kw_: lFreeLibrary, Function
    }}*/
 /*{{|desc: Releases a module handle with FreeLibrary(). Returns the result of FreeLibrary() (.T. on
       success), or .F. when hDll is zero.
@@ -731,7 +731,7 @@ static DWORD _format_msg_( DWORD dwf, void* ps, DWORD id, DWORD lan, LPSTR pb, D
 /*{{function_: cFmtSysMsg
             | syntax_: `cFmtSysMsg( nMessageId [, nLangId] ) -> cMessage`
             | category: messages
-            | _kw_: FormatMessage, system error message, error text, GetLastError
+            | _kw_: cFmtSysMsg, Function
    }}*/
 /*{{|desc: Formats a Win32 system message with FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM) and returns it.
       Inserts are ignored (FORMAT_MESSAGE_IGNORE_INSERTS). Returns an empty string when it cannot be
@@ -762,7 +762,7 @@ XPPRET XPPENTRY CFMTSYSMSG( XppParamList pl )
 /*{{function_: cFmtResMsg
             | syntax_: `cFmtResMsg( hDll, nMessageId [, nLangId], ... ) -> cMessage`
             | category: msg-string
-            | _kw_: FormatMessage, message resource, module message, error text
+            | _kw_: cFmtResMsg, Function
    }}*/
 /*{{|desc: Formats a message resource from a module with FormatMessage(FORMAT_MESSAGE_FROM_HMODULE) and
       returns it. When hDll is NIL or 0 the current executable module is used. The extra arguments are
@@ -845,7 +845,7 @@ XPPRET XPPENTRY CFMTRESMSG( XppParamList pl )
 /*{{function_: cFmtStrMsg
             | syntax_: `cFmtStrMsg( cTemplate, ... ) -> cMessage`
             | category: msg-string
-            | _kw_: FormatMessage, message template, inserts, %1
+            | _kw_: cFmtStrMsg, Function
    }}*/
 /*{{|desc: Formats an in-memory message template with FormatMessage(FORMAT_MESSAGE_FROM_STRING) and
       returns it. The extra arguments are passed as message inserts. Returns an empty string when the
@@ -1006,7 +1006,7 @@ static int ot4xb_cprintf_internal( LPSTR pFmt, TXbFpParam* pParams, LONG nParams
             | syntax_: `LPSTR __cdecl _ot4xb_cprintf_c_escape_( LPSTR pStr )`
             | category: strings
             | mangled-name: _ot4xb_cprintf_c_escape_
-            | _kw_: C escapes, backslash escapes, unescape, newline tab, string
+            | _kw_: _ot4xb_cprintf_c_escape_, Function
    }}*/
 /*{{|desc: Returns a newly allocated copy of pStr with C-style backslash escapes expanded: \n \r \t \a \b
       \f \v \\ (the usual C escapes), \q (a double quote), \xHH (a byte from two hex digits) and \dDDD (a
@@ -1073,7 +1073,7 @@ extern "C" LPSTR OT4XB_API __cdecl _ot4xb_cprintf_c_escape_( LPSTR pStr )
 /*{{function_: cPrintf
             | syntax_: ``cPrintf( cFormat, ... ) -> cText  | cPrintf( NIL, cFormatWithEscapes, ... )``
             | category: strings
-            | _kw_: sprintf, printf, format string, C format
+            | _kw_: cPrintf, Function
    }}*/
 /*{{|desc: Formats text with C sprintf() conversion rules and returns the generated string. If the first
       argument is NIL, the next argument is taken as the format and its C escapes are expanded first (see
@@ -1138,7 +1138,7 @@ XPPRET XPPENTRY CPRINTF( XppParamList pl )
 /*{{function_: pt2gp
             | syntax_: `pt2gp( pPointer ) -> oGenericPointer`
             | category: pointer
-            | _kw_: generic pointer, wrap pointer, extended pointer, _lock_
+            | _kw_: pt2gp, Function
    }}*/
 /*{{|desc: Wraps a numeric pointer in an OT4XB_GENERIC_POINTER object so it can be passed where an OT4XB
       extended pointer (an object exposing ::_lock_()/::_unlock_()) is expected.
@@ -1166,13 +1166,13 @@ XPPRET XPPENTRY PT2GP( XppParamList pl )
             | desc: Minimal wrapper over a numeric pointer. It exposes ::_lock_() and ::_unlock_() so the object
               can be passed to OT4XB functions that accept extended pointers. Created from PRG via pt2gp() or
               OT4XB_GENERIC_POINTER():new(pPointer). The class registers itself lazily and is EXPORTED.
-            | ivar _m__pt_: Numeric - Holds the wrapped pointer value (a memory pointer, character buffer or parent
+            | ivar_: - VAR _m__pt_ | type: Numeric | desc_: Holds the wrapped pointer value (a memory pointer, character buffer or parent
               object). Registered EXPORTED so Xbase++ can access it.
-            | method init: init(pPointer) -> Self - Stores pPointer, or 0 when NIL. Called from new().
-            | method _lock_: _lock_(@n) -> pPointer - Returns the stored pointer (sets n to 0); extended-pointer
+            | method_: - `init(pPointer) -> Self` | desc_: Stores pPointer, or 0 when NIL. Called from new().
+            | method_: - `_lock_(@n) -> pPointer` | desc_: Returns the stored pointer (sets n to 0); extended-pointer
               lock hook.
-            | method _unlock_: _unlock_() -> NIL - No-op unlock hook for extended-pointer compatibility.
-            | _kw_: generic pointer, pointer wrapper, _lock_, _unlock_, extended pointer
+            | method_: - `_unlock_() -> NIL` | desc_: No-op unlock hook for extended-pointer compatibility.
+            | _kw_: OT4XB_GENERIC_POINTER, Class
    }}*/
 XPPRET XPPENTRY OT4XB_GENERIC_POINTER( XppParamList pl )
 {
@@ -1221,7 +1221,7 @@ XPPRET XPPENTRY OT4XB_GENERIC_POINTER( XppParamList pl )
 /*{{function_: FpQCall
             | syntax_: `FpQCall( fpSpec, cPrototype, ... ) -> xResult`
             | category: function-pointer
-            | _kw_: call function pointer, prototype string, quick call, dll call, marshalling
+            | _kw_: FpQCall, Function
    }}*/
 /*{{|desc: Calls a stdcall or cdecl function using an explicit prototype string. fpSpec selects the
       function (resolved as in nFpGet); cPrototype is a string of 4-character templates, one for the return
@@ -1291,7 +1291,7 @@ XPPRET XPPENTRY FPQCALL( XppParamList pl )
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: bWriteLogLine
-            | _kw_: log, write log line, append file, printf
+            | _kw_: bWriteLogLine, Function
    }}*/
 /*{{|desc: Formats a log line with vsprintf(pFmt, ...) and appends it to the log file pFName via
       dwWriteLogData. Returns TRUE when the write produced a non-zero locator. C primitive behind
@@ -1324,7 +1324,7 @@ BOOL OT4XB_API bWriteLogLine( LPSTR pFName, LPSTR pFmt, ... )
 /*{{function_: lWriteLogLine
             | syntax_: `lWriteLogLine( cFile, cFormat, ... ) -> lOk`
             | category: log
-            | _kw_: log, write log line, append file, C format
+            | _kw_: lWriteLogLine, Function
    }}*/
 /*{{|desc: Formats a log line with C formatting rules and appends it to a log file, by calling
       bWriteLogLine through the fpCall machinery. Returns .T. on success.
@@ -1401,7 +1401,7 @@ static __declspec( naked ) void dummy16( void ) { DUMMY_N( 0x40 ) }
 /*{{function_: _dummyStdCbk
             | syntax_: `_dummyStdCbk( nParams ) -> pFunction | NIL`
             | category: function-pointer
-            | _kw_: dummy callback, stdcall stub, no-op callback, pop parameters
+            | _kw_: _dummyStdCbk, Function
    }}*/
 /*{{|desc: Returns a pointer to a dummy stdcall callback that does nothing, returns 0, and pops nParams
       DWORD parameters off the stack on return. Useful where an API requires a stdcall callback you do not
@@ -1442,7 +1442,7 @@ XPPRET XPPENTRY _DUMMYSTDCBK( XppParamList pl )
 /*{{function_: FpLQCall2
             | syntax_: `FpLQCall2( nIndex, cPrototype, pThisOrList, ... ) -> xResult`
             | category: function-pointer
-            | _kw_: vtable, pointer list, call function pointer, prototype string
+            | _kw_: FpLQCall2, Function
    }}*/
 /*{{|desc: Variant of FpLQCall that reads the function pointer directly from the supplied pointer list.
       The pointer is resolved from nIndex and pThisOrList; cPrototype is the 4-character-template prototype
@@ -1503,7 +1503,7 @@ XPPRET XPPENTRY FPLQCALL2( XppParamList pl )
 /*{{function_: IFpQCall
             | syntax_: `IFpQCall( nVTableIndex, cPrototype, pInterface, ... ) -> xResult`
             | category: function-pointer
-            | _kw_: COM, interface method, vtable, call, prototype string
+            | _kw_: IFpQCall, Function
    }}*/
 /*{{|desc: Calls a COM interface method resolved from the interface vtable. The function pointer is taken
       from vtable slot nVTableIndex of pInterface; cPrototype is the 4-character-template prototype string
@@ -1593,7 +1593,7 @@ static DWORD vtlbn2fp( LONG n, LONG v )
 /*{{function_: FpLQCall
             | syntax_: `FpLQCall( nIndex, cPrototype, pPointerList, ... ) -> xResult`
             | category: function-pointer
-            | _kw_: pointer list, call function pointer, prototype string, vtable
+            | _kw_: FpLQCall, Function
    }}*/
 /*{{|desc: Calls a function pointer read from a pointer list. The pointer is resolved from nIndex and
       pPointerList; cPrototype is the 4-character-template prototype string. Arguments after the list are

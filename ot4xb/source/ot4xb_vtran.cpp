@@ -619,7 +619,7 @@ BOOL vcmp_ns::compare_values( ContainerHandle v1, ContainerHandle v2, DWORD flag
 /*{{function_: __vcmp
             | syntax_: `__vcmp( xValue1, xValue2 [, xFlags] )`
             | category: value/compare
-            | _kw_: compare values, type conversion, comparison flags, equal
+            | _kw_: __vcmp, Function
    }}*/
 /*{{|desc: Compares two Xbase++ values with optional type conversion and comparison flags.
     | params:
@@ -667,7 +667,7 @@ _XPP_REG_FUN_( __VCMP )
 /*{{function_: __vtran
             | syntax_: `__vtran( xValue [, xFlags] )`
             | category: value/transform
-            | _kw_: value to string, transform, character representation, convert
+            | _kw_: __vtran, Function
    }}*/
 /*{{|desc: Transforms a Xbase++ value to its character representation.
     | params:

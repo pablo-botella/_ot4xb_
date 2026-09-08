@@ -10,8 +10,8 @@
    | category: c-api/classes
    | desc: Root of the ot4xb C++ classes: it only redefines the allocation operators, so an object of any class
      derived from it lives in the ot4xb heap whichever module (the DLL, an executable, another DLL) creates or
-     | _kw_: base class, operator new, ot4xb heap, C++ classes root
-     deletes it. It has no data members and no virtual functions: deriving from it costs nothing. }}*/
+     deletes it. It has no data members and no virtual functions: deriving from it costs nothing.
+     | _kw_: T_ot4xb_base, Class }}*/
 class OT4XB_API T_ot4xb_base
 {
    public:
@@ -31,8 +31,8 @@ class OT4XB_API T_ot4xb_base
    | desc: Base of the classes that allocate many small blocks (lists, tables) and can do it from a private heap
      (an OT4XB_VHEAP): the object itself still lives in the ot4xb heap, its items go wherever **m_vheap_flags**
      says. A derived class calls vheap_on_init() when it is built, vheap_on_destroy() when it dies, and
-     | _kw_: base class, private heap, vheap, allocation flags
-     alloc_bytes() / free_bytes() for every item in between. }}*/
+     alloc_bytes() / free_bytes() for every item in between.
+     | _kw_: T_ot4xb_base_with_vheap, Class }}*/
 class OT4XB_API T_ot4xb_base_with_vheap : public T_ot4xb_base
 {
 	public:
@@ -88,8 +88,8 @@ class OT4XB_API T_ot4xb_base_with_vheap : public T_ot4xb_base
      object is allocated in the executable heap of ot4xb ({{ilink: <c-function _exec_m_grab> _exec_m_grab}}),
      which is why it can be run, and lives until it is deleted: delete it only when no more calls can arrive.
    | see_also: the macros `_TSTDCTXCBK_PROXI_WNDPROC_` and `_TSTDCTXCBK_SUBCLASS_` of ot4xb_api.h, which use
-   | _kw_: thunk, callback with context, WNDPROC, executable code, ATL thunk
-     it to subclass a window with a C++ method as window procedure. }}*/
+     it to subclass a window with a C++ method as window procedure.
+   | _kw_: TStdCtxCbk, Class }}*/
 class OT4XB_API TStdCtxCbk
 {
    public:
@@ -121,8 +121,8 @@ class OT4XB_API TStdCtxCbk
      {{ilink: <c-function x_www_form_urlencoded_to_cp1252> x_www_form_urlencoded_to_cp1252}}: the key and the
      value are zero-terminated strings inside the decoded block, and the items sit one after another right
      after the {{ilink: <cpp-class x_www_form_cp1252_Header_t> x_www_form_cp1252_Header_t}}. Nothing here is
-     | _kw_: form data, key value, url decoded, query string item
-     allocated on its own: the whole block is released with the string returned by the decoder. }}*/
+     allocated on its own: the whole block is released with the string returned by the decoder.
+     | _kw_: x_www_form_cp1252_KeyVal_t, Class }}*/
 class OT4XB_API x_www_form_cp1252_KeyVal_t : public T_ot4xb_base
 {
    public:
@@ -174,8 +174,8 @@ class OT4XB_API x_www_form_cp1252_KeyVal_t : public T_ot4xb_base
            use( k->m_pKey, k->m_pVal );
         }
         _xfree( s );
-     | _kw_: form data, decoded block, key value list, query string
-     } }}*/
+     }
+     | _kw_: x_www_form_cp1252_Header_t, Class }}*/
 class OT4XB_API x_www_form_cp1252_Header_t : public T_ot4xb_base
 {
    public:

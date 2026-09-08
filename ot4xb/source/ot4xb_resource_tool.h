@@ -15,8 +15,8 @@
      like): every Pt* function takes the pointer by reference, reads or writes one field at it, and moves
      the pointer past the field, so a template is parsed or built by a plain sequence of calls. Strings in
      resources are UTF-16 and are converted from and to the ANSI code page on the way. Meant to be the
-     | _kw_: resource template, dialog template, read write fields, UTF-16 strings
-     base of a resource-handling class; on its own it only holds static functions. }}*/
+     base of a resource-handling class; on its own it only holds static functions.
+     | _kw_: resource_tool_base_t, Class }}*/
 class OT4XB_API resource_tool_base_t  : public T_ot4xb_base
 {
    public:

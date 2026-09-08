@@ -40,7 +40,7 @@ static IRegExp2* _rgx_init_interface(LONG npi)
 /*{{function_: _rgx_new
             | syntax_: `_rgx_new( [@hRgx,] [cPattern], [cFlags] )`
             | category: string/regex
-            | _kw_: regexp, VBScript RegExp, ActiveX, regular expression engine, create
+            | _kw_: _rgx_new, Function
    }}*/
 /*{{|desc: Creates or reuses a regular expression engine based on the system VBScript/IE RegExp ActiveX
       component.
@@ -121,7 +121,7 @@ _XPP_REG_FUN_(_RGX_NEW)
 /*{{function_: _rgx_set_pattern
             | syntax_: `_rgx_set_pattern( hRgx, cPattern )`
             | category: string/regex
-            | _kw_: regexp, pattern, VBScript RegExp, set pattern
+            | _kw_: _rgx_set_pattern, Function
    }}*/
 /*{{|desc: Sets the pattern on an existing _RGX ActiveX regular expression engine.
     | params:
@@ -150,7 +150,7 @@ _XPP_REG_FUN_(_RGX_SET_PATTERN)
 /*{{function_: _rgx_set_flags
             | syntax_: `_rgx_set_flags( hRgx, cFlags )`
             | category: string/regex
-            | _kw_: regexp, Global, IgnoreCase, Multiline, flags
+            | _kw_: _rgx_set_flags, Function
    }}*/
 /*{{|desc: Sets the Global, IgnoreCase and Multiline flags on an existing _RGX engine.
     | params:
@@ -208,7 +208,7 @@ _XPP_REG_FUN_(_RGX_SET_FLAGS)
 /*{{function_: _rgx_destroy
             | syntax_: `_rgx_destroy( @hRgx )`
             | category: string/regex
-            | _kw_: regexp, release engine, destroy
+            | _kw_: _rgx_destroy, Function
    }}*/
 /*{{|desc: Releases an _RGX ActiveX regular expression engine handle.
     | params:
@@ -237,7 +237,7 @@ _XPP_REG_FUN_(_RGX_DESTROY)
 /*{{function_: _rgx_test
             | syntax_: `_rgx_test( hRgx, cString )`
             | category: string/regex
-            | _kw_: regexp, test, match, VBScript RegExp
+            | _kw_: _rgx_test, Function
    }}*/
 /*{{|desc: Tests a string with an _RGX ActiveX regular expression engine.
     | params:
@@ -273,7 +273,7 @@ _XPP_REG_FUN_(_RGX_TEST)
 /*{{function_: _rgx_replace
             | syntax_: `_rgx_replace( hRgx, cString, cReplacement )`
             | category: string/regex
-            | _kw_: regexp, replace, substitution, VBScript RegExp
+            | _kw_: _rgx_replace, Function
    }}*/
 /*{{|desc: Replaces text using an _RGX ActiveX regular expression engine.
     | params:
@@ -316,7 +316,7 @@ _XPP_REG_FUN_(_RGX_REPLACE)
 /*{{function_: _rgx_exec
             | syntax_: `_rgx_exec( hRgx, cString, [lSubMatches] )`
             | category: string/regex
-            | _kw_: regexp, exec, match positions, submatches, VBScript RegExp
+            | _kw_: _rgx_exec, Function
    }}*/
 /*{{|desc: Executes an _RGX ActiveX regular expression engine and returns match positions.
     | params:
@@ -401,7 +401,7 @@ _XPP_REG_FUN_(_RGX_EXEC)
               ? rx:Test( "PATATA" )
               rx:Destroy()
               ```
-   | _kw_: regexp, VBScript RegExp, ActiveX, regular expression, class
+   | _kw_: _rgx, Class
    }}*/
 static void create_class_rgx(XppParamList pl)
 {
@@ -418,36 +418,36 @@ static void create_class_rgx(XppParamList pl)
       }}*/
       pc->Var("m_hrgx");
       // -----
-      /*{{|method_: - METHOD init( [cPattern], [cFlags] )
+      /*{{|method_: - `METHOD init( [cPattern], [cFlags] )`
                | return: Self
                | desc_: Creates or reuses the internal ActiveX RegExp engine; invoked through _rgx():New( [cPattern],
                  [cFlags] ) -> oRgx.
       }}*/
       pc->MethodCB("init", "{|s,pat,flg| s:m_hrgx := _rgx_new(__vdef(s:m_hrgx,0),pat,flg) , s }");
-      /*{{|method_: - METHOD SetPattern( cPattern ) | return: NIL | desc_: Sets the regular expression pattern. }}*/
+      /*{{|method_: - `METHOD SetPattern( cPattern )` | return: NIL | desc_: Sets the regular expression pattern. }}*/
       pc->MethodCB("SetPattern", "{|s,pat| _rgx_set_pattern(s:m_hrgx,pat)}");
-      /*{{|method_: - METHOD SetFlags( cFlags )
+      /*{{|method_: - `METHOD SetFlags( cFlags )`
                | return: NIL
                | desc_: Sets the "g", "i" and "m" ActiveX RegExp flags. All three flags are reset before the letters
                  present in cFlags are applied.
       }}*/
       pc->MethodCB("SetFlags", "{|s,fl| _rgx_set_flags(s:m_hrgx,fl)}");
-      /*{{|method_: - METHOD Destroy()
+      /*{{|method_: - `METHOD Destroy()`
                | return: 0
                | desc_: Releases the internal ActiveX RegExp engine and clears the handle.
       }}*/
       pc->MethodCB("Destroy", "{|s| s:m_hrgx:=_rgx_destroy(s:m_hrgx)}");
-      /*{{|method_: - METHOD Test( cString )
+      /*{{|method_: - `METHOD Test( cString )`
                | return: lMatch / NIL
                | desc_: Tests cString with the current pattern: .T. on match, .F. on no match, NIL on engine errors.
       }}*/
       pc->MethodCB("Test", "{|s,cc| _rgx_test(s:m_hrgx,cc)}");
-      /*{{|method_: - METHOD Replace( cString, cReplacement )
+      /*{{|method_: - `METHOD Replace( cString, cReplacement )`
                | return: cResult / NIL
                | desc_: Replaces text with the current pattern.
       }}*/
       pc->MethodCB("Replace", "{|s,cc,cRep| _rgx_replace(s:m_hrgx,cc,cRep)}");
-      /*{{|method_: - METHOD Exec( cString, [lSubMatches] )
+      /*{{|method_: - `METHOD Exec( cString, [lSubMatches] )`
                | return: aMatches / NIL
                | desc_: Returns match positions and optionally captured submatches, as rows { nPos, nLen } or
                  { nPos, nLen, aSubMatches }.
@@ -579,7 +579,7 @@ cleanup:;
 /*{{function_: _rgx
             | syntax_: `_rgx( cCommand, cString [, cReplacement] ) -> xResult`
             | category: string/regex
-            | _kw_: regexp, one shot, VBScript RegExp, regular expression command
+            | _kw_: _rgx, Function
    }}*/
 /*{{|desc: Executes a one-shot legacy ActiveX regular expression command: a temporary engine is created for
       the command and destroyed before returning. Called without parameters, _rgx() acts instead as the class

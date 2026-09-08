@@ -19,7 +19,7 @@ static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr );
 /*{{function_: Register_User_Log_Uuid
             | syntax_: `Register_User_Log_Uuid( cWndClass ) -> NIL`
             | category: log
-            | _kw_: log window, register, WM_COPYDATA, user log, class name
+            | _kw_: Register_User_Log_Uuid, Function
    }}*/
 /*{{|desc: Registers the window class name of the user log window targeted by lSendLogStr() and
       lSendLogStrFL(). Any previously registered class name is released and the cached window handle is
@@ -51,7 +51,7 @@ XPPRET XPPENTRY REGISTER_USER_LOG_UUID( XppParamList pl )
 /*{{function_: lSendLogStr
             | syntax_: `lSendLogStr( cFormat, ... ) -> lOk`
             | category: log
-            | _kw_: log, send log, WM_COPYDATA, debug output, printf
+            | _kw_: lSendLogStr, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the user log window registered with
       Register_User_Log_Uuid(); when no window class is registered it falls back to the default OT4XB log
@@ -69,7 +69,7 @@ XPPRET XPPENTRY LSENDLOGSTR( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD) 
 /*{{function_: lSendLogStrFL
             | syntax_: `lSendLogStrFL( cFile, nLine, cFormat, ... ) -> lOk`
             | category: log
-            | _kw_: log, send log, file and line, timestamp, WM_COPYDATA
+            | _kw_: lSendLogStrFL, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message, preceded by a header line holding the UTC timestamp and
       the given source file and line, to the user log window registered with Register_User_Log_Uuid(); when
@@ -89,7 +89,7 @@ XPPRET XPPENTRY LSENDLOGSTRFL( XppParamList pl ){XbSendLogStr_internal(pl,(DWORD
 /*{{function_: ot4xb_lSendLogStr
             | syntax_: `ot4xb_lSendLogStr( cFormat, ... ) -> lOk`
             | category: log
-            | _kw_: log, send log, ot4xb log window, WM_COPYDATA, debug output
+            | _kw_: ot4xb_lSendLogStr, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the default OT4XB log window, ignoring
       any window class registered with Register_User_Log_Uuid().
@@ -106,7 +106,7 @@ XPPRET XPPENTRY OT4XB_LSENDLOGSTR( XppParamList pl ){XbSendLogStr_internal(pl,(D
 /*{{function_: ot4xb_lSendLogStrFL
             | syntax_: `ot4xb_lSendLogStrFL( cFile, nLine, cFormat, ... ) -> lOk`
             | category: log
-            | _kw_: log, send log, file and line, timestamp, ot4xb log window
+            | _kw_: ot4xb_lSendLogStrFL, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message, preceded by a header line holding the UTC timestamp and
       the given source file and line, to the default OT4XB log window, ignoring any window class registered
@@ -166,7 +166,7 @@ static void XbSendLogStr_internal( XppParamList pl , DWORD dwFPtr )
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: bSendLogStrFL
-            | _kw_: log, send log, file and line, timestamp, WM_COPYDATA
+            | _kw_: bSendLogStrFL, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message, preceded by a "YYYYMMDD-HH:MM:SS.mmm {File:...,Line:...}"
       UTC header line, via WM_COPYDATA to the user log window registered with Register_User_Log_Uuid()
@@ -194,7 +194,7 @@ BOOL OT4XB_API bSendLogStrFL( LPSTR cFile , LONG nLine , LPSTR pFmt , ... )
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_bSendLogStrFL
-            | _kw_: log, send log, file and line, timestamp, ot4xb log window
+            | _kw_: ot4xb_bSendLogStrFL, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message, preceded by a "YYYYMMDD-HH:MM:SS.mmm {File:...,Line:...}"
       UTC header line, via WM_COPYDATA to the default OT4XB log window. C primitive behind
@@ -296,7 +296,7 @@ static BOOL bSendLogStrFL_internal( HWND * phWnd, LPSTR pWndCls, LPSTR cFile , L
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: bSendLogStr
-            | _kw_: log, send log, WM_COPYDATA, debug output, printf
+            | _kw_: bSendLogStr, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the user log window registered with
       Register_User_Log_Uuid() (default OT4XB log window when no class is registered). C primitive behind
@@ -321,7 +321,7 @@ BOOL OT4XB_API bSendLogStr( LPSTR pFmt , ... )
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_bSendLogStr
-            | _kw_: log, send log, ot4xb log window, WM_COPYDATA, debug output
+            | _kw_: ot4xb_bSendLogStr, Function
    }}*/
 /*{{|desc: Sends a printf-style formatted message via WM_COPYDATA to the default OT4XB log window, ignoring
       any window class registered with Register_User_Log_Uuid(). C primitive behind ot4xb_lSendLogStr(). The

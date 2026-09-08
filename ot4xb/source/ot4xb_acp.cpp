@@ -441,7 +441,7 @@ BEGIN_EXTERN_C
             | category: tasks/internal
             | export: _OT4XB_TASK_INTERNAL_PROC_
             | source: ot4xb_acp.cpp:_OT4XB_TASK_INTERNAL_PROC_
-            | _kw_: task, worker thread, internal entry point
+            | _kw_: _ot4xb_task_internal_proc_, Function
    }}*/
 /*{{|desc: Internal worker entry point used by OT4XB task threads.
     | params:
@@ -461,7 +461,7 @@ _XPP_REG_FUN_( _OT4XB_TASK_INTERNAL_PROC_ ){ ot4xb_task::worker(pl); }
             | category: tasks
             | export: OT4XB_TASK_ID
             | source: ot4xb_acp.cpp:OT4XB_TASK_ID
-            | _kw_: task id, current thread, task
+            | _kw_: ot4xb_task_id, Function
    }}*/
 /*{{|desc: Returns the OT4XB task id associated with the current thread.
 
@@ -477,7 +477,7 @@ _XPP_REG_FUN_( OT4XB_TASK_ID              ){ _retnl(pl,(LONG)GetTlsHeapManager()
             | category: tasks
             | export: OT4XB_TASK_RUN
             | source: ot4xb_acp.cpp:OT4XB_TASK_RUN
-            | _kw_: run in thread, background task, thread pool, evaluate code block, async
+            | _kw_: ot4xb_task_run, Function
    }}*/
 /*{{|desc: Evaluates a code block in a separate thread from the OT4XB thread pool.
     | params:
@@ -499,7 +499,7 @@ _XPP_REG_FUN_( OT4XB_TASK_RUN             ){ ot4xb_task::run(pl); }
             | category: tasks
             | export: OT4XB_TASK_WAIT
             | source: ot4xb_acp.cpp:OT4XB_TASK_WAIT
-            | _kw_: wait task, join, completion, timeout, async
+            | _kw_: ot4xb_task_wait, Function
    }}*/
 /*{{|desc: Waits for an OT4XB task to finish, or checks its completion state.
     | params:
@@ -523,7 +523,7 @@ _XPP_REG_FUN_( OT4XB_TASK_WAIT            ){ ot4xb_task::wait(pl); }
             | category: tasks
             | export: OT4XB_TASK_POP
             | source: ot4xb_acp.cpp:OT4XB_TASK_POP
-            | _kw_: task result, collect result, release task, async
+            | _kw_: ot4xb_task_pop, Function
    }}*/
 /*{{|desc: Retrieves the result of a finished OT4XB task and releases the task resources.
     | params:
@@ -544,7 +544,7 @@ _XPP_REG_FUN_( OT4XB_TASK_POP             ){ ot4xb_task::pop(pl); }
             | category: threads/apc
             | export: OT4XB_APC_POST_CB
             | source: ot4xb_acp.cpp:OT4XB_APC_POST_CB
-            | _kw_: APC, queue code block, QueueUserAPC, run in thread, asynchronous
+            | _kw_: ot4xb_apc_post_cb, Function
    }}*/
 /*{{|desc: Queues a code block APC for a target thread.
     | params:
@@ -590,7 +590,7 @@ _XPP_REG_FUN_( OT4XB_APC_POST_CB )
             | category: threads/apc
             | export: OT4XB_APC_POST_CB_H
             | source: ot4xb_acp.cpp:OT4XB_APC_POST_CB_H
-            | _kw_: APC, queue code block, thread handle, QueueUserAPC
+            | _kw_: ot4xb_apc_post_cb_h, Function
    }}*/
 /*{{|desc: Queues a code block APC for a target thread handle.
     | params:
@@ -641,7 +641,7 @@ _XPP_REG_FUN_( OT4XB_APC_POST_CB_H )
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: __ot4xb_apcproc_stksync_@4
-            | _kw_: APC procedure, synchronous call, target thread, stack
+            | _kw_: _ot4xb_apcproc_stksync_, Function
    }}*/
 /*{{|desc: APC procedure queued by ot4xb_apc_send_cb(). Runs on the target thread: pushes the packed
       arguments, calls the target function, then signals the completion event for the caller.
@@ -677,7 +677,7 @@ OT4XB_API void __stdcall _ot4xb_apcproc_stksync_(DWORD* pdw )
             | category: threads/apc
             | export: OT4XB_APC_SEND_CB
             | source: ot4xb_acp.cpp:OT4XB_APC_SEND_CB
-            | _kw_: APC, run in thread, synchronous, alertable wait, evaluate code block
+            | _kw_: ot4xb_apc_send_cb, Function
    }}*/
 /*{{|desc: Synchronously evaluates a code block in a target thread that enters an alertable wait state.
     | params:
@@ -766,7 +766,7 @@ _XPP_REG_FUN_( OT4XB_APC_SEND_CB )
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_ThreadObject2hThread
-            | _kw_: thread handle, Thread object, HANDLE, Xbase++ thread
+            | _kw_: _ot4xb_ThreadObject2hThread, Function
    }}*/
 /*{{|desc: Resolves an Xbase++ thread reference to a native Windows thread handle.
     | params:
@@ -797,7 +797,7 @@ OT4XB_API HANDLE _ot4xb_ThreadObject2hThread(ContainerHandle cono)
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_thread_new_
-            | _kw_: new thread, Thread object, thread pool, reuse
+            | _kw_: _ot4xb_thread_new_, Function
    }}*/
 /*{{|desc: Returns a ready-to-use Xbase++ Thread object, reusing one from the internal thread pool when
       available, otherwise creating a new Thread object.
@@ -817,7 +817,7 @@ OT4XB_API ContainerHandle _ot4xb_thread_new_(void)
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_thread_
-            | _kw_: start thread, C function, Thread object, run in thread
+            | _kw_: _ot4xb_thread_, Function
    }}*/
 /*{{|desc: Starts a new Xbase++ thread that runs a C function pointer. It obtains a Thread object and calls
       its Start method so the thread executes fp(lp).
@@ -858,7 +858,7 @@ static void __cdecl _ot4xb_fp_map_break_hook_(XppParamList pl)
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_setup_break_hook_
-            | _kw_: Break, hook, runtime patch, break value, per thread
+            | _kw_: _ot4xb_setup_break_hook_, Function
    }}*/
 /*{{|desc: Installs, once, a hook on the Xbase++ runtime _BREAK function so the value passed to Break() is
       stored per thread before the original _BREAK runs.
@@ -882,7 +882,7 @@ OT4XB_API void __cdecl _ot4xb_setup_break_hook_(void)
               ```
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_redirect_xppapi_call_ex_
-            | _kw_: forward call, redirect, method, Self, parameters
+            | _kw_: _ot4xb_redirect_xppapi_call_ex_, Function
    }}*/
 /*{{|desc: Forwards the parameters of the current Xbase++ call to method pMethodName of object Self and
       returns its result. If the method returns 333 and pBreak is set, pBreak is called instead.
@@ -937,7 +937,7 @@ OT4XB_API void __cdecl _ot4xb_redirect_xppapi_call_ex_(XppParamList pl , Contain
             | category: threads , tasks
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_redirect_xppapi_call_
-            | _kw_: forward call, redirect, method, Self, parameters
+            | _kw_: _ot4xb_redirect_xppapi_call_, Function
    }}*/
 /*{{|desc: Forwards the parameters of the current Xbase++ call to method pMethodName of object Self and
       returns its result to the caller.
@@ -983,7 +983,7 @@ OT4XB_API void __cdecl _ot4xb_redirect_xppapi_call_(XppParamList pl , ContainerH
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_hook_func_in_mod_
-            | _kw_: import table hook, IAT patch, redirect dll call, detour
+            | _kw_: _ot4xb_hook_func_in_mod_, Function
    }}*/
 /*{{|desc: Redirects the calls that module hFrom makes to function pFName of DLL pDllFrom by patching its
       import table entry to pfNew. Returns the original address so the caller can chain to it.
@@ -1046,7 +1046,7 @@ OT4XB_API DWORD _ot4xb_hook_func_in_mod_(HMODULE hFrom,LPSTR pDllFrom,LPSTR pFNa
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_find_sym_
-            | _kw_: runtime symbol, lookup, function pointer, xpprt1
+            | _kw_: _ot4xb_find_sym_, Function
    }}*/
 /*{{|desc: Looks up an Xbase++ runtime symbol by name and returns its function pointer.
     | params:
@@ -1078,7 +1078,7 @@ OT4XB_API DWORD _ot4xb_find_sym_(LPSTR p)
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_fp_map_
-            | _kw_: redirect function, jmp patch, detour, function map
+            | _kw_: _ot4xb_fp_map_, Function
    }}*/
 /*{{|desc: Redirects a function: writes a jump to fpd at the entry of the function at fps and returns a
       callable pointer to the original (its relocated first bytes followed by a jump back). Recognizes
@@ -1149,7 +1149,7 @@ OT4XB_API DWORD _ot4xb_fp_map_(DWORD fps,DWORD fpd)
             | category: function-pointer
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_fp_map2_
-            | _kw_: redirect function, jmp patch, detour, function map
+            | _kw_: _ot4xb_fp_map2_, Function
    }}*/
 /*{{|desc: Redirects a function by writing a jump to fpd at the entry of the function at fps. Unlike
       _ot4xb_fp_map_() it keeps no way to call the original.
@@ -1177,7 +1177,7 @@ OT4XB_API void _ot4xb_fp_map2_(DWORD fps,DWORD fpd)
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: __ot4xb_apcproc_cb_@4
-            | _kw_: APC procedure, evaluate code block, target thread
+            | _kw_: _ot4xb_apcproc_cb_, Function
    }}*/
 /*{{|desc: APC procedure queued by ot4xb_apc_post_cb() and ot4xb_apc_post_cb_h(). On the target thread it
       evaluates the queued code block with its parameters and releases the block. No result is returned.
@@ -1259,7 +1259,7 @@ static  void __stdcall _ot4xb_apc_ratxbg_(DWORD* pdw)
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: _ratx_if_
-            | _kw_: run at thread, APC, operation code, cross thread call
+            | _kw_: _ratx_if_, Function
    }}*/
 /*{{|desc: Returns the run-at-thread APC procedure for an operation code: 1 call function, 2 call method,
       3 set member, 4 get member; 0 for any other code.
@@ -1287,7 +1287,7 @@ OT4XB_API DWORD __cdecl _ratx_if_(DWORD dw)
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: _ratx_prep_
-            | _kw_: run at thread, parameter block, cross thread call, event
+            | _kw_: _ratx_prep_, Function
    }}*/
 /*{{|desc: Allocates and initializes the parameter block for a run-at-thread Xbase++ call. Bit 1 of nFlags
       creates a completion event and bit 2 creates a container; the name is copied and the count stored.
@@ -1314,7 +1314,7 @@ OT4XB_API DWORD*  __cdecl _ratx_prep_(DWORD np, LPSTR pStr,DWORD nFlags)
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: _ratx_set_
-            | _kw_: run at thread, parameter, cross thread call
+            | _kw_: _ratx_set_, Function
    }}*/
 /*{{|desc: Stores the np-th parameter container into a run-at-thread call block.
     | params:
@@ -1332,7 +1332,7 @@ OT4XB_API void __cdecl _ratx_set_(DWORD* pdw,ULONG np,DWORD con){pdw[(np+4)] = c
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: _ratx_get_
-            | _kw_: run at thread, result, cross thread call
+            | _kw_: _ratx_get_, Function
    }}*/
 /*{{|desc: Reads a value back from a run-at-thread call block: returns the container slot (pdw[2]) when np
       is nonzero, or the stored parameter count (pdw[4]) when np is 0.
@@ -1351,7 +1351,7 @@ OT4XB_API DWORD __cdecl _ratx_get_(DWORD* pdw,ULONG np){return ( np ? pdw[2] : p
             | category: threads/apc
             | header: ot4xb_c_exported.h
             | mangled-name: _ratx_clr_
-            | _kw_: run at thread, release, cross thread call, cleanup
+            | _kw_: _ratx_clr_, Function
    }}*/
 /*{{|desc: Releases a run-at-thread call block: closes its event, releases its container and parameters,
       frees the name string, and frees the block itself.
@@ -1376,7 +1376,7 @@ OT4XB_API void __cdecl _ratx_clr_(DWORD* pdw)
             | category: runtime
             | header: ot4xb_c_exported.h
             | mangled-name: kill_process_by_id
-            | _kw_: kill process, TerminateProcess, process id, pid
+            | _kw_: kill_process_by_id, Function
    }}*/
 /*{{|desc: Terminates a process by its identifier and waits up to 5 seconds for it to end.
     | params:
@@ -1414,7 +1414,7 @@ OT4XB_API BOOL __cdecl kill_process_by_id(DWORD id , UINT nCode)
             | category: runtime
             | header: ot4xb_c_exported.h
             | mangled-name: process_wait_by_id
-            | _kw_: wait process, process id, pid, timeout, WaitForSingleObject
+            | _kw_: process_wait_by_id, Function
    }}*/
 /*{{|desc: Waits for a process, identified by its id, to finish or until the timeout expires.
     | params:
@@ -1486,7 +1486,7 @@ extern "C" LPSTR __cdecl __unDName(LPSTR buffer,LPSTR mangled, int buflen,DWORD 
             | category: cpp/symbols
             | header: ot4xb_xbexports.hpp
             | mangled-name: ot4xb_unmangle_cpp_name
-            | _kw_: undecorate, demangle, C++ name, UnDecorateSymbolName, mangled
+            | _kw_: ot4xb_unmangle_cpp_name, Function
    }}*/
 /*{{|desc: Converts a Microsoft C++ decorated symbol name into a readable C++ function or method signature.
     | params:
@@ -1505,7 +1505,7 @@ extern "C" OT4XB_API LPSTR  ot4xb_unmangle_cpp_name(LPSTR pName )
             | category: cpp/symbols
             | export: OT4XB_UNMANGLE_CPP_NAME
             | source: ot4xb_acp.cpp:OT4XB_UNMANGLE_CPP_NAME
-            | _kw_: undecorate, demangle, C++ name, UnDecorateSymbolName, mangled
+            | _kw_: ot4xb_unmangle_cpp_name, Function
    }}*/
 /*{{|desc: Converts a Microsoft C++ decorated symbol name into a readable C++ function or method signature.
     | params:

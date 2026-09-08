@@ -27,7 +27,7 @@ static void _conPutLong_pv_( ContainerHandle con , void* pValue)
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conaGetLen
-            | _kw_: array element length, nested array, indices, size
+            | _kw_: _conaGetLen, Function
    }}*/
 /*{{|desc: Gets the length of the array or string element addressed by an array of indices. Wrapper for
       _conSizeA that builds the null-terminated index list from pIndex/nDepth. With pIndex NULL or
@@ -85,7 +85,7 @@ OT4XB_API ULONG _conaGetLen(ContainerHandle cona , ULONG * pIndex, ULONG nDepth)
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conaGetType
-            | _kw_: array element type, nested array, indices, XPP type
+            | _kw_: _conaGetType, Function
    }}*/
 /*{{|desc: Gets the XPP type flags of the element addressed by an array of indices. Wrapper for _conTypeA
       that builds the null-terminated index list from pIndex/nDepth. With pIndex NULL or nDepth 0 it

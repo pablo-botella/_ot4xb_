@@ -150,7 +150,7 @@ DWORD TLXbStack::Count( void ){ return m_element_capacity; }
 /*{{function_: TlsStackTop
             | syntax_: `TlsStackTop( [nSkip] [, @pCtx] )`
             | category: runtime/thread
-            | _kw_: TLS stack, thread stack, top, peek, per thread
+            | _kw_: TlsStackTop, Function
    }}*/
 /*{{|desc: Returns an item from the current thread's OT4XB ThreadLocalStorage Stack without removing it.
       Each thread has its own independent ThreadLocalStorage Stack for application use; TlsStackPush() and
@@ -180,7 +180,7 @@ XPPRET XPPENTRY TLSSTACKTOP( XppParamList pl)
 /*{{function_: TlsStackPush
             | syntax_: `TlsStackPush( xValue )`
             | category: runtime/thread
-            | _kw_: TLS stack, thread stack, push, per thread
+            | _kw_: TlsStackPush, Function
    }}*/
 /*{{|desc: Pushes a value on the current thread's OT4XB ThreadLocalStorage Stack.
     | params:
@@ -199,7 +199,7 @@ XPPRET XPPENTRY TLSSTACKPUSH( XppParamList pl)
 /*{{function_: TlsStackPop
             | syntax_: `TlsStackPop( [@nCtx] )`
             | category: runtime/thread
-            | _kw_: TLS stack, thread stack, pop, per thread
+            | _kw_: TlsStackPop, Function
    }}*/
 /*{{|desc: Pops the top value from the current thread's OT4XB ThreadLocalStorage Stack.
     | params:
@@ -223,7 +223,7 @@ XPPRET XPPENTRY TLSSTACKPOP( XppParamList pl)
 /*{{function_: TlsStackCount
             | syntax_: `TlsStackCount()`
             | category: runtime/thread
-            | _kw_: TLS stack, thread stack, count, per thread
+            | _kw_: TlsStackCount, Function
    }}*/
 /*{{|desc: Returns the number of items in the current thread's OT4XB ThreadLocalStorage Stack.
 
@@ -241,7 +241,7 @@ XPPRET XPPENTRY TLSSTACKCOUNT( XppParamList pl)
 /*{{function_: XbTlsAlloc
             | syntax_: `XbTlsAlloc()`
             | category: runtime/thread
-            | _kw_: TLS, thread local storage, TlsAlloc, slot
+            | _kw_: XbTlsAlloc, Function
    }}*/
 /*{{|desc: Allocates a Win32 TLS (thread local storage) slot for the process by calling the TlsAlloc()
       Win32 API. The returned index is valid in every thread of the process, but each thread keeps its own
@@ -265,7 +265,7 @@ XPPRET XPPENTRY XBTLSALLOC( XppParamList pl)
 /*{{function_: XbTlsFree
             | syntax_: `XbTlsFree( nTlsIndex )`
             | category: runtime/thread
-            | _kw_: TLS, thread local storage, TlsFree, slot
+            | _kw_: XbTlsFree, Function
    }}*/
 /*{{|desc: Frees a Win32 TLS slot allocated with XbTlsAlloc().
     | params:
@@ -282,7 +282,7 @@ XPPRET XPPENTRY XBTLSFREE( XppParamList pl){ _retl(pl,TlsFree((DWORD) _parLong(p
 /*{{function_: XbTlsSetValue
             | syntax_: `XbTlsSetValue( nTlsIndex [, xValue] )`
             | category: runtime/thread
-            | _kw_: TLS, thread local storage, TlsSetValue, per thread value
+            | _kw_: XbTlsSetValue, Function
    }}*/
 /*{{|desc: Replaces the current thread's value for a Win32 TLS slot. The previously stored value is released
       first; when xValue is omitted the slot is left empty.
@@ -312,7 +312,7 @@ XPPRET XPPENTRY XBTLSSETVALUE( XppParamList pl)
 /*{{function_: XbTlsGetValue
             | syntax_: `XbTlsGetValue( nTlsIndex )`
             | category: runtime/thread
-            | _kw_: TLS, thread local storage, TlsGetValue, per thread value
+            | _kw_: XbTlsGetValue, Function
    }}*/
 /*{{|desc: Returns the current thread's value stored in a Win32 TLS slot.
     | params:
@@ -328,7 +328,7 @@ XPPRET XPPENTRY XBTLSGETVALUE( XppParamList pl){ _conReturn(pl,(ContainerHandle)
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _WithObject_StackTop_
-            | _kw_: with object, stack top, WITH OBJECT, per thread
+            | _kw_: _WithObject_StackTop_, Function
    }}*/
 /*{{|desc: C-level access to the current thread's with-object stack: returns an item without removing it.
     | params:
@@ -347,7 +347,7 @@ OT4XB_API ContainerHandle _WithObject_StackTop_( UINT n )
             | _tg_: with_object
             | syntax_: `WithObjectStackTop( [nSkip] )`
             | category: runtime/thread
-            | _kw_: with object, stack top, WITH OBJECT, with.item
+            | _kw_: WithObjectStackTop, Function
    }}*/
 /*{{|desc: Returns an item from the current thread's with-object stack without removing it. The with.item
       and with.this shorthands translate to a call to this function, and the .: shorthand sends the message
@@ -377,7 +377,7 @@ XPPRET XPPENTRY WITHOBJECTSTACKTOP( XppParamList pl)
             | _tg_: with_object
             | syntax_: `WithObjectStackPush( xValue )`
             | category: runtime/thread
-            | _kw_: with object, push, WITH OBJECT, per thread
+            | _kw_: WithObjectStackPush, Function
    }}*/
 /*{{|desc: Pushes a value on the current thread's with-object stack. The WITH OBJECT command translates to a
       call to this function, and the pushed value becomes reachable as with.item or through the .: shorthand.
@@ -398,7 +398,7 @@ XPPRET XPPENTRY WITHOBJECTSTACKPUSH( XppParamList pl)
             | _tg_: with_object
             | syntax_: `WithObjectStackPop()`
             | category: runtime/thread
-            | _kw_: with object, pop, END WITH, per thread
+            | _kw_: WithObjectStackPop, Function
    }}*/
 /*{{|desc: Pops the top value from the current thread's with-object stack. The END WITH command translates to
       a call to this function.
@@ -419,7 +419,7 @@ XPPRET XPPENTRY WITHOBJECTSTACKPOP( XppParamList pl)
             | _tg_: with_object
             | syntax_: `WithObjectStackCount()`
             | category: runtime/thread
-            | _kw_: with object, count, WITH FRAME, per thread
+            | _kw_: WithObjectStackCount, Function
    }}*/
 /*{{|desc: Returns the number of items in the current thread's with-object stack. The WITH FRAME command
       records this value so that END FRAME can restore the stack depth with WithObjectStackRecover().
@@ -437,7 +437,7 @@ XPPRET XPPENTRY WITHOBJECTSTACKCOUNT( XppParamList pl)
             | _tg_: with_object
             | syntax_: `WithObjectStackRecover( nCount )`
             | category: runtime/thread
-            | _kw_: with object, recover, unwind, END FRAME
+            | _kw_: WithObjectStackRecover, Function
    }}*/
 /*{{|desc: Pops and discards items until the current thread's with-object stack holds at most nCount items.
       The END FRAME command uses it to unwind entries left on the stack when a WITH FRAME block is abandoned.
@@ -460,7 +460,7 @@ XPPRET XPPENTRY WITHOBJECTSTACKRECOVER( XppParamList pl)
             | _tg_: with_object
             | syntax_: `ot4xb_array_iterator( aArray )`
             | category: array/iteration
-            | _kw_: ITERATE ARRAY, array iterator, with object, loop
+            | _kw_: ot4xb_array_iterator, Function
    }}*/
 /*{{|desc: Starts an array iterator on the current thread's with-object stack. The ITERATE ARRAY command
       translates to a call to this function followed by a while loop on ot4xb_array_iterator_step(), which
@@ -496,7 +496,7 @@ _XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR )
             | _tg_: with_object
             | syntax_: `ot4xb_array_iterator_step( [nTypeMask] )`
             | category: array/iteration
-            | _kw_: ITERATE ARRAY, next item, array iterator, loop
+            | _kw_: ot4xb_array_iterator_step, Function
    }}*/
 /*{{|desc: Advances the array iterator started by ot4xb_array_iterator() and loads the next array item on top
       of the current thread's with-object stack, where with.item and with.index read it. The ITERATE ARRAY
@@ -558,7 +558,7 @@ _XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR_STEP )
             | _tg_: with_object
             | syntax_: `ot4xb_array_iterator_index()`
             | category: array/iteration
-            | _kw_: ITERATE ARRAY, index, with.index, loop counter
+            | _kw_: ot4xb_array_iterator_index, Function
    }}*/
 /*{{|desc: Returns the 1-based index of the current array item while inside an ITERATE ARRAY loop. The
       with.index shorthand translates to a call to this function.
@@ -574,7 +574,7 @@ _XPP_REG_FUN_( OT4XB_ARRAY_ITERATOR_INDEX )
 /*{{function_: TLS
             | syntax_: `TLS()`
             | category: runtime/thread
-            | _kw_: TLS, thread expando, thread local object, per thread properties
+            | _kw_: TLS, Function
    }}*/
 /*{{|desc: Returns the current thread's TLS expando object.
 

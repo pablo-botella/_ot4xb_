@@ -11,7 +11,7 @@
 /*{{function_: nOr
             | syntax_: `nOr( x1, ... xN )`
             | category: bitwise
-            | _kw_: bitwise or, OR, flags, combine, set bits
+            | _kw_: nOr, Function
    }}*/
 /*{{|desc: Combines all numeric or logical parameters with bitwise `|`. nOr( x1, x2, ... ) starts with 0 and
       applies `|` to every parameter: `((0 | x1) | x2) | ...`
@@ -42,7 +42,7 @@ XPPRET XPPENTRY NOR(XppParamList pl)
 /*{{function_: nXOr
             | syntax_: `nXOr( x1, ... xN )`
             | category: bitwise
-            | _kw_: bitwise xor, XOR, exclusive or, toggle bits
+            | _kw_: nXOr, Function
    }}*/
 /*{{|desc: Combines numeric or logical parameters with bitwise `^`. nXOr( x1, x2, ... ) starts with x1 and
       applies `^` to each remaining parameter: `((x1 ^ x2) ^ x3) ...`
@@ -70,7 +70,7 @@ XPPRET XPPENTRY NXOR(XppParamList pl)
 /*{{function_: nAnd
             | syntax_: `nAnd( x1, ... xN )`
             | category: bitwise
-            | _kw_: bitwise and, AND, mask, test bits
+            | _kw_: nAnd, Function
    }}*/
 /*{{|desc: Combines numeric or logical parameters with bitwise `&`. nAnd( x1, x2, ... ) starts with x1 and
       applies `&` to each remaining parameter: `((x1 & x2) & x3) ...`
@@ -98,7 +98,7 @@ XPPRET XPPENTRY NAND(XppParamList pl)
 /*{{function_: nAndNot
             | syntax_: `nAndNot( nMask, ... nBitsN )`
             | category: bitwise
-            | _kw_: clear bits, remove flag, and not, mask off
+            | _kw_: nAndNot, Function
    }}*/
 /*{{|desc: Removes bits from a mask. nAndNot( mask, bits1, bits2, ... ) starts with mask and clears the
       specified bits from it. Equivalent in C: `((mask & ~bits1) & ~bits2) ...`
@@ -127,7 +127,7 @@ XPPRET XPPENTRY NANDNOT(XppParamList pl)
 /*{{function_: lAnd
             | syntax_: `lAnd( x1, ... xN )`
             | category: bitwise
-            | _kw_: bitwise and, AND, test flag, has bit, logical
+            | _kw_: lAnd, Function
    }}*/
 /*{{|desc: Combines numeric or logical parameters with bitwise `&` and returns a logical result. lAnd( x1, x2,
       ... ) starts with x1 and applies `&` to each remaining parameter.
@@ -153,7 +153,7 @@ XPPRET XPPENTRY LAND(XppParamList pl)
 /*{{function_: nNot
             | syntax_: `nNot( nValue )`
             | category: bitwise
-            | _kw_: bitwise not, complement, invert bits, NOT
+            | _kw_: nNot, Function
    }}*/
 /*{{|desc: Performs bitwise `~` (complement) on a numeric value. Inverts all bits.
     | params:
@@ -176,7 +176,7 @@ XPPRET XPPENTRY NNOT(XppParamList pl)
 /*{{function_: nLShift
             | syntax_: `nLShift( nValue, nBits )`
             | category: bitwise
-            | _kw_: shift left, <<, bit shift, multiply by 2
+            | _kw_: nLShift, Function
    }}*/
 /*{{|desc: Performs left bit shift on a 32-bit value.
     | params:
@@ -201,7 +201,7 @@ XPPRET XPPENTRY NLSHIFT(XppParamList pl)
 /*{{function_: nRShift
             | syntax_: `nRShift( nValue, nBits )`
             | category: bitwise
-            | _kw_: shift right, >>, bit shift, divide by 2
+            | _kw_: nRShift, Function
    }}*/
 /*{{|desc: Performs right bit shift on a 32-bit value.
     | params:
@@ -226,7 +226,7 @@ XPPRET XPPENTRY NRSHIFT(XppParamList pl)
 /*{{function_: nLRot
             | syntax_: `nLRot( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate left, rol, circular shift, 32-bit
+            | _kw_: nLRot, Function
    }}*/
 /*{{|desc: Performs left bit rotation on a 32-bit value. Bits shifted out on the left re-enter on the right.
     | params:
@@ -260,7 +260,7 @@ XPPRET XPPENTRY NLROT(XppParamList pl)
 /*{{function_: nRRot
             | syntax_: `nRRot( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate right, ror, circular shift, 32-bit
+            | _kw_: nRRot, Function
    }}*/
 /*{{|desc: Performs right bit rotation on a 32-bit value. Bits shifted out on the right re-enter on the left.
     | params:
@@ -294,9 +294,9 @@ XPPRET XPPENTRY NRROT(XppParamList pl)
 /*{{c-function_: _str_rt_r_
             | syntax_: `void _str_rt_r_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_r_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_r_
-            | _kw_: rotate right, ror, bytes, buffer, obfuscate
+            | _kw_: _str_rt_r_, Function
    }}*/
 /*{{|desc: Rotates each byte in a buffer right by r bits. Bits shifted out on the right re-enter on the left
       (circular rotation). Unlike `>>` where shifted-out bits are lost, here no bits are discarded.
@@ -332,9 +332,9 @@ extern "C" OT4XB_API void _str_rt_r_(LPBYTE p, DWORD cb , BYTE r )
 /*{{c-function_: _str_rt_l_
             | syntax_: `void _str_rt_l_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_l_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_l_
-            | _kw_: rotate left, rol, bytes, buffer, obfuscate
+            | _kw_: _str_rt_l_, Function
    }}*/
 /*{{|desc: Rotates each byte in a buffer left by r bits. Bits shifted out on the left re-enter on the right
       (circular rotation). Unlike `<<` where shifted-out bits are lost, here no bits are discarded.
@@ -370,9 +370,9 @@ extern "C" OT4XB_API void _str_rt_l_(LPBYTE p, DWORD cb , BYTE r )
 /*{{c-function_: _str_rt_r_ex_
             | syntax_: `void _str_rt_r_ex_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_r_ex_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_r_ex_
-            | _kw_: rotate right, ror, bytes, buffer, incremental, obfuscate
+            | _kw_: _str_rt_r_ex_, Function
    }}*/
 /*{{|desc: Processes each byte in a buffer: rotates it right by r bits, then increments r by 1. Since r is a
       BYTE, it wraps naturally from 255 back to 0. Rotating a byte by 8 returns it to its original value. Bits
@@ -408,9 +408,9 @@ extern "C" OT4XB_API void _str_rt_r_ex_(LPBYTE p, DWORD cb, BYTE r)
 /*{{c-function_: _str_rt_l_ex_
             | syntax_: `void _str_rt_l_ex_( LPBYTE p, DWORD cb, BYTE r )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )
+            | xbase-syntax: `@ot4xb:_str_rt_l_ex_( @buffer, len(buffer), nBitsToRotate )`
             | mangled-name: _str_rt_l_ex_
-            | _kw_: rotate left, rol, bytes, buffer, incremental, obfuscate
+            | _kw_: _str_rt_l_ex_, Function
    }}*/
 /*{{|desc: Processes each byte in a buffer: rotates it left by r bits, then increments r by 1. Since r is a
       BYTE, it wraps naturally from 255 back to 0. Rotating a byte by 8 returns it to its original value. Bits
@@ -446,7 +446,7 @@ extern "C" OT4XB_API void _str_rt_l_ex_(LPBYTE p, DWORD cb, BYTE r)
 /*{{function_: nLRotByte
             | syntax_: `nLRotByte( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate left, rol, byte, 8-bit, circular shift
+            | _kw_: nLRotByte, Function
    }}*/
 /*{{|desc: Performs left bit rotation on an 8-bit value. Bits shifted out on the left re-enter on the right.
     | params:
@@ -481,7 +481,7 @@ XPPRET XPPENTRY NLROTBYTE(XppParamList pl)
 /*{{function_: nRRotByte
             | syntax_: `nRRotByte( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate right, ror, byte, 8-bit, circular shift
+            | _kw_: nRRotByte, Function
    }}*/
 /*{{|desc: Performs right bit rotation on an 8-bit value. Bits shifted out on the right re-enter on the left.
     | params:
@@ -516,7 +516,7 @@ XPPRET XPPENTRY NRROTBYTE(XppParamList pl)
 /*{{function_: nLRotWord
             | syntax_: `nLRotWord( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate left, rol, word, 16-bit, circular shift
+            | _kw_: nLRotWord, Function
    }}*/
 /*{{|desc: Performs left bit rotation on a 16-bit value. Bits shifted out on the left re-enter on the right.
     | params:
@@ -551,7 +551,7 @@ XPPRET XPPENTRY NLROTWORD(XppParamList pl)
 /*{{function_: nRRotWord
             | syntax_: `nRRotWord( nValue, nBits )`
             | category: bitwise
-            | _kw_: rotate right, ror, word, 16-bit, circular shift
+            | _kw_: nRRotWord, Function
    }}*/
 /*{{|desc: Performs right bit rotation on a 16-bit value. Bits shifted out on the right re-enter on the left.
     | params:
@@ -586,7 +586,7 @@ XPPRET XPPENTRY NRROTWORD(XppParamList pl)
 /*{{function_: lDwBitOnOff
             | syntax_: `lDwBitOnOff( @nValue, nBit, [lOnOff] )`
             | category: bitwise
-            | _kw_: bit, get bit, set bit, test bit, flag, by reference
+            | _kw_: lDwBitOnOff, Function
    }}*/
 /*{{|desc: Gets or sets a specific bit in a 32-bit value. If lOnOff is passed, sets the bit and updates nValue
       by reference. Always returns the current state of the bit.
@@ -614,9 +614,9 @@ XPPRET XPPENTRY LDWBITONOFF(XppParamList pl)
 /*{{c-function_: _dw_bf_get_
             | syntax_: `DWORD _dw_bf_get_( DWORD dw, DWORD sh, DWORD cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_dw_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_dw_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _dw_bf_get_
-            | _kw_: bitfield, bit field, extract bits, DWORD
+            | _kw_: _dw_bf_get_, Function
    }}*/
 /*{{|desc: Extracts a bitfield from a DWORD value. Returns cb bits starting at bit position sh.
     | params:
@@ -638,9 +638,9 @@ OT4XB_API DWORD _dw_bf_get_(DWORD dw,DWORD sh, DWORD cb)
 /*{{c-function_: _dw_bf_set_
             | syntax_: `DWORD _dw_bf_set_( DWORD dw, DWORD sh, DWORD cb, DWORD v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_dw_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _dw_bf_set_
-            | _kw_: bitfield, bit field, write bits, DWORD
+            | _kw_: _dw_bf_set_, Function
    }}*/
 /*{{|desc: Writes a value into a bitfield of a DWORD. Sets cb bits starting at bit position sh to the value v.
     | params:
@@ -664,9 +664,9 @@ OT4XB_API DWORD _dw_bf_set_(DWORD dw,DWORD sh, DWORD cb , DWORD v)
 /*{{c-function_: _b1_bf_get_
             | syntax_: `BYTE _b1_bf_get_( BYTE b, BYTE sh, BYTE cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_b1_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_b1_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _b1_bf_get_
-            | _kw_: bitfield, bit field, extract bits, BYTE
+            | _kw_: _b1_bf_get_, Function
    }}*/
 /*{{|desc: Extracts a bitfield from a BYTE value. Returns cb bits starting at bit position sh.
     | params:
@@ -688,9 +688,9 @@ OT4XB_API BYTE _b1_bf_get_(BYTE b,BYTE sh, BYTE cb)
 /*{{c-function_: _b1_bf_set_
             | syntax_: `BYTE _b1_bf_set_( BYTE b, BYTE sh, BYTE cb, BYTE v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_b1_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _b1_bf_set_
-            | _kw_: bitfield, bit field, write bits, BYTE
+            | _kw_: _b1_bf_set_, Function
    }}*/
 /*{{|desc: Writes a value into a bitfield of a BYTE. Sets cb bits starting at bit position sh to the value v.
     | params:
@@ -714,9 +714,9 @@ OT4XB_API BYTE _b1_bf_set_(BYTE b ,BYTE sh, BYTE cb , BYTE v)
 /*{{c-function_: _w_bf_get_
             | syntax_: `WORD _w_bf_get_( WORD w, WORD sh, WORD cb )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_w_bf_get_( nValue, nShift, nBits )
+            | xbase-syntax: `@ot4xb:_w_bf_get_( nValue, nShift, nBits )`
             | mangled-name: _w_bf_get_
-            | _kw_: bitfield, bit field, extract bits, WORD
+            | _kw_: _w_bf_get_, Function
    }}*/
 /*{{|desc: Extracts a bitfield from a WORD (int16) value. Returns cb bits starting at bit position sh.
     | params:
@@ -738,9 +738,9 @@ OT4XB_API WORD _w_bf_get_(WORD w,WORD sh, WORD cb)
 /*{{c-function_: _w_bf_set_
             | syntax_: `WORD _w_bf_set_( WORD w, WORD sh, WORD cb, WORD v )`
             | category: bitwise/bitfield
-            | xbase-syntax: @ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )
+            | xbase-syntax: `@ot4xb:_w_bf_set_( nValue, nShift, nBits, nNewValue )`
             | mangled-name: _w_bf_set_
-            | _kw_: bitfield, bit field, write bits, WORD
+            | _kw_: _w_bf_set_, Function
    }}*/
 /*{{|desc: Writes a value into a bitfield of a WORD (int16). Sets cb bits starting at bit position sh to the
       value v.
@@ -765,9 +765,9 @@ OT4XB_API WORD _w_bf_set_(WORD w ,WORD sh, WORD cb , WORD v)
 /*{{c-function_: _byteflipbits_
             | syntax_: `BYTE _byteflipbits_( BYTE n )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_byteflipbits_( nByte )
+            | xbase-syntax: `@ot4xb:_byteflipbits_( nByte )`
             | mangled-name: _byteflipbits_
-            | _kw_: reverse bits, mirror bits, bit order, byte
+            | _kw_: _byteflipbits_, Function
    }}*/
 /*{{|desc: Reverses the bit order of a BYTE. bit 0 becomes bit 7, bit 1 becomes bit 6, and so on.
     | params:
@@ -792,9 +792,9 @@ OT4XB_API BYTE _byteflipbits_(BYTE n)
 /*{{c-function_: _str_byte_xor_
             | syntax_: `BYTE _str_byte_xor_( LPBYTE p, UINT sh, UINT cb )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )
+            | xbase-syntax: `@ot4xb:_str_byte_xor_( pBuffer, nOffset, nBytes )`
             | mangled-name: _str_byte_xor_
-            | _kw_: xor checksum, xor bytes, buffer, checksum
+            | _kw_: _str_byte_xor_, Function
    }}*/
 /*{{|desc: Computes the cumulative XOR of cb bytes in a buffer starting at offset sh. Result is the XOR of all
       bytes in the specified range.
@@ -822,9 +822,9 @@ OT4XB_API BYTE _str_byte_xor_(LPBYTE p , UINT sh , UINT cb)
 /*{{c-function_: _str_byte_sum_
             | syntax_: `BYTE _str_byte_sum_( LPBYTE p, UINT sh, UINT cb )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )
+            | xbase-syntax: `@ot4xb:_str_byte_sum_( pBuffer, nOffset, nBytes )`
             | mangled-name: _str_byte_sum_
-            | _kw_: byte sum, checksum, buffer, add bytes
+            | _kw_: _str_byte_sum_, Function
    }}*/
 /*{{|desc: Computes the cumulative sum of cb bytes in a buffer starting at offset sh.
     | params:
@@ -855,9 +855,9 @@ OT4XB_API BYTE _str_byte_sum_(LPBYTE p , UINT sh , UINT cb)
 /*{{c-function_: _str_reverse_bytes_
             | syntax_: `void _str_reverse_bytes_( LPBYTE p, UINT sh, UINT count )`
             | category: bitwise
-            | xbase-syntax: @ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )
+            | xbase-syntax: `@ot4xb:_str_reverse_bytes_( @pBuffer, nOffset, nCount )`
             | mangled-name: _str_reverse_bytes_
-            | _kw_: reverse bytes, byte order, swap, endian, in place
+            | _kw_: _str_reverse_bytes_, Function
    }}*/
 /*{{|desc: Reverses the order of count bytes in a buffer starting at offset sh. The buffer is modified in
       place.

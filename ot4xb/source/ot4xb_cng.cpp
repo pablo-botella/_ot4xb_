@@ -956,7 +956,7 @@ END_NAMESPACE() // ot4xb_cng_ns
               encode_input and encode_output default to "bin".
             | note: OT4XB_CNG() returns NIL instead of the class object when the CNG runtime (ncrypt.dll)
               cannot be loaded.
-   | _kw_: CNG, BCrypt, AES, RC4, encrypt, decrypt, cipher, cryptography
+   | _kw_: OT4XB_CNG, Class
    }}*/
 _XPP_REG_FUN_( OT4XB_CNG )
 {

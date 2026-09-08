@@ -102,7 +102,7 @@ static LRESULT __stdcall _ot4xbxbwndprocwithxbobj_(OT4XB_WND_CARGO * pc,HWND hWn
             | category: windows/window
             | export: OT4XB_CREATEGENERICWINDOW
             | source: WndTool.cpp:OT4XB_CREATEGENERICWINDOW
-            | _kw_: message window, hidden window, window procedure, dispatch messages, Xbase++ method
+            | _kw_: ot4xb_CreateGenericWindow, Function
    }}*/
 /*{{|desc: Creates a non-visual OT4XB window that receives window messages in the Xbase++ UI thread and
       dispatches them to a selected Xbase++ method.
@@ -164,7 +164,7 @@ XPPRET XPPENTRY OT4XB_CREATEGENERICWINDOW( XppParamList pl)
             | category: windows/window
             | export: OT4XB_SUBCLASSWINDOW
             | source: WndTool.cpp:OT4XB_SUBCLASSWINDOW
-            | _kw_: subclass window, window procedure, WNDPROC, hook messages, Xbase++ method
+            | _kw_: ot4xb_SubclassWindow, Function
    }}*/
 /*{{|desc: Subclasses an existing window and dispatches its window messages to a selected Xbase++ method.
     | params:
@@ -329,7 +329,7 @@ static LRESULT __stdcall _ot4xbDelegateGen_(WNDPROC pOldProc ,HWND hWnd,UINT nMs
             | category: windows/delegation
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_gen_hwnd_delegate_
-            | _kw_: delegate window, GUI thread, create, internal window
+            | _kw_: _ot4xb_gen_hwnd_delegate_, Function
    }}*/
 /*{{|desc: Ensures that the internal OT4XB delegate window exists. When it does not exist yet and hWnd is a
       valid window, hWnd is subclassed for the time of one message, so the delegate window is created by the
@@ -361,7 +361,7 @@ HWND OT4XB_API __cdecl _ot4xb_gen_hwnd_delegate_(HWND hWnd)
             | category: windows/delegation
             | export: OT4XB_REGISTER_DELEGATE_HWND
             | source: WndTool.cpp:OT4XB_REGISTER_DELEGATE_HWND
-            | _kw_: delegate window, GUI thread, register, window handle
+            | _kw_: ot4xb_register_delegate_hwnd, Function
    }}*/
 /*{{|desc: Ensures that the internal OT4XB delegate window exists and returns its window handle.
     | params:
@@ -417,7 +417,7 @@ XPPRET XPPENTRY OT4XB_REGISTER_DELEGATE_HWND( XppParamList pl)
             | category: windows/delegation
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_get_hwnd_delegate_
-            | _kw_: delegate window, handle, GUI thread
+            | _kw_: _ot4xb_get_hwnd_delegate_, Function
    }}*/
 /*{{|desc: Returns the handle of the internal OT4XB delegate window without trying to create it.
 
@@ -431,7 +431,7 @@ HWND OT4XB_API __cdecl _ot4xb_get_hwnd_delegate_(void){return _hWndDelegate_;}
             | category: windows/delegation
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_set_hwnd_delegate_
-            | _kw_: delegate window, set handle, GUI thread
+            | _kw_: _ot4xb_set_hwnd_delegate_, Function
    }}*/
 /*{{|desc: Replaces the stored handle of the internal OT4XB delegate window. The handle is stored as it is,
       without any check; passing NULL makes OT4XB forget the current delegate window.
@@ -491,7 +491,7 @@ static ContainerHandle _delegated_xbase_call_( XppParamList pl , LPSTR pFName , 
             | category: windows/delegation
             | export: DELEGATED_XBASE_CALL
             | source: WndTool.cpp:DELEGATED_XBASE_CALL
-            | _kw_: GUI thread, call in UI thread, cross thread, delegate, SendMessage
+            | _kw_: delegated_xbase_call, Function
    }}*/
 /*{{|desc: Executes an Xbase++ function in the thread that runs the target window procedure.
     | params:
@@ -520,7 +520,7 @@ XPPRET XPPENTRY DELEGATED_XBASE_CALL( XppParamList pl)
             | category: windows/delegation
             | export: DELEGATED_FPQCALL
             | source: WndTool.cpp:DELEGATED_FPQCALL
-            | _kw_: GUI thread, FpQCall in UI thread, cross thread, delegate
+            | _kw_: delegated_FPQCall, Function
    }}*/
 /*{{|desc: Executes FPQCall in the Xbase++ UI thread through the internal OT4XB delegate window.
     | params:
@@ -550,7 +550,7 @@ XPPRET XPPENTRY DELEGATED_FPQCALL( XppParamList pl)
             | category: windows/delegation
             | export: DELEGATED_EVAL
             | source: WndTool.cpp:DELEGATED_EVAL
-            | _kw_: GUI thread, eval in UI thread, cross thread, code block, delegate
+            | _kw_: delegated_eval, Function
    }}*/
 /*{{|desc: Evaluates a code block in the Xbase++ UI thread through the internal OT4XB delegate window.
     | params:
@@ -575,7 +575,7 @@ XPPRET XPPENTRY DELEGATED_EVAL( XppParamList pl)
             | category: windows/delegation
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_call_in_gui_thread_
-            | _kw_: GUI thread, call in UI thread, cross thread, synchronous
+            | _kw_: ot4xb_call_in_gui_thread_, Function
    }}*/
 /*{{|desc: Calls a function in the thread that owns the OT4XB delegate window, normally the main GUI thread
       of the Xbase++ application. The arguments are packed and sent with SendMessage() to the delegate
@@ -612,7 +612,7 @@ DWORD OT4XB_API ot4xb_call_in_gui_thread_(ULONG np, DWORD dwfp , ... )
             | category: windows/delegation
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_delay_call_in_gui_thread_
-            | _kw_: GUI thread, queue call, PostMessage, cross thread, asynchronous
+            | _kw_: ot4xb_delay_call_in_gui_thread_, Function
    }}*/
 /*{{|desc: Queues a function call in the thread that owns the OT4XB delegate window, normally the main GUI
       thread of the Xbase++ application. The arguments are packed and posted with PostMessage() to the
@@ -690,7 +690,7 @@ static DWORD ot4xb_single_instance_internal(LPSTR pUuid, ContainerHandle cono , 
             | category: windows/application
             | export: OT4XB_SINGLE_INSTANCE
             | source: WndTool.cpp:OT4XB_SINGLE_INSTANCE
-            | _kw_: single instance, one instance, application id, already running, notify
+            | _kw_: ot4xb_single_instance, Function
    }}*/
 /*{{|desc: Registers the current process as the single running instance for an application identifier, or
       notifies the already running instance when one is found.
@@ -751,7 +751,7 @@ XPPRET XPPENTRY OT4XB_SINGLE_INSTANCE( XppParamList pl )
             | header: ot4xb_c_exported.h
             | category: windows/picture
             | mangled-name: str2ipicture
-            | _kw_: IPicture, load image, OLE picture, memory image
+            | _kw_: str2ipicture, Function
    }}*/
 /*{{|desc: Creates an OLE picture object from an image held in a memory buffer. The buffer is copied to a
       global memory block, wrapped in a COM stream and loaded with OleLoadPicture(), so any image format
@@ -795,7 +795,7 @@ extern "C" DWORD OT4XB_API str2ipicture(void* p , ULONG cb)
             | header: ot4xb_c_exported.h
             | category: windows/picture
             | mangled-name: ipicture2file
-            | _kw_: IPicture, save image, OleSavePictureFile, picture file
+            | _kw_: ipicture2file, Function
    }}*/
 /*{{|desc: Saves an OLE picture object to a picture file with OleSavePictureFile().
     | params:
@@ -842,7 +842,7 @@ extern "C" DWORD OT4XB_API ipicture2file(DWORD dwpic,  LPSTR fn )
             | header: ot4xb_c_exported.h
             | category: windows/picture
             | mangled-name: str2hbmp
-            | _kw_: HBITMAP, load image, bitmap from memory, OLE picture
+            | _kw_: str2hbmp, Function
    }}*/
 /*{{|desc: Creates a GDI bitmap from an image held in a memory buffer. The image is loaded into an OLE
       picture object with str2ipicture(), the bitmap handle of the picture is copied with CopyImage() and
@@ -875,7 +875,7 @@ extern "C" DWORD OT4XB_API str2hbmp(void* p , ULONG cb, DWORD nFlags)
             | header: ot4xb_c_exported.h
             | category: windows/stream
             | mangled-name: istream2xgrab_mem
-            | _kw_: IStream, read stream, to memory, COM stream
+            | _kw_: istream2xgrab_mem, Function
    }}*/
 /*{{|desc: Reads the whole content of a COM stream into a new memory block allocated with _xgrab(). The
       stream is measured by seeking to its end and then read from position 0, whatever its current position
@@ -917,7 +917,7 @@ extern "C" LPVOID OT4XB_API istream2xgrab_mem(IStream * pStream, ULONG * pcb)
             | header: ot4xb_c_exported.h
             | category: windows/stream
             | mangled-name: istream_release_and_get_content_as_base64
-            | _kw_: IStream, to base64, read stream, release
+            | _kw_: istream_release_and_get_content_as_base64, Function
    }}*/
 /*{{|desc: Reads the whole content of a COM stream, releases the stream and returns the content encoded as
       Base64 text in a new NUL terminated string allocated with _xgrab(). The stream is released even when
@@ -956,7 +956,7 @@ extern "C" LPSTR OT4XB_API istream_release_and_get_content_as_base64(IStream * p
             | category: windows/stream
             | header: ot4xb_c_exported.h
             | mangled-name: str2istream
-            | _kw_: IStream, from memory, CreateStreamOnHGlobal, COM stream
+            | _kw_: str2istream, Function
    }}*/
 /*{{|desc: Creates a COM stream holding a copy of a memory buffer. The buffer is copied to a global memory
       block wrapped with CreateStreamOnHGlobal(); the block is released together with the stream. The
@@ -1042,7 +1042,7 @@ static BOOL ot4xb_hooktype_from_string( LPSTR pStr , int* pht , LPSTR* ppxm )
             | category: windows/hooks
             | export: OT4XB_HOOKTHREAD
             | source: WndTool.cpp:OT4XB_HOOKTHREAD
-            | _kw_: SetWindowsHookEx, windows hook, keyboard hook, mouse hook, thread hook, Xbase++ method
+            | _kw_: ot4xb_HookThread, Function
    }}*/
 /*{{|desc: Installs a Windows hook inside the current process and dispatches hook callbacks to a method of an
       Xbase++ handler object.
@@ -1120,7 +1120,7 @@ _XPP_REG_FUN_( OT4XB_HOOKTHREAD )
             | category: windows/hooks
             | export: OT4XB_UNHOOKTHREAD
             | source: WndTool.cpp:OT4XB_UNHOOKTHREAD
-            | _kw_: UnhookWindowsHookEx, remove hook, windows hook
+            | _kw_: ot4xb_UnhookThread, Function
    }}*/
 /*{{|desc: Removes a thread hook installed by ot4xb_HookThread() and releases the internal hook callback
       resources.
@@ -1177,7 +1177,7 @@ static LRESULT __stdcall _ot4xbxbhookprocwithxbobj_(OT4XB_HOOK_CARGO* pc,int nCo
               ```
             | category: windows/font
             | mangled-name: _create_font_
-            | _kw_: CreateFont, GDI font, point size, face name, HFONT
+            | _kw_: _create_font_, Function
    }}*/
 /*{{|desc: Creates a GDI font from a face name and a character height given in tenths of a point. The
       device context is used to convert the point size to device units; its state is saved and restored
@@ -1257,7 +1257,7 @@ extern "C" HFONT OT4XB_API _create_font_(HDC hDC, LPSTR szFaceName, int iDeciPtH
             | category: windows/window
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_ForceForegroundWindow
-            | _kw_: foreground window, SetForegroundWindow, bring to front, focus stealing
+            | _kw_: ot4xb_ForceForegroundWindow, Function
    }}*/
 /*{{|desc: Forces a window to become the foreground window, working around the foreground lock that keeps a
       background process from stealing the focus. When the foreground window belongs to another thread, the
@@ -1296,7 +1296,7 @@ void OT4XB_API  ot4xb_ForceForegroundWindow(HWND hWnd)
             | category: windows/window
             | header: ot4xb_c_exported.h
             | mangled-name: ForceForegroundWindow
-            | _kw_: foreground window, SetForegroundWindow, bring to front, delegate thread
+            | _kw_: ForceForegroundWindow, Function
    }}*/
 /*{{|desc: Forces a window to become the foreground window from the thread that owns the OT4XB delegate
       window. The delegate window is created through hWnd when it does not exist yet, and
@@ -1319,7 +1319,7 @@ void OT4XB_API ForceForegroundWindow(HWND hWnd)
             | category: windows/font
             | header: ot4xb_c_exported.h
             | mangled-name: _best_font_size_from_list_
-            | _kw_: font size, best fit, size list, candidates
+            | _kw_: _best_font_size_from_list_, Function
    }}*/
 /*{{|desc: Selects a font size from a list of candidates, where every size packs two byte values in a WORD
       (LOBYTE and HIBYTE). The list is walked from the last entry towards the first and the first entry
@@ -1350,7 +1350,7 @@ WORD OT4XB_API _best_font_size_from_list_( WORD wav , WORD* lst , UINT wc )
             | category: windows/message-loop
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_generic_message_loop_no_translate
-            | _kw_: message loop, GetMessage, DispatchMessage, thread loop
+            | _kw_: ot4xb_generic_message_loop_no_translate, Function
    }}*/
 /*{{|desc: Runs a message loop for the calling thread, dispatching every message with DispatchMessage()
       until GetMessage() reports WM_QUIT or fails. TranslateMessage() is not called, so keyboard messages
@@ -1375,7 +1375,7 @@ extern "C" void OT4XB_API ot4xb_generic_message_loop_no_translate(void)
             | category: windows/message-loop
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_generic_message_loop
-            | _kw_: message loop, GetMessage, TranslateMessage, DispatchMessage, thread loop
+            | _kw_: ot4xb_generic_message_loop, Function
    }}*/
 /*{{|desc: Runs a standard message loop for the calling thread, translating keyboard messages with
       TranslateMessage() and dispatching every message with DispatchMessage(), until GetMessage() reports
@@ -1655,7 +1655,7 @@ class ot4xb_automatic_scroll_focus_t : public T_ot4xb_base
             | category: windows/scrolling
             | export: OT4XB_AUTOMATIC_SCROLL_FOCUS
             | source: WndTool.cpp:OT4XB_AUTOMATIC_SCROLL_FOCUS
-            | _kw_: auto scroll, scroll to focus, dialog, container, keep visible
+            | _kw_: ot4xb_automatic_scroll_focus, Function
    }}*/
 /*{{|desc: Enables automatic vertical scrolling for a dialog/container and its child panel, keeping the focused
       child control visible.
@@ -1746,7 +1746,7 @@ static void PaintTheMsgRect( HDC hDC , RECT * prct , COLORREF * pclr , LPSTR pTe
             | category: windows/painting
             | export: OT4XB_PAINTTHEMSGBAR
             | source: WndTool.cpp:OT4XB_PAINTTHEMSGBAR
-            | _kw_: message bar, progress bar, paint, status text, meter
+            | _kw_: ot4xb_PaintTheMsgBar, Function
    }}*/
 /*{{|desc: Paints a message bar with text and an optional progress/meter area using the client area of a window
       or control.
@@ -1820,7 +1820,7 @@ _XPP_REG_FUN_( OT4XB_PAINTTHEMSGBAR )
             | category: windows/rich-edit
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_rtf_stream_in@16
-            | _kw_: rich edit, EM_STREAMIN, rtf, load text, stream callback
+            | _kw_: ot4xb_rtf_stream_in, Function
    }}*/
 /*{{|desc: Stream callback used to feed buffered text into a rich edit control. It has the shape the
       EM_STREAMIN message expects from an EDITSTREAMCALLBACK: every call copies the next chunk of the
@@ -1859,7 +1859,7 @@ DWORD OT4XB_API __stdcall ot4xb_rtf_stream_in(DWORD dwctx, LPBYTE pOut , LONG cb
             | category: windows/rich-edit
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_rtf_stream_out@16
-            | _kw_: rich edit, EM_STREAMOUT, rtf, save text, stream callback
+            | _kw_: ot4xb_rtf_stream_out, Function
    }}*/
 /*{{|desc: Stream callback and context manager used to collect the text streamed out of a rich edit
       control with the EM_STREAMOUT message. The context holds a result buffer address at offset 0, its
@@ -1959,7 +1959,7 @@ HWND __stdcall ot4xb_fake_CreateWindowEx_xbasecontainer(  DWORD dwExStyle,LPCSTR
             | category: windows/window
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_hook_createwindowex_
-            | _kw_: CreateWindowEx hook, window creation, route to object, internal
+            | _kw_: _ot4xb_hook_createwindowex_, Function
    }}*/
 /*{{|desc: Support function for routing a CreateWindowExA() call to an Xbase++ object. Called with
       (HANDLE) -1 it returns the address of the OT4XB replacement for CreateWindowExA(): when a handler is

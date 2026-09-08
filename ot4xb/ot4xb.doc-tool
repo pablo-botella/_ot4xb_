@@ -1,131 +1,44 @@
 {
 	"books": [
 		{
-			"name": "c",
-			"title": "C API",
-			"prefix": "c-",
-			"indexes": [
-				{
-					"slug": "index-c",
-					"title": "C API",
-					"sections": [
-						{
-							"title": "Functions by name",
-							"include": [
-								{
-									"kind": "c-function",
-									"category": "*"
-								}
-							],
-							"by": "name"
-						},
-						{
-							"title": "Debug functions",
-							"include": [
-								{
-									"kind": "debug-c-function",
-									"category": "*"
-								}
-							],
-							"by": "name"
-						},
-						{
-							"title": "Topics",
-							"include": [
-								{
-									"kind": "topic",
-									"category": "*"
-								}
-							],
-							"by": "name"
-						},
-						{
-							"title": "By category",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
-							],
-							"by": "category"
-						},
-						{
-							"title": "Alphabetic",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
-							],
-							"by": "name",
-							"slug": "index-c-alpha"
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "cpp",
-			"title": "ot4xb C/C++ Manual",
+			"title": "ot4xb - C/C++ Reference",
 			"prefix": "cpp-",
-			"includes": [
-				"c"
-			],
 			"indexes": [
 				{
 					"slug": "index-cpp",
-					"title": "ot4xb C/C++ Manual",
+					"title": "ot4xb - C/C++ Reference",
 					"sections": [
 						{
-							"title": "Functions by name",
-							"include": [
-								{
-									"kind": "cpp-function",
-									"category": "*"
-								}
-							],
+							"title": "Articles",
+							"include": [ { "kind": "topic", "category": "*" } ],
 							"by": "name"
 						},
 						{
-							"title": "Classes by name",
-							"include": [
-								{
-									"kind": "cpp-class",
-									"category": "*"
-								}
-							],
+							"title": "C Functions",
+							"include": [ { "kind": "c-function", "category": "*" } ],
 							"by": "name"
 						},
 						{
-							"title": "Topics",
-							"include": [
-								{
-									"kind": "topic",
-									"category": "*"
-								}
-							],
+							"title": "C++ Functions",
+							"include": [ { "kind": "cpp-function", "category": "*" } ],
 							"by": "name"
 						},
 						{
-							"title": "By category",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
-							],
-							"by": "category"
+							"title": "C++ Classes",
+							"include": [ { "kind": "cpp-class", "category": "*" } ],
+							"by": "name"
 						},
 						{
-							"title": "Alphabetic",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
+							"title": "Internals",
+							"include": [ { "kind": "*", "category": "*" } ],
+							"exclude": [
+								{ "kind": "topic", "category": "*" },
+								{ "kind": "c-function", "category": "*" },
+								{ "kind": "cpp-function", "category": "*" },
+								{ "kind": "cpp-class", "category": "*" }
 							],
-							"by": "name",
-							"slug": "index-cpp-alpha"
+							"by": "name"
 						}
 					]
 				}
@@ -133,67 +46,38 @@
 		},
 		{
 			"name": "xbase",
-			"title": "ot4xb Xbase++ Manual",
+			"title": "ot4xb - Xbase++ Reference",
 			"prefix": "",
 			"indexes": [
 				{
 					"slug": "index-xbase",
-					"title": "ot4xb Xbase++ Manual",
+					"title": "ot4xb - Xbase++ Reference",
 					"sections": [
 						{
-							"title": "Functions by name",
-							"include": [
-								{
-									"kind": "function",
-									"category": "*"
-								}
-							],
+							"title": "Articles",
+							"include": [ { "kind": "topic", "category": "*" } ],
 							"by": "name"
 						},
 						{
-							"title": "Classes by name",
-							"include": [
-								{
-									"kind": "class",
-									"category": "*"
-								}
-							],
+							"title": "Classes",
+							"include": [ { "kind": "class", "category": "*" } ],
+							"exclude": [ { "kind": "class", "category": "winapi/structures" } ],
 							"by": "name"
 						},
 						{
-							"title": "Other",
-							"include": [
-								{
-									"kind": "internal-function",
-									"category": "*"
-								},
-								{
-									"kind": "topic",
-									"category": "*"
-								}
-							],
+							"title": "Windows Structures",
+							"include": [ { "kind": "class", "category": "winapi/structures" } ],
 							"by": "name"
 						},
 						{
-							"title": "By category",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
-							],
+							"title": "Functions",
+							"include": [ { "kind": "function", "category": "*" } ],
 							"by": "category"
 						},
 						{
-							"title": "Alphabetic",
-							"include": [
-								{
-									"kind": "*",
-									"category": "*"
-								}
-							],
-							"by": "name",
-							"slug": "index-xbase-alpha"
+							"title": "Internal",
+							"include": [ { "kind": "internal-function", "category": "*" } ],
+							"by": "name"
 						}
 					]
 				}
@@ -205,17 +89,7 @@
 		"title": "ot4xb Reference",
 		"sections": [
 			{
-				"title": "Manuals",
-				"books": [
-					"xbase",
-					"cpp"
-				]
-			},
-			{
-				"title": "Reference",
-				"books": [
-					"c"
-				]
+				"books": [ "xbase", "cpp" ]
 			}
 		]
 	},
@@ -246,14 +120,14 @@
 		},
 		{
 			"name": "c-function",
-			"book": "c",
+			"book": "cpp",
 			"case_sensitive": true,
 			"tag": "function",
 			"multi_definition": true
 		},
 		{
 			"name": "debug-c-function",
-			"book": "c",
+			"book": "cpp",
 			"case_sensitive": true,
 			"tag": "debug",
 			"multi_definition": true
@@ -305,7 +179,5 @@
 		"<src>/ch/*.*",
 		"<src>/moredoc/post/*.*"
 	],
-	"db": "<out>/ot4xb.db",
-	"templates": "./templates",
-	"site_title": "ot4xb Reference"
+	"db": "<out>/ot4xb.db"
 }

@@ -31,7 +31,7 @@ void _API_OSVer_InitProc( void)
             | category: runtime/os
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_fill_OSVERSIONINFOEX
-            | _kw_: OSVERSIONINFOEX, windows version, os version, cached
+            | _kw_: ot4xb_fill_OSVERSIONINFOEX, Function
    }}*/
 /*{{|desc: Copies the cached OSVERSIONINFOEX data captured during ot4xb initialization into the caller-provided
       structure.
@@ -55,7 +55,7 @@ OT4XB_API void ot4xb_fill_OSVERSIONINFOEX( OSVERSIONINFOEX* p )
             | category: runtime/os
             | header: ot4xb_c_exported.h
             | mangled-name: bIsVista
-            | _kw_: windows version, Vista, NT 6, legacy
+            | _kw_: bIsVista, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks whether the cached OSVERSIONINFOEX data reports Windows NT
       major version 6.
@@ -78,7 +78,7 @@ OT4XB_API BOOL bIsVista( void )
             | category: runtime/os
             | header: ot4xb_c_exported.h
             | mangled-name: bIsXP
-            | _kw_: windows version, XP, legacy
+            | _kw_: bIsXP, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks whether the cached OSVERSIONINFOEX data identifies the Windows
       XP family.
@@ -102,7 +102,7 @@ OT4XB_API BOOL bIsXP( void )
             | category: runtime/os
             | header: ot4xb_c_exported.h
             | mangled-name: bIsWinXP
-            | _kw_: windows version, XP, legacy alias
+            | _kw_: bIsWinXP, Function
    }}*/
 /*{{|desc: Legacy alias for bIsXP().
 
@@ -122,7 +122,7 @@ OT4XB_API BOOL bIsWinXP( void ){ return bIsXP(); }
             | category: runtime/os
             | header: ot4xb_c_exported.h
             | mangled-name: bIsWin9x
-            | _kw_: windows version, Windows 95 98 ME, legacy
+            | _kw_: bIsWin9x, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks the cached OSVERSIONINFOEX data for Windows 9x platform values.
 
@@ -141,7 +141,7 @@ OT4XB_API BOOL bIsWin9x( void )
 /*{{function_: lIsWin9x
             | syntax_: `lIsWin9x()`
             | category: runtime/os
-            | _kw_: windows version, Windows 95 98 ME, legacy
+            | _kw_: lIsWin9x, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks whether the cached Windows version data identifies a Windows 9x
       platform.
@@ -160,7 +160,7 @@ XPPRET XPPENTRY LISWIN9X( XppParamList pl){ _retl(pl,bIsWin9x());}
 /*{{function_: lIsXp
             | syntax_: `lIsXp()`
             | category: runtime/os
-            | _kw_: windows version, XP, legacy
+            | _kw_: lIsXp, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks whether the cached Windows version data identifies the Windows
       XP family.
@@ -180,7 +180,7 @@ XPPRET XPPENTRY LISXP( XppParamList pl){ _retl(pl,bIsXP());}
 /*{{function_: lIsVista
             | syntax_: `lIsVista()`
             | category: runtime/os
-            | _kw_: windows version, Vista, NT 6, legacy
+            | _kw_: lIsVista, Function
    }}*/
 /*{{|desc: Legacy OS-version helper that checks whether the cached Windows version data reports Windows NT
       major version 6.

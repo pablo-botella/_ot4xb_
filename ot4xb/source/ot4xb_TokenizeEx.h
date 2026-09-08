@@ -24,8 +24,8 @@
      {
         TokenizeEx_t::item_t* it = (TokenizeEx_t::item_t*) k.m_item_list->Get( i );
         use( it->m_start, it->m_cb );
-     | _kw_: tokenizer, split, separators, tokens, TokenizeEx engine
-     } }}*/
+     }
+     | _kw_: TokenizeEx_t, Class }}*/
 class OT4XB_API TokenizeEx_t : public T_ot4xb_base
 {
    public:

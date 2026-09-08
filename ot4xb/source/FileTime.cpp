@@ -89,7 +89,7 @@ class lpstr_cb_t
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_SetTs
-            | _kw_: timestamp, parse date, FILETIME, ISO 8601, timezone
+            | _kw_: ft64_SetTs, Function
    }}*/
 /*{{|desc: Parses the timestamp string ps and stores the result into the FILETIME pft. When the string carries a timezone
       component, the shift in minutes is written to pnShift. This is the C primitive behind the Xbase++ function
@@ -172,7 +172,7 @@ void OT4XB_API __cdecl ft64_SetTs( FILETIME* pft, LPSTR ps , LONG* pnShift )
 /*{{function_: ft64_SetTs
             | syntax_: `ft64_SetTs( pft, cTimeStamp, @nShift [, nFlags] )`
             | category: date-time/filetime
-            | _kw_: timestamp, parse date, FILETIME64, ISO 8601, timezone
+            | _kw_: ft64_SetTs, Function
    }}*/
 /*{{|desc: Stores a timestamp string into a FILETIME64 value.
     | params: 
@@ -247,7 +247,7 @@ _XPP_REG_FUN_( FT64_SETTS )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_GetTs
-            | _kw_: timestamp, format date, FILETIME, ISO 8601
+            | _kw_: ft64_GetTs, Function
    }}*/
 /*{{|desc: Formats the FILETIME pft as a timestamp string and returns it. When pFmt is NULL the default
       format "%04.4hu-%02.2hu-%02.2hu %02.2hu:%02.2hu:%02.2hu" (YYYY-MM-DD HH:MM:SS) is used. Formatting is
@@ -280,7 +280,7 @@ LPSTR OT4XB_API __cdecl ft64_GetTs( FILETIME* pft, LPSTR pFmt)
 /*{{function_: ft64_GetTs
             | syntax_: `ft64_GetTs( pft [, cFormat [, nFlags]] )`
             | category: date-time/filetime
-            | _kw_: timestamp, format date, FILETIME64, ISO 8601
+            | _kw_: ft64_GetTs, Function
    }}*/
 /*{{|desc: Formats a FILETIME64 value as a timestamp string.
     | params:
@@ -378,7 +378,7 @@ _XPP_REG_FUN_( FT64_GETTS )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_ToHttp
-            | _kw_: http date, RFC 1123, GMT, Last-Modified, FILETIME
+            | _kw_: ft64_ToHttp, Function
    }}*/
 /*{{|desc: Formats the FILETIME pft as an HTTP-style date string of the form "Ddd, DD Mmm YYYY HH:MM:SS"
       (RFC 1123 layout with English day and month abbreviations). This is the C primitive behind the
@@ -407,7 +407,7 @@ LPSTR OT4XB_API __cdecl ft64_ToHttp( FILETIME* pft)
 /*{{function_: ft64_ToHttp
             | syntax_: `ft64_ToHttp( pft [, nFlags] )`
             | category: date-time/filetime
-            | _kw_: http date, RFC 1123, GMT, Last-Modified, FILETIME64
+            | _kw_: ft64_ToHttp, Function
    }}*/
 /*{{|desc: Formats a FILETIME64 value as an HTTP date string.
     | params:
@@ -459,7 +459,7 @@ _XPP_REG_FUN_( FT64_TOHTTP)
 /*{{function_: ft64_SetDateTime
             | syntax_: `ft64_SetDateTime( pft, dDate, uTime )`
             | category: date-time/filetime
-            | _kw_: date and time, FILETIME64, from Xbase++ date
+            | _kw_: ft64_SetDateTime, Function
    }}*/
 /*{{|desc: Stores an Xbase++ date/time pair into a FILETIME64 value.
     | params:
@@ -541,7 +541,7 @@ _XPP_REG_FUN_( FT64_SETDATETIME )
 /*{{function_: ft64_GetDateTime
             | syntax_: `ft64_GetDateTime( pft, @dDate, @cTime )`
             | category: date-time/filetime
-            | _kw_: date and time, FILETIME64, to Xbase++ date, time string
+            | _kw_: ft64_GetDateTime, Function
    }}*/
 /*{{|desc: Extracts the date and a time string from a FILETIME64 value.
     | params:
@@ -575,7 +575,7 @@ _XPP_REG_FUN_( FT64_GETDATETIME )
 /*{{function_: ft64_GetDateTimeSec
             | syntax_: `ft64_GetDateTimeSec( pft, @dDate, @nSeconds )`
             | category: date-time/filetime
-            | _kw_: date and time, seconds since midnight, FILETIME64
+            | _kw_: ft64_GetDateTimeSec, Function
    }}*/
 /*{{|desc: Extracts the date and the time as seconds after midnight from a FILETIME64 value.
     | params:
@@ -618,7 +618,7 @@ _XPP_REG_FUN_( FT64_GETDATETIMESEC )
 /*{{function_: ft64_Now
             | syntax_: `ft64_Now( pft [, lLocal] )`
             | category: date-time/filetime
-            | _kw_: now, current time, UTC, FILETIME64, system time
+            | _kw_: ft64_Now, Function
    }}*/
 /*{{|desc: Stores the current time into a FILETIME64 value.
     | params:
@@ -707,7 +707,7 @@ static void elaptime_to_str( TZString & z, LONGLONG t1, LONGLONG t2 )
 /*{{function_: ft64_ElapMilliSeconds
             | syntax_: `ft64_ElapMilliSeconds( pft [, pft2 [, lLocal [, @cElapsed]]] )`
             | category: date-time/filetime
-            | _kw_: elapsed, milliseconds, difference, FILETIME64, timer
+            | _kw_: ft64_ElapMilliSeconds, Function
    }}*/
 /*{{|desc: Returns elapsed milliseconds between two FILETIME64 values.
     | params:
@@ -764,7 +764,7 @@ _XPP_REG_FUN_( FT64_ELAPMILLISECONDS)
 /*{{function_: ft64_ElapSeconds
             | syntax_: `ft64_ElapSeconds( pft [, pft2 [, lLocal [, @cElapsed]]] )`
             | category: date-time/filetime
-            | _kw_: elapsed, seconds, difference, FILETIME64, timer
+            | _kw_: ft64_ElapSeconds, Function
    }}*/
 /*{{|desc: Returns elapsed seconds between two FILETIME64 values.
     | params:
@@ -820,7 +820,7 @@ _XPP_REG_FUN_( FT64_ELAPSECONDS)
 /*{{function_: ft64_Compare
             | syntax_: `ft64_Compare( pft, pft2 [, nFlags] )`
             | category: date-time/filetime
-            | _kw_: compare, FILETIME64, before after, sort dates
+            | _kw_: ft64_Compare, Function
    }}*/
 /*{{|desc: Compares two FILETIME64 values.
     | params:
@@ -878,7 +878,7 @@ _XPP_REG_FUN_( FT64_COMPARE)
 /*{{function_: ft64_Add
             | syntax_: `ft64_Add( pft, nMilliseconds [, nMultiplier] )`
             | category: date-time/filetime
-            | _kw_: add milliseconds, offset, FILETIME64, date arithmetic
+            | _kw_: ft64_Add, Function
    }}*/
 /*{{|desc: Adds a millisecond-based offset to a FILETIME64 value.
     | params:
@@ -911,7 +911,7 @@ _XPP_REG_FUN_( FT64_ADD )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_now
-            | _kw_: now, current time, UTC, FILETIME, GetSystemTimePreciseAsFileTime
+            | _kw_: ft64_now, Function
    }}*/
 /*{{|desc: Stores the current UTC time into the FILETIME pft. On the first call it resolves
       GetSystemTimePreciseAsFileTime from kernel32 and uses it when available, falling back to
@@ -956,7 +956,7 @@ BOOL  OT4XB_API __cdecl ft64_now(FILETIME* pft)
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_AddYears
-            | _kw_: add years, FILETIME, date arithmetic, leap year
+            | _kw_: ft64_AddYears, Function
    }}*/
 /*{{|desc: Adds y years to the FILETIME pft in place. If the source date is February 29 and the target
       year is not a leap year, the day is clamped to February 28. This is the C primitive behind the
@@ -986,7 +986,7 @@ void OT4XB_API __cdecl ft64_AddYears( FILETIME* pft, LONG y )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_AddMonths
-            | _kw_: add months, FILETIME, date arithmetic
+            | _kw_: ft64_AddMonths, Function
    }}*/
 /*{{|desc: Adds m months to the FILETIME pft in place, carrying whole years and normalizing the month to
       the 1..12 range. When the resulting month has fewer days than the original day, the day is clamped to
@@ -1029,7 +1029,7 @@ void OT4XB_API __cdecl ft64_AddMonths( FILETIME* pft, LONG m )
 /*{{function_: ft64_Add_Y
             | syntax_: `ft64_Add_Y( pft, nYears )`
             | category: date-time/filetime
-            | _kw_: add years, FILETIME64, date arithmetic
+            | _kw_: ft64_Add_Y, Function
    }}*/
 /*{{|desc: Adds years to a FILETIME64 value.
     | params:
@@ -1056,7 +1056,7 @@ _XPP_REG_FUN_( FT64_ADD_Y )
 /*{{function_: ft64_Add_M
             | syntax_: `ft64_Add_M( pft, nMonths )`
             | category: date-time/filetime
-            | _kw_: add months, FILETIME64, date arithmetic
+            | _kw_: ft64_Add_M, Function
    }}*/
 /*{{|desc: Adds months to a FILETIME64 value.
     | params:
@@ -1083,7 +1083,7 @@ _XPP_REG_FUN_( FT64_ADD_M )
 /*{{function_: ft64_To_DosDateTime
             | syntax_: `ft64_To_DosDateTime( pft )`
             | category: date-time/filetime
-            | _kw_: DOS date, FAT time, zip timestamp, FileTimeToDosDateTime
+            | _kw_: ft64_To_DosDateTime, Function
    }}*/
 /*{{|desc: Converts a FILETIME64 value to a DOS FAT date/time DWORD.
     | params:
@@ -1111,7 +1111,7 @@ _XPP_REG_FUN_( FT64_TO_DOSDATETIME)
 /*{{function_: ft64_From_DosDateTime
             | syntax_: `ft64_From_DosDateTime( pft, nDosDateTime )`
             | category: date-time/filetime
-            | _kw_: DOS date, FAT time, zip timestamp, DosDateTimeToFileTime
+            | _kw_: ft64_From_DosDateTime, Function
    }}*/
 /*{{|desc: Stores a DOS FAT date/time DWORD into a FILETIME64 value.
     | params:
@@ -1140,7 +1140,7 @@ _XPP_REG_FUN_( FT64_FROM_DOSDATETIME)
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_SetUnixTime
-            | _kw_: unix time, epoch, time_t, 1970, FILETIME
+            | _kw_: ft64_SetUnixTime, Function
    }}*/
 /*{{|desc: Stores the Unix time ut (seconds elapsed since 1970-01-01 UTC) into the FILETIME pft,
       converting to the FILETIME scale (100-nanosecond ticks since 1601-01-01) with the standard
@@ -1165,7 +1165,7 @@ void OT4XB_API __cdecl ft64_SetUnixTime( FILETIME* pft, DWORD ut )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_GetUnixTime
-            | _kw_: unix time, epoch, time_t, 1970, FILETIME
+            | _kw_: ft64_GetUnixTime, Function
    }}*/
 /*{{|desc: Returns the Unix time (seconds since 1970-01-01 UTC) held in the FILETIME pft, converting from
       the FILETIME scale by removing the 116444736000000000 epoch offset and dividing by 10000000. The
@@ -1187,7 +1187,7 @@ DWORD OT4XB_API __cdecl ft64_GetUnixTime( FILETIME* pft)
 /*{{function_: ft64_To_UnixTime
             | syntax_: `ft64_To_UnixTime( pft )`
             | category: date-time/filetime
-            | _kw_: unix time, epoch, time_t, 1970, FILETIME64
+            | _kw_: ft64_To_UnixTime, Function
    }}*/
 /*{{|desc: Converts a FILETIME64 value to a 32-bit Unix timestamp.
     | params:
@@ -1214,7 +1214,7 @@ _XPP_REG_FUN_( FT64_TO_UNIXTIME)
 /*{{function_: ft64_From_UnixTime
             | syntax_: `ft64_From_UnixTime( pft, nUnixTime )`
             | category: date-time/filetime
-            | _kw_: unix time, epoch, time_t, 1970, FILETIME64
+            | _kw_: ft64_From_UnixTime, Function
    }}*/
 /*{{|desc: Stores a 32-bit Unix timestamp into a FILETIME64 value.
     | params:
@@ -1241,7 +1241,7 @@ _XPP_REG_FUN_( FT64_FROM_UNIXTIME)
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_SetUnixTime64
-            | _kw_: unix time, epoch, 64-bit, time_t, FILETIME
+            | _kw_: ft64_SetUnixTime64, Function
    }}*/
 /*{{|desc: Stores the 64-bit Unix time ut (seconds since 1970-01-01 UTC) into the FILETIME pft, converting
       to the FILETIME scale (100-nanosecond ticks since 1601-01-01) with the 116444736000000000 epoch
@@ -1266,7 +1266,7 @@ void OT4XB_API __cdecl ft64_SetUnixTime64( FILETIME* pft, LONGLONG ut )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_GetUnixTime64
-            | _kw_: unix time, epoch, 64-bit, time_t, FILETIME
+            | _kw_: ft64_GetUnixTime64, Function
    }}*/
 /*{{|desc: Returns the 64-bit Unix time (seconds since 1970-01-01 UTC) held in the FILETIME pft, converting
       from the FILETIME scale by removing the 116444736000000000 epoch offset and dividing by 10000000.
@@ -1288,7 +1288,7 @@ LONGLONG OT4XB_API __cdecl ft64_GetUnixTime64( FILETIME* pft)
 /*{{function_: ft64_To_ExcelTime
             | syntax_: `ft64_To_ExcelTime( pft )`
             | category: date-time/filetime
-            | _kw_: excel date, serial date, OLE date, FILETIME64
+            | _kw_: ft64_To_ExcelTime, Function
    }}*/
 /*{{|desc: Converts a FILETIME64 value to an Excel serial date/time number.
     | params:
@@ -1316,7 +1316,7 @@ _XPP_REG_FUN_( FT64_TO_EXCELTIME)
 /*{{function_: ft64_From_ExcelTime
             | syntax_: `ft64_From_ExcelTime( pft, nExcelTime )`
             | category: date-time/filetime
-            | _kw_: excel date, serial date, OLE date, FILETIME64
+            | _kw_: ft64_From_ExcelTime, Function
    }}*/
 /*{{|desc: Stores an Excel serial date/time number into a FILETIME64 value.
     | params:
@@ -1350,7 +1350,7 @@ _XPP_REG_FUN_( FT64_FROM_EXCELTIME)
               calls can be chained; methods that only read the value return the requested value.
             | note: The class is named FILETIME64 instead of FileTime to avoid a name conflict with the FileTime
               function/class name used by Alaska XbTools.
-   | _kw_: FILETIME, timestamp, date time, UTC, 64-bit time, structure
+   | _kw_: FILETIME64, Class
    }}*/
 XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
 {
@@ -1377,43 +1377,43 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       // ---------------------------
       /*{{|:**More Methods and Properties** }}*/
       
-      /*{{|method_: - METHOD SetTimeStamp( cTimeStamp , [@nShift] , [nFlags] )
+      /*{{|method_: - `METHOD SetTimeStamp( cTimeStamp , [@nShift] , [nFlags] )`
                | return: Self
                | desc_: Stores a timestamp string, a FILETIME64 object or now, by flags.
       }}*/
       pc->MethodCB("SetTimeStamp","{|s,c,sh,flags| ft64_SetTs(s,c,@sh,flags),s}");
-      /*{{|method_: - METHOD _GetTimeStamp_( [cFormat] )
+      /*{{|method_: - `METHOD _GetTimeStamp_( [cFormat] )`
                | return: Character
                | desc_: Formats the value with a printf-style format.
       }}*/
       pc->MethodCB("_GetTimeStamp_","{|s,f| ft64_GetTs(s,f)}");
-      /*{{|method_: - METHOD GetTimeStamp()
+      /*{{|method_: - `METHOD GetTimeStamp()`
                | return: Character
                | desc_: Returns YYYY-MM-DD hh:mm:ss (the default format).
       }}*/
       pc->MethodCB("GetTimeStamp","{|s| ft64_GetTs(s)}");
-      /*{{|method_: - METHOD strf( cFormat , [cLocale] )
+      /*{{|method_: - `METHOD strf( cFormat , [cLocale] )`
                | return: Character
                | desc_: Formats the value with the C runtime strftime() formatter.
       }}*/
       pc->MethodCB("strf","{|s,fmt,locale| FT64_STRF(s,fmt,locale)}");
       
-      /*{{|method_: - METHOD GetTimeStamp19()
+      /*{{|method_: - `METHOD GetTimeStamp19()`
                | return: Character
                | desc_: Returns YYYY-MM-DD hh:mm:ss, 19 characters (same as GetTimeStamp).
       }}*/
       pc->MethodCB("GetTimeStamp19","{|s| ft64_GetTs(s)}");
-      /*{{|method_: - METHOD GetTimeStamp14()
+      /*{{|method_: - `METHOD GetTimeStamp14()`
                | return: Character
                | desc_: Returns YYYYMMDDhhmmss, 14 characters (fixed format).
       }}*/
       pc->MethodCB("GetTimeStamp14","{|s| ft64_GetTs(s,'%04.4hu%02.2hu%02.2hu%02.2hu%02.2hu%02.2hu')}");
-      /*{{|method_: - METHOD GetIso8601()
+      /*{{|method_: - `METHOD GetIso8601()`
                | return: Character
                | desc_: Returns YYYY-MM-DDThh:mm:ss (fixed format).
       }}*/
       pc->MethodCB("GetIso8601","{|s| ft64_GetTs(s,'%04.4hu-%02.2hu-%02.2huT%02.2hu:%02.2hu:%02.2hu')}");
-      /*{{|method_: - METHOD json_escape_self()
+      /*{{|method_: - `METHOD json_escape_self()`
                | return: Character
                | desc_: Returns the value as a double-quoted JSON string, YYYY-MM-DDThh:mm:ss.mmm followed by
                  tls():json_timezone when present.
@@ -1427,76 +1427,76 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("cTimeStamp","{|s,v| iif(PCount() > 1,ft64_SetTs(s,v),ft64_GetTs(s))}");
       
-      /*{{|method_: - METHOD SetDateTime( dDate , [uTime] )
+      /*{{|method_: - `METHOD SetDateTime( dDate , [uTime] )`
                | return: Self
                | desc_: Stores an Xbase++ date/time pair.
       }}*/
       pc->MethodCB("SetDateTime","{|s,d,t| ft64_SetDateTime(s,d,t),s}");
-      /*{{|method_: - METHOD GetDateTime( @dDate , @cTime )
+      /*{{|method_: - `METHOD GetDateTime( @dDate , @cTime )`
                | return: Self
                | desc_: Extracts the date and a time string.
       }}*/
       pc->MethodCB("GetDateTime","{|s,d,t| ft64_GetDateTime(s,@d,@t),s}");
-      /*{{|method_: - METHOD GetDateTimeSec( @dDate , @nSeconds )
+      /*{{|method_: - `METHOD GetDateTimeSec( @dDate , @nSeconds )`
                | return: Self
                | desc_: Extracts the date and the time as seconds after midnight.
       }}*/
       pc->MethodCB("GetDateTimeSec","{|s,d,t| ft64_GetDateTimeSec(s,@d,@t),s}");
-      /*{{|method_: - METHOD Now( [lLocal] )
+      /*{{|method_: - `METHOD Now( [lLocal] )`
                | return: Self
                | desc_: Stores the current time, UTC or local.
       }}*/
       pc->MethodCB("Now","{|s,lLocal| ft64_Now(s,lLocal),s}");
-      /*{{|method_: - METHOD NowL()
+      /*{{|method_: - `METHOD NowL()`
                | return: Self
                | desc_: Stores the current local time (lLocal = .T.).
       }}*/
       pc->MethodCB("NowL","{|s| ft64_Now(s,.T.),s}");
-      /*{{|method_: - METHOD ElapMilliSeconds( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapMilliSeconds( [pft2] , [lLocal] )`
                | return: Numeric
                | desc_: Elapsed milliseconds from this value to pft2, or to now.
       }}*/
       pc->MethodCB("ElapMilliSeconds","{|s,t2,lLocal| ft64_ElapMilliSeconds(s,t2,lLocal)}");
-      /*{{|method_: - METHOD ElapMilliSecondsL( [pft2] )
+      /*{{|method_: - `METHOD ElapMilliSecondsL( [pft2] )`
                | return: Numeric
                | desc_: Elapsed milliseconds against local time when pft2 is omitted (lLocal = .T.).
       }}*/
       pc->MethodCB("ElapMilliSecondsL","{|s,t2| ft64_ElapMilliSeconds(s,t2,.T.)}");
-      /*{{|method_: - METHOD ElapTimeStr( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapTimeStr( [pft2] , [lLocal] )`
                | return: Character
                | desc_: Elapsed time as text (the cElapsed output).
       }}*/
       pc->MethodCB( "ElapTimeStr", "{|s,t2,lLocal,ts| ft64_ElapMilliSeconds(s,t2,lLocal,@ts) , ts}" );
-      /*{{|method_: - METHOD ElapSeconds( [pft2] , [lLocal] )
+      /*{{|method_: - `METHOD ElapSeconds( [pft2] , [lLocal] )`
                | return: Numeric
                | desc_: Elapsed seconds from this value to pft2, or to now.
       }}*/
       pc->MethodCB("ElapSeconds","{|s,t2,lLocal| ft64_ElapSeconds(s,t2,lLocal)}");
-      /*{{|method_: - METHOD ElapSecondsL( [pft2] )
+      /*{{|method_: - `METHOD ElapSecondsL( [pft2] )`
                | return: Numeric
                | desc_: Elapsed seconds against local time when pft2 is omitted (lLocal = .T.).
       }}*/
       pc->MethodCB("ElapSecondsL","{|s,t2| ft64_ElapSeconds(s,t2,.T.)}");
-      /*{{|method_: - METHOD Compare( pft2 )
+      /*{{|method_: - `METHOD Compare( pft2 )`
                | return: Numeric
                | desc_: 0 when equal, 1 when this value is earlier than pft2, -1 when it is later.
       }}*/
       pc->MethodCB("Compare","{|s,t2| ft64_Compare(s,t2)}");
       // ---------------------------
-      /*{{|method_: - METHOD SETRFC822( cRfc822 , [@nShift] )
+      /*{{|method_: - `METHOD SETRFC822( cRfc822 , [@nShift] )`
                | return: Self
                | desc_: Stores an RFC822 timestamp string.
       }}*/
       pc->MethodCB("SETRFC822","{|s,c,sh| ft64_SetRfc822Date(s,c,@sh),s}");
       // ---------------------------
-      /*{{|method_: - METHOD Day() | return: Numeric | desc_: Day of month of the stored date (Day() over dDate). }}*/
+      /*{{|method_: - `METHOD Day()` | return: Numeric | desc_: Day of month of the stored date (Day() over dDate). }}*/
       pc->MethodCB("Day","{|s| Day(s:dDate)}");
-      /*{{|method_: - METHOD Month()
+      /*{{|method_: - `METHOD Month()`
                | return: Numeric
                | desc_: Month number of the stored date (Month() over dDate).
       }}*/
       pc->MethodCB("Month","{|s| Month(s:dDate)}");
-      /*{{|method_: - METHOD Year() | return: Numeric | desc_: Year of the stored date (Year() over dDate). }}*/
+      /*{{|method_: - `METHOD Year()` | return: Numeric | desc_: Year of the stored date (Year() over dDate). }}*/
       pc->MethodCB("Year","{|s| Year(s:dDate)}");
       /*{{|property_: - PROPERTY dDate
                | type: Date
@@ -1517,39 +1517,43 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nTime","{|s,v| iif(PCount() > 1, s:SetDateTime(,v) ,s:GetDateTimeSec(,@v)),v}");
       // ---------------------------
-      /*{{|method_: - METHOD AddMilliSeconds( nMilliseconds )
+      /*{{|method_: - `METHOD AddMilliSeconds( nMilliseconds )`
                | return: Self
                | desc_: Adds milliseconds (multiplier 1).
       }}*/
       pc->MethodCB("AddMilliSeconds","{|s,n| ft64_Add(s,n,1),s}");
-      /*{{|method_: - METHOD AddSeconds( nSeconds )
+      /*{{|method_: - `METHOD AddSeconds( nSeconds )`
                | return: Self
                | desc_: Adds seconds (multiplier 1000).
-               | param nSeconds: Numeric - Offset in seconds.
+               | params:
+               - `nSeconds` Numeric - Offset in seconds.
       }}*/
       pc->MethodCB("AddSeconds","{|s,n| ft64_Add(s,n,1000),s}");
-      /*{{|method_: - METHOD AddMinutes( nMinutes )
+      /*{{|method_: - `METHOD AddMinutes( nMinutes )`
                | return: Self
                | desc_: Adds minutes (multiplier 60000).
-               | param nMinutes: Numeric - Offset in minutes.
+               | params:
+               - `nMinutes` Numeric - Offset in minutes.
       }}*/
       pc->MethodCB("AddMinutes","{|s,n| ft64_Add(s,n,60000),s}");
-      /*{{|method_: - METHOD AddHours( nHours )
+      /*{{|method_: - `METHOD AddHours( nHours )`
                | return: Self
                | desc_: Adds hours (multiplier 3600000).
-               | param nHours: Numeric - Offset in hours.
+               | params:
+               - `nHours` Numeric - Offset in hours.
       }}*/
       pc->MethodCB("AddHours","{|s,n| ft64_Add(s,n,3600000),s}");
-      /*{{|method_: - METHOD AddDays( nDays )
+      /*{{|method_: - `METHOD AddDays( nDays )`
                | return: Self
                | desc_: Adds days (multiplier 86400000).
-               | param nDays: Numeric - Offset in days.
+               | params:
+               - `nDays` Numeric - Offset in days.
       }}*/
       pc->MethodCB("AddDays","{|s,n| ft64_Add(s,n,86400000),s}");
       // ---------------------------
-      /*{{|method_: - METHOD AddMonths( nMonths ) | return: Self | desc_: Adds months. }}*/
+      /*{{|method_: - `METHOD AddMonths( nMonths )` | return: Self | desc_: Adds months. }}*/
       pc->MethodCB("AddMonths","{|s,n| Ft64_Add_M(s,n),s}");
-      /*{{|method_: - METHOD AddYears( nYears ) | return: Self | desc_: Adds years. }}*/
+      /*{{|method_: - `METHOD AddYears( nYears )` | return: Self | desc_: Adds years. }}*/
       pc->MethodCB("AddYears","{|s,n| Ft64_Add_Y(s,n),s}");
       // ---------------------------
       /*{{|property_: - PROPERTY cHexTs
@@ -1558,25 +1562,26 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
                  (SetHexTs).
       }}*/
       pc->PropertyCB("cHexTs","{|s,v| iif(PCount() > 1, s:SetHexTs(v) ,s:GetHexTs())}");
-      /*{{|method_: - METHOD SetHexTs( cHex )
+      /*{{|method_: - `METHOD SetHexTs( cHex )`
                | return: NIL
                | desc_: Stores a 64-bit FILETIME value given as a hexadecimal string (nHex2Qw + PokeStr); non-character
                  values are ignored.
-               | param cHex: Character - Hexadecimal representation of the 64-bit value.
+               | params:
+               - `cHex` Character - Hexadecimal representation of the 64-bit value.
       }}*/
       pc->MethodCB("SetHexTs" , "{|s,v| iif( ValType(v) =='C',PokeStr(s,0,nHex2Qw(v)),),NIL }");
-      /*{{|method_: - METHOD GetHexTs()
+      /*{{|method_: - `METHOD GetHexTs()`
                | return: Character
                | desc_: Returns the 64-bit FILETIME value as a hexadecimal string (cQw2Hex over qft).
       }}*/
       pc->MethodCB("GetHexTs" , "{|s,v| cQw2Hex( s:qft ) }");
       // ---------------------------
-      /*{{|method_: - METHOD SetDosDateTime( nDosDateTime )
+      /*{{|method_: - `METHOD SetDosDateTime( nDosDateTime )`
                | return: Self
                | desc_: Stores a DOS FAT date/time DWORD.
       }}*/
       pc->MethodCB("SetDosDateTime","{|s,v| Ft64_From_DosDateTime(s,v),s}");
-      /*{{|method_: - METHOD GetDosDateTime()
+      /*{{|method_: - `METHOD GetDosDateTime()`
                | return: Numeric
                | desc_: Returns the value as a DOS FAT date/time DWORD.
       }}*/
@@ -1588,12 +1593,12 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
        }}*/
        pc->PropertyCB("nDosDateTime","{|s,v| iif(PCount() > 1,Ft64_From_DosDateTime(s,v),Ft64_To_DosDateTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD SetUnixTime( nUnixTime )
+      /*{{|method_: - `METHOD SetUnixTime( nUnixTime )`
                | return: Self
                | desc_: Stores a 32-bit Unix timestamp.
       }}*/
       pc->MethodCB("SetUnixTime","{|s,v| Ft64_From_UnixTime(s,v),s}");
-      /*{{|method_: - METHOD GetUnixTime()
+      /*{{|method_: - `METHOD GetUnixTime()`
                | return: Numeric
                | desc_: Returns the value as a 32-bit Unix timestamp in seconds.
       }}*/
@@ -1605,12 +1610,12 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nUnixTime","{|s,v| iif(PCount() > 1,Ft64_From_UnixTime(s,v),Ft64_To_UnixTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD SetExcelTime( nExcelTime )
+      /*{{|method_: - `METHOD SetExcelTime( nExcelTime )`
                | return: Self
                | desc_: Stores an Excel serial date/time number.
       }}*/
       pc->MethodCB("SetExcelTime","{|s,v| Ft64_From_ExcelTime(s,v),s}");
-      /*{{|method_: - METHOD GetExcelTime()
+      /*{{|method_: - `METHOD GetExcelTime()`
                | return: Numeric
                | desc_: Returns the value as an Excel serial date/time number.
       }}*/
@@ -1622,24 +1627,24 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
       }}*/
       pc->PropertyCB("nExcelTime","{|s,v| iif(PCount() > 1,Ft64_From_ExcelTime(s,v),Ft64_To_ExcelTime(s))}");
       // ---------------------------
-      /*{{|method_: - METHOD ToHttp()
+      /*{{|method_: - `METHOD ToHttp()`
                | return: Character
                | desc_: Returns the value as an HTTP date string.
       }}*/
       pc->MethodCB("ToHttp","{|s| Ft64_ToHttp(s)}");
       // ---------------------------      
-      /*{{|method_: - METHOD ToLocalTime()
+      /*{{|method_: - `METHOD ToLocalTime()`
                | return: NIL
                | desc_: Converts the stored UTC value to local time in place.
       }}*/
       pc->MethodCB("ToLocalTime","{|s| FT64_TOLOCALTIME(s)}");
       // ---------------------------
-      /*{{|method_: - METHOD SetCkf32Ts( cCkf32Ts )
+      /*{{|method_: - `METHOD SetCkf32Ts( cCkf32Ts )`
                | return: Self
                | desc_: Stores a CKF32 timestamp string.
       }}*/
       pc->MethodCB( "SetCkf32Ts", "{|s,v| Ft64_Set_Ckf32Ts(s,v),s}" );
-      /*{{|method_: - METHOD GetCkf32Ts()
+      /*{{|method_: - `METHOD GetCkf32Ts()`
                | return: Character
                | desc_: Returns the value encoded as a CKF32 timestamp string.
       }}*/
@@ -1658,7 +1663,7 @@ XPPRET XPPENTRY wapist_FILETIME64( XppParamList pl )
 /*{{function_: dt2iso8601
             | syntax_: `dt2iso8601( dDate, uTime )`
             | category: date-time/filetime
-            | _kw_: ISO 8601, format date, timestamp, date time string
+            | _kw_: dt2iso8601, Function
    }}*/
 /*{{|desc: Formats an Xbase++ date/time pair as an ISO 8601 timestamp.
     | params:
@@ -1689,7 +1694,7 @@ _XPP_REG_FUN_( DT2ISO8601 )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_SetRfc822Date
-            | _kw_: RFC 822, RFC 1123, email date, http date, parse, FILETIME
+            | _kw_: ft64_SetRfc822Date, Function
    }}*/
 /*{{|desc: Parses an RFC 822 / RFC 1123 date string ps (as used in e-mail and HTTP headers, e.g.
       "Tue, 24 Jan 2012 13:18:22 -0500") and stores the result into the FILETIME pft. Two-digit years are
@@ -1864,7 +1869,7 @@ void OT4XB_API __cdecl ft64_SetRfc822Date( FILETIME* pft, LPSTR ps , LONG* pnShi
 /*{{function_: ft64_SetRfc822Date
             | syntax_: `ft64_SetRfc822Date( pft, cRfc822, @nShift )`
             | category: date-time/filetime
-            | _kw_: RFC 822, RFC 1123, email date, http date, parse, FILETIME64
+            | _kw_: ft64_SetRfc822Date, Function
    }}*/
 /*{{|desc: Stores an RFC822 timestamp string into a FILETIME64 value.
     | params:
@@ -1905,7 +1910,7 @@ _XPP_REG_FUN_( FT64_SETRFC822DATE)
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_ToLocalTime
-            | _kw_: local time, UTC, timezone offset, FILETIME
+            | _kw_: ft64_ToLocalTime, Function
    }}*/
 /*{{|desc: Converts the FILETIME pft from UTC to local time in place by adding the system's current
       UTC-to-local offset, computed as the difference between GetLocalTime and GetSystemTimeAsFileTime
@@ -1937,7 +1942,7 @@ void OT4XB_API __cdecl ft64_ToLocalTime( FILETIME* pft)
 /*{{function_: ft64_ToLocalTime
             | syntax_: `ft64_ToLocalTime( pft )`
             | category: date-time/filetime
-            | _kw_: local time, UTC, timezone offset, FILETIME64
+            | _kw_: ft64_ToLocalTime, Function
    }}*/
 /*{{|desc: Converts the stored UTC FILETIME64 value to local time.
     | params:
@@ -1971,7 +1976,7 @@ _XPP_REG_FUN_( FT64_TOLOCALTIME)
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_strf
-            | _kw_: strftime, format date, FILETIME, C format
+            | _kw_: ft64_strf, Function
    }}*/
 /*{{|desc: Formats the FILETIME pft with a C strftime() format string pFormat and returns the result.
       Convenience wrapper that calls ft64_strf_l with no locale (the current C locale). This is the C
@@ -1995,7 +2000,7 @@ LPSTR OT4XB_API __cdecl ft64_strf( FILETIME* pft, LPSTR pFormat){ return ft64_st
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_strf_l
-            | _kw_: strftime, format date, FILETIME, locale
+            | _kw_: ft64_strf_l, Function
    }}*/
 /*{{|desc: Formats the FILETIME pft with a C strftime() format string pFormat, optionally using a specific
       locale. The FILETIME is converted to a broken-down UTC time with _gmtime64_s and formatted into a
@@ -2045,7 +2050,7 @@ LPSTR OT4XB_API __cdecl ft64_strf_l( FILETIME* pft, LPSTR pFormat , LPSTR locale
 /*{{function_: ft64_strf
             | syntax_: `ft64_strf( pft, cFormat [, cLocale [, nLocaleCategory]] )`
             | category: date-time/filetime
-            | _kw_: strftime, format date, FILETIME64, C format
+            | _kw_: ft64_strf, Function
    }}*/
 /*{{|desc: Formats a FILETIME64 value with the C runtime strftime() formatter.
     | params:
@@ -2108,7 +2113,7 @@ _XPP_REG_FUN_( FT64_STRF )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_set_Ckf32TsStr
-            | _kw_: CKF32, compact timestamp, 8 bytes, parse, FILETIME
+            | _kw_: ft64_set_Ckf32TsStr, Function
    }}*/
 /*{{|desc: Parses an 8-byte CKF32 timestamp string and stores the resulting date and time into the
       FILETIME pft. CKF32 is an in-house ot4xb convention: a non-binary (text) timestamp format that fits a
@@ -2153,7 +2158,7 @@ BOOL OT4XB_API __cdecl ft64_set_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[8] )
             | category: date-time/filetime
             | header: ot4xb_c_exported.h
             | mangled-name: ft64_get_Ckf32TsStr
-            | _kw_: CKF32, compact timestamp, 8 bytes, encode, FILETIME
+            | _kw_: ft64_get_Ckf32TsStr, Function
    }}*/
 /*{{|desc: Encodes the FILETIME pft as an 8-byte CKF32 timestamp string and writes it to ckf32ts. CKF32 is
       an in-house ot4xb convention: a non-binary (text) timestamp format that fits a date and time down to
@@ -2192,7 +2197,7 @@ BOOL OT4XB_API __cdecl ft64_get_Ckf32TsStr( FILETIME* pft, BYTE ckf32ts[ 8 ] )
 /*{{function_: ft64_Set_Ckf32Ts
             | syntax_: `ft64_Set_Ckf32Ts( pft, cCkf32Ts )`
             | category: date-time/filetime
-            | _kw_: CKF32, compact timestamp, 8 bytes, FILETIME64
+            | _kw_: ft64_Set_Ckf32Ts, Function
    }}*/
 /*{{|desc: Stores a CKF32 timestamp string into a FILETIME64 value.
     | params:
@@ -2226,7 +2231,7 @@ _XPP_REG_FUN_( FT64_SET_CKF32TS )
 /*{{function_: ft64_Get_Ckf32Ts
             | syntax_: `ft64_Get_Ckf32Ts( pft )`
             | category: date-time/filetime
-            | _kw_: CKF32, compact timestamp, 8 bytes, FILETIME64
+            | _kw_: ft64_Get_Ckf32Ts, Function
    }}*/
 /*{{|desc: Encodes a FILETIME64 value as a CKF32 timestamp string.
     | params:

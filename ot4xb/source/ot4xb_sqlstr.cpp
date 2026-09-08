@@ -11,7 +11,7 @@
 /*{{function_: __sqlstr_money
             | syntax_: `__sqlstr_money( xValue [, aFormat] )`
             | category: sql/string
-            | _kw_: money, sql string, two decimals, amount format, currency
+            | _kw_: __sqlstr_money, Function
    }}*/
 /*{{|desc: Converts a numeric or character value to a SQL-style money string with two decimal places.
     | params:
@@ -61,7 +61,7 @@ _XPP_REG_FUN_(__SQLSTR_MONEY)
             | category: sql/string
             | header: ot4xb_c_exported.h
             | mangled-name: __sqlstr_str2money
-            | _kw_: money, parse amount, cents, hundredths, int64, currency
+            | _kw_: __sqlstr_str2money, Function
    }}*/
 /*{{|desc: Parses money text into a 64-bit integer amount with two implied decimals, i.e. the value in
       hundredths. This is the character-value parser behind the __sqlstr_money() family.
@@ -190,7 +190,7 @@ static void money_sum_internal(XppParamList pl, BOOL bSubstract)
 /*{{function_: __sqlstr_money_sum
             | syntax_: `__sqlstr_money_sum( xValue1 [, xValueN] [, aFormat] )`
             | category: sql/string
-            | _kw_: money, add amounts, sql string, currency, sum
+            | _kw_: __sqlstr_money_sum, Function
    }}*/
 /*{{|desc: Sums one or more money values and returns the result formatted as a SQL-style money string.
     | params:
@@ -213,7 +213,7 @@ _XPP_REG_FUN_(__SQLSTR_MONEY_SUM)
 /*{{function_: __sqlstr_money_substract
             | syntax_: `__sqlstr_money_substract( xValue1, xValue2 [, xValueN] [, aFormat] )`
             | category: sql/string
-            | _kw_: money, subtract amounts, sql string, currency
+            | _kw_: __sqlstr_money_substract, Function
    }}*/
 /*{{|desc: Subtracts money values from the first value and returns the result formatted as a SQL-style money
       string.
@@ -389,7 +389,7 @@ DWORD escape_to_sql_buffer(LPBYTE p, DWORD cb, LPBYTE po, DWORD cbo, DWORD flags
             | category: sql/string
             | header: ot4xb_c_exported.h
             | mangled-name: escape_to_sql
-            | _kw_: sql escape, quote string, sql literal, injection
+            | _kw_: escape_to_sql, Function
    }}*/
 /*{{|desc: Escapes a zero-terminated string for use inside a SQL string literal, returning the result as a
       newly allocated buffer. Backspace, tab, Ctrl+Z, LF, CR, double quote, single quote and backslash are
@@ -574,7 +574,7 @@ ot4xb_sql_type ot4xb_str_to_sql_type_enum(LPSTR p)
 /*{{function_: ot4xb_sql_escape_string_ansi
             | syntax_: `ot4xb_sql_escape_string_ansi( cString, [nFlags] )`
             | category: sql/string
-            | _kw_: sql escape, quote string, sql literal, injection, ANSI
+            | _kw_: ot4xb_sql_escape_string_ansi, Function
    }}*/
 /*{{|desc: Escapes an ANSI string so it can be used inside a SQL string literal.
     | params:
@@ -1196,7 +1196,7 @@ LPSTR  sql_dump_value::grip_string(TXppParamList& xpp, LPSTR alt_buffer, DWORD* 
 /*{{function_: ot4xb_get_sql_type_len
             | syntax_: `ot4xb_get_sql_type_len( cType | nLen )`
             | category: sql/string
-            | _kw_: sql type, length, VARCHAR(n), type declaration, parse
+            | _kw_: ot4xb_get_sql_type_len, Function
    }}*/
 /*{{|desc: Extracts the length part from a SQL type declaration or returns a positive numeric value unchanged.
     | params:
@@ -1242,7 +1242,7 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_LEN)
 /*{{function_: ot4xb_get_sql_type_dec
             | syntax_: `ot4xb_get_sql_type_dec( cType | nDec )`
             | category: sql/string
-            | _kw_: sql type, decimals, scale, DECIMAL(n,d), type declaration
+            | _kw_: ot4xb_get_sql_type_dec, Function
    }}*/
 /*{{|desc: Extracts the decimal-scale part from a SQL type declaration or returns a positive numeric value
       unchanged.
@@ -1294,7 +1294,7 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_DEC)
 /*{{function_: ot4xb_get_sql_type_flag_enum
             | syntax_: `ot4xb_get_sql_type_flag_enum( cFlags | nFlags )`
             | category: sql/string
-            | _kw_: sql dump flags, flag names, bit mask, enumeration
+            | _kw_: ot4xb_get_sql_type_flag_enum, Function
    }}*/
 /*{{|desc: Converts a SQL dump flag string to the numeric ot4xb_sql_type_flag bit mask.
     | params:
@@ -1315,7 +1315,7 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_FLAG_ENUM)
 /*{{function_: ot4xb_get_sql_type_enum
             | syntax_: `ot4xb_get_sql_type_enum( cType | nType )`
             | category: sql/string
-            | _kw_: sql type name, enumeration, type code, VARCHAR INT DATE
+            | _kw_: ot4xb_get_sql_type_enum, Function
    }}*/
 /*{{|desc: Converts a SQL type name to the numeric ot4xb_sql_type enumeration value.
     | params:
@@ -1339,7 +1339,7 @@ _XPP_REG_FUN_(OT4XB_GET_SQL_TYPE_ENUM)
 /*{{function_: ot4xb_sql_dump_value_ansi
             | syntax_: `ot4xb_sql_dump_value_ansi( xValue, cType | nType, nLen, nDec, cFlags | nFlags )`
             | category: sql/string
-            | _kw_: sql literal, value to sql, dump value, quote, type conversion, insert statement
+            | _kw_: ot4xb_sql_dump_value_ansi, Function
    }}*/
 /*{{|desc: Converts an Xbase++ value to an ANSI SQL literal according to a SQL type, length, decimals and
       flags.

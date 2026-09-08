@@ -24,7 +24,7 @@ BEGIN_EXTERN_C
             | header: ot4xb_c_exported.h
             | category: c-api/socket
             | mangled-name: wsa_select
-            | _kw_: socket, select, readiness, timeout, winsock
+            | _kw_: wsa_select, Function
    }}*/
 /*{{|desc: Tests one socket for readiness with a single select() call, waiting at most ms milliseconds.
     | params:
@@ -67,7 +67,7 @@ OT4XB_API int  wsa_select(SOCKET s , int ms , DWORD mask )
             | header: ot4xb_c_exported.h
             | category: c-api/socket
             | mangled-name: wsa_send_data
-            | _kw_: socket, send, send all, WSAEWOULDBLOCK, winsock, tcp
+            | _kw_: wsa_send_data, Function
    }}*/
 /*{{|desc: Sends a data block through a socket, looping until every byte is sent. On WSAEWOULDBLOCK it
       retries every 100 ms, up to 6 times in a row, then gives up; any other send error aborts.
@@ -112,7 +112,7 @@ OT4XB_API BOOL wsa_send_data( SOCKET s , LPSTR p , int cb , int ms )
             | header: ot4xb_c_exported.h
             | category: c-api/socket
             | mangled-name: wsa_receive_data
-            | _kw_: socket, recv, receive, WSAEWOULDBLOCK, winsock, tcp
+            | _kw_: wsa_receive_data, Function
    }}*/
 /*{{|desc: Receives up to buffer_size bytes from a socket. The buffer is zero filled first. On
       WSAEWOULDBLOCK it waits up to 1 ms more for data and retries; still not readable, it returns 0.
@@ -157,7 +157,7 @@ OT4XB_API int wsa_receive_data( SOCKET s , LPBYTE buffer , int buffer_size , int
             | header: ot4xb_c_exported.h
             | category: c-api/socket
             | mangled-name: get_connected_socket
-            | _kw_: socket, connect, tcp, resolve host, gethostbyname, IPv4
+            | _kw_: get_connected_socket, Function
    }}*/
 /*{{|desc: Resolves a host name and opens a TCP connection to it (IPv4 only).
     | params:
@@ -205,7 +205,7 @@ OT4XB_API SOCKET get_connected_socket( LPSTR host , int port )
             | header: ot4xb_c_exported.h
             | category: c-api/socket
             | mangled-name: get_connected_socket2
-            | _kw_: socket, connect, bind local address, tcp, network interface
+            | _kw_: get_connected_socket2, Function
    }}*/
 /*{{|desc: Same as get_connected_socket() but the new socket is bound to a local IP address before
       connecting, so the caller chooses the outgoing interface.
@@ -276,7 +276,7 @@ OT4XB_API SOCKET get_connected_socket2( LPSTR host , int port , LPSTR bind_ip )
               ```
             | category: c-api/socket
             | mangled-name: socks5_ssc_connect
-            | _kw_: socks5, proxy, connect through proxy, handshake, tcp
+            | _kw_: socks5_ssc_connect, Function
    }}*/
 /*{{|desc: Runs the SOCKS5 client handshake on a socket already connected to a proxy server, asking the
       proxy to connect to host:port. On success the socket has become a tunnel to that target.

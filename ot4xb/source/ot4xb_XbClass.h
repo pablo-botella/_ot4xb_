@@ -24,8 +24,8 @@
         e.oscode( GetLastError() );
         e.Launch();
         return;
-     | _kw_: Error object, raise error, ErrorBlock, gencode, C++ error
-     } }}*/
+     }
+     | _kw_: TXbGenError, Class }}*/
 class OT4XB_API TXbGenError
 {
    public:
@@ -113,8 +113,8 @@ class OT4XB_API TXbGenError
         }
         _conReturn( pl, conco );
         _conRelease( conco );
-     | _kw_: class builder, define class from C++, methods properties, GWST structure builder, ClassCreate
-     } }}*/
+     }
+     | _kw_: TXbClass, Class }}*/
 class OT4XB_API TXbClass
 {
    public:
@@ -426,8 +426,8 @@ class OT4XB_API TXbClass
         double dx = px->GetMemberDouble( "x" ) - _conGetNDMember( other, "x" );
         double dy = px->GetMemberDouble( "y" ) - _conGetNDMember( other, "y" );
         px->PutReturnDouble( sqrt( dx * dx + dy * dy ) );
-     | _kw_: method parameters, C method, Self, return value, GenError, extra arguments
-     } }}*/
+     }
+     | _kw_: TXbClsParams, Class }}*/
 class OT4XB_API TXbClsParams : public T_ot4xb_base
 {
    public:

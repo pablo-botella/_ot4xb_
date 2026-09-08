@@ -22,8 +22,8 @@
      Pointers returned by the readers point inside this window and stay valid only until the next buffer
      operation; the data is not zero-terminated.
    | note: The destructor frees the buffer but does not close the handle: call Close(), or DetachHandle() to
-   | _kw_: binary file, file handle, read line, MIME header, buffer, 64-bit pointer
-     keep it. }}*/
+     keep it.
+   | _kw_: TBinFile, Class }}*/
 class OT4XB_API TBinFile : public T_ot4xb_base
 {
    public:
@@ -182,8 +182,8 @@ class OT4XB_API TBinFile : public T_ot4xb_base
      cache reaches its size, on Write(), Commit() or Close(). The output is a file created by the writer or an
      attached handle; with neither the writer is memory-only and the cache is the result. It is the engine of
      the Xbase++ class {{ilink: <class TFileWriter> TFileWriter}}. It does not derive from T_ot4xb_base: it is
-     | _kw_: buffered writer, file output, encoder, base64 decode, xml node
-     meant to live on the stack or inside another object. }}*/
+     meant to live on the stack or inside another object.
+     | _kw_: TFileWriter, Class }}*/
 class OT4XB_API TFileWriter
 {
    public:

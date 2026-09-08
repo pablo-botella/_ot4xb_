@@ -501,7 +501,7 @@ void ndtg_stack_t::attrib(LPSTR pAttrib, LPSTR pVal)
 /*{{function_: ndtg_create_typedef_table
             | syntax_: `ndtg_create_typedef_table( [@pTable] [, cPropertyPrefix] )`
             | category: xml/node-trigger
-            | _kw_: ndtg, type table, typed nodes, node tree, xml parser types
+            | _kw_: ndtg_create_typedef_table, Function
    }}*/
 /*{{|desc: Creates an empty type-definition table for typed NDTG stacks and returns its handle. The types
       and their properties are then described with ndtg_add_type() and ndtg_add_prop().
@@ -527,7 +527,7 @@ _XPP_REG_FUN_( NDTG_CREATE_TYPEDEF_TABLE )
 /*{{function_: ndtg_destroy_typedef_table
             | syntax_: `ndtg_destroy_typedef_table( @pTable )`
             | category: xml/node-trigger
-            | _kw_: ndtg, type table, destroy, release
+            | _kw_: ndtg_destroy_typedef_table, Function
    }}*/
 /*{{|desc: Destroys a type-definition table with every type and property definition it holds. When pTable is
       passed by reference the variable is set to 0.
@@ -553,7 +553,7 @@ _XPP_REG_FUN_( NDTG_DESTROY_TYPEDEF_TABLE )
 /*{{function_: ndtg_add_type
             | syntax_: `ndtg_add_type( pTable, cTypeName [, uItem] [, nAttrib] )`
             | category: xml/node-trigger
-            | _kw_: ndtg, add type, node type, typed stack
+            | _kw_: ndtg_add_type, Function
    }}*/
 /*{{|desc: Adds the type cTypeName to a type-definition table and returns its handle. When the type already
       exists it is updated instead: uItem replaces the stored item and the nAttrib bits are added to the
@@ -590,7 +590,7 @@ _XPP_REG_FUN_( NDTG_ADD_TYPE )
 /*{{function_: ndtg_get_type
             | syntax_: `ndtg_get_type( pTable, cTypeName )`
             | category: xml/node-trigger
-            | _kw_: ndtg, get type, node type handle
+            | _kw_: ndtg_get_type, Function
    }}*/
 /*{{|desc: Returns the handle of a type already defined in a type-definition table, without adding anything.
     | params:
@@ -613,7 +613,7 @@ _XPP_REG_FUN_( NDTG_GET_TYPE )
 /*{{function_: ndtg_add_prop
             | syntax_: `ndtg_add_prop( pType, cPropName, cTypeName [, uItem] [, nAttrib] )`
             | category: xml/node-trigger
-            | _kw_: ndtg, add property, child node, node property
+            | _kw_: ndtg_add_prop, Function
    }}*/
 /*{{|desc: Adds the property cPropName to a type and returns the property handle. A property describes a
       child node of the nodes of type pType: the child value is built as cTypeName. When cTypeName is not yet
@@ -649,7 +649,7 @@ _XPP_REG_FUN_( NDTG_ADD_PROP)
 /*{{function_: ndtg_set_attrib_cb
             | syntax_: `ndtg_set_attrib_cb( pType, bAttrib )`
             | category: xml/node-trigger
-            | _kw_: ndtg, attribute callback, node attributes, code block
+            | _kw_: ndtg_set_attrib_cb, Function
    }}*/
 /*{{|desc: Installs the attribute callback of a type, replacing any previous one. When a node of the type is
       closed in a typed stack, the codeblock is evaluated once per collected attribute as
@@ -682,7 +682,7 @@ _XPP_REG_FUN_( NDTG_SET_ATTRIB_CB)
 /*{{function_: ndtg_stack_begin
             | syntax_: `ndtg_stack_begin( [pTable, cResultType [, nResultFlags]] )`
             | category: xml/node-trigger
-            | _kw_: ndtg, node stack, begin, tree builder, xml to object
+            | _kw_: ndtg_stack_begin, Function
    }}*/
 /*{{|desc: Creates a node trigger stack and returns its handle. With parameters the stack is typed: node
       values are built as described by the pTable definitions, and the value of the first node, built as
@@ -724,7 +724,7 @@ _XPP_REG_FUN_( NDTG_STACK_BEGIN    )
 /*{{function_: ndtg_stack_step
             | syntax_: `ndtg_stack_step( pStack, nDepth, cNodeName )`
             | category: xml/node-trigger
-            | _kw_: ndtg, open node, nesting level, depth, tree builder
+            | _kw_: ndtg_stack_step, Function
    }}*/
 /*{{|desc: Opens a new node at nesting level nDepth. Nodes still open at the same or a deeper level are
       closed first and their completed values delivered to their parents, so there is no explicit close
@@ -773,7 +773,7 @@ _XPP_REG_FUN_( NDTG_STACK_STEP     )
 /*{{function_: ndtg_stack_seal
             | syntax_: `ndtg_stack_seal( pStack )`
             | category: xml/node-trigger
-            | _kw_: ndtg, seal node, no more text
+            | _kw_: ndtg_stack_seal, Function
    }}*/
 /*{{|desc: Seals the node currently open: later ndtg_stack_putval() calls are ignored for it and
       ndtg_stack_unsealed() returns .F. for it. Child nodes opened afterwards are not affected. Does nothing
@@ -811,7 +811,7 @@ _XPP_REG_FUN_( NDTG_STACK_SEAL     )
 /*{{function_: ndtg_stack_unsealed
             | syntax_: `ndtg_stack_unsealed( pStack )`
             | category: xml/node-trigger
-            | _kw_: ndtg, node open, can receive text
+            | _kw_: ndtg_stack_unsealed, Function
    }}*/
 /*{{|desc: Tells whether the node currently open can still receive its text with ndtg_stack_putval().
     | params:
@@ -848,7 +848,7 @@ _XPP_REG_FUN_( NDTG_STACK_UNSEALED )
 /*{{function_: ndtg_stack_putval
             | syntax_: `ndtg_stack_putval( pStack, cValue )`
             | category: xml/node-trigger
-            | _kw_: ndtg, node text, node value, typed conversion
+            | _kw_: ndtg_stack_putval, Function
    }}*/
 /*{{|desc: Stores the text content of the node currently open. In a typed stack the text is converted as
       selected by the conversion code in the type's nAttrib (see ndtg_add_type()); nodes whose type has no
@@ -892,7 +892,7 @@ _XPP_REG_FUN_( NDTG_STACK_PUTVAL   )
 /*{{function_: ndtg_stack_attrib
             | syntax_: `ndtg_stack_attrib( pStack, cName, cValue )`
             | category: xml/node-trigger
-            | _kw_: ndtg, node attribute, key value
+            | _kw_: ndtg_stack_attrib, Function
    }}*/
 /*{{|desc: Adds one attribute to the node currently open. In a typed stack attributes are kept until the
       node is closed and then delivered to the attribute callback of the node type (see
@@ -937,7 +937,7 @@ _XPP_REG_FUN_( NDTG_STACK_ATTRIB )
 /*{{function_: ndtg_stack_attrib_seal
             | syntax_: `ndtg_stack_attrib_seal( pStack )`
             | category: xml/node-trigger
-            | _kw_: ndtg, attributes done, node created, xstack
+            | _kw_: ndtg_stack_attrib_seal, Function
    }}*/
 /*{{|desc: In a generic xstack, closes the attribute phase of the node currently open: the node value is
       created from the attributes collected so far. Call it once the start tag of a node is complete and
@@ -973,7 +973,7 @@ _XPP_REG_FUN_( NDTG_STACK_ATTRIB_SEAL )
 /*{{function_: ndtg_stack_end
             | syntax_: `ndtg_stack_end( @pStack )`
             | category: xml/node-trigger
-            | _kw_: ndtg, close all, result value, tree builder, end
+            | _kw_: ndtg_stack_end, Function
    }}*/
 /*{{|desc: Closes every node still open, destroys the stack and returns the completed result value. When
       pStack is passed by reference the variable is set to 0.

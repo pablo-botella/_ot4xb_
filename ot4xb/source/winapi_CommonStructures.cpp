@@ -551,7 +551,7 @@ XPPRET XPPENTRY WAPIST_##structName( XppParamList pl ) \
             | category: winapi/structures
             | desc: Wrapper over the WinApi POINT structure. Defined as POINT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-point
-            | _kw_: POINT
+            | _kw_: WAPIST_POINT, POINT, WINAPI, Structures
    }}*/
 // -----------------------------------------------------------------------------------------------------------------
 /*{{|:**BEGIN STRUCTURE  POINT** }}*/
@@ -572,7 +572,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi POINTS structure. Defined as POINTS in ot4xb_wapist_map.ch.
-            | _kw_: POINTS
+            | _kw_: WAPIST_POINTS, POINTS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  POINTS** }}*/
 XB_BEGIN_STRUCTURE ( POINTS )
@@ -592,7 +592,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi POINTL structure. Defined as POINTL in ot4xb_wapist_map.ch.
-            | _kw_: POINTL
+            | _kw_: WAPIST_POINTL, POINTL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  POINTL** }}*/
 XB_BEGIN_STRUCTURE ( POINTL )
@@ -612,7 +612,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MSG structure. Defined as MSG in ot4xb_wapist_map.ch.
-            | _kw_: MSG
+            | _kw_: WAPIST_MSG, MSG, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MSG** }}*/
 XB_BEGIN_STRUCTURE ( MSG )
@@ -640,7 +640,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi BITMAP structure. Defined as BITMAP in ot4xb_wapist_map.ch.
-            | _kw_: BITMAP
+            | _kw_: WAPIST_BITMAP, BITMAP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BITMAP** }}*/
 XB_BEGIN_STRUCTURE ( BITMAP       )
@@ -671,7 +671,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi BITMAPINFOHEADER structure. Defined as BITMAPINFOHEADER in
               ot4xb_wapist_map.ch.
-   | _kw_: BITMAPINFOHEADER
+   | _kw_: WAPIST_BITMAPINFOHEADER, BITMAPINFOHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BITMAPINFOHEADER** }}*/
 XB_BEGIN_STRUCTURE ( BITMAPINFOHEADER )
@@ -709,7 +709,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DIBSECTION structure. Defined as DIBSECTION in ot4xb_wapist_map.ch.
-            | _kw_: DIBSECTION
+            | _kw_: WAPIST_DIBSECTION, DIBSECTION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DIBSECTION** }}*/
 XB_BEGIN_STRUCTURE ( DIBSECTION )
@@ -739,7 +739,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi EXTLOGPEN structure. Defined as EXTLOGPEN in ot4xb_wapist_map.ch.
-            | _kw_: EXTLOGPEN
+            | _kw_: WAPIST_EXTLOGPEN, EXTLOGPEN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  EXTLOGPEN** }}*/
 XB_BEGIN_STRUCTURE ( EXTLOGPEN )
@@ -769,7 +769,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LOGPEN structure. Defined as LOGPEN in ot4xb_wapist_map.ch.
-            | _kw_: LOGPEN
+            | _kw_: WAPIST_LOGPEN, LOGPEN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LOGPEN** }}*/
 XB_BEGIN_STRUCTURE ( LOGPEN )
@@ -791,7 +791,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LOGBRUSH structure. Defined as LOGBRUSH in ot4xb_wapist_map.ch.
-            | _kw_: LOGBRUSH
+            | _kw_: WAPIST_LOGBRUSH, LOGBRUSH, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LOGBRUSH** }}*/
 XB_BEGIN_STRUCTURE ( LOGBRUSH )
@@ -813,7 +813,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LOGBRUSH32 structure. Defined as LOGBRUSH32 in ot4xb_wapist_map.ch.
-            | _kw_: LOGBRUSH32
+            | _kw_: WAPIST_LOGBRUSH32, LOGBRUSH32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LOGBRUSH32** }}*/
 XB_BEGIN_STRUCTURE ( LOGBRUSH32 )
@@ -835,7 +835,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LOGFONT structure. Defined as LOGFONT in ot4xb_wapist_map.ch.
-            | _kw_: LOGFONT
+            | _kw_: WAPIST_LOGFONT, LOGFONT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LOGFONT** }}*/
 XB_BEGIN_STRUCTURE ( LOGFONT )
@@ -879,7 +879,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi BLENDFUNCTION structure. Defined as BLENDFUNCTION in ot4xb_wapist_map.ch.
-            | _kw_: BLENDFUNCTION
+            | _kw_: WAPIST_BLENDFUNCTION, BLENDFUNCTION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BLENDFUNCTION** }}*/
 XB_BEGIN_STRUCTURE ( BLENDFUNCTION )
@@ -903,7 +903,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RGBQUAD structure. Defined as RGBQUAD in ot4xb_wapist_map.ch.
-            | _kw_: RGBQUAD
+            | _kw_: WAPIST_RGBQUAD, RGBQUAD, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RGBQUAD** }}*/
 XB_BEGIN_STRUCTURE ( RGBQUAD )
@@ -927,7 +927,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi BITMAPINFO structure. Defined as BITMAPINFO in ot4xb_wapist_map.ch.
-            | _kw_: BITMAPINFO
+            | _kw_: WAPIST_BITMAPINFO, BITMAPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BITMAPINFO** }}*/
 XB_BEGIN_STRUCTURE ( BITMAPINFO )
@@ -947,7 +947,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SIZE structure. Defined as SIZE in ot4xb_wapist_map.ch.
-            | _kw_: SIZE
+            | _kw_: WAPIST_SIZE, SIZE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SIZE** }}*/
 XB_BEGIN_STRUCTURE ( SIZE )
@@ -967,7 +967,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SIZEL structure. Defined as SIZEL in ot4xb_wapist_map.ch.
-            | _kw_: SIZEL
+            | _kw_: WAPIST_SIZEL, SIZEL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SIZEL** }}*/
 XB_BEGIN_STRUCTURE ( SIZEL )
@@ -987,7 +987,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TRIVERTEX structure. Defined as TRIVERTEX in ot4xb_wapist_map.ch.
-            | _kw_: TRIVERTEX
+            | _kw_: WAPIST_TRIVERTEX, TRIVERTEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TRIVERTEX** }}*/
 XB_BEGIN_STRUCTURE ( TRIVERTEX )
@@ -1015,7 +1015,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PALETTEENTRY structure. Defined as PALETTEENTRY in ot4xb_wapist_map.ch.
-            | _kw_: PALETTEENTRY
+            | _kw_: WAPIST_PALETTEENTRY, PALETTEENTRY, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PALETTEENTRY** }}*/
 XB_BEGIN_STRUCTURE ( PALETTEENTRY )
@@ -1039,7 +1039,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LOGPALETTE structure. Defined as LOGPALETTE in ot4xb_wapist_map.ch.
-            | _kw_: LOGPALETTE
+            | _kw_: WAPIST_LOGPALETTE, LOGPALETTE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LOGPALETTE** }}*/
 XB_BEGIN_STRUCTURE ( LOGPALETTE )
@@ -1061,7 +1061,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi XFORM structure. Defined as XFORM in ot4xb_wapist_map.ch.
-            | _kw_: XFORM
+            | _kw_: WAPIST_XFORM, XFORM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  XFORM** }}*/
 XB_BEGIN_STRUCTURE ( XFORM )
@@ -1089,7 +1089,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RECT structure. Defined as RECT in ot4xb_wapist_map.ch.
-            | _kw_: RECT
+            | _kw_: WAPIST_RECT, RECT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RECT** }}*/
 XB_BEGIN_STRUCTURE ( RECT )
@@ -1113,7 +1113,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RECTL structure. Defined as RECTL in ot4xb_wapist_map.ch.
-            | _kw_: RECTL
+            | _kw_: WAPIST_RECTL, RECTL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RECTL** }}*/
 XB_BEGIN_STRUCTURE ( RECTL )
@@ -1137,7 +1137,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ABC structure. Defined as ABC in ot4xb_wapist_map.ch.
-            | _kw_: ABC
+            | _kw_: WAPIST_ABC, ABC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ABC** }}*/
 XB_BEGIN_STRUCTURE ( ABC )
@@ -1159,7 +1159,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ABCFLOAT structure. Defined as ABCFLOAT in ot4xb_wapist_map.ch.
-            | _kw_: ABCFLOAT
+            | _kw_: WAPIST_ABCFLOAT, ABCFLOAT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ABCFLOAT** }}*/
 XB_BEGIN_STRUCTURE ( ABCFLOAT )
@@ -1182,7 +1182,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRAWTEXTPARAMS structure. Defined as DRAWTEXTPARAMS in
               ot4xb_wapist_map.ch.
-   | _kw_: DRAWTEXTPARAMS
+   | _kw_: WAPIST_DRAWTEXTPARAMS, DRAWTEXTPARAMS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRAWTEXTPARAMS** }}*/
 XB_BEGIN_STRUCTURE ( DRAWTEXTPARAMS )
@@ -1208,7 +1208,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENUMLOGFONT structure. Defined as ENUMLOGFONT in ot4xb_wapist_map.ch.
-            | _kw_: ENUMLOGFONT
+            | _kw_: WAPIST_ENUMLOGFONT, ENUMLOGFONT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENUMLOGFONT** }}*/
 XB_BEGIN_STRUCTURE ( ENUMLOGFONT )
@@ -1230,7 +1230,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENUMLOGFONTEX structure. Defined as ENUMLOGFONTEX in ot4xb_wapist_map.ch.
-            | _kw_: ENUMLOGFONTEX
+            | _kw_: WAPIST_ENUMLOGFONTEX, ENUMLOGFONTEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENUMLOGFONTEX** }}*/
 XB_BEGIN_STRUCTURE ( ENUMLOGFONTEX )
@@ -1254,7 +1254,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi EXTLOGFONT structure. Defined as EXTLOGFONT in ot4xb_wapist_map.ch.
-            | _kw_: EXTLOGFONT
+            | _kw_: WAPIST_EXTLOGFONT, EXTLOGFONT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  EXTLOGFONT** }}*/
 XB_BEGIN_STRUCTURE ( EXTLOGFONT )
@@ -1290,7 +1290,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FIXED structure. Defined as FIXED in ot4xb_wapist_map.ch.
-            | _kw_: FIXED
+            | _kw_: WAPIST_FIXED, FIXED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FIXED** }}*/
 XB_BEGIN_STRUCTURE ( FIXED )
@@ -1310,7 +1310,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GCP_RESULTS structure. Defined as GCP_RESULTS in ot4xb_wapist_map.ch.
-            | _kw_: GCP_RESULTS
+            | _kw_: WAPIST_GCP_RESULTS, GCP_RESULTS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GCP_RESULTS** }}*/
 XB_BEGIN_STRUCTURE ( GCP_RESULTS )
@@ -1344,7 +1344,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GLYPHMETRICS structure. Defined as GLYPHMETRICS in ot4xb_wapist_map.ch.
-            | _kw_: GLYPHMETRICS
+            | _kw_: WAPIST_GLYPHMETRICS, GLYPHMETRICS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GLYPHMETRICS** }}*/
 XB_BEGIN_STRUCTURE ( GLYPHMETRICS )
@@ -1370,7 +1370,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GLYPHSET structure. Defined as GLYPHSET in ot4xb_wapist_map.ch.
-            | _kw_: GLYPHSET
+            | _kw_: WAPIST_GLYPHSET, GLYPHSET, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GLYPHSET** }}*/
 XB_BEGIN_STRUCTURE ( GLYPHSET )
@@ -1396,7 +1396,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi KERNINGPAIR structure. Defined as KERNINGPAIR in ot4xb_wapist_map.ch.
-            | _kw_: KERNINGPAIR
+            | _kw_: WAPIST_KERNINGPAIR, KERNINGPAIR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  KERNINGPAIR** }}*/
 XB_BEGIN_STRUCTURE ( KERNINGPAIR )
@@ -1418,7 +1418,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MAT2 structure. Defined as MAT2 in ot4xb_wapist_map.ch.
-            | _kw_: MAT2
+            | _kw_: WAPIST_MAT2, MAT2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MAT2** }}*/
 XB_BEGIN_STRUCTURE ( MAT2 )
@@ -1442,7 +1442,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NEWTEXTMETRIC structure. Defined as NEWTEXTMETRIC in ot4xb_wapist_map.ch.
-            | _kw_: NEWTEXTMETRIC
+            | _kw_: WAPIST_NEWTEXTMETRIC, NEWTEXTMETRIC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NEWTEXTMETRIC** }}*/
 XB_BEGIN_STRUCTURE ( NEWTEXTMETRIC )
@@ -1507,7 +1507,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NEWTEXTMETRICEX structure. Defined as NEWTEXTMETRICEX in
               ot4xb_wapist_map.ch.
-   | _kw_: NEWTEXTMETRICEX
+   | _kw_: WAPIST_NEWTEXTMETRICEX, NEWTEXTMETRICEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NEWTEXTMETRICEX** }}*/
 XB_BEGIN_STRUCTURE ( NEWTEXTMETRICEX )
@@ -1528,7 +1528,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi OUTLINETEXTMETRIC structure. Defined as OUTLINETEXTMETRIC in
               ot4xb_wapist_map.ch.
-   | _kw_: OUTLINETEXTMETRIC
+   | _kw_: WAPIST_OUTLINETEXTMETRIC, OUTLINETEXTMETRIC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OUTLINETEXTMETRIC** }}*/
 XB_BEGIN_STRUCTURE ( OUTLINETEXTMETRIC )
@@ -1608,7 +1608,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PANOSE structure. Defined as PANOSE in ot4xb_wapist_map.ch.
-            | _kw_: PANOSE
+            | _kw_: WAPIST_PANOSE, PANOSE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PANOSE** }}*/
 XB_BEGIN_STRUCTURE ( PANOSE )
@@ -1644,7 +1644,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi POINTFX structure. Defined as POINTFX in ot4xb_wapist_map.ch.
-            | _kw_: POINTFX
+            | _kw_: WAPIST_POINTFX, POINTFX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  POINTFX** }}*/
 XB_BEGIN_STRUCTURE ( POINTFX )
@@ -1665,7 +1665,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi POLYTEXT structure. Defined as POLYTEXT in ot4xb_wapist_map.ch.
-            | _kw_: POLYTEXT
+            | _kw_: WAPIST_POLYTEXT, POLYTEXT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  POLYTEXT** }}*/
 XB_BEGIN_STRUCTURE ( POLYTEXT )
@@ -1696,7 +1696,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RASTERIZER_STATUS structure. Defined as RASTERIZER_STATUS in
               ot4xb_wapist_map.ch.
-   | _kw_: RASTERIZER_STATUS
+   | _kw_: WAPIST_RASTERIZER_STATUS, RASTERIZER_STATUS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RASTERIZER_STATUS** }}*/
 XB_BEGIN_STRUCTURE( RASTERIZER_STATUS )
@@ -1718,7 +1718,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TEXTMETRIC structure. Defined as TEXTMETRIC in ot4xb_wapist_map.ch.
-            | _kw_: TEXTMETRIC
+            | _kw_: WAPIST_TEXTMETRIC, TEXTMETRIC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TEXTMETRIC** }}*/
 XB_BEGIN_STRUCTURE( TEXTMETRIC )
@@ -1774,7 +1774,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TTPOLYCURVE structure. Defined as TTPOLYCURVE in ot4xb_wapist_map.ch.
-            | _kw_: TTPOLYCURVE
+            | _kw_: WAPIST_TTPOLYCURVE, TTPOLYCURVE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TTPOLYCURVE** }}*/
 XB_BEGIN_STRUCTURE( TTPOLYCURVE )
@@ -1797,7 +1797,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TTPOLYGONHEADER structure. Defined as TTPOLYGONHEADER in
               ot4xb_wapist_map.ch.
-   | _kw_: TTPOLYGONHEADER
+   | _kw_: WAPIST_TTPOLYGONHEADER, TTPOLYGONHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TTPOLYGONHEADER** }}*/
 XB_BEGIN_STRUCTURE( TTPOLYGONHEADER )
@@ -1819,7 +1819,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WCRANGE structure. Defined as WCRANGE in ot4xb_wapist_map.ch.
-            | _kw_: WCRANGE
+            | _kw_: WAPIST_WCRANGE, WCRANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WCRANGE** }}*/
 XB_BEGIN_STRUCTURE( WCRANGE )
@@ -1839,7 +1839,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FONTSIGNATURE structure. Defined as FONTSIGNATURE in ot4xb_wapist_map.ch.
-            | _kw_: FONTSIGNATURE
+            | _kw_: WAPIST_FONTSIGNATURE, FONTSIGNATURE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FONTSIGNATURE** }}*/
 XB_BEGIN_STRUCTURE( FONTSIGNATURE )
@@ -1867,7 +1867,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MONITORINFO structure. Defined as MONITORINFO in ot4xb_wapist_map.ch.
-            | _kw_: MONITORINFO
+            | _kw_: WAPIST_MONITORINFO, MONITORINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MONITORINFO** }}*/
 XB_BEGIN_STRUCTURE( MONITORINFO )
@@ -1891,7 +1891,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MONITORINFOEX structure. Defined as MONITORINFOEX in ot4xb_wapist_map.ch.
-            | _kw_: MONITORINFOEX
+            | _kw_: WAPIST_MONITORINFOEX, MONITORINFOEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MONITORINFOEX** }}*/
 XB_BEGIN_STRUCTURE( MONITORINFOEX )
@@ -1917,7 +1917,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PAINTSTRUCT structure. Defined as PAINTSTRUCT in ot4xb_wapist_map.ch.
-            | _kw_: PAINTSTRUCT
+            | _kw_: WAPIST_PAINTSTRUCT, PAINTSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PAINTSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( PAINTSTRUCT )
@@ -1945,7 +1945,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SYSTEMTIME structure. Defined as SYSTEMTIME in ot4xb_wapist_map.ch.
-            | _kw_: SYSTEMTIME
+            | _kw_: WAPIST_SYSTEMTIME, SYSTEMTIME, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SYSTEMTIME** }}*/
 XB_BEGIN_STRUCTURE( SYSTEMTIME )
@@ -1978,7 +1978,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ADDJOB_INFO_1 structure. Defined as ADDJOB_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: ADDJOB_INFO_1
+            | _kw_: WAPIST_ADDJOB_INFO_1, ADDJOB_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ADDJOB_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( ADDJOB_INFO_1 )
@@ -1999,7 +1999,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DATATYPES_INFO_1 structure. Defined as DATATYPES_INFO_1 in
               ot4xb_wapist_map.ch.
-   | _kw_: DATATYPES_INFO_1
+   | _kw_: WAPIST_DATATYPES_INFO_1, DATATYPES_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DATATYPES_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( DATATYPES_INFO_1 )
@@ -2026,7 +2026,7 @@ XB_END_STRUCTURE
               overlay the same storage (a union in the WinApi declaration); dmDisplayFlags and dmNup overlay each
               other too.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-devmodew
-            | _kw_: DEVMODEW
+            | _kw_: WAPIST_DEVMODEW, DEVMODEW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DEVMODEW** }}*/
    /*{{|member_: - MEMBER SZWSTR dmDeviceName }}*/
@@ -2093,7 +2093,7 @@ void __cdecl WAPIST_DEVMODEW( XppParamList pl )
               overlay the same storage (a union in the WinApi declaration); dmDisplayFlags and dmNup overlay each
               other too.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-devmodea
-            | _kw_: DEVMODEA
+            | _kw_: WAPIST_DEVMODEA, DEVMODEA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DEVMODEA** }}*/
    /*{{|member_: - MEMBER SZSTR dmDeviceName }}*/
@@ -2222,7 +2222,7 @@ static void __cdecl devmode_structure( XppParamList pl , BOOL bUnicode )
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DOC_INFO_1 structure. Defined as DOC_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: DOC_INFO_1
+            | _kw_: WAPIST_DOC_INFO_1, DOC_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DOC_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( DOC_INFO_1 )
@@ -2244,7 +2244,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DOC_INFO_2 structure. Defined as DOC_INFO_2 in ot4xb_wapist_map.ch.
-            | _kw_: DOC_INFO_2
+            | _kw_: WAPIST_DOC_INFO_2, DOC_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DOC_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( DOC_INFO_2 )
@@ -2270,7 +2270,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DOC_INFO_3 structure. Defined as DOC_INFO_3 in ot4xb_wapist_map.ch.
-            | _kw_: DOC_INFO_3
+            | _kw_: WAPIST_DOC_INFO_3, DOC_INFO_3, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DOC_INFO_3** }}*/
 XB_BEGIN_STRUCTURE( DOC_INFO_3 )
@@ -2294,7 +2294,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DOCINFO structure. Defined as DOCINFO in ot4xb_wapist_map.ch.
-            | _kw_: DOCINFO
+            | _kw_: WAPIST_DOCINFO, DOCINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DOCINFO** }}*/
 XB_BEGIN_STRUCTURE( DOCINFO )
@@ -2320,7 +2320,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRAWPATRECT structure. Defined as DRAWPATRECT in ot4xb_wapist_map.ch.
-            | _kw_: DRAWPATRECT
+            | _kw_: WAPIST_DRAWPATRECT, DRAWPATRECT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRAWPATRECT** }}*/
 XB_BEGIN_STRUCTURE( DRAWPATRECT )
@@ -2344,7 +2344,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_1 structure. Defined as DRIVER_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_1
+            | _kw_: WAPIST_DRIVER_INFO_1, DRIVER_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_1 )
@@ -2362,7 +2362,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_2 structure. Defined as DRIVER_INFO_2 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_2
+            | _kw_: WAPIST_DRIVER_INFO_2, DRIVER_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_2 )
@@ -2390,7 +2390,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_3 structure. Defined as DRIVER_INFO_3 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_3
+            | _kw_: WAPIST_DRIVER_INFO_3, DRIVER_INFO_3, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_3** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_3 )
@@ -2426,7 +2426,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_4 structure. Defined as DRIVER_INFO_4 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_4
+            | _kw_: WAPIST_DRIVER_INFO_4, DRIVER_INFO_4, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_4** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_4 )
@@ -2464,7 +2464,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_5 structure. Defined as DRIVER_INFO_5 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_5
+            | _kw_: WAPIST_DRIVER_INFO_5, DRIVER_INFO_5, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_5** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_5 )
@@ -2498,7 +2498,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRIVER_INFO_6 structure. Defined as DRIVER_INFO_6 in ot4xb_wapist_map.ch.
-            | _kw_: DRIVER_INFO_6
+            | _kw_: WAPIST_DRIVER_INFO_6, DRIVER_INFO_6, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRIVER_INFO_6** }}*/
 XB_BEGIN_STRUCTURE( DRIVER_INFO_6 )
@@ -2548,7 +2548,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FORM_INFO_1 structure. Defined as FORM_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: FORM_INFO_1
+            | _kw_: WAPIST_FORM_INFO_1, FORM_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FORM_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( FORM_INFO_1 )
@@ -2572,7 +2572,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi JOB_INFO_1 structure. Defined as JOB_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: JOB_INFO_1
+            | _kw_: WAPIST_JOB_INFO_1, JOB_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  JOB_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( JOB_INFO_1 )
@@ -2614,7 +2614,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi JOB_INFO_2 structure. Defined as JOB_INFO_2 in ot4xb_wapist_map.ch.
-            | _kw_: JOB_INFO_2
+            | _kw_: WAPIST_JOB_INFO_2, JOB_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  JOB_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( JOB_INFO_2 )
@@ -2676,7 +2676,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi JOB_INFO_3 structure. Defined as JOB_INFO_3 in ot4xb_wapist_map.ch.
-            | _kw_: JOB_INFO_3
+            | _kw_: WAPIST_JOB_INFO_3, JOB_INFO_3, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  JOB_INFO_3** }}*/
 XB_BEGIN_STRUCTURE( JOB_INFO_3 )
@@ -2699,7 +2699,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MONITOR_INFO_1 structure. Defined as MONITOR_INFO_1 in
               ot4xb_wapist_map.ch.
-   | _kw_: MONITOR_INFO_1
+   | _kw_: WAPIST_MONITOR_INFO_1, MONITOR_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MONITOR_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( MONITOR_INFO_1 )
@@ -2718,7 +2718,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MONITOR_INFO_2 structure. Defined as MONITOR_INFO_2 in
               ot4xb_wapist_map.ch.
-   | _kw_: MONITOR_INFO_2
+   | _kw_: WAPIST_MONITOR_INFO_2, MONITOR_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MONITOR_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( MONITOR_INFO_2 )
@@ -2740,7 +2740,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PORT_INFO_1 structure. Defined as PORT_INFO_1 in ot4xb_wapist_map.ch.
-            | _kw_: PORT_INFO_1
+            | _kw_: WAPIST_PORT_INFO_1, PORT_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PORT_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( PORT_INFO_1 )
@@ -2758,7 +2758,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PORT_INFO_2 structure. Defined as PORT_INFO_2 in ot4xb_wapist_map.ch.
-            | _kw_: PORT_INFO_2
+            | _kw_: WAPIST_PORT_INFO_2, PORT_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PORT_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( PORT_INFO_2 )
@@ -2784,7 +2784,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PORT_INFO_3 structure. Defined as PORT_INFO_3 in ot4xb_wapist_map.ch.
-            | _kw_: PORT_INFO_3
+            | _kw_: WAPIST_PORT_INFO_3, PORT_INFO_3, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PORT_INFO_3** }}*/
 XB_BEGIN_STRUCTURE( PORT_INFO_3 )
@@ -2807,7 +2807,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_DEFAULTS structure. Defined as PRINTER_DEFAULTS in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_DEFAULTS
+   | _kw_: WAPIST_PRINTER_DEFAULTS, PRINTER_DEFAULTS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_DEFAULTS** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_DEFAULTS )
@@ -2830,7 +2830,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_ENUM_VALUES structure. Defined as PRINTER_ENUM_VALUES in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_ENUM_VALUES
+   | _kw_: WAPIST_PRINTER_ENUM_VALUES, PRINTER_ENUM_VALUES, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_ENUM_VALUES** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_ENUM_VALUES )
@@ -2858,7 +2858,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PRINTER_INFO_1 structure. Defined as PRINTER_INFO_1 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-1
-            | _kw_: PRINTER_INFO_1
+            | _kw_: WAPIST_PRINTER_INFO_1, PRINTER_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_1 )
@@ -2887,7 +2887,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PRINTER_INFO_2 structure. Defined as PRINTER_INFO_2 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-2
-            | _kw_: PRINTER_INFO_2
+            | _kw_: WAPIST_PRINTER_INFO_2, PRINTER_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_2 )
@@ -2957,7 +2957,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_INFO_3 structure. Defined as PRINTER_INFO_3 in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_INFO_3
+   | _kw_: WAPIST_PRINTER_INFO_3, PRINTER_INFO_3, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_3** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_3 )
@@ -2977,7 +2977,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PRINTER_INFO_4 structure. Defined as PRINTER_INFO_4 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-4
-            | _kw_: PRINTER_INFO_4
+            | _kw_: WAPIST_PRINTER_INFO_4, PRINTER_INFO_4, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_4** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_4 )
@@ -3003,7 +3003,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PRINTER_INFO_5 structure. Defined as PRINTER_INFO_5 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-5
-            | _kw_: PRINTER_INFO_5
+            | _kw_: WAPIST_PRINTER_INFO_5, PRINTER_INFO_5, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_5** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_5 )
@@ -3035,7 +3035,7 @@ XB_END_STRUCTURE
             | note: OT4XB exposes additional readonly logical properties for all status flags declared in this source
               block.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-6
-            | _kw_: PRINTER_INFO_6
+            | _kw_: WAPIST_PRINTER_INFO_6, PRINTER_INFO_6, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_6** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_6 )
@@ -3112,7 +3112,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PRINTER_INFO_7 structure. Defined as PRINTER_INFO_7 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-7
-            | _kw_: PRINTER_INFO_7
+            | _kw_: WAPIST_PRINTER_INFO_7, PRINTER_INFO_7, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_7** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_7 )
@@ -3134,7 +3134,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_INFO_8 structure. Defined as PRINTER_INFO_8 in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_INFO_8
+   | _kw_: WAPIST_PRINTER_INFO_8, PRINTER_INFO_8, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_8** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_8 )
@@ -3153,7 +3153,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_INFO_9 structure. Defined as PRINTER_INFO_9 in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_INFO_9
+   | _kw_: WAPIST_PRINTER_INFO_9, PRINTER_INFO_9, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_INFO_9** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_INFO_9 )
@@ -3172,7 +3172,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_NOTIFY_INFO structure. Defined as PRINTER_NOTIFY_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_NOTIFY_INFO
+   | _kw_: WAPIST_PRINTER_NOTIFY_INFO, PRINTER_NOTIFY_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_NOTIFY_INFO** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_NOTIFY_INFO )
@@ -3197,7 +3197,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi _PRINTER_NOTIFY_INFO_DATA___DATA structure. Defined as
               _PRINTER_NOTIFY_INFO_DATA___DATA in ot4xb_wapist_map.ch.
-   | _kw_: _PRINTER_NOTIFY_INFO_DATA___DATA
+   | _kw_: WAPIST__PRINTER_NOTIFY_INFO_DATA___DATA, _PRINTER_NOTIFY_INFO_DATA___DATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  _PRINTER_NOTIFY_INFO_DATA___DATA** }}*/
 XB_BEGIN_STRUCTURE( _PRINTER_NOTIFY_INFO_DATA___DATA )
@@ -3218,7 +3218,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Auxiliary wrapper for the PRINTER_NOTIFY_INFO_DATA NotifyData union. Defined as
               _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA in ot4xb_wapist_map.ch.
-   | _kw_: _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA
+   | _kw_: WAPIST__PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA, _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA** }}*/
 XB_BEGIN_STRUCTURE( _PRINTER_NOTIFY_INFO_DATA___NOTIFYDATA )
@@ -3269,7 +3269,7 @@ XB_END_STRUCTURE
                  ? PeekStr( nd:NotifyData:Data:pBuf, 0, nd:NotifyData:Data:cbBuf )
               endif
               ```
-   | _kw_: PRINTER_NOTIFY_INFO_DATA
+   | _kw_: WAPIST_PRINTER_NOTIFY_INFO_DATA, PRINTER_NOTIFY_INFO_DATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_NOTIFY_INFO_DATA** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_NOTIFY_INFO_DATA )
@@ -3296,7 +3296,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_NOTIFY_OPTIONS structure. Defined as PRINTER_NOTIFY_OPTIONS in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_NOTIFY_OPTIONS
+   | _kw_: WAPIST_PRINTER_NOTIFY_OPTIONS, PRINTER_NOTIFY_OPTIONS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_NOTIFY_OPTIONS** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_NOTIFY_OPTIONS )
@@ -3321,7 +3321,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTER_NOTIFY_OPTIONS_TYPE structure. Defined as
               PRINTER_NOTIFY_OPTIONS_TYPE in ot4xb_wapist_map.ch.
-   | _kw_: PRINTER_NOTIFY_OPTIONS_TYPE
+   | _kw_: WAPIST_PRINTER_NOTIFY_OPTIONS_TYPE, PRINTER_NOTIFY_OPTIONS_TYPE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTER_NOTIFY_OPTIONS_TYPE** }}*/
 XB_BEGIN_STRUCTURE( PRINTER_NOTIFY_OPTIONS_TYPE )
@@ -3350,7 +3350,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTPROCESSOR_CAPS_1 structure. Defined as PRINTPROCESSOR_CAPS_1 in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTPROCESSOR_CAPS_1
+   | _kw_: WAPIST_PRINTPROCESSOR_CAPS_1, PRINTPROCESSOR_CAPS_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTPROCESSOR_CAPS_1** }}*/
 XB_BEGIN_STRUCTURE( PRINTPROCESSOR_CAPS_1 )
@@ -3375,7 +3375,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PRINTPROCESSOR_INFO_1 structure. Defined as PRINTPROCESSOR_INFO_1 in
               ot4xb_wapist_map.ch.
-   | _kw_: PRINTPROCESSOR_INFO_1
+   | _kw_: WAPIST_PRINTPROCESSOR_INFO_1, PRINTPROCESSOR_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PRINTPROCESSOR_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( PRINTPROCESSOR_INFO_1 )
@@ -3394,7 +3394,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PROVIDOR_INFO_1 structure. Defined as PROVIDOR_INFO_1 in
               ot4xb_wapist_map.ch.
-   | _kw_: PROVIDOR_INFO_1
+   | _kw_: WAPIST_PROVIDOR_INFO_1, PROVIDOR_INFO_1, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PROVIDOR_INFO_1** }}*/
 XB_BEGIN_STRUCTURE( PROVIDOR_INFO_1 )
@@ -3417,7 +3417,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PROVIDOR_INFO_2 structure. Defined as PROVIDOR_INFO_2 in
               ot4xb_wapist_map.ch.
-   | _kw_: PROVIDOR_INFO_2
+   | _kw_: WAPIST_PROVIDOR_INFO_2, PROVIDOR_INFO_2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PROVIDOR_INFO_2** }}*/
 XB_BEGIN_STRUCTURE( PROVIDOR_INFO_2 )
@@ -3436,7 +3436,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PSFEATURE_CUSTPAPER structure. Defined as PSFEATURE_CUSTPAPER in
               ot4xb_wapist_map.ch.
-   | _kw_: PSFEATURE_CUSTPAPER
+   | _kw_: WAPIST_PSFEATURE_CUSTPAPER, PSFEATURE_CUSTPAPER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PSFEATURE_CUSTPAPER** }}*/
 XB_BEGIN_STRUCTURE( PSFEATURE_CUSTPAPER )
@@ -3463,7 +3463,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PSFEATURE_OUTPUT structure. Defined as PSFEATURE_OUTPUT in
               ot4xb_wapist_map.ch.
-   | _kw_: PSFEATURE_OUTPUT
+   | _kw_: WAPIST_PSFEATURE_OUTPUT, PSFEATURE_OUTPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PSFEATURE_OUTPUT** }}*/
 XB_BEGIN_STRUCTURE( PSFEATURE_OUTPUT )
@@ -3483,7 +3483,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PSINJECTDATA structure. Defined as PSINJECTDATA in ot4xb_wapist_map.ch.
-            | _kw_: PSINJECTDATA
+            | _kw_: WAPIST_PSINJECTDATA, PSINJECTDATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PSINJECTDATA** }}*/
 XB_BEGIN_STRUCTURE( PSINJECTDATA )
@@ -3505,7 +3505,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RGNDATA structure. Defined as RGNDATA in ot4xb_wapist_map.ch.
-            | _kw_: RGNDATA
+            | _kw_: WAPIST_RGNDATA, RGNDATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RGNDATA** }}*/
 XB_BEGIN_STRUCTURE( RGNDATA )
@@ -3525,7 +3525,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RGNDATAHEADER structure. Defined as RGNDATAHEADER in ot4xb_wapist_map.ch.
-            | _kw_: RGNDATAHEADER
+            | _kw_: WAPIST_RGNDATAHEADER, RGNDATAHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RGNDATAHEADER** }}*/
 XB_BEGIN_STRUCTURE( RGNDATAHEADER )
@@ -3553,7 +3553,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi DISPLAY_DEVICE layout declared in this source block, with the ANSI
               fixed string members of DISPLAY_DEVICEA.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-display_devicea
-            | _kw_: DISPLAY_DEVICE
+            | _kw_: WAPIST_DISPLAY_DEVICE, DISPLAY_DEVICE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DISPLAY_DEVICE** }}*/
 XB_BEGIN_STRUCTURE( DISPLAY_DEVICE )
@@ -3580,7 +3580,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ALTTABINFO structure. Defined as ALTTABINFO in ot4xb_wapist_map.ch.
-            | _kw_: ALTTABINFO
+            | _kw_: WAPIST_ALTTABINFO, ALTTABINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ALTTABINFO** }}*/
 XB_BEGIN_STRUCTURE( ALTTABINFO )
@@ -3614,7 +3614,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TITLEBARINFO structure. Defined as TITLEBARINFO in ot4xb_wapist_map.ch.
-            | _kw_: TITLEBARINFO
+            | _kw_: WAPIST_TITLEBARINFO, TITLEBARINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TITLEBARINFO** }}*/
 XB_BEGIN_STRUCTURE( TITLEBARINFO )
@@ -3648,7 +3648,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WINDOWINFO structure. Defined as WINDOWINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-windowinfo
-            | _kw_: WINDOWINFO
+            | _kw_: WAPIST_WINDOWINFO, WINDOWINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WINDOWINFO** }}*/
 XB_BEGIN_STRUCTURE( WINDOWINFO )
@@ -3686,7 +3686,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WINDOWPLACEMENT structure. Defined as WINDOWPLACEMENT in
               ot4xb_wapist_map.ch.
-   | _kw_: WINDOWPLACEMENT
+   | _kw_: WAPIST_WINDOWPLACEMENT, WINDOWPLACEMENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WINDOWPLACEMENT** }}*/
 XB_BEGIN_STRUCTURE( WINDOWPLACEMENT )
@@ -3714,7 +3714,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GUITHREADINFO structure. Defined as GUITHREADINFO in ot4xb_wapist_map.ch.
-            | _kw_: GUITHREADINFO
+            | _kw_: WAPIST_GUITHREADINFO, GUITHREADINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GUITHREADINFO** }}*/
 XB_BEGIN_STRUCTURE( GUITHREADINFO )
@@ -3748,7 +3748,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi CURSORINFO structure. Defined as CURSORINFO in ot4xb_wapist_map.ch.
-            | _kw_: CURSORINFO
+            | _kw_: WAPIST_CURSORINFO, CURSORINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CURSORINFO** }}*/
 XB_BEGIN_STRUCTURE( CURSORINFO  )
@@ -3772,7 +3772,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ICONINFO structure. Defined as ICONINFO in ot4xb_wapist_map.ch.
-            | _kw_: ICONINFO
+            | _kw_: WAPIST_ICONINFO, ICONINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ICONINFO** }}*/
 XB_BEGIN_STRUCTURE( ICONINFO  )
@@ -3798,7 +3798,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ICONMETRICS structure. Defined as ICONMETRICS in ot4xb_wapist_map.ch.
-            | _kw_: ICONMETRICS
+            | _kw_: WAPIST_ICONMETRICS, ICONMETRICS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ICONMETRICS** }}*/
 XB_BEGIN_STRUCTURE( ICONMETRICS  )
@@ -3824,7 +3824,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi METAFILEPICT structure. Defined as METAFILEPICT in ot4xb_wapist_map.ch.
-            | _kw_: METAFILEPICT
+            | _kw_: WAPIST_METAFILEPICT, METAFILEPICT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  METAFILEPICT** }}*/
 XB_BEGIN_STRUCTURE( METAFILEPICT  )
@@ -3848,7 +3848,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MDINEXTMENU structure. Defined as MDINEXTMENU in ot4xb_wapist_map.ch.
-            | _kw_: MDINEXTMENU
+            | _kw_: WAPIST_MDINEXTMENU, MDINEXTMENU, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MDINEXTMENU** }}*/
 XB_BEGIN_STRUCTURE( MDINEXTMENU              )
@@ -3871,7 +3871,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUBARINFO structure. Defined as MENUBARINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-menubarinfo
-            | _kw_: MENUBARINFO
+            | _kw_: WAPIST_MENUBARINFO, MENUBARINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUBARINFO** }}*/
 XB_BEGIN_STRUCTURE( MENUBARINFO              )
@@ -3902,7 +3902,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUEX_TEMPLATE_HEADER structure. Defined as MENUEX_TEMPLATE_HEADER in
               ot4xb_wapist_map.ch.
-   | _kw_: MENUEX_TEMPLATE_HEADER
+   | _kw_: WAPIST_MENUEX_TEMPLATE_HEADER, MENUEX_TEMPLATE_HEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUEX_TEMPLATE_HEADER** }}*/
 XB_BEGIN_STRUCTURE( MENUEX_TEMPLATE_HEADER   )
@@ -3925,7 +3925,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUEX_TEMPLATE_ITEM structure. Defined as MENUEX_TEMPLATE_ITEM in
               ot4xb_wapist_map.ch.
-   | _kw_: MENUEX_TEMPLATE_ITEM
+   | _kw_: WAPIST_MENUEX_TEMPLATE_ITEM, MENUEX_TEMPLATE_ITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUEX_TEMPLATE_ITEM** }}*/
 XB_BEGIN_STRUCTURE( MENUEX_TEMPLATE_ITEM  )
@@ -3954,7 +3954,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUGETOBJECTINFO structure. Defined as MENUGETOBJECTINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: MENUGETOBJECTINFO
+   | _kw_: WAPIST_MENUGETOBJECTINFO, MENUGETOBJECTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUGETOBJECTINFO** }}*/
 XB_BEGIN_STRUCTURE( MENUGETOBJECTINFO        )
@@ -3980,7 +3980,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUINFO structure. Defined as MENUINFO in ot4xb_wapist_map.ch.
-            | _kw_: MENUINFO
+            | _kw_: WAPIST_MENUINFO, MENUINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUINFO** }}*/
 XB_BEGIN_STRUCTURE( MENUINFO                 )
@@ -4011,7 +4011,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUITEMINFOA structure. Defined as MENUITEMINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-menuiteminfoa
-            | _kw_: MENUITEMINFO, MENUITEMINFOA
+            | _kw_: WAPIST_MENUITEMINFO, MENUITEMINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUITEMINFO** }}*/
 XB_BEGIN_STRUCTURE( MENUITEMINFO             )
@@ -4056,7 +4056,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUITEMTEMPLATE structure. Defined as MENUITEMTEMPLATE in
               ot4xb_wapist_map.ch.
-   | _kw_: MENUITEMTEMPLATE
+   | _kw_: WAPIST_MENUITEMTEMPLATE, MENUITEMTEMPLATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUITEMTEMPLATE** }}*/
 XB_BEGIN_STRUCTURE( MENUITEMTEMPLATE         )
@@ -4079,7 +4079,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MENUITEMTEMPLATEHEADER structure. Defined as MENUITEMTEMPLATEHEADER in
               ot4xb_wapist_map.ch.
-   | _kw_: MENUITEMTEMPLATEHEADER
+   | _kw_: WAPIST_MENUITEMTEMPLATEHEADER, MENUITEMTEMPLATEHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MENUITEMTEMPLATEHEADER** }}*/
 XB_BEGIN_STRUCTURE( MENUITEMTEMPLATEHEADER   )
@@ -4099,7 +4099,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TPMPARAMS structure. Defined as TPMPARAMS in ot4xb_wapist_map.ch.
-            | _kw_: TPMPARAMS
+            | _kw_: WAPIST_TPMPARAMS, TPMPARAMS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TPMPARAMS** }}*/
 XB_BEGIN_STRUCTURE( TPMPARAMS                )
@@ -4119,7 +4119,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ACCEL structure. Defined as ACCEL in ot4xb_wapist_map.ch.
-            | _kw_: ACCEL
+            | _kw_: WAPIST_ACCEL, ACCEL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ACCEL** }}*/
 XB_BEGIN_STRUCTURE( ACCEL )
@@ -4141,7 +4141,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MINMAXINFO structure. Defined as MINMAXINFO in ot4xb_wapist_map.ch.
-            | _kw_: MINMAXINFO
+            | _kw_: WAPIST_MINMAXINFO, MINMAXINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MINMAXINFO** }}*/
 XB_BEGIN_STRUCTURE( MINMAXINFO )
@@ -4167,7 +4167,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMHDR structure. Defined as NMHDR in ot4xb_wapist_map.ch.
-            | _kw_: NMHDR
+            | _kw_: WAPIST_NMHDR, NMHDR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMHDR** }}*/
 XB_BEGIN_STRUCTURE( NMHDR )
@@ -4189,7 +4189,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMRBAUTOSIZE structure. Defined as NMRBAUTOSIZE in ot4xb_wapist_map.ch.
-            | _kw_: NMRBAUTOSIZE
+            | _kw_: WAPIST_NMRBAUTOSIZE, NMRBAUTOSIZE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMRBAUTOSIZE** }}*/
 XB_BEGIN_STRUCTURE( NMRBAUTOSIZE      )
@@ -4213,7 +4213,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMREBAR structure. Defined as NMREBAR in ot4xb_wapist_map.ch.
-            | _kw_: NMREBAR
+            | _kw_: WAPIST_NMREBAR, NMREBAR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMREBAR** }}*/
 XB_BEGIN_STRUCTURE( NMREBAR           )
@@ -4242,7 +4242,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMREBARAUTOBREAK structure. Defined as NMREBARAUTOBREAK in
               ot4xb_wapist_map.ch.
-   | _kw_: NMREBARAUTOBREAK
+   | _kw_: WAPIST_NMREBARAUTOBREAK, NMREBARAUTOBREAK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMREBARAUTOBREAK** }}*/
 XB_BEGIN_STRUCTURE( NMREBARAUTOBREAK  )
@@ -4271,7 +4271,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMREBARCHEVRON structure. Defined as NMREBARCHEVRON in
               ot4xb_wapist_map.ch.
-   | _kw_: NMREBARCHEVRON
+   | _kw_: WAPIST_NMREBARCHEVRON, NMREBARCHEVRON, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMREBARCHEVRON** }}*/
 XB_BEGIN_STRUCTURE( NMREBARCHEVRON    )
@@ -4300,7 +4300,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMREBARCHILDSIZE structure. Defined as NMREBARCHILDSIZE in
               ot4xb_wapist_map.ch.
-   | _kw_: NMREBARCHILDSIZE
+   | _kw_: WAPIST_NMREBARCHILDSIZE, NMREBARCHILDSIZE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMREBARCHILDSIZE** }}*/
 XB_BEGIN_STRUCTURE( NMREBARCHILDSIZE  )
@@ -4327,7 +4327,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RBHITTESTINFO structure. Defined as RBHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: RBHITTESTINFO
+            | _kw_: WAPIST_RBHITTESTINFO, RBHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RBHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( RBHITTESTINFO     )
@@ -4350,7 +4350,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi REBARBANDINFO structure. Defined as REBARBANDINFO in ot4xb_wapist_map.ch.
-            | _kw_: REBARBANDINFO
+            | _kw_: WAPIST_REBARBANDINFO, REBARBANDINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  REBARBANDINFO** }}*/
 XB_BEGIN_STRUCTURE( REBARBANDINFO     )
@@ -4406,7 +4406,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi REBARINFO structure. Defined as REBARINFO in ot4xb_wapist_map.ch.
-            | _kw_: REBARINFO
+            | _kw_: WAPIST_REBARINFO, REBARINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  REBARINFO** }}*/
 XB_BEGIN_STRUCTURE( REBARINFO         )
@@ -4428,7 +4428,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBBUTTON structure. Defined as TBBUTTON in ot4xb_wapist_map.ch.
-            | _kw_: TBBUTTON
+            | _kw_: WAPIST_TBBUTTON, TBBUTTON, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBBUTTON** }}*/
 XB_BEGIN_STRUCTURE( TBBUTTON )
@@ -4459,7 +4459,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WNDCLASSA structure. Defined as WNDCLASS in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassa
-            | _kw_: WNDCLASS, WNDCLASSA
+            | _kw_: WAPIST_WNDCLASS, WNDCLASS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WNDCLASS** }}*/
 XB_BEGIN_STRUCTURE(WNDCLASS)
@@ -4498,7 +4498,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WNDCLASSEX structure. Defined as WNDCLASSEX in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa
-            | _kw_: WNDCLASSEX
+            | _kw_: WAPIST_WNDCLASSEX, WNDCLASSEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WNDCLASSEX** }}*/
 XB_BEGIN_STRUCTURE(WNDCLASSEX)
@@ -4542,7 +4542,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi MDICREATESTRUCT structure. Defined as MDICREATESTRUCT in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-mdicreatestructa
-            | _kw_: MDICREATESTRUCT
+            | _kw_: WAPIST_MDICREATESTRUCT, MDICREATESTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MDICREATESTRUCT** }}*/
 XB_BEGIN_STRUCTURE( MDICREATESTRUCT )
@@ -4578,7 +4578,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HARDWAREINPUT structure. Defined as HARDWAREINPUT in ot4xb_wapist_map.ch.
-            | _kw_: HARDWAREINPUT
+            | _kw_: WAPIST_HARDWAREINPUT, HARDWAREINPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HARDWAREINPUT** }}*/
 XB_BEGIN_STRUCTURE( HARDWAREINPUT )
@@ -4601,7 +4601,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INPUT structure. Defined as INPUT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-input
-            | _kw_: INPUT
+            | _kw_: WAPIST_INPUT, INPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INPUT** }}*/
 XB_BEGIN_STRUCTURE( INPUT )
@@ -4627,7 +4627,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi KEYBDINPUT structure. Defined as KEYBDINPUT in ot4xb_wapist_map.ch.
-            | _kw_: KEYBDINPUT
+            | _kw_: WAPIST_KEYBDINPUT, KEYBDINPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  KEYBDINPUT** }}*/
 XB_BEGIN_STRUCTURE( KEYBDINPUT )
@@ -4653,7 +4653,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LASTINPUTINFO structure. Defined as LASTINPUTINFO in ot4xb_wapist_map.ch.
-            | _kw_: LASTINPUTINFO
+            | _kw_: WAPIST_LASTINPUTINFO, LASTINPUTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LASTINPUTINFO** }}*/
 XB_BEGIN_STRUCTURE( LASTINPUTINFO )
@@ -4673,7 +4673,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MOUSEINPUT structure. Defined as MOUSEINPUT in ot4xb_wapist_map.ch.
-            | _kw_: MOUSEINPUT
+            | _kw_: WAPIST_MOUSEINPUT, MOUSEINPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MOUSEINPUT** }}*/
 XB_BEGIN_STRUCTURE( MOUSEINPUT )
@@ -4701,7 +4701,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi IMAGEINFO structure. Defined as IMAGEINFO in ot4xb_wapist_map.ch.
-            | _kw_: IMAGEINFO
+            | _kw_: WAPIST_IMAGEINFO, IMAGEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IMAGEINFO** }}*/
 XB_BEGIN_STRUCTURE( IMAGEINFO )
@@ -4728,7 +4728,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi IMAGELISTDRAWPARAMS structure. Defined as IMAGELISTDRAWPARAMS in
               ot4xb_wapist_map.ch.
-   | _kw_: IMAGELISTDRAWPARAMS
+   | _kw_: WAPIST_IMAGELISTDRAWPARAMS, IMAGELISTDRAWPARAMS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IMAGELISTDRAWPARAMS** }}*/
 XB_BEGIN_STRUCTURE( IMAGELISTDRAWPARAMS )
@@ -4778,7 +4778,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MSGBOXPARAMS structure. Defined as MSGBOXPARAMS in ot4xb_wapist_map.ch.
-            | _kw_: MSGBOXPARAMS
+            | _kw_: WAPIST_MSGBOXPARAMS, MSGBOXPARAMS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MSGBOXPARAMS** }}*/
 XB_BEGIN_STRUCTURE( MSGBOXPARAMS )
@@ -4814,7 +4814,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DLGTEMPLATE structure. Defined as DLGTEMPLATE in ot4xb_wapist_map.ch.
-            | _kw_: DLGTEMPLATE
+            | _kw_: WAPIST_DLGTEMPLATE, DLGTEMPLATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DLGTEMPLATE** }}*/
 XB_BEGIN_STRUCTURE( DLGTEMPLATE )
@@ -4845,7 +4845,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DLGITEMTEMPLATE structure. Defined as DLGITEMTEMPLATE in
               ot4xb_wapist_map.ch.
-   | _kw_: DLGITEMTEMPLATE
+   | _kw_: WAPIST_DLGITEMTEMPLATE, DLGITEMTEMPLATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DLGITEMTEMPLATE** }}*/
 XB_BEGIN_STRUCTURE( DLGITEMTEMPLATE  )
@@ -4875,7 +4875,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FLASHWINFO structure. Defined as FLASHWINFO in ot4xb_wapist_map.ch.
-            | _kw_: FLASHWINFO
+            | _kw_: WAPIST_FLASHWINFO, FLASHWINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FLASHWINFO** }}*/
 XB_BEGIN_STRUCTURE( FLASHWINFO )
@@ -4903,7 +4903,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi BIDIOPTIONS structure. Defined as BIDIOPTIONS in ot4xb_wapist_map.ch.
-            | _kw_: BIDIOPTIONS
+            | _kw_: WAPIST_BIDIOPTIONS, BIDIOPTIONS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BIDIOPTIONS** }}*/
 XB_BEGIN_STRUCTURE( BIDIOPTIONS )
@@ -4926,7 +4926,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi CHARFORMAT structure. Defined as CHARFORMAT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/richedit/ns-richedit-charformata
-            | _kw_: CHARFORMAT
+            | _kw_: WAPIST_CHARFORMAT, CHARFORMAT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CHARFORMAT** }}*/
 XB_BEGIN_STRUCTURE( CHARFORMAT )
@@ -4962,7 +4962,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi CHARFORMAT2 structure. Defined as CHARFORMAT2 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/richedit/ns-richedit-charformat2a
-            | _kw_: CHARFORMAT2
+            | _kw_: WAPIST_CHARFORMAT2, CHARFORMAT2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CHARFORMAT2** }}*/
 XB_BEGIN_STRUCTURE( CHARFORMAT2 )
@@ -5019,7 +5019,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi CHARRANGE structure. Defined as CHARRANGE in ot4xb_wapist_map.ch.
-            | _kw_: CHARRANGE
+            | _kw_: WAPIST_CHARRANGE, CHARRANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CHARRANGE** }}*/
 XB_BEGIN_STRUCTURE( CHARRANGE )
@@ -5039,7 +5039,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi COMPCOLOR structure. Defined as COMPCOLOR in ot4xb_wapist_map.ch.
-            | _kw_: COMPCOLOR
+            | _kw_: WAPIST_COMPCOLOR, COMPCOLOR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COMPCOLOR** }}*/
 XB_BEGIN_STRUCTURE( COMPCOLOR )
@@ -5061,7 +5061,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi EDITSTREAM structure. Defined as EDITSTREAM in ot4xb_wapist_map.ch.
-            | _kw_: EDITSTREAM
+            | _kw_: WAPIST_EDITSTREAM, EDITSTREAM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  EDITSTREAM** }}*/
 XB_BEGIN_STRUCTURE( EDITSTREAM )
@@ -5083,7 +5083,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENCORRECTTEXT structure. Defined as ENCORRECTTEXT in ot4xb_wapist_map.ch.
-            | _kw_: ENCORRECTTEXT
+            | _kw_: WAPIST_ENCORRECTTEXT, ENCORRECTTEXT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENCORRECTTEXT** }}*/
 XB_BEGIN_STRUCTURE( ENCORRECTTEXT )
@@ -5106,7 +5106,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENDROPFILES structure. Defined as ENDROPFILES in ot4xb_wapist_map.ch.
-            | _kw_: ENDROPFILES
+            | _kw_: WAPIST_ENDROPFILES, ENDROPFILES, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENDROPFILES** }}*/
 XB_BEGIN_STRUCTURE( ENDROPFILES )
@@ -5130,7 +5130,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENLINK structure. Defined as ENLINK in ot4xb_wapist_map.ch.
-            | _kw_: ENLINK
+            | _kw_: WAPIST_ENLINK, ENLINK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENLINK** }}*/
 XB_BEGIN_STRUCTURE( ENLINK )
@@ -5156,7 +5156,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENLOWFIRTF structure. Defined as ENLOWFIRTF in ot4xb_wapist_map.ch.
-            | _kw_: ENLOWFIRTF
+            | _kw_: WAPIST_ENLOWFIRTF, ENLOWFIRTF, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENLOWFIRTF** }}*/
 XB_BEGIN_STRUCTURE( ENLOWFIRTF )
@@ -5176,7 +5176,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENOLEOPFAILED structure. Defined as ENOLEOPFAILED in ot4xb_wapist_map.ch.
-            | _kw_: ENOLEOPFAILED
+            | _kw_: WAPIST_ENOLEOPFAILED, ENOLEOPFAILED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENOLEOPFAILED** }}*/
 XB_BEGIN_STRUCTURE( ENOLEOPFAILED )
@@ -5200,7 +5200,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENPROTECTED structure. Defined as ENPROTECTED in ot4xb_wapist_map.ch.
-            | _kw_: ENPROTECTED
+            | _kw_: WAPIST_ENPROTECTED, ENPROTECTED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENPROTECTED** }}*/
 XB_BEGIN_STRUCTURE( ENPROTECTED )
@@ -5227,7 +5227,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi ENSAVECLIPBOARD structure. Defined as ENSAVECLIPBOARD in
               ot4xb_wapist_map.ch.
-   | _kw_: ENSAVECLIPBOARD
+   | _kw_: WAPIST_ENSAVECLIPBOARD, ENSAVECLIPBOARD, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ENSAVECLIPBOARD** }}*/
 XB_BEGIN_STRUCTURE( ENSAVECLIPBOARD )
@@ -5249,7 +5249,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FINDTEXT structure. Defined as FINDTEXT in ot4xb_wapist_map.ch.
-            | _kw_: FINDTEXT
+            | _kw_: WAPIST_FINDTEXT, FINDTEXT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FINDTEXT** }}*/
 XB_BEGIN_STRUCTURE( FINDTEXT ) // Ojo resolver colisión con la función FindText() de comdlg32.dll
@@ -5269,7 +5269,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FINDTEXTEX structure. Defined as FINDTEXTEX in ot4xb_wapist_map.ch.
-            | _kw_: FINDTEXTEX
+            | _kw_: WAPIST_FINDTEXTEX, FINDTEXTEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FINDTEXTEX** }}*/
 XB_BEGIN_STRUCTURE( FINDTEXTEX )
@@ -5291,7 +5291,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FORMATRANGE structure. Defined as FORMATRANGE in ot4xb_wapist_map.ch.
-            | _kw_: FORMATRANGE
+            | _kw_: WAPIST_FORMATRANGE, FORMATRANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FORMATRANGE** }}*/
 XB_BEGIN_STRUCTURE( FORMATRANGE )
@@ -5317,7 +5317,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GETTEXTEX structure. Defined as GETTEXTEX in ot4xb_wapist_map.ch.
-            | _kw_: GETTEXTEX
+            | _kw_: WAPIST_GETTEXTEX, GETTEXTEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GETTEXTEX** }}*/
 XB_BEGIN_STRUCTURE( GETTEXTEX )
@@ -5344,7 +5344,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi GETTEXTLENGTHEX structure. Defined as GETTEXTLENGTHEX in
               ot4xb_wapist_map.ch.
-   | _kw_: GETTEXTLENGTHEX
+   | _kw_: WAPIST_GETTEXTLENGTHEX, GETTEXTLENGTHEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GETTEXTLENGTHEX** }}*/
 XB_BEGIN_STRUCTURE( GETTEXTLENGTHEX )
@@ -5364,7 +5364,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HYPHENATEINFO structure. Defined as HYPHENATEINFO in ot4xb_wapist_map.ch.
-            | _kw_: HYPHENATEINFO
+            | _kw_: WAPIST_HYPHENATEINFO, HYPHENATEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HYPHENATEINFO** }}*/
 XB_BEGIN_STRUCTURE( HYPHENATEINFO )
@@ -5386,7 +5386,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HYPHRESULT structure. Defined as HYPHRESULT in ot4xb_wapist_map.ch.
-            | _kw_: HYPHRESULT
+            | _kw_: WAPIST_HYPHRESULT, HYPHRESULT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HYPHRESULT** }}*/
 XB_BEGIN_STRUCTURE( HYPHRESULT )
@@ -5409,7 +5409,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi IMECOMPTEXT structure. Defined as IMECOMPTEXT in ot4xb_wapist_map.ch.
-            | _kw_: IMECOMPTEXT
+            | _kw_: WAPIST_IMECOMPTEXT, IMECOMPTEXT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IMECOMPTEXT** }}*/
 XB_BEGIN_STRUCTURE( IMECOMPTEXT )
@@ -5429,7 +5429,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MSGFILTER structure. Defined as MSGFILTER in ot4xb_wapist_map.ch.
-            | _kw_: MSGFILTER
+            | _kw_: WAPIST_MSGFILTER, MSGFILTER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MSGFILTER** }}*/
 XB_BEGIN_STRUCTURE( MSGFILTER )
@@ -5454,7 +5454,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi OBJECTPOSITIONS structure. Defined as OBJECTPOSITIONS in
               ot4xb_wapist_map.ch.
-   | _kw_: OBJECTPOSITIONS
+   | _kw_: WAPIST_OBJECTPOSITIONS, OBJECTPOSITIONS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OBJECTPOSITIONS** }}*/
 XB_BEGIN_STRUCTURE( OBJECTPOSITIONS )
@@ -5476,7 +5476,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PARAFORMAT structure. Defined as PARAFORMAT in ot4xb_wapist_map.ch.
-            | _kw_: PARAFORMAT
+            | _kw_: WAPIST_PARAFORMAT, PARAFORMAT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PARAFORMAT** }}*/
 XB_BEGIN_STRUCTURE( PARAFORMAT )
@@ -5513,7 +5513,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PARAFORMAT2 structure. Defined as PARAFORMAT2 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/richedit/ns-richedit-paraformat2
-            | _kw_: PARAFORMAT2
+            | _kw_: WAPIST_PARAFORMAT2, PARAFORMAT2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PARAFORMAT2** }}*/
 XB_BEGIN_STRUCTURE( PARAFORMAT2 )
@@ -5578,7 +5578,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PUNCTUATION structure. Defined as PUNCTUATION in ot4xb_wapist_map.ch.
-            | _kw_: PUNCTUATION
+            | _kw_: WAPIST_PUNCTUATION, PUNCTUATION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PUNCTUATION** }}*/
 XB_BEGIN_STRUCTURE( PUNCTUATION )
@@ -5598,7 +5598,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi REOBJECT structure. Defined as REOBJECT in ot4xb_wapist_map.ch.
-            | _kw_: REOBJECT
+            | _kw_: WAPIST_REOBJECT, REOBJECT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  REOBJECT** }}*/
 XB_BEGIN_STRUCTURE( REOBJECT )
@@ -5635,7 +5635,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi REPASTESPECIAL structure. Defined as REPASTESPECIAL in
               ot4xb_wapist_map.ch.
-   | _kw_: REPASTESPECIAL
+   | _kw_: WAPIST_REPASTESPECIAL, REPASTESPECIAL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  REPASTESPECIAL** }}*/
 XB_BEGIN_STRUCTURE( REPASTESPECIAL )
@@ -5655,7 +5655,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi REQRESIZE structure. Defined as REQRESIZE in ot4xb_wapist_map.ch.
-            | _kw_: REQRESIZE
+            | _kw_: WAPIST_REQRESIZE, REQRESIZE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  REQRESIZE** }}*/
 XB_BEGIN_STRUCTURE( REQRESIZE )
@@ -5676,7 +5676,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SELCHANGE structure. Defined as SELCHANGE in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/richedit/ns-richedit-selchange
-            | _kw_: SELCHANGE
+            | _kw_: WAPIST_SELCHANGE, SELCHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SELCHANGE** }}*/
 XB_BEGIN_STRUCTURE( SELCHANGE )
@@ -5699,7 +5699,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SETTEXTEX structure. Defined as SETTEXTEX in ot4xb_wapist_map.ch.
-            | _kw_: SETTEXTEX
+            | _kw_: WAPIST_SETTEXTEX, SETTEXTEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SETTEXTEX** }}*/
 XB_BEGIN_STRUCTURE( SETTEXTEX )
@@ -5719,7 +5719,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TEXTRANGE structure. Defined as TEXTRANGE in ot4xb_wapist_map.ch.
-            | _kw_: TEXTRANGE
+            | _kw_: WAPIST_TEXTRANGE, TEXTRANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TEXTRANGE** }}*/
 XB_BEGIN_STRUCTURE( TEXTRANGE )
@@ -5739,7 +5739,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi GUID structure. Defined as GUID in ot4xb_wapist_map.ch.
-            | _kw_: GUID
+            | _kw_: WAPIST_GUID, GUID, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  GUID** }}*/
 XB_BEGIN_STRUCTURE( GUID )
@@ -5763,7 +5763,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi CLSID structure. Defined as CLSID in ot4xb_wapist_map.ch.
-            | _kw_: CLSID
+            | _kw_: WAPIST_CLSID, CLSID, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CLSID** }}*/
 XB_BEGIN_STRUCTURE( CLSID )
@@ -5790,7 +5790,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi IN_ADDR structure. Defined as IN_ADDR in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr
-            | _kw_: IN_ADDR
+            | _kw_: WAPIST_IN_ADDR, IN_ADDR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IN_ADDR** }}*/
 XB_BEGIN_STRUCTURE( IN_ADDR )
@@ -5833,7 +5833,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SOCKADDR structure. Defined as SOCKADDR in ot4xb_wapist_map.ch.
-            | _kw_: SOCKADDR
+            | _kw_: WAPIST_SOCKADDR, SOCKADDR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKADDR** }}*/
 XB_BEGIN_STRUCTURE( SOCKADDR )
@@ -5854,7 +5854,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SOCKET_ADDRESS structure. Defined as SOCKET_ADDRESS in
               ot4xb_wapist_map.ch.
-   | _kw_: SOCKET_ADDRESS
+   | _kw_: WAPIST_SOCKET_ADDRESS, SOCKET_ADDRESS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKET_ADDRESS** }}*/
 XB_BEGIN_STRUCTURE( SOCKET_ADDRESS )
@@ -5876,7 +5876,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi SOCKET_ADDRESS_LIST structure. Defined as SOCKET_ADDRESS_LIST in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/ws2def/ns-ws2def-socket_address_list
-            | _kw_: SOCKET_ADDRESS_LIST
+            | _kw_: WAPIST_SOCKET_ADDRESS_LIST, SOCKET_ADDRESS_LIST, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKET_ADDRESS_LIST** }}*/
 XB_BEGIN_STRUCTURE( SOCKET_ADDRESS_LIST )
@@ -5892,7 +5892,7 @@ XB_BEGIN_STRUCTURE( SOCKET_ADDRESS_LIST )
    }}*/
    pc->Member_EmbededStructArray( "Address","WAPIST_SOCKET_ADDRESS","_Address_","iAddressCount",
                                   pc->GwstGetOffset(),sizeof(SOCKET_ADDRESS) );
-   /*{{|method_: - METHOD ReqSize( n )
+   /*{{|method_: - `METHOD ReqSize( n )`
             | return: Numeric
             | desc_: Returns the byte size required for the requested address count.
    }}*/
@@ -5910,7 +5910,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi CSADDR_INFO structure. Defined as CSADDR_INFO in ot4xb_wapist_map.ch.
-            | _kw_: CSADDR_INFO
+            | _kw_: WAPIST_CSADDR_INFO, CSADDR_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  CSADDR_INFO** }}*/
 XB_BEGIN_STRUCTURE( CSADDR_INFO )
@@ -5935,7 +5935,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SOCKADDR_STORAGE structure. Defined as SOCKADDR_STORAGE in
               ot4xb_wapist_map.ch.
-   | _kw_: SOCKADDR_STORAGE
+   | _kw_: WAPIST_SOCKADDR_STORAGE, SOCKADDR_STORAGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKADDR_STORAGE** }}*/
 XB_BEGIN_STRUCTURE( SOCKADDR_STORAGE )
@@ -5960,7 +5960,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SCOPE_ID structure. Defined as SCOPE_ID in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/ws2ipdef/ns-ws2ipdef-scope_id
-            | _kw_: SCOPE_ID
+            | _kw_: WAPIST_SCOPE_ID, SCOPE_ID, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SCOPE_ID** }}*/
 XB_BEGIN_STRUCTURE( SCOPE_ID )
@@ -5982,7 +5982,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SOCKADDR_IN structure. Defined as SOCKADDR_IN in ot4xb_wapist_map.ch.
-            | _kw_: SOCKADDR_IN
+            | _kw_: WAPIST_SOCKADDR_IN, SOCKADDR_IN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKADDR_IN** }}*/
 XB_BEGIN_STRUCTURE( SOCKADDR_IN )
@@ -6006,7 +6006,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSABUF structure. Defined as WSABUF in ot4xb_wapist_map.ch.
-            | _kw_: WSABUF
+            | _kw_: WAPIST_WSABUF, WSABUF, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSABUF** }}*/
 XB_BEGIN_STRUCTURE( WSABUF )
@@ -6037,7 +6037,7 @@ END_NAMESPACE()
             | category: winapi/structures
             | desc: Wrapper over the WinSock WSAMSG structure. Defined as WSAMSG in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/ws2def/ns-ws2def-wsamsg
-            | _kw_: WSAMSG
+            | _kw_: WAPIST_WSAMSG, WSAMSG, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAMSG** }}*/
 XB_BEGIN_STRUCTURE( WSAMSG )
@@ -6091,7 +6091,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACMSGHDR structure. Defined as WSACMSGHDR in ot4xb_wapist_map.ch.
-            | _kw_: WSACMSGHDR
+            | _kw_: WAPIST_WSACMSGHDR, WSACMSGHDR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACMSGHDR** }}*/
 XB_BEGIN_STRUCTURE( WSACMSGHDR )
@@ -6141,7 +6141,7 @@ END_NAMESPACE()
             | category: winapi/structures
             | desc: Wrapper over the WinApi FD_SET structure. Defined as FD_SET in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-fd_set
-            | _kw_: FD_SET
+            | _kw_: WAPIST_FD_SET, FD_SET, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FD_SET** }}*/
 XB_BEGIN_STRUCTURE( FD_SET )
@@ -6176,7 +6176,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TIMEVAL structure. Defined as TIMEVAL in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-timeval
-            | _kw_: TIMEVAL
+            | _kw_: WAPIST_TIMEVAL, TIMEVAL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TIMEVAL** }}*/
 XB_BEGIN_STRUCTURE( TIMEVAL )
@@ -6184,9 +6184,9 @@ XB_BEGIN_STRUCTURE( TIMEVAL )
    _XBST_LONG(  tv_sec  )
    /*{{|member_: - MEMBER LONG tv_usec }}*/
    _XBST_LONG(  tv_usec )
-   /*{{|method_: - METHOD IsSet() |return: Logical }}*/
+   /*{{|method_: - `METHOD IsSet()` |return: Logical }}*/
    pc->MethodCB("IsSet","{|s| nOr(s:tv_sec,s:tv_usec) != 0 }");
-   /*{{|method_: - METHOD Clear() |return: Self }}*/
+   /*{{|method_: - `METHOD Clear()` |return: Self }}*/
    pc->MethodCB("Clear","{|s| s:tv_sec := 0 , s:tv_usec := 0 , s}");
    /*{{|class-method_: - CLASS METHOD cmp( a , b ) }}*/
    pc->ClassMethodCB("cmp","{|s,a,b|i64cmp({a:tv_usec,a:tv_sec},{b:tv_usec,b:tv_sec})}");
@@ -6203,7 +6203,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi HOSTENT structure. Defined as HOSTENT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-hostent
-            | _kw_: HOSTENT
+            | _kw_: WAPIST_HOSTENT, HOSTENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HOSTENT** }}*/
 XB_BEGIN_STRUCTURE( HOSTENT )
@@ -6232,7 +6232,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NETENT structure. Defined as NETENT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-netent
-            | _kw_: NETENT
+            | _kw_: WAPIST_NETENT, NETENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NETENT** }}*/
 XB_BEGIN_STRUCTURE( NETENT )
@@ -6260,7 +6260,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SERVENT structure. Defined as SERVENT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-servent
-            | _kw_: SERVENT
+            | _kw_: WAPIST_SERVENT, SERVENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SERVENT** }}*/
 XB_BEGIN_STRUCTURE( SERVENT )
@@ -6289,7 +6289,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi PROTOENT structure. Defined as PROTOENT in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-protoent
-            | _kw_: PROTOENT
+            | _kw_: WAPIST_PROTOENT, PROTOENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PROTOENT** }}*/
 XB_BEGIN_STRUCTURE( PROTOENT )
@@ -6315,7 +6315,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSADATA structure. Defined as WSADATA in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winsock/ns-winsock-wsadata
-            | _kw_: WSADATA
+            | _kw_: WAPIST_WSADATA, WSADATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSADATA** }}*/
 XB_BEGIN_STRUCTURE( WSADATA )
@@ -6350,7 +6350,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SOCKPROTO structure. Defined as SOCKPROTO in ot4xb_wapist_map.ch.
-            | _kw_: SOCKPROTO
+            | _kw_: WAPIST_SOCKPROTO, SOCKPROTO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SOCKPROTO** }}*/
 XB_BEGIN_STRUCTURE( SOCKPROTO )
@@ -6370,7 +6370,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LINGER structure. Defined as LINGER in ot4xb_wapist_map.ch.
-            | _kw_: LINGER
+            | _kw_: WAPIST_LINGER, LINGER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LINGER** }}*/
 XB_BEGIN_STRUCTURE( LINGER )
@@ -6390,7 +6390,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi FLOWSPEC structure. Defined as FLOWSPEC in ot4xb_wapist_map.ch.
-            | _kw_: FLOWSPEC
+            | _kw_: WAPIST_FLOWSPEC, FLOWSPEC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  FLOWSPEC** }}*/
 XB_BEGIN_STRUCTURE( FLOWSPEC )
@@ -6423,7 +6423,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi QOS_OBJECT_HDR structure. Defined as QOS_OBJECT_HDR in
               ot4xb_wapist_map.ch.
-   | _kw_: QOS_OBJECT_HDR
+   | _kw_: WAPIST_QOS_OBJECT_HDR, QOS_OBJECT_HDR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  QOS_OBJECT_HDR** }}*/
 XB_BEGIN_STRUCTURE( QOS_OBJECT_HDR )
@@ -6443,7 +6443,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi QOS_SD_MODE structure. Defined as QOS_SD_MODE in ot4xb_wapist_map.ch.
-            | _kw_: QOS_SD_MODE
+            | _kw_: WAPIST_QOS_SD_MODE, QOS_SD_MODE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  QOS_SD_MODE** }}*/
 XB_BEGIN_STRUCTURE( QOS_SD_MODE )
@@ -6464,7 +6464,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi QOS_SHAPING_RATE structure. Defined as QOS_SHAPING_RATE in
               ot4xb_wapist_map.ch.
-   | _kw_: QOS_SHAPING_RATE
+   | _kw_: WAPIST_QOS_SHAPING_RATE, QOS_SHAPING_RATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  QOS_SHAPING_RATE** }}*/
 XB_BEGIN_STRUCTURE( QOS_SHAPING_RATE )
@@ -6484,7 +6484,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi QOS structure. Defined as QOS in ot4xb_wapist_map.ch.
-            | _kw_: QOS
+            | _kw_: WAPIST_QOS, QOS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  QOS** }}*/
 XB_BEGIN_STRUCTURE( QOS )
@@ -6507,7 +6507,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSANETWORKEVENTS structure. Defined as WSANETWORKEVENTS in
               ot4xb_wapist_map.ch.
-   | _kw_: WSANETWORKEVENTS
+   | _kw_: WAPIST_WSANETWORKEVENTS, WSANETWORKEVENTS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSANETWORKEVENTS** }}*/
 XB_BEGIN_STRUCTURE( WSANETWORKEVENTS )
@@ -6528,7 +6528,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAPROTOCOLCHAIN structure. Defined as WSAPROTOCOLCHAIN in
               ot4xb_wapist_map.ch.
-   | _kw_: WSAPROTOCOLCHAIN
+   | _kw_: WAPIST_WSAPROTOCOLCHAIN, WSAPROTOCOLCHAIN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAPROTOCOLCHAIN** }}*/
 XB_BEGIN_STRUCTURE( WSAPROTOCOLCHAIN )
@@ -6549,7 +6549,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAPROTOCOL_INFO structure. Defined as WSAPROTOCOL_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: WSAPROTOCOL_INFO
+   | _kw_: WAPIST_WSAPROTOCOL_INFO, WSAPROTOCOL_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAPROTOCOL_INFO** }}*/
 XB_BEGIN_STRUCTURE( WSAPROTOCOL_INFO )
@@ -6606,7 +6606,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACOMPLETION_NS_WINDOWMESSAGE structure. Defined as
               WSACOMPLETION_NS_WINDOWMESSAGE in ot4xb_wapist_map.ch.
-   | _kw_: WSACOMPLETION_NS_WINDOWMESSAGE
+   | _kw_: WAPIST_WSACOMPLETION_NS_WINDOWMESSAGE, WSACOMPLETION_NS_WINDOWMESSAGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION_NS_WINDOWMESSAGE** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION_NS_WINDOWMESSAGE )
@@ -6629,7 +6629,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACOMPLETION_NS_EVENT structure. Defined as WSACOMPLETION_NS_EVENT in
               ot4xb_wapist_map.ch.
-   | _kw_: WSACOMPLETION_NS_EVENT
+   | _kw_: WAPIST_WSACOMPLETION_NS_EVENT, WSACOMPLETION_NS_EVENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION_NS_EVENT** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION_NS_EVENT )
@@ -6648,7 +6648,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACOMPLETION_NS_APC structure. Defined as WSACOMPLETION_NS_APC in
               ot4xb_wapist_map.ch.
-   | _kw_: WSACOMPLETION_NS_APC
+   | _kw_: WAPIST_WSACOMPLETION_NS_APC, WSACOMPLETION_NS_APC, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION_NS_APC** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION_NS_APC )
@@ -6669,7 +6669,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACOMPLETION_NS_PORT structure. Defined as WSACOMPLETION_NS_PORT in
               ot4xb_wapist_map.ch.
-   | _kw_: WSACOMPLETION_NS_PORT
+   | _kw_: WAPIST_WSACOMPLETION_NS_PORT, WSACOMPLETION_NS_PORT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION_NS_PORT** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION_NS_PORT )
@@ -6692,7 +6692,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Auxiliary wrapper for the WSACOMPLETION namespace-provider parameter union. Defined as
               WSACOMPLETION_NS_PARAMETERS in ot4xb_wapist_map.ch.
-   | _kw_: WSACOMPLETION_NS_PARAMETERS
+   | _kw_: WAPIST_WSACOMPLETION_NS_PARAMETERS, WSACOMPLETION_NS_PARAMETERS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION_NS_PARAMETERS** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION_NS_PARAMETERS )
@@ -6718,7 +6718,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSACOMPLETION structure. Defined as WSACOMPLETION in ot4xb_wapist_map.ch.
-            | _kw_: WSACOMPLETION
+            | _kw_: WAPIST_WSACOMPLETION, WSACOMPLETION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSACOMPLETION** }}*/
 XB_BEGIN_STRUCTURE( WSACOMPLETION )
@@ -6738,7 +6738,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi BLOB structure. Defined as BLOB in ot4xb_wapist_map.ch.
-            | _kw_: BLOB
+            | _kw_: WAPIST_BLOB, BLOB, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BLOB** }}*/
 XB_BEGIN_STRUCTURE( BLOB )
@@ -6758,7 +6758,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi AFPROTOCOLS structure. Defined as AFPROTOCOLS in ot4xb_wapist_map.ch.
-            | _kw_: AFPROTOCOLS
+            | _kw_: WAPIST_AFPROTOCOLS, AFPROTOCOLS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  AFPROTOCOLS** }}*/
 XB_BEGIN_STRUCTURE( AFPROTOCOLS )
@@ -6778,7 +6778,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAVERSION structure. Defined as WSAVERSION in ot4xb_wapist_map.ch.
-            | _kw_: WSAVERSION
+            | _kw_: WAPIST_WSAVERSION, WSAVERSION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAVERSION** }}*/
 XB_BEGIN_STRUCTURE( WSAVERSION )
@@ -6798,7 +6798,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAQUERYSET structure. Defined as WSAQUERYSET in ot4xb_wapist_map.ch.
-            | _kw_: WSAQUERYSET
+            | _kw_: WAPIST_WSAQUERYSET, WSAQUERYSET, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAQUERYSET** }}*/
 XB_BEGIN_STRUCTURE( WSAQUERYSET )
@@ -6844,7 +6844,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAQUERYSET2 structure. Defined as WSAQUERYSET2 in ot4xb_wapist_map.ch.
-            | _kw_: WSAQUERYSET2
+            | _kw_: WAPIST_WSAQUERYSET2, WSAQUERYSET2, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAQUERYSET2** }}*/
 XB_BEGIN_STRUCTURE( WSAQUERYSET2 )
@@ -6889,7 +6889,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSANSCLASSINFO structure. Defined as WSANSCLASSINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: WSANSCLASSINFO
+   | _kw_: WAPIST_WSANSCLASSINFO, WSANSCLASSINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSANSCLASSINFO** }}*/
 XB_BEGIN_STRUCTURE( WSANSCLASSINFO )
@@ -6916,7 +6916,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSASERVICECLASSINFO structure. Defined as WSASERVICECLASSINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: WSASERVICECLASSINFO
+   | _kw_: WAPIST_WSASERVICECLASSINFO, WSASERVICECLASSINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSASERVICECLASSINFO** }}*/
 XB_BEGIN_STRUCTURE( WSASERVICECLASSINFO )
@@ -6941,7 +6941,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSANAMESPACE_INFO structure. Defined as WSANAMESPACE_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: WSANAMESPACE_INFO
+   | _kw_: WAPIST_WSANAMESPACE_INFO, WSANAMESPACE_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSANAMESPACE_INFO** }}*/
 XB_BEGIN_STRUCTURE( WSANAMESPACE_INFO )
@@ -6968,7 +6968,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSANAMESPACE_INFOEX structure. Defined as WSANAMESPACE_INFOEX in
               ot4xb_wapist_map.ch.
-   | _kw_: WSANAMESPACE_INFOEX
+   | _kw_: WAPIST_WSANAMESPACE_INFOEX, WSANAMESPACE_INFOEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSANAMESPACE_INFOEX** }}*/
 XB_BEGIN_STRUCTURE( WSANAMESPACE_INFOEX )
@@ -6996,7 +6996,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WSAPOLLFD structure. Defined as WSAPOLLFD in ot4xb_wapist_map.ch.
-            | _kw_: WSAPOLLFD
+            | _kw_: WAPIST_WSAPOLLFD, WSAPOLLFD, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WSAPOLLFD** }}*/
 XB_BEGIN_STRUCTURE( WSAPOLLFD )
@@ -7019,7 +7019,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinSock ADDRINFOA structure. Defined as ADDRINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/ws2def/ns-ws2def-addrinfoa
-            | _kw_: ADDRINFO
+            | _kw_: WAPIST_ADDRINFO, ADDRINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  ADDRINFO** }}*/
 XB_BEGIN_STRUCTURE( ADDRINFO )
@@ -7053,7 +7053,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi OPENFILENAMEA structure. Defined as OPENFILENAME in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commdlg/ns-commdlg-openfilenamea
-            | _kw_: OPENFILENAME, OPENFILENAMEA
+            | _kw_: WAPIST_OPENFILENAME, OPENFILENAME, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OPENFILENAME** }}*/
 XB_BEGIN_STRUCTURE( OPENFILENAME )
@@ -7131,7 +7131,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWHID structure. Defined as RAWHID in ot4xb_wapist_map.ch.
-            | _kw_: RAWHID
+            | _kw_: WAPIST_RAWHID, RAWHID, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWHID** }}*/
 XB_BEGIN_STRUCTURE( RAWHID )
@@ -7154,7 +7154,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Auxiliary wrapper for the RAWINPUT data union.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rawinput
-            | _kw_: RAWINPUT_DATA_UNION
+            | _kw_: WAPIST_RAWINPUT_DATA_UNION, RAWINPUT_DATA_UNION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWINPUT_DATA_UNION** }}*/
 XB_BEGIN_STRUCTURE( RAWINPUT_DATA_UNION )
@@ -7177,7 +7177,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWINPUT structure. Defined as RAWINPUT in ot4xb_wapist_map.ch.
-            | _kw_: RAWINPUT
+            | _kw_: WAPIST_RAWINPUT, RAWINPUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWINPUT** }}*/
 XB_BEGIN_STRUCTURE( RAWINPUT )
@@ -7198,7 +7198,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWINPUTDEVICE structure. Defined as RAWINPUTDEVICE in
               ot4xb_wapist_map.ch.
-   | _kw_: RAWINPUTDEVICE
+   | _kw_: WAPIST_RAWINPUTDEVICE, RAWINPUTDEVICE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWINPUTDEVICE** }}*/
 XB_BEGIN_STRUCTURE( RAWINPUTDEVICE)
@@ -7223,7 +7223,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWINPUTDEVICELIST structure. Defined as RAWINPUTDEVICELIST in
               ot4xb_wapist_map.ch.
-   | _kw_: RAWINPUTDEVICELIST
+   | _kw_: WAPIST_RAWINPUTDEVICELIST, RAWINPUTDEVICELIST, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWINPUTDEVICELIST** }}*/
 XB_BEGIN_STRUCTURE( RAWINPUTDEVICELIST )
@@ -7244,7 +7244,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWINPUTHEADER structure. Defined as RAWINPUTHEADER in
               ot4xb_wapist_map.ch.
-   | _kw_: RAWINPUTHEADER
+   | _kw_: WAPIST_RAWINPUTHEADER, RAWINPUTHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWINPUTHEADER** }}*/
 XB_BEGIN_STRUCTURE( RAWINPUTHEADER )
@@ -7268,7 +7268,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWKEYBOARD structure. Defined as RAWKEYBOARD in ot4xb_wapist_map.ch.
-            | _kw_: RAWKEYBOARD
+            | _kw_: WAPIST_RAWKEYBOARD, RAWKEYBOARD, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWKEYBOARD** }}*/
 XB_BEGIN_STRUCTURE( RAWKEYBOARD )
@@ -7297,7 +7297,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RAWMOUSE structure. Defined as RAWMOUSE in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rawmouse
-            | _kw_: RAWMOUSE
+            | _kw_: WAPIST_RAWMOUSE, RAWMOUSE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RAWMOUSE** }}*/
 XB_BEGIN_STRUCTURE( RAWMOUSE )
@@ -7334,7 +7334,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi RID_DEVICE_INFO structure. Defined as RID_DEVICE_INFO in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rid_device_info
-            | _kw_: RID_DEVICE_INFO
+            | _kw_: WAPIST_RID_DEVICE_INFO, RID_DEVICE_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RID_DEVICE_INFO** }}*/
 XB_BEGIN_STRUCTURE( RID_DEVICE_INFO )
@@ -7363,7 +7363,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RID_DEVICE_INFO_HID structure. Defined as RID_DEVICE_INFO_HID in
               ot4xb_wapist_map.ch.
-   | _kw_: RID_DEVICE_INFO_HID
+   | _kw_: WAPIST_RID_DEVICE_INFO_HID, RID_DEVICE_INFO_HID, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RID_DEVICE_INFO_HID** }}*/
 XB_BEGIN_STRUCTURE( RID_DEVICE_INFO_HID )
@@ -7390,7 +7390,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RID_DEVICE_INFO_KEYBOARD structure. Defined as RID_DEVICE_INFO_KEYBOARD in
               ot4xb_wapist_map.ch.
-   | _kw_: RID_DEVICE_INFO_KEYBOARD
+   | _kw_: WAPIST_RID_DEVICE_INFO_KEYBOARD, RID_DEVICE_INFO_KEYBOARD, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RID_DEVICE_INFO_KEYBOARD** }}*/
 XB_BEGIN_STRUCTURE( RID_DEVICE_INFO_KEYBOARD )
@@ -7419,7 +7419,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi RID_DEVICE_INFO_MOUSE structure. Defined as RID_DEVICE_INFO_MOUSE in
               ot4xb_wapist_map.ch.
-   | _kw_: RID_DEVICE_INFO_MOUSE
+   | _kw_: WAPIST_RID_DEVICE_INFO_MOUSE, RID_DEVICE_INFO_MOUSE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  RID_DEVICE_INFO_MOUSE** }}*/
 XB_BEGIN_STRUCTURE( RID_DEVICE_INFO_MOUSE )
@@ -7448,7 +7448,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi IP_ADDR_STRING structure. Defined as IP_ADDR_STRING in
               ot4xb_wapist_map.ch.
-   | _kw_: IP_ADDR_STRING
+   | _kw_: WAPIST_IP_ADDR_STRING, IP_ADDR_STRING, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IP_ADDR_STRING** }}*/
 XB_BEGIN_STRUCTURE( IP_ADDR_STRING )
@@ -7473,7 +7473,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi IP_ADAPTER_INFO structure. Defined as IP_ADAPTER_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: IP_ADAPTER_INFO
+   | _kw_: WAPIST_IP_ADAPTER_INFO, IP_ADAPTER_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IP_ADAPTER_INFO** }}*/
 XB_BEGIN_STRUCTURE( IP_ADAPTER_INFO )
@@ -7526,7 +7526,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi IP_PER_ADAPTER_INFO structure. Defined as IP_PER_ADAPTER_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: IP_PER_ADAPTER_INFO
+   | _kw_: WAPIST_IP_PER_ADAPTER_INFO, IP_PER_ADAPTER_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  IP_PER_ADAPTER_INFO** }}*/
 XB_BEGIN_STRUCTURE( IP_PER_ADAPTER_INFO )
@@ -7553,7 +7553,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi OVERLAPPED structure. Defined as OVERLAPPED in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-overlapped
-            | _kw_: OVERLAPPED
+            | _kw_: WAPIST_OVERLAPPED, OVERLAPPED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OVERLAPPED** }}*/
 XB_BEGIN_STRUCTURE( OVERLAPPED )
@@ -7585,7 +7585,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi SYSTEM_INFO structure. Defined as SYSTEM_INFO in ot4xb_wapist_map.ch.
             | note: The structure is automatically initialized with the current system information when instantiated.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
-            | _kw_: SYSTEM_INFO
+            | _kw_: WAPIST_SYSTEM_INFO, SYSTEM_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SYSTEM_INFO** }}*/
 XB_BEGIN_STRUCTURE( SYSTEM_INFO )
@@ -7636,7 +7636,7 @@ XB_END_STRUCTURE
             | note: The structure is automatically initialized with the current operating system version information
               when instantiated.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-osversioninfoexa
-            | _kw_: OSVERSIONINFOEX, OSVERSIONINFOEXA
+            | _kw_: WAPIST_OSVERSIONINFOEX, OSVERSIONINFOEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OSVERSIONINFOEX** }}*/
 XB_BEGIN_STRUCTURE( OSVERSIONINFOEX )
@@ -7679,11 +7679,11 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MODULEENTRY32 structure. Defined as MODULEENTRY32 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/ns-tlhelp32-moduleentry32
-            | _kw_: MODULEENTRY32
+            | _kw_: WAPIST_MODULEENTRY32, MODULEENTRY32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MODULEENTRY32** }}*/
 XB_BEGIN_STRUCTURE( MODULEENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7722,11 +7722,11 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PROCESSENTRY32 structure. Defined as PROCESSENTRY32 in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/ns-tlhelp32-processentry32
-            | _kw_: PROCESSENTRY32
+            | _kw_: WAPIST_PROCESSENTRY32, PROCESSENTRY32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PROCESSENTRY32** }}*/
 XB_BEGIN_STRUCTURE( PROCESSENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7764,11 +7764,11 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi THREADENTRY32 structure. Defined as THREADENTRY32 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/ns-tlhelp32-threadentry32
-            | _kw_: THREADENTRY32
+            | _kw_: WAPIST_THREADENTRY32, THREADENTRY32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  THREADENTRY32** }}*/
 XB_BEGIN_STRUCTURE( THREADENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7800,11 +7800,11 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi HEAPENTRY32 structure. Defined as HEAPENTRY32 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/ns-tlhelp32-heapentry32
-            | _kw_: HEAPENTRY32
+            | _kw_: WAPIST_HEAPENTRY32, HEAPENTRY32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HEAPENTRY32** }}*/
 XB_BEGIN_STRUCTURE( HEAPENTRY32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7840,11 +7840,11 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi HEAPLIST32 structure. Defined as HEAPLIST32 in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/ns-tlhelp32-heaplist32
-            | _kw_: HEAPLIST32
+            | _kw_: WAPIST_HEAPLIST32, HEAPLIST32, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HEAPLIST32** }}*/
 XB_BEGIN_STRUCTURE( HEAPLIST32 )
-   /*{{|method_: - METHOD _reset_()
+   /*{{|method_: - `METHOD _reset_()`
             | return: Self
             | desc_: Clears the structure, sets dwSize to ::_sizeof_(), and returns Self.
    }}*/
@@ -7873,7 +7873,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVBKIMAGE structure. Defined as LVBKIMAGE in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-lvbkimagea
-            | _kw_: LVBKIMAGE
+            | _kw_: WAPIST_LVBKIMAGE, LVBKIMAGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVBKIMAGE** }}*/
 XB_BEGIN_STRUCTURE( LVBKIMAGE )
@@ -7903,7 +7903,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVCOLUMN structure. Defined as LVCOLUMN in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-lvcolumna
-            | _kw_: LVCOLUMN
+            | _kw_: WAPIST_LVCOLUMN, LVCOLUMN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVCOLUMN** }}*/
 XB_BEGIN_STRUCTURE( LVCOLUMN )
@@ -7943,7 +7943,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVFINDINFO structure. Defined as LVFINDINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-lvfindinfoa
-            | _kw_: LVFINDINFO
+            | _kw_: WAPIST_LVFINDINFO, LVFINDINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVFINDINFO** }}*/
 XB_BEGIN_STRUCTURE( LVFINDINFO )
@@ -7970,7 +7970,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVFOOTERINFO structure. Defined as LVFOOTERINFO in ot4xb_wapist_map.ch.
-            | _kw_: LVFOOTERINFO
+            | _kw_: WAPIST_LVFOOTERINFO, LVFOOTERINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVFOOTERINFO** }}*/
 XB_BEGIN_STRUCTURE(LVFOOTERINFO )
@@ -7994,7 +7994,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVFOOTERITEM structure. Defined as LVFOOTERITEM in ot4xb_wapist_map.ch.
-            | _kw_: LVFOOTERITEM
+            | _kw_: WAPIST_LVFOOTERITEM, LVFOOTERITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVFOOTERITEM** }}*/
 XB_BEGIN_STRUCTURE(LVFOOTERITEM )
@@ -8022,7 +8022,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVGROUP structure. Defined as LVGROUP in ot4xb_wapist_map.ch.
-            | _kw_: LVGROUP
+            | _kw_: WAPIST_LVGROUP, LVGROUP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVGROUP** }}*/
 XB_BEGIN_STRUCTURE( LVGROUP )
@@ -8087,7 +8087,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVGROUPMETRICS structure. Defined as LVGROUPMETRICS in
               ot4xb_wapist_map.ch.
-   | _kw_: LVGROUPMETRICS
+   | _kw_: WAPIST_LVGROUPMETRICS, LVGROUPMETRICS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVGROUPMETRICS** }}*/
 XB_BEGIN_STRUCTURE(LVGROUPMETRICS )
@@ -8127,7 +8127,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVHITTESTINFO structure. Defined as LVHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: LVHITTESTINFO
+            | _kw_: WAPIST_LVHITTESTINFO, LVHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( LVHITTESTINFO )
@@ -8154,7 +8154,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVINSERTGROUPSORTED structure. Defined as LVINSERTGROUPSORTED in
               ot4xb_wapist_map.ch.
-   | _kw_: LVINSERTGROUPSORTED
+   | _kw_: WAPIST_LVINSERTGROUPSORTED, LVINSERTGROUPSORTED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVINSERTGROUPSORTED** }}*/
 XB_BEGIN_STRUCTURE( LVINSERTGROUPSORTED )
@@ -8176,7 +8176,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVINSERTMARK structure. Defined as LVINSERTMARK in ot4xb_wapist_map.ch.
-            | _kw_: LVINSERTMARK
+            | _kw_: WAPIST_LVINSERTMARK, LVINSERTMARK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVINSERTMARK** }}*/
 XB_BEGIN_STRUCTURE( LVINSERTMARK )
@@ -8201,7 +8201,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVITEMA structure. Defined as LVITEM in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-lvitema
-            | _kw_: LVITEM, LVITEMA
+            | _kw_: WAPIST_LVITEM, LVITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVITEM** }}*/
 XB_BEGIN_STRUCTURE( LVITEM )
@@ -8248,7 +8248,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVITEMINDEX structure. Defined as LVITEMINDEX in ot4xb_wapist_map.ch.
-            | _kw_: LVITEMINDEX
+            | _kw_: WAPIST_LVITEMINDEX, LVITEMINDEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVITEMINDEX** }}*/
 XB_BEGIN_STRUCTURE( LVITEMINDEX )
@@ -8268,7 +8268,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVSETINFOTIP structure. Defined as LVSETINFOTIP in ot4xb_wapist_map.ch.
-            | _kw_: LVSETINFOTIP
+            | _kw_: WAPIST_LVSETINFOTIP, LVSETINFOTIP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVSETINFOTIP** }}*/
 XB_BEGIN_STRUCTURE( LVSETINFOTIP )
@@ -8296,7 +8296,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVTILEINFO structure. Defined as LVTILEINFO in ot4xb_wapist_map.ch.
-            | _kw_: LVTILEINFO
+            | _kw_: WAPIST_LVTILEINFO, LVTILEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVTILEINFO** }}*/
 XB_BEGIN_STRUCTURE( LVTILEINFO )
@@ -8323,7 +8323,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi LVTILEVIEWINFO structure. Defined as LVTILEVIEWINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: LVTILEVIEWINFO
+   | _kw_: WAPIST_LVTILEVIEWINFO, LVTILEVIEWINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LVTILEVIEWINFO** }}*/
 XB_BEGIN_STRUCTURE( LVTILEVIEWINFO )
@@ -8352,7 +8352,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMITEMACTIVATE structure. Defined as NMITEMACTIVATE in
               ot4xb_wapist_map.ch.
-   | _kw_: NMITEMACTIVATE
+   | _kw_: WAPIST_NMITEMACTIVATE, NMITEMACTIVATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMITEMACTIVATE** }}*/
 XB_BEGIN_STRUCTURE( NMITEMACTIVATE )
@@ -8386,7 +8386,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLISTVIEW structure. Defined as NMLISTVIEW in ot4xb_wapist_map.ch.
-            | _kw_: NMLISTVIEW
+            | _kw_: WAPIST_NMLISTVIEW, NMLISTVIEW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLISTVIEW** }}*/
 XB_BEGIN_STRUCTURE( NMLISTVIEW )
@@ -8418,7 +8418,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVCACHEHINT structure. Defined as NMLVCACHEHINT in ot4xb_wapist_map.ch.
-            | _kw_: NMLVCACHEHINT
+            | _kw_: WAPIST_NMLVCACHEHINT, NMLVCACHEHINT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVCACHEHINT** }}*/
 XB_BEGIN_STRUCTURE( NMLVCACHEHINT )
@@ -8441,7 +8441,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVCUSTOMDRAW structure. Defined as NMLVCUSTOMDRAW in
               ot4xb_wapist_map.ch.
-   | _kw_: NMLVCUSTOMDRAW
+   | _kw_: WAPIST_NMLVCUSTOMDRAW, NMLVCUSTOMDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVCUSTOMDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMLVCUSTOMDRAW )
@@ -8481,7 +8481,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVDISPINFO structure. Defined as NMLVDISPINFO in ot4xb_wapist_map.ch.
-            | _kw_: NMLVDISPINFO
+            | _kw_: WAPIST_NMLVDISPINFO, NMLVDISPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVDISPINFO** }}*/
 XB_BEGIN_STRUCTURE( NMLVDISPINFO )
@@ -8502,7 +8502,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVEMPTYMARKUP structure. Defined as NMLVEMPTYMARKUP in
               ot4xb_wapist_map.ch.
-   | _kw_: NMLVEMPTYMARKUP
+   | _kw_: WAPIST_NMLVEMPTYMARKUP, NMLVEMPTYMARKUP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVEMPTYMARKUP** }}*/
 XB_BEGIN_STRUCTURE( NMLVEMPTYMARKUP )
@@ -8524,7 +8524,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVFINDITEM structure. Defined as NMLVFINDITEM in ot4xb_wapist_map.ch.
-            | _kw_: NMLVFINDITEM
+            | _kw_: WAPIST_NMLVFINDITEM, NMLVFINDITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVFINDITEM** }}*/
 XB_BEGIN_STRUCTURE( NMLVFINDITEM )
@@ -8548,7 +8548,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi NMLVGETINFOTIP structure. Defined as NMLVGETINFOTIP in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-nmlvgetinfotipa
-            | _kw_: NMLVGETINFOTIP
+            | _kw_: WAPIST_NMLVGETINFOTIP, NMLVGETINFOTIP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVGETINFOTIP** }}*/
 XB_BEGIN_STRUCTURE( NMLVGETINFOTIP )
@@ -8579,7 +8579,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVKEYDOWN structure. Defined as NMLVKEYDOWN in ot4xb_wapist_map.ch.
-            | _kw_: NMLVKEYDOWN
+            | _kw_: WAPIST_NMLVKEYDOWN, NMLVKEYDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVKEYDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMLVKEYDOWN )
@@ -8601,7 +8601,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVLINK structure. Defined as NMLVLINK in ot4xb_wapist_map.ch.
-            | _kw_: NMLVLINK
+            | _kw_: WAPIST_NMLVLINK, NMLVLINK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVLINK** }}*/
 XB_BEGIN_STRUCTURE( NMLVLINK )
@@ -8626,7 +8626,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVODSTATECHANGE structure. Defined as NMLVODSTATECHANGE in
               ot4xb_wapist_map.ch.
-   | _kw_: NMLVODSTATECHANGE
+   | _kw_: WAPIST_NMLVODSTATECHANGE, NMLVODSTATECHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVODSTATECHANGE** }}*/
 XB_BEGIN_STRUCTURE( NMLVODSTATECHANGE )
@@ -8652,7 +8652,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLVSCROLL structure. Defined as NMLVSCROLL in ot4xb_wapist_map.ch.
-            | _kw_: NMLVSCROLL
+            | _kw_: WAPIST_NMLVSCROLL, NMLVSCROLL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLVSCROLL** }}*/
 XB_BEGIN_STRUCTURE( NMLVSCROLL )
@@ -8674,7 +8674,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LITEM structure. Defined as LITEM in ot4xb_wapist_map.ch.
-            | _kw_: LITEM
+            | _kw_: WAPIST_LITEM, LITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LITEM** }}*/
 XB_BEGIN_STRUCTURE( LITEM )
@@ -8702,7 +8702,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCUSTOMDRAW structure. Defined as NMCUSTOMDRAW in ot4xb_wapist_map.ch.
-            | _kw_: NMCUSTOMDRAW
+            | _kw_: WAPIST_NMCUSTOMDRAW, NMCUSTOMDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCUSTOMDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMCUSTOMDRAW )
@@ -8735,7 +8735,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi WINDOWPOS structure. Defined as WINDOWPOS in ot4xb_wapist_map.ch.
-            | _kw_: WINDOWPOS
+            | _kw_: WAPIST_WINDOWPOS, WINDOWPOS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  WINDOWPOS** }}*/
 XB_BEGIN_STRUCTURE( WINDOWPOS )
@@ -8765,7 +8765,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi COLORSCHEME structure. Defined as COLORSCHEME in ot4xb_wapist_map.ch.
-            | _kw_: COLORSCHEME
+            | _kw_: WAPIST_COLORSCHEME, COLORSCHEME, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COLORSCHEME** }}*/
 XB_BEGIN_STRUCTURE( COLORSCHEME )
@@ -8787,7 +8787,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DPASTREAMINFO structure. Defined as DPASTREAMINFO in ot4xb_wapist_map.ch.
-            | _kw_: DPASTREAMINFO
+            | _kw_: WAPIST_DPASTREAMINFO, DPASTREAMINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DPASTREAMINFO** }}*/
 XB_BEGIN_STRUCTURE( DPASTREAMINFO )
@@ -8807,7 +8807,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCHAR structure. Defined as NMCHAR in ot4xb_wapist_map.ch.
-            | _kw_: NMCHAR
+            | _kw_: WAPIST_NMCHAR, NMCHAR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCHAR** }}*/
 XB_BEGIN_STRUCTURE( NMCHAR )
@@ -8832,7 +8832,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCUSTOMSPLITRECTINFO structure. Defined as NMCUSTOMSPLITRECTINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: NMCUSTOMSPLITRECTINFO
+   | _kw_: WAPIST_NMCUSTOMSPLITRECTINFO, NMCUSTOMSPLITRECTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCUSTOMSPLITRECTINFO** }}*/
 XB_BEGIN_STRUCTURE( NMCUSTOMSPLITRECTINFO )
@@ -8856,7 +8856,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCUSTOMTEXT structure. Defined as NMCUSTOMTEXT in ot4xb_wapist_map.ch.
-            | _kw_: NMCUSTOMTEXT
+            | _kw_: WAPIST_NMCUSTOMTEXT, NMCUSTOMTEXT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCUSTOMTEXT** }}*/
 XB_BEGIN_STRUCTURE( NMCUSTOMTEXT )
@@ -8886,7 +8886,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMKEY structure. Defined as NMKEY in ot4xb_wapist_map.ch.
-            | _kw_: NMKEY
+            | _kw_: WAPIST_NMKEY, NMKEY, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMKEY** }}*/
 XB_BEGIN_STRUCTURE( NMKEY )
@@ -8908,7 +8908,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMMOUSE structure. Defined as NMMOUSE in ot4xb_wapist_map.ch.
-            | _kw_: NMMOUSE
+            | _kw_: WAPIST_NMMOUSE, NMMOUSE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMMOUSE** }}*/
 XB_BEGIN_STRUCTURE( NMMOUSE )
@@ -8935,7 +8935,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMOBJECTNOTIFY structure. Defined as NMOBJECTNOTIFY in
               ot4xb_wapist_map.ch.
-   | _kw_: NMOBJECTNOTIFY
+   | _kw_: WAPIST_NMOBJECTNOTIFY, NMOBJECTNOTIFY, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMOBJECTNOTIFY** }}*/
 XB_BEGIN_STRUCTURE( NMOBJECTNOTIFY )
@@ -8962,7 +8962,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTOOLTIPSCREATED structure. Defined as NMTOOLTIPSCREATED in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTOOLTIPSCREATED
+   | _kw_: WAPIST_NMTOOLTIPSCREATED, NMTOOLTIPSCREATED, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTOOLTIPSCREATED** }}*/
 XB_BEGIN_STRUCTURE( NMTOOLTIPSCREATED )
@@ -8983,7 +8983,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi READERMODEINFO structure. Defined as READERMODEINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: READERMODEINFO
+   | _kw_: WAPIST_READERMODEINFO, READERMODEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  READERMODEINFO** }}*/
 XB_BEGIN_STRUCTURE( READERMODEINFO )
@@ -9014,7 +9014,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi BUTTON_IMAGELIST structure. Defined as BUTTON_IMAGELIST in
               ot4xb_wapist_map.ch.
-   | _kw_: BUTTON_IMAGELIST
+   | _kw_: WAPIST_BUTTON_IMAGELIST, BUTTON_IMAGELIST, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BUTTON_IMAGELIST** }}*/
 XB_BEGIN_STRUCTURE( BUTTON_IMAGELIST )
@@ -9037,7 +9037,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi BUTTON_SPLITINFO structure. Defined as BUTTON_SPLITINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: BUTTON_SPLITINFO
+   | _kw_: WAPIST_BUTTON_SPLITINFO, BUTTON_SPLITINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  BUTTON_SPLITINFO** }}*/
 XB_BEGIN_STRUCTURE( BUTTON_SPLITINFO )
@@ -9061,7 +9061,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMBCDROPDOWN structure. Defined as NMBCDROPDOWN in ot4xb_wapist_map.ch.
-            | _kw_: NMBCDROPDOWN
+            | _kw_: WAPIST_NMBCDROPDOWN, NMBCDROPDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMBCDROPDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMBCDROPDOWN )
@@ -9081,7 +9081,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMBCHOTITEM structure. Defined as NMBCHOTITEM in ot4xb_wapist_map.ch.
-            | _kw_: NMBCHOTITEM
+            | _kw_: WAPIST_NMBCHOTITEM, NMBCHOTITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMBCHOTITEM** }}*/
 XB_BEGIN_STRUCTURE( NMBCHOTITEM )
@@ -9101,7 +9101,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi COMBOBOXINFO structure. Defined as COMBOBOXINFO in ot4xb_wapist_map.ch.
-            | _kw_: COMBOBOXINFO
+            | _kw_: WAPIST_COMBOBOXINFO, COMBOBOXINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COMBOBOXINFO** }}*/
 XB_BEGIN_STRUCTURE( COMBOBOXINFO )
@@ -9132,7 +9132,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi COMPAREITEMSTRUCT structure. Defined as COMPAREITEMSTRUCT in
               ot4xb_wapist_map.ch.
-   | _kw_: COMPAREITEMSTRUCT
+   | _kw_: WAPIST_COMPAREITEMSTRUCT, COMPAREITEMSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COMPAREITEMSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( COMPAREITEMSTRUCT )
@@ -9165,7 +9165,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRAWITEMSTRUCT structure. Defined as DRAWITEMSTRUCT in
               ot4xb_wapist_map.ch.
-   | _kw_: DRAWITEMSTRUCT
+   | _kw_: WAPIST_DRAWITEMSTRUCT, DRAWITEMSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRAWITEMSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( DRAWITEMSTRUCT )
@@ -9200,7 +9200,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MEASUREITEMSTRUCT structure. Defined as MEASUREITEMSTRUCT in
               ot4xb_wapist_map.ch.
-   | _kw_: MEASUREITEMSTRUCT
+   | _kw_: WAPIST_MEASUREITEMSTRUCT, MEASUREITEMSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MEASUREITEMSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( MEASUREITEMSTRUCT )
@@ -9229,7 +9229,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi COMBOBOXEXITEM structure. Defined as COMBOBOXEXITEM in
               ot4xb_wapist_map.ch.
-   | _kw_: COMBOBOXEXITEM
+   | _kw_: WAPIST_COMBOBOXEXITEM, COMBOBOXEXITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COMBOBOXEXITEM** }}*/
 XB_BEGIN_STRUCTURE( COMBOBOXEXITEM )
@@ -9264,7 +9264,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCBEDRAGBEGIN structure. Defined as NMCBEDRAGBEGIN in
               ot4xb_wapist_map.ch.
-   | _kw_: NMCBEDRAGBEGIN
+   | _kw_: WAPIST_NMCBEDRAGBEGIN, NMCBEDRAGBEGIN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCBEDRAGBEGIN** }}*/
 XB_BEGIN_STRUCTURE( NMCBEDRAGBEGIN )
@@ -9286,7 +9286,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCBEENDEDIT structure. Defined as NMCBEENDEDIT in ot4xb_wapist_map.ch.
-            | _kw_: NMCBEENDEDIT
+            | _kw_: WAPIST_NMCBEENDEDIT, NMCBEENDEDIT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCBEENDEDIT** }}*/
 XB_BEGIN_STRUCTURE( NMCBEENDEDIT )
@@ -9312,7 +9312,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMCOMBOBOXEX structure. Defined as NMCOMBOBOXEX in ot4xb_wapist_map.ch.
-            | _kw_: NMCOMBOBOXEX
+            | _kw_: WAPIST_NMCOMBOBOXEX, NMCOMBOBOXEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMCOMBOBOXEX** }}*/
 XB_BEGIN_STRUCTURE( NMCOMBOBOXEX )
@@ -9333,7 +9333,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DATETIMEPICKERINFO structure. Defined as DATETIMEPICKERINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: DATETIMEPICKERINFO
+   | _kw_: WAPIST_DATETIMEPICKERINFO, DATETIMEPICKERINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DATETIMEPICKERINFO** }}*/
 XB_BEGIN_STRUCTURE( DATETIMEPICKERINFO )
@@ -9366,7 +9366,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDATETIMECHANGE structure. Defined as NMDATETIMECHANGE in
               ot4xb_wapist_map.ch.
-   | _kw_: NMDATETIMECHANGE
+   | _kw_: WAPIST_NMDATETIMECHANGE, NMDATETIMECHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDATETIMECHANGE** }}*/
 XB_BEGIN_STRUCTURE( NMDATETIMECHANGE )
@@ -9389,7 +9389,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDATETIMEFORMAT structure. Defined as NMDATETIMEFORMAT in
               ot4xb_wapist_map.ch.
-   | _kw_: NMDATETIMEFORMAT
+   | _kw_: WAPIST_NMDATETIMEFORMAT, NMDATETIMEFORMAT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDATETIMEFORMAT** }}*/
 XB_BEGIN_STRUCTURE( NMDATETIMEFORMAT )
@@ -9416,7 +9416,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDATETIMEFORMATQUERY structure. Defined as NMDATETIMEFORMATQUERY in
               ot4xb_wapist_map.ch.
-   | _kw_: NMDATETIMEFORMATQUERY
+   | _kw_: WAPIST_NMDATETIMEFORMATQUERY, NMDATETIMEFORMATQUERY, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDATETIMEFORMATQUERY** }}*/
 XB_BEGIN_STRUCTURE( NMDATETIMEFORMATQUERY )
@@ -9439,7 +9439,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDATETIMESTRING structure. Defined as NMDATETIMESTRING in
               ot4xb_wapist_map.ch.
-   | _kw_: NMDATETIMESTRING
+   | _kw_: WAPIST_NMDATETIMESTRING, NMDATETIMESTRING, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDATETIMESTRING** }}*/
 XB_BEGIN_STRUCTURE( NMDATETIMESTRING )
@@ -9464,7 +9464,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDATETIMEWMKEYDOWN structure. Defined as NMDATETIMEWMKEYDOWN in
               ot4xb_wapist_map.ch.
-   | _kw_: NMDATETIMEWMKEYDOWN
+   | _kw_: WAPIST_NMDATETIMEWMKEYDOWN, NMDATETIMEWMKEYDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDATETIMEWMKEYDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMDATETIMEWMKEYDOWN )
@@ -9488,7 +9488,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi DRAGLISTINFO structure. Defined as DRAGLISTINFO in ot4xb_wapist_map.ch.
-            | _kw_: DRAGLISTINFO
+            | _kw_: WAPIST_DRAGLISTINFO, DRAGLISTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DRAGLISTINFO** }}*/
 XB_BEGIN_STRUCTURE( DRAGLISTINFO )
@@ -9511,7 +9511,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi EDITBALLOONTIP structure. Defined as EDITBALLOONTIP in
               ot4xb_wapist_map.ch.
-   | _kw_: EDITBALLOONTIP
+   | _kw_: WAPIST_EDITBALLOONTIP, EDITBALLOONTIP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  EDITBALLOONTIP** }}*/
 XB_BEGIN_STRUCTURE( EDITBALLOONTIP )
@@ -9535,7 +9535,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HDHITTESTINFO structure. Defined as HDHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: HDHITTESTINFO
+            | _kw_: WAPIST_HDHITTESTINFO, HDHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HDHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( HDHITTESTINFO )
@@ -9557,7 +9557,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HDITEM structure. Defined as HDITEM in ot4xb_wapist_map.ch.
-            | _kw_: HDITEM
+            | _kw_: WAPIST_HDITEM, HDITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HDITEM** }}*/
 XB_BEGIN_STRUCTURE( HDITEM )
@@ -9597,7 +9597,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HDLAYOUT structure. Defined as HDLAYOUT in ot4xb_wapist_map.ch.
-            | _kw_: HDLAYOUT
+            | _kw_: WAPIST_HDLAYOUT, HDLAYOUT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HDLAYOUT** }}*/
 XB_BEGIN_STRUCTURE( HDLAYOUT )
@@ -9617,7 +9617,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi HDTEXTFILTER structure. Defined as HDTEXTFILTER in ot4xb_wapist_map.ch.
-            | _kw_: HDTEXTFILTER
+            | _kw_: WAPIST_HDTEXTFILTER, HDTEXTFILTER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HDTEXTFILTER** }}*/
 XB_BEGIN_STRUCTURE( HDTEXTFILTER )
@@ -9637,7 +9637,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMHDDISPINFO structure. Defined as NMHDDISPINFO in ot4xb_wapist_map.ch.
-            | _kw_: NMHDDISPINFO
+            | _kw_: WAPIST_NMHDDISPINFO, NMHDDISPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMHDDISPINFO** }}*/
 XB_BEGIN_STRUCTURE( NMHDDISPINFO )
@@ -9668,7 +9668,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMHDFILTERBTNCLICK structure. Defined as NMHDFILTERBTNCLICK in
               ot4xb_wapist_map.ch.
-   | _kw_: NMHDFILTERBTNCLICK
+   | _kw_: WAPIST_NMHDFILTERBTNCLICK, NMHDFILTERBTNCLICK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMHDFILTERBTNCLICK** }}*/
 XB_BEGIN_STRUCTURE( NMHDFILTERBTNCLICK )
@@ -9690,7 +9690,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMHEADER structure. Defined as NMHEADER in ot4xb_wapist_map.ch.
-            | _kw_: NMHEADER
+            | _kw_: WAPIST_NMHEADER, NMHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMHEADER** }}*/
 XB_BEGIN_STRUCTURE( NMHEADER )
@@ -9718,7 +9718,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMIPADDRESS structure. Defined as NMIPADDRESS in ot4xb_wapist_map.ch.
-            | _kw_: NMIPADDRESS
+            | _kw_: WAPIST_NMIPADDRESS, NMIPADDRESS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMIPADDRESS** }}*/
 XB_BEGIN_STRUCTURE( NMIPADDRESS )
@@ -9741,7 +9741,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi DELETEITEMSTRUCT structure. Defined as DELETEITEMSTRUCT in
               ot4xb_wapist_map.ch.
-   | _kw_: DELETEITEMSTRUCT
+   | _kw_: WAPIST_DELETEITEMSTRUCT, DELETEITEMSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  DELETEITEMSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( DELETEITEMSTRUCT )
@@ -9767,7 +9767,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MCGRIDINFO structure. Defined as MCGRIDINFO in ot4xb_wapist_map.ch.
-            | _kw_: MCGRIDINFO
+            | _kw_: WAPIST_MCGRIDINFO, MCGRIDINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MCGRIDINFO** }}*/
 XB_BEGIN_STRUCTURE( MCGRIDINFO )
@@ -9807,7 +9807,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi MCHITTESTINFO structure. Defined as MCHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: MCHITTESTINFO
+            | _kw_: WAPIST_MCHITTESTINFO, MCHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MCHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( MCHITTESTINFO )
@@ -9839,7 +9839,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMDAYSTATE structure. Defined as NMDAYSTATE in ot4xb_wapist_map.ch.
-            | _kw_: NMDAYSTATE
+            | _kw_: WAPIST_NMDAYSTATE, NMDAYSTATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMDAYSTATE** }}*/
 XB_BEGIN_STRUCTURE( NMDAYSTATE )
@@ -9863,7 +9863,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMSELCHANGE structure. Defined as NMSELCHANGE in ot4xb_wapist_map.ch.
-            | _kw_: NMSELCHANGE
+            | _kw_: WAPIST_NMSELCHANGE, NMSELCHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMSELCHANGE** }}*/
 XB_BEGIN_STRUCTURE( NMSELCHANGE )
@@ -9885,7 +9885,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMVIEWCHANGE structure. Defined as NMVIEWCHANGE in ot4xb_wapist_map.ch.
-            | _kw_: NMVIEWCHANGE
+            | _kw_: WAPIST_NMVIEWCHANGE, NMVIEWCHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMVIEWCHANGE** }}*/
 XB_BEGIN_STRUCTURE( NMVIEWCHANGE )
@@ -9907,7 +9907,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMPGCALCSIZE structure. Defined as NMPGCALCSIZE in ot4xb_wapist_map.ch.
-            | _kw_: NMPGCALCSIZE
+            | _kw_: WAPIST_NMPGCALCSIZE, NMPGCALCSIZE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMPGCALCSIZE** }}*/
 XB_BEGIN_STRUCTURE( NMPGCALCSIZE )
@@ -9931,7 +9931,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMPGHOTITEM structure. Defined as NMPGHOTITEM in ot4xb_wapist_map.ch.
-            | _kw_: NMPGHOTITEM
+            | _kw_: WAPIST_NMPGHOTITEM, NMPGHOTITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMPGHOTITEM** }}*/
 XB_BEGIN_STRUCTURE( NMPGHOTITEM )
@@ -9955,7 +9955,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMPGSCROLL structure. Defined as NMPGSCROLL in ot4xb_wapist_map.ch.
-            | _kw_: NMPGSCROLL
+            | _kw_: WAPIST_NMPGSCROLL, NMPGSCROLL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMPGSCROLL** }}*/
 XB_BEGIN_STRUCTURE( NMPGSCROLL )
@@ -9985,7 +9985,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi PBRANGE structure. Defined as PBRANGE in ot4xb_wapist_map.ch.
-            | _kw_: PBRANGE
+            | _kw_: WAPIST_PBRANGE, PBRANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PBRANGE** }}*/
 XB_BEGIN_STRUCTURE( PBRANGE )
@@ -10007,7 +10007,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMREBARSPLITTER structure. Defined as NMREBARSPLITTER in
               ot4xb_wapist_map.ch.
-   | _kw_: NMREBARSPLITTER
+   | _kw_: WAPIST_NMREBARSPLITTER, NMREBARSPLITTER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMREBARSPLITTER** }}*/
 XB_BEGIN_STRUCTURE( NMREBARSPLITTER )
@@ -10029,7 +10029,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SCROLLBARINFO structure. Defined as SCROLLBARINFO in ot4xb_wapist_map.ch.
-            | _kw_: SCROLLBARINFO
+            | _kw_: WAPIST_SCROLLBARINFO, SCROLLBARINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SCROLLBARINFO** }}*/
 XB_BEGIN_STRUCTURE( SCROLLBARINFO )
@@ -10059,7 +10059,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi SCROLLINFO structure. Defined as SCROLLINFO in ot4xb_wapist_map.ch.
-            | _kw_: SCROLLINFO
+            | _kw_: WAPIST_SCROLLINFO, SCROLLINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SCROLLINFO** }}*/
 XB_BEGIN_STRUCTURE( SCROLLINFO )
@@ -10089,7 +10089,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi LHITTESTINFO structure. Defined as LHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: LHITTESTINFO
+            | _kw_: WAPIST_LHITTESTINFO, LHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  LHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( LHITTESTINFO )
@@ -10109,7 +10109,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMLINK structure. Defined as NMLINK in ot4xb_wapist_map.ch.
-            | _kw_: NMLINK
+            | _kw_: WAPIST_NMLINK, NMLINK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMLINK** }}*/
 XB_BEGIN_STRUCTURE( NMLINK )
@@ -10129,7 +10129,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTCKEYDOWN structure. Defined as NMTCKEYDOWN in ot4xb_wapist_map.ch.
-            | _kw_: NMTCKEYDOWN
+            | _kw_: WAPIST_NMTCKEYDOWN, NMTCKEYDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTCKEYDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMTCKEYDOWN )
@@ -10151,7 +10151,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TCHITTESTINFO structure. Defined as TCHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: TCHITTESTINFO
+            | _kw_: WAPIST_TCHITTESTINFO, TCHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TCHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( TCHITTESTINFO )
@@ -10171,7 +10171,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TCITEM structure. Defined as TCITEM in ot4xb_wapist_map.ch.
-            | _kw_: TCITEM
+            | _kw_: WAPIST_TCITEM, TCITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TCITEM** }}*/
 XB_BEGIN_STRUCTURE( TCITEM )
@@ -10201,7 +10201,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TCITEMHEADER structure. Defined as TCITEMHEADER in ot4xb_wapist_map.ch.
-            | _kw_: TCITEMHEADER
+            | _kw_: WAPIST_TCITEMHEADER, TCITEMHEADER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TCITEMHEADER** }}*/
 XB_BEGIN_STRUCTURE( TCITEMHEADER )
@@ -10229,7 +10229,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi COLORMAP structure. Defined as COLORMAP in ot4xb_wapist_map.ch.
-            | _kw_: COLORMAP
+            | _kw_: WAPIST_COLORMAP, COLORMAP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COLORMAP** }}*/
 XB_BEGIN_STRUCTURE( COLORMAP )
@@ -10250,7 +10250,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBCUSTOMDRAW structure. Defined as NMTBCUSTOMDRAW in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTBCUSTOMDRAW
+   | _kw_: WAPIST_NMTBCUSTOMDRAW, NMTBCUSTOMDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBCUSTOMDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMTBCUSTOMDRAW )
@@ -10294,7 +10294,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBDISPINFO structure. Defined as NMTBDISPINFO in ot4xb_wapist_map.ch.
-            | _kw_: NMTBDISPINFO
+            | _kw_: WAPIST_NMTBDISPINFO, NMTBDISPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBDISPINFO** }}*/
 XB_BEGIN_STRUCTURE( NMTBDISPINFO )
@@ -10325,7 +10325,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBGETINFOTIP structure. Defined as NMTBGETINFOTIP in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTBGETINFOTIP
+   | _kw_: WAPIST_NMTBGETINFOTIP, NMTBGETINFOTIP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBGETINFOTIP** }}*/
 XB_BEGIN_STRUCTURE( NMTBGETINFOTIP )
@@ -10351,7 +10351,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBHOTITEM structure. Defined as NMTBHOTITEM in ot4xb_wapist_map.ch.
-            | _kw_: NMTBHOTITEM
+            | _kw_: WAPIST_NMTBHOTITEM, NMTBHOTITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBHOTITEM** }}*/
 XB_BEGIN_STRUCTURE( NMTBHOTITEM )
@@ -10375,7 +10375,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBRESTORE structure. Defined as NMTBRESTORE in ot4xb_wapist_map.ch.
-            | _kw_: NMTBRESTORE
+            | _kw_: WAPIST_NMTBRESTORE, NMTBRESTORE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBRESTORE** }}*/
 XB_BEGIN_STRUCTURE( NMTBRESTORE )
@@ -10407,7 +10407,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTBSAVE structure. Defined as NMTBSAVE in ot4xb_wapist_map.ch.
-            | _kw_: NMTBSAVE
+            | _kw_: WAPIST_NMTBSAVE, NMTBSAVE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTBSAVE** }}*/
 XB_BEGIN_STRUCTURE( NMTBSAVE )
@@ -10437,7 +10437,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTOOLBAR structure. Defined as NMTOOLBAR in ot4xb_wapist_map.ch.
-            | _kw_: NMTOOLBAR
+            | _kw_: WAPIST_NMTOOLBAR, NMTOOLBAR, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTOOLBAR** }}*/
 XB_BEGIN_STRUCTURE( NMTOOLBAR )
@@ -10465,7 +10465,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBADDBITMAP structure. Defined as TBADDBITMAP in ot4xb_wapist_map.ch.
-            | _kw_: TBADDBITMAP
+            | _kw_: WAPIST_TBADDBITMAP, TBADDBITMAP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBADDBITMAP** }}*/
 XB_BEGIN_STRUCTURE( TBADDBITMAP )
@@ -10485,7 +10485,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBBUTTONINFOA structure. Defined as TBBUTTONINFOA in ot4xb_wapist_map.ch.
-            | _kw_: TBBUTTONINFOA
+            | _kw_: WAPIST_TBBUTTONINFOA, TBBUTTONINFOA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBBUTTONINFOA** }}*/
 XB_BEGIN_STRUCTURE( TBBUTTONINFOA )
@@ -10523,7 +10523,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBINSERTMARK structure. Defined as TBINSERTMARK in ot4xb_wapist_map.ch.
-            | _kw_: TBINSERTMARK
+            | _kw_: WAPIST_TBINSERTMARK, TBINSERTMARK, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBINSERTMARK** }}*/
 XB_BEGIN_STRUCTURE( TBINSERTMARK )
@@ -10543,7 +10543,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBMETRICS structure. Defined as TBMETRICS in ot4xb_wapist_map.ch.
-            | _kw_: TBMETRICS
+            | _kw_: WAPIST_TBMETRICS, TBMETRICS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBMETRICS** }}*/
 XB_BEGIN_STRUCTURE( TBMETRICS )
@@ -10576,7 +10576,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBREPLACEBITMAP structure. Defined as TBREPLACEBITMAP in
               ot4xb_wapist_map.ch.
-   | _kw_: TBREPLACEBITMAP
+   | _kw_: WAPIST_TBREPLACEBITMAP, TBREPLACEBITMAP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBREPLACEBITMAP** }}*/
 XB_BEGIN_STRUCTURE( TBREPLACEBITMAP )
@@ -10602,7 +10602,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TBSAVEPARAMS structure. Defined as TBSAVEPARAMS in ot4xb_wapist_map.ch.
-            | _kw_: TBSAVEPARAMS
+            | _kw_: WAPIST_TBSAVEPARAMS, TBSAVEPARAMS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TBSAVEPARAMS** }}*/
 XB_BEGIN_STRUCTURE( TBSAVEPARAMS )
@@ -10625,7 +10625,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTTCUSTOMDRAW structure. Defined as NMTTCUSTOMDRAW in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTTCUSTOMDRAW
+   | _kw_: WAPIST_NMTTCUSTOMDRAW, NMTTCUSTOMDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTTCUSTOMDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMTTCUSTOMDRAW )
@@ -10645,7 +10645,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTTDISPINFO structure. Defined as NMTTDISPINFO in ot4xb_wapist_map.ch.
-            | _kw_: NMTTDISPINFO
+            | _kw_: WAPIST_NMTTDISPINFO, NMTTDISPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTTDISPINFO** }}*/
 XB_BEGIN_STRUCTURE( NMTTDISPINFO )
@@ -10675,7 +10675,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TOOLINFO structure. Defined as TOOLINFO in ot4xb_wapist_map.ch.
-            | _kw_: TOOLINFO
+            | _kw_: WAPIST_TOOLINFO, TOOLINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TOOLINFO** }}*/
 XB_BEGIN_STRUCTURE( TOOLINFO )
@@ -10709,7 +10709,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TTGETTITLE structure. Defined as TTGETTITLE in ot4xb_wapist_map.ch.
-            | _kw_: TTGETTITLE
+            | _kw_: WAPIST_TTGETTITLE, TTGETTITLE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TTGETTITLE** }}*/
 XB_BEGIN_STRUCTURE( TTGETTITLE )
@@ -10733,7 +10733,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TTHITTESTINFO structure. Defined as TTHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: TTHITTESTINFO
+            | _kw_: WAPIST_TTHITTESTINFO, TTHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TTHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( TTHITTESTINFO )
@@ -10755,7 +10755,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTREEVIEW structure. Defined as NMTREEVIEW in ot4xb_wapist_map.ch.
-            | _kw_: NMTREEVIEW
+            | _kw_: WAPIST_NMTREEVIEW, NMTREEVIEW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTREEVIEW** }}*/
 XB_BEGIN_STRUCTURE( NMTREEVIEW )
@@ -10781,7 +10781,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVASYNCDRAW structure. Defined as NMTVASYNCDRAW in ot4xb_wapist_map.ch.
-            | _kw_: NMTVASYNCDRAW
+            | _kw_: WAPIST_NMTVASYNCDRAW, NMTVASYNCDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVASYNCDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMTVASYNCDRAW )
@@ -10812,7 +10812,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVCUSTOMDRAW structure. Defined as NMTVCUSTOMDRAW in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTVCUSTOMDRAW
+   | _kw_: WAPIST_NMTVCUSTOMDRAW, NMTVCUSTOMDRAW, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVCUSTOMDRAW** }}*/
 XB_BEGIN_STRUCTURE( NMTVCUSTOMDRAW )
@@ -10836,7 +10836,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVDISPINFO structure. Defined as NMTVDISPINFO in ot4xb_wapist_map.ch.
-            | _kw_: NMTVDISPINFO
+            | _kw_: WAPIST_NMTVDISPINFO, NMTVDISPINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVDISPINFO** }}*/
 XB_BEGIN_STRUCTURE( NMTVDISPINFO )
@@ -10857,7 +10857,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVDISPINFOEX structure. Defined as NMTVDISPINFOEX in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTVDISPINFOEX
+   | _kw_: WAPIST_NMTVDISPINFOEX, NMTVDISPINFOEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVDISPINFOEX** }}*/
 XB_BEGIN_STRUCTURE( NMTVDISPINFOEX )
@@ -10878,7 +10878,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVGETINFOTIP structure. Defined as NMTVGETINFOTIP in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTVGETINFOTIP
+   | _kw_: WAPIST_NMTVGETINFOTIP, NMTVGETINFOTIP, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVGETINFOTIP** }}*/
 XB_BEGIN_STRUCTURE( NMTVGETINFOTIP )
@@ -10905,7 +10905,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVITEMCHANGE structure. Defined as NMTVITEMCHANGE in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTVITEMCHANGE
+   | _kw_: WAPIST_NMTVITEMCHANGE, NMTVITEMCHANGE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVITEMCHANGE** }}*/
 XB_BEGIN_STRUCTURE( NMTVITEMCHANGE )
@@ -10933,7 +10933,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVKEYDOWN structure. Defined as NMTVKEYDOWN in ot4xb_wapist_map.ch.
-            | _kw_: NMTVKEYDOWN
+            | _kw_: WAPIST_NMTVKEYDOWN, NMTVKEYDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVKEYDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMTVKEYDOWN )
@@ -10956,7 +10956,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMTVSTATEIMAGECHANGING structure. Defined as NMTVSTATEIMAGECHANGING in
               ot4xb_wapist_map.ch.
-   | _kw_: NMTVSTATEIMAGECHANGING
+   | _kw_: WAPIST_NMTVSTATEIMAGECHANGING, NMTVSTATEIMAGECHANGING, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMTVSTATEIMAGECHANGING** }}*/
 XB_BEGIN_STRUCTURE( NMTVSTATEIMAGECHANGING )
@@ -10981,7 +10981,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TVGETITEMPARTRECTINFO structure. Defined as TVGETITEMPARTRECTINFO in
               ot4xb_wapist_map.ch.
-   | _kw_: TVGETITEMPARTRECTINFO
+   | _kw_: WAPIST_TVGETITEMPARTRECTINFO, TVGETITEMPARTRECTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVGETITEMPARTRECTINFO** }}*/
 XB_BEGIN_STRUCTURE( TVGETITEMPARTRECTINFO )
@@ -11003,7 +11003,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TVHITTESTINFO structure. Defined as TVHITTESTINFO in ot4xb_wapist_map.ch.
-            | _kw_: TVHITTESTINFO
+            | _kw_: WAPIST_TVHITTESTINFO, TVHITTESTINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVHITTESTINFO** }}*/
 XB_BEGIN_STRUCTURE( TVHITTESTINFO )
@@ -11027,7 +11027,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi TVINSERTSTRUCTA structure. Defined as TVINSERTSTRUCT in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-tvinsertstructa
-            | _kw_: TVINSERTSTRUCT, TVINSERTSTRUCTA
+            | _kw_: WAPIST_TVINSERTSTRUCT, TVINSERTSTRUCT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVINSERTSTRUCT** }}*/
 XB_BEGIN_STRUCTURE( TVINSERTSTRUCT )
@@ -11054,7 +11054,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TVITEM structure. Defined as TVITEM in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-tvitema
-            | _kw_: TVITEM
+            | _kw_: WAPIST_TVITEM, TVITEM, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVITEM** }}*/
 XB_BEGIN_STRUCTURE( TVITEM )
@@ -11092,7 +11092,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TVITEMEX structure. Defined as TVITEMEX in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-tvitemexa
-            | _kw_: TVITEMEX
+            | _kw_: WAPIST_TVITEMEX, TVITEMEX, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVITEMEX** }}*/
 XB_BEGIN_STRUCTURE( TVITEMEX )
@@ -11137,7 +11137,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi TVSORTCB structure. Defined as TVSORTCB in ot4xb_wapist_map.ch.
-            | _kw_: TVSORTCB
+            | _kw_: WAPIST_TVSORTCB, TVSORTCB, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TVSORTCB** }}*/
 XB_BEGIN_STRUCTURE( TVSORTCB )
@@ -11159,7 +11159,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi NMUPDOWN structure. Defined as NMUPDOWN in ot4xb_wapist_map.ch.
-            | _kw_: NMUPDOWN
+            | _kw_: WAPIST_NMUPDOWN, NMUPDOWN, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  NMUPDOWN** }}*/
 XB_BEGIN_STRUCTURE( NMUPDOWN )
@@ -11181,7 +11181,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Wrapper over the WinApi UDACCEL structure. Defined as UDACCEL in ot4xb_wapist_map.ch.
-            | _kw_: UDACCEL
+            | _kw_: WAPIST_UDACCEL, UDACCEL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  UDACCEL** }}*/
 XB_BEGIN_STRUCTURE( UDACCEL )
@@ -11204,7 +11204,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi URL_COMPONENTSA structure. Defined as URL_COMPONENTS in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-url_componentsa
-            | _kw_: URL_COMPONENTS, URL_COMPONENTSA
+            | _kw_: WAPIST_URL_COMPONENTS, URL_COMPONENTS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  URL_COMPONENTS** }}*/
 XB_BEGIN_STRUCTURE( URL_COMPONENTS )
@@ -11252,7 +11252,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNET_ASYNC_RESULT structure. Defined as INTERNET_ASYNC_RESULT in
               ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_ASYNC_RESULT
+   | _kw_: WAPIST_INTERNET_ASYNC_RESULT, INTERNET_ASYNC_RESULT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_ASYNC_RESULT** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_ASYNC_RESULT )
@@ -11275,7 +11275,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinInet INTERNET_DIAGNOSTIC_SOCKET_INFO structure. Defined as
               INTERNET_DIAGNOSTIC_SOCKET_INFO in ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_DIAGNOSTIC_SOCKET_INFO
+   | _kw_: WAPIST_INTERNET_DIAGNOSTIC_SOCKET_INFO, INTERNET_DIAGNOSTIC_SOCKET_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_DIAGNOSTIC_SOCKET_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_DIAGNOSTIC_SOCKET_INFO )
@@ -11302,7 +11302,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_PROXY_INFO structure. Defined as INTERNET_PROXY_INFO in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_proxy_info
-            | _kw_: INTERNET_PROXY_INFO
+            | _kw_: WAPIST_INTERNET_PROXY_INFO, INTERNET_PROXY_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_PROXY_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_PROXY_INFO )
@@ -11327,7 +11327,7 @@ XB_END_STRUCTURE
             | parent: {{ilink: <class gwst> gwst}}
             | category: winapi/structures
             | desc: Auxiliary wrapper for the INTERNET_PER_CONN_OPTION Value union.
-            | _kw_: INTERNET_PER_CONN_OPTION___VALUE
+            | _kw_: WAPIST_INTERNET_PER_CONN_OPTION___VALUE, INTERNET_PER_CONN_OPTION___VALUE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_PER_CONN_OPTION___VALUE** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_PER_CONN_OPTION___VALUE )
@@ -11352,7 +11352,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_PER_CONN_OPTIONA structure. Defined as INTERNET_PER_CONN_OPTION
               in ot4xb_wapist_map.ch.
            | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_per_conn_optiona
-           | _kw_: INTERNET_PER_CONN_OPTION
+           | _kw_: WAPIST_INTERNET_PER_CONN_OPTION, INTERNET_PER_CONN_OPTION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_PER_CONN_OPTION** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_PER_CONN_OPTION )
@@ -11376,7 +11376,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_PER_CONN_OPTION_LISTA structure. Defined as
               INTERNET_PER_CONN_OPTION_LIST in ot4xb_wapist_map.ch.
       | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_per_conn_option_lista
-      | _kw_: INTERNET_PER_CONN_OPTION_LIST
+      | _kw_: WAPIST_INTERNET_PER_CONN_OPTION_LIST, INTERNET_PER_CONN_OPTION_LIST, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_PER_CONN_OPTION_LIST** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_PER_CONN_OPTION_LIST )
@@ -11405,7 +11405,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNET_VERSION_INFO structure. Defined as INTERNET_VERSION_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_VERSION_INFO
+   | _kw_: WAPIST_INTERNET_VERSION_INFO, INTERNET_VERSION_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_VERSION_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_VERSION_INFO )
@@ -11426,7 +11426,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi HTTP_VERSION_INFO structure. Defined as HTTP_VERSION_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: HTTP_VERSION_INFO
+   | _kw_: WAPIST_HTTP_VERSION_INFO, HTTP_VERSION_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  HTTP_VERSION_INFO** }}*/
 XB_BEGIN_STRUCTURE( HTTP_VERSION_INFO )
@@ -11447,7 +11447,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNET_CONNECTED_INFO structure. Defined as INTERNET_CONNECTED_INFO in
               ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_CONNECTED_INFO
+   | _kw_: WAPIST_INTERNET_CONNECTED_INFO, INTERNET_CONNECTED_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_CONNECTED_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_CONNECTED_INFO )
@@ -11469,7 +11469,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_CERTIFICATE_INFO structure. Defined as INTERNET_CERTIFICATE_INFO
               in ot4xb_wapist_map.ch.
            | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_certificate_info
-           | _kw_: INTERNET_CERTIFICATE_INFO
+           | _kw_: WAPIST_INTERNET_CERTIFICATE_INFO, INTERNET_CERTIFICATE_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_CERTIFICATE_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_CERTIFICATE_INFO )
@@ -11503,7 +11503,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinInet INTERNET_BUFFERSA structure.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_buffersa
-            | _kw_: INTERNET_BUFFERS
+            | _kw_: WAPIST_INTERNET_BUFFERS, INTERNET_BUFFERS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_BUFFERS** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_BUFFERS )
@@ -11540,7 +11540,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinInet IncomingCookieState structure. Defined as IncomingCookieState in
               ot4xb_wapist_map.ch.
-   | _kw_: INCOMINGCOOKIESTATE
+   | _kw_: WAPIST_INCOMINGCOOKIESTATE, INCOMINGCOOKIESTATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INCOMINGCOOKIESTATE** }}*/
 XB_BEGIN_STRUCTURE( INCOMINGCOOKIESTATE )
@@ -11573,7 +11573,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinInet OutgoingCookieState structure. Defined as OutgoingCookieState in
               ot4xb_wapist_map.ch.
-   | _kw_: OUTGOINGCOOKIESTATE
+   | _kw_: WAPIST_OUTGOINGCOOKIESTATE, OUTGOINGCOOKIESTATE, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  OUTGOINGCOOKIESTATE** }}*/
 XB_BEGIN_STRUCTURE( OUTGOINGCOOKIESTATE  )
@@ -11598,7 +11598,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNETCOOKIEHISTORY structure. Defined as InternetCookieHistory in
               ot4xb_wapist_map.ch.
-   | _kw_: INTERNETCOOKIEHISTORY
+   | _kw_: WAPIST_INTERNETCOOKIEHISTORY, INTERNETCOOKIEHISTORY, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNETCOOKIEHISTORY** }}*/
 XB_BEGIN_STRUCTURE( INTERNETCOOKIEHISTORY )
@@ -11623,7 +11623,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi COOKIEDECISION structure. Defined as CookieDecision in
               ot4xb_wapist_map.ch.
-   | _kw_: COOKIEDECISION
+   | _kw_: WAPIST_COOKIEDECISION, COOKIEDECISION, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  COOKIEDECISION** }}*/
 XB_BEGIN_STRUCTURE( COOKIEDECISION         )
@@ -11644,7 +11644,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNET_AUTH_NOTIFY_DATA structure. Defined as INTERNET_AUTH_NOTIFY_DATA
               in ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_AUTH_NOTIFY_DATA
+   | _kw_: WAPIST_INTERNET_AUTH_NOTIFY_DATA, INTERNET_AUTH_NOTIFY_DATA, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_AUTH_NOTIFY_DATA** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_AUTH_NOTIFY_DATA   )
@@ -11670,7 +11670,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_CACHE_ENTRY_INFOA structure. Defined as
               INTERNET_CACHE_ENTRY_INFO in ot4xb_wapist_map.ch.
           | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infoa
-          | _kw_: INTERNET_CACHE_ENTRY_INFO
+          | _kw_: WAPIST_INTERNET_CACHE_ENTRY_INFO, INTERNET_CACHE_ENTRY_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_CACHE_ENTRY_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_CACHE_ENTRY_INFO )
@@ -11730,7 +11730,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi INTERNET_CACHE_TIMESTAMPS structure. Defined as INTERNET_CACHE_TIMESTAMPS
               in ot4xb_wapist_map.ch.
-   | _kw_: INTERNET_CACHE_TIMESTAMPS
+   | _kw_: WAPIST_INTERNET_CACHE_TIMESTAMPS, INTERNET_CACHE_TIMESTAMPS, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_CACHE_TIMESTAMPS** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_CACHE_TIMESTAMPS  )
@@ -11752,7 +11752,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinInet INTERNET_CACHE_GROUP_INFOA structure. Defined as
               INTERNET_CACHE_GROUP_INFO in ot4xb_wapist_map.ch.
           | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/wininet/ns-wininet-internet_cache_group_infoa
-          | _kw_: INTERNET_CACHE_GROUP_INFO
+          | _kw_: WAPIST_INTERNET_CACHE_GROUP_INFO, INTERNET_CACHE_GROUP_INFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  INTERNET_CACHE_GROUP_INFO** }}*/
 XB_BEGIN_STRUCTURE( INTERNET_CACHE_GROUP_INFO   )
@@ -11793,7 +11793,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinInet AUTO_PROXY_SCRIPT_BUFFER structure. Defined as AUTO_PROXY_SCRIPT_BUFFER
               in ot4xb_wapist_map.ch.
-   | _kw_: AUTO_PROXY_SCRIPT_BUFFER
+   | _kw_: WAPIST_AUTO_PROXY_SCRIPT_BUFFER, AUTO_PROXY_SCRIPT_BUFFER, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  AUTO_PROXY_SCRIPT_BUFFER** }}*/
 XB_BEGIN_STRUCTURE( AUTO_PROXY_SCRIPT_BUFFER )
@@ -11821,7 +11821,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi TRACKMOUSEEVENT structure. Defined as TRACKMOUSEEVENT in
               ot4xb_wapist_map.ch.
-   | _kw_: TRACKMOUSEEVENT
+   | _kw_: WAPIST_TRACKMOUSEEVENT, TRACKMOUSEEVENT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  TRACKMOUSEEVENT** }}*/
 XB_BEGIN_STRUCTURE(TRACKMOUSEEVENT )
@@ -11846,7 +11846,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi MOUSEMOVEPOINT structure. Defined as MOUSEMOVEPOINT in
               ot4xb_wapist_map.ch.
-   | _kw_: MOUSEMOVEPOINT
+   | _kw_: WAPIST_MOUSEMOVEPOINT, MOUSEMOVEPOINT, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  MOUSEMOVEPOINT** }}*/
 XB_BEGIN_STRUCTURE( MOUSEMOVEPOINT )
@@ -11872,7 +11872,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi PREVENT_MEDIA_REMOVAL structure. Defined as PREVENT_MEDIA_REMOVAL in
               ot4xb_wapist_map.ch.
  | ref-url: https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddstor/ns-ntddstor-_prevent_media_removal
- | _kw_: PREVENT_MEDIA_REMOVAL
+ | _kw_: WAPIST_PREVENT_MEDIA_REMOVAL, PREVENT_MEDIA_REMOVAL, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  PREVENT_MEDIA_REMOVAL** }}*/
 XB_BEGIN_STRUCTURE( PREVENT_MEDIA_REMOVAL )
@@ -11892,7 +11892,7 @@ XB_END_STRUCTURE
             | category: winapi/structures
             | desc: Wrapper over the WinApi SHFILEINFOA structure. Defined as SHFILEINFO in ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-shfileinfoa
-            | _kw_: SHFILEINFO, SHFILEINFOA
+            | _kw_: WAPIST_SHFILEINFO, SHFILEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SHFILEINFO** }}*/
 XB_BEGIN_STRUCTURE(SHFILEINFO)
@@ -11921,7 +11921,7 @@ XB_END_STRUCTURE
             | desc: Wrapper over the WinApi SHELLEXECUTEINFOA structure. Defined as SHELLEXECUTEINFO in
               ot4xb_wapist_map.ch.
             | ref-url: https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-shellexecuteinfoa
-            | _kw_: SHELLEXECUTEINFO, SHELLEXECUTEINFOA
+            | _kw_: WAPIST_SHELLEXECUTEINFO, SHELLEXECUTEINFO, WINAPI, Structures
    }}*/
 /*{{|:**BEGIN STRUCTURE  SHELLEXECUTEINFO** }}*/
 XB_BEGIN_STRUCTURE(SHELLEXECUTEINFO)

@@ -9,7 +9,7 @@
 /*{{function_: TokenizeEx
             | syntax_: `TokenizeEx( cText, xSeparator )`
             | category: string
-            | _kw_: tokenize, split string, separators, multi character separator, array of tokens
+            | _kw_: TokenizeEx, Function
    }}*/
 /*{{|desc: Splits a character string using one literal separator or an array of literal separators.
     | params:

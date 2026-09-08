@@ -17,8 +17,8 @@
      built with (the ot4xb heap, a given OT4XB_VHEAP or a private one, see the parent class); the pointers
      stored are never freed by the list. The C API of the same object is the `_tlist_*` family
      ({{ilink: <c-function _tlist_new> _tlist_new}}, {{ilink: <c-function _tlist_add> _tlist_add}}, ...),
-     | _kw_: pointer list, growable array, sort, binary search, tlist
-     one function per method, with the same semantics. }}*/
+     one function per method, with the same semantics.
+     | _kw_: TList, Class }}*/
 class OT4XB_API TList    : public T_ot4xb_base_with_vheap
 {
    public:
@@ -150,8 +150,8 @@ END_EXTERN_C
      the strings whose length or CRC differ. The list owns the copies: they die with the slot (Put(),
      DeleteItems()) or with the list. Slots may be empty (0): InsertBlank() opens them and Find() with no text
      locates the first one. Every public method is serialised with a critical section unless the constructor
-     | _kw_: string list, heap strings, find case insensitive, slots
-     was told not to. }}*/
+     was told not to.
+     | _kw_: THpStrList, Class }}*/
 class OT4XB_API THpStrList  : public T_ot4xb_base
 {
    private:
@@ -232,8 +232,8 @@ class OT4XB_API THpStrList  : public T_ot4xb_base
    | category: c-api/classes , container
    | desc: A growable array of ContainerHandle, for a function that creates a number of containers and wants
      to release them all at once with ReleaseAll(). The list does not release anything by itself: what is
-     | _kw_: container list, ContainerHandle array, release all
-     still inside when it is destroyed stays alive. }}*/
+     still inside when it is destroyed stays alive.
+     | _kw_: TContainerHandleList, Class }}*/
 class OT4XB_API TContainerHandleList   : public T_ot4xb_base
 {
    public:

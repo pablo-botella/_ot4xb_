@@ -110,7 +110,7 @@ static void method_font_spec(TXbClsParams* px)
             | desc: Small GDI+ helper class. It loads gdiplus.dll on demand and exposes helpers used by OT4XB image
               code.
             | note: The helper keeps the GDI+ entry points resolved after the first successful load.
-            | _kw_: GDI+, gdiplus.dll, image, load on demand
+            | _kw_: GDIPLUS_HELPER, Class
    }}*/
 void AddXbMethods(TXbClass* pc)
 {

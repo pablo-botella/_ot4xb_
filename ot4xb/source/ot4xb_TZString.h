@@ -16,8 +16,8 @@
      by powers of two in the ot4xb heap, and the text is ready as a C string at any moment through
      GetBuffer(). Besides plain appends it has the escapers ot4xb needs when it writes text for other
      consumers: HTML from the OEM and ANSI code pages, XML, SQL literals, JSON strings, UTF-8 and CSV cells.
-     | _kw_: string builder, append, html escape, sql escape, json escape, printf
-     printf() formats straight into the buffer. }}*/
+     printf() formats straight into the buffer.
+     | _kw_: TZString, Class }}*/
 class OT4XB_API TZString : public T_ot4xb_base
 {
    public:
@@ -172,8 +172,8 @@ class OT4XB_API TZString : public T_ot4xb_base
      primitives reserve room at the end (or at an offset) and let the caller write there, and the append_*
      family fills it with bytes, integers, UTF-8 conversions and the decoded form of base64, quoted-printable
      and uuencoded text. The memory functions are virtual so that a derived class can take the bytes from
-     | _kw_: byte buffer, growable, reserve, append, decode base64
-     another heap; here they use the ot4xb heap. }}*/
+     another heap; here they use the ot4xb heap.
+     | _kw_: xstream_t, Class }}*/
 class OT4XB_API xstream_t  : public T_ot4xb_base // the ot4cpp xstream_t class
 {
    public:
@@ -291,8 +291,8 @@ class OT4XB_API xstream_t  : public T_ot4xb_base // the ot4cpp xstream_t class
      want one. The same object is reachable from C through the `TByteStream_*` functions
      ({{ilink: <c-function TByteStream_new> TByteStream_new}}, {{ilink: <c-function TByteStream_Add> TByteStream_Add}},
      ...), one per method. The nested IByteStream class is the IStream implementation, private to
-     | _kw_: byte stream, binary buffer, IStream, append, decode
-     get_IStream(). }}*/
+     get_IStream().
+     | _kw_: TByteStream, Class }}*/
 class OT4XB_API TByteStream : public xstream_t
 {
        // ---------------------------------------------------------------------------------

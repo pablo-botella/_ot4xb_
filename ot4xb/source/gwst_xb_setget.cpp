@@ -95,7 +95,7 @@ static void _gwst_sg_exit_( GWSTSG * psg )
 /*{{internal-function_: _gwst_xbsetget_bool_
             | syntax_: `_gwst_xbsetget_bool_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, BOOL member
+            | _kw_: _gwst_xbsetget_bool_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a Win32 BOOL member (32 bit). A
       written value that is not zero is stored as 1, zero as 0; reading returns the member as a Logical.
@@ -136,7 +136,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_BOOL_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_bytebool_
             | syntax_: `_gwst_xbsetget_bytebool_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, byte boolean member
+            | _kw_: _gwst_xbsetget_bytebool_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a boolean member
       stored in a single byte. A written value that is not zero is stored as 1, zero as 0; reading returns
@@ -183,7 +183,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_BYTEBOOL_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_byte_
             | syntax_: `_gwst_xbsetget_byte_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, BYTE member
+            | _kw_: _gwst_xbsetget_byte_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
       8 bit member. Reading returns 0 to 255.
@@ -228,7 +228,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_BYTE_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_sint8_
             | syntax_: `_gwst_xbsetget_sint8_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, signed byte member
+            | _kw_: _gwst_xbsetget_sint8_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 8 bit
       member. Reading sign extends the byte and returns -128 to 127.
@@ -274,7 +274,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_SINT8_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_word_
             | syntax_: `_gwst_xbsetget_word_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, WORD member
+            | _kw_: _gwst_xbsetget_word_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
       16 bit member. Reading returns 0 to 65535.
@@ -318,7 +318,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_WORD_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_sint16_
             | syntax_: `_gwst_xbsetget_sint16_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, signed 16-bit member
+            | _kw_: _gwst_xbsetget_sint16_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 16 bit
       member. Reading sign extends the value and returns -32768 to 32767.
@@ -363,7 +363,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_SINT16_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_dword_
             | syntax_: `_gwst_xbsetget_dword_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, DWORD member, LONG
+            | _kw_: _gwst_xbsetget_dword_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit member.
       The member is read back with signed semantics, so values above 0x7FFFFFFF appear negative.
@@ -405,7 +405,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORD_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_uint32_
             | syntax_: `_gwst_xbsetget_uint32_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, unsigned 32-bit member
+            | _kw_: _gwst_xbsetget_uint32_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
       32 bit member. Reading never returns a negative value: above 0x7FFFFFFF the member comes back as a
@@ -450,7 +450,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_UINT32_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_dword64_
             | syntax_: `_gwst_xbsetget_dword64_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, QWORD member, 64-bit
+            | _kw_: _gwst_xbsetget_dword64_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
       64 bit member (QWORD). Reading returns the raw member as an 8 byte Character string. Writing clears
@@ -527,7 +527,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORD64_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_nint64_
             | syntax_: `_gwst_xbsetget_nint64_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, signed 64-bit member
+            | _kw_: _gwst_xbsetget_nint64_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a signed 64 bit
       member. Reading returns the raw member as an 8 byte Character string. Writing clears the member first
@@ -604,7 +604,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_NINT64_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_pclipvar_
             | syntax_: `_gwst_xbsetget_pclipvar_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, Xbase++ value member, pClipVar
+            | _kw_: _gwst_xbsetget_pclipvar_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code for members that hold a complete
       Xbase++ value of any type. Every write releases the previously stored value; assigning NIL just
@@ -653,7 +653,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_PCLIPVAR_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_xppguiwnd_
             | syntax_: `_gwst_xbsetget_xppguiwnd_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, GUI window member, XbpWindow
+            | _kw_: _gwst_xbsetget_xppguiwnd_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code for members that hold the C++
       window pointer of an Xbase++ GUI object. A Numeric is stored as is; an Object is asked for the
@@ -702,7 +702,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_XPPGUIWND_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_float_
             | syntax_: `_gwst_xbsetget_float_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, float member
+            | _kw_: _gwst_xbsetget_float_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit
       floating point member.
@@ -743,7 +743,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_FLOAT_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_double_
             | syntax_: `_gwst_xbsetget_double_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, double member
+            | _kw_: _gwst_xbsetget_double_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a 64 bit
       floating point member.
@@ -784,7 +784,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_DOUBLE_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_lpstr_
             | syntax_: `_gwst_xbsetget_lpstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, LPSTR member, string pointer
+            | _kw_: _gwst_xbsetget_lpstr_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor for LPSTR members. Alias of the DWORD accessor: the member is
       handled as a 32 bit pointer value, a Numeric address, not the text it points to.
@@ -810,7 +810,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_LPSTR_(XppParamList pl){ _GWST_XBSETGET_DWORD_(pl
 /*{{internal-function_: _gwst_xbsetget_binstr_
             | syntax_: `_gwst_xbsetget_binstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
             | category: structures/internal
-            | _kw_: gwst accessor, binary member, fixed size
+            | _kw_: _gwst_xbsetget_binstr_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
       binary member of nMemberSize bytes. Writing copies a Character value into the member and zero fills
@@ -864,7 +864,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_BINSTR_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_szstr_
             | syntax_: `_gwst_xbsetget_szstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
             | category: structures/internal
-            | _kw_: gwst accessor, zero terminated string member, char array
+            | _kw_: _gwst_xbsetget_szstr_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
       zero terminated ANSI member of nMemberSize bytes. Writing copies a Character value and zero fills the
@@ -910,7 +910,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_SZSTR_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_szwstr_
             | syntax_: `_gwst_xbsetget_szwstr_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
             | category: structures/internal
-            | _kw_: gwst accessor, unicode string member, wchar array
+            | _kw_: _gwst_xbsetget_szwstr_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a fixed size
       Unicode member of nMemberSize bytes. Writing zero fills the member and converts the ANSI Character
@@ -974,7 +974,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_SZWSTR_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_dynsz_
             | syntax_: `_gwst_xbsetget_dynsz_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost, nMemberSize )`
             | category: structures/internal
-            | _kw_: gwst accessor, dynamic string member, allocated string
+            | _kw_: _gwst_xbsetget_dynsz_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code for members that point to a
       dynamically allocated zero terminated ANSI string owned by the structure. Writing always releases the
@@ -1028,7 +1028,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_DYNSZ_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_wordnet_
             | syntax_: `_gwst_xbsetget_wordnet_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, network byte order, big endian, WORD
+            | _kw_: _gwst_xbsetget_wordnet_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write an unsigned
       16 bit member kept in network byte order (big endian). Bytes are swapped on write and on read, so
@@ -1073,7 +1073,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_WORDNET_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_dwordnet_
             | syntax_: `_gwst_xbsetget_dwordnet_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, network byte order, big endian, DWORD
+            | _kw_: _gwst_xbsetget_dwordnet_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a 32 bit member
       kept in network byte order (big endian). Bytes are swapped on write and on read; the member is read
@@ -1118,7 +1118,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_DWORDNET_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_xdate_
             | syntax_: `_gwst_xbsetget_xdate_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, date member, YYYYMMDD
+            | _kw_: _gwst_xbsetget_xdate_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor used by generated property code to read or write a Date member
       stored as 8 characters in YYYYMMDD form. Writing clears the member and stores a Date as its YYYYMMDD
@@ -1176,7 +1176,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_XDATE_(XppParamList pl)
 /*{{internal-function_: _gwst_xbsetget_pointer32_
             | syntax_: `_gwst_xbsetget_pointer32_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, pointer member
+            | _kw_: _gwst_xbsetget_pointer32_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor for 32 bit pointer members. Alias of the DWORD accessor: the
       member is handled as a plain 32 bit value.
@@ -1202,7 +1202,7 @@ XPPRET XPPENTRY _GWST_XBSETGET_POINTER32_(XppParamList pl) { _GWST_XBSETGET_DWOR
 /*{{internal-function_: _gwst_xbsetget_handle_
             | syntax_: `_gwst_xbsetget_handle_( @xValue, nPCount, @pStorage, nShift, nOffset, nStorageSize, pGhost )`
             | category: structures/internal
-            | _kw_: gwst accessor, handle member, HWND, HANDLE
+            | _kw_: _gwst_xbsetget_handle_, Function
    }}*/
 /*{{|desc: Internal GWST member accessor for Win32 handle members (HANDLE, HWND and the like). Alias of
       the DWORD accessor: the member is handled as a plain 32 bit value.

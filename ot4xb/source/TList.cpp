@@ -18,7 +18,7 @@ typedef double*           LPDOUBLE;
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_new
-            | _kw_: tlist, pointer list, create, growable array
+            | _kw_: _tlist_new, Function
    }}*/
 /*{{|desc: Creates a new empty TList, a growable array of void pointers, using the default ot4xb heap.
 
@@ -32,7 +32,7 @@ OT4XB_API void*  _tlist_new(void){return (void*) new TList;}
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_destroy
-            | _kw_: tlist, destroy, release list
+            | _kw_: _tlist_destroy, Function
    }}*/
 /*{{|desc: Destroys a list, freeing its slot array and, when the list owns a private heap, that heap too.
       The pointers stored as items are not freed by themselves.
@@ -49,7 +49,7 @@ OT4XB_API void   _tlist_destroy(void* ls){delete reinterpret_cast<TList*>(ls);}
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_grow
-            | _kw_: tlist, capacity, reserve, grow
+            | _kw_: _tlist_grow, Function
    }}*/
 /*{{|desc: Extends the list capacity by nItems extra slots, reallocating the internal slot array. Useful
       to reserve room before adding many items.
@@ -67,7 +67,7 @@ OT4XB_API void   _tlist_grow(void* ls,UINT nItems){reinterpret_cast<TList*>(ls)-
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_add
-            | _kw_: tlist, append, add pointer, push
+            | _kw_: _tlist_add, Function
    }}*/
 /*{{|desc: Appends a pointer at the end of the list, growing the slot array when it is full.
     | params:
@@ -84,7 +84,7 @@ OT4XB_API void*  _tlist_add(void* ls , void* p ){return reinterpret_cast<TList*>
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_get
-            | _kw_: tlist, get item, position
+            | _kw_: _tlist_get, Function
    }}*/
 /*{{|desc: Returns the pointer stored at a zero-based position.
     | params:
@@ -102,7 +102,7 @@ OT4XB_API void*  _tlist_get(void* ls , DWORD n ){return reinterpret_cast<TList*>
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_replace
-            | _kw_: tlist, replace item, position
+            | _kw_: _tlist_replace, Function
    }}*/
 /*{{|desc: Stores a new pointer at a zero-based position and returns the pointer that was there before.
     | params:
@@ -120,7 +120,7 @@ OT4XB_API void*  _tlist_replace(void* ls , DWORD n , void* p ){return reinterpre
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_count
-            | _kw_: tlist, count, number of items
+            | _kw_: _tlist_count, Function
    }}*/
 /*{{|desc: Returns the number of items currently stored in the list.
     | params:
@@ -136,7 +136,7 @@ OT4XB_API DWORD  _tlist_count(void* ls){return reinterpret_cast<TList*>(ls)->Cou
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_insert
-            | _kw_: tlist, insert item, position
+            | _kw_: _tlist_insert, Function
    }}*/
 /*{{|desc: Inserts a pointer at a zero-based position, shifting that item and the following ones up one
       slot.
@@ -156,7 +156,7 @@ OT4XB_API void*  _tlist_insert(void* ls , DWORD n , void* p ){return reinterpret
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_remove
-            | _kw_: tlist, remove item, position
+            | _kw_: _tlist_remove, Function
    }}*/
 /*{{|desc: Removes the item at a zero-based position, shifting the following items down one slot.
     | params:
@@ -174,7 +174,7 @@ OT4XB_API void*  _tlist_remove(void* ls , DWORD n){return reinterpret_cast<TList
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_pop
-            | _kw_: tlist, pop, last item
+            | _kw_: _tlist_pop, Function
    }}*/
 /*{{|desc: Removes the last item of the list and returns it.
     | params:
@@ -190,7 +190,7 @@ OT4XB_API void*  _tlist_pop(void* ls){return reinterpret_cast<TList*>(ls)->Pop()
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_truncate
-            | _kw_: tlist, truncate, cut, count
+            | _kw_: _tlist_truncate, Function
    }}*/
 /*{{|desc: Cuts the list down to new_count items, clearing the abandoned slots. The dropped pointers are
       not freed: release them before truncating or their memory leaks.
@@ -209,7 +209,7 @@ OT4XB_API void _tlist_truncate(void* ls , UINT new_count ){reinterpret_cast<TLis
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_iseek
-            | _kw_: tlist, binary search, bsearch, sorted, position
+            | _kw_: _tlist_iseek, Function
    }}*/
 /*{{|desc: Binary search over a list previously sorted with the same comparator. Returns the position of
       a matching item.
@@ -230,7 +230,7 @@ OT4XB_API int _tlist_iseek( void* ls,void *key,DWORD compare,void* ctx){return r
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_pseek
-            | _kw_: tlist, binary search, bsearch, sorted, pointer
+            | _kw_: _tlist_pseek, Function
    }}*/
 /*{{|desc: Binary search over a list previously sorted with the same comparator. Returns the matching
       stored pointer.
@@ -251,7 +251,7 @@ OT4XB_API void* _tlist_pseek( void* ls,void *key,DWORD compare,void* ctx){return
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_qsort
-            | _kw_: tlist, sort, qsort, comparator
+            | _kw_: _tlist_qsort, Function
    }}*/
 /*{{|desc: Sorts the list items in place using the C runtime quick sort and the given comparator.
     | params:
@@ -270,7 +270,7 @@ OT4XB_API void _tlist_qsort( void* ls,DWORD compare,void * ctx){return reinterpr
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_ilocate
-            | _kw_: tlist, linear search, find, position
+            | _kw_: _tlist_ilocate, Function
    }}*/
 /*{{|desc: Linear scan of the list, no sort order required. Returns the position of the first matching
       item.
@@ -291,7 +291,7 @@ OT4XB_API int _tlist_ilocate( void* ls,void *key,DWORD compare,void* ctx){return
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_plocate
-            | _kw_: tlist, linear search, find, pointer
+            | _kw_: _tlist_plocate, Function
    }}*/
 /*{{|desc: Linear scan of the list, no sort order required. Returns the first matching stored pointer.
     | params:
@@ -311,7 +311,7 @@ OT4XB_API void* _tlist_plocate( void* ls,void *key,DWORD compare,void* ctx){retu
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_new_ex
-            | _kw_: tlist, create, vheap, private heap, flags
+            | _kw_: _tlist_new_ex, Function
    }}*/
 /*{{|desc: Creates a new empty TList choosing where its memory comes from: the default ot4xb heap, a
       caller supplied OT4XB_VHEAP, or a private heap owned by the list.
@@ -331,7 +331,7 @@ OT4XB_API void* _tlist_new_ex( DWORD flags, void* vheap ) {	return (void*) new T
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_alloc_bytes
-            | _kw_: tlist, allocate, list heap
+            | _kw_: _tlist_alloc_bytes, Function
    }}*/
 /*{{|desc: Allocates a memory block from the heap the list was created with (default ot4xb heap, custom
       vheap or private heap).
@@ -349,7 +349,7 @@ OT4XB_API void* _tlist_alloc_bytes( void* ls, UINT nBytes ) {return reinterpret_
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_free_bytes
-            | _kw_: tlist, free, list heap
+            | _kw_: _tlist_free_bytes, Function
    }}*/
 /*{{|desc: Returns to the list heap a block previously obtained with _tlist_alloc_bytes on the same list.
     | params:
@@ -366,7 +366,7 @@ OT4XB_API void  _tlist_free_bytes( void* ls, void* p ) {	reinterpret_cast<TList*
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_set_granularity
-            | _kw_: tlist, growth step, granularity
+            | _kw_: _tlist_set_granularity, Function
    }}*/
 /*{{|desc: Sets how many slots the capacity grows by when the list is full. The value is clamped to
       0xFFFF and its low four bits are forced on, so the real growth step (value + 1) is a multiple of 16.
@@ -390,7 +390,7 @@ OT4XB_API void   _tlist_set_granularity(void* ls,DWORD nn)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_serialize
-            | _kw_: tlist, serialize, write records, file
+            | _kw_: _tlist_serialize, Function
    }}*/
 /*{{|desc: Writes the memory blocks referenced by the list items to an open file, one fixed size record
       of record_size bytes per item. Items holding NULL are skipped.
@@ -440,7 +440,7 @@ OT4XB_API DWORD _tlist_serialize(void* pList, DWORD record_size , DWORD dwStart 
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_unserialize
-            | _kw_: tlist, unserialize, read records, file
+            | _kw_: _tlist_unserialize, Function
    }}*/
 /*{{|desc: Reads fixed size records from an open file; each record is allocated as a separate block,
       filled from the file and appended to the list.
@@ -514,7 +514,7 @@ OT4XB_API DWORD _tlist_unserialize(void* pList,DWORD record_size,DWORD dwMax,HAN
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_free_simple_items
-            | _kw_: tlist, free items, release blocks, range
+            | _kw_: _tlist_free_simple_items, Function
    }}*/
 /*{{|desc: Frees the blocks referenced by a range of items and stores NULL in their slots. The item count
       does not change.
@@ -549,7 +549,7 @@ OT4XB_API void  _tlist_free_simple_items(void* pList,DWORD nStart , DWORD nEnd ,
             | header: ot4xb_TLists.h
             | category: c-api/tlist
             | mangled-name: _tlist_cbk_cmp_combi
-            | _kw_: tlist comparator, multi key, sort rules, chain
+            | _kw_: _tlist_cbk_cmp_combi, Function
    }}*/
 /*{{|desc: Multi-key comparator for the list sort and search functions: runs a chain of rule comparators
       in order and returns the first non-zero result. NULL items sort before non-NULL items.
@@ -608,7 +608,7 @@ static BOOL _tlist_cmp_resolve_indirection_level( DWORD* ctx, void** & pp1,void*
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmpi_cb
-            | _kw_: tlist comparator, byte range, case insensitive, offset
+            | _kw_: _tlist_cbk_cmpi_cb, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a byte range at a fixed offset
       inside both items, case insensitive through the ANSI lower case table. The stored item pointers
@@ -635,7 +635,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmpi_cb( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_cb
-            | _kw_: tlist comparator, byte range, offset
+            | _kw_: _tlist_cbk_cmp_cb, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a byte range at a fixed offset
       inside both items as raw unsigned bytes (case sensitive). The stored item pointers must not be
@@ -663,7 +663,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_cb( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_char
-            | _kw_: tlist comparator, char field, offset
+            | _kw_: _tlist_cbk_cmp_char, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a signed char field at a fixed
       offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -693,7 +693,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_char( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_BYTE
-            | _kw_: tlist comparator, BYTE field, offset
+            | _kw_: _tlist_cbk_cmp_BYTE, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares an unsigned BYTE field at a fixed
       offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -723,7 +723,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_BYTE( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_short
-            | _kw_: tlist comparator, short field, offset
+            | _kw_: _tlist_cbk_cmp_short, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a signed short field at a fixed
       offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -753,7 +753,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_short( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_WORD
-            | _kw_: tlist comparator, WORD field, offset
+            | _kw_: _tlist_cbk_cmp_WORD, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares an unsigned WORD field at a fixed
       offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -783,7 +783,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_WORD( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_LONG
-            | _kw_: tlist comparator, LONG field, offset
+            | _kw_: _tlist_cbk_cmp_LONG, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a signed LONG field at a fixed
       offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -812,7 +812,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_LONG( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_DWORD
-            | _kw_: tlist comparator, DWORD field, offset
+            | _kw_: _tlist_cbk_cmp_DWORD, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares an unsigned DWORD field at a
       fixed offset inside both items, optionally AND masked. The stored item pointers must not be NULL.
@@ -841,7 +841,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_DWORD( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_LONGLONG
-            | _kw_: tlist comparator, LONGLONG field, int64, offset
+            | _kw_: _tlist_cbk_cmp_LONGLONG, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a signed LONGLONG field at a
       fixed offset inside both items. The stored item pointers must not be NULL.
@@ -869,7 +869,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_LONGLONG( DWORD* ctx, void** pp1,void** pp2
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_QWORD
-            | _kw_: tlist comparator, QWORD field, uint64, offset
+            | _kw_: _tlist_cbk_cmp_QWORD, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares an unsigned 64 bit (ULONGLONG)
       field at a fixed offset inside both items. The stored item pointers must not be NULL.
@@ -897,7 +897,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_QWORD( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_float
-            | _kw_: tlist comparator, float field, offset
+            | _kw_: _tlist_cbk_cmp_float, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a float field at a fixed offset
       inside both items. The stored item pointers must not be NULL.
@@ -925,7 +925,7 @@ OT4XB_API int __cdecl _tlist_cbk_cmp_float( DWORD* ctx, void** pp1,void** pp2)
             | category: c-api/tlist
             | header: ot4xb_TLists.h
             | mangled-name: _tlist_cbk_cmp_double
-            | _kw_: tlist comparator, double field, offset
+            | _kw_: _tlist_cbk_cmp_double, Function
    }}*/
 /*{{|desc: Comparator for the list sort and search functions: compares a double field at a fixed offset
       inside both items. The stored item pointers must not be NULL.

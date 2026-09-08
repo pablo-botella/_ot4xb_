@@ -70,7 +70,7 @@ read. A dictionary created by the caller must be released with _hdict_destroy() 
 /*{{function_: _hdict_new
             | syntax_: `_hdict_new( [@pOld] [, nBuckets] [, nMaxPopulation] [, lSync] )`
             | category: container/dictionary
-            | _kw_: dictionary, hash table, key value, create, case insensitive, hdict
+            | _kw_: _hdict_new, Function
    }}*/
 /*{{|desc: Creates a new case-insensitive dictionary and returns its handle. When pOld holds the handle
       of an existing dictionary, that dictionary is destroyed first and, when pOld is passed by
@@ -119,7 +119,7 @@ XPPRET XPPENTRY _HDICT_NEW( XppParamList pl )// (pOld,nBuckets,nMaxPopulation,lS
 /*{{function_: _hdictcs_new
             | syntax_: `_hdictcs_new( [@pOld] [, nBuckets] [, nMaxPopulation] [, lSync] )`
             | category: container/dictionary
-            | _kw_: dictionary, hash table, key value, create, case sensitive, hdict
+            | _kw_: _hdictcs_new, Function
    }}*/
 /*{{|desc: Creates a new case-sensitive dictionary and returns its handle. When pOld holds the handle of
       an existing dictionary, that dictionary is destroyed first and, when pOld is passed by reference,
@@ -168,7 +168,7 @@ XPPRET XPPENTRY _HDICTCS_NEW( XppParamList pl )
 /*{{function_: _hdict_destroy
             | syntax_: `_hdict_destroy( @pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, destroy, release, hdict
+            | _kw_: _hdict_destroy, Function
    }}*/
 /*{{|desc: Destroys a case-insensitive dictionary and every entry stored in it. When pHt is passed by
       reference the variable is set to 0.
@@ -201,7 +201,7 @@ XPPRET XPPENTRY _HDICT_DESTROY( XppParamList pl )
 /*{{function_: _hdictcs_destroy
             | syntax_: `_hdictcs_destroy( @pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, destroy, release, case sensitive, hdict
+            | _kw_: _hdictcs_destroy, Function
    }}*/
 /*{{|desc: Destroys a case-sensitive dictionary and every entry stored in it. When pHt is passed by
       reference the variable is set to 0.
@@ -234,7 +234,7 @@ XPPRET XPPENTRY _HDICTCS_DESTROY( XppParamList pl )
 /*{{function_: _hdict_key_compare
             | syntax_: `_hdict_key_compare( xKey1, xKey2 )`
             | category: container/dictionary
-            | _kw_: dictionary, compare keys, case insensitive, hdict
+            | _kw_: _hdict_key_compare, Function
    }}*/
 /*{{|desc: Compares two key values with the rules a case-insensitive dictionary applies to its keys and
       returns .T. when both resolve to the same key.
@@ -266,7 +266,7 @@ XPPRET XPPENTRY _HDICT_KEY_COMPARE( XppParamList pl )
 /*{{function_: _hdictcs_key_compare
             | syntax_: `_hdictcs_key_compare( xKey1, xKey2 )`
             | category: container/dictionary
-            | _kw_: dictionary, compare keys, case sensitive, hdict
+            | _kw_: _hdictcs_key_compare, Function
    }}*/
 /*{{|desc: Compares two key values with the rules a case-sensitive dictionary applies to its keys and
       returns .T. when both resolve to the same key.
@@ -298,7 +298,7 @@ XPPRET XPPENTRY _HDICTCS_KEY_COMPARE( XppParamList pl )
 /*{{function_: _hdict_setprop
             | syntax_: `_hdict_setprop( pHt, xKey, xValue )`
             | category: container/dictionary
-            | _kw_: dictionary, set value, put, store key, hdict
+            | _kw_: _hdict_setprop, Function
    }}*/
 /*{{|desc: Stores a value in a case-insensitive dictionary. When an entry with the same key already
       exists, its value is replaced.
@@ -345,7 +345,7 @@ XPPRET XPPENTRY _HDICT_SETPROP( XppParamList pl )
 /*{{function_: _hdictcs_setprop
             | syntax_: `_hdictcs_setprop( pHt, xKey, xValue )`
             | category: container/dictionary
-            | _kw_: dictionary, set value, put, store key, case sensitive, hdict
+            | _kw_: _hdictcs_setprop, Function
    }}*/
 /*{{|desc: Stores a value in a case-sensitive dictionary. When an entry with the same key already
       exists, its value is replaced.
@@ -421,7 +421,7 @@ static void hdict_add_env_strings(  THashTable * pht , LPSTR pEnvironment )
 /*{{function_: _hdict_add_env_strings
             | syntax_: `_hdict_add_env_strings( pHt [, pEnvironment] )`
             | category: container/dictionary
-            | _kw_: dictionary, environment variables, getenv, hdict
+            | _kw_: _hdict_add_env_strings, Function
    }}*/
 /*{{|desc: Adds environment variables to a case-insensitive dictionary, one Character entry per variable,
       keyed by the variable name. When pEnvironment is omitted or 0, the environment block of the current
@@ -457,7 +457,7 @@ _XPP_REG_FUN_( _HDICT_ADD_ENV_STRINGS  )
 /*{{function_: _hdict_from_zkdw
             | syntax_: `_hdict_from_zkdw( pHt, cZkdw )`
             | category: container/dictionary
-            | _kw_: dictionary, ZKDW, import records, hdict
+            | _kw_: _hdict_from_zkdw, Function
    }}*/
 /*{{|desc: Imports a ZKDW buffer into a case-insensitive dictionary. Each record holds a 4-byte integer
       value, a 4-byte key length and the key bytes; every record becomes an integer Numeric entry stored
@@ -509,7 +509,7 @@ _XPP_REG_FUN_( _HDICT_FROM_ZKDW )
 /*{{function_: _hdict_getprop
             | syntax_: `_hdict_getprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, get value, lookup key, hdict
+            | _kw_: _hdict_getprop, Function
    }}*/
 /*{{|desc: Returns the value stored under a key in a case-insensitive dictionary.
     | params:
@@ -548,7 +548,7 @@ XPPRET XPPENTRY _HDICT_GETPROP( XppParamList pl )
 /*{{function_: _hdictcs_getprop
             | syntax_: `_hdictcs_getprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, get value, lookup key, case sensitive, hdict
+            | _kw_: _hdictcs_getprop, Function
    }}*/
 /*{{|desc: Returns the value stored under a key in a case-sensitive dictionary.
     | params:
@@ -588,7 +588,7 @@ XPPRET XPPENTRY _HDICTCS_GETPROP( XppParamList pl )
 /*{{function_: _hdict_isprop
             | syntax_: `_hdict_isprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, key exists, contains, hdict
+            | _kw_: _hdict_isprop, Function
    }}*/
 /*{{|desc: Checks whether a key exists in a case-insensitive dictionary.
     | params:
@@ -623,7 +623,7 @@ XPPRET XPPENTRY _HDICT_ISPROP( XppParamList pl )
 /*{{function_: _hdictcs_isprop
             | syntax_: `_hdictcs_isprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, key exists, contains, case sensitive, hdict
+            | _kw_: _hdictcs_isprop, Function
    }}*/
 /*{{|desc: Checks whether a key exists in a case-sensitive dictionary.
     | params:
@@ -658,7 +658,7 @@ XPPRET XPPENTRY _HDICTCS_ISPROP( XppParamList pl )
 /*{{function_: _hdict_getprop_raw_
             | syntax_: `_hdict_getprop_raw_( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, item address, internal item, hdict
+            | _kw_: _hdict_getprop_raw_, Function
    }}*/
 /*{{|desc: Returns the address of the internal item that stores a key in a case-insensitive dictionary.
       This is an internal/diagnostic entry point.
@@ -695,7 +695,7 @@ XPPRET XPPENTRY _HDICT_GETPROP_RAW_( XppParamList pl )
 /*{{function_: _hdict_removeprop
             | syntax_: `_hdict_removeprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, remove key, delete entry, hdict
+            | _kw_: _hdict_removeprop, Function
    }}*/
 /*{{|desc: Removes an entry from a case-insensitive dictionary.
     | params:
@@ -729,7 +729,7 @@ XPPRET XPPENTRY _HDICT_REMOVEPROP( XppParamList pl )
 /*{{function_: _hdictcs_removeprop
             | syntax_: `_hdictcs_removeprop( pHt, xKey )`
             | category: container/dictionary
-            | _kw_: dictionary, remove key, delete entry, case sensitive, hdict
+            | _kw_: _hdictcs_removeprop, Function
    }}*/
 /*{{|desc: Removes an entry from a case-sensitive dictionary.
     | params:
@@ -763,7 +763,7 @@ XPPRET XPPENTRY _HDICTCS_REMOVEPROP( XppParamList pl )
 /*{{function_: _hdict_removeall
             | syntax_: `_hdict_removeall( pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, clear, remove all, hdict
+            | _kw_: _hdict_removeall, Function
    }}*/
 /*{{|desc: Removes every entry from a case-insensitive dictionary. The dictionary itself remains usable.
     | params:
@@ -787,7 +787,7 @@ XPPRET XPPENTRY _HDICT_REMOVEALL( XppParamList pl )
 /*{{function_: _hdictcs_removeall
             | syntax_: `_hdictcs_removeall( pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, clear, remove all, case sensitive, hdict
+            | _kw_: _hdictcs_removeall, Function
    }}*/
 /*{{|desc: Removes every entry from a case-sensitive dictionary. The dictionary itself remains usable.
     | params:
@@ -811,7 +811,7 @@ XPPRET XPPENTRY _HDICTCS_REMOVEALL( XppParamList pl )
 /*{{function_: _hdict_count
             | syntax_: `_hdict_count( pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, count, number of entries, hdict
+            | _kw_: _hdict_count, Function
    }}*/
 /*{{|desc: Returns the number of entries stored in a case-insensitive dictionary.
     | params:
@@ -834,7 +834,7 @@ XPPRET XPPENTRY _HDICT_COUNT( XppParamList pl )
 /*{{function_: _hdictcs_count
             | syntax_: `_hdictcs_count( pHt )`
             | category: container/dictionary
-            | _kw_: dictionary, count, number of entries, case sensitive, hdict
+            | _kw_: _hdictcs_count, Function
    }}*/
 /*{{|desc: Returns the number of entries stored in a case-sensitive dictionary.
     | params:
@@ -857,7 +857,7 @@ XPPRET XPPENTRY _HDICTCS_COUNT( XppParamList pl )
 /*{{function_: _hdict_iterate_step
             | syntax_: `_hdict_iterate_step( pHt, @pIterator, @xValue, @cKey [, pFilter] )`
             | category: container/dictionary
-            | _kw_: dictionary, iterate, next entry, iterator, hdict
+            | _kw_: _hdict_iterate_step, Function
    }}*/
 /*{{|desc: Returns the entries of a case-insensitive dictionary one call at a time. Start with pIterator
       containing 0; while the function returns .T., xValue and cKey hold the current entry and pIterator
@@ -961,7 +961,7 @@ XPPRET XPPENTRY _HDICT_ITERATE_STEP( XppParamList pl )
 /*{{function_: _hdict_iterate_cb
             | syntax_: `_hdict_iterate_cb( pHt, bEval [, xCargo] ) / _hdict_iterate_cb( pHt, nOp [, @xExtra] )`
             | category: container/dictionary
-            | _kw_: dictionary, iterate, code block, export, for each, hdict
+            | _kw_: _hdict_iterate_cb, Function
    }}*/
 /*{{|desc: Iterates or exports a case-insensitive dictionary. When the second parameter is a CodeBlock
       it is evaluated as Eval( bEval, nPos, cKey, xValue, xCargo ) for every entry until it returns .F.,
@@ -1232,7 +1232,7 @@ XPPRET XPPENTRY _HDICT_ITERATE_CB( XppParamList pl )
 /*{{function_: _hdict_addpropfromarray
             | syntax_: `_hdict_addpropfromarray( pHt, aPairs )`
             | category: container/dictionary
-            | _kw_: dictionary, from array, key value pairs, hdict
+            | _kw_: _hdict_addpropfromarray, Function
    }}*/
 /*{{|desc: Adds entries to a case-insensitive dictionary from an array of { xKey, xValue } pairs. The
       first element of each pair is the key; the second, when present, is the value (NIL otherwise).
@@ -1295,7 +1295,7 @@ XPPRET XPPENTRY _HDICT_ADDPROPFROMARRAY( XppParamList pl )
 /*{{function_: _hdict_add_http_headers
             | syntax_: `_hdict_add_http_headers( pHt, cHeaders )`
             | category: container/dictionary
-            | _kw_: dictionary, http headers, parse headers, hdict
+            | _kw_: _hdict_add_http_headers, Function
    }}*/
 /*{{|desc: Parses HTTP-style header text and adds one Character entry per "Name: value" line to a
       case-insensitive dictionary. Lines are separated by CR and/or LF; blanks between the name and the
@@ -1406,7 +1406,7 @@ _XPP_REG_FUN_( _HDICT_ADD_HTTP_HEADERS )
 /*{{function_: _hdict_addpropfroministring
             | syntax_: `_hdict_addpropfroministring( pHt, cIniText, nFlags )`
             | category: container/dictionary
-            | _kw_: dictionary, ini, key=value, parse ini, hdict
+            | _kw_: _hdict_addpropfroministring, Function
    }}*/
 /*{{|desc: Parses INI-style text and adds one Character entry per "key=value" line to a case-insensitive
       dictionary. Lines whose first non-blank character is ";" are comments, and "[section]" lines set
@@ -1575,7 +1575,7 @@ _XPP_REG_FUN_( _HDICT_ADDPROPFROMINISTRING )
 
               o:destroy()
               ```
-   | _kw_: dictionary, hash table, key value, class wrapper, hdict
+   | _kw_: THDictEx, Class
    }}*/
 BEGIN_XBASE_CLASS( THDICTEX )
 {
@@ -1585,96 +1585,96 @@ BEGIN_XBASE_CLASS( THDICTEX )
             | desc_: Internal instance variable holding the wrapped dictionary handle; read it with ::h().
    }}*/
    pc->Var("m_23D7C8B01AF14A059D83551121621B91");
-   /*{{|method_: - METHOD h() | return: pHt | desc_: Returns the raw dictionary handle. }}*/
+   /*{{|method_: - `METHOD h()` | return: pHt | desc_: Returns the raw dictionary handle. }}*/
    pc->MethodCB("h","{|s| s:m_23D7C8B01AF14A059D83551121621B91 }");
-   /*{{|method_: - METHOD handle() | return: pHt | desc_: Returns the raw dictionary handle, like ::h(). }}*/
+   /*{{|method_: - `METHOD handle()` | return: pHt | desc_: Returns the raw dictionary handle, like ::h(). }}*/
    pc->MethodCB("handle","{|s| s:m_23D7C8B01AF14A059D83551121621B91 }");
-   /*{{|method_: - METHOD new( [lSync] )
+   /*{{|method_: - `METHOD new( [lSync] )`
             | return: oDict
             | desc_: Creates the object and its underlying case-insensitive dictionary. lSync is passed to
               _hdict_new(); with .T. the dictionary is synchronized and can be shared between threads.
    }}*/
    pc->MethodCB("init"       ,"{|s,lSync| s:m_23D7C8B01AF14A059D83551121621B91 := _hdict_new(@s:m_23D7C8B01AF14A059D83551121621B91,NIL,NIL,lSync),s}");
-   /*{{|method_: - METHOD destroy()
+   /*{{|method_: - `METHOD destroy()`
             | return: NIL
             | desc_: Destroys the wrapped dictionary and sets the handle member to NIL.
    }}*/
    pc->MethodCB("destroy"    ,"{|s| _HDICT_DESTROY(s:h()) , s:m_23D7C8B01AF14A059D83551121621B91 := NIL}");
-   /*{{|method_: - METHOD SetProp( xKey, xValue )
+   /*{{|method_: - `METHOD SetProp( xKey, xValue )`
             | return: NIL
             | desc_: Stores or replaces a value in the dictionary.
    }}*/
    pc->MethodCB("SetProp"   ,"{|s,k,v| _HDICT_SETPROP(s:h(),k,v) }");
-   /*{{|method_: - METHOD GetProp( xKey )
+   /*{{|method_: - `METHOD GetProp( xKey )`
             | return: `xValue | NIL`
             | desc_: Returns the value stored under a key, or NIL when the key does not exist.
    }}*/
    pc->MethodCB("GetProp"   ,"{|s,k| _HDICT_GETPROP(s:h(),k) }");
-   /*{{|method_: - METHOD SetNoIVar( cKey, xValue )
+   /*{{|method_: - `METHOD SetNoIVar( cKey, xValue )`
             | return: NIL
             | desc_: Virtual instance-variable setter: assigning an undeclared instance variable stores the
               value in the dictionary.
    }}*/
    pc->MethodCB("SetNoIVar"  ,"{|s,k,v| _HDICT_SETPROP(s:h(),k,v) }");
-   /*{{|method_: - METHOD GetNoIVar( cKey )
+   /*{{|method_: - `METHOD GetNoIVar( cKey )`
             | return: `xValue | NIL`
             | desc_: Virtual instance-variable getter: reading an undeclared instance variable returns the
               value stored under that name.
    }}*/
    pc->MethodCB("GetNoIVar"  ,"{|s,k| _HDICT_GETPROP(s:h(),k) }");
-   /*{{|method_: - METHOD IsProp( xKey )
+   /*{{|method_: - `METHOD IsProp( xKey )`
             | return: lExists
             | desc_: Returns .T. when the key exists in the dictionary.
    }}*/
    pc->MethodCB("IsProp"     ,"{|s,k| _HDICT_ISPROP(s:h(),k) }");
-   /*{{|method_: - METHOD RemoveProp( xKey ) | return: lRemoved | desc_: Removes one entry from the dictionary. }}*/
+   /*{{|method_: - `METHOD RemoveProp( xKey )` | return: lRemoved | desc_: Removes one entry from the dictionary. }}*/
    pc->MethodCB("RemoveProp" ,"{|s,k| _HDICT_REMOVEPROP(s:h(),k) }");
-   /*{{|method_: - METHOD RemoveAll() | return: NIL | desc_: Removes all entries from the dictionary. }}*/
+   /*{{|method_: - `METHOD RemoveAll()` | return: NIL | desc_: Removes all entries from the dictionary. }}*/
    pc->MethodCB("RemoveAll"  ,"{|s| _HDICT_REMOVEALL(s:h()) }");
-   /*{{|method_: - METHOD Count()
+   /*{{|method_: - `METHOD Count()`
             | return: nCount
             | desc_: Returns the number of entries stored in the dictionary.
    }}*/
    pc->MethodCB("Count"      ,"{|s| _HDICT_COUNT(s:h()) }");
-   /*{{|method_: - METHOD AddFromArray( aPairs )
+   /*{{|method_: - `METHOD AddFromArray( aPairs )`
             | return: NIL
             | desc_: Adds entries from an array of { xKey, xValue } pairs.
    }}*/
    pc->MethodCB("AddFromArray"     ,"{|s,aData| _HDICT_ADDPROPFROMARRAY(s:h(),aData) }");
-   /*{{|method_: - METHOD AddFromIniString( cIniText, nFlags )
+   /*{{|method_: - `METHOD AddFromIniString( cIniText, nFlags )`
             | return: `aSections | NIL`
             | desc_: Adds entries parsed from INI-style text; see _hdict_addpropfroministring() for the flags
               and the returned value.
    }}*/
    pc->MethodCB("AddFromIniString" ,"{|s,cStr,flags| _HDICT_ADDPROPFROMINISTRING(s:h(),cStr,flags) }");
-   /*{{|method_: - METHOD AddEnvStrings( [pEnvironment] )
+   /*{{|method_: - `METHOD AddEnvStrings( [pEnvironment] )`
             | return: NIL
             | desc_: Adds the environment variables of a Windows environment block or, when pEnvironment is
               omitted, of the current process.
    }}*/
    pc->MethodCB("AddEnvStrings" ,"{|s,pEnv| _HDICT_ADD_ENV_STRINGS(s:h(),pEnv) }");
-   /*{{|method_: - METHOD AddHttpHeaders( cHeaders )
+   /*{{|method_: - `METHOD AddHttpHeaders( cHeaders )`
             | return: NIL
             | desc_: Adds HTTP-style header lines formatted as "Name: value".
    }}*/
    pc->MethodCB("AddHttpHeaders" ,"{|s,cStr| _HDICT_ADD_HTTP_HEADERS(s:h(),cStr,flags) }");
-   /*{{|method_: - METHOD ToArray()
+   /*{{|method_: - `METHOD ToArray()`
             | return: aPairs
             | desc_: Returns the entries as an array of { cKey, xValue } pairs, _hdict_iterate_cb() operation 3.
    }}*/
    pc->MethodCB("ToArray" ,"{|s| _HDICT_ITERATE_CB(s:h(),3) }");
-   /*{{|method_: - METHOD FromZkdw( cZkdw )
+   /*{{|method_: - `METHOD FromZkdw( cZkdw )`
             | return: nItems
             | desc_: Imports the records of a ZKDW buffer and returns the number of entries imported.
    }}*/
    pc->MethodCB("FromZkdw" ,"{|s,zkdw| _HDICT_FROM_ZKDW(s:h(),zkdw) }");
-   /*{{|method_: - METHOD ToZkdw( [nDefault] )
+   /*{{|method_: - `METHOD ToZkdw( [nDefault] )`
             | return: cZkdw
             | desc_: Exports the entries as a ZKDW buffer, _hdict_iterate_cb() operation 5, with nDefault used
               for non-integer entries.
    }}*/
    pc->MethodCB("ToZkdw" ,"{|s,defval| _HDICT_ITERATE_CB(s:h(),5,defval) }");
-   /*{{|method_: - METHOD ResetZkdw( [nDefault] )
+   /*{{|method_: - `METHOD ResetZkdw( [nDefault] )`
             | return: NIL
             | desc_: Resets every entry to an integer Numeric value, nDefault or 0, _hdict_iterate_cb()
               operation 6.

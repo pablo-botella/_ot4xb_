@@ -14,7 +14,7 @@ static void UnicodeDynStr_wStr( TXbClsParams * px );
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: mb2w
-            | _kw_: multibyte to wide, MultiByteToWideChar, UTF-16, code page
+            | _kw_: mb2w, Function
    }}*/
 /*{{|desc: Converts a multibyte string to a newly allocated zero-terminated UTF-16 wide string with
       MultiByteToWideChar(), using the given code page and flags.
@@ -47,7 +47,7 @@ OT4XB_API  LPWSTR mb2w( LPSTR pu ,int cb ,int* pcc , UINT nAcp , DWORD nFlags)
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: pAnsi2BSTR
-            | _kw_: ANSI to BSTR, SysAllocString, COM string
+            | _kw_: pAnsi2BSTR, Function
    }}*/
 /*{{|desc: Converts an ANSI string to a newly allocated BSTR, using the process ANSI code page (CP_ACP).
     | params:
@@ -75,7 +75,7 @@ OT4XB_API BSTR pAnsi2BSTR( LPSTR pAnsi , int cb)
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: w2mb
-            | _kw_: wide to multibyte, WideCharToMultiByte, UTF-16, code page
+            | _kw_: w2mb, Function
    }}*/
 /*{{|desc: Converts a UTF-16 wide string to a newly allocated zero-terminated multibyte string with
       WideCharToMultiByte(), using the given code page and flags.
@@ -111,7 +111,7 @@ OT4XB_API LPSTR w2mb(LPWSTR pw , int cc,int* pcb, UINT nAcp , DWORD nFlags)
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: mb2mb
-            | _kw_: code page conversion, transcode, multibyte, charset
+            | _kw_: mb2mb, Function
    }}*/
 /*{{|desc: Converts a multibyte string from one Windows code page to another through an intermediate
       UTF-16 conversion.
@@ -151,7 +151,7 @@ OT4XB_API LPSTR mb2mb(LPSTR pa ,int cb,int* pcb,UINT nAcpFrom , UINT nAcpTo , DW
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: w2utf8
-            | _kw_: wide to UTF-8, UTF-16 to UTF-8, convert
+            | _kw_: w2utf8, Function
    }}*/
 /*{{|desc: Converts a UTF-16 wide string to a newly allocated zero-terminated UTF-8 string.
     | params:
@@ -171,7 +171,7 @@ OT4XB_API LPSTR w2utf8(LPWSTR pw , int cc,int* pcb){ return w2mb(pw,cc,pcb,CP_UT
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: w2ansi
-            | _kw_: wide to ANSI, UTF-16 to ANSI, convert, CP_ACP
+            | _kw_: w2ansi, Function
    }}*/
 /*{{|desc: Converts a UTF-16 wide string to a newly allocated zero-terminated ANSI string, using the
       process ANSI code page (CP_ACP).
@@ -192,7 +192,7 @@ OT4XB_API LPSTR w2ansi(LPWSTR pw , int cc,int* pcb){ return w2mb(pw,cc,pcb,CP_AC
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: w2oem
-            | _kw_: wide to OEM, UTF-16 to OEM, convert, CP_OEMCP
+            | _kw_: w2oem, Function
    }}*/
 /*{{|desc: Converts a UTF-16 wide string to a newly allocated zero-terminated OEM string, using the
       process OEM code page (CP_OEMCP).
@@ -213,7 +213,7 @@ OT4XB_API LPSTR w2oem(LPWSTR pw , int cc,int* pcb){ return w2mb(pw,cc,pcb,CP_OEM
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: utf82w
-            | _kw_: UTF-8 to wide, UTF-8 to UTF-16, convert
+            | _kw_: utf82w, Function
    }}*/
 /*{{|desc: Converts a UTF-8 string to a newly allocated zero-terminated UTF-16 wide string.
     | params:
@@ -232,7 +232,7 @@ OT4XB_API  LPWSTR utf82w( LPSTR pu ,int cb ,int* pcc ){ return mb2w(pu,cb,pcc,CP
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: ansi2w
-            | _kw_: ANSI to wide, ANSI to UTF-16, convert, CP_ACP
+            | _kw_: ansi2w, Function
    }}*/
 /*{{|desc: Converts an ANSI string to a newly allocated zero-terminated UTF-16 wide string, using the
       process ANSI code page (CP_ACP).
@@ -252,7 +252,7 @@ OT4XB_API  LPWSTR ansi2w( LPSTR pu ,int cb ,int* pcc ){ return mb2w(pu,cb,pcc,CP
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: oem2w
-            | _kw_: OEM to wide, OEM to UTF-16, convert
+            | _kw_: oem2w, Function
    }}*/
 /*{{|desc: Converts an OEM string to a newly allocated zero-terminated UTF-16 wide string, using the
       process OEM code page (CP_OEMCP).
@@ -272,7 +272,7 @@ OT4XB_API  LPWSTR oem2w( LPSTR pu ,int cb ,int* pcc ){ return mb2w(pu,cb,pcc,CP_
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: ansi2utf8
-            | _kw_: ANSI to UTF-8, convert, CP_ACP
+            | _kw_: ansi2utf8, Function
    }}*/
 /*{{|desc: Converts an ANSI string to a newly allocated zero-terminated UTF-8 string, using the process
       ANSI code page (CP_ACP) as the source encoding.
@@ -292,7 +292,7 @@ OT4XB_API LPSTR ansi2utf8( LPSTR pa ,int cb,int* pcb){ return mb2mb(pa,cb,pcb,CP
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: oem2utf8
-            | _kw_: OEM to UTF-8, convert, code page 850
+            | _kw_: oem2utf8, Function
    }}*/
 /*{{|desc: Converts an OEM string to a newly allocated zero-terminated UTF-8 string, using the process
       OEM code page (CP_OEMCP) as the source encoding.
@@ -312,7 +312,7 @@ OT4XB_API LPSTR oem2utf8(  LPSTR po ,int cb,int* pcb){ return mb2mb(po,cb,pcb,CP
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: utf82ansi
-            | _kw_: UTF-8 to ANSI, convert, CP_ACP
+            | _kw_: utf82ansi, Function
    }}*/
 /*{{|desc: Converts a UTF-8 string to a newly allocated zero-terminated ANSI string, using the process
       ANSI code page (CP_ACP) as the destination encoding.
@@ -332,7 +332,7 @@ OT4XB_API LPSTR utf82ansi( LPSTR pu ,int cb,int* pcb){ return mb2mb(pu,cb,pcb,CP
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: utf82oem
-            | _kw_: UTF-8 to OEM, convert, code page 850
+            | _kw_: utf82oem, Function
    }}*/
 /*{{|desc: Converts a UTF-8 string to a newly allocated zero-terminated OEM string, using the process
       OEM code page (CP_OEMCP) as the destination encoding.
@@ -350,7 +350,7 @@ OT4XB_API LPSTR utf82oem(  LPSTR pu ,int cb,int* pcb){ return mb2mb(pu,cb,pcb,CP
 /*{{function_: cSzAnsi2Wide
             | syntax_: `cSzAnsi2Wide( cAnsi )`
             | category: unicode
-            | _kw_: ANSI to wide, UTF-16, unicode string, convert
+            | _kw_: cSzAnsi2Wide, Function
    }}*/
 /*{{|desc: Converts an ANSI string using the process ANSI code page to a wide-character binary string.
     | params:
@@ -390,7 +390,7 @@ XPPRET XPPENTRY CSZANSI2WIDE(XppParamList pl )
 /*{{function_: cSzWide2Ansi
             | syntax_: `cSzWide2Ansi( cWide )`
             | category: unicode
-            | _kw_: wide to ANSI, UTF-16, unicode string, convert
+            | _kw_: cSzWide2Ansi, Function
    }}*/
 /*{{|desc: Converts a wide-character binary string to an ANSI string using the process ANSI code page.
     | params:
@@ -634,7 +634,7 @@ static void UnicodeDynStr_wStr( TXbClsParams * px )
 /*{{function_: cUtf8ToAnsi
             | syntax_: `cUtf8ToAnsi( cUtf8 )`
             | category: unicode
-            | _kw_: UTF-8 to ANSI, convert, decode utf8
+            | _kw_: cUtf8ToAnsi, Function
    }}*/
 /*{{|desc: Converts UTF-8 text to ANSI using the process ANSI code page.
     | params:
@@ -672,7 +672,7 @@ XPPRET XPPENTRY CUTF8TOANSI(XppParamList pl )
 /*{{function_: cAnsiToUtf8
             | syntax_: `cAnsiToUtf8( cAnsi )`
             | category: unicode
-            | _kw_: ANSI to UTF-8, convert, encode utf8
+            | _kw_: cAnsiToUtf8, Function
    }}*/
 /*{{|desc: Converts ANSI text from the process ANSI code page to UTF-8.
     | params:
@@ -710,7 +710,7 @@ XPPRET XPPENTRY CANSITOUTF8(XppParamList pl )
 /*{{function_: cUtf8ToOem
             | syntax_: `cUtf8ToOem( cUtf8 )`
             | category: unicode
-            | _kw_: UTF-8 to OEM, convert, console
+            | _kw_: cUtf8ToOem, Function
    }}*/
 /*{{|desc: Converts UTF-8 text to the process OEM code page.
     | params:
@@ -748,7 +748,7 @@ XPPRET XPPENTRY CUTF8TOOEM(XppParamList pl )
 /*{{function_: cOemToUtf8
             | syntax_: `cOemToUtf8( cOem )`
             | category: unicode
-            | _kw_: OEM to UTF-8, convert, console
+            | _kw_: cOemToUtf8, Function
    }}*/
 /*{{|desc: Converts OEM text from the process OEM code page to UTF-8.
     | params:
@@ -788,7 +788,7 @@ XPPRET XPPENTRY COEMTOUTF8(XppParamList pl )
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: pAnsi2WStr
-            | _kw_: ANSI to wide, UTF-16, allocated wide string
+            | _kw_: pAnsi2WStr, Function
    }}*/
 /*{{|desc: Converts an ANSI string to a newly allocated zero-terminated UTF-16 wide string, using the
       process ANSI code page (CP_ACP) with the MB_PRECOMPOSED flag.
@@ -822,7 +822,7 @@ OT4XB_API WCHAR * pAnsi2WStr( LPSTR pAnsi , int cb , int* pcc )
             | category: unicode
             | header: ot4xb_c_exported.h
             | mangled-name: pWStr2Ansi
-            | _kw_: wide to ANSI, UTF-16, allocated string
+            | _kw_: pWStr2Ansi, Function
    }}*/
 /*{{|desc: Converts a UTF-16 wide string to a newly allocated zero-terminated ANSI string, using the
       process ANSI code page (CP_ACP) with the WC_COMPOSITECHECK flag.
@@ -846,7 +846,7 @@ OT4XB_API LPSTR pWStr2Ansi( WCHAR* pWide  , int cc, int* pcc)
 /*{{function_: PeekWStr
             | syntax_: `PeekWStr( pMem, @nShift, nChars )`
             | category: unicode/memory
-            | _kw_: peek wide string, read UTF-16, memory, pointer
+            | _kw_: PeekWStr, Function
    }}*/
 /*{{|desc: Reads UTF-16 little-endian data from a memory buffer or pointer.
     | params:
@@ -957,7 +957,7 @@ XPPRET XPPENTRY PEEKWSTR(XppParamList pl)
 /*{{function_: cUtf8ToWide
             | syntax_: `cUtf8ToWide( cUtf8 )`
             | category: unicode
-            | _kw_: UTF-8 to UTF-16, wide string, convert
+            | _kw_: cUtf8ToWide, Function
    }}*/
 /*{{|desc: Converts UTF-8 text to a UTF-16 little-endian binary string.
     | params:
@@ -992,7 +992,7 @@ XPPRET XPPENTRY CUTF8TOWIDE(XppParamList pl )
 /*{{function_: _mb2w
             | syntax_: `_mb2w( cText, nCodePage [, nFlags] [, lNoAddZero] )`
             | category: unicode
-            | _kw_: multibyte to wide, code page, UTF-16, convert
+            | _kw_: _mb2w, Function
    }}*/
 /*{{|desc: Converts a multibyte string from a selected Windows code page to UTF-16.
     | params:
@@ -1019,7 +1019,7 @@ _XPP_REG_FUN_( _MB2W )
 /*{{function_: _w2mb
             | syntax_: `_w2mb( cWide, nCodePage [, nFlags] [, lRemoveZero] )`
             | category: unicode
-            | _kw_: wide to multibyte, code page, UTF-16, convert
+            | _kw_: _w2mb, Function
    }}*/
 /*{{|desc: Converts a UTF-16 little-endian binary string to a selected Windows multibyte code page.
     | params:
@@ -1054,7 +1054,7 @@ _XPP_REG_FUN_( _W2MB )
 /*{{function_: _mb2mb
             | syntax_: `_mb2mb( cText, nCodePageFrom, nCodePageTo [, nFlagsFrom] [, nFlagsTo] )`
             | category: unicode
-            | _kw_: code page conversion, transcode, charset, convert
+            | _kw_: _mb2mb, Function
    }}*/
 /*{{|desc: Converts a multibyte string from one Windows code page to another.
     | params:

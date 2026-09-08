@@ -197,7 +197,7 @@ END_NAMESPACE()
             | note: The class is available only when the needed kernel32 IOCP entry points are present. Handles and
               OVERLAPPED pointers are numeric Win32 values; callers are responsible for the lifetime of associated
               handles and overlapped structures.
-   | _kw_: IOCP, completion port, overlapped io, experimental
+   | _kw_: OT4XB_IOCP, Class
    }}*/
 extern "C" XPPRET XPPENTRY OT4XB_IOCP( XppParamList pl)
 {

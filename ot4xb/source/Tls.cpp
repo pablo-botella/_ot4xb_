@@ -143,7 +143,7 @@ void TTlsHeapManager::PutLastPointer(DWORD dw){ m_dwLastPointer  =  dw; }
             | category: json
             | header: Tls_Internal.hpp
             | mangled-name: ot4xb_get_tls_json_encoding_flags
-            | _kw_: json flags, per thread, TLS, encoding
+            | _kw_: ot4xb_get_tls_json_encoding_flags, Function
    }}*/
 /*{{|desc: Returns the JSON encoding flags kept, per thread, in the ot4xb thread local storage block.
       Every thread starts with the value 0. The library itself never reads these flags: this getter and
@@ -162,7 +162,7 @@ OT4XB_API DWORD __cdecl ot4xb_get_tls_json_encoding_flags(void)
             | category: json
             | header: Tls_Internal.hpp
             | mangled-name: ot4xb_set_tls_json_encoding_flags
-            | _kw_: json flags, per thread, TLS, encoding
+            | _kw_: ot4xb_set_tls_json_encoding_flags, Function
    }}*/
 /*{{|desc: Stores the given value as the JSON encoding flags of the calling thread, in the ot4xb thread
       local storage block. Each thread has its own copy, starting at 0. The library itself never reads
@@ -184,7 +184,7 @@ OT4XB_API void __cdecl ot4xb_set_tls_json_encoding_flags(DWORD dw)
             | category: c-api/variant
             | header: Tls_Internal.hpp
             | mangled-name: ot4xb_get_tls_variant_to_string_locale
-            | _kw_: variant locale, per thread, TLS, LCID, VariantChangeType
+            | _kw_: ot4xb_get_tls_variant_to_string_locale, Function
    }}*/
 /*{{|desc: Returns the locale identifier the calling thread applies when the library changes the type of
       a COM variant value, typically when automation values are converted to strings. Kept per thread in
@@ -205,7 +205,7 @@ OT4XB_API DWORD __cdecl ot4xb_get_tls_variant_to_string_locale(void)
             | category: c-api/variant
             | header: Tls_Internal.hpp
             | mangled-name: ot4xb_set_tls_variant_to_string_locale
-            | _kw_: variant locale, per thread, TLS, LCID, VariantChangeType
+            | _kw_: ot4xb_set_tls_variant_to_string_locale, Function
    }}*/
 /*{{|desc: Sets the locale identifier the calling thread applies when the library changes the type of a
       COM variant value, typically when automation values are converted to strings. A nonzero LCID routes
@@ -229,7 +229,7 @@ OT4XB_API void __cdecl ot4xb_set_tls_variant_to_string_locale(DWORD dw)
             | category: c-api/variant
             | header: Tls_Internal.hpp
             | mangled-name: ot4xb_set_tls_variant_to_string_locale_invariant
-            | _kw_: variant locale, invariant, LOCALE_INVARIANT, TLS
+            | _kw_: ot4xb_set_tls_variant_to_string_locale_invariant, Function
    }}*/
 /*{{|desc: Sets the variant conversion locale of the calling thread to LOCALE_INVARIANT, so COM variant
       values converted by the library, typically to strings, are formatted the same way on any machine

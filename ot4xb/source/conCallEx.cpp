@@ -51,7 +51,7 @@ LPSTR  _conRelease_ret_LPSTR( ContainerHandle con )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallConR@@YAPAUMomHandleEntry@@PADZZ
-            | _kw_: call function by name, container result, variadic containers, C to Xbase++ call, variadic
+            | _kw_: _conCallConR, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with a variable list of container parameters, terminated by NULLCONTAINER, and
       returns its result in a new container; release it with _conRelease. Takes ownership of the containers passed (the
@@ -87,7 +87,7 @@ OT4XB_API ContainerHandle _conCallConR( LPSTR pFN , ... )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PAD@Z
-            | _kw_: call function by name, container result, C to Xbase++ call
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -111,7 +111,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADH@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -138,7 +138,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , BOOL   val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -165,7 +165,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LONG   val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADJPAU1@@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -193,7 +193,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LONG   val, ContainerHandle c
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADJPAU1@1@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -222,7 +222,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LONG   val, ContainerHandle c
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADPAU1@@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, container parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -247,7 +247,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADK@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -274,7 +274,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , DWORD  val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -303,7 +303,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LONG   val1 , LONG   val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADJJJ@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -334,7 +334,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN, LONG   val1, LONG   val2 , LON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PADN@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, double parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -361,7 +361,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call function by name, container result, C to Xbase++ call
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -388,7 +388,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LPSTR  val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallCon@@YAPAUMomHandleEntry@@PAD0J@Z
-            | _kw_: call function by name, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallCon, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result in a new container; release it
       with _conRelease.
@@ -417,7 +417,7 @@ OT4XB_API ContainerHandle _conCallCon( LPSTR pFN , LPSTR  pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPAD@Z
-            | _kw_: call function by name, no result, C to Xbase++ call
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -439,7 +439,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADH@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -462,7 +462,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADJ@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -485,7 +485,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADJJ@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -509,7 +509,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -533,7 +533,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -558,7 +558,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LONG val, ContainerHandle con,Container
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, container parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -581,7 +581,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADK@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -604,7 +604,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPADN@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, double parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -627,7 +627,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPAD0@Z
-            | _kw_: call function by name, no result, C to Xbase++ call
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -650,7 +650,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallVoid@@YAXPAD0J@Z
-            | _kw_: call function by name, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallVoid, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and discards the result.
     | params:
@@ -674,7 +674,7 @@ OT4XB_API void _conCallVoid( LPSTR pFN , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPAD@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -697,7 +697,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADH@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -721,7 +721,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADJ@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -745,7 +745,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADJJ@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -770,7 +770,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -795,7 +795,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -823,7 +823,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LONG val, ContainerHandle con, Containe
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, container parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -847,7 +847,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADK@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -871,7 +871,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPADN@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, double parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -895,7 +895,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPAD0@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -919,7 +919,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallBool@@YAHPAD0J@Z
-            | _kw_: call function by name, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallBool, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a BOOL (FALSE
       when the result is not a logical value).
@@ -944,7 +944,7 @@ OT4XB_API BOOL _conCallBool( LPSTR pFN , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPAD@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -968,7 +968,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADH@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -993,7 +993,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADJ@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1018,7 +1018,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADJJ@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1044,7 +1044,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1070,7 +1070,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1097,7 +1097,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LONG val, ContainerHandle con, Containe
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, container parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1122,7 +1122,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADK@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1147,7 +1147,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPADN@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, double parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1172,7 +1172,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPAD0@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1197,7 +1197,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLong@@YAJPAD0J@Z
-            | _kw_: call function by name, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLong, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1223,7 +1223,7 @@ OT4XB_API LONG _conCallLong( LPSTR pFN , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPAD@Z
-            | _kw_: call function by name, double result, C to Xbase++ call
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1246,7 +1246,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADH@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1270,7 +1270,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADJ@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1294,7 +1294,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADJJ@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1319,7 +1319,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1344,7 +1344,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1370,7 +1370,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LONG val, ContainerHandle con, Cont
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, container parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1394,7 +1394,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADK@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1418,7 +1418,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPADN@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, double parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1442,7 +1442,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPAD0@Z
-            | _kw_: call function by name, double result, C to Xbase++ call
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1466,7 +1466,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallDouble@@YANPAD0J@Z
-            | _kw_: call function by name, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallDouble, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1491,7 +1491,7 @@ OT4XB_API double _conCallDouble( LPSTR pFN , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPAD@Z
-            | _kw_: call function by name, float result, C to Xbase++ call
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1514,7 +1514,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADH@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, logical parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1538,7 +1538,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADJ@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1562,7 +1562,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADJJ@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1587,7 +1587,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1612,7 +1612,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1638,7 +1638,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LONG val, ContainerHandle con, Contai
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, container parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1662,7 +1662,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADK@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1686,7 +1686,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPADN@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, double parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1710,7 +1710,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPAD0@Z
-            | _kw_: call function by name, float result, C to Xbase++ call
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1734,7 +1734,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallFloat@@YAMPAD0J@Z
-            | _kw_: call function by name, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallFloat, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1759,7 +1759,7 @@ OT4XB_API FLOAT _conCallFloat( LPSTR pFN , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPAD@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1782,7 +1782,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADH@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, logical parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1806,7 +1806,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADJ@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1830,7 +1830,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADJJ@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1855,7 +1855,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADJJJ@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1881,7 +1881,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN, LONG val, LONG val2 , LONG val3 )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADJPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1906,7 +1906,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , LONG val, ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADJPAUMomHandleEntry@@1@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter, container parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1932,7 +1932,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , LONG val, ContainerHandle con, Contai
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADPAUMomHandleEntry@@@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, container parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1956,7 +1956,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADK@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, DWORD parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1980,7 +1980,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPADN@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, double parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2004,7 +2004,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPAD0@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2028,7 +2028,7 @@ OT4XB_API LPSTR _conCallLpstr( LPSTR pFN , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conCallLpstr@@YAPADPAD0J@Z
-            | _kw_: call function by name, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conCallLpstr, Function
    }}*/
 /*{{|desc: Calls the Xbase++ function pFN with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.

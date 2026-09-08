@@ -1215,7 +1215,7 @@ void TXbClass::GwstAlignNextMember(DWORD dwAlign)
 /*{{function_: _xbmtpf1_
             | syntax_: `_xbmtpf1_( @Self, nPtrLo, nPtrHi, @rt, @e, nPCount, nParams, ... )`
             | category: structures/internal
-            | _kw_: GWST dispatcher, method wrapper, internal, C method pointer
+            | _kw_: _xbmtpf1_, Function
    }}*/
 /*{{|desc: Internal GWST dispatcher used by generated method wrappers to invoke a C method pointer through
       TXbClsParams. It is exported for the generated Xbase++ code emitted by OT4XB, not as a general application

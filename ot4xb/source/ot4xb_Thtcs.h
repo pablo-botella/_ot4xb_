@@ -15,8 +15,8 @@
    | category: c-api/classes , container/hash
    | desc: One entry of a {{ilink: <cpp-class THtcsTable> THtcsTable}}: the same layout as
      {{ilink: <cpp-class THashItem> THashItem}} (key, length, CRC, data, links), with the CRC computed on
-     | _kw_: hash table entry, case sensitive, key, data pointer
-     the key bytes as they are. The key is not copied. }}*/
+     the key bytes as they are. The key is not copied.
+     | _kw_: THtcsItem, Class }}*/
 class OT4XB_API THtcsItem  : public T_ot4xb_base
 {
    public:
@@ -43,8 +43,8 @@ class OT4XB_API THtcsItem  : public T_ot4xb_base
    | category: c-api/classes , container/hash
    | desc: One slot of a {{ilink: <cpp-class THtcsTable> THtcsTable}}, the case-sensitive twin of
      {{ilink: <cpp-class THashBucket> THashBucket}}: the head of a sorted run of entries in the table's list
-     | _kw_: hash bucket, case sensitive, chain
-     and their number. The methods maintain the chain and the table counters; they are the table's business. }}*/
+     and their number. The methods maintain the chain and the table counters; they are the table's business.
+     | _kw_: THtcsBucket, Class }}*/
 class OT4XB_API THtcsBucket
 {
    public:
@@ -83,8 +83,8 @@ class OT4XB_API THtcsBucket
      {{ilink: <cpp-class THashTable> THashTable}} (power-of-two buckets that double when the entries exceed
      half of them, one list of all entries, opaque data with an optional destroy callback, keys not copied)
      with keys compared byte by byte and hashed as they are, so "Key" and "key" are two entries. Create it
-     | _kw_: hash table, case sensitive keys, void data, destroy callback
-     with `new` for the same reason as THashTable. }}*/
+     with `new` for the same reason as THashTable.
+     | _kw_: THtcsTable, Class }}*/
 class OT4XB_API THtcsTable  : public T_ot4xb_base
 {
    public:

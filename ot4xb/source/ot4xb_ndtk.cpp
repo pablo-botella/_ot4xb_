@@ -15,7 +15,7 @@
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_new
-            | _kw_: node token, node path, tree path, backslash path
+            | _kw_: ndtk_new, Function
    }}*/
 /*{{|desc: Creates a node token path: a text buffer that identifies a node inside a tree by listing the
       node names from the root separated by backslashes, like `a\b\c`. The buffer is 4096 bytes and comes
@@ -31,7 +31,7 @@ extern "C" LPVOID OT4XB_API ndtk_new(void){ return _xgrab(NDTK_MAX_CB);}
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_delete
-            | _kw_: node token, node path, release
+            | _kw_: ndtk_delete, Function
    }}*/
 /*{{|desc: Releases a node token path buffer created with ndtk_new.
     | params:
@@ -47,7 +47,7 @@ extern "C" void  OT4XB_API ndtk_delete(void* p){ _xfree(p);}
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_get_depth
-            | _kw_: node token, depth, nesting level, path
+            | _kw_: ndtk_get_depth, Function
    }}*/
 /*{{|desc: Returns the depth of a node token path, counting its backslash separators: 0 for a single
       name, 1 for `a\b`, and so on. An empty path returns -1.
@@ -70,7 +70,7 @@ extern "C" LONG OT4XB_API ndtk_get_depth(LPSTR pRoot)
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_set_depth
-            | _kw_: node token, truncate path, depth, parent path
+            | _kw_: ndtk_set_depth, Function
    }}*/
 /*{{|desc: Truncates a node token path in place at its nLevel-th backslash separator, keeping only the
       first nLevel node names. A negative nLevel empties the path; nLevel 0 does nothing (use a negative
@@ -97,7 +97,7 @@ extern "C" BOOL OT4XB_API ndtk_set_depth(LPSTR pRoot , LONG nLevel)
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_dec_depth
-            | _kw_: node token, parent, remove last name, path
+            | _kw_: ndtk_dec_depth, Function
    }}*/
 /*{{|desc: Removes the last node name from a node token path, cutting it in place at its last backslash
       separator. A path with a single name becomes empty; an empty path stays empty.
@@ -120,7 +120,7 @@ extern "C" void OT4XB_API ndtk_dec_depth(LPSTR pRoot)
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_add
-            | _kw_: node token, append name, child path
+            | _kw_: ndtk_add, Function
    }}*/
 /*{{|desc: Appends a node name at the end of a node token path, writing a backslash separator first
       unless the path is empty. There is no room check: the path buffer must be large enough to hold the
@@ -146,7 +146,7 @@ extern "C" void OT4XB_API ndtk_add(LPSTR pRoot , LPSTR pNode)
             | category: c-api/node-token
             | header: ot4xb_c_exported.h
             | mangled-name: ndtk_ischild
-            | _kw_: node token, is child, descendant, path prefix
+            | _kw_: ndtk_ischild, Function
    }}*/
 /*{{|desc: Tests whether pChild is pParent itself or lies anywhere below it: TRUE when both paths are
       identical, or when pChild starts with pParent followed by a backslash, at any depth. Names are

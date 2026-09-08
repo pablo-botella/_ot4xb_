@@ -14,7 +14,7 @@ static LPSTR _conParamLockStrExFloat_( XppParamList pl, ULONG nParam, CON_PLKSTR
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamRLockStrEx
-            | _kw_: lock parameter, read pointer, string lock, array lock, GWST lock
+            | _kw_: _conParamRLockStrEx, Function
    }}*/
 /*{{|desc: Retrieves a read only memory pointer from an Xbase++ parameter. Character: locks the internal
       buffer of the string. Numeric: the value is taken as a memory address and returned cast to LPSTR.
@@ -37,7 +37,7 @@ OT4XB_API LPSTR _conParamRLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamWLockStrEx
-            | _kw_: lock parameter, write pointer, string lock, array lock, GWST lock
+            | _kw_: _conParamWLockStrEx, Function
    }}*/
 /*{{|desc: Retrieves a read/write memory pointer from an Xbase++ parameter. Character: write locks the
       internal buffer of the string; pass the string by reference so the changes reach the caller. Numeric:
@@ -64,7 +64,7 @@ OT4XB_API LPSTR _conParamWLockStrEx( XppParamList pl, ULONG nParam, CON_PLKSTREX
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conLockStrEx_
-            | _kw_: lock container, memory pointer, string lock, array lock
+            | _kw_: _conLockStrEx_, Function
    }}*/
 /*{{|desc: Locks a container as a memory pointer, with the same type handling as _conParamRLockStrEx() and
       _conParamWLockStrEx() but taking the container, its XPP type and the by reference flag directly
@@ -177,7 +177,7 @@ static LPSTR _conParamLockStrEx_( XppParamList pl, ULONG nParam, CON_PLKSTREX * 
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamUnLockStrEx
-            | _kw_: unlock parameter, release lock, write back
+            | _kw_: _conParamUnLockStrEx, Function
    }}*/
 /*{{|desc: Releases a lock obtained with _conParamRLockStrEx() or _conParamWLockStrEx(). For a write locked
       Array the LONG values of the temporary buffer are written back to the array elements before the buffer
@@ -195,7 +195,7 @@ OT4XB_API void _conParamUnLockStrEx(CON_PLKSTREX * pInfo){ _conUnLockStrEx_(pInf
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conUnLockStrEx_
-            | _kw_: unlock container, release lock, write back
+            | _kw_: _conUnLockStrEx_, Function
    }}*/
 /*{{|desc: Releases a lock obtained with _conLockStrEx_(). For a write locked Array the LONG values of the
       temporary buffer are written back to the array elements before the buffer is freed; for an Object the
@@ -273,7 +273,7 @@ OT4XB_API void _conUnLockStrEx_(CON_PLKSTREX * pInfo)
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamRLockStrExFloat
-            | _kw_: lock parameter, read pointer, float array, packed floats
+            | _kw_: _conParamRLockStrExFloat, Function
    }}*/
 /*{{|desc: Retrieves a read only memory pointer from an Xbase++ parameter. Same type handling as
       _conParamRLockStrEx() except for an Array: the temporary buffer holds one FLOAT per element instead of
@@ -295,7 +295,7 @@ OT4XB_API LPSTR _conParamRLockStrExFloat( XppParamList pl, ULONG nParam, CON_PLK
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamWLockStrExFloat
-            | _kw_: lock parameter, write pointer, float array, packed floats
+            | _kw_: _conParamWLockStrExFloat, Function
    }}*/
 /*{{|desc: Retrieves a read/write memory pointer from an Xbase++ parameter. Same type handling as
       _conParamWLockStrEx() except for an Array: the temporary buffer holds one FLOAT per element instead of
@@ -396,7 +396,7 @@ static LPSTR _conParamLockStrExFloat_( XppParamList pl, ULONG nParam, CON_PLKSTR
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conParamUnLockStrExFloat
-            | _kw_: unlock parameter, float array, write back
+            | _kw_: _conParamUnLockStrExFloat, Function
    }}*/
 /*{{|desc: Releases a lock obtained with _conParamRLockStrExFloat() or _conParamWLockStrExFloat(). For a
       write locked Array the FLOAT values of the temporary buffer are written back to the array elements

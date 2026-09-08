@@ -118,7 +118,7 @@ static void disphelper( XppParamList pl , DWORD dwFPtr)
 /*{{function_: _dh_createobject
             | syntax_: `_dh_createobject( cProgId, cMachine, @pDispatch ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, CreateObject, ProgId, CLSID, IDispatch, disphelper
+            | _kw_: _dh_createobject, Function
    }}*/
 /*{{|desc: Creates a COM object from its ProgId - or from a "{...}" CLSID string - and returns its
       IDispatch pointer in pDispatch. With a machine name the object is created on that remote machine
@@ -137,7 +137,7 @@ _XPP_REG_FUN_( _DH_CREATEOBJECT       ){ disphelper(pl, (DWORD) dhCreateObject  
 /*{{function_: _dh_getobject
             | syntax_: `_dh_getobject( cFile, cProgId, @pDispatch ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, GetObject, running object, moniker, IDispatch, disphelper
+            | _kw_: _dh_getobject, Function
    }}*/
 /*{{|desc: Returns in pDispatch the IDispatch of an already running COM object or of an object loaded
       from a file. With only cProgId it attaches to the running instance registered for that ProgId
@@ -158,7 +158,7 @@ _XPP_REG_FUN_( _DH_GETOBJECT          ){ disphelper(pl, (DWORD) dhGetObject     
 /*{{function_: _dh_createobjectex
             | syntax_: `_dh_createobjectex( cProgId, pIID, nClsContext, pServerInfo, @pInterface ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, CreateObject, class factory, CLSCTX, IDispatch, disphelper
+            | _kw_: _dh_createobjectex, Function
    }}*/
 /*{{|desc: Extended object creation: resolves cProgId - or a "{...}" CLSID string - to a class id, gets
       the class factory with CoGetClassObject in the requested class context and returns the interface
@@ -180,7 +180,7 @@ _XPP_REG_FUN_( _DH_CREATEOBJECTEX     ){ disphelper(pl, (DWORD) dhCreateObjectEx
 /*{{function_: _dh_getobjectex
             | syntax_: `_dh_getobjectex( cFile, cProgId, pIID, nClsContext, pReserved, @pInterface ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, GetObject, running instance, IDispatch, disphelper
+            | _kw_: _dh_getobjectex, Function
    }}*/
 /*{{|desc: Extended form of _dh_getobject(): attaches to the running cProgId instance, or resolves an
       object from a file or moniker path, returning the interface selected by pIID instead of IDispatch.
@@ -203,7 +203,7 @@ _XPP_REG_FUN_( _DH_GETOBJECTEX        ){ disphelper(pl, (DWORD) dhGetObjectEx   
 /*{{function_: _dh_callmethod
             | syntax_: `_dh_callmethod( pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, call method, IDispatch, Invoke, disphelper, automation
+            | _kw_: _dh_callmethod, Function
    }}*/
 /*{{|desc: Invokes a method on a COM object through IDispatch. cMember is the method name or a dotted
       member path whose format identifiers describe the extra arguments, e.g. "Documents.Open(%S)"; the
@@ -226,7 +226,7 @@ _XPP_REG_FUN_( _DH_CALLMETHOD         ){ disphelper(pl, (DWORD) dhCallMethod    
 /*{{function_: _dh_putvalue
             | syntax_: `_dh_putvalue( pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, set property, property put, IDispatch, disphelper
+            | _kw_: _dh_putvalue, Function
    }}*/
 /*{{|desc: Sets a property of a COM object through IDispatch (a property put). cMember is the property
       name or a dotted member path; the new value - and any index of the path - is supplied through
@@ -249,7 +249,7 @@ _XPP_REG_FUN_( _DH_PUTVALUE           ){ disphelper(pl, (DWORD) dhPutValue      
 /*{{function_: _dh_putref
             | syntax_: `_dh_putref( pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, put by reference, property putref, IDispatch, disphelper
+            | _kw_: _dh_putref, Function
    }}*/
 /*{{|desc: Sets a property of a COM object through IDispatch as a put-by-reference, the flavor used
       for object-valued properties: the property stores the reference itself instead of a converted
@@ -272,7 +272,7 @@ _XPP_REG_FUN_( _DH_PUTREF             ){ disphelper(pl, (DWORD) dhPutRef        
 /*{{function_: _dh_getvalue
             | syntax_: `_dh_getvalue( cIdentifier, @xResult, pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, get property, property get, IDispatch, disphelper, convert
+            | _kw_: _dh_getvalue, Function
    }}*/
 /*{{|desc: Reads a property or calls a method and stores the result, converted to the C type selected
       by cIdentifier, into xResult. cMember is the property or method name or a dotted member path with
@@ -298,7 +298,7 @@ _XPP_REG_FUN_( _DH_GETVALUE           ){ disphelper(pl, (DWORD) dhGetValue      
 /*{{function_: _dh_invoke
             | syntax_: `_dh_invoke( nInvokeType, nReturnType, pVarResult, pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, Invoke, DISPATCH flags, IDispatch, disphelper
+            | _kw_: _dh_invoke, Function
    }}*/
 /*{{|desc: Generic IDispatch invocation: issues cMember with the DISPATCH_* invoke type given in
       nInvokeType and stores the result, coerced to the VARTYPE nReturnType, in the VARIANT pointed to
@@ -324,7 +324,7 @@ _XPP_REG_FUN_( _DH_INVOKE             ){ disphelper(pl, (DWORD) dhInvoke        
 /*{{function_: _dh_invokearray
             | syntax_: `_dh_invokearray( nInvokeType, pVarResult, nArgs, pDispatch, cMember, pVarArgs ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, Invoke, VARIANT array, IDispatch, disphelper
+            | _kw_: _dh_invokearray, Function
    }}*/
 /*{{|desc: Generic IDispatch invocation taking a ready-made VARIANT argument array instead of format
       identifiers. cMember is a plain member name (no path, no identifiers) resolved with GetIDsOfNames;
@@ -347,7 +347,7 @@ _XPP_REG_FUN_( _DH_INVOKEARRAY        ){ disphelper(pl, (DWORD) dhInvokeArray   
 /*{{function_: _dh_callmethodv
             | syntax_: `_dh_callmethodv( pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, call method, va_list, IDispatch, disphelper
+            | _kw_: _dh_callmethodv, Function
    }}*/
 /*{{|desc: Method invocation through IDispatch that takes the values for the format identifiers of
       cMember from a C va_list instead of the parameter list; mainly useful for C-level integration.
@@ -367,7 +367,7 @@ _XPP_REG_FUN_( _DH_CALLMETHODV        ){ disphelper(pl, (DWORD) dhCallMethodV   
 /*{{function_: _dh_putvaluev
             | syntax_: `_dh_putvaluev( pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, set property, va_list, IDispatch, disphelper
+            | _kw_: _dh_putvaluev, Function
    }}*/
 /*{{|desc: Property put through IDispatch that takes the values for the format identifiers of cMember
       from a C va_list instead of the parameter list; mainly useful for C-level integration.
@@ -387,7 +387,7 @@ _XPP_REG_FUN_( _DH_PUTVALUEV          ){ disphelper(pl, (DWORD) dhPutValueV     
 /*{{function_: _dh_putrefv
             | syntax_: `_dh_putrefv( pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, put by reference, va_list, IDispatch, disphelper
+            | _kw_: _dh_putrefv, Function
    }}*/
 /*{{|desc: Property put-by-reference through IDispatch that takes the values for the format identifiers
       of cMember from a C va_list instead of the parameter list; mainly useful for C-level integration.
@@ -407,7 +407,7 @@ _XPP_REG_FUN_( _DH_PUTREFV            ){ disphelper(pl, (DWORD) dhPutRefV       
 /*{{function_: _dh_getvaluev
             | syntax_: `_dh_getvaluev( cIdentifier, pResult, pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, get property, va_list, IDispatch, disphelper
+            | _kw_: _dh_getvaluev, Function
    }}*/
 /*{{|desc: Property or method read that stores the result, converted to the C type selected by
       cIdentifier, at the address pResult, taking the values for the format identifiers of cMember from
@@ -430,7 +430,7 @@ _XPP_REG_FUN_( _DH_GETVALUEV          ){ disphelper(pl, (DWORD) dhGetValueV     
 /*{{function_: _dh_invokev
             | syntax_: `_dh_invokev( nInvokeType, nReturnType, pVarResult, pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, Invoke, va_list, IDispatch, disphelper
+            | _kw_: _dh_invokev, Function
    }}*/
 /*{{|desc: Generic IDispatch invocation that takes the values for the format identifiers of cMember
       from a C va_list instead of the parameter list; mainly useful for C-level integration.
@@ -453,7 +453,7 @@ _XPP_REG_FUN_( _DH_INVOKEV            ){ disphelper(pl, (DWORD) dhInvokeV       
 /*{{function_: _dh_enumbegin
             | syntax_: `_dh_enumbegin( @pEnum, pDispatch, cMember, ... ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, enumerate collection, IEnumVARIANT, for each, disphelper
+            | _kw_: _dh_enumbegin, Function
    }}*/
 /*{{|desc: Starts enumeration over a COM collection: reads the collection selected by cMember - or
       uses pDispatch itself when cMember is NIL - asks it for its standard enumerator and returns the
@@ -475,7 +475,7 @@ _XPP_REG_FUN_( _DH_ENUMBEGIN          ){ disphelper(pl, (DWORD) dhEnumBegin     
 /*{{function_: _dh_enumbeginv
             | syntax_: `_dh_enumbeginv( @pEnum, pDispatch, cMember, pVaList ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, enumerate collection, va_list, IEnumVARIANT, disphelper
+            | _kw_: _dh_enumbeginv, Function
    }}*/
 /*{{|desc: Starts enumeration over a COM collection, taking the values for the format identifiers of
       cMember from a C va_list instead of the parameter list; mainly useful for C-level integration.
@@ -496,7 +496,7 @@ _XPP_REG_FUN_( _DH_ENUMBEGINV         ){ disphelper(pl, (DWORD) dhEnumBeginV    
 /*{{function_: _dh_enumnextobject
             | syntax_: `_dh_enumnextobject( pEnum, @pDispatch ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, enumeration next, IDispatch item, for each, disphelper
+            | _kw_: _dh_enumnextobject, Function
    }}*/
 /*{{|desc: Fetches the next item of an enumeration as an IDispatch pointer stored in pDispatch,
       converting the item to an object when it is not one already.
@@ -514,7 +514,7 @@ _XPP_REG_FUN_( _DH_ENUMNEXTOBJECT     ){ disphelper(pl, (DWORD) dhEnumNextObject
 /*{{function_: _dh_enumnextvariant
             | syntax_: `_dh_enumnextvariant( pEnum, pVarResult ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, enumeration next, VARIANT item, for each, disphelper
+            | _kw_: _dh_enumnextvariant, Function
    }}*/
 /*{{|desc: Fetches the next item of an enumeration into the VARIANT pointed to by pVarResult, without
       converting it; clearing the received VARIANT is up to the caller.
@@ -532,7 +532,7 @@ _XPP_REG_FUN_( _DH_ENUMNEXTVARIANT    ){ disphelper(pl, (DWORD) dhEnumNextVarian
 /*{{function_: _dh_toggleexceptions
             | syntax_: `_dh_toggleexceptions( lShow ) -> nHRESULT`
             | category: interop/com
-            | _kw_: COM, exceptions, error display, disphelper
+            | _kw_: _dh_toggleexceptions, Function
    }}*/
 /*{{|desc: Turns the DispHelper exception display on or off. The wrappers switch it off when they
       initialize, so COM errors are only reported through the returned HRESULTs; switching it on makes

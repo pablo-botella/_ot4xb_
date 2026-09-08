@@ -86,7 +86,7 @@ void _API_DrTool_ExitProc(void)
 /*{{function_: GetCommandLine
             | syntax_: `GetCommandLine()`
             | category: runtime
-            | _kw_: command line, arguments, argv, process
+            | _kw_: GetCommandLine, Function
    }}*/
 /*{{|desc: Returns the raw command line of the current process.
 
@@ -98,7 +98,7 @@ XPPRET XPPENTRY GETCOMMANDLINE( XppParamList pl ){ _retc(pl, GetCommandLine()); 
 /*{{function_: cAppPath
             | syntax_: `cAppPath()`
             | category: filesystem
-            | _kw_: exe path, application directory, executable folder, program path
+            | _kw_: cAppPath, Function
    }}*/
 /*{{|desc: Returns the directory path of the running executable, including the trailing backslash.
 
@@ -110,7 +110,7 @@ XPPRET XPPENTRY CAPPPATH( XppParamList pl ){ _retclen(pl,_pAppName_,(ULONG) _dwA
 /*{{function_: cAppDir
             | syntax_: `cAppDir()`
             | category: filesystem
-            | _kw_: exe directory, application directory, executable folder, program path
+            | _kw_: cAppDir, Function
    }}*/
 /*{{|desc: Returns the directory path of the running executable without the trailing backslash.
 
@@ -181,7 +181,7 @@ static BOOL ot4xb_CopyFile( LPSTR pSrc , LPSTR pDst , BOOL bFailIfExist )
 /*{{function_: lCopyFile
             | syntax_: `lCopyFile( cSource, cTarget [, lOverwrite := .T.] [, lUseTargetFolderAcl := .F.] )`
             | category: filesystem
-            | _kw_: copy file, CopyFile, file copy
+            | _kw_: lCopyFile, Function
    }}*/
 /*{{|desc: Copies a file.
     | params:
@@ -228,7 +228,7 @@ XPPRET XPPENTRY LCOPYFILE( XppParamList pl)
 /*{{function_: lMakePath
             | syntax_: `lMakePath( cPath )`
             | category: filesystem
-            | _kw_: create directory, mkdir, make path, nested folders, MakeDir
+            | _kw_: lMakePath, Function
    }}*/
 /*{{|desc: Checks that a path exists and creates missing directory components when possible.
     | params:
@@ -254,7 +254,7 @@ XPPRET XPPENTRY LMAKEPATH( XppParamList pl)
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: bCheckAndMakePath
-            | _kw_: create directory, mkdir, make path, nested folders
+            | _kw_: bCheckAndMakePath, Function
    }}*/
 /*{{|desc: Checks whether a path exists and creates the missing directory levels when it does not. It walks the
       path from the first level below the root (skipping the UNC share, the drive root or the leading backslash)
@@ -335,7 +335,7 @@ OT4XB_API BOOL bCheckAndMakePath(LPSTR _pPath_ )
 /*{{function_: cCreateTmpFile
             | syntax_: `cCreateTmpFile( [cPath] [, cPrefix] [, lCreate] )`
             | category: filesystem
-            | _kw_: temp file, temporary file, GetTempFileName, unique name
+            | _kw_: cCreateTmpFile, Function
    }}*/
 /*{{|desc: Creates or reserves a temporary file name using the Windows temporary-file API.
     | params:
@@ -364,7 +364,7 @@ XPPRET XPPENTRY CCREATETMPFILE( XppParamList pl)
 /*{{function_: cGetTmpPath
             | syntax_: `cGetTmpPath()`
             | category: filesystem
-            | _kw_: temp path, temporary directory, GetTempPath, TMP
+            | _kw_: cGetTmpPath, Function
    }}*/
 /*{{|desc: Returns the Windows temporary directory path.
 
@@ -382,7 +382,7 @@ XPPRET XPPENTRY CGETTMPPATH( XppParamList pl)
 /*{{function_: nGetDriveType
             | syntax_: `nGetDriveType( cRoot )`
             | category: filesystem
-            | _kw_: drive type, GetDriveType, removable, fixed, cdrom, network drive
+            | _kw_: nGetDriveType, Function
    }}*/
 /*{{|desc: Returns the Windows drive type for a root path.
     | params:
@@ -406,7 +406,7 @@ XPPRET XPPENTRY NGETDRIVETYPE( XppParamList pl)
 /*{{function_: lChDir
             | syntax_: `lChDir( cDir )`
             | category: filesystem
-            | _kw_: change directory, chdir, SetCurrentDirectory, current directory
+            | _kw_: lChDir, Function
    }}*/
 /*{{|desc: Changes the Win32 current directory.
     | params:
@@ -432,7 +432,7 @@ XPPRET XPPENTRY LCHDIR(XppParamList pl)
 /*{{function_: cDrives
             | syntax_: `cDrives()`
             | category: filesystem
-            | _kw_: drive letters, logical drives, GetLogicalDrives
+            | _kw_: cDrives, Function
    }}*/
 /*{{|desc: Returns the available drive letters as a compact character string.
 
@@ -453,7 +453,7 @@ XPPRET XPPENTRY CDRIVES( XppParamList pl )
 /*{{function_: aDrives
             | syntax_: `aDrives()`
             | category: filesystem
-            | _kw_: drive roots, logical drives, GetLogicalDriveStrings, drive list
+            | _kw_: aDrives, Function
    }}*/
 /*{{|desc: Returns the available logical drive roots as an array.
 
@@ -488,7 +488,7 @@ XPPRET XPPENTRY ADRIVES( XppParamList pl )
 /*{{function_: cGetShortFileName
             | syntax_: `cGetShortFileName( cPath )`
             | category: filesystem
-            | _kw_: short name, 8.3, GetShortPathName, dos name
+            | _kw_: cGetShortFileName, Function
    }}*/
 /*{{|desc: Returns the short 8.3 path name for a file path when Windows can provide one.
     | params:
@@ -517,7 +517,7 @@ XPPRET XPPENTRY CGETSHORTFILENAME( XppParamList pl )
             | desc: Data container used by GetDriveInfo() to return Windows volume information.
             | note: The object stores the raw volume flags in ::nFlags. The read-only logical properties simply test
               ::nFlags against their corresponding Windows flag mask.
-   | _kw_: volume info, drive info, serial number, volume label, file system
+   | _kw_: _TDriveInfo_, Class
    }}*/
 XPPRET XPPENTRY _TDRIVEINFO_( XppParamList pl )
 {
@@ -539,7 +539,7 @@ XPPRET XPPENTRY _TDRIVEINFO_( XppParamList pl )
       pc->Var("nFlags"); /*{{|ivar_: - VAR nFlags | type: Numeric | desc_: Raw file system flags reported by Windows. }}*/
       pc->Var("nDriveType"); /*{{|ivar_: - VAR nDriveType | type: Numeric | desc_: Drive type returned by GetDriveType(). }}*/
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD new()
+      /*{{|method_: - `METHOD new()`
                | return: oDriveInfo
                | desc_: Creates the object with all members reset to empty values.
       }}*/
@@ -610,7 +610,7 @@ DWORD WINAPI lDiskReady_internal(void * lp )
 /*{{function_: lDiskReady
             | syntax_: `lDiskReady( cPath [, @nTimeoutSeconds] )`
             | category: filesystem
-            | _kw_: drive ready, disk ready, volume, removable media
+            | _kw_: lDiskReady, Function
    }}*/
 /*{{|desc: Checks whether a drive or volume path can return volume information.
     | params:
@@ -744,7 +744,7 @@ XPPRET XPPENTRY LDISKREADY( XppParamList pl )
 /*{{function_: GetDriveInfo
             | syntax_: `GetDriveInfo( cRoot )`
             | category: filesystem
-            | _kw_: volume info, drive info, serial number, volume label, GetVolumeInformation
+            | _kw_: GetDriveInfo, Function
    }}*/
 /*{{|desc: Returns volume information for a drive or root path as a _TDriveInfo_ object.
     | params:
@@ -792,7 +792,7 @@ XPPRET XPPENTRY GETDRIVEINFO( XppParamList pl )
 /*{{function_: lIsDir
             | syntax_: `lIsDir( cDir )`
             | category: filesystem
-            | _kw_: is directory, folder exists, directory exists, path test
+            | _kw_: lIsDir, Function
    }}*/
 /*{{|desc: Checks whether a path exists and is a directory.
     | params:
@@ -820,7 +820,7 @@ XPPRET XPPENTRY LISDIR(XppParamList pl)
 /*{{function_: lIsFile
             | syntax_: `lIsFile( cFile )`
             | category: filesystem
-            | _kw_: file exists, is file, path test
+            | _kw_: lIsFile, Function
    }}*/
 /*{{|desc: Checks whether a path exists and is not a directory.
     | params:
@@ -849,7 +849,7 @@ _XPP_REG_FUN_( LISFILE )
 /*{{function_: GetWinDir
             | syntax_: `GetWinDir()`
             | category: filesystem
-            | _kw_: windows directory, GetWindowsDirectory, system folder
+            | _kw_: GetWinDir, Function
    }}*/
 /*{{|desc: Returns the Windows directory.
 
@@ -868,7 +868,7 @@ XPPRET XPPENTRY GETWINDIR(XppParamList pl)
 /*{{function_: GetSysDir
             | syntax_: `GetSysDir()`
             | category: filesystem
-            | _kw_: system32, system directory, GetSystemDirectory
+            | _kw_: GetSysDir, Function
    }}*/
 /*{{|desc: Returns the Windows system directory.
 
@@ -886,7 +886,7 @@ XPPRET XPPENTRY GETSYSDIR(XppParamList pl)
 /*{{function_: cPathCombine
             | syntax_: `cPathCombine( cPart1 [, cPartN...] )`
             | category: filesystem
-            | _kw_: path join, combine path, backslash, PathCombine
+            | _kw_: cPathCombine, Function
    }}*/
 /*{{|desc: Combines path components using backslash separators.
     | params:
@@ -955,7 +955,7 @@ XPPRET XPPENTRY CPATHCOMBINE( XppParamList pl )
 /*{{function_: cUrlCombine
             | syntax_: `cUrlCombine( cPart1 [, cPartN...] )`
             | category: filesystem
-            | _kw_: url join, combine url, slash, path
+            | _kw_: cUrlCombine, Function
    }}*/
 /*{{|desc: Combines URL or path components using slash separators.
     | params:
@@ -1025,7 +1025,7 @@ XPPRET XPPENTRY CURLCOMBINE( XppParamList pl )
 /*{{function_: cPathDefExt
             | syntax_: `cPathDefExt( cPath, cDefaultExt )`
             | category: filesystem
-            | _kw_: default extension, add extension, PathAddExtension
+            | _kw_: cPathDefExt, Function
    }}*/
 /*{{|desc: Adds a default extension to a path when the file name has no extension.
     | params:
@@ -1079,7 +1079,7 @@ XPPRET XPPENTRY CPATHDEFEXT( XppParamList pl)
 /*{{function_: cPathBuildRoot
             | syntax_: `cPathBuildRoot( cDrive | nDrive )`
             | category: filesystem
-            | _kw_: drive root, PathBuildRoot, drive letter
+            | _kw_: cPathBuildRoot, Function
    }}*/
 /*{{|desc: Builds a drive root string.
     | params:
@@ -1125,7 +1125,7 @@ XPPRET XPPENTRY CPATHBUILDROOT( XppParamList pl)
             | category: filesystem
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?Path2TList@@YAPAVTList@@PAD@Z
-            | _kw_: split path, path components, TList, UNC, drive root
+            | _kw_: Path2TList, Function
    }}*/
 /*{{|desc: Splits a path into its components and returns them as a new TList: the root part first (UNC
       \\server\share, drive root X:\, the drive letter, or a leading backslash) and then each folder and the
@@ -1201,7 +1201,7 @@ OT4XB_API TList * Path2TList( LPSTR pPath )
 /*{{function_: aSplitPath
             | syntax_: `aSplitPath( cPath )`
             | category: filesystem
-            | _kw_: split path, path components, directories, array
+            | _kw_: aSplitPath, Function
    }}*/
 /*{{|desc: Splits a path into root and component parts.
     | params:
@@ -1258,7 +1258,7 @@ XPPRET XPPENTRY ASPLITPATH( XppParamList pl)
 /*{{function_: cPathCanonicalize
             | syntax_: `cPathCanonicalize( cPath )`
             | category: filesystem
-            | _kw_: canonical path, normalize path, dot dot, PathCanonicalize
+            | _kw_: cPathCanonicalize, Function
    }}*/
 /*{{|desc: Canonicalizes a path by resolving "." and ".." components where possible.
     | params:
@@ -1368,7 +1368,7 @@ XPPRET XPPENTRY CPATHCANONICALIZE( XppParamList pl)
 /*{{function_: cPathGetExt
             | syntax_: `cPathGetExt( cPath )`
             | category: filesystem
-            | _kw_: file extension, extension, PathFindExtension
+            | _kw_: cPathGetExt, Function
    }}*/
 /*{{|desc: Returns the extension of the file name part of a path.
     | params:
@@ -1397,7 +1397,7 @@ XPPRET XPPENTRY CPATHGETEXT( XppParamList pl )
 /*{{function_: cPathRemoveExt
             | syntax_: `cPathRemoveExt( cPath )`
             | category: filesystem
-            | _kw_: remove extension, strip extension, PathRemoveExtension
+            | _kw_: cPathRemoveExt, Function
    }}*/
 /*{{|desc: Removes the extension from the file name part of a path.
     | params:
@@ -1426,7 +1426,7 @@ XPPRET XPPENTRY CPATHREMOVEEXT( XppParamList pl )
 /*{{function_: cPathChangeExt
             | syntax_: `cPathChangeExt( cPath, cNewExt )`
             | category: filesystem
-            | _kw_: change extension, rename extension, PathRenameExtension
+            | _kw_: cPathChangeExt, Function
    }}*/
 /*{{|desc: Replaces or adds the extension of the file name part of a path.
     | params:
@@ -1485,7 +1485,7 @@ XPPRET XPPENTRY CPATHCHANGEEXT( XppParamList pl )
 /*{{function_: cPathGetFileName
             | syntax_: `cPathGetFileName( cPath )`
             | category: filesystem
-            | _kw_: file name, base name, PathFindFileName, strip directory
+            | _kw_: cPathGetFileName, Function
    }}*/
 /*{{|desc: Returns the file name part of a path.
     | params:
@@ -1511,7 +1511,7 @@ XPPRET XPPENTRY CPATHGETFILENAME( XppParamList pl )
 /*{{function_: cPathRemoveBackSlash
             | syntax_: `cPathRemoveBackSlash( cPath )`
             | category: filesystem
-            | _kw_: trailing backslash, remove backslash, PathRemoveBackslash
+            | _kw_: cPathRemoveBackSlash, Function
    }}*/
 /*{{|desc: Removes trailing backslashes from a path.
     | params:
@@ -1535,7 +1535,7 @@ XPPRET XPPENTRY CPATHREMOVEBACKSLASH( XppParamList pl )
 /*{{function_: cPathAddBackSlash
             | syntax_: `cPathAddBackSlash( cPath )`
             | category: filesystem
-            | _kw_: trailing backslash, add backslash, PathAddBackslash
+            | _kw_: cPathAddBackSlash, Function
    }}*/
 /*{{|desc: Ensures that a path ends with one backslash.
     | params:
@@ -1562,7 +1562,7 @@ XPPRET XPPENTRY CPATHADDBACKSLASH( XppParamList pl )
 /*{{function_: cPathGetPath
             | syntax_: `cPathGetPath( cPath )`
             | category: filesystem
-            | _kw_: directory part, dirname, PathRemoveFileSpec, folder of file
+            | _kw_: cPathGetPath, Function
    }}*/
 /*{{|desc: Returns the directory part of a path.
     | params:
@@ -1593,7 +1593,7 @@ XPPRET XPPENTRY CPATHGETPATH( XppParamList pl )
 /*{{function_: cPathGetRoot
             | syntax_: `cPathGetRoot( cPath )`
             | category: filesystem
-            | _kw_: path root, drive, UNC root, PathStripToRoot
+            | _kw_: cPathGetRoot, Function
    }}*/
 /*{{|desc: Returns the root part of a path.
     | params:
@@ -1652,7 +1652,7 @@ XPPRET XPPENTRY CPATHGETROOT( XppParamList pl )
 /*{{function_: cPathRemoveRoot
             | syntax_: `cPathRemoveRoot( cPath )`
             | category: filesystem
-            | _kw_: remove root, strip drive, relative part
+            | _kw_: cPathRemoveRoot, Function
    }}*/
 /*{{|desc: Removes the root part of a path.
     | params:
@@ -1717,7 +1717,7 @@ XPPRET XPPENTRY CPATHREMOVEROOT( XppParamList pl )
 /*{{function_: lPathIsRelative
             | syntax_: `lPathIsRelative( cPath )`
             | category: filesystem
-            | _kw_: relative path, absolute path, PathIsRelative
+            | _kw_: lPathIsRelative, Function
    }}*/
 /*{{|desc: Checks whether a path is relative according to the simple OT4XB path test.
     | params:
@@ -1744,8 +1744,8 @@ static void FindFiles_Close( TXbClsParams * px );  // FindClose() -> NIL
             | parent: {{ilink: <class gwst> gwst}}
             | category: filesystem
             | desc: OT4XB structure class that exposes the Windows WIN32_FIND_DATA structure and provides a small
-            | _kw_: FindFirstFile, FindNextFile, directory listing, file search, file attributes, wildcard
-              FindFirst/FindNext/FindClose search helper. }}*/
+              FindFirst/FindNext/FindClose search helper.
+            | _kw_: WIN32_FIND_DATA, Class }}*/
            
 XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
 {
@@ -1832,17 +1832,17 @@ XPPRET XPPENTRY wapist_WIN32_FIND_DATA( XppParamList pl )
       }}*/
       pc->Var( "_find_handle_" );
       // ---------------------------
-      /*{{|method_: - METHOD FindFirst( cMask )
+      /*{{|method_: - `METHOD FindFirst( cMask )`
                | return: lFound
                | desc_: Starts a search and fills the structure with the first matching entry.
       }}*/
       pc->Method("FindFirst",FindFiles_First,1,",@s:_find_handle_");
-      /*{{|method_: - METHOD FindNext()
+      /*{{|method_: - `METHOD FindNext()`
                | return: lFound
                | desc_: Moves to the next matching entry and updates the structure.
       }}*/
       pc->Method("FindNext" ,FindFiles_Next,0,",@s:_find_handle_");
-      /*{{|method_: - METHOD FindClose() | return: NIL | desc_: Closes the current search handle. }}*/
+      /*{{|method_: - `METHOD FindClose()` | return: NIL | desc_: Closes the current search handle. }}*/
       pc->Method("FindClose",FindFiles_Close,0,",@s:_find_handle_");
       // ---------------------------
       /*{{|:**END STRUCTURE** }}*/
@@ -1933,7 +1933,7 @@ static void FindFiles_Close( TXbClsParams * px )  // FindClose() -> NIL
 /*{{function_: cCpuSerial
             | syntax_: `cCpuSerial()`
             | category: system
-            | _kw_: cpuid, cpu id, processor id, hardware id, serial
+            | _kw_: cCpuSerial, Function
    }}*/
 /*{{|desc: Returns a legacy CPU identification string obtained with the x86 CPUID instruction.
 
@@ -1987,7 +1987,7 @@ XPPRET XPPENTRY CCPUSERIAL( XppParamList pl )
 /*{{function_: GetProccessArgv
             | syntax_: `GetProccessArgv()`
             | category: runtime
-            | _kw_: command line, arguments, argv, misspelled alias
+            | _kw_: GetProccessArgv, Function
    }}*/
 /*{{|desc: Historical misspelled name of GetProcessArgv(), kept exported as a duplicate so existing code keeps
       working.
@@ -2003,7 +2003,7 @@ _XPP_REG_FUN_( GETPROCCESSARGV ) { GETPROCESSARGV( pl ); }
 /*{{function_: GetProcessArgv
             | syntax_: `GetProcessArgv()`
             | category: runtime
-            | _kw_: command line, arguments, argv, parameters, process
+            | _kw_: GetProcessArgv, Function
    }}*/
 /*{{|desc: Returns the current process command-line arguments as an array.
 
@@ -2036,7 +2036,7 @@ _XPP_REG_FUN_( GETPROCESSARGV )
             | category: runtime
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_pszz_proc_params
-            | _kw_: command line, arguments, argv, double zero list, pszz
+            | _kw_: ot4xb_pszz_proc_params, Function
    }}*/
 /*{{|desc: Reads the process command line with GetCommandLine(), skips the executable name (honoring quotes and
       backslash escaping) and returns the remaining arguments as a pszz buffer: each argument as a
@@ -2104,7 +2104,7 @@ LPSTR OT4XB_API ot4xb_pszz_proc_params(DWORD* pcb)
 /*{{function_: ot4xb_pushdir
             | syntax_: `ot4xb_pushdir( [cNewDir] )`
             | category: filesystem
-            | _kw_: push directory, directory stack, save current directory, pushd
+            | _kw_: ot4xb_pushdir, Function
    }}*/
 /*{{|desc: Pushes the current directory onto the current thread's directory stack.
     | params:
@@ -2165,7 +2165,7 @@ _XPP_REG_FUN_( OT4XB_PUSHDIR )
 /*{{function_: ot4xb_popdir
             | syntax_: `ot4xb_popdir()`
             | category: filesystem
-            | _kw_: pop directory, directory stack, restore current directory, popd
+            | _kw_: ot4xb_popdir, Function
    }}*/
 /*{{|desc: Restores the last directory saved with ot4xb_pushdir() in the current thread.
 
@@ -2192,7 +2192,7 @@ _XPP_REG_FUN_( OT4XB_POPDIR )
 /*{{function_: ot4xb_curdir
             | syntax_: `ot4xb_curdir()`
             | category: filesystem
-            | _kw_: current directory, GetCurrentDirectory, SetCurrentDirectory, curdir, cwd
+            | _kw_: ot4xb_curdir, Function
    }}*/
 /*{{|desc: Gets or sets the current directory.
     | params:
@@ -2259,7 +2259,7 @@ _XPP_REG_FUN_( OT4XB_CURDIR )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: _PathCombineDefaultDir
-            | _kw_: combine path, default directory, absolute, relative path
+            | _kw_: _PathCombineDefaultDir, Function
    }}*/
 /*{{|desc: Combines pFileName with a base directory into pOut. When pFileName is absolute it is copied as it
       is; when it is relative it is combined with pDefaultDir, or with the current directory when pDefaultDir is
@@ -2307,7 +2307,7 @@ OT4XB_API int _PathCombineDefaultDir(LPSTR pOut , LPSTR pFileName , LPSTR pDefau
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: bPathIsAbsolute
-            | _kw_: absolute path, UNC, drive path, PathIsRelative
+            | _kw_: bPathIsAbsolute, Function
    }}*/
 /*{{|desc: Tells whether pPath is an absolute path: a drive path (X:\...) or a UNC path (\\server\...). A
       rooted path without a drive (\folder) or any relative path is not considered absolute.
@@ -2338,7 +2338,7 @@ OT4XB_API BOOL bPathIsAbsolute(LPSTR pPath )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: get_current_directory
-            | _kw_: current directory, GetCurrentDirectory, cwd, full path
+            | _kw_: get_current_directory, Function
    }}*/
 /*{{|desc: Returns the current directory as a new ANSI string. It reads the directory with
       GetCurrentDirectoryW(), normalizes it to a full path with GetFullPathNameW() and converts the result to
@@ -2383,7 +2383,7 @@ OT4XB_API LPSTR get_current_directory( void )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: get_currrent_directory
-            | _kw_: current directory, misspelled alias
+            | _kw_: get_currrent_directory, Function
    }}*/
 /*{{|desc: Historical misspelled name (triple r) of get_current_directory(), kept exported as an alias so
       existing external code keeps working.
@@ -2405,7 +2405,7 @@ OT4XB_API LPSTR get_currrent_directory( void )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: set_current_directory
-            | _kw_: change directory, SetCurrentDirectory, chdir, cwd
+            | _kw_: set_current_directory, Function
    }}*/
 /*{{|desc: Sets the process current directory from an ANSI path. Converts pa to wide with ansi2w() and calls
       SetCurrentDirectoryW().
@@ -2428,7 +2428,7 @@ OT4XB_API BOOL set_current_directory( LPSTR pa )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: set_currrent_directory
-            | _kw_: change directory, misspelled alias
+            | _kw_: set_currrent_directory, Function
    }}*/
 /*{{|desc: Historical misspelled name (triple r) of set_current_directory(), kept exported as an alias so
       existing external code keeps working.
@@ -2452,7 +2452,7 @@ OT4XB_API BOOL set_currrent_directory( LPSTR pa )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_recurse_dir_item_codeblock
-            | _kw_: recurse directory, callback, code block, directory walk
+            | _kw_: ot4xb_recurse_dir_item_codeblock, Function
    }}*/
 /*{{|desc: A ready-made _PFN_OT4XB_RECURSE_DIR_CREATE_ITEM_ callback that you pass to
       ot4xb_recurse_dir()/ot4xb_recurse_dir_ex() to run an Xbase++ code block for each matching entry. Per entry
@@ -2499,7 +2499,7 @@ OT4XB_API int  __cdecl ot4xb_recurse_dir_item_codeblock( WIN32_FIND_DATA* pfd , 
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_recurse_dir
-            | _kw_: recurse directory, directory walk, find files, mask, tree
+            | _kw_: ot4xb_recurse_dir, Function
    }}*/
 /*{{|desc: Walks a directory from folder and calls pfn_new_item for every entry that matches mask. Shorthand
       for ot4xb_recurse_dir_ex() with flags = 0.
@@ -2533,7 +2533,7 @@ OT4XB_API int ot4xb_recurse_dir(LPSTR folder, LPSTR mask, _PFN_OT4XB_RECURSE_DIR
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_recurse_dir_ex
-            | _kw_: recurse directory, directory walk, find files, mask, tree, flags, subdirectories
+            | _kw_: ot4xb_recurse_dir_ex, Function
    }}*/
 /*{{|desc: Recursively walks the directory tree under folder and calls pfn_new_item( &WIN32_FIND_DATA, szPath,
       cargo ) for every file that matches mask. Subdirectories are entered automatically ("." and ".." are
@@ -2704,7 +2704,7 @@ OT4XB_API int ot4xb_recurse_dir_ex(LPSTR folder, LPSTR mask, _PFN_OT4XB_RECURSE_
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_path_combine
-            | _kw_: path join, combine path, backslash, normalize slashes
+            | _kw_: ot4xb_path_combine, Function
    }}*/
 /*{{|desc: Combines a folder and a file or relative path into a new path string, inserting the separating
       backslash and normalizing forward slashes to backslashes. Allocates the output buffer; wrapper over
@@ -2731,7 +2731,7 @@ OT4XB_API LPSTR __cdecl ot4xb_path_combine( LPSTR pFolder , LPSTR pFile )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_path_combine_buffer
-            | _kw_: path join, combine path, buffer, backslash, normalize slashes
+            | _kw_: ot4xb_path_combine_buffer, Function
    }}*/
 /*{{|desc: Combines pFolder and pFile into the caller-provided buffer pOut, inserting a single backslash
       between them and normalizing forward slashes to backslashes. Leading spaces of pFolder, and leading spaces

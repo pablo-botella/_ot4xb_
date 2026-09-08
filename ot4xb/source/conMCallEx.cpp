@@ -13,7 +13,7 @@
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallConN@@YAPAUMomHandleEntry@@PADPAU1@KZZ
-            | _kw_: call method, object, variadic containers, container result, string parameter, container parameter, count, variadic
+            | _kw_: _conMCallConN, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with nParams container parameters passed as a variable
       argument list and returns its result in a new container; release it with _conRelease. The parameter
@@ -49,7 +49,7 @@ OT4XB_API ContainerHandle _conMCallConN( LPSTR pFN , ContainerHandle Self , ULON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallConNR@@YAPAUMomHandleEntry@@PADPAU1@KZZ
-            | _kw_: call method, object, variadic containers, release parameters, container result, string parameter, container parameter, count, variadic
+            | _kw_: _conMCallConNR, Function
    }}*/
 /*{{|desc: Like _conMCallConN, but releases the nParams parameter containers after the call (Self is never
       released): the caller hands them over. Returns the result in a new container; release it with _conRelease.
@@ -91,7 +91,7 @@ OT4XB_API ContainerHandle _conMCallConNR( LPSTR pFN , ContainerHandle Self , ULO
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PAD@Z
-            | _kw_: call method, object, container result, C to Xbase++ call
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -116,7 +116,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self ,LPSTR pFN)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADH@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -143,7 +143,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN,  BOOL 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADJ@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -170,7 +170,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN ,LONG  
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADJ0@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -200,7 +200,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN ,LONG  
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PAD0@Z
-            | _kw_: call method, object, container result, C to Xbase++ call
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -226,7 +226,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN ,Contai
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADK@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -253,7 +253,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN ,DWORD 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADJJ@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -282,7 +282,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , LONG 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADJJJ@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -313,7 +313,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , LONG 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADN@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -340,7 +340,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , doubl
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PAD1@Z
-            | _kw_: call method, object, container result, C to Xbase++ call
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -367,7 +367,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , LPSTR
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PAD11@Z
-            | _kw_: call method, object, container result, C to Xbase++ call
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -396,7 +396,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , LPSTR
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PAD1J@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -425,7 +425,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN ,LPSTR 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADJH@Z
-            | _kw_: call method, object, container result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -452,7 +452,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , LONG 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallCon@@YAPAUMomHandleEntry@@PAU1@PADPAK@Z
-            | _kw_: call method, object, container result, C to Xbase++ call
+            | _kw_: _conMCallCon, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result in a new
       container; release it with _conRelease.
@@ -485,7 +485,7 @@ OT4XB_API ContainerHandle _conMCallCon( ContainerHandle Self , LPSTR pFN , ULONG
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, no result, C to Xbase++ call
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -508,7 +508,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -532,7 +532,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -556,7 +556,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -581,7 +581,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LONG val , LON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADJJJ@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -607,7 +607,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LONG val , LON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -632,7 +632,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LONG val, Cont
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, no result, C to Xbase++ call
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -656,7 +656,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , ContainerHandl
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -680,7 +680,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -704,7 +704,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, no result, C to Xbase++ call
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -728,7 +728,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PAD11@Z
-            | _kw_: call method, object, no result, C to Xbase++ call
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -753,7 +753,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LPSTR p1 , LPS
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -778,7 +778,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LPSTR pStr , L
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, no result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -803,7 +803,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN  , LONG v1,BOOL v
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallVoid@@YAXPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, no result, C to Xbase++ call
+            | _kw_: _conMCallVoid, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and discards the result.
     | params:
@@ -829,7 +829,7 @@ OT4XB_API void _conMCallVoid( ContainerHandle Self , LPSTR pFN , ULONG * pDw )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -853,7 +853,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -878,7 +878,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -903,7 +903,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -929,7 +929,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LONG val , LON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -955,7 +955,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LONG val, Cont
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -980,7 +980,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , ContainerHandl
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1005,7 +1005,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1030,7 +1030,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1055,7 +1055,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1081,7 +1081,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LPSTR pStr , L
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1107,7 +1107,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN  , LONG v1,BOOL v
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallBool@@YAHPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, BOOL result, C to Xbase++ call
+            | _kw_: _conMCallBool, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a BOOL
       (FALSE when the result is not a logical value).
@@ -1134,7 +1134,7 @@ OT4XB_API BOOL _conMCallBool( ContainerHandle Self , LPSTR pFN , ULONG * pDw )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1159,7 +1159,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1185,7 +1185,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1211,7 +1211,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1238,7 +1238,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LONG val , LON
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1265,7 +1265,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LONG val, Cont
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1291,7 +1291,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , ContainerHandl
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1317,7 +1317,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1343,7 +1343,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1369,7 +1369,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1396,7 +1396,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LPSTR pStr , L
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1423,7 +1423,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN  , LONG v1,BOOL v
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLong@@YAJPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, LONG result, C to Xbase++ call
+            | _kw_: _conMCallLong, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a LONG
       through _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the
@@ -1451,7 +1451,7 @@ OT4XB_API LONG _conMCallLong( ContainerHandle Self , LPSTR pFN , ULONG * pDw )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, double result, C to Xbase++ call
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1475,7 +1475,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1500,7 +1500,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1525,7 +1525,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1551,7 +1551,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LONG val ,
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1577,7 +1577,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LONG val, 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, double result, C to Xbase++ call
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1602,7 +1602,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , ContainerH
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1627,7 +1627,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1652,7 +1652,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , double val
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, double result, C to Xbase++ call
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1677,7 +1677,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1703,7 +1703,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LPSTR pStr
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, double result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1729,7 +1729,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN  , LONG v1,BO
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallDouble@@YANPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, double result, C to Xbase++ call
+            | _kw_: _conMCallDouble, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a double
       (0 when the result is not numeric).
@@ -1757,7 +1757,7 @@ OT4XB_API double _conMCallDouble( ContainerHandle Self , LPSTR pFN , ULONG * pDw
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, float result, C to Xbase++ call
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1781,7 +1781,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1806,7 +1806,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1831,7 +1831,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1857,7 +1857,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LONG val , L
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1883,7 +1883,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LONG val, Co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, float result, C to Xbase++ call
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1908,7 +1908,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , ContainerHan
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1933,7 +1933,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, double parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1958,7 +1958,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, float result, C to Xbase++ call
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -1983,7 +1983,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -2009,7 +2009,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LPSTR pStr ,
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, float result, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -2035,7 +2035,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN  , LONG v1,BOOL
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallFloat@@YAMPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, float result, C to Xbase++ call
+            | _kw_: _conMCallFloat, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its result as a FLOAT,
       the double result cast to float (0 when the result is not numeric).
@@ -2063,7 +2063,7 @@ OT4XB_API FLOAT _conMCallFloat( ContainerHandle Self , LPSTR pFN , ULONG * pDw )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PAD@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2087,7 +2087,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADH@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, logical parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2112,7 +2112,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADJ@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2137,7 +2137,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADJJ@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2163,7 +2163,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LONG val , L
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADJJJ@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2190,7 +2190,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self, LPSTR pFN, LONG val, LONG 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADJ0@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2216,7 +2216,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LONG val, Co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PAD0@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2241,7 +2241,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , ContainerHan
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADK@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, DWORD parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2266,7 +2266,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADN@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, double parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2291,7 +2291,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PAD1@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2316,7 +2316,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PAD1J@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2342,7 +2342,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LPSTR pStr ,
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADJH@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call, numeric parameter, logical parameter
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -2368,7 +2368,7 @@ OT4XB_API LPSTR _conMCallLpstr( ContainerHandle Self , LPSTR pFN  , LONG v1,BOOL
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conMCallLpstr@@YAPADPAUMomHandleEntry@@PADPAK@Z
-            | _kw_: call method, object, string result, xgrab, C to Xbase++ call
+            | _kw_: _conMCallLpstr, Function
    }}*/
 /*{{|desc: Calls the method pFN of the object Self with the given parameters and returns its character result
       as a C string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.

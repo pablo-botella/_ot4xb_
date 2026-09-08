@@ -332,7 +332,7 @@ namespace base32_ns
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base32_encode_required_length
-            | _kw_: base32, encode, buffer size, required length
+            | _kw_: ot4xb_base32_encode_required_length, Function
    }}*/
 /*{{|desc: Returns the number of significant Base32 digits for nSrcLen source bytes. This is a lower
       bound only: the encoder writes complete 8-character '='-padded blocks plus a null terminator,
@@ -359,7 +359,7 @@ OT4XB_API int ot4xb_base32_encode_required_length( int nSrcLen )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base32_encode_with_table
-            | _kw_: base32, encode, alphabet table, padding
+            | _kw_: ot4xb_base32_encode_with_table, Function
    }}*/
 /*{{|desc: Encodes binary data as Base32 text into a caller buffer, written as complete 8-character
       blocks padded with '=' plus a null terminator, so the real capacity needed is
@@ -398,7 +398,7 @@ OT4XB_API BOOL ot4xb_base32_encode_with_table( LPSTR pTable, LPBYTE pSrc, int nS
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base32_decode_required_length
-            | _kw_: base32, decode, buffer size, required length
+            | _kw_: ot4xb_base32_decode_required_length, Function
    }}*/
 /*{{|desc: Returns a destination capacity able to hold the decode of nEncodedLen Base32 characters:
       five bytes per started 8-character block, plus one spare byte.
@@ -423,7 +423,7 @@ OT4XB_API int ot4xb_base32_decode_required_length(int nEncodedLen)
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base32_decode_with_table
-            | _kw_: base32, decode, alphabet table
+            | _kw_: ot4xb_base32_decode_with_table, Function
    }}*/
 /*{{|desc: Decodes Base32 text into a caller buffer, which must be at least
       ot4xb_base32_decode_required_length( nEncodedLen ) bytes. The input is consumed in 8-character

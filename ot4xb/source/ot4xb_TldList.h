@@ -8,8 +8,8 @@
    | category: c-api/classes , container/list
    | desc: The header of a record of a {{ilink: <cpp-class TLdList_Master> TLdList_Master}}: the two links,
      followed in memory by the record's own data. A record is a block of the list's item size, zero-filled
-     | _kw_: record header, linked list, structure list
-     when created, that starts with this header; the list never looks past it. }}*/
+     when created, that starts with this header; the list never looks past it.
+     | _kw_: TLdList_Item, Class }}*/
 class OT4XB_API TLdList_Item : public T_ot4xb_base
 {
    public:
@@ -32,8 +32,8 @@ class OT4XB_API TLdList_Item : public T_ot4xb_base
      current-record pointer, which is what the Xbase++ side keeps in its helper pointer to read and write
      the fields of the current record in place. Three optional callbacks let the owner dispose of a record's
      own resources, fix up a cloned record, and clean up when the list dies. Whole runs of records can be
-     | _kw_: linked list, records, work area, skip goto append, TldList engine
-     cloned, detached and attached between lists without copying. }}*/
+     cloned, detached and attached between lists without copying.
+     | _kw_: TLdList_Master, Class }}*/
 class OT4XB_API TLdList_Master : public T_ot4xb_base
 {
    public:

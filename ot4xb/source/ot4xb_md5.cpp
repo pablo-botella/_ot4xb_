@@ -10,7 +10,7 @@
             | syntax_: `Str2Md5Hex( cData [, nLen] )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash string, hex digest, checksum
+            | _kw_: Str2Md5Hex, Function
    }}*/
 /*{{|desc: Returns the 32-character hexadecimal MD5 digest of a string or OT4XB extended-pointer source.
     | params:
@@ -45,7 +45,7 @@ XPPRET XPPENTRY STR2MD5HEX( XppParamList pl )
             | syntax_: `Str2Md5Bin( cData [, nLen] )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash string, binary digest, 16 bytes
+            | _kw_: Str2Md5Bin, Function
    }}*/
 /*{{|desc: Returns the 16-byte binary MD5 digest of a string or OT4XB extended-pointer source.
     | params:
@@ -80,7 +80,7 @@ XPPRET XPPENTRY STR2MD5BIN( XppParamList pl )
             | syntax_: `HFile2Md5Hex( hFile )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash file handle, hex digest, checksum
+            | _kw_: HFile2Md5Hex, Function
    }}*/
 /*{{|desc: Reads from an existing Win32 file handle and returns its MD5 digest as hexadecimal text.
     | params:
@@ -106,7 +106,7 @@ XPPRET XPPENTRY HFILE2MD5HEX( XppParamList pl )
             | syntax_: `HFile2Md5Bin( hFile )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash file handle, binary digest
+            | _kw_: HFile2Md5Bin, Function
    }}*/
 /*{{|desc: Reads from an existing Win32 file handle and returns its MD5 digest as 16 raw bytes.
     | params:
@@ -132,7 +132,7 @@ XPPRET XPPENTRY HFILE2MD5BIN( XppParamList pl )
             | syntax_: `File2Md5Hex( cFileName )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash file, hex digest, checksum, file integrity
+            | _kw_: File2Md5Hex, Function
    }}*/
 /*{{|desc: Opens a file for reading and returns its MD5 digest as hexadecimal text.
     | params:
@@ -164,7 +164,7 @@ XPPRET XPPENTRY FILE2MD5HEX( XppParamList pl )
             | syntax_: `File2Md5Bin( cFileName )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hash file, binary digest
+            | _kw_: File2Md5Bin, Function
    }}*/
 /*{{|desc: Opens a file for reading and returns its MD5 digest as 16 raw bytes.
     | params:
@@ -196,7 +196,7 @@ XPPRET XPPENTRY FILE2MD5BIN( XppParamList pl )
             | syntax_: `_md5_new( [@pMd5] )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, incremental hash, context, streaming
+            | _kw_: _md5_new, Function
    }}*/
 /*{{|desc: Allocates a low-level incremental MD5 context.
     | params:
@@ -218,7 +218,7 @@ XPPRET XPPENTRY _MD5_NEW( XppParamList pl )
             | syntax_: `_md5_str( pMd5, cData [, nLen] )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, incremental hash, add string, update
+            | _kw_: _md5_str, Function
    }}*/
 /*{{|desc: Adds a string or OT4XB extended-pointer source to a low-level incremental MD5 context.
     | params:
@@ -248,7 +248,7 @@ XPPRET XPPENTRY _MD5_STR( XppParamList pl )
             | syntax_: `_md5_hfile( pMd5, hFile )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, incremental hash, add file, update
+            | _kw_: _md5_hfile, Function
    }}*/
 /*{{|desc: Adds file contents to a low-level incremental MD5 context.
     | params:
@@ -276,7 +276,7 @@ XPPRET XPPENTRY _MD5_HFILE( XppParamList pl )
             | syntax_: `_md5_finalize( pMd5 )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, incremental hash, finalize, digest
+            | _kw_: _md5_finalize, Function
    }}*/
 /*{{|desc: Finalizes a low-level incremental MD5 context.
     | params:
@@ -297,7 +297,7 @@ XPPRET XPPENTRY _MD5_FINALIZE( XppParamList pl )
             | syntax_: `_md5_gethex( pMd5 )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, hex digest, context
+            | _kw_: _md5_gethex, Function
    }}*/
 /*{{|desc: Returns the hexadecimal digest from a low-level MD5 context.
     | params:
@@ -326,7 +326,7 @@ XPPRET XPPENTRY _MD5_GETHEX( XppParamList pl )
             | syntax_: `_md5_getbin( pMd5 )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, binary digest, context
+            | _kw_: _md5_getbin, Function
    }}*/
 /*{{|desc: Returns the binary digest from a low-level MD5 context.
     | params:
@@ -355,7 +355,7 @@ XPPRET XPPENTRY _MD5_GETBIN( XppParamList pl )
             | syntax_: `_md5_destroy( @pMd5 )`
             | category: hash/md5
             | source: ot4xb_md5.cpp
-            | _kw_: md5, destroy context, release
+            | _kw_: _md5_destroy, Function
    }}*/
 /*{{|desc: Destroys a low-level MD5 context and clears the caller's pointer slot.
     | params:

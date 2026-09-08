@@ -12,7 +12,7 @@
             | header: ot4xb_c_exported.h
             | category: memory
             | mangled-name: ot4xb_peek_safe
-            | _kw_: peek, read memory, safe read, access violation, IsBadReadPtr
+            | _kw_: ot4xb_peek_safe, Function
    }}*/
 /*{{|desc: Copies bytes from an arbitrary address into a caller buffer without raising an access violation.
       The transfer is done with ReadProcessMemory() on the current process, so an unreadable source address
@@ -67,7 +67,7 @@ extern "C" int OT4XB_API __cdecl ot4xb_peek_safe(LPBYTE p_from , int cb_to_read,
 /*{{function_: PeekStr
             | syntax_: `PeekStr( pMem, @nShift, nSize [, cDelimiter] )`
             | category: memory
-            | _kw_: peek, read bytes, extended pointer, offset, memory read
+            | _kw_: PeekStr, Function
    }}*/
 /*{{|desc: Reads character data from an OT4XB extended pointer parameter, using and optionally updating a byte
       offset.
@@ -337,7 +337,7 @@ XPPRET XPPENTRY PEEKSTR(XppParamList pl)
 /*{{function_: PokeStr
             | syntax_: `PokeStr( pMem, @nShift, cStr )`
             | category: memory
-            | _kw_: poke, write bytes, extended pointer, offset, memory write
+            | _kw_: PokeStr, Function
    }}*/
 /*{{|desc: Writes character data into an OT4XB extended pointer parameter, using and optionally updating a byte
       offset.
@@ -624,7 +624,7 @@ XPPRET XPPENTRY PEEKBYTE(XppParamList pl) // PeekByte(pMem,[@]nShift[,nItems]) -
 /*{{function_: PokeByte
             | syntax_: `PokeByte( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write byte, extended pointer, offset
+            | _kw_: PokeByte, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as single bytes into an OT4XB extended pointer parameter, using
       and optionally updating a byte offset.
@@ -694,7 +694,7 @@ XPPRET XPPENTRY POKEBYTE(XppParamList pl)
 /*{{function_: PeekWord
             | syntax_: `PeekWord( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read word, 16-bit, extended pointer, offset
+            | _kw_: PeekWord, Function
    }}*/
 /*{{|desc: Reads one or more unsigned 16-bit values in host byte order from an OT4XB extended pointer
       parameter, using and optionally updating a byte offset.
@@ -746,7 +746,7 @@ XPPRET XPPENTRY PEEKWORD(XppParamList pl)
 /*{{function_: PeekShort
             | syntax_: `PeekShort( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read short, signed 16-bit, extended pointer
+            | _kw_: PeekShort, Function
    }}*/
 /*{{|desc: Reads one or more signed 16-bit values in host byte order from an OT4XB extended pointer
       parameter, using and optionally updating a byte offset.
@@ -798,7 +798,7 @@ XPPRET XPPENTRY PEEKSHORT(XppParamList pl)
 /*{{function_: PeekWordNet
             | syntax_: `PeekWordNet( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read word, network byte order, big endian, ntohs
+            | _kw_: PeekWordNet, Function
    }}*/
 /*{{|desc: Reads one or more unsigned 16-bit values stored in network byte order from an OT4XB extended
       pointer parameter, using and optionally updating a byte offset.
@@ -850,7 +850,7 @@ XPPRET XPPENTRY PEEKWORDNET(XppParamList pl)
 /*{{function_: PokeWord
             | syntax_: `PokeWord( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write word, 16-bit, extended pointer
+            | _kw_: PokeWord, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 16-bit words in host byte order into an OT4XB extended
       pointer parameter, using and optionally updating a byte offset.
@@ -918,7 +918,7 @@ XPPRET XPPENTRY POKEWORD(XppParamList pl)
 /*{{function_: PokeWordNet
             | syntax_: `PokeWordNet( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write word, network byte order, big endian, htons
+            | _kw_: PokeWordNet, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 16-bit words in network byte order into an OT4XB extended
       pointer parameter, using and optionally updating a byte offset.
@@ -986,7 +986,7 @@ XPPRET XPPENTRY POKEWORDNET(XppParamList pl)
 /*{{function_: PeekDWord
             | syntax_: `PeekDWord( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read DWORD, 32-bit, extended pointer, offset
+            | _kw_: PeekDWord, Function
    }}*/
 /*{{|desc: Reads one or more 32-bit values in host byte order from an OT4XB extended pointer parameter,
       using and optionally updating a byte offset.
@@ -1041,7 +1041,7 @@ XPPRET XPPENTRY PEEKDWORD(XppParamList pl)
 /*{{function_: PeekDWordNet
             | syntax_: `PeekDWordNet( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read DWORD, network byte order, big endian, ntohl
+            | _kw_: PeekDWordNet, Function
    }}*/
 /*{{|desc: Reads one or more 32-bit values stored in network byte order from an OT4XB extended pointer
       parameter, using and optionally updating a byte offset.
@@ -1096,7 +1096,7 @@ XPPRET XPPENTRY PEEKDWORDNET(XppParamList pl)
 /*{{function_: PokeDWord
             | syntax_: `PokeDWord( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write DWORD, 32-bit, extended pointer
+            | _kw_: PokeDWord, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 32-bit values in host byte order into an OT4XB extended
       pointer parameter, using and optionally updating a byte offset.
@@ -1164,7 +1164,7 @@ XPPRET XPPENTRY POKEDWORD(XppParamList pl)
 /*{{function_: PokeDWordNet
             | syntax_: `PokeDWordNet( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write DWORD, network byte order, big endian, htonl
+            | _kw_: PokeDWordNet, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 32-bit values in network byte order into an OT4XB extended
       pointer parameter, using and optionally updating a byte offset.
@@ -1232,7 +1232,7 @@ XPPRET XPPENTRY POKEDWORDNET(XppParamList pl)
 /*{{function_: PeekDouble
             | syntax_: `PeekDouble( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read double, 64-bit float, extended pointer
+            | _kw_: PeekDouble, Function
    }}*/
 /*{{|desc: Reads one or more 64-bit floating point values from an OT4XB extended pointer parameter, using
       and optionally updating a byte offset.
@@ -1284,7 +1284,7 @@ XPPRET XPPENTRY PEEKDOUBLE(XppParamList pl)
 /*{{function_: PokeDouble
             | syntax_: `PokeDouble( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write double, 64-bit float, extended pointer
+            | _kw_: PokeDouble, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 64-bit floating point values into an OT4XB extended pointer
       parameter, using and optionally updating a byte offset.
@@ -1352,7 +1352,7 @@ XPPRET XPPENTRY POKEDOUBLE(XppParamList pl)
 /*{{function_: PeekFloat
             | syntax_: `PeekFloat( pMem, @nShift [, nItems] )`
             | category: memory
-            | _kw_: peek, read float, 32-bit float, extended pointer
+            | _kw_: PeekFloat, Function
    }}*/
 /*{{|desc: Reads one or more 32-bit floating point values from an OT4XB extended pointer parameter, using
       and optionally updating a byte offset.
@@ -1404,7 +1404,7 @@ XPPRET XPPENTRY PEEKFLOAT(XppParamList pl)
 /*{{function_: PokeFloat
             | syntax_: `PokeFloat( pMem, @nShift, nValue [, nValueN] )`
             | category: memory
-            | _kw_: poke, write float, 32-bit float, extended pointer
+            | _kw_: PokeFloat, Function
    }}*/
 /*{{|desc: Writes one or more numeric values as 32-bit floating point values into an OT4XB extended pointer
       parameter, using and optionally updating a byte offset.
@@ -1472,7 +1472,7 @@ XPPRET XPPENTRY POKEFLOAT(XppParamList pl)
 /*{{function_: __i8
             | syntax_: `__i8( nValue [, nValueN] )`
             | category: memory/packing
-            | _kw_: pack bytes, binary string, int8, struct packing
+            | _kw_: __i8, Function
    }}*/
 /*{{|desc: Packs its numeric parameters into a binary string, one byte per parameter.
     | params:
@@ -1500,7 +1500,7 @@ XPPRET XPPENTRY __I8( XppParamList pl )
 /*{{function_: __i16
             | syntax_: `__i16( nValue [, nValueN] )`
             | category: memory/packing
-            | _kw_: pack words, binary string, int16, struct packing
+            | _kw_: __i16, Function
    }}*/
 /*{{|desc: Packs its numeric parameters into a binary string, one 16-bit word per parameter, using host byte
       order.
@@ -1529,7 +1529,7 @@ XPPRET XPPENTRY __I16( XppParamList pl )
 /*{{function_: __i32
             | syntax_: `__i32( nValue [, nValueN] )`
             | category: memory/packing
-            | _kw_: pack DWORDs, binary string, int32, struct packing
+            | _kw_: __i32, Function
    }}*/
 /*{{|desc: Packs its numeric parameters into a binary string, one 32-bit value per parameter, using host byte
       order.
@@ -1558,7 +1558,7 @@ XPPRET XPPENTRY __I32( XppParamList pl )
 /*{{function_: __f32
             | syntax_: `__f32( nValue [, nValueN] )`
             | category: memory/packing
-            | _kw_: pack floats, binary string, float, struct packing
+            | _kw_: __f32, Function
    }}*/
 /*{{|desc: Packs its numeric parameters into a binary string, one 32-bit floating point value per parameter.
     | params:
@@ -1586,7 +1586,7 @@ XPPRET XPPENTRY __F32( XppParamList pl )
 /*{{function_: __f64
             | syntax_: `__f64( nValue [, nValueN] )`
             | category: memory/packing
-            | _kw_: pack doubles, binary string, double, struct packing
+            | _kw_: __f64, Function
    }}*/
 /*{{|desc: Packs its numeric parameters into a binary string, one 64-bit floating point value per parameter.
     | params:
@@ -1701,7 +1701,7 @@ XPPRET XPPENTRY PPVTBL2A(XppParamList pl) // ppVtbl2A(p,mc)
 /*{{function_: ppVtbl2N
             | syntax_: `ppVtbl2N( pInterface, nIndex )`
             | category: memory/com
-            | _kw_: vtable, COM interface, method pointer, virtual table entry
+            | _kw_: ppVtbl2N, Function
    }}*/
 /*{{|desc: Returns one entry from the virtual table of a COM-style interface pointer.
     | params:

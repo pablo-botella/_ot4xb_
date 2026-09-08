@@ -14,7 +14,7 @@ static DWORD _fp_parclen_jmp_ = (DWORD) GetProcAddress( GetModuleHandle( "xpprt1
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetLen
-            | _kw_: array element, length, size, indices, container
+            | _kw_: _conArrayGetLen, Function
    }}*/
 /*{{|desc: Gets the length of an array element at the specified indices. Wrapper for _conSizeA with variable
       arguments.
@@ -72,7 +72,7 @@ OT4XB_API DWORD _conArrayGetLen( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetType
-            | _kw_: array element, type, XPP type, indices, container
+            | _kw_: _conArrayGetType, Function
    }}*/
 /*{{|desc: Gets the type of an array element at the specified indices. Wrapper for _conTypeA with variable
       arguments.
@@ -130,7 +130,7 @@ OT4XB_API DWORD _conArrayGetType( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayCheckType
-            | _kw_: array element, check type, type flags, indices
+            | _kw_: _conArrayCheckType, Function
    }}*/
 /*{{|desc: Checks if an array element at the specified indices matches the given type flags.
     | params:
@@ -188,7 +188,7 @@ OT4XB_API BOOL _conArrayCheckType( ContainerHandle cona, ULONG nType, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conCheckType
-            | _kw_: container type, check type, XPP flags, valtype
+            | _kw_: _conCheckType, Function
    }}*/
 /*{{|desc: Checks if a container matches the given type flags.
     | params:
@@ -211,7 +211,7 @@ OT4XB_API BOOL _conCheckType( ContainerHandle con, ULONG nType )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetArrayLen
-            | _kw_: array length, Len, first dimension, container
+            | _kw_: _conGetArrayLen, Function
    }}*/
 /*{{|desc: Returns the number of elements in the first dimension of an array container.
     | params:
@@ -232,7 +232,7 @@ OT4XB_API ULONG _conGetArrayLen( ContainerHandle cona )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetLong
-            | _kw_: container to LONG, numeric, read value
+            | _kw_: _conGetLong, Function
    }}*/
 /*{{|desc: Extracts a LONG value from a numeric container.
     | params:
@@ -275,7 +275,7 @@ OT4XB_API XPPAPIRET _conGetLong( ContainerHandle con, LONG * pnVal )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetLongOrBool
-            | _kw_: container to LONG, logical as 1 0, read value
+            | _kw_: _conGetLongOrBool, Function
    }}*/
 /*{{|desc: Extracts a LONG value from a numeric or logical container. Logical containers are converted to 1
       (.T.) or 0 (.F.).
@@ -325,7 +325,7 @@ OT4XB_API XPPAPIRET _conGetLongOrBool( ContainerHandle con, LONG * pnVal )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetLong64
-            | _kw_: container to int64, LONGLONG, numeric, read value
+            | _kw_: _conGetLong64, Function
    }}*/
 /*{{|desc: Extracts a LONGLONG (64-bit integer) value from a numeric container. Detects the internal numeric
       type to avoid data loss.
@@ -387,7 +387,7 @@ OT4XB_API XPPAPIRET _conGetLong64( ContainerHandle con, LONGLONG * pnVal )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetLongEx
-            | _kw_: container to LONG, any type, error return
+            | _kw_: _conGetLongEx, Function
    }}*/
 /*{{|desc: The function return non 0 on error
     | params:
@@ -451,7 +451,7 @@ OT4XB_API XPPAPIRET _conGetLongEx( ContainerHandle con, LONG * pnVal )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _parLong
-            | _kw_: parameter to LONG, numeric parameter, XppParamList
+            | _kw_: _parLong, Function
    }}*/
 /*{{|desc: Extracts a LONG value from a numeric parameter in an XppParamList. If the parameter is an array,
       accepts indices to select the element.
@@ -512,7 +512,7 @@ OT4XB_API LONG _parLong( XppParamList pl, ULONG nIndex, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _parLongOrBool
-            | _kw_: parameter to LONG, logical parameter, XppParamList
+            | _kw_: _parLongOrBool, Function
    }}*/
 /*{{|desc: Extracts a LONG value from a numeric or logical parameter in an XppParamList. Logical parameters are
       converted to 1 (.T.) or 0 (.F.). If the parameter is an array, accepts indices to select the element.
@@ -576,7 +576,7 @@ OT4XB_API LONG _parLongOrBool( XppParamList pl, ULONG nIndex, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _parLongEx
-            | _kw_: parameter to LONG, any type, XppParamList
+            | _kw_: _parLongEx, Function
    }}*/
 /*{{|desc: Extracts a LONG value from a parameter of any supported type in an XppParamList: - Numeric: detects
       internal type (double or integer) and converts properly. - Logical: returns 1 for .T., 0 for .F. -
@@ -659,7 +659,7 @@ OT4XB_API LONG _parLongEx( XppParamList pl, ULONG nIndex, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _parLong64
-            | _kw_: parameter to int64, LONGLONG, XppParamList
+            | _kw_: _parLong64, Function
    }}*/
 /*{{|desc: Extracts a LONGLONG (64-bit integer) value from a numeric parameter in an XppParamList. Detects the
       internal numeric type to avoid data loss. If the parameter is an array, accepts indices to select the
@@ -720,7 +720,7 @@ OT4XB_API LONGLONG _parLong64( XppParamList pl, ULONG nIndex, ... )
 /*{{function_: PSzz2Array
             | syntax_: `PSzz2Array( pStr )`
             | category: container
-            | _kw_: pszz, double zero list, string list to array, multi string
+            | _kw_: PSzz2Array, Function
    }}*/
 /*{{|desc: Converts a pszz buffer to a Xbase++ array. A pszz buffer is a sequence of substrings each terminated
       by Chr(0), where a double Chr(0)+Chr(0) marks the end of the list. Each substring becomes one element of
@@ -772,7 +772,7 @@ XPPRET XPPENTRY PSZZ2ARRAY( XppParamList pl )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conXStrDup
-            | _kw_: container to string, copy string, zero terminated, xgrab
+            | _kw_: _conXStrDup, Function
    }}*/
 /*{{|desc: Retrieves a zero-terminated string copy from a CHARACTER Xbase++ container.
     | params:
@@ -804,7 +804,7 @@ OT4XB_API LPSTR _conXStrDup( ContainerHandle con, ULONG * pnLen )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszGetClassName
-            | _kw_: class name, object, className, container
+            | _kw_: _pszGetClassName, Function
    }}*/
 /*{{|desc: Returns the class name of a Xbase++ object container. Calls the object's className() method
       internally.
@@ -841,7 +841,7 @@ OT4XB_API LPSTR _pszGetClassName( ContainerHandle conClassObject )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetSuperClass
-            | _kw_: super class, parent class name, object
+            | _kw_: _conGetSuperClass, Function
    }}*/
 /*{{|desc: Returns a container holding the parent class name of a Xbase++ object container.
     | params:
@@ -899,7 +899,7 @@ OT4XB_API ContainerHandle _conGetSuperClass( ContainerHandle conClassObject )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _dwANFlagsParam
-            | _kw_: flags parameter, array or numeric, DWORD flags, combine
+            | _kw_: _dwANFlagsParam, Function
    }}*/
 /*{{|desc: Returns a Xbase++ parameter as DWORD flags. If the parameter is a single numeric value, returns it
       as DWORD. If the parameter is an array of numeric values, combines all elements with bitwise OR and
@@ -934,7 +934,7 @@ OT4XB_API DWORD _dwANFlagsParam( XppParamList pl, ULONG nParam )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszzACParam
-            | _kw_: pszz parameter, string or array, double zero list
+            | _kw_: _pszzACParam, Function
    }}*/
 /*{{|desc: Returns a pszz buffer from a Xbase++ character parameter. If the parameter is a single string,
       returns it as a pszz buffer (string + Chr(0)+Chr(0)). If the parameter is an array of strings,
@@ -985,7 +985,7 @@ OT4XB_API LPSTR _pszzACParam( XppParamList pl, ULONG nParam )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszParam
-            | _kw_: string parameter, copy, zero terminated, xgrab, XppParamList
+            | _kw_: _pszParam, Function
    }}*/
 /*{{|desc: Returns a copy of a Xbase++ character parameter as a zero-terminated string, allocated with
       _xgrab(). Must be released with _xfree() when no longer needed.
@@ -1008,7 +1008,7 @@ OT4XB_API LPSTR _pszParam( XppParamList pl, ULONG n )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszParam_cb
-            | _kw_: string parameter, copy, length, zero terminated, xgrab
+            | _kw_: _pszParam_cb, Function
    }}*/
 /*{{|desc: Returns a copy of a Xbase++ character parameter as a zero-terminated string, allocated with
       _xgrab(). Must be released with _xfree() when no longer needed. Also returns the length of the string (not
@@ -1047,7 +1047,7 @@ OT4XB_API LPSTR _pszParam_cb( XppParamList pl, ULONG n, DWORD * pcb )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetNLMember
-            | _kw_: object member, get LONG, ivar, read member
+            | _kw_: _conGetNLMember, Function
    }}*/
 /*{{|desc: Returns the value of a Xbase++ object member as LONG.
     | params:
@@ -1072,7 +1072,7 @@ OT4XB_API LONG _conGetNLMember( ContainerHandle conObj, LPSTR pMName )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conSetNLMember
-            | _kw_: object member, set LONG, ivar, write member
+            | _kw_: _conSetNLMember, Function
    }}*/
 /*{{|desc: Sets the value of a Xbase++ object member from a LONG.
     | params:
@@ -1095,7 +1095,7 @@ OT4XB_API void _conSetNLMember( ContainerHandle conObj, LPSTR pMName, LONG n )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetLMember
-            | _kw_: object member, get BOOL, logical, read member
+            | _kw_: _conGetLMember, Function
    }}*/
 /*{{|desc: Returns the value of a Xbase++ object member as BOOL.
     | params:
@@ -1120,7 +1120,7 @@ OT4XB_API BOOL _conGetLMember( ContainerHandle conObj, LPSTR pMName )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conSetLMember
-            | _kw_: object member, set BOOL, logical, write member
+            | _kw_: _conSetLMember, Function
    }}*/
 /*{{|desc: Sets the value of a Xbase++ object member from a BOOL.
     | params:
@@ -1149,7 +1149,7 @@ OT4XB_API void _conSetLMember( ContainerHandle conObj, LPSTR pMName, BOOL n )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszMember
-            | _kw_: object member, get string, copy, xgrab
+            | _kw_: _pszMember, Function
    }}*/
 /*{{|desc: Returns a copy of a Xbase++ object string member as a zero-terminated string, allocated with
       _xgrab(). Must be released with _xfree() when no longer needed. Also returns the string length (not
@@ -1185,7 +1185,7 @@ OT4XB_API LPSTR _pszMember( ContainerHandle cono, LPSTR pMName, PULONG pnLen )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _pszMember2W
-            | _kw_: object member, get string, wide, UTF-16, xgrab
+            | _kw_: _pszMember2W, Function
    }}*/
 /*{{|desc: Returns a copy of a Xbase++ object string member converted to Unicode (UCS2), allocated with
       _xgrab(). Must be released with _xfree() when no longer needed. Also returns the number of Unicode
@@ -1220,7 +1220,7 @@ OT4XB_API LPWSTR _pszMember2W( ContainerHandle cono, LPSTR pMName, PULONG pcc )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conSetCLMember
-            | _kw_: object member, set string, counted, write member
+            | _kw_: _conSetCLMember, Function
    }}*/
 /*{{|desc: Sets a Xbase++ object member from a sized string (length specified explicitly).
     | params:
@@ -1246,7 +1246,7 @@ OT4XB_API void _conSetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pVal
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conSetCMember
-            | _kw_: object member, set string, zero terminated, write member
+            | _kw_: _conSetCMember, Function
    }}*/
 /*{{|desc: Sets a Xbase++ object member from a zero-terminated string.
     | params:
@@ -1273,7 +1273,7 @@ OT4XB_API void  _conSetCMember( ContainerHandle conObj, LPSTR pMName, LPSTR pVal
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conGetCLMember
-            | _kw_: object member, get string, buffer, read member
+            | _kw_: _conGetCLMember, Function
    }}*/
 /*{{|desc: Copies the value of a Xbase++ object string member into a caller-provided buffer.
     | params:
@@ -1305,7 +1305,7 @@ OT4XB_API void _conGetCLMember( ContainerHandle conObj, LPSTR pMName, LPSTR pBuf
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conSetNILMember
-            | _kw_: object member, set NIL, clear member
+            | _kw_: _conSetNILMember, Function
    }}*/
 /*{{|desc: Sets a Xbase++ object member to NIL.
     | params:
@@ -1330,7 +1330,7 @@ OT4XB_API void _conSetNILMember( ContainerHandle conObj, LPSTR pMName )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conTParam
-            | _kw_: typed parameter, type check, XppParamList, container
+            | _kw_: _conTParam, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter if its type is one of the types specified in the
       nType mask. If not, releases the container (only if not passed by reference) and returns NULLCONTAINER.
@@ -1364,7 +1364,7 @@ OT4XB_API ContainerHandle _conTParam( XppParamList pl, ULONG n, BOOL * pbByRef, 
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conCopyParam
-            | _kw_: copy parameter, independent copy, XppParamList, container
+            | _kw_: _conCopyParam, Function
    }}*/
 /*{{|desc: Returns an independent copy of a Xbase++ parameter as a new ContainerHandle, regardless of whether
       it was passed by reference or by value. The caller must release the returned handle with _conRelease().
@@ -1391,7 +1391,7 @@ OT4XB_API ContainerHandle _conCopyParam( XppParamList pl, ULONG n )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conTpParam
-            | _kw_: typed parameter, type string, XppParamList, container
+            | _kw_: _conTpParam, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter if its type is one of the types specified in the
       pType mask. If not, releases the container (only if not passed by reference) and returns NULLCONTAINER.
@@ -1439,7 +1439,7 @@ OT4XB_API ContainerHandle _conTpParam( XppParamList pl, ULONG n, BOOL * pbByRef,
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conTMember
-            | _kw_: typed member, object member, type check, container
+            | _kw_: _conTMember, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ object member if its type is one of the types specified in
       the nType mask. If not, releases the container and returns NULLCONTAINER.
@@ -1478,7 +1478,7 @@ OT4XB_API ContainerHandle _conTMember( ContainerHandle Self, LPSTR pszMemberName
 /*{{function_: lCallFuncPA
             | syntax_: `lCallFuncPA( cFuncName, aParams, @uResult )`
             | category: container
-            | _kw_: call function, parameters array, by name, dynamic call
+            | _kw_: lCallFuncPA, Function
    }}*/
 /*{{|desc: Calls a Xbase++ function by name passing the elements of an array as individual parameters. Returns
       .F. without raising an error if the function does not exist.
@@ -1533,7 +1533,7 @@ XPPRET XPPENTRY LCALLFUNCPA( XppParamList pl )
 /*{{function_: lCallMethodPA
             | syntax_: `lCallMethodPA( oSelf, cMethod, aParams, @uResult )`
             | category: container
-            | _kw_: call method, parameters array, by name, dynamic call, object
+            | _kw_: lCallMethodPA, Function
    }}*/
 /*{{|desc: Calls a method of a Xbase++ object passing the elements of an array as individual parameters.
       Returns .F. without raising an error if the object is not valid or the method does not exist.
@@ -1596,7 +1596,7 @@ XPPRET XPPENTRY LCALLMETHODPA( XppParamList pl )
 /*{{function_: CallFunction
             | syntax_: `CallFunction( cFuncName, params... )`
             | category: container
-            | _kw_: call function, by name, dynamic call, variable parameters
+            | _kw_: CallFunction, Function
    }}*/
 /*{{|desc: Calls a Xbase++ function by name. The function name is the first parameter, followed by any number
       of parameters to pass to the function. Returns NIL if the function cannot be called.
@@ -1640,7 +1640,7 @@ XPPRET XPPENTRY CALLFUNCTION( XppParamList pl )
 /*{{function_: lObjGetMember
             | syntax_: `lObjGetMember( oSelf, cMemberName, @uVal )`
             | category: container
-            | _kw_: object member, get, by name, ivar, reflection
+            | _kw_: lObjGetMember, Function
    }}*/
 /*{{|desc: Gets the value of a member of a Xbase++ object.
     | params:
@@ -1688,7 +1688,7 @@ XPPRET XPPENTRY LOBJGETMEMBER( XppParamList pl )
 /*{{function_: lObjSetMember
             | syntax_: `lObjSetMember( oSelf, cMemberName, uVal )`
             | category: container
-            | _kw_: object member, set, by name, ivar, reflection
+            | _kw_: lObjSetMember, Function
    }}*/
 /*{{|desc: Sets the value of a member of a Xbase++ object.
     | params:
@@ -1738,7 +1738,7 @@ XPPRET XPPENTRY LOBJSETMEMBER( XppParamList pl )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conParamSelfByRef
-            | _kw_: parameter by reference, object, Self, XppParamList
+            | _kw_: _conParamSelfByRef, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter if it is an object and was passed by reference.
       Returns NULLCONTAINER otherwise.
@@ -1762,7 +1762,7 @@ OT4XB_API ContainerHandle _conParamSelfByRef( XppParamList pl, ULONG nParam )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conParamByRef
-            | _kw_: parameter by reference, @, XppParamList, container
+            | _kw_: _conParamByRef, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference. Returns
       NULLCONTAINER if the parameter was not passed by reference.
@@ -1791,7 +1791,7 @@ OT4XB_API ContainerHandle _conParamByRef( XppParamList pl, ULONG nParam )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conTParamByRef
-            | _kw_: parameter by reference, typed, type flags, XppParamList
+            | _kw_: _conTParamByRef, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference and its type
       is one of the types specified in the ulType mask. Returns NULLCONTAINER otherwise.
@@ -1821,7 +1821,7 @@ OT4XB_API ContainerHandle _conTParamByRef( XppParamList pl, ULONG nParam, ULONG 
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conTpParamByRef
-            | _kw_: parameter by reference, typed, type string, XppParamList
+            | _kw_: _conTpParamByRef, Function
    }}*/
 /*{{|desc: Returns the ContainerHandle of a Xbase++ parameter only if it was passed by reference and its type
       is one of the types specified in the pType mask. Also returns the actual type of the parameter via pType.
@@ -1855,7 +1855,7 @@ OT4XB_API ContainerHandle _conTpParamByRef( XppParamList pl, ULONG nParam, ULONG
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conReleaseM
-            | _kw_: release containers, multiple, NULLCONTAINER terminated
+            | _kw_: _conReleaseM, Function
    }}*/
 /*{{|desc: Releases multiple ContainerHandles in a single call. The argument list must end with NULLCONTAINER.
     | params:
@@ -1883,7 +1883,7 @@ OT4XB_API void _conReleaseM( ContainerHandle con, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conReleasePa
-            | _kw_: release containers, array of handles
+            | _kw_: _conReleasePa, Function
    }}*/
 /*{{|desc: Releases an array of ContainerHandles.
     | params:
@@ -1917,7 +1917,7 @@ OT4XB_API void _conReleasePa( ContainerHandle * pcon, ULONG np )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conNil2NullContainer
-            | _kw_: release NIL container, NULLCONTAINER, cleanup
+            | _kw_: _conNil2NullContainer, Function
    }}*/
 /*{{|desc: Releases a ContainerHandle if it contains NIL and sets the pointer to NULLCONTAINER.
     | params:
@@ -1944,7 +1944,7 @@ OT4XB_API void _conNil2NullContainer( ContainerHandle * pcon )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetSizeC
-            | _kw_: array element, string length, indices
+            | _kw_: _conArrayGetSizeC, Function
    }}*/
 /*{{|desc: Returns the length of a string stored inside a Xbase++ array element at the specified indices.
     | params:
@@ -1983,7 +1983,7 @@ OT4XB_API LONG _conArrayGetSizeC( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetXStrDup
-            | _kw_: array element, get string, copy, xgrab, indices
+            | _kw_: _conArrayGetXStrDup, Function
    }}*/
 /*{{|desc: Returns a copy of a string stored inside a Xbase++ array element at the specified indices, allocated
       with _xgrab(). Must be released with _xfree() when no longer needed.
@@ -2030,7 +2030,7 @@ OT4XB_API LPSTR _conArrayGetXStrDup( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetCL
-            | _kw_: array element, get string, buffer, indices
+            | _kw_: _conArrayGetCL, Function
    }}*/
 /*{{|desc: Fills a caller-provided buffer with the content of a string stored inside a Xbase++ array element at
       the specified indices.
@@ -2072,7 +2072,7 @@ OT4XB_API LONG _conArrayGetCL( ContainerHandle cona, LPSTR pStr, ULONG nLen, ...
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetNL
-            | _kw_: array element, get LONG, indices
+            | _kw_: _conArrayGetNL, Function
    }}*/
 /*{{|desc: Returns a LONG value stored inside a Xbase++ array element at the specified indices.
     | params:
@@ -2111,7 +2111,7 @@ OT4XB_API LONG _conArrayGetNL( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetL
-            | _kw_: array element, get BOOL, logical, indices
+            | _kw_: _conArrayGetL, Function
    }}*/
 /*{{|desc: Returns a BOOL value stored inside a Xbase++ array element at the specified indices.
     | params:
@@ -2150,7 +2150,7 @@ OT4XB_API BOOL _conArrayGetL( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetNLEx
-            | _kw_: array element, get LONG, any type, indices
+            | _kw_: _conArrayGetNLEx, Function
    }}*/
 /*{{|desc: Returns a LONG value from a Xbase++ array element at the specified indices, supporting any type
       accepted by _conGetLongEx: - Numeric: detects internal type (double or integer) and converts properly. -
@@ -2195,7 +2195,7 @@ OT4XB_API LONG _conArrayGetNLEx( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayGetND
-            | _kw_: array element, get double, indices
+            | _kw_: _conArrayGetND, Function
    }}*/
 /*{{|desc: Returns a double value stored inside a Xbase++ array element at the specified indices.
     | params:
@@ -2234,7 +2234,7 @@ OT4XB_API double _conArrayGetND( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayPutC_MacroStr
-            | _kw_: array element, put codeblock, macro compile, indices
+            | _kw_: _conArrayPutC_MacroStr, Function
    }}*/
 /*{{|desc: Compiles a string as a codeblock and stores it into a Xbase++ array element at the specified
       indices.
@@ -2281,7 +2281,7 @@ OT4XB_API XPPAPIRET _conArrayPutC_MacroStr( ContainerHandle cona, LPSTR pStr, ..
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayPutEmptyData
-            | _kw_: array element, empty value, type, initialize, indices
+            | _kw_: _conArrayPutEmptyData, Function
    }}*/
 /*{{|desc: Initializes a Xbase++ array element with the empty value corresponding to the specified type.
     | params:
@@ -2323,7 +2323,7 @@ OT4XB_API XPPAPIRET _conArrayPutEmptyData( ContainerHandle cona, ULONG nType, LO
             | category: container
             | header: ot4xb_cpp_exported.h
             | mangled-name: _conArrayPutNL
-            | _kw_: array element, put LONG, indices
+            | _kw_: _conArrayPutNL, Function
    }}*/
 /*{{|desc: Stores a LONG value into a Xbase++ array element at the specified indices.
     | params:
@@ -2365,7 +2365,7 @@ OT4XB_API XPPAPIRET _conArrayPutNL( ContainerHandle cona, LONG nVal, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutNDF
-            | _kw_: array element, put double, digits decimals, format, indices
+            | _kw_: _conArrayPutNDF, Function
    }}*/
 /*{{|desc: Stores a double value with explicit digit and decimal format into a Xbase++ array element at the
       specified indices.
@@ -2409,7 +2409,7 @@ OT4XB_API XPPAPIRET _conArrayPutNDF( ContainerHandle cona, double nd, LONG nDigi
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutND
-            | _kw_: array element, put double, indices
+            | _kw_: _conArrayPutND, Function
    }}*/
 /*{{|desc: Stores a double value into a Xbase++ array element at the specified indices.
     | params:
@@ -2451,7 +2451,7 @@ OT4XB_API XPPAPIRET _conArrayPutND( ContainerHandle cona, double nd, ULONG nn, .
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutL
-            | _kw_: array element, put BOOL, logical, indices
+            | _kw_: _conArrayPutL, Function
    }}*/
 /*{{|desc: Stores a BOOL as a Xbase++ logical value into an array element at the specified indices.
     | params:
@@ -2491,7 +2491,7 @@ OT4XB_API XPPAPIRET _conArrayPutL( ContainerHandle cona, BOOL bVal, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutDS
-            | _kw_: array element, put date, date string, indices
+            | _kw_: _conArrayPutDS, Function
    }}*/
 /*{{|desc: Stores a date string as a Xbase++ Date value into an array element at the specified indices.
     | params:
@@ -2531,7 +2531,7 @@ OT4XB_API XPPAPIRET _conArrayPutDS( ContainerHandle cona, LPSTR pStr, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutCL
-            | _kw_: array element, put string, counted, indices
+            | _kw_: _conArrayPutCL, Function
    }}*/
 /*{{|desc: Stores a byte counted string as a Xbase++ character value into an array element at the specified
       indices.
@@ -2573,7 +2573,7 @@ OT4XB_API XPPAPIRET _conArrayPutCL( ContainerHandle cona, LPSTR pStr, ULONG nLen
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutBSTR2a
-            | _kw_: array element, put BSTR, ANSI, indices
+            | _kw_: _conArrayPutBSTR2a, Function
    }}*/
 /*{{|desc: Converts a BSTR to ANSI and stores it as a Xbase++ character value into an array element at the
       specified indices. A NULL BSTR, or one that cannot be converted, is stored as an empty string.
@@ -2626,7 +2626,7 @@ OT4XB_API XPPAPIRET _conArrayPutBSTR2a( ContainerHandle cona, BSTR bs, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArrayPutC
-            | _kw_: array element, put string, zero terminated, indices
+            | _kw_: _conArrayPutC, Function
    }}*/
 /*{{|desc: Stores a zero terminated string as a Xbase++ character value into an array element at the
       specified indices.
@@ -2667,7 +2667,7 @@ OT4XB_API XPPAPIRET _conArrayPutC( ContainerHandle cona, LPSTR pStr, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _retcFmt
-            | _kw_: return formatted string, wvsprintf, return value
+            | _kw_: _retcFmt, Function
    }}*/
 /*{{|desc: Formats a string with wvsprintf() and places it as the character return value of the current
       Xbase++ function. The formatted result is limited to 1023 characters.
@@ -2696,7 +2696,7 @@ OT4XB_API void  _retcFmt( XppParamList pl, LPSTR pFmt, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conClassDestroyCon
-            | _kw_: ClassDestroy, dynamic class, destroy class
+            | _kw_: _conClassDestroyCon, Function
    }}*/
 /*{{|desc: Tries to destroy a Xbase++ dynamic class by calling the ClassDestroy() function with the supplied
       class object.
@@ -2723,7 +2723,7 @@ OT4XB_API BOOL _conClassDestroyCon( ContainerHandle conco )
             | category: container
             | header: ot4xb_api.h
             | mangled-name: _conClsObj
-            | _kw_: ClassObject, class object, by name
+            | _kw_: _conClsObj, Function
    }}*/
 /*{{|desc: Returns the class object of a class from its name, using the Xbase++ ClassObject() function. The
       class must already be known to the running application.
@@ -2759,7 +2759,7 @@ OT4XB_API ContainerHandle _conClsObj( LPSTR pClassName )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conClsObjNew
-            | _kw_: ClassObject, class object, by name, class function fallback
+            | _kw_: _conClsObjNew, Function
    }}*/
 /*{{|desc: Returns the class object of a class from its name. When ClassObject() does not know the class, the
       function with the class name is called to obtain it, so the class is created on first use.
@@ -2796,7 +2796,7 @@ OT4XB_API ContainerHandle _conClsObjNew( LPSTR pClassName )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutNewObj
-            | _kw_: new object, instantiate, class object, New()
+            | _kw_: _conPutNewObj, Function
    }}*/
 /*{{|desc: Creates a new instance of a class and stores it in a container. The class object is obtained with
       _conClsObjNew() and its New() method is called with the supplied parameters. The parameter containers
@@ -2841,7 +2841,7 @@ OT4XB_API ContainerHandle _conPutNewObj( ContainerHandle conr, LPSTR pClassName,
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conNewObj
-            | _kw_: new object, instantiate, class name, New() parameters
+            | _kw_: _conNewObj, Function
    }}*/
 /*{{|desc: Creates a new instance of a class from its class name, calling the New() method with the supplied
       parameters. The parameter containers are not released.
@@ -2889,7 +2889,7 @@ OT4XB_API ContainerHandle _conNewObj( LPSTR pClassName, ContainerHandle p1, ... 
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conNewObjR
-            | _kw_: new object, instantiate, release parameters
+            | _kw_: _conNewObjR, Function
    }}*/
 /*{{|desc: Like _conNewObj() but releases every supplied parameter container after the New() call.
     | params:
@@ -2936,7 +2936,7 @@ OT4XB_API ContainerHandle _conNewObjR( LPSTR pClassName, ContainerHandle p1, ...
             | category: c-api/container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetFloat
-            | _kw_: container to float, numeric, read value
+            | _kw_: _conGetFloat, Function
    }}*/
 /*{{|desc: Reads a Xbase++ numeric container and stores it as a C FLOAT.
     | params:
@@ -2961,7 +2961,7 @@ OT4XB_API DWORD _conGetFloat( ContainerHandle con, FLOAT * pnf )
             | category: c-api/container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutFloat
-            | _kw_: float to container, numeric, write value
+            | _kw_: _conPutFloat, Function
    }}*/
 /*{{|desc: Stores a C FLOAT in a Xbase++ numeric container.
     | params:
@@ -2984,7 +2984,7 @@ OT4XB_API ContainerHandle _conPutFloat( ContainerHandle con, FLOAT nf )
             | category: c-api/container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetQWord
-            | _kw_: container to QWORD, 8-byte string, ULONGLONG
+            | _kw_: _conGetQWord, Function
    }}*/
 /*{{|desc: Reads eight binary bytes from a character container into a ULONGLONG.
     | params:
@@ -3007,7 +3007,7 @@ OT4XB_API DWORD _conGetQWord( ContainerHandle con, ULONGLONG * pqw )
             | category: c-api/container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutQWord
-            | _kw_: QWORD to container, 8-byte string, ULONGLONG
+            | _kw_: _conPutQWord, Function
    }}*/
 /*{{|desc: Stores a ULONGLONG as an eight-byte Xbase++ character value.
     | params:
@@ -3027,7 +3027,7 @@ OT4XB_API ContainerHandle _conPutQWord( ContainerHandle con, ULONGLONG qw )
 /*{{function_: _var2con
             | syntax_: `_var2con( xValue )`
             | category: container/low-level
-            | _kw_: value to container, ContainerHandle, copy value, C interop
+            | _kw_: _var2con, Function
    }}*/
 /*{{|desc: Creates a new Xbase++ container handle containing a copy of a value.
     | params:
@@ -3055,7 +3055,7 @@ XPPRET XPPENTRY _VAR2CON( XppParamList pl )
 /*{{function_: _con2var
             | syntax_: `_con2var( hContainer )`
             | category: container/low-level
-            | _kw_: container to value, ContainerHandle, read value, C interop
+            | _kw_: _con2var, Function
    }}*/
 /*{{|desc: Returns the Xbase++ value stored in a container handle without releasing the handle.
     | params:
@@ -3081,7 +3081,7 @@ XPPRET XPPENTRY _CON2VAR( XppParamList pl )
 /*{{function_: _conrelease
             | syntax_: `_conrelease( hContainer )`
             | category: container/low-level
-            | _kw_: container to value, release handle, ContainerHandle
+            | _kw_: _conrelease, Function
    }}*/
 /*{{|desc: Returns the Xbase++ value stored in a container handle and releases that handle.
     | params:
@@ -3109,7 +3109,7 @@ XPPRET XPPENTRY _CONRELEASE( XppParamList pl )
 /*{{function_: Array2pszz
             | syntax_: `Array2pszz( aStrings | cText, @nBuffSize )`
             | category: container/marshalling
-            | _kw_: pszz, double zero list, array to string list, multi string, allocate
+            | _kw_: Array2pszz, Function
    }}*/
 /*{{|desc: Allocates a double-zero-terminated string list buffer from a string or array of strings.
     | params:
@@ -3159,7 +3159,7 @@ XPPRET XPPENTRY ARRAY2PSZZ( XppParamList pl )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conArray2Pszz
-            | _kw_: pszz, double zero list, array to string list
+            | _kw_: _conArray2Pszz, Function
    }}*/
 /*{{|desc: Builds a double zero terminated string list (pszz) from a Xbase++ array of strings. Elements that
       are not strings, or are empty, produce no entry.
@@ -3199,7 +3199,7 @@ OT4XB_API LPSTR _conArray2Pszz( ContainerHandle cona, DWORD * pcb )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPszz2Array
-            | _kw_: pszz, double zero list, string list to array
+            | _kw_: _conPszz2Array, Function
    }}*/
 /*{{|desc: Builds a Xbase++ array of character values from a double zero terminated string list (pszz).
     | params:
@@ -3242,7 +3242,7 @@ OT4XB_API ContainerHandle _conPszz2Array( LPSTR p )
 /*{{function_: ppMarshall2Array
             | syntax_: `ppMarshall2Array( pArrayOfStringPointers )`
             | category: container/marshalling
-            | _kw_: argv, LPSTR array, C string array to Xbase++ array
+            | _kw_: ppMarshall2Array, Function
    }}*/
 /*{{|desc: Builds an Xbase++ array from a NULL-terminated C array of LPSTR pointers.
     | params:
@@ -3281,7 +3281,7 @@ XPPRET XPPENTRY PPMARSHALL2ARRAY( XppParamList pl )
 /*{{function_: Array2ppMarshall
             | syntax_: `Array2ppMarshall( aStrings [, @aSizes] )`
             | category: container/marshalling
-            | _kw_: argv, LPSTR array, Xbase++ array to C string array, marshal
+            | _kw_: Array2ppMarshall, Function
    }}*/
 /*{{|desc: Allocates a buffer containing a NULL-terminated C array of LPSTR pointers and the string data
       referenced by those pointers.
@@ -3295,7 +3295,7 @@ XPPRET XPPENTRY PPMARSHALL2ARRAY( XppParamList pl )
 
     |note: The returned memory is allocated with _xgrab(). The application owns that buffer and must release it
       with _xfree() when it is no longer required. The buffer layout is: LPSTR pStr1 ... LPSTR pStrN DWORD 0
-      String1 + Chr(0) ... StringN + Chr(0) This layout is suitable for C APIs that expect a char** or LPSTR*
+      String1 + Chr(0) ... StringN + Chr(0) This layout is suitable for C APIs that expect a `char**` or LPSTR*
       list terminated with a NULL pointer.
 
     |seealso: See also: {{ilink: <function ppMarshall2Array> ppMarshall2Array}}
@@ -3358,7 +3358,7 @@ XPPRET XPPENTRY ARRAY2PPMARSHALL( XppParamList pl )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutZeroString
-            | _kw_: zero string, blank buffer, Replicate chr(0), container
+            | _kw_: _conPutZeroString, Function
    }}*/
 /*{{|desc: Creates a Xbase++ character value of the requested length with every byte set to binary zero.
     | params:
@@ -3382,7 +3382,7 @@ OT4XB_API ContainerHandle _conPutZeroString( ContainerHandle con, ULONG nLen )
 /*{{function_: Type2EmptyValue
             | syntax_: `Type2EmptyValue( cType [, nLen [, nDec]] )`
             | category: container/value
-            | _kw_: empty value, by type, default value, blank
+            | _kw_: Type2EmptyValue, Function
    }}*/
 /*{{|desc: Creates an empty Xbase++ value for the requested type.
     | params:
@@ -3444,7 +3444,7 @@ XPPRET XPPENTRY TYPE2EMPTYVALUE( XppParamList pl )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _parHWND
-            | _kw_: window handle parameter, HWND, GetHWND, XppParamList
+            | _kw_: _parHWND, Function
    }}*/
 /*{{|desc: Reads a window handle from a Xbase++ parameter. The parameter may be a numeric handle, an object
       implementing a GetHWND() method, or an array holding one of those when element indices are supplied.
@@ -3510,7 +3510,7 @@ OT4XB_API HWND _parHWND( XppParamList pl, ULONG nIndex, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetDateAsFileTime
-            | _kw_: date to FILETIME, Xbase++ date, convert
+            | _kw_: _conGetDateAsFileTime, Function
    }}*/
 /*{{|desc: Converts a Xbase++ Date value into a FILETIME set to 00:00:00 of that day. When the date is empty
       the FILETIME is left untouched.
@@ -3549,7 +3549,7 @@ OT4XB_API XPPAPIRET _conGetDateAsFileTime( ContainerHandle con, FILETIME * pft )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetDateAsSystemTime
-            | _kw_: date to SYSTEMTIME, Xbase++ date, convert
+            | _kw_: _conGetDateAsSystemTime, Function
    }}*/
 /*{{|desc: Fills the date fields of a SYSTEMTIME from a Xbase++ Date value. A character value is also
       accepted; the first eight digits found in it are used as YYYYMMDD. Only wYear, wMonth and wDay are
@@ -3622,7 +3622,7 @@ OT4XB_API XPPAPIRET _conGetDateAsSystemTime( ContainerHandle con, SYSTEMTIME * p
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetDateTimeAsSystemTime
-            | _kw_: date time to SYSTEMTIME, Xbase++ date, time string
+            | _kw_: _conGetDateTimeAsSystemTime, Function
    }}*/
 /*{{|desc: Fills a SYSTEMTIME from a date container and a time container. The date part follows the
       _conGetDateAsSystemTime() rules; when the date is empty the time part is not read. The time may be a
@@ -3675,7 +3675,7 @@ OT4XB_API XPPAPIRET _conGetDateTimeAsSystemTime( ContainerHandle cond, Container
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutDateFromFileTime
-            | _kw_: FILETIME to date, Xbase++ date, convert
+            | _kw_: _conPutDateFromFileTime, Function
    }}*/
 /*{{|desc: Stores the date part of a FILETIME into a container as a Xbase++ Date value. A NULL FILETIME
       pointer, or one that cannot be converted, stores an empty date.
@@ -3712,7 +3712,7 @@ OT4XB_API XPPAPIRET _conPutDateFromFileTime( ContainerHandle con, FILETIME * pft
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conPutDateFromSystemTime
-            | _kw_: SYSTEMTIME to date, Xbase++ date, convert
+            | _kw_: _conPutDateFromSystemTime, Function
    }}*/
 /*{{|desc: Stores the date fields of a SYSTEMTIME into a container as a Xbase++ Date value. A NULL SYSTEMTIME
       pointer stores an empty date.
@@ -3744,7 +3744,7 @@ OT4XB_API XPPAPIRET _conPutDateFromSystemTime( ContainerHandle con, SYSTEMTIME *
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _cona2i64a
-            | _kw_: array to int64 array, LONGLONG, convert array
+            | _kw_: _cona2i64a, Function
    }}*/
 /*{{|desc: Converts a Xbase++ array into a C array of LONGLONG values. Character elements are read as up to
       eight raw bytes, numeric elements are converted to integer, Date elements are stored as FILETIME, and
@@ -3817,7 +3817,7 @@ OT4XB_API LONGLONG * _cona2i64a( ContainerHandle cona, ULONG * pnItems )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _BSTRParam
-            | _kw_: BSTR parameter, string to BSTR, COM, XppParamList
+            | _kw_: _BSTRParam, Function
    }}*/
 /*{{|desc: Reads a Xbase++ character parameter and returns it converted to a newly allocated BSTR. The ANSI
       code page is used for the wide conversion.
@@ -3843,7 +3843,7 @@ OT4XB_API BSTR _BSTRParam( XppParamList pl, ULONG n )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetBSTRMember
-            | _kw_: object member, BSTR, COM string
+            | _kw_: _conGetBSTRMember, Function
    }}*/
 /*{{|desc: Reads a member variable of a Xbase++ object and returns its character content as a newly allocated
       BSTR.
@@ -3869,7 +3869,7 @@ OT4XB_API BSTR _conGetBSTRMember( ContainerHandle conObj, LPSTR pMName )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetBSTR
-            | _kw_: container to BSTR, COM string, SysAllocString
+            | _kw_: _conGetBSTR, Function
    }}*/
 /*{{|desc: Converts the character content of a container into a newly allocated BSTR. The ANSI code page is
       used for the wide conversion.
@@ -3910,7 +3910,7 @@ OT4XB_API BSTR _conGetBSTR( ContainerHandle con )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: ?_conArrayGetBSTR@@YAPA_WPAUMomHandleEntry@@ZZ
-            | _kw_: array element, BSTR, COM string, indices
+            | _kw_: _conArrayGetBSTR, Function
    }}*/
 /*{{|desc: Returns the character content of a Xbase++ array element converted to a newly allocated BSTR.
     | params:
@@ -3950,7 +3950,7 @@ OT4XB_API BSTR _conArrayGetBSTR( ContainerHandle cona, ... )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGetHWND
-            | _kw_: container to HWND, window handle, GetHWND
+            | _kw_: _conGetHWND, Function
    }}*/
 /*{{|desc: Reads a window handle from a container. Accepts a numeric value or an object implementing a
       GetHWND() method.
@@ -3976,7 +3976,7 @@ OT4XB_API HWND _conGetHWND( ContainerHandle con )
 /*{{function_: ot4xb_memvar_setget
             | syntax_: `ot4xb_memvar_setget( cName )`
             | category: container/memvar
-            | _kw_: memvar, public private variable, by name, get set
+            | _kw_: ot4xb_memvar_setget, Function
    }}*/
 /*{{|desc: Gets or sets an Xbase++ memvar by name.
     | params:
@@ -4026,7 +4026,7 @@ XPPRET XPPENTRY OT4XB_MEMVAR_SETGET( XppParamList pl )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _pszCaptionParam
-            | _kw_: caption parameter, tilde to ampersand, mnemonic, window caption
+            | _kw_: _pszCaptionParam, Function
    }}*/
 /*{{|desc: Reads a Xbase++ character parameter and returns a copy prepared for Windows captions: each '~' is
       replaced with '&' and each ';' with a tab character. The copy is allocated with _xgrab() and must be
@@ -4065,7 +4065,7 @@ LPSTR OT4XB_API _pszCaptionParam( XppParamList pl, ULONG n )
             | category: container
             | header: ot4xb_api.h
             | mangled-name: ?ot4xb_parclen@@YAKPAXKZZ
-            | _kw_: _parclen, parameter length, guarded, string parameter
+            | _kw_: ot4xb_parclen, Function
    }}*/
 /*{{|desc: Guarded version of the Xbase++ runtime _parclen(). When the requested position is greater than the
       actual parameter count it returns 0; otherwise execution continues in the original runtime routine.
@@ -4114,7 +4114,7 @@ void _hook_parclen( void )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conaadd
-            | _kw_: AAdd, append element, array, container
+            | _kw_: _conaadd, Function
    }}*/
 /*{{|desc: Appends one element to a Xbase++ array, like the AAdd() function. When cona does not hold an array
       it is turned into a one element array, creating a new container when it is NULLCONTAINER.
@@ -4153,7 +4153,7 @@ OT4XB_API ContainerHandle _conaadd( ContainerHandle cona, ContainerHandle con )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conNewCodeblock
-            | _kw_: codeblock, macro compile, create block, string to block
+            | _kw_: _conNewCodeblock, Function
    }}*/
 /*{{|desc: Creates a codeblock by macro compiling a source string written in Xbase++ codeblock syntax.
     | params:
@@ -4181,7 +4181,7 @@ OT4XB_API ContainerHandle _conNewCodeblock( LPSTR pStr )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: _conGenericBreakCB
-            | _kw_: break codeblock, Break(), error handling, generic block
+            | _kw_: _conGenericBreakCB, Function
    }}*/
 /*{{|desc: Returns the generic ot4xb break codeblock, which calls Break() with the value it receives. The
       codeblock is created on first use and cached for the rest of the process.
@@ -4204,7 +4204,7 @@ OT4XB_API ContainerHandle _conGenericBreakCB( BOOL bCopy )
 /*{{function_: _congenericbreakcb
             | syntax_: `_congenericbreakcb()`
             | category: container/low-level
-            | _kw_: break codeblock, Break(), error handling, generic block
+            | _kw_: _congenericbreakcb, Function
    }}*/
 /*{{|desc: Returns the generic OT4XB break codeblock.
 
@@ -4222,7 +4222,7 @@ _XPP_REG_FUN_( _CONGENERICBREAKCB )
 /*{{function_: __vdef
             | syntax_: `__vdef( xValue1 [, xValueN] )`
             | category: value
-            | _kw_: default value, first non NIL, coalesce, parameters
+            | _kw_: __vdef, Function
    }}*/
 /*{{|desc: Returns the first parameter that has a real Xbase++ value.
     | params:
@@ -4251,7 +4251,7 @@ _XPP_REG_FUN_( __VDEF )
 /*{{function_: __vblock
             | syntax_: `__vblock( xValue1 [, xValueN] )`
             | category: value
-            | _kw_: first codeblock, variadic, find block
+            | _kw_: __vblock, Function
    }}*/
 /*{{|desc: Returns the first codeblock found in a variable argument list.
     | params:
@@ -4280,7 +4280,7 @@ _XPP_REG_FUN_( __VBLOCK )
 /*{{function_: __vnum
             | syntax_: `__vnum( xValue1 [, xValueN] )`
             | category: value
-            | _kw_: first numeric, variadic, find number
+            | _kw_: __vnum, Function
    }}*/
 /*{{|desc: Returns the first numeric value found in a variable argument list.
     | params:
@@ -4309,7 +4309,7 @@ _XPP_REG_FUN_( __VNUM )
 /*{{function_: __vlower
             | syntax_: `__vlower( xValue1 [, xValueN] )`
             | category: value/string
-            | _kw_: first string, lowercase, variadic
+            | _kw_: __vlower, Function
    }}*/
 /*{{|desc: Returns the first character value found in a variable argument list, converted to lowercase.
     | params:
@@ -4343,7 +4343,7 @@ _XPP_REG_FUN_( __VLOWER )
 /*{{function_: __vupper
             | syntax_: `__vupper( xValue1 [, xValueN] )`
             | category: value/string
-            | _kw_: first string, uppercase, variadic
+            | _kw_: __vupper, Function
    }}*/
 /*{{|desc: Returns the first character value found in a variable argument list, converted to uppercase.
     | params:
@@ -4377,7 +4377,7 @@ _XPP_REG_FUN_( __VUPPER )
 /*{{function_: __vstr
             | syntax_: `__vstr( xValue1 [, xValueN] )`
             | category: value/string
-            | _kw_: first string, variadic, find character
+            | _kw_: __vstr, Function
    }}*/
 /*{{|desc: Returns the first character value found in a variable argument list.
     | params:
@@ -4406,7 +4406,7 @@ _XPP_REG_FUN_( __VSTR )
 /*{{function_: __v2fv
             | syntax_: `__v2fv( xValue, cFieldType, nLength, nDecimals )`
             | category: value
-            | _kw_: field value, adjust type, length decimals, database field
+            | _kw_: __v2fv, Function
    }}*/
 /*{{|desc: Converts a value to a field value, adjusted to the requested field type, length, and decimals.
     | params:
@@ -4645,7 +4645,7 @@ _XPP_REG_FUN_( __V2FV )
 /*{{function_: __vmask
             | syntax_: `__vmask( nTypeMask, xValue1 [, xValueN] )`
             | category: value
-            | _kw_: first matching type, type mask, variadic
+            | _kw_: __vmask, Function
    }}*/
 /*{{|desc: Returns the first parameter whose Xbase++ type matches a type mask.
     | params:
@@ -4705,7 +4705,7 @@ _XPP_REG_FUN_( __VMASK )
 /*{{function_: __xb_type
             | syntax_: `__xb_type( xValue )`
             | category: container/type
-            | _kw_: internal type, XPP type, type mask, valtype
+            | _kw_: __xb_type, Function
    }}*/
 /*{{|desc: Returns the Xbase++ internal type of a value, or checks that type against a mask.
     | params:
@@ -4744,7 +4744,7 @@ _XPP_REG_FUN_( __XB_TYPE )
 /*{{function_: __vclsptr
             | syntax_: `__vclsptr( cClassName, xValue1 [, xValueN] )`
             | category: value
-            | _kw_: pointer argument, first pointer, class filter, variadic
+            | _kw_: __vclsptr, Function
    }}*/
 /*{{|desc: Returns the first value that can be used as a pointer argument, optionally filtering object values
       by class name.
@@ -4817,7 +4817,7 @@ _XPP_REG_FUN_( __VCLSPTR )
 /*{{function_: __anew
             | syntax_: `__anew( xValue1 [, xValueN] )`
             | category: container/array
-            | _kw_: new array, from parameters, array literal
+            | _kw_: __anew, Function
    }}*/
 /*{{|desc: Creates a new array initialized with the values passed as parameters.
     | params:
@@ -4851,7 +4851,7 @@ _XPP_REG_FUN_( __ANEW )
 /*{{function_: __apeek
             | syntax_: `__apeek( aArray, nIndex1 [, nIndexN] )`
             | category: container/array
-            | _kw_: array peek, safe index, nested array, no error
+            | _kw_: __apeek, Function
    }}*/
 /*{{|desc: Tries to read a value from an array using one or more indexes.
     | params:
@@ -4988,7 +4988,7 @@ static BOOL __vpeek_from_object( ContainerHandle con, DWORD & cb, LPSTR & p )
 /*{{function_: __vpeek
             | syntax_: `__vpeek( xValue, cExpression [, xDefault] )`
             | category: value
-            | _kw_: peek value, nested, array object path, safe access
+            | _kw_: __vpeek, Function
    }}*/
 /*{{|desc: Safely peeks/extracts a nested value from an array, object, or a combination of both.
     | params:
@@ -5079,7 +5079,7 @@ _XPP_REG_FUN_( __VPEEK )
 /*{{function_: __anext
             | syntax_: `__anext( aArray, @nIndex [, nFlags] )`
             | category: value/array
-            | _kw_: array iterator, next element, index by reference
+            | _kw_: __anext, Function
    }}*/
 /*{{|desc: Returns the next element of an array and advances an index passed by reference.
     | params:
@@ -5204,7 +5204,7 @@ static LPSTR __xml_fv__get_value( ContainerHandle  con_value )
 /*{{function_: __xml_fv_get_value
             | syntax_: `__xml_fv_get_value( xValue )`
             | category: value/xml
-            | _kw_: xml value, format value, text representation
+            | _kw_: __xml_fv_get_value, Function
    }}*/
 /*{{|desc: Formats a Xbase++ value as the text representation used by __xml_fv().
     | params:
@@ -5287,7 +5287,7 @@ static void __xml_fv__add_atributes( TZString & z, TXbCPItem & x )
 /*{{function_: __v2_csv_cell
             | syntax_: `__v2_csv_cell( xValue [, nFlags] [, nDecimals] )`
             | category: value/csv
-            | _kw_: csv cell, value to csv, quote, separator
+            | _kw_: __v2_csv_cell, Function
    }}*/
 /*{{|desc: Converts a Xbase++ value to one CSV cell.
     | params:
@@ -5296,8 +5296,8 @@ static void __xml_fv__add_atributes( TZString & z, TXbCPItem & x )
       ..., flagX ). 0x0001 - left-trim spaces while building the cell. 0x0002 - right-trim spaces after building
       the cell. 0x0008 - prefix numeric-looking cells with an apostrophe. 0x0100 - quote numeric-looking cells
       to avoid scientific-notation interpretation by CSV consumers. 0x0200 - do not convert CP1252 characters to
-      UTF-8. 0x0400 - convert CR, LF, and TAB to spaces. 0x0800 - convert double quotes to single quotes. 0x4000
-      - limit input length to 400 characters. 0x8000 - limit input length to 800 characters. 0xC000 - limit
+      UTF-8. 0x0400 - convert CR, LF, and TAB to spaces. 0x0800 - convert double quotes to single quotes.
+      0x4000 - limit input length to 400 characters. 0x8000 - limit input length to 800 characters. 0xC000 - limit
       input length to 1200 characters.
     - `nDecimals` Numeric - Optional decimal count for numeric values. When omitted, doubles use a compact
       representation and integer values are formatted without decimals.
@@ -5403,7 +5403,7 @@ _XPP_REG_FUN_( __V2_CSV_CELL )
 /*{{function_: __xml_fv
             | syntax_: `__xml_fv( cName, xValue [, xAttributes] [, nCodePageTo] [, nCodePageFrom] [, nFlags] )`
             | category: value/xml
-            | _kw_: xml fragment, element, attributes, format value
+            | _kw_: __xml_fv, Function
    }}*/
 /*{{|desc: Formats a Xbase++ value as an XML value fragment, using an element name and optional attributes.
     | params:
@@ -5492,7 +5492,7 @@ static LONG  _watching_thread_count = 0;
 /*{{debug-c-function_: begin_watch_thread_conc
             | syntax_: `BOOL begin_watch_thread_conc( void )`
             | category: container
-            | _kw_: lock watch, container locks, debug, balance, thread
+            | _kw_: begin_watch_thread_conc, Function
    }}*/
 /*{{|desc: Starts counting the balance of container C locks and unlocks made from the calling thread. Only
       one watch can be active at a time. Debug builds of ot4xb only.
@@ -5516,7 +5516,7 @@ extern "C" OT4XB_API BOOL __cdecl begin_watch_thread_conc( void )
 /*{{debug-c-function_: end_watch_thread_conc
             | syntax_: `LONG end_watch_thread_conc( void )`
             | category: container
-            | _kw_: lock watch, container locks, debug, final balance
+            | _kw_: end_watch_thread_conc, Function
    }}*/
 /*{{|desc: Stops the container C lock watch and returns the final balance. Debug builds of ot4xb only.
 
@@ -5540,7 +5540,7 @@ extern "C" OT4XB_API LONG  __cdecl end_watch_thread_conc( void )
 /*{{debug-c-function_: count_watch_thread_conc
             | syntax_: `LONG count_watch_thread_conc( void )`
             | category: container
-            | _kw_: lock watch, container locks, debug, balance
+            | _kw_: count_watch_thread_conc, Function
    }}*/
 /*{{|desc: Returns the current balance of the container C lock watch. Debug builds of ot4xb only.
 
@@ -5561,7 +5561,7 @@ extern "C" OT4XB_API LONG  __cdecl count_watch_thread_conc( void )
 /*{{debug-c-function_: on_watch_thread_conc
             | syntax_: `void on_watch_thread_conc( LONG n )`
             | category: container
-            | _kw_: lock watch, container locks, debug, counter
+            | _kw_: on_watch_thread_conc, Function
    }}*/
 /*{{|desc: Adds an amount to the container C lock watch balance when called from the watching thread. The
       ot4xb lock wrappers call it with 1 on each successful lock and -1 on each unlock. Debug builds of ot4xb
@@ -5589,7 +5589,7 @@ extern "C" OT4XB_API void  __cdecl on_watch_thread_conc( LONG n )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_conRLockC
-            | _kw_: lock string, read lock, container bytes, _conRLockC
+            | _kw_: ot4xb_conRLockC, Function
    }}*/
 /*{{|desc: Locks the character content of a container for read access and returns a pointer to its bytes. In
       debug builds the lock is counted by the watch thread instrumentation. Unlock with ot4xb_conUnlockC().
@@ -5618,7 +5618,7 @@ OT4XB_API ULONG ot4xb_conRLockC( ContainerHandle con, LPSTR * pp, ULONG * pcb )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_conWLockC
-            | _kw_: lock string, write lock, modify in place, _conWLockC
+            | _kw_: ot4xb_conWLockC, Function
    }}*/
 /*{{|desc: Locks the character content of a container for write access, so the string bytes can be modified
       in place. In debug builds the lock is counted by the watch thread instrumentation. Unlock with
@@ -5648,7 +5648,7 @@ OT4XB_API ULONG ot4xb_conWLockC( ContainerHandle con, LPSTR * pp, ULONG * pcb )
             | category: container
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_conUnlockC
-            | _kw_: unlock string, release lock, _conUnlockC
+            | _kw_: ot4xb_conUnlockC, Function
    }}*/
 /*{{|desc: Releases a character content lock previously obtained with ot4xb_conRLockC() or ot4xb_conWLockC().
       In debug builds the unlock is counted by the watch thread instrumentation.
@@ -5675,7 +5675,7 @@ OT4XB_API ULONG ot4xb_conUnlockC( ContainerHandle con )
 /*{{function_: ot4xb_qloop
             | syntax_: `ot4xb_qloop( nFlags, @uCargo, bEval [, bCondition] [, bInit] )`
             | category: value/control
-            | _kw_: loop, codeblock loop, while, iterate, quick loop
+            | _kw_: ot4xb_qloop, Function
    }}*/
 /*{{|desc: Executes a small loop from Xbase++, evaluating a body codeblock while an optional condition
       codeblock is true.

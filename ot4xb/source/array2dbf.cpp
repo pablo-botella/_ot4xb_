@@ -308,7 +308,7 @@ END_NAMESPACE() // a2dbf_ns
 /*{{function_: _a2dbf_
             | syntax_: `_a2dbf_( aData , aStruct , cFName )`
             | category: misc/dbf
-            | _kw_: dbf, foxpro, create table, array to dbf, export, no DBE
+            | _kw_: _a2dbf_, Function
    }}*/
 /*{{|desc: Create a FOX database from the provided bidimensional array directly without use the DBE engine.
       Only supported types are C, N, L, D.

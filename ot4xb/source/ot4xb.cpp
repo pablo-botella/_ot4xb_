@@ -201,7 +201,7 @@ XBASE_EXIT_PROC()
 /*{{function_: ot4xb_push_exit_cb
             | syntax_: `ot4xb_push_exit_cb( bExit )`
             | category: runtime
-            | _kw_: exit, unload, shutdown, cleanup, atexit, codeblock
+            | _kw_: ot4xb_push_exit_cb, Function
    }}*/
 /*{{|desc: Registers a codeblock to be evaluated when the Xbase++ runtime unloads ot4xb. Registered codeblocks
       are stored in a synchronized internal stack and executed during XBASE_EXIT_PROC().
@@ -231,7 +231,7 @@ _XPP_REG_FUN_( OT4XB_PUSH_EXIT_CB )
             | category: runtime/windows
             | export: APPINSTANCE
             | source: ot4xb.cpp:APPINSTANCE
-            | _kw_: hInstance, application instance, module handle, GetModuleHandle
+            | _kw_: AppInstance, Function
    }}*/
 /*{{|desc: Returns the application instance handle.
 
@@ -246,7 +246,7 @@ XPPRET XPPENTRY APPINSTANCE( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle(0)
             | category: runtime/windows
             | export: GETCURRENTPROCESSHANDLE
             | source: ot4xb.cpp:GETCURRENTPROCESSHANDLE
-            | _kw_: process handle, current process, OpenProcess, DuplicateHandle
+            | _kw_: GetCurrentProcessHandle, Function
    }}*/
 /*{{|desc: Returns a cached real process handle for the current process.
 
@@ -273,7 +273,7 @@ XPPRET XPPENTRY GETCURRENTPROCESSHANDLE( XppParamList pl)
             | category: runtime/windows
             | export: GETHKERNEL32
             | source: ot4xb.cpp:GETHKERNEL32
-            | _kw_: kernel32, module handle, hmodule
+            | _kw_: GetHKernel32, Function
    }}*/
 /*{{|desc: Returns the module handle for kernel32.dll.
 
@@ -287,7 +287,7 @@ XPPRET XPPENTRY GETHKERNEL32( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle("
             | category: runtime/windows
             | export: GETHUSER32
             | source: ot4xb.cpp:GETHUSER32
-            | _kw_: user32, module handle, hmodule
+            | _kw_: GetHUser32, Function
    }}*/
 /*{{|desc: Returns the module handle for user32.dll.
 
@@ -301,7 +301,7 @@ XPPRET XPPENTRY GETHUSER32( XppParamList pl){_retnl(pl,(LONG)GetModuleHandle("us
             | category: runtime/windows
             | export: GETHOT4XB
             | source: ot4xb.cpp:GETHOT4XB
-            | _kw_: ot4xb.dll, module handle, hmodule, hInstance
+            | _kw_: GetHOt4xb, Function
    }}*/
 /*{{|desc: Returns the module handle for this OT4XB runtime library instance.
 
@@ -316,7 +316,7 @@ XPPRET XPPENTRY GETHOT4XB( XppParamList pl){_retnl(pl,(LONG)hOT4XBInstance);}
             | category: runtime/windows
             | export: GETHSHELL32
             | source: ot4xb.cpp:GETHSHELL32
-            | _kw_: shell32, module handle, hmodule
+            | _kw_: GetHShell32, Function
    }}*/
 /*{{|desc: Returns the module handle for shell32.dll.
 
@@ -340,7 +340,7 @@ XPPRET XPPENTRY GETHSHELL32( XppParamList pl)
             | category: runtime
             | export: OT4XB
             | source: ot4xb.cpp:OT4XB
-            | _kw_: version, dll version, build number
+            | _kw_: ot4xb, Function
    }}*/
 /*{{|desc: Returns the OT4XB library version string.
 
@@ -360,7 +360,7 @@ XPPRET XPPENTRY OT4XB( XppParamList pl){_retc(pl, OT4XB_VERSION_STRING );}
             | category: runtime/callback
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_stdctxcbk_new_
-            | _kw_: thunk, callback, context, WNDPROC, TStdCtxCbk
+            | _kw_: _ot4xb_stdctxcbk_new_, Function
    }}*/
 /*{{|desc: Allocates a TStdCtxCbk callback thunk that pushes a DWORD context value and jumps to a target
       function pointer.
@@ -380,7 +380,7 @@ OT4XB_API void* _ot4xb_stdctxcbk_new_(DWORD dwCtx , DWORD dwFp){return (void*) n
             | category: runtime/callback
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_stdctxcbk_delete_
-            | _kw_: thunk, callback, TStdCtxCbk, release
+            | _kw_: _ot4xb_stdctxcbk_delete_, Function
    }}*/
 /*{{|desc: Releases a callback thunk previously allocated with _ot4xb_stdctxcbk_new_.
     | params:
@@ -398,7 +398,7 @@ OT4XB_API void  _ot4xb_stdctxcbk_delete_(void* p){ delete reinterpret_cast<TStdC
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_thread_pool_push_
-            | _kw_: thread pool, thread, stack, reuse
+            | _kw_: _ot4xb_thread_pool_push_, Function
    }}*/
 /*{{|desc: Pushes an Xbase++ thread container into the internal synchronized thread pool stack.
     | params:
@@ -416,7 +416,7 @@ OT4XB_API void __cdecl _ot4xb_thread_pool_push_(ContainerHandle conThread){_thre
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: _ot4xb_thread_pool_pop_
-            | _kw_: thread pool, thread, stack, reuse
+            | _kw_: _ot4xb_thread_pool_pop_, Function
    }}*/
 /*{{|desc: Pops one Xbase++ thread container from the internal synchronized thread pool stack.
 

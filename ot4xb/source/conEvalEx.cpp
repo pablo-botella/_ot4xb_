@@ -12,7 +12,7 @@
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -38,7 +38,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@H@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -67,7 +67,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , BOOL   val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@J@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -96,7 +96,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , LONG   val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@J0@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -126,7 +126,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , LONG   val, Contai
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@0@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -153,7 +153,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , ContainerHandle co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@K@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -182,7 +182,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , DWORD  val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@JJ@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -213,7 +213,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , LONG   val1 , LONG
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@N@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -242,7 +242,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@PAD@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -271,7 +271,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , LPSTR  val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalCon@@YAPAUMomHandleEntry@@PAU1@PADJ@Z
-            | _kw_: eval codeblock, container result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalCon, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result in a new container;
       release it with _conRelease.
@@ -302,7 +302,7 @@ OT4XB_API ContainerHandle _conEvalCon( ContainerHandle conb , LPSTR  pStr , LONG
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -324,7 +324,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -347,7 +347,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -370,7 +370,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -394,7 +394,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -418,7 +418,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , LONG val, ContainerHandle co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -441,7 +441,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -464,7 +464,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -487,7 +487,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -510,7 +510,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalVoid@@YAXPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, no result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalVoid, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and discards the result.
     | params:
@@ -534,7 +534,7 @@ OT4XB_API void _conEvalVoid( ContainerHandle conb , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -557,7 +557,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -581,7 +581,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -605,7 +605,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -630,7 +630,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -655,7 +655,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , LONG val, ContainerHandle co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -679,7 +679,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -703,7 +703,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -727,7 +727,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -751,7 +751,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalBool@@YAHPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, BOOL result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalBool, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a BOOL (FALSE when
       the result is not a logical value).
@@ -776,7 +776,7 @@ OT4XB_API BOOL _conEvalBool( ContainerHandle conb , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -800,7 +800,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -825,7 +825,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -850,7 +850,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -876,7 +876,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -902,7 +902,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , LONG val, ContainerHandle co
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -927,7 +927,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -952,7 +952,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -977,7 +977,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1002,7 +1002,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLong@@YAJPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, LONG result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalLong, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a LONG through
       _conGetLong, which keeps the 32-bit representation whatever numeric type came back (0 when the result is
@@ -1028,7 +1028,7 @@ OT4XB_API LONG _conEvalLong( ContainerHandle conb , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1051,7 +1051,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1075,7 +1075,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1099,7 +1099,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1124,7 +1124,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1149,7 +1149,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , LONG val, ContainerHandl
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1173,7 +1173,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1197,7 +1197,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1221,7 +1221,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1245,7 +1245,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalDouble@@YANPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, double result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalDouble, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a double (0 when
       the result is not numeric).
@@ -1270,7 +1270,7 @@ OT4XB_API double _conEvalDouble( ContainerHandle conb , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1293,7 +1293,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1317,7 +1317,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1341,7 +1341,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1366,7 +1366,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1391,7 +1391,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , LONG val, ContainerHandle 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1415,7 +1415,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1439,7 +1439,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1463,7 +1463,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1487,7 +1487,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalFloat@@YAMPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, float result, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalFloat, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its result as a FLOAT, the
       double result cast to float (0 when the result is not numeric).
@@ -1512,7 +1512,7 @@ OT4XB_API FLOAT _conEvalFloat( ContainerHandle conb , LPSTR pStr , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1535,7 +1535,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb )
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@H@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, logical parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1559,7 +1559,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , BOOL val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@J@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1583,7 +1583,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , LONG val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@JJ@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1608,7 +1608,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , LONG val , LONG val2)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@J0@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, numeric parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1633,7 +1633,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , LONG val, ContainerHandle 
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@0@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1657,7 +1657,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , ContainerHandle con)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@K@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, DWORD parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1681,7 +1681,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , DWORD val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@N@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, double parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1705,7 +1705,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , double val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@PAD@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, string parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.
@@ -1729,7 +1729,7 @@ OT4XB_API LPSTR _conEvalLpstr( ContainerHandle conb , LPSTR val)
             | category: ot4xb-api
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?_conEvalLpstr@@YAPADPAUMomHandleEntry@@PADJ@Z
-            | _kw_: eval codeblock, string result, xgrab, C to Xbase++ eval, string parameter, numeric parameter
+            | _kw_: _conEvalLpstr, Function
    }}*/
 /*{{|desc: Evaluates the code block conb with the given parameters and returns its character result as a C
       string allocated with _xgrab (_conXStrDup); the caller releases it with _xfree.

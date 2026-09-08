@@ -1831,7 +1831,7 @@ DWORD __stdcall ot4xb_dirty_dlgedit::thread_proc(void* ctx )
                  ot4xb_dirty_dlgedit( hParent, @aRect, nFlags, cTitle, aTabs, aButtons, @aEdits, hWndNotify, nActiveTab )
               ```
             | category: ui/dialogs
-            | _kw_: quick dialog, edit dialog, input form, tabs, alert with fields
+            | _kw_: ot4xb_dirty_dlgedit, Function
    }}*/
 /*{{|desc: Quick tabbed editor dialog helper, in the style of the old alert() helpers but with edit controls,
       checkboxes, combo pick lists and buttons. It builds the dialog from arrays and writes edited values back

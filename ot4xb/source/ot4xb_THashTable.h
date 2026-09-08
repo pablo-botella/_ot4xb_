@@ -15,8 +15,8 @@
    | category: c-api/classes , container/hash
    | desc: One entry of a {{ilink: <cpp-class THashTable> THashTable}}: the key, its CRC and the data pointer,
      linked with the other entries of the table. The key is not copied: **m_pKey** points to memory the
-     | _kw_: hash table entry, key, crc, data pointer
-     caller keeps alive (typically inside the data itself) for as long as the entry exists. }}*/
+     caller keeps alive (typically inside the data itself) for as long as the entry exists.
+     | _kw_: THashItem, Class }}*/
 class OT4XB_API THashItem  : public T_ot4xb_base
 {
    public:
@@ -45,8 +45,8 @@ class OT4XB_API THashItem  : public T_ot4xb_base
    | desc: One slot of a {{ilink: <cpp-class THashTable> THashTable}}: the head of its chain of entries and
      their number. The chain is a run of the table's single list, kept sorted by CRC and then by key (case
      insensitive), so a lookup walks the run and stops as soon as it passes the key. The methods maintain the
-     | _kw_: hash bucket, chain, sorted entries
-     chain and the table counters together; they are the table's business, not the caller's. }}*/
+     chain and the table counters together; they are the table's business, not the caller's.
+     | _kw_: THashBucket, Class }}*/
 class OT4XB_API THashBucket
 {
    public:
@@ -92,8 +92,8 @@ class OT4XB_API THashBucket
      destroyed. Keys are not copied.
    | note: Create it with `new`: the constructor relies on the zeroed memory of the ot4xb heap for the
      members it does not set (m_pBuckets, m_pFirstItem, m_pfnOnDestroyItem, m_dwCargo). Set the callback
-     | _kw_: hash table, case insensitive keys, void data, destroy callback
-     and the cargo right after construction when the data needs disposing. }}*/
+     and the cargo right after construction when the data needs disposing.
+     | _kw_: THashTable, Class }}*/
 class OT4XB_API THashTable  : public T_ot4xb_base
 {
    public:

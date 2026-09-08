@@ -351,9 +351,9 @@ static DWORD svc_value_need_quotes(LPSTR p, DWORD cb, DWORD flags)
    // 0x0200 do not convert 1252-to-utf8
    // 0x0400 CR LF or TAB to space 
    // 0x0800 double quote to single
-   // 0x4000 limit length to 40
-   // 0x8000 limit length to 80
-   // 0xC000 limit length to 120
+   // 0x4000 limit length to 400
+   // 0x8000 limit length to 800
+   // 0xC000 limit length to 1200
 void TZString::str_1252_to_svc_utf8_cell(LPSTR p, DWORD cb, DWORD flags)
 {
 
@@ -2759,7 +2759,7 @@ HRESULT STDMETHODCALLTYPE TByteStream::IByteStream::Stat(STATSTG* pStatstg, DWOR
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_new
-            | _kw_: byte stream, create, growable buffer, IStream
+            | _kw_: TByteStream_new, Function
    }}*/
 /*{{|desc: Creates a TByteStream: a growable binary byte buffer that can also expose its content as a COM
       IStream (see TByteStream_get_IStream).
@@ -2781,7 +2781,7 @@ OT4XB_API TByteStream* __cdecl TByteStream_new(DWORD nInitialSize, DWORD nBlockS
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_destroy
-            | _kw_: byte stream, destroy, release
+            | _kw_: TByteStream_destroy, Function
    }}*/
 /*{{|desc: Destroys a TByteStream created with TByteStream_new and frees its internal buffer.
     | params:
@@ -2800,7 +2800,7 @@ OT4XB_API void __cdecl TByteStream_destroy(TByteStream* pbs)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__grow_
-            | _kw_: byte stream, capacity, grow, reserve
+            | _kw_: TByteStream__grow_, Function
    }}*/
 /*{{|desc: Ensures the buffer capacity is at least nNewSize bytes, reallocating and copying the current
       content when needed. Content and length are preserved; the buffer address may change.
@@ -2821,7 +2821,7 @@ OT4XB_API BOOL __cdecl TByteStream__grow_(TByteStream* pbs, DWORD nNewSize)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__reserve_bytes_
-            | _kw_: byte stream, reserve, write pointer, append room
+            | _kw_: TByteStream__reserve_bytes_, Function
    }}*/
 /*{{|desc: Makes room for nBytes more bytes after the current content and returns the address where they
       can be written. The content length does not change: write the bytes, then commit them with
@@ -2844,7 +2844,7 @@ OT4XB_API void* __cdecl TByteStream__reserve_bytes_(TByteStream* pbs, DWORD nByt
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__reserve_bytes_at
-            | _kw_: byte stream, reserve at offset, write pointer
+            | _kw_: TByteStream__reserve_bytes_at, Function
    }}*/
 /*{{|desc: Like TByteStream__reserve_bytes_ but at a given position: ensures the buffer can hold
       offset + nBytes bytes and returns the address of offset. The content length does not change.
@@ -2868,7 +2868,7 @@ OT4XB_API void* __cdecl TByteStream__reserve_bytes_at(TByteStream* pbs, DWORD of
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__skip_bytes_
-            | _kw_: byte stream, commit bytes, advance length
+            | _kw_: TByteStream__skip_bytes_, Function
    }}*/
 /*{{|desc: Advances the content length by nBytes, growing the buffer when needed. Commit half of the
       reserve, write, skip pattern: the skipped bytes keep whatever the caller wrote there.
@@ -2889,7 +2889,7 @@ OT4XB_API BOOL __cdecl TByteStream__skip_bytes_(TByteStream* pbs, DWORD nBytes)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__offset_ptr_
-            | _kw_: byte stream, pointer at offset, content access
+            | _kw_: TByteStream__offset_ptr_, Function
    }}*/
 /*{{|desc: Returns a pointer into the content after checking that offset + cb bytes fit inside it.
     | params:
@@ -2911,7 +2911,7 @@ OT4XB_API void* __cdecl TByteStream__offset_ptr_(TByteStream* pbs, DWORD offset,
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__offset_len_
-            | _kw_: byte stream, remaining length, offset
+            | _kw_: TByteStream__offset_len_, Function
    }}*/
 /*{{|desc: Returns how many content bytes remain from offset to the end of the content.
     | params:
@@ -2931,7 +2931,7 @@ OT4XB_API DWORD __cdecl TByteStream__offset_len_(TByteStream* pbs, DWORD offset)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__truncate_buffer_
-            | _kw_: byte stream, truncate, cut length
+            | _kw_: TByteStream__truncate_buffer_, Function
    }}*/
 /*{{|desc: Cuts the content length down to len bytes. It can only shrink: a len beyond the current length
       is clamped to it. The buffer memory is kept allocated.
@@ -2952,7 +2952,7 @@ OT4XB_API DWORD __cdecl TByteStream__truncate_buffer_(TByteStream* pbs, DWORD le
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_buffer
-            | _kw_: byte stream, append bytes, write
+            | _kw_: TByteStream_append_buffer, Function
    }}*/
 /*{{|desc: Appends cb bytes from p to the content, growing the buffer as needed.
     | params:
@@ -2974,7 +2974,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_buffer(TByteStream* pbs, void* p, DWOR
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_BYTE
-            | _kw_: byte stream, append byte, write
+            | _kw_: TByteStream_append_BYTE, Function
    }}*/
 /*{{|desc: Appends one byte to the content.
     | params:
@@ -2994,7 +2994,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_BYTE(TByteStream* pbs, BYTE n)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_WORD
-            | _kw_: byte stream, append word, little endian
+            | _kw_: TByteStream_append_WORD, Function
    }}*/
 /*{{|desc: Appends the two bytes of n to the content in memory order (little endian).
     | params:
@@ -3014,7 +3014,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_WORD(TByteStream* pbs, WORD n)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_DWORD
-            | _kw_: byte stream, append DWORD, little endian
+            | _kw_: TByteStream_append_DWORD, Function
    }}*/
 /*{{|desc: Appends the four bytes of n to the content in memory order (little endian).
     | params:
@@ -3034,7 +3034,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_DWORD(TByteStream* pbs, DWORD n)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_ansi_to_utf8
-            | _kw_: byte stream, ANSI to UTF-8, append, convert
+            | _kw_: TByteStream_append_ansi_to_utf8, Function
    }}*/
 /*{{|desc: Converts ANSI text (the active Windows codepage) to UTF-8 and appends the converted bytes.
     | params:
@@ -3055,7 +3055,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_ansi_to_utf8(TByteStream* pbs, LPSTR p
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_ansi_to_xform_utf8
-            | _kw_: byte stream, url encoded UTF-8, append, percent encoding
+            | _kw_: TByteStream_append_ansi_to_xform_utf8, Function
    }}*/
 /*{{|desc: Appends the source text transformed byte by byte from Windows-1252 to URL (percent) encoded
       UTF-8.
@@ -3080,7 +3080,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_ansi_to_xform_utf8(TByteStream* pbs, L
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_decode_base64
-            | _kw_: byte stream, base64 decode, append
+            | _kw_: TByteStream_append_decode_base64, Function
    }}*/
 /*{{|desc: Decodes base64 text and appends the decoded bytes to the content.
     | params:
@@ -3102,7 +3102,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_decode_base64(TByteStream* pbs, LPSTR 
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_decode_qp
-            | _kw_: byte stream, quoted printable decode, append
+            | _kw_: TByteStream_append_decode_qp, Function
    }}*/
 /*{{|desc: Decodes quoted-printable text and appends the decoded bytes to the content.
     | params:
@@ -3126,7 +3126,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_decode_qp(TByteStream* pbs, LPSTR p, i
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_append_decode_uu
-            | _kw_: byte stream, uudecode, append
+            | _kw_: TByteStream_append_decode_uu, Function
    }}*/
 /*{{|desc: Decodes uuencoded data and appends the decoded bytes to the content.
     | params:
@@ -3148,7 +3148,7 @@ OT4XB_API BOOL __cdecl TByteStream_append_decode_uu(TByteStream* pbs, LPSTR p, i
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_ansi_ZTrim
-            | _kw_: byte stream, trim zeros, trailing zero bytes
+            | _kw_: TByteStream_ansi_ZTrim, Function
    }}*/
 /*{{|desc: Shortens the content length while its last byte is a zero byte.
     | params:
@@ -3167,7 +3167,7 @@ OT4XB_API void __cdecl TByteStream_ansi_ZTrim(TByteStream* pbs)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_ansi_ZSafe
-            | _kw_: byte stream, zero terminate, C string safe
+            | _kw_: TByteStream_ansi_ZSafe, Function
    }}*/
 /*{{|desc: Makes the content safe to read as a C string: when the stream is empty or its last byte is not
       zero, one zero byte is appended and counted in the length.
@@ -3187,7 +3187,7 @@ OT4XB_API void __cdecl TByteStream_ansi_ZSafe(TByteStream* pbs)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream__grow_cb_
-            | _kw_: byte stream, capacity, grow
+            | _kw_: TByteStream__grow_cb_, Function
    }}*/
 /*{{|desc: Ensures the buffer capacity is at least cb bytes, preserving the content. Same grow as
       TByteStream__grow_ but without a result.
@@ -3208,7 +3208,7 @@ OT4XB_API void __cdecl TByteStream__grow_cb_(TByteStream* pbs, UINT cb)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_Detach
-            | _kw_: byte stream, detach buffer, take ownership
+            | _kw_: TByteStream_Detach, Function
    }}*/
 /*{{|desc: Hands the internal buffer over to the caller and leaves the stream empty.
     | params:
@@ -3230,7 +3230,7 @@ OT4XB_API LPBYTE __cdecl TByteStream_Detach(TByteStream* pbs, UINT* pcb, UINT* p
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_GetBuffer
-            | _kw_: byte stream, buffer pointer, content
+            | _kw_: TByteStream_GetBuffer, Function
    }}*/
 /*{{|desc: Returns the internal buffer address without transferring ownership. The pointer stays valid
       only until the next operation that grows the buffer.
@@ -3250,7 +3250,7 @@ OT4XB_API LPBYTE __cdecl TByteStream_GetBuffer(TByteStream* pbs)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_len
-            | _kw_: byte stream, length, content size
+            | _kw_: TByteStream_len, Function
    }}*/
 /*{{|desc: Returns the number of content bytes in the stream.
     | params:
@@ -3269,7 +3269,7 @@ OT4XB_API ULONG __cdecl TByteStream_len(TByteStream* pbs)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_Add
-            | _kw_: byte stream, append, zero terminated
+            | _kw_: TByteStream_Add, Function
    }}*/
 /*{{|desc: Appends cb bytes from p and keeps one zero byte after them that is not counted in the length,
       so the content stays readable as a C string.
@@ -3293,7 +3293,7 @@ OT4XB_API BOOL __cdecl TByteStream_Add(TByteStream* pbs, LPBYTE p, UINT cb)
             | category: c-api/byte-stream
             | header: ot4xb_TZString.h
             | mangled-name: TByteStream_get_IStream
-            | _kw_: byte stream, IStream, COM stream, view
+            | _kw_: TByteStream_get_IStream, Function
    }}*/
 /*{{|desc: Creates a COM IStream view over the stream content. Read, Write, Seek and SetSize work with
       32 bit sizes and writing past the end extends the content; Stat only reports the size

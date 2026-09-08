@@ -16,8 +16,8 @@
      every setting of set.ch, one overload to read the current value and one to change it, which returns
      the previous value as Set() does. A string comes back as a copy in the ot4xb heap: free it with _xfree.
    | note: Set() is executed by the calling thread, so the value read or written is the one of the current
-   | _kw_: Set(), settings, set.ch, Exact Decimals DateFormat, C++
-     Xbase++ thread. }}*/
+     Xbase++ thread.
+   | _kw_: XbSet, Class }}*/
 class OT4XB_API XbSet
 {
    public:

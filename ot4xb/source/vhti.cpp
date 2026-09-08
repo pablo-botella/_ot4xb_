@@ -278,7 +278,7 @@ END_NAMESPACE()
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_OpenThemeData@8
-            | _kw_: uxtheme, OpenThemeData, visual style, theme handle, HTHEME
+            | _kw_: vhti_OpenThemeData, Function
    }}*/
 /*{{|desc: Opens a theme handle giving access to the visual style data of a window class. Forwards to
       OpenThemeData in uxtheme.dll, bound on first use; when the export is missing it does nothing and returns
@@ -303,7 +303,7 @@ OT4XB_API HTHEME __stdcall vhti_OpenThemeData(HWND p1,LPCWSTR p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_OpenThemeDataEx@12
-            | _kw_: uxtheme, OpenThemeDataEx, visual style, theme handle, flags
+            | _kw_: vhti_OpenThemeDataEx, Function
    }}*/
 /*{{|desc: Opens a theme handle giving access to the visual style data of a window class, with extra option
       flags. Forwards to OpenThemeDataEx in uxtheme.dll, bound on first use; when the export is missing it
@@ -329,7 +329,7 @@ OT4XB_API HTHEME __stdcall vhti_OpenThemeDataEx(HWND p1,LPCWSTR p2,DWORD p3)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_CloseThemeData@4
-            | _kw_: uxtheme, CloseThemeData, theme handle, release
+            | _kw_: vhti_CloseThemeData, Function
    }}*/
 /*{{|desc: Closes a theme handle opened with vhti_OpenThemeData or vhti_OpenThemeDataEx. Forwards to
       CloseThemeData in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -353,7 +353,7 @@ OT4XB_API HRESULT __stdcall vhti_CloseThemeData(HTHEME p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeBackground@24
-            | _kw_: uxtheme, DrawThemeBackground, draw part, visual style, owner draw
+            | _kw_: vhti_DrawThemeBackground, Function
    }}*/
 /*{{|desc: Draws the border and fill of a theme part in a given state. Forwards to DrawThemeBackground in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -384,7 +384,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeBackground(HTHEME p1,HDC p2,int p3,int
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeText@36
-            | _kw_: uxtheme, DrawThemeText, themed text, draw text
+            | _kw_: vhti_DrawThemeText, Function
    }}*/
 /*{{|desc: Draws text using the font and color the theme defines for a part and state. Forwards to
       DrawThemeText in uxtheme.dll, bound on first use; when the export is missing it does nothing and returns
@@ -418,7 +418,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeText(HTHEME p1,HDC p2,int p3,int p4,LP
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeBackgroundContentRect@24
-            | _kw_: uxtheme, content rect, background, borders
+            | _kw_: vhti_GetThemeBackgroundContentRect, Function
    }}*/
 /*{{|desc: Computes the content area of a theme background: the part of the bounding rectangle left inside
       the borders. Forwards to GetThemeBackgroundContentRect in uxtheme.dll, bound on first use; when the
@@ -447,7 +447,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeBackgroundContentRect(HTHEME p1,HDC p2,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeBackgroundExtent@24
-            | _kw_: uxtheme, background extent, borders, rectangle
+            | _kw_: vhti_GetThemeBackgroundExtent, Function
    }}*/
 /*{{|desc: Computes the full background rectangle needed to wrap a given content rectangle with the part
       borders. Forwards to GetThemeBackgroundExtent in uxtheme.dll, bound on first use; when the export is
@@ -476,7 +476,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeBackgroundExtent(HTHEME p1,HDC p2,int p
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeBackgroundRegion@24
-            | _kw_: uxtheme, background region, HRGN, transparent
+            | _kw_: vhti_GetThemeBackgroundRegion, Function
    }}*/
 /*{{|desc: Computes the region covered by a theme background, honoring transparent and rounded areas.
       Forwards to GetThemeBackgroundRegion in uxtheme.dll, bound on first use; when the export is missing it
@@ -507,7 +507,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeBackgroundRegion(HTHEME p1,HDC p2,int p
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemePartSize@28
-            | _kw_: uxtheme, part size, GetThemePartSize, themed control size
+            | _kw_: vhti_GetThemePartSize, Function
    }}*/
 /*{{|desc: Retrieves the size of a theme part. Forwards to GetThemePartSize in uxtheme.dll, bound on first
       use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -538,7 +538,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemePartSize(HTHEME p1,HDC p2,int p3,int p4
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeTextExtent@36
-            | _kw_: uxtheme, text extent, measure text, theme font
+            | _kw_: vhti_GetThemeTextExtent, Function
    }}*/
 /*{{|desc: Calculates the rectangle required to draw a text with the theme font of a part and state. Forwards
       to GetThemeTextExtent in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -570,7 +570,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeTextExtent(HTHEME p1,HDC p2,int p3,int 
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeTextMetrics@20
-            | _kw_: uxtheme, text metrics, TEXTMETRIC, theme font
+            | _kw_: vhti_GetThemeTextMetrics, Function
    }}*/
 /*{{|desc: Retrieves the text metrics of the font the theme uses for a part and state. Forwards to
       GetThemeTextMetrics in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -600,7 +600,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeTextMetrics(HTHEME p1,HDC p2,int p3,int
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_HitTestThemeBackground@40
-            | _kw_: uxtheme, hit test, background, point
+            | _kw_: vhti_HitTestThemeBackground, Function
    }}*/
 /*{{|desc: Hit tests a point against the background of a theme part. Forwards to HitTestThemeBackground in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -634,7 +634,7 @@ OT4XB_API HRESULT __stdcall vhti_HitTestThemeBackground(HTHEME p1,HDC p2,int p3,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeEdge@32
-            | _kw_: uxtheme, DrawThemeEdge, draw edge, border
+            | _kw_: vhti_DrawThemeEdge, Function
    }}*/
 /*{{|desc: Draws one or more edges of a rectangle with the theme colors of a part and state. Forwards to
       DrawThemeEdge in uxtheme.dll, bound on first use; when the export is missing it does nothing and returns
@@ -668,7 +668,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeEdge(HTHEME p1,HDC p2,int p3,int p4,RE
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeIcon@28
-            | _kw_: uxtheme, DrawThemeIcon, image list, draw icon
+            | _kw_: vhti_DrawThemeIcon, Function
    }}*/
 /*{{|desc: Draws an image from an image list applying the effects the theme defines for a part and state.
       Forwards to DrawThemeIcon in uxtheme.dll, bound on first use; when the export is missing it does nothing
@@ -698,7 +698,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeIcon(HTHEME p1,HDC p2,int p3,int p4,RE
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsThemePartDefined@12
-            | _kw_: uxtheme, part defined, state defined, query
+            | _kw_: vhti_IsThemePartDefined, Function
    }}*/
 /*{{|desc: Tells whether the theme defines the given part and state. Forwards to IsThemePartDefined in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns FALSE.
@@ -723,7 +723,7 @@ OT4XB_API BOOL __stdcall vhti_IsThemePartDefined(HTHEME p1,int p2,int p3)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsThemeBackgroundPartiallyTransparent@12
-            | _kw_: uxtheme, transparent background, alpha, query
+            | _kw_: vhti_IsThemeBackgroundPartiallyTransparent, Function
    }}*/
 /*{{|desc: Tells whether the background of a part and state contains transparent or alpha blended pixels.
       Forwards to IsThemeBackgroundPartiallyTransparent in uxtheme.dll, bound on first use; when the export is
@@ -749,7 +749,7 @@ OT4XB_API BOOL __stdcall vhti_IsThemeBackgroundPartiallyTransparent(HTHEME p1,in
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeColor@20
-            | _kw_: uxtheme, theme color, COLORREF, property
+            | _kw_: vhti_GetThemeColor, Function
    }}*/
 /*{{|desc: Retrieves a color property of a theme part and state. Forwards to GetThemeColor in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -776,7 +776,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeColor(HTHEME p1,int p2,int p3,int p4,CO
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeMetric@24
-            | _kw_: uxtheme, theme metric, integer property
+            | _kw_: vhti_GetThemeMetric, Function
    }}*/
 /*{{|desc: Retrieves a metric property (an integer measure) of a theme part and state. Forwards to
       GetThemeMetric in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -805,7 +805,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeMetric(HTHEME p1,HDC p2,int p3,int p4,i
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeString@24
-            | _kw_: uxtheme, theme string, property
+            | _kw_: vhti_GetThemeString, Function
    }}*/
 /*{{|desc: Retrieves a string property of a theme part and state. Forwards to GetThemeString in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -833,7 +833,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeString(HTHEME p1,int p2,int p3,int p4,L
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeBool@20
-            | _kw_: uxtheme, theme bool, property
+            | _kw_: vhti_GetThemeBool, Function
    }}*/
 /*{{|desc: Retrieves a boolean property of a theme part and state. Forwards to GetThemeBool in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -860,7 +860,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeBool(HTHEME p1,int p2,int p3,int p4,BOO
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeInt@20
-            | _kw_: uxtheme, theme int, property
+            | _kw_: vhti_GetThemeInt, Function
    }}*/
 /*{{|desc: Retrieves an integer property of a theme part and state. Forwards to GetThemeInt in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -887,7 +887,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeInt(HTHEME p1,int p2,int p3,int p4,int*
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeEnumValue@20
-            | _kw_: uxtheme, theme enum, property
+            | _kw_: vhti_GetThemeEnumValue, Function
    }}*/
 /*{{|desc: Retrieves an enumerated property of a theme part and state. Forwards to GetThemeEnumValue in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -915,7 +915,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeEnumValue(HTHEME p1,int p2,int p3,int p
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemePosition@20
-            | _kw_: uxtheme, theme position, POINT property
+            | _kw_: vhti_GetThemePosition, Function
    }}*/
 /*{{|desc: Retrieves a position property of a theme part and state. Forwards to GetThemePosition in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -943,7 +943,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemePosition(HTHEME p1,int p2,int p3,int p4
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeFont@24
-            | _kw_: uxtheme, theme font, LOGFONT, property
+            | _kw_: vhti_GetThemeFont, Function
    }}*/
 /*{{|desc: Retrieves a font property of a theme part and state. Forwards to GetThemeFont in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -971,7 +971,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeFont(HTHEME p1,HDC p2,int p3,int p4,int
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeRect@20
-            | _kw_: uxtheme, theme rect, RECT property
+            | _kw_: vhti_GetThemeRect, Function
    }}*/
 /*{{|desc: Retrieves a rectangle property of a theme part and state. Forwards to GetThemeRect in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -1000,7 +1000,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeRect(HTHEME p1,int p2,int p3,int p4,LPR
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeMargins@28
-            | _kw_: uxtheme, theme margins, MARGINS property
+            | _kw_: vhti_GetThemeMargins, Function
    }}*/
 /*{{|desc: Retrieves a margins property of a theme part and state. Forwards to GetThemeMargins in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1030,7 +1030,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeMargins(HTHEME p1,HDC p2,int p3,int p4,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeIntList@20
-            | _kw_: uxtheme, int list, INTLIST property
+            | _kw_: vhti_GetThemeIntList, Function
    }}*/
 /*{{|desc: Retrieves an integer list property of a theme part and state. Forwards to GetThemeIntList in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1058,7 +1058,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeIntList(HTHEME p1,int p2,int p3,int p4,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemePropertyOrigin@20
-            | _kw_: uxtheme, property origin, where defined
+            | _kw_: vhti_GetThemePropertyOrigin, Function
    }}*/
 /*{{|desc: Tells at which level a property of a part and state is defined: state, part, class, global or not
       found. Forwards to GetThemePropertyOrigin in uxtheme.dll, bound on first use; when the export is missing
@@ -1086,7 +1086,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemePropertyOrigin(HTHEME p1,int p2,int p3,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_SetWindowTheme@12
-            | _kw_: uxtheme, SetWindowTheme, disable theming, explorer theme, window
+            | _kw_: vhti_SetWindowTheme, Function
    }}*/
 /*{{|desc: Changes the way the visual style applies to a window. Passing empty strings in p2 and p3 removes
       theming from the window. Forwards to SetWindowTheme in uxtheme.dll, bound on first use; when the export
@@ -1112,7 +1112,7 @@ OT4XB_API HRESULT __stdcall vhti_SetWindowTheme(HWND p1,LPCWSTR p2,LPCWSTR p3)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeFilename@24
-            | _kw_: uxtheme, theme filename, property
+            | _kw_: vhti_GetThemeFilename, Function
    }}*/
 /*{{|desc: Retrieves a filename property of a theme part and state. Forwards to GetThemeFilename in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1141,7 +1141,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeFilename(HTHEME p1,int p2,int p3,int p4
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysColor@8
-            | _kw_: uxtheme, system color, theme, COLORREF
+            | _kw_: vhti_GetThemeSysColor, Function
    }}*/
 /*{{|desc: Retrieves a system color as defined by the current theme. Forwards to GetThemeSysColor in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0.
@@ -1165,7 +1165,7 @@ OT4XB_API COLORREF __stdcall vhti_GetThemeSysColor(HTHEME p1,int p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysColorBrush@8
-            | _kw_: uxtheme, system color brush, HBRUSH
+            | _kw_: vhti_GetThemeSysColorBrush, Function
    }}*/
 /*{{|desc: Retrieves a brush of a system color as defined by the current theme. Forwards to
       GetThemeSysColorBrush in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -1190,7 +1190,7 @@ OT4XB_API HBRUSH __stdcall vhti_GetThemeSysColorBrush(HTHEME p1,int p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysBool@8
-            | _kw_: uxtheme, system bool, metric
+            | _kw_: vhti_GetThemeSysBool, Function
    }}*/
 /*{{|desc: Retrieves a boolean system metric of the current theme. Forwards to GetThemeSysBool in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns FALSE.
@@ -1214,7 +1214,7 @@ OT4XB_API BOOL __stdcall vhti_GetThemeSysBool(HTHEME p1,int p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysSize@8
-            | _kw_: uxtheme, system size, metric
+            | _kw_: vhti_GetThemeSysSize, Function
    }}*/
 /*{{|desc: Retrieves a system size metric of the current theme. Forwards to GetThemeSysSize in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0.
@@ -1238,7 +1238,7 @@ OT4XB_API int __stdcall vhti_GetThemeSysSize(HTHEME p1,int p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysFont@12
-            | _kw_: uxtheme, system font, LOGFONT
+            | _kw_: vhti_GetThemeSysFont, Function
    }}*/
 /*{{|desc: Retrieves a system font of the current theme. Forwards to GetThemeSysFont in uxtheme.dll, bound on
       first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -1263,7 +1263,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeSysFont(HTHEME p1,int p2,LOGFONTW* p3)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysString@16
-            | _kw_: uxtheme, system string
+            | _kw_: vhti_GetThemeSysString, Function
    }}*/
 /*{{|desc: Retrieves a system string of the current theme. Forwards to GetThemeSysString in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -1289,7 +1289,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeSysString(HTHEME p1,int p2,LPWSTR p3,in
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeSysInt@12
-            | _kw_: uxtheme, system int
+            | _kw_: vhti_GetThemeSysInt, Function
    }}*/
 /*{{|desc: Retrieves a system integer of the current theme. Forwards to GetThemeSysInt in uxtheme.dll, bound
       on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -1314,7 +1314,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeSysInt(HTHEME p1,int p2,int* p3)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsThemeActive@0
-            | _kw_: uxtheme, IsThemeActive, visual styles enabled
+            | _kw_: vhti_IsThemeActive, Function
    }}*/
 /*{{|desc: Tells whether a visual style is active for the current user session. Forwards to IsThemeActive in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns FALSE.
@@ -1335,7 +1335,7 @@ OT4XB_API BOOL __stdcall vhti_IsThemeActive(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsAppThemed@0
-            | _kw_: uxtheme, IsAppThemed, visual styles, application
+            | _kw_: vhti_IsAppThemed, Function
    }}*/
 /*{{|desc: Tells whether visual styles are applied to the current application. Forwards to IsAppThemed in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns FALSE.
@@ -1356,7 +1356,7 @@ OT4XB_API BOOL __stdcall vhti_IsAppThemed(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetWindowTheme@4
-            | _kw_: uxtheme, GetWindowTheme, theme handle, window
+            | _kw_: vhti_GetWindowTheme, Function
    }}*/
 /*{{|desc: Retrieves the theme handle associated with a window. Forwards to GetWindowTheme in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns NULL.
@@ -1379,7 +1379,7 @@ OT4XB_API HTHEME __stdcall vhti_GetWindowTheme(HWND p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_EnableThemeDialogTexture@8
-            | _kw_: uxtheme, dialog texture, tab page background, ETDT
+            | _kw_: vhti_EnableThemeDialogTexture, Function
    }}*/
 /*{{|desc: Enables or disables the tab page background texture of a dialog window. Forwards to
       EnableThemeDialogTexture in uxtheme.dll, bound on first use; when the export is missing it does nothing
@@ -1404,7 +1404,7 @@ OT4XB_API HRESULT __stdcall vhti_EnableThemeDialogTexture(HWND p1,DWORD p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsThemeDialogTextureEnabled@4
-            | _kw_: uxtheme, dialog texture, query
+            | _kw_: vhti_IsThemeDialogTextureEnabled, Function
    }}*/
 /*{{|desc: Tells whether the tab page background texture is enabled for a dialog window. Forwards to
       IsThemeDialogTextureEnabled in uxtheme.dll, bound on first use; when the export is missing it does
@@ -1428,7 +1428,7 @@ OT4XB_API BOOL __stdcall vhti_IsThemeDialogTextureEnabled(HWND p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeAppProperties@0
-            | _kw_: uxtheme, app properties, STAP flags
+            | _kw_: vhti_GetThemeAppProperties, Function
    }}*/
 /*{{|desc: Retrieves the flags that tell which parts of the current application can be themed. Forwards to
       GetThemeAppProperties in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -1450,7 +1450,7 @@ OT4XB_API DWORD __stdcall vhti_GetThemeAppProperties(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_SetThemeAppProperties@4
-            | _kw_: uxtheme, app properties, STAP flags, set
+            | _kw_: vhti_SetThemeAppProperties, Function
    }}*/
 /*{{|desc: Sets the flags that tell which parts of the current application can be themed. Forwards to
       SetThemeAppProperties in uxtheme.dll, bound on first use; when the export is missing it does nothing.
@@ -1473,7 +1473,7 @@ OT4XB_API void __stdcall vhti_SetThemeAppProperties(DWORD p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetCurrentThemeName@24
-            | _kw_: uxtheme, current theme, msstyles, color scheme, size name
+            | _kw_: vhti_GetCurrentThemeName, Function
    }}*/
 /*{{|desc: Retrieves the file path of the current visual style and its active color scheme and size names.
       Forwards to GetCurrentThemeName in uxtheme.dll, bound on first use; when the export is missing it does
@@ -1502,7 +1502,7 @@ OT4XB_API HRESULT __stdcall vhti_GetCurrentThemeName(LPWSTR p1,int p2,LPWSTR p3,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeDocumentationProperty@16
-            | _kw_: uxtheme, documentation property, theme file
+            | _kw_: vhti_GetThemeDocumentationProperty, Function
    }}*/
 /*{{|desc: Retrieves a property from the documentation section of a theme file. Forwards to
       GetThemeDocumentationProperty in uxtheme.dll, bound on first use; when the export is missing it does
@@ -1529,7 +1529,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeDocumentationProperty(LPCWSTR p1,LPCWST
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeParentBackground@12
-            | _kw_: uxtheme, parent background, transparent control, paint
+            | _kw_: vhti_DrawThemeParentBackground, Function
    }}*/
 /*{{|desc: Asks the parent of a window to paint its background into the given device context, to fill
       transparent child areas. Forwards to DrawThemeParentBackground in uxtheme.dll, bound on first use; when
@@ -1555,7 +1555,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeParentBackground(HWND p1,HDC p2,RECT* 
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_EnableTheming@4
-            | _kw_: uxtheme, EnableTheming, deprecated
+            | _kw_: vhti_EnableTheming, Function
    }}*/
 /*{{|desc: Enables or disables visual styles for the current user session. Deprecated; modern Windows
       versions ignore it. Forwards to EnableTheming in uxtheme.dll, bound on first use; when the export is
@@ -1581,7 +1581,7 @@ OT4XB_API HRESULT __stdcall vhti_EnableTheming(BOOL p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeBackgroundEx@24
-            | _kw_: uxtheme, DrawThemeBackgroundEx, DTBGOPTS, draw part
+            | _kw_: vhti_DrawThemeBackgroundEx, Function
    }}*/
 /*{{|desc: Draws the border and fill of a theme part with extended options. Forwards to DrawThemeBackgroundEx
       in uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1610,7 +1610,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeBackgroundEx(HTHEME p1,HDC p2,int p3,i
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintInit@0
-            | _kw_: buffered paint, BufferedPaintInit, double buffering, thread
+            | _kw_: vhti_BufferedPaintInit, Function
    }}*/
 /*{{|desc: Prepares buffered painting for the calling thread. Every call must be paired with
       vhti_BufferedPaintUnInit. Forwards to BufferedPaintInit in uxtheme.dll, bound on first use; when the
@@ -1632,7 +1632,7 @@ OT4XB_API HRESULT __stdcall vhti_BufferedPaintInit(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintUnInit@0
-            | _kw_: buffered paint, BufferedPaintUnInit, double buffering
+            | _kw_: vhti_BufferedPaintUnInit, Function
    }}*/
 /*{{|desc: Closes buffered painting for the calling thread, matching a previous vhti_BufferedPaintInit.
       Forwards to BufferedPaintUnInit in uxtheme.dll, bound on first use; when the export is missing it does
@@ -1656,7 +1656,7 @@ OT4XB_API HRESULT __stdcall vhti_BufferedPaintUnInit(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BeginBufferedPaint@20
-            | _kw_: buffered paint, BeginBufferedPaint, double buffering, HPAINTBUFFER
+            | _kw_: vhti_BeginBufferedPaint, Function
    }}*/
 /*{{|desc: Begins a double buffered paint operation over a target device context. Forwards to
       BeginBufferedPaint in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -1684,7 +1684,7 @@ OT4XB_API HANDLE __stdcall vhti_BeginBufferedPaint(HDC p1,RECT* p2,BP_BUFFERFORM
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_EndBufferedPaint@8
-            | _kw_: buffered paint, EndBufferedPaint, double buffering
+            | _kw_: vhti_EndBufferedPaint, Function
    }}*/
 /*{{|desc: Ends a buffered paint operation and frees the buffer. Forwards to EndBufferedPaint in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns 0 (reads as S_OK).
@@ -1708,7 +1708,7 @@ OT4XB_API HRESULT __stdcall vhti_EndBufferedPaint(HANDLE p1,BOOL p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetBufferedPaintTargetRect@8
-            | _kw_: buffered paint, target rect
+            | _kw_: vhti_GetBufferedPaintTargetRect, Function
    }}*/
 /*{{|desc: Retrieves the target rectangle of a paint buffer. Forwards to GetBufferedPaintTargetRect in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1733,7 +1733,7 @@ OT4XB_API HRESULT __stdcall vhti_GetBufferedPaintTargetRect(HANDLE p1,RECT* p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetBufferedPaintTargetDC@4
-            | _kw_: buffered paint, target DC
+            | _kw_: vhti_GetBufferedPaintTargetDC, Function
    }}*/
 /*{{|desc: Retrieves the target device context of a paint buffer. Forwards to GetBufferedPaintTargetDC in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns NULL.
@@ -1756,7 +1756,7 @@ OT4XB_API HDC __stdcall vhti_GetBufferedPaintTargetDC(HANDLE p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetBufferedPaintDC@4
-            | _kw_: buffered paint, paint DC
+            | _kw_: vhti_GetBufferedPaintDC, Function
    }}*/
 /*{{|desc: Retrieves the paint device context of a paint buffer, the same DC returned by
       vhti_BeginBufferedPaint. Forwards to GetBufferedPaintDC in uxtheme.dll, bound on first use; when the
@@ -1780,7 +1780,7 @@ OT4XB_API HDC __stdcall vhti_GetBufferedPaintDC(HANDLE p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetBufferedPaintBits@12
-            | _kw_: buffered paint, pixel bits, DIB, direct access
+            | _kw_: vhti_GetBufferedPaintBits, Function
    }}*/
 /*{{|desc: Gives direct access to the pixel bits of a paint buffer. Works only with the DIB based buffer
       formats. Forwards to GetBufferedPaintBits in uxtheme.dll, bound on first use; when the export is missing
@@ -1806,7 +1806,7 @@ OT4XB_API HRESULT __stdcall vhti_GetBufferedPaintBits(HANDLE p1,RGBQUAD** p2,int
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintClear@8
-            | _kw_: buffered paint, clear, transparent, ARGB
+            | _kw_: vhti_BufferedPaintClear, Function
    }}*/
 /*{{|desc: Clears a rectangle of a paint buffer to transparent black (ARGB 0). Forwards to BufferedPaintClear
       in uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1831,7 +1831,7 @@ OT4XB_API HRESULT __stdcall vhti_BufferedPaintClear(HANDLE p1,RECT* p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintSetAlpha@12
-            | _kw_: buffered paint, alpha channel, set alpha
+            | _kw_: vhti_BufferedPaintSetAlpha, Function
    }}*/
 /*{{|desc: Sets the alpha channel of the pixels in a rectangle of a paint buffer. Forwards to
       BufferedPaintSetAlpha in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -1857,7 +1857,7 @@ OT4XB_API HRESULT __stdcall vhti_BufferedPaintSetAlpha(HANDLE p1,RECT* p2,BYTE p
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintStopAllAnimations@4
-            | _kw_: buffered animation, stop, window
+            | _kw_: vhti_BufferedPaintStopAllAnimations, Function
    }}*/
 /*{{|desc: Stops all buffered animations running on a window. Forwards to BufferedPaintStopAllAnimations in
       uxtheme.dll, bound on first use; when the export is missing it does nothing and returns 0 (reads as
@@ -1884,7 +1884,7 @@ OT4XB_API HRESULT __stdcall vhti_BufferedPaintStopAllAnimations(HWND p1)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BeginBufferedAnimation@32
-            | _kw_: buffered animation, BeginBufferedAnimation, transition, fade
+            | _kw_: vhti_BeginBufferedAnimation, Function
    }}*/
 /*{{|desc: Begins an animated transition of a window area: the caller paints the initial state into one DC
       and the final state into another, and the system renders the frames in between. Forwards to
@@ -1916,7 +1916,7 @@ OT4XB_API HANDLE __stdcall vhti_BeginBufferedAnimation(HWND p1,HDC p2,RECT* p3,B
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_EndBufferedAnimation@8
-            | _kw_: buffered animation, EndBufferedAnimation, transition
+            | _kw_: vhti_EndBufferedAnimation, Function
    }}*/
 /*{{|desc: Ends the setup phase of a buffered animation and starts rendering it. Forwards to
       EndBufferedAnimation in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -1941,7 +1941,7 @@ OT4XB_API HRESULT __stdcall vhti_EndBufferedAnimation(HANDLE p1,BOOL p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_BufferedPaintRenderAnimation@8
-            | _kw_: buffered animation, render frame, WM_PAINT
+            | _kw_: vhti_BufferedPaintRenderAnimation, Function
    }}*/
 /*{{|desc: Paints the current frame of a buffered animation; call it first when handling WM_PAINT. Forwards
       to BufferedPaintRenderAnimation in uxtheme.dll, bound on first use; when the export is missing it does
@@ -1966,7 +1966,7 @@ OT4XB_API BOOL __stdcall vhti_BufferedPaintRenderAnimation(HWND p1,HDC p2)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeParentBackgroundEx@16
-            | _kw_: uxtheme, parent background, DTPB flags, paint
+            | _kw_: vhti_DrawThemeParentBackgroundEx, Function
    }}*/
 /*{{|desc: Asks the parent of a window to paint its background into the given device context, with DTPB_*
       control flags. Forwards to DrawThemeParentBackgroundEx in uxtheme.dll, bound on first use; when the
@@ -1993,7 +1993,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeParentBackgroundEx(HWND p1,HDC p2,DWOR
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeBitmap@24
-            | _kw_: uxtheme, theme bitmap, HBITMAP property
+            | _kw_: vhti_GetThemeBitmap, Function
    }}*/
 /*{{|desc: Retrieves the bitmap behind a bitmap property of a theme part and state. Forwards to
       GetThemeBitmap in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -2024,7 +2024,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeBitmap(HTHEME p1,int p2,int p3,int p4,U
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeStream@28
-            | _kw_: uxtheme, theme stream, raw property data
+            | _kw_: vhti_GetThemeStream, Function
    }}*/
 /*{{|desc: Retrieves the raw data stream of a stream property of a theme part and state. Forwards to
       GetThemeStream in uxtheme.dll, bound on first use; when the export is missing it does nothing and
@@ -2054,7 +2054,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeStream(HTHEME p1,int p2,int p3,int p4,v
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_GetThemeTransitionDuration@24
-            | _kw_: uxtheme, transition duration, animation, states
+            | _kw_: vhti_GetThemeTransitionDuration, Function
    }}*/
 /*{{|desc: Retrieves the duration of the animated transition between two states of a theme part. Forwards to
       GetThemeTransitionDuration in uxtheme.dll, bound on first use; when the export is missing it does
@@ -2083,7 +2083,7 @@ OT4XB_API HRESULT __stdcall vhti_GetThemeTransitionDuration(HTHEME p1,int p2,int
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_IsCompositionActive@0
-            | _kw_: DWM, composition active, aero, uxtheme
+            | _kw_: vhti_IsCompositionActive, Function
    }}*/
 /*{{|desc: Tells whether desktop composition (DWM) is active. Forwards to IsCompositionActive in uxtheme.dll,
       bound on first use; when the export is missing it does nothing and returns FALSE.
@@ -2104,7 +2104,7 @@ OT4XB_API BOOL __stdcall vhti_IsCompositionActive(void)
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_SetWindowThemeAttribute@16
-            | _kw_: uxtheme, SetWindowThemeAttribute, non client, WTA
+            | _kw_: vhti_SetWindowThemeAttribute, Function
    }}*/
 /*{{|desc: Sets a theme attribute of a window; used to control the theming of the non client area. Forwards
       to SetWindowThemeAttribute in uxtheme.dll, bound on first use; when the export is missing it does
@@ -2133,7 +2133,7 @@ OT4XB_API HRESULT __stdcall vhti_SetWindowThemeAttribute(HWND p1,WINDOWTHEMEATTR
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _vhti_DrawThemeTextEx@36
-            | _kw_: uxtheme, DrawThemeTextEx, DTTOPTS, glow, shadow, text color
+            | _kw_: vhti_DrawThemeTextEx, Function
    }}*/
 /*{{|desc: Draws text with the theme font of a part and state and extended DTTOPTS options (color, shadow,
       glow, composited drawing). Forwards to DrawThemeTextEx in uxtheme.dll, bound on first use; when the
@@ -2165,7 +2165,7 @@ OT4XB_API HRESULT __stdcall vhti_DrawThemeTextEx(HTHEME p1,HDC p2,int p3,int p4,
             | category: winapi/uxtheme
             | header: vhti.h
             | mangled-name: _ot4xb_IsAppThemed@0
-            | _kw_: visual styles, themed, IsAppThemed, IsThemeActive, manifest
+            | _kw_: ot4xb_IsAppThemed, Function
    }}*/
 /*{{|desc: Tells whether the process is really running with visual styles: a visual style is active, the
       application is themed and the process loaded common controls version 6 or later (application manifest).

@@ -16,8 +16,8 @@
      population and sample variance and standard deviation. NaN never gets in (a NaN parameter is stored
      as 0 and reported) and every operation leaves its outcome in **m_last_error**. The C API of the same
      object is the `list_of_float_double_t_*` family
-     | _kw_: double list, statistics, mean, variance, standard deviation
-     ({{ilink: <c-function list_of_float_double_t_new> list_of_float_double_t_new}}, ...). }}*/
+     ({{ilink: <c-function list_of_float_double_t_new> list_of_float_double_t_new}}, ...).
+     | _kw_: list_of_float_double_t, Class }}*/
 class OT4XB_API list_of_float_double_t : public T_ot4xb_base_with_vheap
 {
 	public:

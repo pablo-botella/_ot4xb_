@@ -34,7 +34,7 @@ static void TCriticalSection_UnLock( TXbClsParams * px );
             | note: TCriticalSection is process-local synchronization. It is not a named interprocess mutex.
             | note: ::Lock(), ::TryLock(), ::UnLock() and ::Destroy() raise a runtime error when the object has been
               destroyed or is not properly initialized.
-   | _kw_: critical section, mutex, lock, synchronize, thread safety
+   | _kw_: TCriticalSection, Class
    }}*/
 XPPRET XPPENTRY TCRITICALSECTION(XppParamList pl)
 {
@@ -54,7 +54,7 @@ XPPRET XPPENTRY TCRITICALSECTION(XppParamList pl)
       }}*/
       pc->Var("_m__cs_");  // cs handle stored as a long member variable, initialized to 0 by default
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD init()
+      /*{{|method_: - `METHOD init()`
                | return: Self
                | desc_: Allocates and initializes the internal CRITICAL_SECTION and returns the object itself. It is
                  called automatically by :New().
@@ -62,21 +62,21 @@ XPPRET XPPENTRY TCRITICALSECTION(XppParamList pl)
                  already initialized instance it raises a runtime error.
       }}*/
       pc->Method("init"     , TCriticalSection_Init);
-      /*{{|method_: - METHOD Destroy()
+      /*{{|method_: - `METHOD Destroy()`
                | return: NIL
                | desc_: Releases the internal CRITICAL_SECTION storage owned by this object.
                | note: ::Destroy() enters the critical section before deleting it, so it blocks until it can be
                  owned by the current thread. Do not use the object after ::Destroy() has been called.
       }}*/
       pc->Method("Destroy"  , TCriticalSection_Destroy);
-      /*{{|method_: - METHOD Lock()
+      /*{{|method_: - `METHOD Lock()`
                | return: NIL
                | desc_: Enters the critical section, blocking until the current thread owns it.
                | note: When ::Lock() returns normally, it must be paired with a matching ::UnLock() call by the same
                  thread.
       }}*/
       pc->Method("Lock"     , TCriticalSection_Lock);
-      /*{{|method_: - METHOD TryLock()
+      /*{{|method_: - `METHOD TryLock()`
                | return: lLocked
                | desc_: Tests whether the critical section can be entered immediately, and enters it only when it is
                  available. Returns .T. when ownership was acquired, otherwise .F..
@@ -84,7 +84,7 @@ XPPRET XPPENTRY TCRITICALSECTION(XppParamList pl)
                  .T..
       }}*/
       pc->Method("TryLock"  , TCriticalSection_TryLock);
-      /*{{|method_: - METHOD UnLock()
+      /*{{|method_: - `METHOD UnLock()`
                | return: NIL
                | desc_: Leaves the critical section previously entered by the current thread.
                | note: The current thread must own the critical section before calling ::UnLock().
@@ -108,7 +108,7 @@ XPPRET XPPENTRY TCRITICALSECTION(XppParamList pl)
             | category: runtime/thread
             | header: ot4xb_c_exported.h
             | mangled-name: get_new_initialized_critical_section
-            | _kw_: critical section, allocate, InitializeCriticalSection
+            | _kw_: get_new_initialized_critical_section, Function
    }}*/
 /*{{|desc: Allocates memory for a Windows CRITICAL_SECTION and initializes it.
 

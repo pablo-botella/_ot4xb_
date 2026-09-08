@@ -25,7 +25,7 @@ static BOOL regex_replace_seh( std::string & text, LPSTR pattern, LPSTR replacem
             | category: string/regex
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_regex_match
-            | _kw_: regex, std::regex, match whole string, regular expression
+            | _kw_: ot4xb_regex_match, Function
    }}*/
 /*{{|desc: Tests whether a whole string matches a C++ std::regex pattern using std::regex_match(). C-level
       entry to the same protected engine as the Xbase-level ot4xb_regex_match(); lStrWildCmpEx() uses it for
@@ -56,7 +56,7 @@ int   OT4XB_API __cdecl ot4xb_regex_match(LPSTR pattern, LPSTR string_to_test, i
             | category: string/regex
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_regex_replace
-            | _kw_: regex, std::regex, replace, regular expression
+            | _kw_: ot4xb_regex_replace, Function
    }}*/
 /*{{|desc: Replaces text using a C++ std::regex pattern and std::regex_replace(), returning the result as a
       newly allocated string. C-level entry to the same protected engine as the Xbase-level
@@ -144,7 +144,7 @@ static int regex_match_seh(LPSTR pattern, LPSTR string_to_test, std::regex::flag
 /*{{function_: ot4xb_regex_match
             | syntax_: `ot4xb_regex_match( cPattern, cString, [nFlags], [nMatchFlags] )`
             | category: string/regex
-            | _kw_: regex, std::regex, match whole string, regular expression, pattern
+            | _kw_: ot4xb_regex_match, Function
    }}*/
 /*{{|desc: Tests a string against a C++ std::regex pattern using std::regex_match().
     | params:
@@ -223,7 +223,7 @@ static BOOL regex_replace_seh(std::string & text, LPSTR pattern, LPSTR replaceme
 /*{{function_: ot4xb_regex_replace
             | syntax_: `ot4xb_regex_replace( cPattern, cInput, cReplacement, [nFlags], [nMatchFlags] )`
             | category: string/regex
-            | _kw_: regex, std::regex, replace, regular expression, pattern, substitution
+            | _kw_: ot4xb_regex_replace, Function
    }}*/
 /*{{|desc: Replaces text using a C++ std::regex pattern and std::regex_replace().
     | params:
@@ -302,7 +302,7 @@ static BOOL ot4xb_regex_search_seh(LPCSTR ps, std::cmatch & cm, std::regex & rgx
 /*{{function_: ot4xb_regex_search
             | syntax_: `ot4xb_regex_search( cPattern, cInput, [nFlags], [nMatchFlags], [lSubMatches] )`
             | category: string/regex
-            | _kw_: regex, std::regex, search, find all matches, regular expression, pattern
+            | _kw_: ot4xb_regex_search, Function
    }}*/
 /*{{|desc: Searches an input string with a C++ std::regex pattern and returns all matches.
     | params:

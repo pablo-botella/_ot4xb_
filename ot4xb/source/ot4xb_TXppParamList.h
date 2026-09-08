@@ -22,8 +22,8 @@
         LPSTR name = xpp[1]->LockStr();          // parameter 1 as a locked string
         LONG  n    = xpp[2]->GetLong();          // parameter 2 as a number (0 when NIL)
         xpp[0]->PutBool( do_something( name, n ) ); // the return value
-     | _kw_: parameters, XppParamList, C++ wrapper, return value, entry point
-     } }}*/
+     }
+     | _kw_: TXppParamList, Class }}*/
 class OT4XB_API TXppParamList : public T_ot4xb_base
 {
    public:
@@ -77,8 +77,8 @@ class OT4XB_API TXppParamList : public T_ot4xb_base
      cannot be converted; the setters replace the value, and on a parameter passed by reference that changes
      the caller's variable. A Character can be locked for direct access, and the LockStrEx family locks
      "anything with bytes": a Character, a numeric array packed into a buffer, or a GWST object through its
-     | _kw_: parameter item, container access, typed getters setters, lock string
-     _lock_() method. One lock at a time per item; the destructor unlocks. }}*/
+     _lock_() method. One lock at a time per item; the destructor unlocks.
+     | _kw_: TXbCPItem, Class }}*/
 class OT4XB_API TXbCPItem : public T_ot4xb_base
 {
    public:

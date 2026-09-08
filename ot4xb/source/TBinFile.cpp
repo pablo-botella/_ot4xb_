@@ -94,7 +94,7 @@ static int split_stg_path( LPSTR pPath , TList* pList)
 /*{{function_: lMemoStgWrite
             | syntax_: `lMemoStgWrite( cStgFile, cName, cBuffer [, lAppend := .F.] )`
             | category: filesystem
-            | _kw_: structured storage, compound file, write stream, IStorage, OLE storage
+            | _kw_: lMemoStgWrite, Function
    }}*/
 /*{{|desc: Writes a character buffer to a stream inside a COM structured storage file. The storage file is
       created when it does not exist, and every missing nested storage named in cName is created on the way
@@ -246,7 +246,7 @@ _XPP_REG_FUN_( LMEMOSTGWRITE )
 /*{{function_: cMemoStgRead
             | syntax_: `cMemoStgRead( cStgFile, cName [, nStart := 0] [, nBytes := -1] )`
             | category: filesystem
-            | _kw_: structured storage, compound file, read stream, IStorage
+            | _kw_: cMemoStgRead, Function
    }}*/
 /*{{|desc: Reads bytes from a stream inside an existing COM structured storage file.
     | params:
@@ -413,7 +413,7 @@ _XPP_REG_FUN_( CMEMOSTGREAD )
 /*{{function_: lMemoStgImport
             | syntax_: `lMemoStgImport( cStgFile, cName, cInputFile [, lAppend := .F.] )`
             | category: filesystem
-            | _kw_: structured storage, import file, stream, IStorage
+            | _kw_: lMemoStgImport, Function
    }}*/
 /*{{|desc: Copies the contents of a disk file into a stream inside a COM structured storage file. The
       storage file is created when it does not exist, and every missing nested storage named in cName is
@@ -585,7 +585,7 @@ _XPP_REG_FUN_( LMEMOSTGIMPORT )
 /*{{function_: lMemoStgExport
             | syntax_: `lMemoStgExport( cStgFile, cName, cOutputFile )`
             | category: filesystem
-            | _kw_: structured storage, export stream, to file, IStorage
+            | _kw_: lMemoStgExport, Function
    }}*/
 /*{{|desc: Copies a stream from an existing COM structured storage file to a disk file. The output file is
       created, or overwritten when it already exists. The copy runs in 1 MB blocks.
@@ -790,7 +790,7 @@ static ContainerHandle memostg_enum( IStorage* stg  )
 /*{{function_: cMemoStgList
             | syntax_: `cMemoStgList( cStgFile )`
             | category: filesystem
-            | _kw_: structured storage, list streams, storages tree, IStorage
+            | _kw_: cMemoStgList, Function
    }}*/
 /*{{|desc: Returns the whole tree of storages and streams contained in a COM structured storage file. Each
       item is an array { cName, nType, nSize, aChildren }: nType is the STGTY_* value (1 = storage,
@@ -834,7 +834,7 @@ _XPP_REG_FUN_( CMEMOSTGLIST   )
 /*{{function_: cMemoReadEx
             | syntax_: `cMemoReadEx( cFile [, @nOffset := 0] [, nMaxBytes] [, nFlags := 0] )`
             | category: filesystem
-            | _kw_: read file, file slice, offset, MemoRead, partial read
+            | _kw_: cMemoReadEx, Function
    }}*/
 /*{{|desc: Reads a slice of a disk file into a character value, starting at nOffset. When data is returned
       and nOffset was passed by reference, nOffset is advanced to the position right after the returned
@@ -918,7 +918,7 @@ XPPRET XPPENTRY CMEMOREADEX(XppParamList pl)
 /*{{function_: lMemoWrite
             | syntax_: `lMemoWrite( cFile, cBuffer [, lAppend := .F.] )`
             | category: filesystem
-            | _kw_: write file, MemoWrit, save file, binary write, no Ctrl+Z
+            | _kw_: lMemoWrite, Function
    }}*/
 /*{{|desc: Writes a character buffer to a disk file. Exactly the bytes of cBuffer are written: no Ctrl+Z
       end-of-file marker is appended. The file is opened denying shared access.
@@ -982,7 +982,7 @@ XPPRET XPPENTRY LMEMOWRITE(XppParamList pl)
               buffer with line-oriented and MIME-header-oriented reads.
             | note: The GWST-style pointer support members _m__pt_, ::_lock_() and ::_unlock_() are also
               registered.
-   | _kw_: binary file, file handle, CreateFile, read line, file pointer, buffered read
+   | _kw_: TBinFile, Class
    }}*/
 XPPRET XPPENTRY TBINFILE(XppParamList pl)
 {
@@ -1002,89 +1002,93 @@ XPPRET XPPENTRY TBINFILE(XppParamList pl)
       }}*/
       pc->ROProperty("hFile" , TBinFile_hFile);// ::hFile -> nHandle | NIL
       // ---------------------------------------------------------------------------------
-      /*{{|method_: - METHOD new( [hFile] )
+      /*{{|method_: - `METHOD new( [hFile] )`
                | return: Self
                | desc_: Creates the object. When hFile holds a Numeric Win32 file handle other than -1, the object
                  attaches to that already open handle; otherwise it starts with no file attached until ::Open()
                  or ::Create() succeeds.
       }}*/
       pc->Method( "init"         , TBinFile_init     , 1); // ::New([hFile]) -> Self
-      /*{{|method_: - METHOD Release()
+      /*{{|method_: - `METHOD Release()`
                | return: Self
                | desc_: Detaches the object from the file without closing it: the internal wrapper and its read
                  buffer are destroyed, but the Win32 handle stays open. ::hFile returns NIL afterwards.
       }}*/
       pc->Method( "Release"      , TBinFile_Release     ); // ::Release() -> Self
-      /*{{|method_: - METHOD Close()
+      /*{{|method_: - `METHOD Close()`
                | return: Self
                | desc_: Closes the attached Win32 handle and destroys the internal wrapper and its read buffer.
                  ::hFile returns NIL afterwards.
       }}*/
       pc->Method( "Close"        , TBinFile_Close       ); // ::Close() -> Self
-      /*{{|method_: - METHOD Open( cFile [, cAccess] [, cShare] [, lOpenAlways] )
+      /*{{|method_: - `METHOD Open( cFile [, cAccess] [, cShare] [, lOpenAlways] )`
                | return: lOk
                | desc_: Opens a disk file and attaches it to the object; a file already attached is closed first.
                  When the open fails, .F. is returned and the object is left with no file attached.
-               | param cFile: Character - File name.
-               | param cAccess: Numeric/Logical/Character - Access mode: a Numeric GENERIC_* mask, a Logical
+               | params:
+               - `cFile` Character - File name.
+               - `cAccess` Numeric/Logical/Character - Access mode: a Numeric GENERIC_* mask, a Logical
                  (.T. means read and write, .F. no read/write access), or a Character value holding the letters
                  r and/or w. Defaults to read and write.
-               | param cShare: Numeric/Logical/Character - Sharing mode: a Numeric FILE_SHARE_* mask, a Logical
+               - `cShare` Numeric/Logical/Character - Sharing mode: a Numeric FILE_SHARE_* mask, a Logical
                  (.T. shares read and write, .F. denies sharing), or a Character value holding the letters r, w
                  and/or d (d shares delete). Defaults to denying shared access.
-               | param lOpenAlways: Logical - When .T. the file is created when it does not exist; with the
+               - `lOpenAlways` Logical - When .T. the file is created when it does not exist; with the
                  default .F. only an existing file is opened.
       }}*/
       pc->Method( "Open"         , TBinFile_Open     , 4); // ::Open(cFName,[cAccess],[cShare],[lOpenAlways]) -> lOk
-      /*{{|method_: - METHOD Create( cFile [, cAccess] [, cShare] [, xSecurity] [, dwFunc] [, dwAttrib] [, hTemplate] )
+      /*{{|method_: - `METHOD Create( cFile [, cAccess] [, cShare] [, xSecurity] [, dwFunc] [, dwAttrib] [, hTemplate] )`
                | return: lOk
                | desc_: Creates or opens a disk file with CreateFile-style options and attaches it to the object;
                  a file already attached is closed first. When the call fails, .F. is returned and the object is
                  left with no file attached.
-               | param cFile: Character - File name.
-               | param cAccess: Numeric/Logical/Character - Access mode, as in ::Open(). Defaults to read and
+               | params:
+               - `cFile` Character - File name.
+               - `cAccess` Numeric/Logical/Character - Access mode, as in ::Open(). Defaults to read and
                  write.
-               | param cShare: Numeric/Logical/Character - Sharing mode, as in ::Open(). Defaults to denying
+               - `cShare` Numeric/Logical/Character - Sharing mode, as in ::Open(). Defaults to denying
                  shared access.
-               | param xSecurity: Logical/Numeric/Character/Array - A Logical only sets the inherit-handle flag
+               - `xSecurity` Logical/Numeric/Character/Array - A Logical only sets the inherit-handle flag
                  over a default security descriptor. The other types are an extended pointer buffer holding a
                  complete SECURITY_ATTRIBUTES structure, whose descriptor and inherit flag are used.
-               | param dwFunc: Numeric - Win32 creation disposition: CREATE_NEW, CREATE_ALWAYS, OPEN_EXISTING,
+               - `dwFunc` Numeric - Win32 creation disposition: CREATE_NEW, CREATE_ALWAYS, OPEN_EXISTING,
                  OPEN_ALWAYS or TRUNCATE_EXISTING. Defaults to CREATE_ALWAYS: create the file, overwriting an
                  existing one.
-               | param dwAttrib: Numeric - Win32 flags and attributes for CreateFile(). Defaults to
+               - `dwAttrib` Numeric - Win32 flags and attributes for CreateFile(). Defaults to
                  FILE_ATTRIBUTE_NORMAL.
-               | param hTemplate: Numeric - Template file handle passed to CreateFile(). Defaults to 0 (none).
+               - `hTemplate` Numeric - Template file handle passed to CreateFile(). Defaults to 0 (none).
       }}*/
       pc->Method( "Create"       , TBinFile_Create   , 7);
       // ::Create(1 cFName,2[cAccess],3[cShare], 4[pSecurity|lInherit],5[dwFunc],6[dwAttrib],7[hTemplate]) -> lOk
-      /*{{|method_: - METHOD Read( xBuffer [, nBytes] [, @nRead] )
+      /*{{|method_: - `METHOD Read( xBuffer [, nBytes] [, @nRead] )`
                | return: cBytes / nRead / NIL
                | desc_: Reads bytes from the file at the current position. With xBuffer NIL and nBytes Numeric, up
                  to nBytes bytes are read into a new Character value, which is returned (shorter at end of
                  file). With xBuffer holding a writable extended pointer buffer, the bytes are read into it and
                  the count of bytes read is returned. NIL is returned when no file is attached, when the Win32
                  read fails or, in buffer mode, when the buffer cannot be locked or the byte count to read is 0.
-               | param xBuffer: NIL/Character/Numeric/Array/Object - NIL to receive a new Character value, or
+               | params:
+               - `xBuffer` NIL/Character/Numeric/Array/Object - NIL to receive a new Character value, or
                  the target buffer: a Character passed by reference, a Numeric memory address, an Array or an
                  Object with GWST-style lock support.
-               | param nBytes: Numeric - Number of bytes to read. Required with xBuffer NIL or a Numeric memory
+               - `nBytes` Numeric - Number of bytes to read. Required with xBuffer NIL or a Numeric memory
                  address; for the other buffer forms it defaults to the locked buffer length.
-               | param nRead: Numeric by reference - Receives the count of bytes actually read, 0 on failure.
+               - `nRead` Numeric by reference - Receives the count of bytes actually read, 0 on failure.
       }}*/
       pc->Method( "Read"         , TBinFile_Read     , 3); // ::Read( @ptEx,[nBytes] )->nBytes | NIL
-      /*{{|method_: - METHOD Write( xBuffer [, nBytes] )
+      /*{{|method_: - `METHOD Write( xBuffer [, nBytes] )`
                | return: nWritten / NIL
                | desc_: Writes bytes to the file at the current position, taken from an extended pointer buffer,
                  and returns the count of bytes written. NIL is returned when no file is attached, when the
                  buffer cannot be locked, when the byte count to write is 0, or when the Win32 write fails.
-               | param xBuffer: Character/Numeric/Array/Object - Source buffer: a Character value, a Numeric
+               | params:
+               - `xBuffer` Character/Numeric/Array/Object - Source buffer: a Character value, a Numeric
                  memory address, an Array or an Object with GWST-style lock support.
-               | param nBytes: Numeric - Number of bytes to write. Required with a Numeric memory address; for
+               - `nBytes` Numeric - Number of bytes to write. Required with a Numeric memory address; for
                  the other buffer forms it defaults to the locked buffer length.
       }}*/
       pc->Method( "Write"        , TBinFile_Write    , 2); // ::Write( @ptEx,[nBytes] )->nBytes | NIL
-      /*{{|method_: - METHOD GetPos( [@uPos] )
+      /*{{|method_: - `METHOD GetPos( [@uPos] )`
                | return: nPos / uPos / NIL
                | desc_: Reports the current 64-bit file pointer position. Called without parameters it returns the
                  position as a Numeric. When uPos is passed by reference holding a Character value it receives
@@ -1093,7 +1097,7 @@ XPPRET XPPENTRY TBINFILE(XppParamList pl)
                  also the return value. NIL is returned when no file is attached.
       }}*/
       pc->Method( "GetPos"       , TBinFile_GetPos   , 1 ); // ::GetPos(@uPos) -> uUpdatedPos
-      /*{{|method_: - METHOD GoTo( nSkip, nFrom )
+      /*{{|method_: - `METHOD GoTo( nSkip, nFrom )`
                | return: lOk
                | desc_: Moves the file pointer nSkip bytes away from the origin selected by nFrom, following the
                  Win32 convention: 0 = beginning of file, 1 = current position, 2 = end of file. nSkip is a
@@ -1101,82 +1105,86 @@ XPPRET XPPENTRY TBINFILE(XppParamList pl)
                  an Object exposing a Q member. Returns .F. when the move fails or no file is attached.
       }}*/
       pc->Method( "GoTo"         , TBinFile_GoTo     , 2 ); // ::GoTo(nSkip,nFrom)
-      /*{{|method_: - METHOD GoBof( [nSkip] )
+      /*{{|method_: - `METHOD GoBof( [nSkip] )`
                | return: lOk
                | desc_: Moves the file pointer nSkip bytes (default 0) from the beginning of the file, through
                  ::GoTo( nSkip, 0 ).
       }}*/
       pc->MethodCB("GoBof"       , "{|s,nn| s:GoTo( nn , 0) }"); // #define FILE_BEGIN           0
-      /*{{|method_: - METHOD SkipBytes( [nSkip] )
+      /*{{|method_: - `METHOD SkipBytes( [nSkip] )`
                | return: lOk
                | desc_: Moves the file pointer nSkip bytes (default 0) forward from the current position, backward
                  when nSkip is negative, through ::GoTo( nSkip, 1 ).
       }}*/
       pc->MethodCB("SkipBytes"   , "{|s,nn| s:GoTo( nn , 1) }"); // #define FILE_CURRENT         1
-      /*{{|method_: - METHOD GoEof( [nSkip] )
+      /*{{|method_: - `METHOD GoEof( [nSkip] )`
                | return: lOk
                | desc_: Moves the file pointer relative to the end of the file, through ::GoTo( nSkip, 2 ); the
                  default nSkip of 0 goes to the very end and a negative value stays inside the file.
       }}*/
       pc->MethodCB("GoEof"       , "{|s,nn| s:GoTo( nn , 2) }"); // #define FILE_END             2
-      /*{{|method_: - METHOD SetEof()
+      /*{{|method_: - `METHOD SetEof()`
                | return: lOk / NIL
                | desc_: Sets the physical end of file at the current file pointer position, truncating or
                  extending the file. NIL is returned when no file is attached.
       }}*/
       pc->Method("SetEof"        , TBinFile_SetEof );
-      /*{{|method_: - METHOD Commit()
+      /*{{|method_: - `METHOD Commit()`
                | return: lOk / NIL
                | desc_: Flushes the operating system buffers of the attached file to disk. NIL is returned when no
                  file is attached.
       }}*/
       pc->Method("Commit"        , TBinFile_Commit );
-      /*{{|method_: - METHOD ReadLine( [@lEof] [, @lEol] )
+      /*{{|method_: - `METHOD ReadLine( [@lEof] [, @lEol] )`
                | return: cLine
                | desc_: Reads the next text line from the current file position and moves the pointer past its
                  line terminator (CR, LF or CRLF), which is not part of the returned value. Reading goes through
                  the internal buffer (see ::ResetBuffer()), so a line longer than the buffer comes back in
                  pieces.
-               | param lEof: Logical by reference - Receives .T. when nothing could be read because the end of
+               | params:
+               - `lEof` Logical by reference - Receives .T. when nothing could be read because the end of
                  the file was reached; the method then returns an empty string.
-               | param lEol: Logical by reference - Receives .T. when a line terminator was found; .F. when the
+               - `lEol` Logical by reference - Receives .T. when a line terminator was found; .F. when the
                  line was cut at the end of the file or at the end of the internal buffer.
       }}*/
       pc->Method("ReadLine"      , TBinFile_ReadLine , 2); // ReadLine( @lEof,@lEol ) -> cLine
-      /*{{|method_: - METHOD ReadMimeHeader( [@lEof] [, @lEoh] )
+      /*{{|method_: - `METHOD ReadMimeHeader( [@lEof] [, @lEoh] )`
                | return: cMimeHeader
                | desc_: Reads a MIME header block from the current file position: the read stops after the first
                  empty line (a CR LF CR LF, CR CR or LF LF sequence) and the returned value includes those
                  end-of-header bytes. The file pointer advances past the returned bytes. Reading goes through
                  the internal buffer (see ::ResetBuffer()); when the end of the header lies beyond the buffered
                  bytes a partial block is returned with lEoh .F., and the next call continues the header.
-               | param lEof: Logical by reference - Receives .T. when nothing could be read because the end of
+               | params:
+               - `lEof` Logical by reference - Receives .T. when nothing could be read because the end of
                  the file was reached; the method then returns an empty string.
-               | param lEoh: Logical by reference - Receives .T. when the end of the header was found.
+               - `lEoh` Logical by reference - Receives .T. when the end of the header was found.
       }}*/
 	  pc->Method("ReadMimeHeader", TBinFile_ReadMimeHeader, 2); // ReadMimeHeader( @lEof,@lEoh ) -> cMimeHeader
-      /*{{|method_: - METHOD ResetBuffer( [nSize] )
+      /*{{|method_: - `METHOD ResetBuffer( [nSize] )`
                | return: NIL
                | desc_: Discards any bytes held in the internal read buffer, re-anchoring it at the current file
                  pointer position, and optionally resizes it. The buffer serves ::ReadLine(),
                  ::ReadMimeHeader(), ::LoadBuffer() and ::PeekBytesFromBuffer().
-               | param nSize: Numeric - New buffer size in bytes, limited to 64 MB; 0 selects the default size
+               | params:
+               - `nSize` Numeric - New buffer size in bytes, limited to 64 MB; 0 selects the default size
                  of 64 KB. When the parameter is omitted the current size is kept (64 KB when the buffer was
                  never sized).
       }}*/
       pc->Method("ResetBuffer"   , TBinFile_ResetBuffer , 1); // ResetBuffer( [nSize] )
-      /*{{|method_: - METHOD LoadBuffer( [@lEof] [, lSkip] )
+      /*{{|method_: - `METHOD LoadBuffer( [@lEof] [, lSkip] )`
                | return: nBytes / NIL
                | desc_: Fills the internal read buffer with bytes read from the current file pointer position and
                  returns the count of bytes now buffered. With lSkip .F. the file pointer is restored after
                  loading; with the default .T. it stays past the loaded bytes. NIL is returned when no file is
                  attached.
-               | param lEof: Logical by reference - Receives .T. when the buffer could not be filled completely
+               | params:
+               - `lEof` Logical by reference - Receives .T. when the buffer could not be filled completely
                  because the end of the file was reached.
-               | param lSkip: Logical - .F. restores the file pointer after loading. Defaults to .T.
+               - `lSkip` Logical - .F. restores the file pointer after loading. Defaults to .T.
       }}*/
       pc->Method("LoadBuffer"    , TBinFile_LoadBuffer  , 2); // LoadBuffer(@lEof,lSkip = .T.) -> nBytes
-      /*{{|method_: - METHOD PeekBytesFromBuffer( [nRelOffset] [, nBytes] )
+      /*{{|method_: - `METHOD PeekBytesFromBuffer( [nRelOffset] [, nBytes] )`
                | return: cBytes / NIL
                | desc_: Returns bytes already held in the internal read buffer without touching the file or the
                  file pointer. nRelOffset is the zero-based position inside the buffered data and nBytes the
@@ -1606,7 +1614,7 @@ static void TBinFile_PeekBytesFromBuffer( TXbClsParams * px ) // PeekBytesFromBu
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: lMemoWrite
-            | _kw_: write file, create file, append, binary write
+            | _kw_: lMemoWrite, Function
    }}*/
 /*{{|desc: Writes a byte block to a disk file, creating or truncating the file, or appending at its end.
       The file is opened denying shared access.
@@ -1643,7 +1651,7 @@ OT4XB_API BOOL lMemoWrite(LPSTR pFileName,LPBYTE pBuffer, DWORD cb , BOOL bAppen
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: pMemoRead
-            | _kw_: read whole file, load file, buffer, MemoRead
+            | _kw_: pMemoRead, Function
    }}*/
 /*{{|desc: Reads a whole disk file into a newly allocated buffer. The buffer is allocated two bytes larger
       than the file and zero-filled, so the data always ends with two zero bytes; release it with
@@ -1677,7 +1685,7 @@ OT4XB_API LPBYTE pMemoRead(LPSTR pFileName, DWORD* pcb )
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: pMemoReadEx
-            | _kw_: read file slice, offset, buffer, partial read
+            | _kw_: pMemoReadEx, Function
    }}*/
 /*{{|desc: Reads a slice of a disk file, either into a caller supplied buffer or into a newly allocated
       one. Equivalent to pMemoReadEx2() with no flags: the file is opened allowing shared read and write
@@ -1707,7 +1715,7 @@ OT4XB_API LPBYTE pMemoReadEx(LPSTR pFileName, DWORD* pcb , LPBYTE pBuffer , DWOR
             | category: filesystem
             | header: ot4xb_c_exported.h
             | mangled-name: pMemoReadEx2
-            | _kw_: read file slice, offset, buffer, partial read, primitive
+            | _kw_: pMemoReadEx2, Function
    }}*/
 /*{{|desc: Reads a slice of a disk file, either into a caller supplied buffer or into a newly allocated
       one. C primitive behind the cMemoReadEx() Xbase++ function.
@@ -1762,7 +1770,7 @@ OT4XB_API LPBYTE pMemoReadEx2(LPSTR pFileName, DWORD* pcb , LPBYTE pBuffer , DWO
             | category: log
             | header: ot4xb_c_exported.h
             | mangled-name: dwWriteLogData
-            | _kw_: append log, log file, shared file, write data
+            | _kw_: dwWriteLogData, Function
    }}*/
 /*{{|desc: Appends a data block at the end of a shared log file, creating the file when it does not exist.
       The file is opened with full read and write sharing and the appended region is locked while it is

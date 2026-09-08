@@ -28,7 +28,7 @@
    Every OT4XB_HASH hash method is a class method with the same argument list, called directly on the class
    object with no instance needed:
 
-   OT4XB_HASH():<method>( uInput, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash
+   `OT4XB_HASH():<method>( uInput, [nFlags := 0], [nOffset], [nBytes], [nGranularity] ) -> cHash`
 
    uInput is the data to hash. What it holds, and how the hash value is returned, is selected with nFlags, a
    combination (nOr) of:
@@ -238,7 +238,7 @@ BEGIN_NAMESPACE( ot4xb_hash_ns )
               an open file handle, selected with nFlags, and returns the hash value as a hex Character string, or
               as raw binary bytes when output flag 0x01 is set. For file input, nFlags can also select a start
               offset, a maximum byte count and the read buffer size. sha and sha1 are the same algorithm (SHA-1).
-   | _kw_: hash, md5, sha1, sha256, sha512, CryptoAPI, digest, hmac
+   | _kw_: OT4XB_HASH, Class
    }}*/
 _XPP_REG_FUN_( OT4XB_HASH )
 {

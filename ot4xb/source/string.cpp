@@ -81,7 +81,7 @@ static BYTE __TEMPLATE_09_AZ_NOCASE__[ ] = { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 /*{{function_: nCRC32
             | syntax_: `nCRC32( nCRC32, cBuffer [, nLen] [, @nStart] )`
             | category: string
-            | _kw_: crc32, checksum, hash, integrity
+            | _kw_: nCRC32, Function
    }}*/
 /*{{|desc: Calculates a CRC32 value for a character buffer, optionally processing only a byte range.
     | params:
@@ -164,7 +164,7 @@ OT4XB_API DWORD __cdecl dwCrc8( DWORD dwCrc, char* data, int length );
 /*{{function_: nCRC8
             | syntax_: `nCRC8( nCRC8, cBuffer [, nLen] [, @nStart] )`
             | category: string
-            | _kw_: crc8, checksum, hash, small checksum
+            | _kw_: nCRC8, Function
    }}*/
 /*{{|desc: Calculates a CRC8 value for a character buffer, optionally processing only a byte range.
     | params:
@@ -246,7 +246,7 @@ XPPRET XPPENTRY NCRC8( XppParamList pl )
 /*{{function_: ChrR
             | syntax_: `ChrR( nChar1 [, ... nCharN, nRepeat] )`
             | category: string
-            | _kw_: chr, character codes, build string, repeat
+            | _kw_: ChrR, Function
    }}*/
 /*{{|desc: Builds a character string from numeric character codes, optionally repeating the whole sequence.
     | params:
@@ -295,7 +295,7 @@ XPPRET XPPENTRY CHRR( XppParamList pl )
 /*{{function_: MkScStr
             | syntax_: `MkScStr( nChar, cColorBytes )`
             | category: string
-            | _kw_: screen string, Clipper screen, attribute bytes, console
+            | _kw_: MkScStr, Function
    }}*/
 /*{{|desc: Makes an old Clipper-style screen string. Console screen captures used one byte for the character
       code, followed by one byte for the color attribute; this helper repeats one character code with a sequence
@@ -337,7 +337,7 @@ XPPRET XPPENTRY MKSCSTR( XppParamList pl )
 /*{{function_: lStrBitSet
             | syntax_: `lStrBitSet( @cStr, nBit [, lNewSetting] )`
             | category: string/bit
-            | _kw_: bit in string, test bit, set bit, bit array
+            | _kw_: lStrBitSet, Function
    }}*/
 /*{{|desc: Tests and optionally changes one bit inside a character string.
     | params:
@@ -412,7 +412,7 @@ XPPRET XPPENTRY LSTRBITSET( XppParamList pl )
 /*{{function_: lPStrBitSet
             | syntax_: `lPStrBitSet( pStr, nBit [, lNewSetting] [, nLen] )`
             | category: string/bit
-            | _kw_: bit in buffer, test bit, set bit, pointer, bit array
+            | _kw_: lPStrBitSet, Function
    }}*/
 /*{{|desc: Tests and optionally changes one bit inside a memory buffer addressed by a pointer.
     | params:
@@ -468,7 +468,7 @@ XPPRET XPPENTRY LPSTRBITSET( XppParamList pl )
 /*{{function_: cStrBitNot
             | syntax_: `cStrBitNot( @cStr )`
             | category: string/bit
-            | _kw_: invert bits, not, string bits, complement
+            | _kw_: cStrBitNot, Function
    }}*/
 /*{{|desc: Inverts all bits in a character string.
     | params:
@@ -513,7 +513,7 @@ XPPRET XPPENTRY CSTRBITNOT( XppParamList pl )
 /*{{function_: PStrBitNot
             | syntax_: `PStrBitNot( pStr, nLen )`
             | category: string/bit
-            | _kw_: invert bits, not, buffer bits, pointer
+            | _kw_: PStrBitNot, Function
    }}*/
 /*{{|desc: Inverts all bits in a memory buffer addressed by a pointer.
     | params:
@@ -543,7 +543,7 @@ XPPRET XPPENTRY PSTRBITNOT( XppParamList pl )
 /*{{function_: cStrBitOR
             | syntax_: `cStrBitOR( @cStr, cMask [, lRotate] )`
             | category: string/bit
-            | _kw_: or strings, byte or, string bits, bitmask
+            | _kw_: cStrBitOR, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise OR between two character strings.
     | params:
@@ -614,7 +614,7 @@ XPPRET XPPENTRY CSTRBITOR( XppParamList pl )
 /*{{function_: cStrBitXOR
             | syntax_: `cStrBitXOR( @cStr, cKey [, lRotate] )`
             | category: string/bit
-            | _kw_: xor strings, byte xor, string bits, obfuscate
+            | _kw_: cStrBitXOR, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise XOR between two character strings.
     | params:
@@ -686,7 +686,7 @@ XPPRET XPPENTRY CSTRBITXOR( XppParamList pl )
 /*{{function_: cStrBitAND
             | syntax_: `cStrBitAND( @cStr, cMask [, lRotate] )`
             | category: string/bit
-            | _kw_: and strings, byte and, string bits, bitmask
+            | _kw_: cStrBitAND, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise AND between two character strings.
     | params:
@@ -759,7 +759,7 @@ XPPRET XPPENTRY CSTRBITAND( XppParamList pl )
 /*{{function_: PStrBitOR
             | syntax_: `PStrBitOR( pTarget, nTargetLen, pMask, nMaskLen [, lRotate] )`
             | category: string/bit
-            | _kw_: or buffers, byte or, pointer, bitmask
+            | _kw_: PStrBitOR, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise OR between two memory buffers addressed by pointers.
     | params:
@@ -806,7 +806,7 @@ XPPRET XPPENTRY PSTRBITOR( XppParamList pl )
 /*{{function_: PStrBitXOR
             | syntax_: `PStrBitXOR( pTarget, nTargetLen, pKey, nKeyLen [, lRotate] )`
             | category: string/bit
-            | _kw_: xor buffers, byte xor, pointer, obfuscate
+            | _kw_: PStrBitXOR, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise XOR between two memory buffers addressed by pointers.
     | params:
@@ -855,7 +855,7 @@ XPPRET XPPENTRY PSTRBITXOR( XppParamList pl )
             | category: string/bit
             | header: ot4xb_c_exported.h
             | mangled-name: _xstr_bit_xor
-            | _kw_: xor buffer, byte xor, in place, rotation, obfuscate
+            | _kw_: _xstr_bit_xor, Function
    }}*/
 /*{{|desc: XORs a byte buffer in place with the bytes of a second buffer. Without rotation only the common
       length of both buffers is processed. Nothing is done when a pointer is NULL or a length is 0.
@@ -886,7 +886,7 @@ OT4XB_API void _xstr_bit_xor( LPBYTE p1, ULONG cb1, LPBYTE p2, ULONG cb2, BOOL b
 /*{{function_: PStrBitAND
             | syntax_: `PStrBitAND( pTarget, nTargetLen, pMask, nMaskLen [, lRotate] )`
             | category: string/bit
-            | _kw_: and buffers, byte and, pointer, bitmask
+            | _kw_: PStrBitAND, Function
    }}*/
 /*{{|desc: Applies a byte-by-byte bitwise AND between two memory buffers addressed by pointers.
     | params:
@@ -933,7 +933,7 @@ XPPRET XPPENTRY PSTRBITAND( XppParamList pl )
 /*{{function_: nStrBitCount
             | syntax_: `nStrBitCount( cStr )`
             | category: string/bit
-            | _kw_: count bits, popcount, bits set, string bits
+            | _kw_: nStrBitCount, Function
    }}*/
 /*{{|desc: Counts the bits set to 1 in a character string.
     | params:
@@ -979,7 +979,7 @@ XPPRET XPPENTRY NSTRBITCOUNT( XppParamList pl )
 /*{{function_: aStrBits
             | syntax_: `aStrBits( cStr )`
             | category: string/bit
-            | _kw_: bit positions, bits set, string bits, bit array
+            | _kw_: aStrBits, Function
    }}*/
 /*{{|desc: Returns the one-based positions of all bits set to 1 in a character string.
     | params:
@@ -1052,7 +1052,7 @@ XPPRET XPPENTRY ASTRBITS( XppParamList pl )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: dwCrc32
-            | _kw_: crc32, checksum, hash, chunks, incremental
+            | _kw_: dwCrc32, Function
    }}*/
 /*{{|desc: Calculates the CRC32 of a byte buffer. The CRC can be calculated in several chunks by feeding the
       value returned for one chunk as dwCRC for the next one.
@@ -1082,7 +1082,7 @@ OT4XB_API DWORD dwCrc32( DWORD dwCRC, LPBYTE pStr, ULONG nLen )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: dwCrc8
-            | _kw_: crc8, checksum, polynomial 0x8C, incremental
+            | _kw_: dwCrc8, Function
    }}*/
 /*{{|desc: Calculates the CRC8 of a byte buffer using the reflected polynomial 0x8C. The CRC can be
       calculated in several chunks by feeding the value returned for one chunk as dwCrc for the next one.
@@ -1121,7 +1121,7 @@ OT4XB_API DWORD dwCrc8( DWORD dwCrc, char* data, int length )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: dwCrc32WithTable
-            | _kw_: crc32, translation table, case insensitive checksum
+            | _kw_: dwCrc32WithTable, Function
    }}*/
 /*{{|desc: Calculates the CRC32 of a byte buffer, translating every byte through a 256-byte map table before
       it enters the calculation. Useful for normalized checksums, such as a case-insensitive CRC32 built
@@ -1152,7 +1152,7 @@ OT4XB_API DWORD dwCrc32WithTable( DWORD dwCRC, LPBYTE pStr, ULONG nLen, LPBYTE p
 /*{{function_: NoComment
             | syntax_: `NoComment( cText )`
             | category: string
-            | _kw_: strip comments, remove comments, C comments, source text
+            | _kw_: NoComment, Function
    }}*/
 /*{{|desc: Removes C/C++ style comments from a character string.
     | params:
@@ -1212,7 +1212,7 @@ XPPRET XPPENTRY NOCOMMENT( XppParamList pl )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: chHex2Nibble
-            | _kw_: hex digit, nibble, hex character, 0-15
+            | _kw_: chHex2Nibble, Function
    }}*/
 /*{{|desc: Converts one hexadecimal character to its numeric nibble value.
     | params:
@@ -1248,7 +1248,7 @@ OT4XB_API BYTE chHex2Nibble( BYTE chHex )
 /*{{function_: cBin2Hex
             | syntax_: `cBin2Hex( cBinary )`
             | category: string/hex
-            | _kw_: hex encode, binary to hex, hexadecimal string
+            | _kw_: cBin2Hex, Function
    }}*/
 /*{{|desc: Converts a binary string to an uppercase hexadecimal string.
     | params:
@@ -1293,7 +1293,7 @@ XPPRET XPPENTRY CBIN2HEX( XppParamList pl )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_CHEX2BIN_defmode_
-            | _kw_: hex decode mode, default mode, cHex2Bin
+            | _kw_: ot4xb_CHEX2BIN_defmode_, Function
    }}*/
 /*{{|desc: Reads and optionally changes the process-wide default decoding mode used by cHex2Bin() when its
       nMode parameter is omitted. The initial default mode is 1.
@@ -1318,7 +1318,7 @@ OT4XB_API LONG ot4xb_CHEX2BIN_defmode_( LONG n )
 /*{{function_: cHex2Bin
             | syntax_: `cHex2Bin( cHex [, nMode] )`
             | category: string/hex
-            | _kw_: hex decode, hex to binary, hexadecimal string
+            | _kw_: cHex2Bin, Function
    }}*/
 /*{{|desc: Converts a hexadecimal string to binary bytes.
     | params:
@@ -1382,7 +1382,7 @@ XPPRET XPPENTRY CHEX2BIN( XppParamList pl )
 /*{{function_: Tokenize
             | syntax_: `Tokenize( cText [, cSeparator] )`
             | category: string
-            | _kw_: tokenize, split string, separator, array of tokens
+            | _kw_: Tokenize, Function
    }}*/
 /*{{|desc: Splits a character string using a literal separator string.
     | params:
@@ -1447,7 +1447,7 @@ XPPRET XPPENTRY TOKENIZE( XppParamList pl )
 /*{{function_: TrimQuotes
             | syntax_: `TrimQuotes( cText )`
             | category: string
-            | _kw_: trim quotes, strip quotes, remove double quotes
+            | _kw_: TrimQuotes, Function
    }}*/
 /*{{|desc: Removes spaces and double quote characters from both ends of a string.
     | params:
@@ -1480,7 +1480,7 @@ XPPRET XPPENTRY TRIMQUOTES( XppParamList pl )
 /*{{function_: TrimZ
             | syntax_: `TrimZ( cText )`
             | category: string
-            | _kw_: zero terminated, cut at null, C string, strip after zero
+            | _kw_: TrimZ, Function
    }}*/
 /*{{|desc: Returns the zero-terminated portion of a character string.
     | params:
@@ -1512,7 +1512,7 @@ XPPRET XPPENTRY TRIMZ( XppParamList pl )
 /*{{function_: C5AllTrim
             | syntax_: `C5AllTrim( cText )`
             | category: string
-            | _kw_: alltrim, trim zeros, trim spaces, Clipper
+            | _kw_: C5AllTrim, Function
    }}*/
 /*{{|desc: Removes leading and trailing zero bytes and spaces from a character string.
     | params:
@@ -1550,7 +1550,7 @@ XPPRET XPPENTRY C5ALLTRIM( XppParamList pl )
 /*{{function_: C5RTrim
             | syntax_: `C5RTrim( cText )`
             | category: string
-            | _kw_: rtrim, trim zeros, trailing spaces, Clipper
+            | _kw_: C5RTrim, Function
    }}*/
 /*{{|desc: Removes trailing zero bytes and spaces from a character string.
     | params:
@@ -1587,7 +1587,7 @@ XPPRET XPPENTRY C5RTRIM( XppParamList pl )
 /*{{function_: C5LTrim
             | syntax_: `C5LTrim( cText )`
             | category: string
-            | _kw_: ltrim, trim zeros, leading spaces, Clipper
+            | _kw_: C5LTrim, Function
    }}*/
 /*{{|desc: Removes leading zero bytes and spaces from a character string.
     | params:
@@ -1624,7 +1624,7 @@ XPPRET XPPENTRY C5LTRIM( XppParamList pl )
 /*{{function_: cQW2Hex
             | syntax_: `cQW2Hex( xValue )`
             | category: string/hex
-            | _kw_: hex, 64-bit, QWORD to hex, 16 digits
+            | _kw_: cQW2Hex, Function
    }}*/
 /*{{|desc: Converts a 64-bit value to a 16-character uppercase hexadecimal string.
     | params:
@@ -1680,7 +1680,7 @@ XPPRET XPPENTRY CQW2HEX( XppParamList  pl )
 /*{{function_: nHex2QW
             | syntax_: `nHex2QW( cHex )`
             | category: string/hex
-            | _kw_: hex, 64-bit, hex to QWORD, 8-byte string
+            | _kw_: nHex2QW, Function
    }}*/
 /*{{|desc: Converts a 16-character hexadecimal QWORD representation to its raw 8-byte binary form.
     | params:
@@ -1720,7 +1720,7 @@ XPPRET XPPENTRY NHEX2QW( XppParamList  pl )
 /*{{function_: cDouble2Hex
             | syntax_: `cDouble2Hex( nValue )`
             | category: string/hex
-            | _kw_: hex, double, IEEE 754, raw bits to hex
+            | _kw_: cDouble2Hex, Function
    }}*/
 /*{{|desc: Converts the binary representation of a double to a 16-character uppercase hexadecimal string.
     | params:
@@ -1757,7 +1757,7 @@ XPPRET XPPENTRY CDOUBLE2HEX( XppParamList  pl )
 /*{{function_: nHex2Double
             | syntax_: `nHex2Double( cHex )`
             | category: string/hex
-            | _kw_: hex, double, IEEE 754, hex to double
+            | _kw_: nHex2Double, Function
    }}*/
 /*{{|desc: Converts a 16-character hexadecimal representation of a double back to a numeric double value.
     | params:
@@ -1788,7 +1788,7 @@ XPPRET XPPENTRY NHEX2DOUBLE( XppParamList  pl )
 /*{{function_: cDw2Hex
             | syntax_: `cDw2Hex( nValue )`
             | category: string/hex
-            | _kw_: hex, DWORD to hex, 8 digits, 32-bit
+            | _kw_: cDw2Hex, Function
    }}*/
 /*{{|desc: Converts a 32-bit value to an 8-character uppercase hexadecimal string.
     | params:
@@ -1819,7 +1819,7 @@ XPPRET XPPENTRY CDW2HEX( XppParamList  pl )
 /*{{function_: nHex2Dw
             | syntax_: `nHex2Dw( cHex )`
             | category: string/hex
-            | _kw_: hex, hex to DWORD, parse hex, 32-bit
+            | _kw_: nHex2Dw, Function
    }}*/
 /*{{|desc: Converts hexadecimal text to a 32-bit numeric value.
     | params:
@@ -1881,7 +1881,7 @@ XPPRET XPPENTRY NHEX2DW( XppParamList  pl )
 /*{{function_: cW2Hex
             | syntax_: `cW2Hex( nValue )`
             | category: string/hex
-            | _kw_: hex, word to hex, 4 digits, 16-bit
+            | _kw_: cW2Hex, Function
    }}*/
 /*{{|desc: Converts the low 16 bits of a numeric value to a 4-character uppercase hexadecimal string.
     | params:
@@ -1912,7 +1912,7 @@ XPPRET XPPENTRY CW2HEX( XppParamList  pl )
 /*{{function_: nHex2W
             | syntax_: `nHex2W( cHex )`
             | category: string/hex
-            | _kw_: hex, hex to word, 16-bit
+            | _kw_: nHex2W, Function
    }}*/
 /*{{|desc: Converts a 4-character hexadecimal word representation to a numeric value.
     | params:
@@ -1941,7 +1941,7 @@ XPPRET XPPENTRY NHEX2W( XppParamList  pl )
 /*{{function_: cByte2Hex
             | syntax_: `cByte2Hex( nValue )`
             | category: string/hex
-            | _kw_: hex, byte to hex, 2 digits
+            | _kw_: cByte2Hex, Function
    }}*/
 /*{{|desc: Converts the low byte of a numeric value to a 2-character uppercase hexadecimal string.
     | params:
@@ -1972,7 +1972,7 @@ XPPRET XPPENTRY CBYTE2HEX( XppParamList  pl )
 /*{{function_: nHex2Byte
             | syntax_: `nHex2Byte( cHex )`
             | category: string/hex
-            | _kw_: hex, hex to byte, 2 digits
+            | _kw_: nHex2Byte, Function
    }}*/
 /*{{|desc: Converts a 2-character hexadecimal byte representation to a numeric value.
     | params:
@@ -2018,7 +2018,7 @@ XPPRET XPPENTRY NHEX2BYTE( XppParamList  pl )
 /*{{function_: lStrWildCmp
             | syntax_: `lStrWildCmp( cWild | aWild, cStr [, nFlags] )`
             | category: string/match
-            | _kw_: wildcard, match, like, pattern, star question mark
+            | _kw_: lStrWildCmp, Function
    }}*/
 /*{{|desc: Legacy-compatible entry point. The implementation is shared with lStrWildCmpEx(); see
       lStrWildCmpEx() documentation for the full flag reference.
@@ -2040,7 +2040,7 @@ XPPRET XPPENTRY LSTRWILDCMP( XppParamList  pl )
 /*{{function_: lStrWildCmpEx
             | syntax_: `lStrWildCmpEx( cWild | aWild, cStr [, nFlags] [, nRegexFlags] [, nRegexMatchFlags] )`
             | category: string/match
-            | _kw_: wildcard, match, like, pattern, regex option, array of patterns, case insensitive
+            | _kw_: lStrWildCmpEx, Function
    }}*/
 /*{{|desc: Compares a string against one wildcard pattern, an array of wildcard patterns, or a regular
       expression. lStrWildCmp() is the legacy-compatible name; lStrWildCmpEx() is the extended name. Both use
@@ -2251,7 +2251,7 @@ XPPRET XPPENTRY LSTRWILDCMPEX( XppParamList  pl )
 /*{{function_: cDw2Bits
             | syntax_: `cDw2Bits( nInt32 [, nLen] )`
             | category: string/bit
-            | _kw_: binary string, bits, 0 and 1, DWORD to bits
+            | _kw_: cDw2Bits, Function
    }}*/
 /*{{|desc: Converts a 32-bit numeric value to a character string made of '0' and '1' bytes.
     | params:
@@ -2282,7 +2282,7 @@ XPPRET XPPENTRY CDW2BITS( XppParamList  pl )
 /*{{function_: nBits2Dw
             | syntax_: `nBits2Dw( cBitStr )`
             | category: string/bit
-            | _kw_: binary string, bits, 0 and 1, bits to DWORD
+            | _kw_: nBits2Dw, Function
    }}*/
 /*{{|desc: Converts a string of '0' and '1' bytes to a 32-bit numeric value.
     | params:
@@ -2384,7 +2384,7 @@ BOOL __gen_rnd_str_buffer( LPBYTE buffer, ULONG cb , DWORD flags )
 /*{{function_: cGenRndStr
             | syntax_: `cGenRndStr( nLen [, nMode | lSafeChars] )`
             | category: string/random
-            | _kw_: random string, random bytes, password, token, safe charset
+            | _kw_: cGenRndStr, Function
    }}*/
 /*{{|desc: Generates a random binary string or a random string restricted to a safe character set.
     | params:
@@ -2417,7 +2417,7 @@ XPPRET XPPENTRY CGENRNDSTR( XppParamList  pl )
 /*{{function_: ot4xb_nRand
             | syntax_: `ot4xb_nRand( [nMax] )`
             | category: numeric/random
-            | _kw_: random number, rand, integer, random
+            | _kw_: ot4xb_nRand, Function
    }}*/
 /*{{|desc: Generates a random non-negative integer lower than the requested maximum.
     | params:
@@ -2461,7 +2461,7 @@ XPPRET XPPENTRY OT4XB_NRAND( XppParamList pl )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: TxtSplitLinesToTList
-            | _kw_: split lines, text to lines, TList, CRLF
+            | _kw_: TxtSplitLinesToTList, Function
    }}*/
 /*{{|desc: Splits a zero-terminated text buffer into lines, overwriting the CRLF, CR or LF separators with
       zero bytes and collecting a pointer to each line in a new TList. Same as TxtSplitLinesToTListEx()
@@ -2485,7 +2485,7 @@ OT4XB_API TList* TxtSplitLinesToTList( LPSTR pStr, DWORD dwFlags )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: TxtSplitLinesToTListEx
-            | _kw_: split lines, text to lines, TList, CRLF, options
+            | _kw_: TxtSplitLinesToTListEx, Function
    }}*/
 /*{{|desc: Splits a zero-terminated text buffer into lines, overwriting the CRLF, CR or LF separators with
       zero bytes and collecting a pointer to each line in a new TList. Trimming treats spaces, tabs, CR and
@@ -2663,7 +2663,7 @@ OT4XB_API TList* TxtSplitLinesToTListEx( LPSTR pStr, DWORD dwFlags, DWORD* pdwSk
 /*{{function_: aSplitTxtLines
             | syntax_: `aSplitTxtLines( cText [, nFlags] [, @nShift] )`
             | category: string
-            | _kw_: split lines, text to array, lines, trim, email headers, CRLF
+            | _kw_: aSplitTxtLines, Function
    }}*/
 /*{{|desc: Splits a text buffer into lines and optionally applies simple trimming, filtering, e-mail-header
       parsing, or INI-style key/value parsing.
@@ -2861,7 +2861,7 @@ XPPRET XPPENTRY ASPLITTXTLINES( XppParamList pl )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_urlencode
-            | _kw_: url encode, percent encoding, escape url, query string
+            | _kw_: ot4xb_urlencode, Function
    }}*/
 /*{{|desc: URL-encodes a byte buffer into a newly allocated string. Bytes other than ASCII letters and
       digits are written as '%' followed by two uppercase hexadecimal digits; a space becomes %20, not '+'.
@@ -2911,7 +2911,7 @@ OT4XB_API LPSTR ot4xb_urlencode( LPSTR pIn, DWORD cbIn, DWORD* pcbOut )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_urlencode_cb
-            | _kw_: url encode, required length, percent encoding
+            | _kw_: ot4xb_urlencode_cb, Function
    }}*/
 /*{{|desc: Calculates the length needed to URL-encode a byte buffer, without producing output: one byte per
       ASCII letter or digit and three bytes for any other value.
@@ -2942,7 +2942,7 @@ OT4XB_API DWORD ot4xb_urlencode_cb( LPBYTE pIn, DWORD cbIn )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_urlencode_buffer
-            | _kw_: url encode, percent encoding, buffer, escape url
+            | _kw_: ot4xb_urlencode_buffer, Function
    }}*/
 /*{{|desc: URL-encodes a byte buffer into a caller-supplied buffer. Bytes other than ASCII letters and
       digits are written as '%' followed by two uppercase hexadecimal digits.
@@ -2989,7 +2989,7 @@ OT4XB_API DWORD ot4xb_urlencode_buffer( LPBYTE pIn, DWORD cbIn, LPBYTE pOut, DWO
             | category: string/encoding
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?TZString_urlencode_add@@YAHPAVTZString@@PADK@Z
-            | _kw_: url encode, TZString, append, percent encoding
+            | _kw_: TZString_urlencode_add, Function
    }}*/
 /*{{|desc: Appends a URL-encoded copy of a byte buffer to a TZString. Bytes other than ASCII letters and
       digits are appended as '%' followed by two uppercase hexadecimal digits.
@@ -3028,7 +3028,7 @@ OT4XB_API BOOL TZString_urlencode_add( TZString* psc, LPSTR pIn, DWORD cb )
             | category: string/encoding
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?TZString_urlencode_add_con@@YAHPAVTZString@@PAUMomHandleEntry@@@Z
-            | _kw_: url encode, TZString, container, append
+            | _kw_: TZString_urlencode_add_con, Function
    }}*/
 /*{{|desc: Appends a URL-encoded copy of the contents of a character container to a TZString.
     | params:
@@ -3061,7 +3061,7 @@ OT4XB_API BOOL TZString_urlencode_add_con( TZString* psc, ContainerHandle con )
             | category: string
             | header: ot4xb_cpp_exported.h
             | mangled-name: ?TZString_add_con@@YAHPAVTZString@@PAUMomHandleEntry@@@Z
-            | _kw_: TZString, append container, container string
+            | _kw_: TZString_add_con, Function
    }}*/
 /*{{|desc: Appends the contents of a character container to a TZString. The text is appended as a C string,
       so it stops at the first zero byte.
@@ -3095,7 +3095,7 @@ OT4XB_API BOOL TZString_add_con( TZString* psc, ContainerHandle con )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: Bin2Hex_buffer
-            | _kw_: hex encode, binary to hex, buffer
+            | _kw_: Bin2Hex_buffer, Function
    }}*/
 /*{{|desc: Converts binary bytes to uppercase hexadecimal text in a caller-supplied buffer, two characters
       per source byte. No zero terminator is written.
@@ -3129,7 +3129,7 @@ OT4XB_API int Bin2Hex_buffer( LPBYTE pb, UINT cb, LPSTR buffer, UINT buffer_cb )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: pBin2Hex
-            | _kw_: hex encode, binary to hex, allocated string
+            | _kw_: pBin2Hex, Function
    }}*/
 /*{{|desc: Converts binary bytes to a newly allocated uppercase hexadecimal string, two characters per
       source byte.
@@ -3152,7 +3152,7 @@ OT4XB_API LPSTR pBin2Hex( LPBYTE pb, UINT cb )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: pHex2Bin
-            | _kw_: hex decode, hex to binary, allocated buffer
+            | _kw_: pHex2Bin, Function
    }}*/
 /*{{|desc: Decodes a zero-terminated hexadecimal string into a newly allocated binary buffer. Characters
       that are not hexadecimal digits are skipped and act as byte separators: a lone digit between
@@ -3209,7 +3209,7 @@ OT4XB_API LPBYTE pHex2Bin( LPSTR ph, DWORD* pcb )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: pHex2i64
-            | _kw_: parse hex, 64-bit, hex string to integer
+            | _kw_: pHex2i64, Function
    }}*/
 /*{{|desc: Parses hexadecimal text into a 64-bit integer. Hexadecimal digits are shifted into the result; an
       'x' or 'X' resets the accumulated value, so text with a 0x prefix parses correctly; any other
@@ -3253,7 +3253,7 @@ OT4XB_API LONGLONG pHex2i64( LPBYTE ph, DWORD cb )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: pHex2i32
-            | _kw_: parse hex, 32-bit, hex string to integer
+            | _kw_: pHex2i32, Function
    }}*/
 /*{{|desc: Parses hexadecimal text into a 32-bit integer. Hexadecimal digits are shifted into the result; an
       'x' or 'X' resets the accumulated value, so text with a 0x prefix parses correctly; any other
@@ -3299,7 +3299,7 @@ OT4XB_API DWORD pHex2i32( LPBYTE ph, DWORD cb )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_RO_LtrimEx
-            | _kw_: byte map, ltrim, read only, trim view
+            | _kw_: ByteMapTable_RO_LtrimEx, Function
    }}*/
 /*{{|desc: Computes a left-trimmed view of a byte buffer without modifying it: leading bytes flagged in the
       map table are skipped and the resulting pointer and length are returned by reference.
@@ -3343,7 +3343,7 @@ OT4XB_API BOOL  ByteMapTable_RO_LtrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn, 
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_RO_RtrimEx
-            | _kw_: byte map, rtrim, read only, trimmed length
+            | _kw_: ByteMapTable_RO_RtrimEx, Function
    }}*/
 /*{{|desc: Computes a right-trimmed length of a byte buffer without modifying it: cbOut receives the length
       with trailing map-flagged bytes discarded, while pOut receives pIn unchanged.
@@ -3385,7 +3385,7 @@ OT4XB_API BOOL  ByteMapTable_RO_RtrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn, 
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_RTrimEx
-            | _kw_: byte map, rtrim, trailing bytes, table
+            | _kw_: ByteMapTable_RTrimEx, Function
    }}*/
 /*{{|desc: Returns the length of a byte buffer once trailing bytes flagged in the map table are discarded.
       The buffer itself is not modified.
@@ -3432,7 +3432,7 @@ OT4XB_API DWORD ByteMapTable_RTrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_LTrimEx
-            | _kw_: byte map, ltrim, leading bytes, table, in place
+            | _kw_: ByteMapTable_LTrimEx, Function
    }}*/
 /*{{|desc: Removes leading bytes flagged in the map table by shifting the remaining bytes to the start of
       the buffer. No zero terminator is written at the new length.
@@ -3493,7 +3493,7 @@ OT4XB_API DWORD ByteMapTable_LTrimEx( LPBYTE pTable, LPBYTE pIn, DWORD cbIn )
 /*{{function_: StrTrimEx
             | syntax_: `StrTrimEx( cText, cTableBytes, nFlags [, cCondenseChar] )`
             | category: string
-            | _kw_: trim, condense, filter string, byte table, custom trim
+            | _kw_: StrTrimEx, Function
    }}*/
 /*{{|desc: Trims, condenses, or filters a string using a caller-supplied byte table.
     | params:
@@ -3600,7 +3600,7 @@ _XPP_REG_FUN_( STRTRIMEX )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_Add
-            | _kw_: byte map, flag bytes, character set table
+            | _kw_: ByteMapTable_Add, Function
    }}*/
 /*{{|desc: Fills entries of a 256-byte map table. For each byte in pPos, the table entry indexed by that
       byte value is set to the corresponding byte of pMap.
@@ -3630,7 +3630,7 @@ OT4XB_API void ByteMapTable_Add( LPBYTE pTable, LPBYTE pPos, LPBYTE pMap, DWORD 
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_IsSafeStr
-            | _kw_: byte map, safe string, validate characters, whitelist
+            | _kw_: ByteMapTable_IsSafeStr, Function
    }}*/
 /*{{|desc: Tests whether every byte of a buffer is flagged as accepted (nonzero) in the map table.
     | params:
@@ -3667,7 +3667,7 @@ OT4XB_API BOOL  ByteMapTable_IsSafeStr( LPBYTE pTable, LPBYTE p, int cb )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_safe_strlen
-            | _kw_: byte map, safe length, validate characters
+            | _kw_: ByteMapTable_safe_strlen, Function
    }}*/
 /*{{|desc: Counts the bytes of a zero-terminated string whose values are flagged (nonzero) in the map table:
       the length the string would have once the unflagged bytes are removed.
@@ -3700,7 +3700,7 @@ OT4XB_API DWORD  ByteMapTable_safe_strlen( BYTE map[ 256 ], LPSTR p )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_RemoveUnsafe
-            | _kw_: byte map, remove characters, filter, in place, whitelist
+            | _kw_: ByteMapTable_RemoveUnsafe, Function
    }}*/
 /*{{|desc: Removes the bytes not flagged in the map table, compacting the buffer in place. Kept bytes are
       written back through their table entry, so a map holding translated values converts while it filters.
@@ -3748,7 +3748,7 @@ OT4XB_API int  ByteMapTable_RemoveUnsafe( LPBYTE pTable, LPBYTE p, int cb )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_CondenseString
-            | _kw_: byte map, condense, collapse runs, squeeze spaces
+            | _kw_: ByteMapTable_CondenseString, Function
    }}*/
 /*{{|desc: Collapses each run of map-flagged bytes into one single byte, modifying the buffer in place.
       Typically used with a white-space table to condense repeated blanks. No zero terminator is written at
@@ -3807,7 +3807,7 @@ OT4XB_API int  ByteMapTable_CondenseString( LPBYTE pTable, LPBYTE p, int cb, BYT
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_FillSeq
-            | _kw_: byte map, fill ranges, character set table
+            | _kw_: ByteMapTable_FillSeq, Function
    }}*/
 /*{{|desc: Fills identity entries of a 256-byte map table from a sequence of byte ranges: every table entry
       inside each range is set to its own index value.
@@ -3842,7 +3842,7 @@ OT4XB_API void ByteMapTable_FillSeq( LPBYTE pTable, LPWORD pSeq, DWORD sc )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ByteMapTable_StrFindFlag
-            | _kw_: byte map, word boundary, next word, cursor
+            | _kw_: ByteMapTable_StrFindFlag, Function
    }}*/
 /*{{|desc: Moves a cursor position to the next or previous word boundary in a byte buffer. Bytes flagged in
       the map table act as word separators.
@@ -3912,14 +3912,14 @@ OT4XB_API DWORD ByteMapTable_StrFindFlag( LPBYTE pSrc, int cb, int nStart, LPBYT
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: cp850_to_html
-            | _kw_: html entities, code page 850, OEM to html, escape html
+            | _kw_: cp850_to_html, Function
    }}*/
 /*{{|desc: Converts code page 850 text to HTML in a newly allocated buffer. Characters above 127 become HTML
       entities and the markup characters '&', '<' and '>' are escaped.
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 
@@ -3941,14 +3941,14 @@ OT4XB_API LPSTR cp850_to_html( LPSTR pIn, UINT* pcbOut, DWORD dwFlags )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: cp437_to_html
-            | _kw_: html entities, code page 437, OEM to html, escape html
+            | _kw_: cp437_to_html, Function
    }}*/
 /*{{|desc: Converts code page 437 text to HTML in a newly allocated buffer. Characters above 127 become HTML
       entities and the markup characters '&', '<' and '>' are escaped.
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 
@@ -3970,14 +3970,14 @@ OT4XB_API LPSTR cp437_to_html( LPSTR pIn, UINT* pcbOut, DWORD dwFlags )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: cp1252_to_html
-            | _kw_: html entities, code page 1252, ANSI to html, escape html
+            | _kw_: cp1252_to_html, Function
    }}*/
 /*{{|desc: Converts code page 1252 (Windows ANSI) text to HTML in a newly allocated buffer. Characters above
       127 become HTML entities and the markup characters '&', '<' and '>' are escaped.
     | params:
     - `pIn` LPSTR - Zero-terminated source text.
     - `pcbOut` UINT * - Optional. Receives the length of the converted text. May be NULL.
-    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to <br>. 0x02 - emit a space followed by
+    - `dwFlags` DWORD - Bit mask. 0x01 - convert line breaks to `<br>`. 0x02 - emit a space followed by
       another space as &nbsp;. 0x04 - map accented letters to their upper-case entities. 0x10 - without
       0x01, drop the LF of each CRLF pair.
 
@@ -3999,7 +3999,7 @@ OT4XB_API LPSTR cp1252_to_html( LPSTR pIn, UINT* pcbOut, DWORD dwFlags )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: escape_to_xml
-            | _kw_: xml escape, html escape, &amp; &lt;, entities
+            | _kw_: escape_to_xml, Function
    }}*/
 /*{{|desc: Escapes text for XML or HTML content in a newly allocated buffer: '&' becomes &amp;, '"' becomes
       &quot;, '<' becomes &lt;, '>' becomes &gt; and the single quote becomes &#39;. Every other byte is
@@ -4028,7 +4028,7 @@ OT4XB_API LPSTR escape_to_xml( LPSTR pIn, UINT* pcbOut )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: escape_to_json
-            | _kw_: json escape, string literal, backslash, control characters
+            | _kw_: escape_to_json, Function
    }}*/
 /*{{|desc: Escapes text for the body of a JSON string in a newly allocated buffer. Control bytes, '"' and
       the backslash use the standard JSON escapes and bytes above 127 are converted from ANSI to \uXXXX
@@ -4056,7 +4056,7 @@ OT4XB_API LPSTR escape_to_json( LPSTR pIn, int cb, UINT* pcbOut )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xbenc2bin
-            | _kw_: ot4xb encoding, decode, backslash escapes, binary
+            | _kw_: ot4xbenc2bin, Function
    }}*/
 /*{{|desc: Decodes ot4xb escape-encoded text back to binary. Backslash escapes are expanded: \xHH gives a
       hexadecimal byte, \dNNN a decimal byte, \0 a zero byte, \s a space, \q a double quote, \a \b \f \n \r
@@ -4178,7 +4178,7 @@ OT4XB_API LPSTR ot4xbenc2bin( LPSTR pIn, UINT cb, UINT* pcbOut )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: bin2ot4xbenc_ta
-            | _kw_: ot4xb encoding, encode, trim, printable, xml safe
+            | _kw_: bin2ot4xbenc_ta, Function
    }}*/
 /*{{|desc: Encodes binary data like bin2ot4xbenc() but first strips leading and trailing spaces from the
       input and reports how many were removed on each side, so the exact original string can be rebuilt when
@@ -4217,7 +4217,7 @@ OT4XB_API LPSTR bin2ot4xbenc_ta( LPSTR pIn, UINT cb, UINT* pcbOut, UINT* lt, UIN
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: bin2ot4xbenc
-            | _kw_: ot4xb encoding, encode, printable, xml safe, backslash escapes
+            | _kw_: bin2ot4xbenc, Function
    }}*/
 /*{{|desc: Encodes binary data into the printable ot4xb escape encoding, reversible with ot4xbenc2bin().
       Bytes outside the 32 to 127 range become \xHH escapes and the usual control bytes use their short
@@ -4402,7 +4402,7 @@ static LPSTR x_www_form_urlencoded_internal( LPSTR pIn, UINT cb, void** ppInfo, 
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: x_www_form_urlencoded_to_cp1252
-            | _kw_: form data, query string, POST body, key value, url decode, UTF-8
+            | _kw_: x_www_form_urlencoded_to_cp1252, Function
    }}*/
 /*{{|desc: Decodes application/x-www-form-urlencoded data, such as an URL query string or a POST body, into
       key and value pairs. Percent escapes and '+' are decoded and every value is converted from UTF-8 to
@@ -4428,7 +4428,7 @@ OT4XB_API LPSTR x_www_form_urlencoded_to_cp1252( LPSTR pIn, UINT cb, void** ppIn
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: x_www_form_urlencoded_ncp
-            | _kw_: form data, query string, POST body, key value, url decode
+            | _kw_: x_www_form_urlencoded_ncp, Function
    }}*/
 /*{{|desc: Same parsing as x_www_form_urlencoded_to_cp1252() for content that is already in the target code
       page: percent escapes and '+' are decoded but the values get no UTF-8 conversion.
@@ -4604,7 +4604,7 @@ label_exit_loop_1:;
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_urldecode
-            | _kw_: url decode, percent decoding, unescape url, query string
+            | _kw_: ot4xb_urldecode, Function
    }}*/
 /*{{|desc: URL-decodes a byte buffer into a newly allocated string. '+' becomes a space and every valid %XX
       pair becomes one byte; carriage returns, line feeds, tabs and spaces in the source are ignored;
@@ -4689,7 +4689,7 @@ OT4XB_API LPSTR ot4xb_urldecode( LPSTR pIn, DWORD cbIn, DWORD* pcbOut )
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bStrWildCmp
-            | _kw_: wildcard, match, pattern, case sensitive, star question mark
+            | _kw_: bStrWildCmp, Function
    }}*/
 /*{{|desc: Case-sensitive wildcard match of a zero-terminated string against a pattern where '*' matches any
       run of characters and '?' matches one character.
@@ -4710,7 +4710,7 @@ OT4XB_API BOOL bStrWildCmp( LPSTR pWild, LPSTR pStr )
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bStrWildCmpEx
-            | _kw_: wildcard, match, pattern, flags
+            | _kw_: bStrWildCmpEx, Function
    }}*/
 /*{{|desc: Wildcard match with flags and no translation table. Same matching as bStrWildCmpWithTableEx()
       with a NULL table.
@@ -4734,7 +4734,7 @@ OT4XB_API BOOL bStrWildCmpEx( LPSTR pWild, LPSTR pStr, DWORD flags, DWORD, DWORD
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bStrWildCmpWithTable
-            | _kw_: wildcard, match, translation table, case folding
+            | _kw_: bStrWildCmpWithTable, Function
    }}*/
 /*{{|desc: Wildcard match that translates both pattern and string bytes through a 256-byte table before
       comparing, so a lower-case table gives a case-insensitive match.
@@ -4758,7 +4758,7 @@ OT4XB_API BOOL bStrWildCmpWithTable( LPSTR pWild, LPSTR pStr, LPBYTE tb )
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bStrWildCmpWithTableEx
-            | _kw_: wildcard, match engine, translation table, flags
+            | _kw_: bStrWildCmpWithTableEx, Function
    }}*/
 /*{{|desc: Wildcard match engine behind the bStrWildCmp() family and lStrWildCmpEx(). The pattern uses '*'
       for any run of characters and '?' for one character; when a translation table is given, both pattern
@@ -4858,7 +4858,7 @@ OT4XB_API BOOL bStrWildCmpWithTableEx( LPSTR pWild, LPSTR pStr, LPBYTE tb, DWORD
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bAnyStrWildCmpI
-            | _kw_: wildcard, any pattern, TList, case insensitive
+            | _kw_: bAnyStrWildCmpI, Function
    }}*/
 /*{{|desc: Tests a string against every zero-terminated wildcard pattern held in a TList, comparing
       case-insensitively, until one matches.
@@ -4888,7 +4888,7 @@ OT4XB_API BOOL bAnyStrWildCmpI( TList* wild_list, LPSTR pStr )
             | category: string/match
             | header: ot4xb_c_exported.h
             | mangled-name: bStrWildCmpI
-            | _kw_: wildcard, match, pattern, case insensitive
+            | _kw_: bStrWildCmpI, Function
    }}*/
 /*{{|desc: Case-insensitive wildcard match of a zero-terminated string against a pattern where '*' matches
       any run of characters and '?' matches one character.
@@ -4909,7 +4909,7 @@ OT4XB_API BOOL bStrWildCmpI( LPSTR pWild, LPSTR pStr )
             | category: string
             | header: ot4xb_c_exported.h
             | mangled-name: ansi_capitalize
-            | _kw_: capitalize, title case, first letter upper, in place
+            | _kw_: ansi_capitalize, Function
    }}*/
 /*{{|desc: Capitalizes text in place: the first character of every word is converted to upper case and the
       rest to lower case using the Windows ANSI conversion. Any byte with value 32 or lower separates words.
@@ -4956,7 +4956,7 @@ OT4XB_API void ansi_capitalize( LPSTR p, int cb )
             | category: string/hex
             | header: ot4xb_c_exported.h
             | mangled-name: bIsNibble
-            | _kw_: hex digit, is hex, nibble, character test
+            | _kw_: bIsNibble, Function
    }}*/
 /*{{|desc: Tests whether a character is a hexadecimal digit and, when it is, stores its value shifted to a
       chosen nibble position.
@@ -4988,7 +4988,7 @@ OT4XB_API BOOL bIsNibble( char ch, DWORD* pNibble, int nNibble )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ansi_byte_to_utf8_urlenc
-            | _kw_: utf-8, url encode, one byte, percent encoding
+            | _kw_: ansi_byte_to_utf8_urlenc, Function
    }}*/
 /*{{|desc: Converts one ANSI (code page 1252) byte to UTF-8 and URL-escapes it according to nLevel, writing
       the result to a caller buffer. Letters and digits stay literal and a space becomes '+' below level 5.
@@ -5075,7 +5075,7 @@ OT4XB_API int ansi_byte_to_utf8_urlenc( BYTE ch, LPBYTE buffer, int nLevel )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_qp_decode
-            | _kw_: quoted printable, decode, mime, ATL
+            | _kw_: ot4xb_qp_decode, Function
    }}*/
 /*{{|desc: Decodes quoted-printable data into a caller buffer. Without flag 0x8000 the work is delegated to
       the ATL QPDecode() function. With 0x8000, '=' followed by CRLF (a soft line break) is removed while
@@ -5146,7 +5146,7 @@ OT4XB_API BOOL ot4xb_qp_decode( LPBYTE p, int cb, LPSTR p_out, int* pcb_out, DWO
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_qp_decode_required_length
-            | _kw_: quoted printable, decode, required length
+            | _kw_: ot4xb_qp_decode_required_length, Function
    }}*/
 /*{{|desc: Returns the destination size needed to decode quoted-printable data. Thin wrapper over the ATL
       QPDecodeGetRequiredLength() function.
@@ -5166,7 +5166,7 @@ OT4XB_API int ot4xb_qp_decode_required_length( int nSrcLen )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base64_encode_required_length
-            | _kw_: base64, encode, required length
+            | _kw_: ot4xb_base64_encode_required_length, Function
    }}*/
 /*{{|desc: Returns the destination size needed to Base64-encode a buffer. Thin wrapper over the ATL
       Base64EncodeGetRequiredLength() function.
@@ -5188,7 +5188,7 @@ OT4XB_API int ot4xb_base64_encode_required_length( int nSrcLen )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base64_encode
-            | _kw_: base64, encode, ATL, buffer
+            | _kw_: ot4xb_base64_encode, Function
    }}*/
 /*{{|desc: Encodes binary data as Base64 text into a caller buffer. Thin wrapper over the ATL Base64Encode()
       function.
@@ -5212,7 +5212,7 @@ OT4XB_API BOOL ot4xb_base64_encode( LPBYTE pSrc, int nSrcLen, LPSTR szDest, int*
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base64_decode_required_length
-            | _kw_: base64, decode, required length
+            | _kw_: ot4xb_base64_decode_required_length, Function
    }}*/
 /*{{|desc: Returns the destination size needed to decode Base64 text. Thin wrapper over the ATL
       Base64DecodeGetRequiredLength() function.
@@ -5232,7 +5232,7 @@ OT4XB_API int ot4xb_base64_decode_required_length( int nSrcLen )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_base64_decode
-            | _kw_: base64, decode, ATL, buffer
+            | _kw_: ot4xb_base64_decode, Function
    }}*/
 /*{{|desc: Decodes Base64 text into a caller buffer. Thin wrapper over the ATL Base64Decode() function.
     | params:
@@ -5254,7 +5254,7 @@ OT4XB_API BOOL ot4xb_base64_decode( LPSTR szSrc, int nSrcLen, BYTE* pbDest, int*
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_uu_decode_required_length
-            | _kw_: uuencode, decode, required length
+            | _kw_: ot4xb_uu_decode_required_length, Function
    }}*/
 /*{{|desc: Returns the destination size needed to decode uuencoded data. Thin wrapper over the ATL
       UUDecodeGetRequiredLength() function.
@@ -5274,7 +5274,7 @@ OT4XB_API BOOL ot4xb_uu_decode_required_length( int nSrcLen )
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: ot4xb_uu_decode
-            | _kw_: uuencode, decode, ATL, buffer
+            | _kw_: ot4xb_uu_decode, Function
    }}*/
 /*{{|desc: Decodes uuencoded data into a caller buffer. Thin wrapper over the ATL UUDecode() function.
     | params:
@@ -5296,7 +5296,7 @@ OT4XB_API BOOL ot4xb_uu_decode( BYTE* pbSrcData, int nSrcLen, BYTE* pbDest, int*
             | category: string/encoding
             | header: ot4xb_c_exported.h
             | mangled-name: unescape_from_json
-            | _kw_: json unescape, string literal, decode, \u escapes
+            | _kw_: unescape_from_json, Function
    }}*/
 /*{{|desc: Decodes a JSON string literal, surrounding double quotes included, into a newly allocated ANSI
       string. The standard JSON backslash escapes and \uXXXX sequences are decoded and the result is
@@ -6013,7 +6013,7 @@ DWORD rfc2047_hash2codepage( DWORD dwcph )
             | header: ot4xb_c_exported.h
             | category: string/encoding
             | mangled-name: rfc2047decode
-            | _kw_: RFC 2047, encoded word, email header, mime, decode
+            | _kw_: rfc2047decode, Function
    }}*/
 /*{{|desc: Decodes RFC 2047 encoded words, the =?charset?B?...?= and =?charset?Q?...?= forms used in e-mail
       headers. Each encoded word is Base64- or quoted-printable-decoded and converted from its character set
@@ -6147,7 +6147,7 @@ extern "C" OT4XB_API LPSTR rfc2047decode( LPSTR pIn, UINT* pcbOut, DWORD nOutCod
 /*{{function_: split_data_uri
             | syntax_: `split_data_uri( cDataUri, @cHeader [, nFlags] )`
             | category: string/encoding
-            | _kw_: data uri, base64, header payload, split
+            | _kw_: split_data_uri, Function
    }}*/
 /*{{|desc: Splits a data URI into its header and payload parts.
     | params:
@@ -6203,7 +6203,7 @@ _XPP_REG_FUN_( SPLIT_DATA_URI )
 /*{{function_: __b64enc
             | syntax_: `__b64enc( cData [, nFlags] )`
             | category: string/encoding
-            | _kw_: base64, encode, binary to text
+            | _kw_: __b64enc, Function
    }}*/
 /*{{|desc: Encodes a binary string as Base64 text.
     | params:
@@ -6248,7 +6248,7 @@ _XPP_REG_FUN_( __B64ENC )
 /*{{function_: __b64dec
             | syntax_: `__b64dec( cBase64 )`
             | category: string/encoding
-            | _kw_: base64, decode, text to binary
+            | _kw_: __b64dec, Function
    }}*/
 /*{{|desc: Decodes Base64 text into its binary string representation.
     | params:
@@ -6290,7 +6290,7 @@ _XPP_REG_FUN_( __B64DEC )
 /*{{function_: __aJoin
             | syntax_: `__aJoin( aItems [, cDelimiter] [, nFlags] )`
             | category: string
-            | _kw_: join array, implode, delimiter, array to string
+            | _kw_: __aJoin, Function
    }}*/
 /*{{|desc: Joins the character items of an array into one string using a literal delimiter. It is the inverse
       operation normally paired with Tokenize().

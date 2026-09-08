@@ -9,7 +9,7 @@
 /*{{function_: dwFix
             | syntax_: `dwFix( nHighWord, nLowWord )`
             | category: numeric/bit
-            | _kw_: make DWORD, high word low word, MAKELONG
+            | _kw_: dwFix, Function
    }}*/
 /*{{|desc: Builds a 32-bit value from a high word and a low word.
     | params:
@@ -27,7 +27,7 @@ XPPRET XPPENTRY DWFIX(XppParamList pl)
 /*{{function_: dwMinus
             | syntax_: `dwMinus( @nValue )`
             | category: numeric/bit
-            | _kw_: negate, two's complement, unsigned negative, DWORD
+            | _kw_: dwMinus, Function
    }}*/
 /*{{|desc: Returns the two's-complement negation of a 32-bit numeric value.
     | params:
@@ -46,7 +46,7 @@ XPPRET XPPENTRY DWMINUS(XppParamList pl)
 /*{{function_: unsigned8
             | syntax_: `unsigned8( @nValue )`
             | category: numeric/bit
-            | _kw_: unsigned byte, 0-255, cast, wrap
+            | _kw_: unsigned8, Function
    }}*/
 /*{{|desc: Converts a numeric value to its unsigned 8-bit representation.
     | params:
@@ -67,7 +67,7 @@ XPPRET XPPENTRY UNSIGNED8( XppParamList pl )
 /*{{function_: unsigned16
             | syntax_: `unsigned16( @nValue )`
             | category: numeric/bit
-            | _kw_: unsigned word, 0-65535, cast, wrap
+            | _kw_: unsigned16, Function
    }}*/
 /*{{|desc: Converts a numeric value to its unsigned 16-bit representation.
     | params:
@@ -88,7 +88,7 @@ XPPRET XPPENTRY UNSIGNED16( XppParamList pl )
 /*{{function_: unsigned32
             | syntax_: `unsigned32( @nValue )`
             | category: numeric/bit
-            | _kw_: unsigned DWORD, negative LONG, cast, 32-bit unsigned
+            | _kw_: unsigned32, Function
    }}*/
 /*{{|desc: Recovers the unsigned 32-bit value of a LONG that holds an unsigned bit pattern. Xbase++ has only
       LONG (signed 32-bit), no unsigned DWORD, so a value coming from an integer/bitwise operation that is
@@ -133,7 +133,7 @@ XPPRET XPPENTRY UNSIGNED32( XppParamList pl )
 /*{{function_: extendSign8
             | syntax_: `extendSign8( @nValue )`
             | category: numeric/bit
-            | _kw_: sign extend, signed byte, int8, cast
+            | _kw_: extendSign8, Function
    }}*/
 /*{{|desc: Sign-extends an 8-bit value to a 32-bit signed value.
     | params:
@@ -153,7 +153,7 @@ XPPRET XPPENTRY EXTENDSIGN8( XppParamList pl )
 /*{{function_: extendSign16
             | syntax_: `extendSign16( @nValue )`
             | category: numeric/bit
-            | _kw_: sign extend, signed word, int16, cast
+            | _kw_: extendSign16, Function
    }}*/
 /*{{|desc: Sign-extends a 16-bit value to a 32-bit signed value.
     | params:
@@ -173,7 +173,7 @@ XPPRET XPPENTRY EXTENDSIGN16( XppParamList pl )
 /*{{function_: long2Double
             | syntax_: `long2Double( @nValue )`
             | category: numeric/conversion
-            | _kw_: numeric to double, force double, internal representation
+            | _kw_: long2Double, Function
    }}*/
 /*{{|desc: Converts a numeric value to Xbase++ double representation.
     | params:
@@ -192,7 +192,7 @@ XPPRET XPPENTRY LONG2DOUBLE( XppParamList pl )
 /*{{function_: double2Long
             | syntax_: `double2Long( @nValue )`
             | category: numeric/conversion
-            | _kw_: numeric to LONG, force integer, internal representation
+            | _kw_: double2Long, Function
    }}*/
 /*{{|desc: Converts a numeric value to Xbase++ LONG representation.
     | params:
@@ -211,7 +211,7 @@ XPPRET XPPENTRY DOUBLE2LONG( XppParamList pl )
 /*{{function_: LOWORD
             | syntax_: `LOWORD( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: low word, 16 bits, LOWORD macro
+            | _kw_: LOWORD, Function
    }}*/
 /*{{|desc: Returns the low-order word from a 32-bit value.
     | params:
@@ -225,7 +225,7 @@ XPPRET XPPENTRY wapimc_LOWORD(XppParamList pl){_retnl(pl,( _parLong(pl,1) & 0xFF
 /*{{function_: HIWORD
             | syntax_: `HIWORD( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: high word, 16 bits, HIWORD macro
+            | _kw_: HIWORD, Function
    }}*/
 /*{{|desc: Returns the high-order word from a 32-bit value.
     | params:
@@ -239,7 +239,7 @@ XPPRET XPPENTRY wapimc_HIWORD(XppParamList pl){ _retnl(pl,( (_parLong(pl,1) >> 1
 /*{{function_: LOBYTE
             | syntax_: `LOBYTE( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: low byte, LOBYTE macro
+            | _kw_: LOBYTE, Function
    }}*/
 /*{{|desc: Returns the low-order byte from a 16-bit or 32-bit value.
     | params:
@@ -253,7 +253,7 @@ XPPRET XPPENTRY wapimc_LOBYTE(XppParamList pl){ _retnl(pl,( _parLong(pl,1) & 0xF
 /*{{function_: HIBYTE
             | syntax_: `HIBYTE( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: high byte, HIBYTE macro
+            | _kw_: HIBYTE, Function
    }}*/
 /*{{|desc: Returns the high-order byte from a 16-bit value.
     | params:
@@ -267,7 +267,7 @@ XPPRET XPPENTRY wapimc_HIBYTE(XppParamList pl){ _retnl(pl,( (_parLong(pl,1) >> 8
 /*{{function_: MAKEWORD
             | syntax_: `MAKEWORD( nLowByte, nHighByte )`
             | category: numeric/winapi-macro
-            | _kw_: make word, two bytes, MAKEWORD macro
+            | _kw_: MAKEWORD, Function
    }}*/
 /*{{|desc: Builds a 16-bit word from low and high byte values.
     | params:
@@ -287,7 +287,7 @@ XPPRET XPPENTRY wapimc_MAKEWORD(XppParamList pl)
 /*{{function_: MAKELONG
             | syntax_: `MAKELONG( nLowWord, nHighWord )`
             | category: numeric/winapi-macro
-            | _kw_: make long, two words, MAKELONG macro
+            | _kw_: MAKELONG, Function
    }}*/
 /*{{|desc: Builds a 32-bit value from low and high word values.
     | params:
@@ -307,7 +307,7 @@ XPPRET XPPENTRY wapimc_MAKELONG(XppParamList pl)
 /*{{function_: MAKELANGID
             | syntax_: `MAKELANGID( nPrimaryLanguage, nSubLanguage )`
             | category: numeric/winapi-macro
-            | _kw_: language id, LANGID, primary language, sublanguage
+            | _kw_: MAKELANGID, Function
    }}*/
 /*{{|desc: Builds a Windows language identifier from primary language and sublanguage values.
     | params:
@@ -327,7 +327,7 @@ XPPRET XPPENTRY wapimc_MAKELANGID(XppParamList pl)
 /*{{function_: MAKELPARAM
             | syntax_: `MAKELPARAM( nLowWord, nHighWord )`
             | category: numeric/winapi-macro
-            | _kw_: LPARAM, two words, MAKELPARAM macro, window message
+            | _kw_: MAKELPARAM, Function
    }}*/
 /*{{|desc: Builds an LPARAM-style 32-bit value from low and high word values.
     | params:
@@ -342,7 +342,7 @@ XPPRET XPPENTRY wapimc_MAKELPARAM(XppParamList pl){ wapimc_MAKELONG(pl); }
 /*{{function_: MAKELRESULT
             | syntax_: `MAKELRESULT( nLowWord, nHighWord )`
             | category: numeric/winapi-macro
-            | _kw_: LRESULT, two words, MAKELRESULT macro
+            | _kw_: MAKELRESULT, Function
    }}*/
 /*{{|desc: Builds an LRESULT-style 32-bit value from low and high word values.
     | params:
@@ -357,7 +357,7 @@ XPPRET XPPENTRY wapimc_MAKELRESULT(XppParamList pl){ wapimc_MAKELONG(pl); }
 /*{{function_: GET_X_LPARAM
             | syntax_: `GET_X_LPARAM( nLParam )`
             | category: numeric/winapi-macro
-            | _kw_: mouse x, LPARAM, x coordinate, window message
+            | _kw_: GET_X_LPARAM, Function
    }}*/
 /*{{|desc: Returns the low word of an LPARAM value, normally used as the X coordinate.
     | params:
@@ -371,7 +371,7 @@ XPPRET XPPENTRY wapimc_GET_X_LPARAM(XppParamList pl){ wapimc_LOWORD(pl); }
 /*{{function_: GET_Y_LPARAM
             | syntax_: `GET_Y_LPARAM( nLParam )`
             | category: numeric/winapi-macro
-            | _kw_: mouse y, LPARAM, y coordinate, window message
+            | _kw_: GET_Y_LPARAM, Function
    }}*/
 /*{{|desc: Returns the high word of an LPARAM value, normally used as the Y coordinate.
     | params:
@@ -385,7 +385,7 @@ XPPRET XPPENTRY wapimc_GET_Y_LPARAM(XppParamList pl){ wapimc_HIWORD(pl); }
 /*{{function_: dwByteRev
             | syntax_: `dwByteRev( @nValue )`
             | category: numeric/byte-order
-            | _kw_: byte swap, reverse bytes, endian, htonl
+            | _kw_: dwByteRev, Function
    }}*/
 /*{{|desc: Reverses the byte order of a 32-bit value.
     | params:
@@ -409,7 +409,7 @@ XPPRET XPPENTRY DWBYTEREV(XppParamList pl)
 /*{{function_: whlByteRev
             | syntax_: `whlByteRev( @nValue )`
             | category: numeric/byte-order
-            | _kw_: byte swap, word halves, endian, htons
+            | _kw_: whlByteRev, Function
    }}*/
 /*{{|desc: Swaps bytes inside each 16-bit word of a 32-bit value.
     | params:
@@ -433,7 +433,7 @@ XPPRET XPPENTRY WHLBYTEREV(XppParamList pl)
 /*{{function_: packFloat32
             | syntax_: `packFloat32( @nValue )`
             | category: numeric/conversion
-            | _kw_: float, IEEE 754, pack, raw bits, single precision
+            | _kw_: packFloat32, Function
    }}*/
 /*{{|desc: Packs a numeric value into the raw 32-bit IEEE float representation.
     | params:
@@ -453,7 +453,7 @@ XPPRET XPPENTRY PACKFLOAT32( XppParamList pl )
 /*{{function_: unpackFloat32
             | syntax_: `unpackFloat32( @nPacked )`
             | category: numeric/conversion
-            | _kw_: float, IEEE 754, unpack, raw bits, single precision
+            | _kw_: unpackFloat32, Function
    }}*/
 /*{{|desc: Unpacks a raw 32-bit IEEE float representation into an Xbase++ numeric value.
     | params:
@@ -473,7 +473,7 @@ XPPRET XPPENTRY UNPACKFLOAT32( XppParamList pl )
 /*{{function_: MAKEBYTE
             | syntax_: `MAKEBYTE( nLowNibble, nHighNibble )`
             | category: numeric/winapi-macro
-            | _kw_: make byte, nibbles, high low nibble
+            | _kw_: MAKEBYTE, Function
    }}*/
 /*{{|desc: Builds a byte from low and high nibble values.
     | params:
@@ -491,7 +491,7 @@ XPPRET XPPENTRY wapimc_MAKEBYTE(XppParamList pl)
 /*{{function_: LONIBBLE
             | syntax_: `LONIBBLE( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: low nibble, 4 bits, byte
+            | _kw_: LONIBBLE, Function
    }}*/
 /*{{|desc: Returns the low-order nibble from a byte value.
     | params:
@@ -508,7 +508,7 @@ XPPRET XPPENTRY wapimc_LONIBBLE(XppParamList pl)
 /*{{function_: HINIBBLE
             | syntax_: `HINIBBLE( nValue )`
             | category: numeric/winapi-macro
-            | _kw_: high nibble, 4 bits, byte
+            | _kw_: HINIBBLE, Function
    }}*/
 /*{{|desc: Returns the high-order nibble from a byte value.
     | params:
@@ -525,7 +525,7 @@ XPPRET XPPENTRY wapimc_HINIBBLE(XppParamList pl)
 /*{{function_: ot4xb_parse_number
             | syntax_: `ot4xb_parse_number( cNumber )`
             | category: numeric/conversion
-            | _kw_: parse number, string to numeric, Val, legacy
+            | _kw_: ot4xb_parse_number, Function
    }}*/
 /*{{|desc: Parses a character string as an Xbase++ numeric value using the current legacy implementation.
     | params:
@@ -568,7 +568,7 @@ _XPP_REG_FUN_( OT4XB_PARSE_NUMBER)
 /*{{function_: ot4xb_parse_int
             | syntax_: `ot4xb_parse_int( cValue, [nDefault] )`
             | category: numeric/conversion
-            | _kw_: parse integer, atoi, string to number, default value
+            | _kw_: ot4xb_parse_int, Function
    }}*/
 /*{{|desc: Parses the initial integer part of a character string using atoi(), with a caller-provided default
       value used when parsing is not possible.
